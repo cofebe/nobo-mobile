@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1038788608728",
+    "project_id": "urp-plus",
+    "storage_bucket": "urp-plus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038788608728:android:9019d4ce624092cc454dad",
+        "android_client_info": {
+          "package_name": "com.urp.urp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038788608728-mcu9m9057nmgmaajfmsl120btba2qm7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALWVHjqkmMLJXffQ9XH_5wJMkAY9nrnX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1038788608728-mcu9m9057nmgmaajfmsl120btba2qm7d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

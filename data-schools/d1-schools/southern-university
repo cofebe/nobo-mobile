@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie6" lang="en"><![endif]-->
+<!--[if IE 7]>
+<html class="ie7" lang="en"><![endif]-->
+<!--[if IE 8]>
+<html class="ie8" lang="en"><![endif]-->
+<!--[if IE 9]>
+<html class="ie9" lang="en"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon" href="https://www.ncsasports.org/wp-content/uploads/2022/07/cropped-ncsa-favicon-32x32.png" sizes="32x32">
+  <link rel="icon" href="https://www.ncsasports.org/wp-content/uploads/2022/07/cropped-ncsa-favicon-192x192.png" sizes="192x192">
+  <link rel="stylesheet" href="https://use.typekit.net/nnl5hxd.css">
+
+    <title> Southern University &amp; A&amp;M College Football Scholarships Guide
+</title>
+  <!--[if lt IE 9]>
+<script type="text/javascript">
+//<![CDATA[
+var gaJsHost = (("https:" == document.location.protocol) ? "https:" : "http:");
+document.write("\<script src='" + gaJsHost + "//html5shiv.googlecode.com/svn/trunk/html5.js' type='text/javascript'\>\</script\>" );
+//]]>
+</script>
+<![endif]-->
+
+<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<link rel="stylesheet" media="screen" href="/seoj/assets/application-8a8663dd40fb916d27d0ef11f06fb60ec4abbead257010e237a42ddbc8750d66.css" />
+<!--[if IE]>
+<link rel="stylesheet" media="screen" href="/seoj/assets/iefont-260d4f9a28840be6d808e8ab792396e7972efdc865d3c94e39f071d0132d24b1.css" />
+<![endif]-->
+
+    
+  <link rel="canonical" href="https://www.ncsasports.org/athletic-scholarships/football/louisiana/southern-university" />
+
+    <meta name="description" content="
+  Get information on the Southern University &amp; A&amp;M College Football program and athletic scholarship opportunities in the NCSA student athlete portal.
+">
+  <script src="/seoj/assets/application-38176db437570002011182543cc273014f88d2b2a2050b78cb6ea1d56e5a7c04.js"></script>
+<script src="/seoj/assets/layouts/application-7a14e066219fd016bb79dca1e6608cc9af8678028fddc792dea60dd14bd3ce6d.js"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55d4deaf13f92be1"></script>
+
+<script type="text/javascript">
+  var RAILS_ENV = {
+    script_name :""
+  }
+</script>
+
+<!--[if lt IE 9]>
+<script src="/seoj/assets/html5-04024382391bb910584145d8113cf35ef376b55d125bb4516cebeb14ce788597.js"></script>
+<![endif]-->
+
+    <script>
+    $(function() {
+      var athleteButton = $(".lead-form button#athlete-button");
+      var parentButton = $(".lead-form button#parent-button");
+
+      function showAthleteOrParentForm(role) {
+        var hasUnderThirteenCookie = document.cookie.indexOf("ncsaUserIsUnder13=1") !== -1;
+
+        if (hasUnderThirteenCookie) {
+          $("#under-thirteen-modal").css('display', 'flex');
+        }
+
+        $(".lead-form #info").hide();
+        $(".lead-form #" + role + "-form").show();
+      }
+
+      athleteButton.bind("click", function() {
+        showAthleteOrParentForm("athlete")
+      });
+
+      parentButton.bind("click", function() {
+        showAthleteOrParentForm("parent")
+      });
+    });
+  </script>
+  <script>
+    $(function() {
+      var isAthleteForm = true;
+      var isBirthDateNeeded = false;
+      var baseSelector = isAthleteForm ? "#athlete-form " : "#parent-form "
+
+      var now = new Date();
+      var currentYear = now.getUTCFullYear()
+      var graduationYearLimit = now.getMonth() + 1 >= 9 ? currentYear + 6 : currentYear + 5;
+
+      var $birthDateInput = $(baseSelector + "#edit-athlete-birth-date")
+      var $graduationInput = $(baseSelector + "#edit-athlete-grad-year")
+
+      $birthDateInput.on("keyup", function(e) {
+        var v = this.value;
+        if (v.match(/^\d{2}$/) !== null) {
+          // If we match two consecutive numbers, add a forward slash
+          this.value = v + '/';
+        } else if (v.match(/^\d{2}\/\d{2}$/) !== null) {
+          // If we match two consecutive numbers followed by a slash
+          // followed by two conseecutive numbers, add a forward slash
+          this.value = v + '/';
+        } else {
+          // If neither check above matches, remove all non-numbers or forward-slashes
+          this.value = v.replace(/[^0-9\/]/g,'');
+        }
+      })
+
+      $graduationInput.on("change", function(e) {
+        var graduationYear = e.target.value;
+        isBirthDateNeeded = graduationYear >= graduationYearLimit
+        var birthdateFieldWrapper = $(baseSelector + ".birthdate-field-wrapper")
+
+        if (isBirthDateNeeded) {
+          birthdateFieldWrapper.show();
+        } else {
+          birthdateFieldWrapper.hide();
+        }
+      })
+
+      $.validator.addMethod(
+        "validBirthdate",
+        function(value) {
+          // RegEx for mm/dd/yyyy
+          const regex = /^(0[1-9]|1[012])[/.](0[1-9]|[12][0-9]|3[01])[/.](19|20)\d\d$/;
+          return regex.test(value);
+        },
+        "Birthdate must be formatted mm/dd/yyyy."
+      );
+
+      $(baseSelector + "form").validate({
+        rules: {
+          "lead_submission[athlete_first_name]": "required",
+          "lead_submission[athlete_last_name]": "required",
+          "lead_submission[athlete_email]": isAthleteForm? "required" : "optional",
+          "lead_submission[athlete_sport]": "required",
+          "lead_submission[birth_date]": {"date": true, "required": false},
+          "lead_submission[graduation_year]": "required",
+          "lead_submission[athlete_phone]": "required",
+          "lead_submission[zip]": "required",
+          "lead_submission[parent_first_name]": "required",
+          "lead_submission[parent_last_name]": "required",
+          "lead_submission[parent_email]": "required",
+          "lead_submission[parent_phone]": "required"
+        },
+        submitHandler: function(form) {
+
+          var rule = isBirthDateNeeded ? "add" : "remove";
+          var $birthDateField = $(baseSelector + '[name="lead_submission[birth_date]"]')
+          $birthDateField.rules(rule, {
+            required: true,
+            validBirthdate: true
+          });
+
+          if (!$birthDateField.valid()){
+            return false;
+          }
+
+          var $form = $(form)
+          var $birthDateInput = $form.find("#edit-athlete-birth-date");
+          var birthDate = new Date($birthDateInput.val());
+          var now = new Date();
+          var year = now.getUTCFullYear() - 13;
+          var month = now.getUTCMonth();
+          var day = now.getUTCDate();
+          var youngestBirthDate = new Date(year,month,day,23,59,59,999);
+
+          var expiryday = 24*60*60*1000 // one day in milliseconds
+          now.setTime(now.getTime() + expiryday);
+          var expires = "expires="+ now.toUTCString();
+
+          if (birthDate >= youngestBirthDate) {
+            document.cookie = "ncsaUserIsUnder13=1;" + expires;
+
+            $("#under-thirteen-modal").css('display', 'flex');
+            return false;
+          }
+          form.submit();
+        },
+        errorContainer: $(baseSelector + "#errorContainer")
+      });
+    });
+  </script>
+  <script>
+    $(function() {
+      var isAthleteForm = false;
+      var isBirthDateNeeded = false;
+      var baseSelector = isAthleteForm ? "#athlete-form " : "#parent-form "
+
+      var now = new Date();
+      var currentYear = now.getUTCFullYear()
+      var graduationYearLimit = now.getMonth() + 1 >= 9 ? currentYear + 6 : currentYear + 5;
+
+      var $birthDateInput = $(baseSelector + "#edit-athlete-birth-date")
+      var $graduationInput = $(baseSelector + "#edit-athlete-grad-year")
+
+      $birthDateInput.on("keyup", function(e) {
+        var v = this.value;
+        if (v.match(/^\d{2}$/) !== null) {
+          // If we match two consecutive numbers, add a forward slash
+          this.value = v + '/';
+        } else if (v.match(/^\d{2}\/\d{2}$/) !== null) {
+          // If we match two consecutive numbers followed by a slash
+          // followed by two conseecutive numbers, add a forward slash
+          this.value = v + '/';
+        } else {
+          // If neither check above matches, remove all non-numbers or forward-slashes
+          this.value = v.replace(/[^0-9\/]/g,'');
+        }
+      })
+
+      $graduationInput.on("change", function(e) {
+        var graduationYear = e.target.value;
+        isBirthDateNeeded = graduationYear >= graduationYearLimit
+        var birthdateFieldWrapper = $(baseSelector + ".birthdate-field-wrapper")
+
+        if (isBirthDateNeeded) {
+          birthdateFieldWrapper.show();
+        } else {
+          birthdateFieldWrapper.hide();
+        }
+      })
+
+      $.validator.addMethod(
+        "validBirthdate",
+        function(value) {
+          // RegEx for mm/dd/yyyy
+          const regex = /^(0[1-9]|1[012])[/.](0[1-9]|[12][0-9]|3[01])[/.](19|20)\d\d$/;
+          return regex.test(value);
+        },
+        "Birthdate must be formatted mm/dd/yyyy."
+      );
+
+      $(baseSelector + "form").validate({
+        rules: {
+          "lead_submission[athlete_first_name]": "required",
+          "lead_submission[athlete_last_name]": "required",
+          "lead_submission[athlete_email]": isAthleteForm? "required" : "optional",
+          "lead_submission[athlete_sport]": "required",
+          "lead_submission[birth_date]": {"date": true, "required": false},
+          "lead_submission[graduation_year]": "required",
+          "lead_submission[athlete_phone]": "required",
+          "lead_submission[zip]": "required",
+          "lead_submission[parent_first_name]": "required",
+          "lead_submission[parent_last_name]": "required",
+          "lead_submission[parent_email]": "required",
+          "lead_submission[parent_phone]": "required"
+        },
+        submitHandler: function(form) {
+
+          var rule = isBirthDateNeeded ? "add" : "remove";
+          var $birthDateField = $(baseSelector + '[name="lead_submission[birth_date]"]')
+          $birthDateField.rules(rule, {
+            required: true,
+            validBirthdate: true
+          });
+
+          if (!$birthDateField.valid()){
+            return false;
+          }
+
+          var $form = $(form)
+          var $birthDateInput = $form.find("#edit-athlete-birth-date");
+          var birthDate = new Date($birthDateInput.val());
+          var now = new Date();
+          var year = now.getUTCFullYear() - 13;
+          var month = now.getUTCMonth();
+          var day = now.getUTCDate();
+          var youngestBirthDate = new Date(year,month,day,23,59,59,999);
+
+          var expiryday = 24*60*60*1000 // one day in milliseconds
+          now.setTime(now.getTime() + expiryday);
+          var expires = "expires="+ now.toUTCString();
+
+          if (birthDate >= youngestBirthDate) {
+            document.cookie = "ncsaUserIsUnder13=1;" + expires;
+
+            $("#under-thirteen-modal").css('display', 'flex');
+            return false;
+          }
+          form.submit();
+        },
+        errorContainer: $(baseSelector + "#errorContainer")
+      });
+    });
+  </script>
+  <script>
+    $(function() {
+      $(".under-thirteen-modal__close-icon").on("click", function() {
+        $("#under-thirteen-modal").hide();
+        $(".form-select-me-inner").hide();
+        $("#under-thirteen-message").show();
+      });
+    })
+  </script>
+  <script>
+    $(function() {
+      var athleteButton = $(".mobile-menu__button--athlete");
+      var parentButton = $(".mobile-menu__button--parent");
+
+      function showAthleteOrParentForm(role) {
+        var otherRole = role === "athlete" ? "parent" : "athlete";
+        var hasUnderThirteenCookie = document.cookie.indexOf("ncsaUserIsUnder13=1") !== -1;
+
+        if (hasUnderThirteenCookie) {
+          $("#under-thirteen-modal").css('display', 'flex');
+        }
+
+        $(".lead-form #info").hide();
+        $(".lead-form #" + otherRole + "-form").hide();
+        $(".lead-form #" + role + "-form").show();
+      }
+
+      athleteButton.bind("click", function(e) {
+        e.preventDefault()
+        showAthleteOrParentForm("athlete");
+        // Scroll into view
+        document.getElementById("athlete-form").scrollIntoView();
+      });
+
+      parentButton.bind("click", function(e) {
+        e.preventDefault()
+        showAthleteOrParentForm("parent");
+        // Scroll into view
+        document.getElementById("parent-form").scrollIntoView();
+      });
+    });
+  </script>
+  <script src="/seoj/assets/views/colleges/colleges-110626dbb621b6a338dd3a718dfc079ff8990a7c0e8bf343057358d6282f8a3d.js"></script>
+<script src="/seoj/assets/views-d896ab284fbfc7f4374dd222a6b190d63dfcf8e4cc4d02f53f1a1e2b613f8de8.js"></script>
+<script src="/seoj/assets/views/colleges/show-04024382391bb910584145d8113cf35ef376b55d125bb4516cebeb14ce788597.js"></script>
+
+  <!-- Start Visual Website Optimizer Asynchronous Code -->
+<script type='text/javascript'>
+  var _vwo_code=(function(){
+    var account_id=22161,
+        settings_tolerance=2000,
+        library_tolerance=2500,
+        use_existing_jquery=false,
+// DO NOT EDIT BELOW THIS LINE
+        f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+</script>
+<!-- End Visual Website Optimizer Asynchronous Code -->
+
+
+    <!-- OneTrust Cookies Consent Notice start for ncsasports.org -->
+    <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="3eefeed7-6970-4ed1-b05c-36f1dc301ebc" ></script>
+    <script type="text/javascript">
+      function OptanonWrapper() { }
+    </script>
+    <!-- OneTrust Cookies Consent Notice end for ncsasports.org -->
+</head>
+<body class="colleges show">
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KR266R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KR266R');</script>
+<!-- End Google Tag Manager -->
+
+<header id="header">
+  <div class="main l-clr">
+    <a href="https://www.ncsasports.org"><img class="ncsa-logo l-left l-gut-right" alt="NCSA College Recruiting" src="/seoj/assets/ncsa_logo_hq-9590ac66de2519311728eca7d0b6e026bdec9734b5ef89c1dff7e8a9712f3826.png" /></a>
+
+     <div class="mobile-phone-icon l-right">
+    <a style="display:inline-block;cursor:pointer;" href="tel:18664955172">  <i class="fa fa-phone fa-2x"></i>
+      <span>CALL</span></a>
+   </div>
+
+    <div class="contact-us">
+      <div class="chat">
+        <span>Questions? Call</span>
+      </div>
+      <div class="telephone">
+        866-495-5172
+      </div>
+      <div class="member-phone-number">Already a member? <span>877-845-6272</span></div>
+    </div>
+  </div>
+</header>
+<div id="main">
+  <div id="breadcrumbs">
+  <!--Need to make sure links are all separated this way. Current page is not a link-->
+  <!--<a href="#">Football</a>&nbsp;&nbsp;/&nbsp;&nbsp;Illinois-->
+    <span class="crumb">
+      <a title="College Athletic Scholarships" href="https://www.ncsasports.org/college-athletic-scholarships">Athletic Scholarships</a>
+    </span>
+      &nbsp;&nbsp;/&nbsp;&nbsp;
+    <span class="crumb">
+      <a title="Football Scholarships" href="https://www.ncsasports.org/athletic-scholarships/football">Football</a>
+    </span>
+      &nbsp;&nbsp;/&nbsp;&nbsp;
+    <span class="crumb">
+      <a title="Louisiana Football Scholarships" href="https://www.ncsasports.org/athletic-scholarships/football/louisiana">Louisiana</a>
+    </span>
+      &nbsp;&nbsp;/&nbsp;&nbsp;
+    <span class="crumb">
+      Southern University &amp; A&amp;M College Football Scholarships
+    </span>
+</div>
+
+
+
+  
+
+
+
+<div class="seoj-profile seoj2-profile l-right l-col-8">
+  <div itemscope itemtype="http://schema.org/School" class="l-left l-col-6 profile-information">
+    <h1><span itemprop="name">Southern University &amp; A&amp;M College</span></h1>
+
+    <h3 class="m-college-sub">Football Athletic Scholarships</h3>
+
+    <div class="l-col-full">
+      <div class="niche">
+  <span>Powered by&nbsp;&nbsp;<i><img src="/seoj/assets/niche-logo-green-f51bdf130bdc8c572097abc589bc9dd829c1a760dc32d366964d3608a44b298b.svg" /></i></span>
+</div>
+
+    </div>
+
+    <ul itemprop="address" itemscope itemtype="http://schema.org/PostalAddress" class="m-inf l-bln-mg-btm-1">
+      <li><span itemprop="streetAddress">3rd Floor, J.S. Clark Adm. Building, P.O. Box 9374</span></li>
+      <li><span itemprop="addressLocality">Baton Rouge, LA 70813</span></li>
+      <li><span itemprop="telephone">(225) 771-4500</span></li>
+      <li><a target="_blank" href="http://www.subr.edu">http://www.subr.edu</a></li>
+      <div style="display:none;" class="committed_student_tag l-right">Committed to UCLA</div>
+    </ul>
+    <div class="l-col-2 l-left">
+      <img alt="Southern University &amp; A&amp;M College logo" class="ClientCollegeMatches" src="https://recruit-match.ncsasports.org/fasttrack/clientimages/15368college.jpg">
+    </div>
+    <dl class="profile-overview m-sts m-snp l-gut-left">
+      <dt>Year Founded:</dt>
+      <dd>1880</dd>
+      <dt>Religious Affiliation:</dt>
+      <dd>None</dd>
+      <dt>College Type:</dt>
+      <dd>Public
+        , Urban</dd>
+      <dt>Enrollment:</dt>
+      <dd>4530 (full time undergrad)
+      </dd>
+      <dt>Tuition In State:</dt>
+      <dd>$9,141</dd>
+      <dt>Tuition Out of State:</dt>
+      <dd>$16,491</dd>
+      <dt>Division:</dt>
+      <dd>NCAA I-AA</dd>
+      <dt>Conference:</dt>
+      <dd><span class="seoj-tooltip" title="Southwestern Athletic Conference (Division I, Football I-AA)">Southwestern Athletic Conference (Division I, Football I-AA)</span></dd>
+    </dl>
+    <div class="l-left m-lead-cap-btn-cont">
+      <a href="https://getrecruited.ncsasports.org/add-school-favorites/" class="m-lead-cap-btn">Add School to Favorites</a>
+      <a href="https://getrecruited.ncsasports.org/email-the-coaches/" class="m-lead-cap-btn">Email the Coaches</a>
+    </div>
+    <div class="l-left search-content m-margin-bottom m-margin-top">
+      This is the Southern University &amp; A&amp;M College Football scholarship and program information page. Here you&#39;ll have access to information regarding the school and details on their Football program like who to get hold of about recruiting, names of 
+      <span>...</span> <a class="seoj-content-read-more" href="#">Read More</a>
+
+      <div id="seoj-content-full">
+        <div class="search-content">
+          <p>This is the Southern University &amp; A&amp;M College Football scholarship and program information page. Here you'll have access to information regarding the school and details on their Football program like who to get hold of about recruiting, names of past alumni, what scholarship opportunities can be had and ways to start the recruiting process.
+<br />Southern University &amp; A&amp;M College Football Program Recruiting and Coaching Staff
+<br />If you're looking to get recruited it's important to understand who to build a relationship with - and NCSA has got the info you need. The Assistant coach (Defensive Ends) of the Southern University &amp; A&amp;M College Football program is LaAllan Clark. Additional essential personnel include:<br><ul>
+<br /><li>Tight Ends Chris Browne</li>
+<br /><li>Defensive Ends LaAllan Clark</li>
+<br /><li>Head Coach Eric Dooley</li>
+<br /><li>Wide Receivers Devin Fosselman</li>
+<br /><li>Assistant coach (Wide Receivers) Devin Fosselman</li>
+<br /><li>Assistant coach (Running Backs) Dre' Fusilier</li>
+<br /><li>Running Backs Dre' Fusilier</li>
+<br /><li>Assistant Head Coach / Special Teams Coordinator / Linebackers Terrence Graves</li>
+<br /><li>Defensive Coordinator Henry Miller</li>
+<br /><li>Defensive Line Demarcus Miller</li>
+<br /><li>Offensive Line Damon Nivens</li>
+<br /><li>Safeties Sean Wallace</li>
+<br /><li>Quarterbacks Johnathan Williams</li>
+<br /></ul><br>
+<br />If you are considering becoming a part of the Southern University &amp; A&amp;M College Football program they are the individuals you need to speak to. It's possible to choose to contact them by way of email using the link above or call the school to get more information regarding the college and Football program prior to deciding on whether or not it's the right fit for you.
+<br />Create a Free NCSA Profile to Start Connecting with Coaches
+<br />NCSA offers student athletes the information and tools they need to enhance their chances of being recruited by a Football program, whether it's at Southern University &amp; A&amp;M College or another college. Since 2000, NCSA has been connecting coaches and athletes which is a critical part of the recruiting process.  This year alone you'll find 498554 Football athletes using the NCSA technology, network and scouting experts to get their highlights before 10074 coaches at 967 colleges Football programs all over the country.
+<br />If you'd like to join the Southern University &amp; A&amp;M College Football program you have to start building relationships and a highly-visible, professional quality recruiting profile. Starting that process as soon as possible is essential to your success. So make your free profile to become a verified NCSA Football athlete and start connecting with coaches at the Southern University &amp; A&amp;M College Football program today.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ATHLETICS SECTION -->
+
+<div id="summary_cont" class="detail_content l-left l-col-9 l-clr m-tab">
+
+  <section class="l-col-9 m-section-cont">
+    <h6 class="m-section-title">Athletics Information</h6>
+    <dl class="profile-overview m-def-list m-snp l-left m-section-data">
+      <dt class="l-gut-right l-col-3">Conference:</dt>
+      <dd class="l-col-3"><span class="seoj-tooltip" title="Southwestern Athletic Conference (Division I, Football I-AA)">Southwestern Athletic Conference (Division I, Football I-AA)</span></dd>
+      <dt class="l-gut-right l-col-3">Division:</dt>
+      <dd class="l-col-3"> NCAA I-AA</dd>
+      <dt class="l-gut-right l-col-3">Athletic Director:</dt>
+      <dd class="l-col-3">Dr. Will Broussard</dd>
+    </dl>
+  </section>
+
+  <section class="l-col-9 m-section-cont">
+    <h6 class="m-section-title">Football Coaching Staff</h6>
+    <ul>
+        <li><span class="m-coach-name">Chris Browne</span>
+            Tight Ends
+        </li>
+        <li><span class="m-coach-name">LaAllan Clark</span>
+            Defensive Ends
+        </li>
+        <li><span class="m-coach-name">LaAllan Clark</span>
+            Assistant coach (Defensive Ends)
+        </li>
+        <li><span class="m-coach-name">Eric Dooley</span>
+            Head Coach
+        </li>
+        <li><span class="m-coach-name">Devin Fosselman</span>
+            Wide Receivers
+        </li>
+        <li><span class="m-coach-name">Devin Fosselman</span>
+            Assistant coach (Wide Receivers)
+        </li>
+        <li><span class="m-coach-name">Dre&#39; Fusilier</span>
+            Assistant coach (Running Backs)
+        </li>
+        <li><span class="m-coach-name">Dre&#39; Fusilier</span>
+            Running Backs
+        </li>
+        <li><span class="m-coach-name">Terrence Graves</span>
+            Assistant Head Coach / Special Teams Coordinator / Linebackers
+        </li>
+        <li><span class="m-coach-name">Henry Miller</span>
+            Defensive Coordinator
+        </li>
+        <li><span class="m-coach-name">Demarcus Miller</span>
+            Defensive Line
+        </li>
+        <li><span class="m-coach-name">Damon Nivens</span>
+            Offensive Line
+        </li>
+        <li><span class="m-coach-name">Sean Wallace</span>
+            Safeties
+        </li>
+        <li><span class="m-coach-name">Johnathan Williams</span>
+            Quarterbacks
+        </li>
+    </ul>
+  </section>
+
+  
+
+  <section class="l-col-9 sports-offered" style="height: auto">
+    <h6 class="m-section-title">Sports Offered</h6>
+    <ul class="l-col-9">
+        <li class="l-col-3 l-left">Baseball</li>
+        <li class="l-col-3 l-left">Football</li>
+        <li class="l-col-3 l-left">Men&#39;s Basketball</li>
+        <li class="l-col-3 l-left">Men&#39;s Track</li>
+        <li class="l-col-3 l-left">Softball</li>
+        <li class="l-col-3 l-left">Women&#39;s Basketball</li>
+        <li class="l-col-3 l-left">Women&#39;s Soccer</li>
+        <li class="l-col-3 l-left">Women&#39;s Tennis</li>
+        <li class="l-col-3 l-left">Women&#39;s Track</li>
+        <li class="l-col-3 l-left">Women&#39;s Volleyball</li>
+    </ul>
+  </section>
+
+
+  <section class="l-col-9 m-section-cont">
+    <a href="" class="m-see-more">See More on this School</a>
+  </section>
+
+</div>
+
+    <!-- ADMISSIONS & ACADEMICS SECTION -->
+
+<div id="admissions_cont" class="detail_content l-left l-col-9 l-clr m-tab m-margin-bottom">
+  <section class="l-col-9 l-clr">
+    <h6 class="m-section-title">Admissions Contact Info</h6>
+    <dl class="profile-overview m-sts-med">
+      <dt class="l-gut-right">Admissions Toll Free Phone:</dt>
+      <dd>(800) 256-1531</dd>
+      <dt class="l-gut-right">Admissions Phone:</dt>
+      <dd>(225) 771-4500</dd>
+      <dt class="l-gut-right">Admissions Email:</dt>
+      <dd><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="244540494d57574d4b4a5764575146560a414051">[email&#160;protected]</a></dd>
+    </dl>
+  </section>
+  <section class="l-col-9 l-clr">
+    <h6 class="m-section-title">Academic Requirements</h6>
+    <dl class="profile-overview m-sts-med">
+      <dt class="l-gut-right">Academic Selectivity:</dt>
+      <dd>Somewhat Selective</dd>
+      <dt class="l-gut-right">Religious Requirements:</dt>
+      <dd>No</dd>
+      <dt class="l-gut-right">Specific Religious Requirements:</dt>
+      <dd>N/A</dd>
+    </dl>
+  </section>
+  <section class="l-col-9 l-clr">
+    <h6 class="m-section-title">Application Information</h6>
+    <dl class="profile-overview m-sts-med">
+      <dt class="l-gut-right">Application Deadline:</dt>
+      <dd>Yes</dd>
+      <dt class="l-gut-right">Application Deadline Date:</dt>
+      <dd>January  1</dd>
+      <dt class="l-gut-right">Application Final Date:</dt>
+      <dd>July 1</dd>
+      <dt class="l-gut-right">Application Priority Date:</dt>
+      <dd>&nbsp;</dd>
+      <dt class="l-gut-right">Notification Date:</dt>
+      <dd>&nbsp;</dd>
+      <dt class="l-gut-right">Rolling Admissions:</dt>
+      <dd>Yes</dd>
+      <dt class="l-gut-right">Early Action:</dt>
+      <dd>No</dd>
+      <dt class="l-gut-right">Early Action Closing Date:</dt>
+      <dd>&nbsp;</dd>
+      <dt class="l-gut-right">Early Decision:</dt>
+      <dd>No</dd>
+      <dt class="l-gut-right">Early Decision Deadline:</dt>
+      <dd>&nbsp;</dd>
+      <dt class="l-gut-right">Common Application:</dt>
+      <dd>No</dd>
+    </dl>
+  </section>
+
+  <section class="l-col-9 l-clr">
+    <h6 class="m-section-title">Student Body Averages</h6>
+    <dl class="profile-overview m-sts-med l-clr">
+      <h6>ACT</h6>
+      <dt class="l-gut-right">Average Freshman GPA:</dt>
+      <dd>0.0</dd>
+      <dt class="l-gut-right">Average ACT Composite:</dt>
+      <dd>19</dd>
+      <dt class="l-gut-right">Average ACT English:</dt>
+      <dd>19</dd>
+      <dt class="l-gut-right">Average ACT Math:</dt>
+      <dd>18</dd>
+      <dt class="l-gut-right">Average ACT Writing:</dt>
+      <dd>0</dd>
+      <dt class="l-gut-right">ACT 25th Percentile:</dt>
+      <dd>16%</dd>
+      <dt class="l-gut-right">ACT 75th Percentile:</dt>
+      <dd>20%</dd>
+    </dl>
+
+    <dl class="profile-overview m-sts-med">
+      <h6>SAT</h6>
+      <dt class="l-gut-right">Average SAT 1 Combined:</dt>
+      <dd>0</dd>
+      <dt class="l-gut-right">Average SAT 1 Math:</dt>
+      <dd>444</dd>
+      <dt class="l-gut-right">Average SAT 1 Verbal:</dt>
+      <dd>0</dd>
+      <dt class="l-gut-right">SAT 25th Percentile:</dt>
+      <dd>850%</dd>
+      <dt class="l-gut-right">SAT 75th Percentile:</dt>
+      <dd>1050%</dd>
+      <dt class="l-gut-right">SAT 2 Requirements:</dt>
+      <dd>&nbsp;</dd>
+    </dl>
+  </section>
+  <section class="l-col-9 m-section-cont m-margin-bottom">
+    <h6 class="m-section-title">Majors</h6>
+    <ul class="l-col-9 m-section-cont">
+      <h6>Most Popular Majors:</h6>
+      <li class="l-left">Criminal Justice, Psychology, Nursing</li>
+    </ul>
+    <ul class="l-col-9">
+      <h6>Pre-Professional Programs:</h6>
+      <li class="l-left">Pre-Law, Pre-Medicine</li>
+    </ul>
+    <ul class="l-col-9 m-section-cont">
+      <h6>Other Pre-Professional Programs:</h6>
+      <li class="l-left"></li>
+    </ul>
+    <ul class="l-col-9 m-section-cont">
+      <h6>Combined 3-2 Programs:</h6>
+      <li class="l-left">&nbsp;</li>
+    </ul>
+    <ul class="l-col-9 m-section-cont">
+      <h6>Majors Offered:</h6>
+        <li class="l-left">Accounting,</li>
+        <li class="l-left">Agricultural Business and Management,</li>
+        <li class="l-left">Architecture,</li>
+        <li class="l-left">Biology,</li>
+        <li class="l-left">Business Administration, Management, and Operations,</li>
+        <li class="l-left">Business Economics,</li>
+        <li class="l-left">Chemistry,</li>
+        <li class="l-left">Civil Engineering,</li>
+        <li class="l-left">Clinical Psychology,</li>
+        <li class="l-left">Communication Disorders Sciences,</li>
+        <li class="l-left">Communication and Media Studies,</li>
+        <li class="l-left">Computer Science,</li>
+        <li class="l-left">Criminal Justice, Forensics and Corrections,</li>
+        <li class="l-left">Curriculum and Instruction,</li>
+        <li class="l-left">Drama and Stagecraft,</li>
+        <li class="l-left">Educational Administration,</li>
+        <li class="l-left">Electrical Engineering,</li>
+        <li class="l-left">Electrical Engineering Technologies,</li>
+        <li class="l-left">Engineering,</li>
+        <li class="l-left">English Literature,</li>
+        <li class="l-left">Family and Consumer Sciences,</li>
+        <li class="l-left">Finance,</li>
+        <li class="l-left">Fine and Studio Arts,</li>
+        <li class="l-left">Forestry,</li>
+        <li class="l-left">History,</li>
+        <li class="l-left">Interdisciplinary Studies, Other,</li>
+        <li class="l-left">Marketing,</li>
+        <li class="l-left">Mathematics,</li>
+        <li class="l-left">Mechanical Engineering,</li>
+        <li class="l-left">Mental and Social Health Services,</li>
+        <li class="l-left">Music,</li>
+        <li class="l-left">Nursing,</li>
+        <li class="l-left">Pharmacology and Toxicology,</li>
+        <li class="l-left">Physical Therapy and Rehabilitation Professions,</li>
+        <li class="l-left">Physics,</li>
+        <li class="l-left">Political Science and Government,</li>
+        <li class="l-left">Psychology,</li>
+        <li class="l-left">Public Administration,</li>
+        <li class="l-left">Public Policy Analysis,</li>
+        <li class="l-left">Romance Linguistics,</li>
+        <li class="l-left">Social Sciences,</li>
+        <li class="l-left">Social Work,</li>
+        <li class="l-left">Sociology,</li>
+        <li class="l-left">Special Education,</li>
+        <li class="l-left">Student Counseling,</li>
+        <li class="l-left">Teacher Development Methods,</li>
+        <li class="l-left">Teacher Development Specific Subjects,</li>
+    </ul>
+  </section>
+</div>
+
+    <div id="environment_cont" class="detail_content l-left l-col-9 l-clr m-tab">
+
+  <section class="l-col-9 l-clr">
+    <h6 class="m-section-title">Location</h6>
+    <dl class="profile-overview m-sts-med">
+      <dt class="l-gut-right">City/Town Situated In:</dt>
+      <dd>Baton Rouge, LA</dd>
+      <dt class="l-gut-right">Population:</dt>
+      <dd>227071</dd>
+      <dt class="l-gut-right">Major City Closest To School:</dt>
+      <dd>New Orleans</dd>
+      <dt class="l-gut-right">Distance Of Major City:</dt>
+      <dd>92 Miles</dd>
+      <dt class="l-gut-right">Closest International Airport:</dt>
+      <dd>New Orleans, LA</dd>
+      <dt class="l-gut-right">Distance To International Airport:</dt>
+      <dd>80 Miles</dd>
+      <dt class="l-gut-right">Closest Other Airport:</dt>
+      <dd>Baton Rouge, LA</dd>
+      <dt class="l-gut-right">Distance To Other Airport:</dt>
+      <dd>5 Miles</dd>
+    </dl>
+  </section>
+
+  <section class="l-col-9 m-section-cont">
+    <h6>Location Description:</h6>
+    <p>
+      884-acre campus in Baton Rouge (population: 227,818). Served by air and bus; train serves Hammond (40 miles). Public transportation serves campus.
+    </p>
+  </section>
+
+  <section class="l-col-9 l-clr">
+    <h6 class="m-section-title">Demographics</h6>
+    <dl class="profile-overview m-sts-med">
+        <dt class="l-gut-right">Male:</dt>
+        <dd>36.42%</dd>
+        <dt class="l-gut-right">Female:</dt>
+        <dd>63.58%</dd>
+        <dt class="l-gut-right">African American:</dt>
+        <dd>90.32%</dd>
+        <dt class="l-gut-right">Asian American:</dt>
+        <dd>0.29%</dd>
+        <dt class="l-gut-right">Caucasian:</dt>
+        <dd>2.70%</dd>
+        <dt class="l-gut-right">Hispanic:</dt>
+        <dd>0.60%</dd>
+        <dt class="l-gut-right">International:</dt>
+        <dd>0.52%</dd>
+        <dt class="l-gut-right">Other:</dt>
+        <dd>3.35%</dd>
+      <dt class="l-gut-right">Student Faculty Ratio:</dt>
+      <dd>24:1</dd>
+      <dt class="l-gut-right">Out State Freshmen:</dt>
+      <dd>21%</dd>
+      <dt class="l-gut-right">Campus Size:</dt>
+      <dd>884 acres</dd>
+    </dl>
+  </section>
+
+  <section class="l-col-9 l-clr">
+    <h6 class="m-section-title">Campus Life</h6>
+    <dl class="profile-overview m-sts-med">
+      <dt class="l-gut-right">Freshmen In School Housing:</dt>
+      <dd>0%</dd>
+      <dt class="l-gut-right">Students Live On Campus:</dt>
+      <dd>31%</dd>
+      <dt class="l-gut-right">Students Live Off Campus:</dt>
+      <dd>69%</dd>
+      <dt class="l-gut-right">Students Live On Campus During Weekends:</dt>
+      <dd>65%</dd>
+    </dl>
+  </section>
+
+  <section class="l-col-9 l-clr">
+    <h6 class="m-section-title">Housing Types:</h6>
+    <ul class="profile-overview m-sts-med">
+      <li class="l-left">Single-student apartments</li>
+    </ul>
+  </section>
+
+  <section class="l-col-9 l-clr">
+    <h6 class="m-section-title">Fraternities &amp; Sororities</h6>
+    <dl class="profile-overview m-sts-med">
+      <dt class="l-gut-right">Fraternities &amp; Sororities:</dt>
+      <dd>Y</dd>
+      <dt class="l-gut-right">Number Of Fraternities:</dt>
+      <dd>5</dd>
+      <dt class="l-gut-right">Number Of Sororities:</dt>
+      <dd>4</dd>
+      <dt class="l-gut-right">Join Fraternities:</dt>
+      <dd>0%</dd>
+      <dt class="l-gut-right">Join Sororities:</dt>
+      <dd>0%</dd>
+    </dl>
+  </section>
+
+  <section class="l-col-9 l-clr m-margin-bottom">
+    <h6 class="m-section-title">ROTC</h6>
+    <dl class="profile-overview m-sts-med">
+      <dt class="l-gut-right">Air Force ROTC:</dt>
+      <dd>No</dd>
+      <dt class="l-gut-right">Navy ROTC:</dt>
+      <dd>Yes</dd>
+      <dt class="l-gut-right">Army ROTC:</dt>
+      <dd>Yes</dd>
+    </dl>
+  </section>
+</div>
+
+    <div id="financial_cont" class="detail_content l-left l-col-9 l-clr m-tab">
+  <section class="l-col-9 l-clr">
+    <h6 class="m-section-title">Financial Aid</h6>
+    <dl class="profile-overview m-sts-med">
+      <dt class="l-gut-right seoj-tooltip" title="Financial Aid Toll Free Number">Financial Aid Toll Free Number:</dt>
+      <dd>800 626-6590</dd>
+      <dt class="l-gut-right seoj-tooltip" title="Financial Aid Phone">Financial Aid Phone:</dt>
+      <dd>&nbsp;</dd>
+      <dt class="l-gut-right seoj-tooltip" title="Financial Aid Email">Financial Aid Email:</dt>
+      <dd>&nbsp;</dd>
+      <dt class="l-gut-right seoj-tooltip" title="Aid Notification Date">Aid Notification Date:</dt>
+      <dd>&nbsp;</dd>
+      <dt class="l-gut-right seoj-tooltip" title="Financial Aid Forms">Financial Aid Forms:</dt>
+      <dd>FAFSA</dd>
+      <dt class="l-gut-right">Tuition Instate:</dt>
+      <dd>$9,141</dd>
+      <dt class="l-gut-right">Tuition Out of State:</dt>
+      <dd>$16,491</dd>
+      <dt class="l-gut-right">Room &amp; Board:</dt>
+      <dd> $6,410</dd>
+      <dt class="l-gut-right">Average Debt On Graduation:</dt>
+      <dd> $0</dd>
+    </dl>
+  </section>
+	  <section class="l-col-9 l-clr">
+	    <h6 class="m-section-title">Scholarship Numbers</h6>
+        <div><strong>FTF</strong> = First Time Freshmen</div>
+        <strong>FTU</strong> = Full Time Undergraduate
+	    <dl class="profile-overview m-sts-wide">
+	      <dt class="l-gut-right seoj-tooltip"
+	          title="Average Non-Need Based Athletic Grant and Scholarship Amount">
+	        Average Non-Need Based Athletic Grant and Scholarship Amount:
+	      </dt>
+	      <dd>FTF :$0</dd>
+	      <dd>FTU : $0</dd>
+	      <dt class="l-gut-right seoj-tooltip"
+	          title="Number of Students Who Received Non-Need Based Athletic Grants and Scholarships">
+	        Number of Students Who Received Non-Need Based Athletic Grants and Scholarships:
+	      <dd>FTF :0</dd>
+	      <dd>FTU : 0</dd>
+	      <dt class="l-gut-right seoj-tooltip" title="Average Non-Need Based Scholarship or Grant Amount">
+	        Average Non-Need Based Scholarship or Grant Amount:
+	      </dt>
+	      <dd>FTF :$0</dd>
+	      <dd>FTU : $0</dd>
+	      <dt class="l-gut-right seoj-tooltip" title="Average Need-Based Loan Amount">
+	        Average Need-Based Loan Amount:
+	      </dt>
+	      <dd>FTF :$0</dd>
+	      <dd>FTU : $0</dd>
+	      <dt class="l-gut-right seoj-tooltip" title="Average Need-Based-Self-Help-Award Amount">
+	        Average Need-Based-Self-Help-Award Amount:
+	      </dt>
+	      <dd>FTF :$0</dd>
+	      <dd>FTU : $0</dd>
+	      <dt class="l-gut-right seoj-tooltip" title="Average Need-Based Scholarship or Grant Amount">
+	        Average Need-Based Scholarship or Grant Amount:
+	      </dt>
+	      <dd>FTF :$0</dd>
+	      <dd>FTU : $0</dd>
+	      <dt class="l-gut-right seoj-tooltip" title="Average Financial Aid Package">
+	        Average Financial Aid Package:
+	      </dt>
+	      <dd>FTF :$0</dd>
+	      <dd>FTU : $0</dd>
+	      <dt class="l-gut-right seoj-tooltip" title="Average Percentage Of Need Met (Based on EFC)">
+	        Average Percentage Of Need Met (Based on EFC):
+	      </dt>
+	      <dd>FTF :0%</dd>
+	      <dd>FTU : 0%</dd>
+	    </dl>
+	  </section>
+</div>
+
+  </div>
+  <div class="l-col-3 l-right lead-cap-wrapper">
+    <div class="lead_cap l-bln-mg-btm-1">
+  <div class="lead-form">
+    <div class="form-container">
+      <div id="info">
+  <div class="form-row">
+    <p class="form-main-title">RECRUITING STARTS HERE</p>
+  </div>
+  <div class="form-row">
+    <div class="button-container">
+      <button id="athlete-button" class="athlete-button">
+        Athletes Start Here</button
+      ><br />
+      <button id="parent-button" class="parent-button">
+        Parents Start Here
+      </button>
+    </div>
+  </div>
+  <div class="form-row">
+    <p class="already-a-member">
+      Already a Member?
+      <a
+        class="sign-in"
+        href="https://recruit-match.ncsasports.org/clientrms/user_accounts/sign_in"
+        >Sign In</a
+      >
+    </p>
+  </div>
+  <div class="form-row">
+    <p class="form-sub-title">The Largest College Recruiting Network</p>
+  </div>
+  <div class="form-row">
+    <p>
+      <img
+        class="form-image"
+        src="/seoj/assets/exposure-icon-d0080b08407c2568cf7a37bcc47bdb356aeb9609f0bf19b6050cc39af29628e5.png"
+        alt=""
+        width="66"
+        height="66"
+      />
+    </p>
+
+    <p class="form-text">
+      <strong>Get Exposure</strong> with college programs. College coaches
+      search for recruits on NCSA's platform 741,611 times in 2021.
+    </p>
+  </div>
+  <div class="form-row">
+    <p>
+      <img
+        class="form-image"
+        src="/seoj/assets/discovered-icon-320f01d6cb47a9b84edefadbf0f50325ce00ae69042ad9c5c8ae2de9a9a70f6f.png"
+        alt=""
+        width="66"
+        height="66"
+      />
+    </p>
+
+    <p class="form-text">
+      <strong>Get Discovered</strong> by college coaches. NCSA athlete's
+      profiles were viewed 4.1 million times by college coaches in 2021.
+    </p>
+  </div>
+  <div class="form-row">
+    <p>
+      <img
+        class="form-image"
+        src="/seoj/assets/get-recruited-icon-b1c66fb6ea2f9f6fb440f356131ad37c90224fe0e6cc2716b99858ae326ee096.png"
+        alt=""
+        width="66"
+        height="66"
+      />
+    </p>
+
+    <p class="form-text">
+      <strong>Get Recruited.</strong> Find out what coaches are viewing your
+      profile and get matched with the right choices.
+    </p>
+  </div>
+  <div class="form-row"><p class="get-started">GET STARTED FOR FREE</p></div>
+</div>
+
+
+
+      <div id="athlete-form" style="display: none;">
+        <div id="form-student">
+  <div role="form" lang="en-US" dir="ltr">
+    <form class="new_lead_submission" id="new_lead_submission" action="/lead_submissions" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" autocomplete="off" /><input type="hidden" name="authenticity_token" value="6jwdu6sM6pKrgqT20S/04hX2lIzWokHNvsGpeWt7eu7SkBhuk5EDG17Rxupl0ctC3jkv39sXGRauT4swpsn0AA==" autocomplete="off" />
+      <input type="hidden" name="lead_submission[event_id]" value="SEOJII"/>
+      <input type="hidden" name="lead_submission[athlete_or_parent]" value="Athlete"/>
+
+      <div class="form-select-me">
+        <div class="rounded-block-wrapper padded-bottom">
+          <p class="form-select-me-title">Get started for free!</p>
+          <p class="form-select-me-sub">A profile only takes 60 seconds</p>
+          <div id="errorContainer"><p>Please fill out the required fields.</p></div>
+        </div>
+
+        <div class="form-select-me-inner rounded-block-wrapper padded-bottom">
+          <p class="form-select-me-inner-title">Athlete Information</p>
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-athlete-first-name">First Name
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="text" name="lead_submission[athlete_first_name]" id="lead_submission_athlete_first_name" />
+                </span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-athlete-last-name">Last Name
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="text" name="lead_submission[athlete_last_name]" id="lead_submission_athlete_last_name" />
+                </span>
+              </div>
+            </div>
+
+              <div class="col">
+                <div class="form-item">
+                  <label for="edit-athlete-email">Email
+                    <span class="form-required" title="This field is required.">*</span>
+                  </label>
+
+                  <span class="form-control-wrap">
+                    <input class="form-control" type="email" name="lead_submission[athlete_email]" id="lead_submission_athlete_email" />
+                  </span>
+                </div>
+              </div>
+          </div>
+
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-athlete-sport">Sport
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <select name="lead_submission[sport_id]" class="form-control" id="edit-athlete-sport" aria-required="true" aria-invalid="false">
+                    <option value="">Select Sport</option>
+                      <option value="17706"  >
+                        Baseball
+                      </option>
+                      <option value="17737"  >
+                        Cheerleading
+                      </option>
+                      <option value="17732"  >
+                        Esports
+                      </option>
+                      <option value="17711"  >
+                        Field Hockey
+                      </option>
+                      <option value="17633" selected=&quot;selected&quot; >
+                        Football
+                      </option>
+                      <option value="17638"  >
+                        Men&#39;s Basketball
+                      </option>
+                      <option value="17652"  >
+                        Men&#39;s Diving
+                      </option>
+                      <option value="17659"  >
+                        Men&#39;s Golf
+                      </option>
+                      <option value="17665"  >
+                        Men&#39;s Ice Hockey
+                      </option>
+                      <option value="17707"  >
+                        Men&#39;s Lacrosse
+                      </option>
+                      <option value="17644"  >
+                        Men&#39;s Rowing
+                      </option>
+                      <option value="17683"  >
+                        Men&#39;s Soccer
+                      </option>
+                      <option value="17687"  >
+                        Men&#39;s Swimming
+                      </option>
+                      <option value="17689"  >
+                        Men&#39;s Tennis
+                      </option>
+                      <option value="17691"  >
+                        Men&#39;s Track
+                      </option>
+                      <option value="17695"  >
+                        Men&#39;s Volleyball
+                      </option>
+                      <option value="17701"  >
+                        Men&#39;s Water Polo
+                      </option>
+                      <option value="17634"  >
+                        Softball
+                      </option>
+                      <option value="17639"  >
+                        Women&#39;s Basketball
+                      </option>
+                      <option value="17730"  >
+                        Women&#39;s Beach Volleyball
+                      </option>
+                      <option value="17653"  >
+                        Women&#39;s Diving
+                      </option>
+                      <option value="17736"  >
+                        Women&#39;s Flag Football
+                      </option>
+                      <option value="17660"  >
+                        Women&#39;s Golf
+                      </option>
+                      <option value="17735"  >
+                        Women&#39;s Gymnastics
+                      </option>
+                      <option value="17666"  >
+                        Women&#39;s Ice Hockey
+                      </option>
+                      <option value="17708"  >
+                        Women&#39;s Lacrosse
+                      </option>
+                      <option value="17645"  >
+                        Women&#39;s Rowing
+                      </option>
+                      <option value="17684"  >
+                        Women&#39;s Soccer
+                      </option>
+                      <option value="17688"  >
+                        Women&#39;s Swimming
+                      </option>
+                      <option value="17690"  >
+                        Women&#39;s Tennis
+                      </option>
+                      <option value="17692"  >
+                        Women&#39;s Track
+                      </option>
+                      <option value="17696"  >
+                        Women&#39;s Volleyball
+                      </option>
+                      <option value="17702"  >
+                        Women&#39;s Water Polo
+                      </option>
+                      <option value="17731"  >
+                        Women&#39;s Wrestling
+                      </option>
+                      <option value="17635"  >
+                        Wrestling
+                      </option>
+                  </select>
+                </span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-athlete-grad-year">H.S Grad Year
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <select name="lead_submission[graduation_year]" class="form-control" id="edit-athlete-grad-year" aria-required="true" aria-invalid="false">
+                    <option value="">Select Year</option>
+                    
+                      <option value="2020">2020</option>
+
+                      <option value="2021">2021</option>
+
+                      <option value="2022">2022</option>
+
+                      <option value="2023">2023</option>
+
+                      <option value="2024">2024</option>
+
+                      <option value="2025">2025</option>
+
+                      <option value="2026">2026</option>
+
+                      <option value="2027">2027</option>
+
+                      <option value="2028">2028</option>
+
+                      <option value="2029">2029</option>
+
+                      <option value="2030">2030</option>
+
+                      <option value="2031">2031</option>
+2020..2031                  </select>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col birthdate-field-wrapper" style="display:none">
+            <div class="form-item">
+              <label for="edit-athlete-birth_date">Please enter athlete's date of birth:
+                <span class="form-required" title="This field is required.">*</span>
+              </label>
+
+              <span class="form-control-wrap">
+                <input
+                  type="text"
+                  name="lead_submission[birth_date]"
+                  class="form-control"
+                  id="edit-athlete-birth-date"
+                  aria-required="true"
+                  aria-invalid="false"
+                  placeholder="mm/dd/yyyy"
+                  pattern="\d{2}\/\d{2}\/\d{4}"
+                  maxlength="10" />
+                </span>
+            </div>
+          </div>
+
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-athlete-phone-area">Phone
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="tel" name="lead_submission[athlete_phone]" id="lead_submission_athlete_phone" />
+                </span>
+              </div>
+            </div>
+          </div>
+
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-athlete-zip">Zip Code
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="text" name="lead_submission[zip]" id="lead_submission_zip" />
+                </span>
+              </div>
+            </div>
+        </div>
+
+        <div class="form-select-me-inner rounded-block-wrapper padded-bottom">
+          <p class="form-select-me-inner-title">Parent Information</p>
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-parent-first-name">First Name
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="text" name="lead_submission[parent_first_name]" id="lead_submission_parent_first_name" />
+                </span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-parent-last-name">Last Name
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="text" name="lead_submission[parent_last_name]" id="lead_submission_parent_last_name" />
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-parent-email">Email
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="email" name="lead_submission[parent_email]" id="lead_submission_parent_email" />
+                </span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-parent-phone">Phone
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="tel" name="lead_submission[parent_phone]" id="lead_submission_parent_phone" />
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-select-me-inner rounded-block-wrapper">
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-actions">
+                <input type="submit" name="commit" value="BUILD PROFILE" class="form-submit button" data-disable-with="BUILD PROFILE" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</form>  </div>
+</div>
+
+
+      </div>
+
+      <div id="parent-form" style="display: none;">
+        <div id="form-student">
+  <div role="form" lang="en-US" dir="ltr">
+    <form class="new_lead_submission" id="new_lead_submission" action="/lead_submissions" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" autocomplete="off" /><input type="hidden" name="authenticity_token" value="hP3XKLINW+5/7mZ8UWsYneB796P6e+mGnqvEYdA1OsC8UdL9ipCyZ4q9BGDllSc9K7RM8PfOsV2OJeYoHYe0Lg==" autocomplete="off" />
+      <input type="hidden" name="lead_submission[event_id]" value="SEOJII"/>
+      <input type="hidden" name="lead_submission[athlete_or_parent]" value="Parent"/>
+
+      <div class="form-select-me">
+        <div class="rounded-block-wrapper padded-bottom">
+          <p class="form-select-me-title">Get started for free!</p>
+          <p class="form-select-me-sub">A profile only takes 60 seconds</p>
+          <div id="errorContainer"><p>Please fill out the required fields.</p></div>
+        </div>
+
+        <div class="form-select-me-inner rounded-block-wrapper padded-bottom">
+          <p class="form-select-me-inner-title">Athlete Information</p>
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-athlete-first-name">First Name
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="text" name="lead_submission[athlete_first_name]" id="lead_submission_athlete_first_name" />
+                </span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-athlete-last-name">Last Name
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="text" name="lead_submission[athlete_last_name]" id="lead_submission_athlete_last_name" />
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-athlete-sport">Sport
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <select name="lead_submission[sport_id]" class="form-control" id="edit-athlete-sport" aria-required="true" aria-invalid="false">
+                    <option value="">Select Sport</option>
+                      <option value="17706"  >
+                        Baseball
+                      </option>
+                      <option value="17737"  >
+                        Cheerleading
+                      </option>
+                      <option value="17732"  >
+                        Esports
+                      </option>
+                      <option value="17711"  >
+                        Field Hockey
+                      </option>
+                      <option value="17633" selected=&quot;selected&quot; >
+                        Football
+                      </option>
+                      <option value="17638"  >
+                        Men&#39;s Basketball
+                      </option>
+                      <option value="17652"  >
+                        Men&#39;s Diving
+                      </option>
+                      <option value="17659"  >
+                        Men&#39;s Golf
+                      </option>
+                      <option value="17665"  >
+                        Men&#39;s Ice Hockey
+                      </option>
+                      <option value="17707"  >
+                        Men&#39;s Lacrosse
+                      </option>
+                      <option value="17644"  >
+                        Men&#39;s Rowing
+                      </option>
+                      <option value="17683"  >
+                        Men&#39;s Soccer
+                      </option>
+                      <option value="17687"  >
+                        Men&#39;s Swimming
+                      </option>
+                      <option value="17689"  >
+                        Men&#39;s Tennis
+                      </option>
+                      <option value="17691"  >
+                        Men&#39;s Track
+                      </option>
+                      <option value="17695"  >
+                        Men&#39;s Volleyball
+                      </option>
+                      <option value="17701"  >
+                        Men&#39;s Water Polo
+                      </option>
+                      <option value="17634"  >
+                        Softball
+                      </option>
+                      <option value="17639"  >
+                        Women&#39;s Basketball
+                      </option>
+                      <option value="17730"  >
+                        Women&#39;s Beach Volleyball
+                      </option>
+                      <option value="17653"  >
+                        Women&#39;s Diving
+                      </option>
+                      <option value="17736"  >
+                        Women&#39;s Flag Football
+                      </option>
+                      <option value="17660"  >
+                        Women&#39;s Golf
+                      </option>
+                      <option value="17735"  >
+                        Women&#39;s Gymnastics
+                      </option>
+                      <option value="17666"  >
+                        Women&#39;s Ice Hockey
+                      </option>
+                      <option value="17708"  >
+                        Women&#39;s Lacrosse
+                      </option>
+                      <option value="17645"  >
+                        Women&#39;s Rowing
+                      </option>
+                      <option value="17684"  >
+                        Women&#39;s Soccer
+                      </option>
+                      <option value="17688"  >
+                        Women&#39;s Swimming
+                      </option>
+                      <option value="17690"  >
+                        Women&#39;s Tennis
+                      </option>
+                      <option value="17692"  >
+                        Women&#39;s Track
+                      </option>
+                      <option value="17696"  >
+                        Women&#39;s Volleyball
+                      </option>
+                      <option value="17702"  >
+                        Women&#39;s Water Polo
+                      </option>
+                      <option value="17731"  >
+                        Women&#39;s Wrestling
+                      </option>
+                      <option value="17635"  >
+                        Wrestling
+                      </option>
+                  </select>
+                </span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-athlete-grad-year">H.S Grad Year
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <select name="lead_submission[graduation_year]" class="form-control" id="edit-athlete-grad-year" aria-required="true" aria-invalid="false">
+                    <option value="">Select Year</option>
+                    
+                      <option value="2020">2020</option>
+
+                      <option value="2021">2021</option>
+
+                      <option value="2022">2022</option>
+
+                      <option value="2023">2023</option>
+
+                      <option value="2024">2024</option>
+
+                      <option value="2025">2025</option>
+
+                      <option value="2026">2026</option>
+
+                      <option value="2027">2027</option>
+
+                      <option value="2028">2028</option>
+
+                      <option value="2029">2029</option>
+
+                      <option value="2030">2030</option>
+
+                      <option value="2031">2031</option>
+2020..2031                  </select>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col birthdate-field-wrapper" style="display:none">
+            <div class="form-item">
+              <label for="edit-athlete-birth_date">Please enter athlete's date of birth:
+                <span class="form-required" title="This field is required.">*</span>
+              </label>
+
+              <span class="form-control-wrap">
+                <input
+                  type="text"
+                  name="lead_submission[birth_date]"
+                  class="form-control"
+                  id="edit-athlete-birth-date"
+                  aria-required="true"
+                  aria-invalid="false"
+                  placeholder="mm/dd/yyyy"
+                  pattern="\d{2}\/\d{2}\/\d{4}"
+                  maxlength="10" />
+                </span>
+            </div>
+          </div>
+
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-athlete-phone-area">Phone
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="tel" name="lead_submission[athlete_phone]" id="lead_submission_athlete_phone" />
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-select-me-inner rounded-block-wrapper padded-bottom">
+          <p class="form-select-me-inner-title">Parent Information</p>
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-parent-first-name">First Name
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="text" name="lead_submission[parent_first_name]" id="lead_submission_parent_first_name" />
+                </span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-parent-last-name">Last Name
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="text" name="lead_submission[parent_last_name]" id="lead_submission_parent_last_name" />
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-parent-email">Email
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="email" name="lead_submission[parent_email]" id="lead_submission_parent_email" />
+                </span>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="form-item">
+                <label for="edit-parent-phone">Phone
+                  <span class="form-required" title="This field is required.">*</span>
+                </label>
+
+                <span class="form-control-wrap">
+                  <input class="form-control" type="tel" name="lead_submission[parent_phone]" id="lead_submission_parent_phone" />
+                </span>
+              </div>
+            </div>
+
+              <div class="col">
+                <div class="form-item">
+                  <label for="edit-athlete-zip">Zip Code
+                    <span class="form-required" title="This field is required.">*</span>
+                  </label>
+
+                  <span class="form-control-wrap">
+                    <input class="form-control" type="text" name="lead_submission[zip]" id="lead_submission_zip" />
+                  </span>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="form-select-me-inner rounded-block-wrapper">
+          <div class="grid-group">
+            <div class="col">
+              <div class="form-actions">
+                <input type="submit" name="commit" value="BUILD PROFILE" class="form-submit button" data-disable-with="BUILD PROFILE" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</form>  </div>
+</div>
+
+
+      </div>
+
+      <div id="under-thirteen-message" class="cant-submit-form-message" style="display: none;">
+        <div class="form-select-me rounded-block-wrapper">
+          <p>
+            We’re sorry, you have to be 13 years old
+            to build a profile. Don’t worry—NCSA is
+            here for you as soon as you turn 13.
+          </p>
+          <p>
+            You can also ask your parents to call us
+            at 866-495-5172 to learn more.
+          </p>
+        </div>
+      </div>
+
+      <div id="under-thirteen-modal" class="modal-wrapper" style="display: none;">
+  <div class="modal-overlay">
+  </div>
+
+  <div class="under-thirteen-modal">
+    <div class="under-thirteen-modal__close-icon">
+      <div class="under-thirteen-modal__close-icon__bar under-thirteen-modal__close-icon__bar--left"></div>
+      <div class="under-thirteen-modal__close-icon__bar under-thirteen-modal__close-icon__bar--right"></div>
+    </div>
+    <img class="under-thirteen-modal__icon" src="/seoj/assets/icon-under13-6926f1f4935b2c9e52a3069ef33182f921c3a197abc4517f78e28259637ed936.png" alt="Under 13 Icon">
+    <h2 class="under-thirteen-modal__title">Unfortunately we cannot create an athlete profile right now</h2>
+    <p>Due to federal privacy regulations, we are not able to create an athlete profile for students under 13 years old.</p>
+
+    <p>
+      According to information you submitted, you are under the age of 13.<br />
+      If you're receiving this message in error, please call us at <a href="tel:+18864955172" class="under-thirteen-modal__link">886-495-5172</a>.
+    </p>
+
+    <p>
+      We apologize for this inconvenience and invite you to return as soon as you turn 13.
+    </p>
+
+    <p>
+      In the meantime, we'd like to offer some helpful information to kick start your recruiting process.<br />
+      Here are two of our most popular articles to get you started:
+    </p>
+
+    <ul class="under-thirteen-modal__link-list">
+      <li>
+        <a href="http://www.ncsasports.org/how-do-you-get-recruited/athletic-recruiting" class="under-thirteen-modal__link">
+          Five Things to Know About Recruiting
+        </a>
+      </li>
+      <li>
+        <a href="http://www.ncsasports.org/how-do-you-get-recruited/college-recruit/football-recruiting-process" class="under-thirteen-modal__link">
+          The Recruiting Process
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+</div>
+
+  </div>
+  <div class="l-col-3 l-right right-side-bar l-bln-mg-top-1">
+    <div class="l-bln-mg-btm-1">
+          <div id="most_recent_alumni">
+      <h4 class="sectionhead m-margin-bottom">NCSA Alumni at Southern University &amp; A&amp;M College</h4>
+      <table>
+            <tr style="margin-bottom: 23px;">
+              <td><img rel="photo" class="m-alumni-img" src="https://s3.amazonaws.com/rms-rmfiles-production/client_photos/athlete_4077861_small.jpg" /></td>
+              <td style="display: block; margin-left: 19px;">
+                <p style="margin-bottom: 1px; font-weight: bold;">Sean-Charles Ned</p>
+                <p style="margin-bottom: 1px;">Class of 2021</p>
+                <p style="margin-bottom: 1px;">Football</p>
+              </td>
+            </tr>
+            <tr style="margin-bottom: 23px;">
+              <td><img rel="photo" class="m-alumni-img" src="https://s3.amazonaws.com/rms-rmfiles-production/client_photos/athlete_1179347_small.jpg" /></td>
+              <td style="display: block; margin-left: 19px;">
+                <p style="margin-bottom: 1px; font-weight: bold;">Avant Monnie</p>
+                <p style="margin-bottom: 1px;">Class of 2020</p>
+                <p style="margin-bottom: 1px;">Football</p>
+              </td>
+            </tr>
+            <tr style="margin-bottom: 23px;">
+              <td><img rel="photo" class="m-alumni-img" src="/seoj/assets/default_client_image-c4eb0cd81b24de89f1907e2ebd3bd4a4d6026a29260a3e625ba0fee51d9a6590.png" /></td>
+              <td style="display: block; margin-left: 19px;">
+                <p style="margin-bottom: 1px; font-weight: bold;">Alphard Walter</p>
+                <p style="margin-bottom: 1px;">Class of 2020</p>
+                <p style="margin-bottom: 1px;">Football</p>
+              </td>
+            </tr>
+            <tr style="margin-bottom: 23px;">
+              <td><img rel="photo" class="m-alumni-img" src="https://s3.amazonaws.com/rms-rmfiles-production/client_photos/athlete_1819586_small.jpg" /></td>
+              <td style="display: block; margin-left: 19px;">
+                <p style="margin-bottom: 1px; font-weight: bold;">Kriston Davis</p>
+                <p style="margin-bottom: 1px;">Class of 2019</p>
+                <p style="margin-bottom: 1px;">Football</p>
+              </td>
+            </tr>
+            <tr style="margin-bottom: 23px;">
+              <td><img rel="photo" class="m-alumni-img" src="/seoj/assets/default_client_image-c4eb0cd81b24de89f1907e2ebd3bd4a4d6026a29260a3e625ba0fee51d9a6590.png" /></td>
+              <td style="display: block; margin-left: 19px;">
+                <p style="margin-bottom: 1px; font-weight: bold;">Kaleb Ware</p>
+                <p style="margin-bottom: 1px;">Class of 2019</p>
+                <p style="margin-bottom: 1px;">Football</p>
+              </td>
+            </tr>
+      </table>
+    </div>
+
+    </div>
+
+      <div class="m-margin-bottom m-similar-schools">
+        <h4 class="sectionhead m-margin-bottom">Other People also Viewed</h4>
+          <div class="l-clr">
+            <div class="m-active-college l-left l-col-2">
+              <a class="seoj-tooltip" title="Albany State University logo" href="https://www.ncsasports.org/athletic-scholarships/football/georgia/albany-state-university">
+                <img src="https://recruit-match.ncsasports.org/fasttrack/clientimages/13865college.jpg" class="span-3 bpad_10 " /> </a>
+            </div>
+            <a class="l-gut-left seoj-tooltip" title="Albany State University Football Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/football/georgia/albany-state-university">
+              Albany State University
+            </a>
+          </div>
+          <div class="l-clr">
+            <div class="m-active-college l-left l-col-2">
+              <a class="seoj-tooltip" title="Albion College logo" href="https://www.ncsasports.org/athletic-scholarships/football/michigan/albion-college">
+                <img src="https://recruit-match.ncsasports.org/fasttrack/clientimages/13868college.jpg" class="span-3 bpad_10 " /> </a>
+            </div>
+            <a class="l-gut-left seoj-tooltip" title="Albion College Football Program Information" href="https://www.ncsasports.org/athletic-scholarships/football/michigan/albion-college">
+              Albion College
+            </a>
+          </div>
+          <div class="l-clr">
+            <div class="m-active-college l-left l-col-2">
+              <a class="seoj-tooltip" title="Augustana College - Illinois logo" href="https://www.ncsasports.org/athletic-scholarships/football/illinois/augustana-college-il">
+                <img src="https://recruit-match.ncsasports.org/fasttrack/clientimages/13935college.jpg" class="span-3 bpad_10 last" /> </a>
+            </div>
+            <a class="l-gut-left seoj-tooltip" title="Augustana College - Illinois Football Program Information" href="https://www.ncsasports.org/athletic-scholarships/football/illinois/augustana-college-il">
+              Augustana College - Illinois
+            </a>
+          </div>
+          <div class="l-clr">
+            <div class="m-active-college l-left l-col-2">
+              <a class="seoj-tooltip" title="Columbia University logo" href="https://www.ncsasports.org/athletic-scholarships/football/new-york/columbia-university">
+                <img src="https://recruit-match.ncsasports.org/fasttrack/clientimages/14247college.jpg" class="span-3 bpad_10 " /> </a>
+            </div>
+            <a class="l-gut-left seoj-tooltip" title="Columbia University Football Program Information" href="https://www.ncsasports.org/athletic-scholarships/football/new-york/columbia-university">
+              Columbia University
+            </a>
+          </div>
+          <div class="l-clr">
+            <div class="m-active-college l-left l-col-2">
+              <a class="seoj-tooltip" title="Tufts University logo" href="https://www.ncsasports.org/athletic-scholarships/football/massachusetts/tufts-university">
+                <img src="https://recruit-match.ncsasports.org/fasttrack/clientimages/15556college.jpg" class="span-3 bpad_10 " /> </a>
+            </div>
+            <a class="l-gut-left seoj-tooltip" title="Tufts University Football Program Information" href="https://www.ncsasports.org/athletic-scholarships/football/massachusetts/tufts-university">
+              Tufts University
+            </a>
+          </div>
+      </div>
+
+    
+    <div class="f-like-box l-clr" style="margin-left: 2px;">
+  <div class="fb-like-box" data-href="https://www.facebook.com/ncsasports" data-width="345" data-show-faces="true" data-border-color="#474747" data-stream="false" data-header="false"></div>
+</div>
+
+  </div>
+</div>
+
+
+
+
+<div class="l-left seoj-profile l-col-1">
+  <div class="mobile-menu">
+  <h4 class="mobile-menu__title">Get Exposure. Get Discovered.</h4>
+  <div class="mobile-menu__buttons">
+    <button class="mobile-menu__button mobile-menu__button--parent">
+      Parents
+      <span class="mobile-menu__button__start-here">Start Here &raquo;</span>
+    </button>
+    <button class="mobile-menu__button mobile-menu__button--athlete">
+      Athletes
+      <span class="mobile-menu__button__start-here">Start Here &raquo;</span>
+    </button>
+  </div>
+</div>
+
+
+  <ul class="m-nav m-nav-vert seoj2-m-nav-vert">
+    <li class="seoj-tooltip" title="Athletics">
+      <a href="#summary_cont" id="summary" class="active detail_link">Athletics</a>
+    </li>
+    <li class="seoj-tooltip" title="Admissions/Academics">
+      <a href="#admissions_cont" id="admissions" class="detail_link">Admissions & Academics</a>
+    </li>
+    <li class="seoj-tooltip" title="Environment">
+      <a href="#environment_cont" id="environment" class="detail_link">Environment</a>
+    </li>
+    <li class="seoj-tooltip" title="Financial">
+      <a href="#financial_cont" id="financial" class="detail_link">Financial</a>
+    </li>
+  </ul>
+</div>
+
+
+
+
+  <div class="l-clr">
+</div>
+
+</div>
+
+
+<footer id="footer" class="l-clr">
+
+  <div class="footer-content l-clr">
+    <div class="main l-clr">
+      
+
+    <section class="apps">
+  <div class="container">
+    <h2>Recruiting in your hands. Tools and advice to find the right fit.</h2>
+    <div class="app-buttons">
+        <a target="_blank" href="https://itunes.apple.com/us/app/apple-store/id673859348?pt=1308363&amp;ct=JoinUs_SEOJ&amp;mt=8"><img class="iphone" alt="Download on the App Store." src="/seoj/assets/ios-app-35d7e87cc497d7a57a07c198aecb8116e9ab418b88aba9d99629b25f92ea495e.png" /></a>
+        <a target="_blank" href="https://play.google.com/store/apps/details?id=org.ncsasports.rms&amp;referrer=utm_source%3Dorganic%26utm_medium%3Djoin_us%26utm_term%3DSEOJ"><img class="android" alt="Android App on Google Play." src="/seoj/assets/android-app-b3fe340192a57b38022dec44445b5e5037abad4e7c937d86f278bb39cab1d748.png" /></a>
+    </div>
+  </div>
+</section>
+
+<section class="social">
+  <div class="container">
+    <div class="social-media-block">
+      <a class="fa fa-facebook" title="Follow us on Facebook." target="_blank" href="https://www.facebook.com/NCSAsports"></a>
+      <a class="fa fa-twitter" title="Follow us on Twitter." target="_blank" href="https://twitter.com/ncsa"></a>
+      <a class="fa fa-instagram" title="Follow us on Instagram." target="_blank" href="https://www.instagram.com/ncsa_sports"></a>
+      <a class="fa fa-youtube" title="Follow us on YouTube." target="_blank" href="https://www.youtube.com/user/NCSAsport"></a>
+    </div>
+  </div>
+</section>
+
+
+  <!--Footer Lead Cap-->
+  <!--<div class="leadcap l-col-3 l-gut-right l-left">-->
+  <!--<div class="vpad_15 footer">
+  <h3>Get Recruited Now!</h3>
+
+  <span>Create your FREE profile today</span><br/>
+
+  <span class="small">(Enter your email below)</span>
+
+  <form method="post" action="https://recruit-match.ncsasports.org/fasttrack/saefentry/submitHalfFormRemote.go">
+    <input type="hidden" name="pageSport" value="Football"/>
+    <input type="hidden" name="linkSource" class="_linksource" value="SEOJII"/>
+    <input type="hidden" name="errorDestination" value="https://recruit-match.ncsasports.org/fasttrack/landing/metal.jsp"/>
+    <input type="hidden" name="successDestinationStudent" value="https://recruit-match.ncsasports.org/fasttrack/landing/steps.jsp"/>
+    <input type="hidden" name="successDestinationParent" value="https://recruit-match.ncsasports.org/fasttrack/landing/steps.jsp"/>
+    <input type="hidden" name="source" value="ncsasports"/>
+    <input name="firstName" type="hidden" value="Enter first name">
+    <input name="lastName" type="hidden" value="Enter last name">
+    <input type="hidden" name="host" value="recruit-match.ncsasports.org"/>
+    <input class="input lc_email" name="parentEmail" type="text" placeholder="e.g. test@example.com"/><br/>
+    <small>You are a:
+      <input type="radio" name="entryFrom" value="parent"/>&nbsp;Parent
+      <input type="radio" name="entryFrom" value="student"/>&nbsp;Student
+    </small>
+
+    <div class="l-bln-mg-top-1">
+      <input type="image" src="/seoj/assets/join_now-ea1f7e046b822b2ed5cdbe5371eac813cf279427aed56e8f72e5bba880acef84.png" />
+    </div>
+  </form>
+</div>
+-->
+  <!--</div>-->
+
+    <div class="lp-col l-col-3 l-gut-right l-left">
+      <!--Link Pack 1-->
+      <div class="links span-8 state_link_pack m-margin-bottom">
+        <ul>
+          <h4 class="l-bln-mg-btm-1">Nearby Football Scholarships</h4>
+            <li style="display: inline;">
+              <a class="seoj-tooltip" title="Jackson State University Football Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/football/mississippi/jackson-state-university">Jackson State University</a>
+            </li>
+            <li style="display: inline;">
+              <a class="seoj-tooltip" title="McNeese State University Football Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/football/louisiana/mcneese-state-university">McNeese State University</a>
+            </li>
+            <li style="display: inline;">
+              <a class="seoj-tooltip" title="Nicholls State University Football Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/football/louisiana/nicholls-state-university">Nicholls State University</a>
+            </li>
+            <li style="display: inline;">
+              <a class="seoj-tooltip" title="Northwestern State University of Louisiana Football Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/football/louisiana/northwestern-state-university-of-louisiana">Northwestern State University of Louisiana</a>
+            </li>
+            <li style="display: inline;">
+              <a class="seoj-tooltip" title="Southeastern Louisiana University Football Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/football/louisiana/southeastern-louisiana-university">Southeastern Louisiana University</a>
+            </li>
+        </ul>
+      </div>
+      <!--Link Pack 2-->  <!-- Hide Other Sport links until all sports are rolled out *MJ 4/18/2012
+	    <div class="links span-8 last state_link_pack">
+	      <ul>
+	        <h4 class="l-bln-mg-btm-1">Other Sports from Southern University &amp; A&amp;M College </h4>
+
+	          <li style="display: inline;">
+	          <a class="seoj-tooltip" title="Southern University &amp; A&amp;M College Softball Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/softball/louisiana/southern-university">Softball</a>
+	          </li>
+
+	          <li style="display: inline;">
+	          <a class="seoj-tooltip" title="Southern University &amp; A&amp;M College Men&#39;s Basketball Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/mens-basketball/louisiana/southern-university">Men&#39;s Basketball</a>
+	          </li>
+
+	          <li style="display: inline;">
+	          <a class="seoj-tooltip" title="Southern University &amp; A&amp;M College Women&#39;s Basketball Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/womens-basketball/louisiana/southern-university">Women&#39;s Basketball</a>
+	          </li>
+
+	          <li style="display: inline;">
+	          <a class="seoj-tooltip" title="Southern University &amp; A&amp;M College Women&#39;s Soccer Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/womens-soccer/louisiana/southern-university">Women&#39;s Soccer</a>
+	          </li>
+
+	          <li style="display: inline;">
+	          <a class="seoj-tooltip" title="Southern University &amp; A&amp;M College Women&#39;s Tennis Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/womens-tennis/louisiana/southern-university">Women&#39;s Tennis</a>
+	          </li>
+
+	          <li style="display: inline;">
+	          <a class="seoj-tooltip" title="Southern University &amp; A&amp;M College Men&#39;s Track Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/mens-track/louisiana/southern-university">Men&#39;s Track</a>
+	          </li>
+
+	          <li style="display: inline;">
+	          <a class="seoj-tooltip" title="Southern University &amp; A&amp;M College Women&#39;s Track Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/womens-track/louisiana/southern-university">Women&#39;s Track</a>
+	          </li>
+
+	          <li style="display: inline;">
+	          <a class="seoj-tooltip" title="Southern University &amp; A&amp;M College Women&#39;s Volleyball Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/womens-volleyball/louisiana/southern-university">Women&#39;s Volleyball</a>
+	          </li>
+
+	          <li style="display: inline;">
+	          <a class="seoj-tooltip" title="Southern University &amp; A&amp;M College Baseball Scholarships Guide" href="https://www.ncsasports.org/athletic-scholarships/baseball/louisiana/southern-university">Baseball</a>
+	          </li>
+
+	      </ul>
+	    </div>
+	    -->
+    </div>
+  <!--Contact Info section-->
+  <div class="f-small l-clr l-left l-col-3 ncsa-col">
+    <h4 class="l-bln-mg-btm-1">About NCSA College Recruiting&reg;</h4>
+<p>
+  NCSA College Recruiting&reg; (NCSA) is the exclusive athletic recruiting network that educates, assists, and connects, families, coaches and companies so
+  they can save time and money, get ahead and give back.
+</p>
+
+<p>
+  <address>
+    NCSA<br/>
+    Chicago, IL 60642
+  </address>
+
+    <a href="https://twitter.com/ncsa" class="twitter-follow-button" data-show-count="false">Follow @ncsa</a>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</p>
+
+  </div>
+
+  <div class="m-social-buttons">
+    <g:plusone></g:plusone>
+    <div class="l-left">
+  <div class="fb-like" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"></div>
+</div>
+
+  </div>
+
+    </div>
+  </div>
+  <div class="overview l-clr">
+    <div class="l-clr">
+      <div class="main">
+        <h4>NCSA COLLEGE RECRUITING&reg;</h4>
+        <p>NCSA College Recruiting&reg; (NCSA) is the nation’s leading collegiate recruiting source for more than 500,000 student-athletes and 42,000 college coaches. By taking advantage of this extensive network, more than 92 percent of NCSA verified athletes play at the college level. The network is available to high school student-athletes around the country through valued relationships with the NFLPA, FBU, NFCA and SPIRE. Each year, NCSA educates over 4 million athletes and their parents about the recruiting process through resources on its website, presentations of the critically-acclaimed seminar College Recruiting Simplified, and with Athletes Wanted, the book written by NCSA founder Chris Krause.</p>
+      </div>
+    </div>
+  </div>
+    <div class="footer-awards">
+        <div class="main l-clr">
+          <div class="l-col-2 l-left">
+            <div class="contact-callout-questions">Questions?</div>
+            <div class="contact-callout-phone">866-495-5172</div>
+            <div class="contact-callout-hours">8am-6pm CST Everyday</div>
+          </div>
+
+          <div class="l-col-7 l-right">
+            <ul>
+
+              <li class="l-left"><img src="/seoj/assets/award-bbb-6d0d3676660d053171485370a6c64af3800143644c7d7279966b00511400dc4c.png" alt="Better Business Bureau"></li>
+              <li class="l-left"><img src="/seoj/assets/award-verisign-adbfb66c51ce243e3f8c16ccf60b7134ae6aad89db73121e1c7ea83880fd0f59.png" alt="VeriSign Secured"></li>
+            </ul>
+
+          </div>
+
+        </div>
+    </div>
+
+  <div class="copyright l-clr">
+        <ul class="footer-contact">
+    <li>NCSA</li>
+    <li>1333 N Kingsbury St 4th Floor</li>
+    <li>Chicago, IL 60642 </li>
+    <li>866-495-5172</li>
+    <li>
+      <a href="/cdn-cgi/l/email-protection#246a677765534146644a47574557544b5650570a4b5643"><span class="__cf_email__" data-cfemail="eba5a8b8aa9c8e89ab8588988a989b84999f98c584998c">[email&#160;protected]</span></a>
+    </li>
+  </ul>
+  <br>
+  <ul class="footer-contact">
+    <li>© 2002-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+        document.write(new Date().getFullYear());
+      </script> NCSA College Recruiting
+    </li>
+    <li><a href="https://www.imgacademy.com/privacy-policy?website=ncsasports.org" target="_blank">Privacy Policy</a></li>
+    <li><a href="https://www.imgacademy.com/cookie-notice?website=ncsasports.org" target="_blank">Cookie Notice</a></li>
+    <li>
+      <a href="https://www.imgacademy.com/california-privacy-rights?website=ncsasports.org" target="_blank">
+        California Privacy Rights
+      </a>
+    </li>
+    <li>All Rights Reserved
+  </ul>
+
+  </div>
+
+</footer>
+</body>
+  <!-- site24x7 monitoring -->
+  <script type="text/javascript">var rumMOKey='45864decb445b9b1e902f73566c74833';(function(){if(window.performance && window.performance.timing && window.performance.navigation) {var site24x7_rum_beacon=document.createElement('script');site24x7_rum_beacon.async=true;site24x7_rum_beacon.setAttribute('src','//static.site24x7rum.com/beacon/site24x7rum-min.js?appKey='+rumMOKey);document.getElementsByTagName('head')[0].appendChild(site24x7_rum_beacon);}})(window)</script>
+
+</html>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">URP</string>
+    <string name="title_activity_main">URP</string>
+    <string name="package_name">com.urp.urp</string>
+    <string name="custom_url_scheme">com.urp.urp</string>
+</resources>

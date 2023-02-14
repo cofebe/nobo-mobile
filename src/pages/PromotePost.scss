@@ -1,0 +1,68 @@
+.post-promote-page {
+  background-color: white;
+
+  .post-promote-content {
+
+    .post-promote-grid {
+      margin: 20px;
+      padding: 0;
+      font-size: 15px;
+
+      .intro {
+      }
+
+      .instructions {
+        margin-top: 20px;
+      }
+
+      .duration {
+        text-align: center;
+        margin-top: 20px;
+
+        .duration-label {
+          font-weight: 500;
+        }
+
+        .duration-text {
+          font-weight: 500;
+          color: #44756D;
+          font-size: 30px;
+        }
+      }
+
+      .duration-select {
+        padding-left: 32px;
+        padding-right: 32px;
+      }
+
+      .cost {
+        text-align: center;
+
+        .cost-label {
+          font-weight: 500;
+        }
+
+        .cost-text {
+          font-weight: 500;
+          color: #44756D;
+          font-size: 20px;
+        }
+      }
+
+      .buttons {
+        margin-top: 20px;
+        text-align: center;
+
+        .urp-upgrade-plan-btn {
+          background: rgb(0, 129, 109);
+          background: linear-gradient(90deg, #00816d 1%, #90ded2 51%, #09b49b 110%);
+          color: #ffffff;
+          text-transform: capitalize;
+          font-size: 1.1em;
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+}
+

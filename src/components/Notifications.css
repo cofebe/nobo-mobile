@@ -1,0 +1,20 @@
+.urp-notification-container {
+	font-size: 12px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	border-bottom: 0.3px solid #9BC9C1;
+}
+
+.urp-notification-name {
+	color: #1A3A35;
+	font-weight: 500;
+	padding-bottom: 22px;
+	padding-top: 23px;
+}
+
+.urp-notification-message {
+	font-weight: 400;
+	padding-bottom: 22px;
+	padding-top: 23px;
+}

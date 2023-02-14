@@ -1,0 +1,19 @@
+.urp-search-widget-wrapper {
+
+}
+
+.urp-search-widget {
+    position: absolute;
+    z-index: 10000;
+}
+
+.urp-top-search-box{
+    position:absolute;
+    left: 50px;
+    right: 40px;
+}
+
+.urp-top-search-box-input ion-input {
+    --padding-end: 120px;
+} 
+

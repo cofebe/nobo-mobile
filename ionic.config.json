@@ -1,0 +1,7 @@
+{
+  "name": "URP+",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

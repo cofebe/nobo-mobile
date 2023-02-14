@@ -1,0 +1,29 @@
+.subscription-page {
+  .urp-upgrade-plan-btn {
+    background: rgb(0, 129, 109);
+    background: linear-gradient(90deg, #00816d 1%, #90ded2 51%, #09b49b 110%);
+    color: #ffffff;
+    text-transform: capitalize;
+    font-size: 1.1em;
+    border-radius: 6px;
+  }
+
+  .urp-subscription-box {
+    padding: '10px';
+    margin: '20px';
+    border: '1px solid #95FFF3';
+    width: '100%';
+    display: 'flex';
+    align-items: 'center';
+    border-radius: '15px';
+  }
+}
+
+ion-modal.subscription-modal {
+  ion-item ion-label {
+    padding: 15px 0px;
+  }
+  ion-item:last-child {
+    --border-width: 0 0 0 0 !important;
+  }
+}

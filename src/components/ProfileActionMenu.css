@@ -1,0 +1,46 @@
+.urp-action-menu {
+    position: relative;
+    overflow: visible;
+    float: right;
+    z-index: 100;
+}
+
+/* .urp-action-menu div {
+    position: absolute;
+    width: 46px;
+    height: 36px;
+    border-radius: 5px;
+    box-shadow: 0px 1px 1px 2px rgb(0 0 0 / 6%);
+    color: blue;
+    padding: 5px;
+} */
+
+.urp-action-menu div {
+    z-index: 100000;
+}
+
+.urp-action-menu ul {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translateY(100%);
+    font-size: 12px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: -1px 2px 7px 1px rgb(0 0 0 / 6%);
+    width: 143px;
+    list-style: none;
+    z-index: 100000;
+    font-weight: normal;
+}
+
+.urp-action-menu ul li {
+    /* border-bottom: 1px solid gray; */
+    line-height: 1.5;
+    z-index: 100000;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    text-align: left;
+}

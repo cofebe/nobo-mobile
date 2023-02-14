@@ -1,0 +1,122 @@
+.urp-label {
+	font-size: 15px;
+	color: rgba(26, 58, 53, 1) !important;
+}
+
+.login-logo {
+	margin-bottom: 10%;
+}
+
+.urp-login-btn {
+	margin-top: 40px;
+}
+
+.register-page ion-item {
+	--border-color: rgba(155, 201, 193, 1);
+}
+
+ion-item.invalid {
+	--border-color: #FF0101;
+}
+
+ion-item.invalid ion-input {
+	--color: #FF0101;
+}
+
+.urp-desktop-signup {
+	width: 100%;
+	text-align: center;
+}
+
+.urp-sign-up-breather-row {
+	margin-top: 80px;
+}
+
+.urp-signup-logo {
+	padding-bottom: 10%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.urp-confirm-email-image {
+	display: flex;
+	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 22px;
+}
+
+.urp-confirm-title {
+	font-size: 30px;
+	font-weight: 600;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 1rem;
+}
+
+.urp-confirm-text {
+	text-align: center;
+	margin-left: auto;
+	padding-bottom: 1rem;
+	margin-right: auto;
+}
+
+.urp-resend-text {
+	margin-top: 5px;
+}
+
+.urp-confirm-email {
+	color: rgba(57, 129, 117, 1);
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.urp-confirm-spinner-container {
+	margin-top: 5rem;
+  display: none;
+  height: 100%;
+  z-index: 1;
+  width: 100%;
+  align-items: flex-end;
+  background-color: white;
+  opacity: 0.7;
+}
+
+.urp-confirm-spinner-container.active {
+  display: flex;
+}
+
+.urp-signup-spinner-container {
+  margin-top: 5rem;
+  display: none;
+  height: 100%;
+  z-index: 1;
+  width: 100%;
+  align-items: flex-end;
+  background-color: white;
+  opacity: 0.7;
+}
+
+.urp-signup-spinner-container.active {
+  display: flex;
+}
+
+.urp-signup-container {
+	display: none;
+}
+
+.urp-signup-container.active {
+	display: block;
+}
+
+.urp-confirm-container {
+	margin-top: 12rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	display: none;
+}
+
+.urp-confirm-container.active {
+	display: block;
+}

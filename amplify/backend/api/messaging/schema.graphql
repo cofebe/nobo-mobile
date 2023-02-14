@@ -1,0 +1,83 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+#input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+type UserConversation @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  lastReadAt: AWSTimestamp
+  conversation: Conversation! @hasOne
+  userId: String! @index(name: "byUserId", queryField: "userConversationByUserId")
+}
+
+type Conversation
+  @model
+  @auth(
+    rules: [
+      # Allow signed in users to perform all actions
+      { allow: private }
+    ]
+  ) {
+  id: ID!
+  createdAt: AWSTimestamp!
+  userIds: AWSJSON #@index
+  lastMessageCreatedAt: AWSTimestamp
+  lastMessageText: String
+  lastMessageFileUrl: String
+  lastMessageFileMimeType: String
+  lastMessageUserId: String
+  messages: [Message] @hasMany(indexName: "byConversation", fields: ["id"])
+
+  # deprecated
+  lastMessageFileType: String
+  lastMessageFileUser: String
+}
+
+type Message
+  @model
+  @auth(
+    rules: [
+      # Allow signed in users to perform all actions
+      { allow: private }
+    ]
+  ) {
+  id: ID!
+  conversationId: ID! @index(name: "byConversation", sortKeyFields: ["id"], queryField: "byConversation")
+  text: String
+  createdAt: AWSTimestamp!
+  userId: Int!
+  fileUrl: String
+  fileMimeType: String
+
+  # deprecated
+  file: S3Object @hasOne
+}
+
+# deprecated
+type S3Object
+  @model
+  @auth(
+    rules: [
+      # Allow signed in users to perform all actions
+      { allow: private }
+    ]
+  ) {
+  id: ID!
+  bucket: String!
+  region: String!
+  key: String!
+  mimeType: String!
+  type: String!
+}
+
+# type User
+#   @model
+#   @auth(
+#     rules: [
+#       # Allow signed in users to perform all actions
+#       { allow: private }
+#     ]
+#   ) {
+#   id: ID!
+#   userConversations: [UserConversation] @hasMany(indexName: "byUser", fields: ["id"])
+# }
+

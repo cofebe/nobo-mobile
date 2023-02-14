@@ -1,0 +1,141 @@
+.create-conversation-container {
+  --height: 95vh;
+  --border-radius: 10px;
+  --backdrop-opacity: 0.1;
+  align-items: end;
+
+  .search-item {
+    --padding-start: 0px;
+    --inner-padding-start: 0px;
+    --padding-end: 0px;
+    --inner-padding-end: 0px;
+  }
+
+  .search-container {
+    padding: 16px 20px;
+    width: 100%;
+
+    .search-col {
+      //filter: drop-shadow(0px 0px 10px rgba(26, 58, 53, 0.05));
+      //background-color: white;
+      position: relative;
+
+      .search {
+        font-size: 10px;
+        --padding-start: 34px;
+        background: white;
+        border-radius: 3px;
+        box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+
+        input {
+          &::placeholder {
+            padding-left: 0;
+          }
+        }
+      }
+
+      ion-icon {
+        position: absolute;
+        z-index: 1000;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        height: 16px;
+        width: 15px;
+        color: #00D6B6;
+      }
+    }
+  }
+
+  .create-conversation-content {
+    background: white;
+  }
+
+  .create-conversation-btn {
+    height: 2rem !important;
+    opacity: 1;
+    --background: #047f6f;
+    --color: #FFFFFF;
+    --background-activated: #047f6f;
+  }
+
+  .create-conversation-btn[disabled=""] {
+    --background: #C4C4C4;
+  }
+
+  .toolbar-container {
+    --padding-bottom: 0;
+  }
+
+  ion-toolbar.create-conversation-header-toolbar {
+    --background: #FFFFFF;
+    padding: 0;
+  }
+
+  .create-conversation-btn, .cancel-btn {
+    text-transform: unset;
+  }
+
+  .cancel-btn {
+    background: none !important;
+    color: #9BC9C1 !important;
+    height: 2rem !important;
+  }
+
+  ion-button.cancel-btn {
+    --background: none;
+    --color: #FFFFFF;
+    --background-activated: none;
+  }
+
+  .connection-item {
+    --padding-start: 20px;
+    --inner-padding-start: 0px;
+    --padding-end: 20px;
+    --inner-padding-end: 0px;
+
+    ion-row {
+      width: 100%;
+
+      ion-col {
+        .connection-container {
+          display: flex;
+          align-items: center;
+
+          ion-avatar {
+            height: 32px;
+            width: 32px;
+          }
+
+          .name-text {
+            flex: 1;
+            font-size: 14px;
+            margin-left: 16px;
+
+            .name {
+              font-weight: 500;
+              margin-top: 4px;
+              margin-bottom: 4px;
+            }
+
+            .position-school {
+              color: #C4C4C4;
+            }
+          }
+
+          .check {
+            ion-checkbox {
+              --size: 11px;
+              --background-checked: #00816D;
+            }
+
+            ion-checkbox::part(container) {
+              border-radius: 2px;
+              border: 1px solid #00816D;
+            }
+          }
+        }
+      }
+    }
+  }
+}

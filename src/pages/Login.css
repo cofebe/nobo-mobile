@@ -1,0 +1,87 @@
+.login-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20%;
+}
+
+.login-fp {
+  display: block;
+  padding-top: 1.2rem;
+  margin-left: 10px;
+  color: #028375;
+  font-size: 0.8em;
+}
+
+.urp-login-btn {
+  margin-top: 80px;
+  background: rgb(0, 129, 109);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 129, 109, 1) 1%,
+    #90ded2 51%,
+    rgb(9 180 155) 110%
+  );
+  color: #ffffff;
+  text-transform: capitalize;
+  font-size: 1.1em;
+  border-radius: 6px;
+}
+
+.login-sign-up-container {
+  margin-top: 0.8rem;
+}
+
+.login-sign-up {
+    margin-left: 10px;
+    color: #00D6B6;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+.urp-spinner-login-container {
+  display: none;
+  height: 100%;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  align-items: center;
+  background-color: white;
+  opacity: 0.7;
+}
+
+.urp-spinner-login-container.active {
+  display: flex;
+}
+
+.urp-spinner {
+  --color: #a4fefc;
+  transform: scale(3);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media(min-width: 1200px) {
+    .login-logo {
+        margin-bottom: 5%;
+    }
+
+    .urp-desktop-login {
+        display: block;
+        width: 30%;
+    }
+}
+
+.toast-message {
+  white-space: pre-line;
+}
+
+.password-border-bottom-red {
+  border-bottom: 1px solid #ff0000;
+}
+
+.incorrect-password {
+  color: #ff0000;
+  font-size: 0.8em;
+  margin-left: 10px;
+}

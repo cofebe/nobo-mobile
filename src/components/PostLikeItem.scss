@@ -1,0 +1,153 @@
+ion-item.post-like-item {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+  border-radius: 5px;
+
+  ion-col h2 {
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .feed-list-urp-badge-line {
+    display: flex;
+    align-items: flex-end;
+    gap: 5%;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-top: 0 !important;
+  }
+
+  .feed-list-feed-image {
+    margin-top: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+  }
+
+  .feed-content {
+    padding-left: 1.2rem;
+  }
+
+  .feed-content-stats {
+    margin-top: -10px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .feed-list-feed-name {
+    display: inline-block !important;
+    font-size: 1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 0px;
+    margin-bottom: 2px;
+    margin-left: 8px;
+  }
+
+  .feed-list-feed-name-coach {
+    display: inline-block !important;
+    font-size: 1rem;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+    margin-bottom: 2px;
+    margin-left: 0;
+  }
+
+  .feed-list-logo-image {
+    margin-left: 4px;
+  }
+
+  .feed-list-feed-primary-sport {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 5px;
+    height: 100%;
+    font-weight: 500;
+    font-size: 10px;
+  }
+
+  .feed-list-feed-ranking {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 5px;
+  }
+
+  .feed-list-feed-ranking-text {
+    color: #1a3a35;
+    font-weight: 400;
+    font-size: 10px;
+    margin: 0px;
+    margin-bottom: 2px;
+  }
+
+  .feed-l2 {
+    font-weight: 400;
+    color: #c4c4c4;
+    margin-top: 0;
+    margin-bottom: 13px;
+    margin-left: 8px;
+    font-size: 12px;
+    color: #c4c4c4;
+  }
+
+  .feed-content-center {
+    display: flex;
+    align-items: center;
+  }
+
+  .feed-content-right {
+    display: flex;
+    justify-content: center;
+  }
+
+  .feed-border {
+    margin-left: 4px;
+    margin-right: 4px;
+    font-size: 1.1rem;
+  }
+
+  .post-like-item {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .post-like-item-content {
+    width: 100%;
+  }
+
+  a > div.item-inner {
+    border-bottom: none !important;
+  }
+
+  .list-md-lines-inset .item,
+  .list-md .item-lines-inset {
+    --inner-border-width: 0 0 0 0;
+  }
+  .list-md-lines-inset .item,
+  .list-md .item-lines-inset {
+    --inner-border-width: 0 0 0 0;
+  }
+
+  .header-md::after {
+    left: 0;
+    bottom: -5px;
+    background-position: left 0 top -2px;
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background-image: none;
+    /* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHBAMAAADzDtBxAAAAD1BMVEUAAAAAAAAAAAAAAAAAAABPDueNAAAABXRSTlMUCS0gBIh/TXEAAAAaSURBVAjXYxCEAgY4UIICBmMogMsgFLtAAQCNSwXZKOdPxgAAAABJRU5ErkJggg==); */
+    background-repeat: repeat-x;
+    content: "";
+  }
+}

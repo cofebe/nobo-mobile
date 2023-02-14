@@ -1,0 +1,48 @@
+.highlights-section .urp-highlights-section {
+}
+
+.highlights-section .urp-section-item {
+  --background: #ffffff;
+  /*box-shadow: 0 0 0 0;*/
+}
+
+.highlights-section .urp-highlight-video-container {
+  /* height: 30vh !important; */
+  /* --background: #ffffff; */
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+
+.highlights-section .urp-highlight-add-media-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem;
+  /* height: 100%;*/
+}
+
+.highlights-section .urp-highlight-video {
+  border-radius: 15px;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.highlights-section .urp-highlight-add-media-title {
+  font-size: 0.85rem;
+  color: rgba(196, 196, 196, 1);
+}
+
+.highlights-section .urp-highlight-add-media-text {
+  color: rgba(0, 214, 182, 1);
+  font-weight: 500;
+  font-size: 15px;
+}

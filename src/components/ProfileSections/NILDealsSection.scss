@@ -1,0 +1,22 @@
+#urp-nil-deals-section {
+  .capatilze-first-letter::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+ion-modal.new-deal-modal {
+  .deal-list {
+    ion-item {
+      ion-label {
+        color: #00816d;
+        font-weight: 500;
+      }
+      ion-input {
+        // color: #9bc9c1;
+        --placeholder-color: #9bc9c1;
+        // padding: 5px 0 !important;
+        // width: 100px;
+      }
+    }
+  }
+}

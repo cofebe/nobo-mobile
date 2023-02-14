@@ -1,0 +1,32 @@
+ion-select {
+  --placeholder-color: #dddddd;
+}
+
+.sort-widget {
+  height: 1rem;
+  width: 100%;
+}
+
+.sort-widget-options .select-interface-option {
+  color: #00D6B6;
+}
+
+.sort-widget-options .select-interface-option .alert-radio-label {
+  color: #971e49;
+}
+
+.sort-widget::part(icon) {
+  opacity: 1;
+  position: absolute;
+  left: 0;
+  height: 50px;
+  width: 50px;
+  content: url('./sort-widget.svg');
+}
+
+.sort-widget::part(text) {
+  /* margin-left: 32px; */
+  /* font-weight: 600; */
+  /* margin-top: 2px; */
+  display: none;
+}

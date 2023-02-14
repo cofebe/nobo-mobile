@@ -1,0 +1,27 @@
+.bg-class{
+    --background: linear-gradient(197deg, rgba(100,100,100,1) 0%, rgba(63,63,63,1) 13.5%, rgba(29,29,29,1) 33.33%, rgba(0,0,0,1) 100%) !important;
+}
+
+.breather-row {
+    margin-top: 80px;
+}
+
+  #login-fp {
+      margin-left: 5px;
+      color: #028375;
+      font-size: .8em;
+  }
+
+  #login-su {
+    margin-left: 5px;
+    color: #00D6B6;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+.urp-basic-btn {
+    border-radius: 6px;
+    background-color: #00816D;
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+}

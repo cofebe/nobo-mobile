@@ -1,0 +1,586 @@
+.urp-profile-section {
+  height: 50vh;
+  .urp-list-background {
+    background-color: #ffffff;
+  }
+}
+
+.home-page-coach-profile {
+
+  .coach-profile-content {
+    max-width: 1088px;
+    width: 100%;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  background-color: #f9fbfb;
+  max-width: 1088px;
+  @media (min-width: 1088px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  // margin-left: auto !important;
+  // margin-right: auto !important;
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  // Desktop scrolling
+  /*@media (max-width: 768px) {
+    overflow-y: auto;
+  }*/
+
+  & > * {
+    max-width: 100vw;
+    //overflow-x: hidden;
+  }
+
+  /* V1 */
+  /* .urp-profile-bottom-section-wrapper {
+      border-radius: 15px;
+      border: 1px solid rgba(100, 100, 100, 0.1);
+      box-shadow: 0px 0px 5px 3px rgb(0 0 0 / 5%);
+      -webkit-box-shadow: 0px 0px 5px 3px rgb(0 0 0 / 5%);
+      height: 50vh;
+      margin-left: 8px;
+      margin-right: 8px;
+      padding-left: 7px;
+      padding-right: 3px;
+    } */
+  /*V2*/
+  .urp-profile-bottom-section-wrapper {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.05);
+    height: 50vh;
+    padding-left: 24px;
+    padding-right: 24px;
+    border-radius: 8px;
+  }
+
+  .urp-profile-section {
+    margin: 0 !important;
+
+    @media (min-width: 568px) {
+      --ion-background-color: transparent;
+    }
+  }
+
+  .urp-profile-tabs {
+    padding-top: 4px;
+    padding-bottom: 20px;
+    overflow: visible;
+    --padding-start: 0;
+    --padding-end: 0;
+  }
+
+  .urp-profile-tabs > ion-grid > ion-row > ion-col > div:nth-child(1) {
+    font-size: 0.7em;
+    color: #1a3a35;
+  }
+
+  /* .urp-edit-profile-button {
+        background-color: #ffffff;
+        color: #1A3A35;
+        border: 1px solid #1A3A35;
+        border-radius: 5px;
+        margin-left: 27px;
+        margin-bottom: 12px;
+        height: 37px;
+        width: 144px;
+        font-weight: 600;
+    } */
+
+  /* small version */
+  .urp-edit-profile-button {
+    background-color: #ffffff;
+    color: #1a3a35;
+    /* border: 1px solid #1A3A35; */
+    border-radius: 5px;
+    height: 25px;
+    width: 103px;
+    font-weight: 500;
+    font-size: 0.7em;
+    text-transform: capitalize;
+    border: 1px solid rgba(100, 100, 100, 0.1);
+    box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.05);
+  }
+
+  /* border: 1px solid rgba(100,100,100,.1);
+    width: 28vw;
+    margin-right: 10px;
+    margin-left: 0;
+    margin-bottom: 10px;
+    padding: 7px;
+    padding-left: 10px;
+    border-radius: 6px;
+    -webkit-box-shadow: 2px 3px 5px 1px rgb(0 0 0 / 5%); */
+
+  .profile-banner-container {
+    /* z-index: 100; */
+    /* height: auto; */
+    /* --opacity-scale: 0 !important;*/
+    /* background-size: cover; */
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 138px;
+    background-position: top left;
+    background-size: cover;
+
+    @media (min-width: 562px) {
+      height: 290px;
+    }
+  }
+
+  .profile-bubble-container {
+    position: relative;
+    overflow: visible;
+    z-index: 100;
+
+    .profile-bubble {
+      position: absolute;
+      top: 0px;
+      left: 12px;
+      transform: translateY(-35%);
+      width: 75px;
+      // border: 2px solid white;
+      height: 75px;
+      border-radius: 50%;
+    }
+    .profile-bubble-premium-border {
+      border: 4px solid #f8cf40;
+    }
+
+    @media (min-width: 562px) {
+      .profile-bubble {
+        width: 125px;
+        height: 125px;
+        left: 25px;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  .home-filter-coach-profile {
+    margin-right: 20px;
+    float: right;
+  }
+
+  .urp-comments-count {
+    top: 8px;
+    position: absolute;
+    right: 61px;
+    font-size: 0.8em;
+    color: #00d6b6;
+  }
+
+  .urp-likes-count {
+    top: 8px;
+    position: absolute;
+    right: 5px;
+    font-size: 0.8em;
+    color: #00d6b6;
+  }
+
+  .urp-float-logo {
+    text-align: center;
+  }
+
+  .item-inner {
+    border-bottom: none;
+  }
+
+  ion-toolbar {
+    background-color: #f9fbfb;
+    --background: #f9fbfb;
+  }
+  /*
+    .urp-list-background {
+      background-color: #F9FBFB;
+      max-width: 100vw;
+    }
+    */
+  .swiper-slide {
+    color: #1a3a35;
+    text-align: center;
+  }
+
+  .swiper-slide-active {
+  }
+
+  .urp-tab-menu-item {
+    margin-right: 1rem;
+    padding: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #1a3a35;
+    font-weight: 400;
+    background-color: rgba(155, 201, 193, 0.25);
+    word-wrap: normal;
+    text-align: center;
+    font-size: 10px;
+    line-height: 4;
+    border-radius: 5px !important;
+    /* border: 1px solid #99E1D9; */
+
+    @media (min-width: 1024px) {
+      font-size: 12px;
+      padding: 9px 16px;
+    }
+  }
+
+  .urp-tab-menu-item.selected {
+    color: #ffffff !important;
+    font-weight: 600;
+    background-color: #1a3a35;
+    border-bottom: none !important;
+    border: 1px solid #1a3a35;
+    border: none !important;
+  }
+
+  .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                        supported by Chrome, Edge, Opera and Firefox */
+  }
+
+  .urp-menu-container {
+    // max-width: 100%;
+    margin-top: 30px;
+    // overflow-x: hidden;
+  }
+
+  .urp-menu-container-shadow {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 12px;
+
+    @media (max-width: 567px) {
+      background-color: white;
+      box-shadow: 0px -5px 8px rgba(26, 58, 53, 0.05);
+      border-radius: 8px;
+      padding: 12px 20px;
+    }
+  }
+
+  .urp-profile-section.urp-profile-section-scroll {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .urp-profile-section.urp-profile-section-scroll ion-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+  }
+
+  .urp-profile-section {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    @media (max-width: 567px) {
+      background-color: white;
+    }
+    /*
+      position: absolute;
+      top: 50px;
+      left: 0;
+      right: 0;
+      */
+  }
+
+  .urp-section-item {
+    margin-top: 4px;
+    margin-bottom: 20px;
+
+    background-color: white;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+
+    /*~~~ border: 1px solid blue;*/
+    --padding-top: 4px;
+    --padding-bottom: 4px;
+    --padding-start: 20px;
+    --padding-end: 25px;
+  }
+
+  .urp-profile-section > ion-item > div {
+    /*~~~ border: 1px solid red; */
+  }
+
+  .urp-section-item > div:nth-child(1) {
+    color: #00816d;
+    font-weight: 400;
+    font-size: 12px;
+    flex: 1;
+  }
+
+  .urp-section-item > div:nth-child(2) {
+    color: #1a3a35;
+    font-weight: 400;
+    font-size: 15px;
+  }
+
+  .urp-profile-section .urp-highlight-add-media-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+  }
+
+  .urp-profile-section .urp-highlight-add-media-title {
+    font-size: 10px;
+    color: #c4c4c4;
+  }
+
+  .urp-profile-section .urp-highlight-add-media-text {
+    color: #00d6b6;
+    font-weight: 500;
+    font-size: 12px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 5px 25px;
+  }
+
+  /*
+    .urp-section-item {
+      margin-left: 7px;
+      margin-right: 7px;
+      margin-top: 10px;
+      margin-bottom: 25px;
+      border-radius: 15px;
+      background-color: white;
+      box-shadow: 0px 0px 5px 3px rgb(0 0 0 / 5%);
+      -webkit-box-shadow: 0px 0px 5px 3px rgb(0 0 0 / 5%);
+      padding-left: 7px;
+      height: 80px;
+    }
+    */
+
+  /*
+    .urp-profile-section > ion-item > div:nth-child(1) svg {
+      display: block;
+    }
+  
+    .urp-profile-section > ion-item > div:nth-child(2) {
+      color: #00816d;
+      font-weight: 300;
+      font-size: 10px;
+      position: initial;
+      top: initial;
+      left: initial;
+      flex: 1;
+      margin-left: 16px;
+    }
+  
+    .urp-profile-section > ion-item > div:nth-child(3) {
+      color: #1a3a35;
+      font-weight: 400;
+      font-size: 15px;
+      position: initial;
+      top: initial;
+      left: initial;
+    }
+    */
+  /*
+    .urp-menu-container {
+      position: absolute;
+      left: 5px;
+      right: 5px;
+    }
+    */
+
+  /*
+    .urp-profile-section {
+      position: absolute;
+      top: 44px;
+      left: 0;
+      right: 0;
+    }
+    */
+
+  .urp-spacer {
+    width: 8px !important;
+  }
+
+  .urp-highlight-video-container {
+    /*margin-top: 1rem;*/
+  }
+
+  .feed-item {
+    margin: 1px;
+    margin-bottom: 30px;
+  }
+
+  .urp-profile-header-v2 {
+    position: absolute;
+    top: 125px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-left: 6rem;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 1) 79%,
+      rgba(0, 0, 0, 0) 106%
+    );
+    z-index: 100;
+  }
+
+  .urp-profile-header-content {
+    background-color: #fafbfb;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 8vw;
+  }
+
+  .urp-profile-first-row {
+    display: flex;
+    justify-content: space-between;
+    display: inline;
+    width: 100%;
+  }
+
+  .urp-profile-name {
+    display: inline;
+    margin: 0;
+  }
+
+  .profile-action-social {
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+  }
+
+  .profile-action-social > div:nth-child(2) {
+    flex: 1;
+  }
+
+  .profile-action-social ion-col {
+    padding: 0;
+  }
+
+  .urp-profile-actions {
+    float: right;
+  }
+
+  .urp-profile-second-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .urp-profile-third-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .urp-profile-header-v2 .feed-name {
+    font-size: 1.4em;
+    font-weight: 500;
+  }
+
+  .urp-active-time {
+    color: #9bc9c1;
+    display: inline;
+    font-size: 0.75rem;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .urp-header-stars {
+    float: left;
+  }
+
+  .urp-profile-primary-sport {
+    float: right;
+    font-weight: 400;
+    font-size: 0.7rem;
+    margin: 0;
+  }
+
+  .urp-social-tops {
+    margin-top: 0.2rem;
+    float: right;
+  }
+
+  .urp-social-tops svg {
+    margin-left: 0.6rem;
+  }
+
+  .urp-watchlist-modal-back {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #8f8f8fbd;
+    z-index: 100000;
+  }
+
+  .urp-watchlist-bottom-menu {
+    position: fixed;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    background-color: white;
+    height: 230px;
+    -webkit-box-shadow: 1px 1px 4px 2px rgba(29, 29, 29, 0.05);
+    border-radius: 20px;
+    border: 1px solid #b7b7b7;
+    text-align: center;
+    padding: 0;
+    z-index: 100000;
+  }
+
+  .urp-add-to-watchlist {
+    position: fixed;
+    bottom: 51px;
+    left: 1px;
+    right: 1px;
+    background-color: white;
+    z-index: 100001;
+    height: 60px;
+  }
+
+  .urp-watchlist-add-button {
+    text-align: right;
+    color: rgb(0, 214, 182);
+    font-size: 0.9em;
+    font-weight: 500;
+    padding-right: 17px;
+    padding-top: 10px;
+  }
+
+  .urp-watchlist-add-button a {
+    text-align: right;
+    color: rgb(0, 214, 182);
+    font-size: 0.9em;
+    font-weight: 500;
+    padding-right: 17px;
+    padding-top: 10px;
+  }
+
+  .urp-ap-action-menu-placement {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: 1000;
+    top: 183px;
+    right: 6px;
+  }
+}

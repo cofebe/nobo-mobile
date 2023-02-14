@@ -1,0 +1,218 @@
+.home-explore-bg {
+  --background: #f9fbfb;
+  --detail-icon-color: #00816d;
+  --detail-icon-opacity: 1;
+}
+
+ion-item.home-explore-bg ion-icon {
+  color: #00816d !important;
+}
+
+
+@media only screen and (min-width:  1000px) {
+  ion-row.explore-filter-row {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+  ion-searchbar.explore-filter-row {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+}
+
+.home-explore-toolbar {
+  padding-left: 1rem;
+  border-color: black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.home-explore-back-btn {
+  --background: #ffffff;
+  --color: rgb(0, 129, 109);
+  height: 2rem;
+  margin-bottom: 0rem;
+}
+
+.urp-explore-btn {
+  background: #00d6b6;
+  color: #ffffff;
+  text-transform: capitalize;
+  font-size: 1.1em;
+  border-radius: 6px;
+  height: 2rem;
+  width: 9.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+}
+
+.home-content.slide-left {
+  display: none;
+  opacity: 0;
+  transition: 0.5s all ease;
+  transform: translateX(-100vw);
+}
+
+.explore-states-label {
+  --background: black;
+  --color: #00816d;
+}
+.explore-states {
+  display: none;
+  position: relative;
+  transform: translateX(100vw);
+}
+
+.home-sports-container {
+  height: 2rem;
+}
+
+.explore-states.slide-left {
+  display: block;
+  opacity: 1;
+  transition: 0.5s all ease;
+  transform: translateX(0vw);
+}
+
+.explore-sports-slide {
+  cursor: pointer;
+  width: auto !important;
+}
+
+.explore-sports-btn {
+  color: #99e1d9;
+  border-radius: 15px;
+  border: solid 0.5px #99e1d9;
+  --background: #ffffff;
+  font-size: 10px;
+  height: 20px;
+}
+
+.explore-schools {
+  display: none;
+  position: relative;
+  transform: translateX(200vw);
+}
+
+.explore-schools.slide-left {
+  display: block;
+  opacity: 1;
+  transition: 0.5s all ease;
+  transform: translateX(0vw);
+}
+
+.explore-countries {
+  display: none;
+  position: relative;
+  transform: translateX(200vw);
+}
+
+.explore-countries.slide-left {
+  display: block;
+  opacity: 1;
+  transition: 0.5s all ease;
+  transform: translateX(0vw);
+}
+
+.explore-checkbox {
+  float: right;
+  background: #ffffff;
+}
+
+.urp-explore-tab-menu-item {
+  margin-right: 1rem;
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #00816d;
+  font-weight: 500;
+  background-color: #ffffff;
+  word-wrap: normal;
+  text-align: center;
+  font-size: 0.6rem;
+  line-height: 4;
+  border-radius: 5px !important;
+  border: 1px solid #9bc9c1;
+}
+
+.urp-explore-tab-menu-item.selected {
+  font-weight: 600;
+  background-color: rgba(153, 225, 217, 0.4);
+  line-height: 4;
+  border-bottom: none !important;
+  border: 1px solid #1a3a35;
+  border: none !important;
+  padding: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.urp-explore-account-tab-menu-item {
+  width: 104px;
+  margin-right: 1rem;
+  padding: 6px;
+  padding-left: 0px;
+  padding-right: 0px;
+  color: #ccdbdc;
+  font-weight: 500;
+  background-color: #f9fbfb;
+  word-wrap: normal;
+  text-align: center;
+  font-size: 15px;
+  line-height: 4;
+}
+
+.urp-explore-account-tab-menu-item.selected {
+  color: #00d6b6;
+  font-weight: 600;
+  background-color: rgba(153, 225, 217, 0.4);
+  border-radius: 8px;
+  line-height: 4;
+  border-bottom: none !important;
+  border: 1px solid #1a3a35;
+  border: none !important;
+  padding: 6px;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.urp-explore-highlight {
+  border-radius: 5px;
+  --background: #f8fafa;
+}
+
+ion-icon.urp-explore-close-item {
+  position: relative;
+  top: 5px;
+  left: 5px;
+}
+
+.explore-filter-labels {
+  font-size: 16px;
+  color: #9bc9c1;
+}
+
+.explore-search-bar {
+  width: 75vw;
+  margin-left: auto;
+  margin-right: auto;
+  --icon-color: #00d6b6;
+  --background: #ffffff;
+  --color: #000000;
+  --placeholder-color: #dce2e3;
+  --placeholder-opacity: 1;
+  --border-radius: 5px;
+  --box-shadow: 0px 0px 5px rgba(26, 58, 53, 0.05);
+}
+
+.explore-search-bar-reset {
+  color: #9bc9c1;
+  font-size: 10px;
+  margin-top: 1.4rem;
+  left: -1.2rem;
+  position: relative;
+}

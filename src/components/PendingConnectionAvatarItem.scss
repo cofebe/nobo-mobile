@@ -1,0 +1,29 @@
+.pending-connection-avatar-container {
+  position: relative;
+  margin-left: 1rem;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  .pending-connection-image {
+    width: 48px;
+    height: 48px;
+  }
+
+  .pending-connection-dot {
+    display: block;
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    background-color: #95FFF3;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 2px solid white;
+  }
+
+  .connection-dot-unread {
+    background: var(--ion-color-primary);
+  }
+}

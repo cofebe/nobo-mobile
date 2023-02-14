@@ -1,0 +1,90 @@
+.connection-list-item {
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+  }
+
+  ion-item ion-icon {
+    color: #c9c9ca;
+  }
+
+  .connection-item {
+    border-radius: 10px;
+    // background-color: white;
+    --background: #f9fbfb;
+    border-bottom: 1px solid #ececec;
+    padding: 0 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05) !important;
+  }
+
+  ion-row.connection-row {
+    width: 100%;
+    align-items: center;
+  }
+
+  .connection-image-name-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .connection-image-name-container .connection-image {
+    width: 31px;
+    height: 31px;
+  }
+
+  .connection-image-name-container .connection-name {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .connection-stats {
+    display: flex;
+    align-items: center;
+  }
+
+  .connection-dot {
+    display: block;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    align-self: start;
+    background-color: #95fff3;
+  }
+
+  .connection-dot-unread {
+    background: var(--ion-color-primary);
+  }
+
+  .connection-sport {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .connection-sport img {
+    display: block;
+    min-width: 18px;
+    min-height: 18px;
+  }
+
+  .connection-position {
+    font-weight: 400;
+    font-size: 0.7rem;
+  }
+
+  .connection-school {
+    font-weight: 400;
+    font-size: 0.7rem;
+    color: rgb(155, 153, 153);
+    text-align: right;
+  }
+
+  .reject-connection {
+    background-color: #bf0a0a;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px !important;
+  }
+}

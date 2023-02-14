@@ -1,0 +1,31 @@
+.urp-experience ion-item {
+    display: block;
+    --padding-top: 10px !important;
+    --padding-bottom: 10px !important;
+}
+
+.urp-experience ion-item > div > div:nth-child(1) {
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.urp-experience ion-item > div > div:nth-child(2) {
+    color: #1A3A35;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.urp-experience ion-item > div > div:nth-child(3) {
+    color: #1A3A35;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.urp-experience .urp-dot {
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #1A3A35;
+    font-weight: bolder;
+}

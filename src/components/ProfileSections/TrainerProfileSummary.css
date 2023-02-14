@@ -1,0 +1,198 @@
+ion-item.urp-profile-item-top.trainer .urp-profile-item-top.trainer {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  background-color: white;
+  /* box-shadow: 1px 0px 6px -1px rgb(0 0 0 / 23%); */
+}
+
+ion-item.urp-profile-item-top.trainer .urp-profile-item-bottom {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 40px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  background-color: white;
+  /* box-shadow: 1px 0px 6px -1px rgb(0 0 0 / 23%); */
+}
+
+ion-item.urp-profile-item-top.trainer .urp-profile-item-top.trainer .urp-profile-summary-row > ion-grid > ion-row > ion-col > div:nth-child(1) {
+  font-size: 0.7em;
+  color: #1a3a35;
+}
+
+ion-item.urp-profile-item-top.trainer .urp-profile-item-top.trainer .urp-profile-summary-row > ion-grid > ion-row > ion-col > div:nth-child(2) {
+  color: #1a3a35;
+  font-size: 0.7em;
+  font-weight: bold;
+}
+
+ion-item.urp-profile-item-top.trainer {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+ion-item.urp-profile-item-top.trainer ion-label {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+ion-item.urp-profile-item-top.trainer ion-col h2 {
+  font-weight: 600;
+  margin: 0;
+}
+
+ion-item.urp-profile-item-top.trainer .date {
+  float: left;
+  align-items: center;
+  display: flex;
+}
+
+ion-item.urp-profile-item-top.trainer ion-icon {
+  color: #c9c9ca;
+}
+
+ion-item.urp-profile-item-top.trainer ion-note {
+  color: #1a3a35;
+  font-size: 15px;
+  margin-right: 8px;
+  font-weight: 400;
+}
+
+ion-item.urp-profile-item-top.trainer ion-note.md {
+  margin-right: 14px;
+}
+
+ion-item.urp-profile-item-top.trainer .dot {
+  display: block;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  align-self: start;
+  margin: 16px 10px 16px 16px;
+}
+
+ion-item.urp-profile-item-top.trainer .dot-unread {
+  background: var(--ion-color-primary);
+}
+
+ion-item.urp-profile-item-top.trainer ion-footer ion-title {
+  font-size: 11px;
+  font-weight: normal;
+}
+
+ion-item.urp-profile-item-top.trainer .urp-badge-line span {
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+ion-item.urp-profile-item-top.trainer .urp-badge-line {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+ion-item.urp-profile-item-top.trainer .feed-image {
+  margin-top: 10px;
+  width: 65px;
+  height: 65px;
+}
+
+ion-item.urp-profile-item-top.trainer .feed-content {
+  padding-left: 1.2rem;
+}
+
+ion-item.urp-profile-item-top.trainer .feed-name {
+  display: inline;
+  font-size: 1rem;
+  margin-left: 0;
+}
+
+ion-item.urp-profile-item-top.trainer .feed-primary-sport {
+  font-weight: 400;
+  font-size: 0.7rem;
+}
+
+ion-item.urp-profile-item-top.trainer .feed-l2 {
+  font-weight: 400;
+  color: #1a3a35;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ion-item.urp-profile-item-top.trainer .feed-l2 {
+  font-size: 0.9rem;
+  color: #1a3a35;
+}
+
+ion-item.urp-profile-item-top.trainer .feed-border {
+  margin-left: 4px;
+  margin-right: 4px;
+  font-size: 1.1rem;
+}
+
+ion-item.urp-profile-item-top.trainer .feed-item {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 1px 0px 6px -1px rgb(0 0 0 / 23%);
+}
+
+ion-item.urp-profile-item-top.trainer a > div.item-inner {
+  border-bottom: none !important;
+}
+
+ion-item.urp-profile-item-top.trainer .list-md-lines-inset .item,
+ion-item.urp-profile-item-top.trainer .list-md .item-lines-inset {
+  --inner-border-width: 0 0 0 0;
+}
+ion-item.urp-profile-item-top.trainer .list-md-lines-inset .item,
+ion-item.urp-profile-item-top.trainer .list-md .item-lines-inset {
+  --inner-border-width: 0 0 0 0;
+}
+
+ion-item.urp-profile-item-top.trainer .header-md::after {
+  left: 0;
+  bottom: -5px;
+  background-position: left 0 top -2px;
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background-image: none;
+  /* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHBAMAAADzDtBxAAAAD1BMVEUAAAAAAAAAAAAAAAAAAABPDueNAAAABXRSTlMUCS0gBIh/TXEAAAAaSURBVAjXYxCEAgY4UIICBmMogMsgFLtAAQCNSwXZKOdPxgAAAABJRU5ErkJggg==); */
+  background-repeat: repeat-x;
+  content: "";
+}
+
+ion-item.urp-profile-item-top.trainer .feed-message {
+  color: #1a3a35;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  height: auto;
+  display: block;
+}
+
+ion-item.urp-profile-item-top.trainer .feed-bottom {
+  padding: 0;
+  width: 100%;
+  display: inline;
+}
+
+ion-item.urp-profile-item-top.trainer .feed-bottom-icons {
+  width: 100%;
+  text-align: right;
+  border-top: 1px solid #d6d6d6;
+  padding-right: 10px;
+}
+
+ion-item.urp-profile-item-top.trainer .urp-profile-stats-top.urp-trainer-version ion-col {
+  max-width: 120px;
+}
+
+ion-item.urp-profile-item-top.trainer .urp-profile-item-top.trainer .feed-l2 {
+  margin-top: 70px;
+}
