@@ -47,17 +47,17 @@ const CoachingExperienceSection: React.FC<CoachingExperienceSectionProps> = ({
     noExperience = false;
 
     experiences.push(
-      <IonItem lines="none" className="urp-section-item" detail={false} key={`${experience.startYear}-${experience.endYear}`}>
+      <IonItem lines="none" className="nobo-section-item" detail={false} key={`${experience.startYear}-${experience.endYear}`}>
         <div>
           <div>{experience.position}</div>
           <div>
             {experience.team}
-            <div className="urp-dot">&#183;</div>
+            <div className="nobo-dot">&#183;</div>
             {experience.startYear}-{experience.endYear}
           </div>
           <div>
             {experience.school}
-            <div className="urp-dot">&#183;</div>
+            <div className="nobo-dot">&#183;</div>
             {experience.city}, {experience.state}
           </div>
         </div>
@@ -68,13 +68,13 @@ const CoachingExperienceSection: React.FC<CoachingExperienceSectionProps> = ({
   if (noExperience) {
     if (myProfile) {
       experiences.push(
-        <div className="urp-highlight-add-media-container urp-highlight-add-media-container" key="none">
-          <p className="urp-highlight-add-media-title">
+        <div className="nobo-highlight-add-media-container nobo-highlight-add-media-container" key="none">
+          <p className="nobo-highlight-add-media-title">
             Uh! Looks like you haven’t added any coaching experiences to your
             account yet
           </p>
           <p
-            className="urp-highlight-add-media-text"
+            className="nobo-highlight-add-media-text"
             onClick={(e) => {
               e.preventDefault();
               history.push(`edit-coach/${userId}`);
@@ -86,8 +86,8 @@ const CoachingExperienceSection: React.FC<CoachingExperienceSectionProps> = ({
       );
     } else {
       experiences.push(
-        <div className="urp-highlight-add-media-container" key="none">
-          <p className="urp-highlight-add-media-title">
+        <div className="nobo-highlight-add-media-container" key="none">
+          <p className="nobo-highlight-add-media-title">
             Uh! Looks like the user hasn't added any stats yet
           </p>
         </div>
@@ -96,7 +96,7 @@ const CoachingExperienceSection: React.FC<CoachingExperienceSectionProps> = ({
   }
 
   return (
-    <div className={`${className} urp-experience`}>
+    <div className={`${className} nobo-experience`}>
       <IonContent>{experiences}</IonContent>
     </div>
   );

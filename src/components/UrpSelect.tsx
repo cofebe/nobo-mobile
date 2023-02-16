@@ -149,28 +149,28 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
   return (
     <div
       className={
-        "urp-select" +
-        (disabled ? " urp-select-disabled" : "") +
-        (border ? " urp-select-border" : "") +
+        "nobo-select" +
+        (disabled ? " nobo-select-disabled" : "") +
+        (border ? " nobo-select-border" : "") +
         (className ? " " + className : "")
       }
     >
-      <div className="urp-select-container" onClick={(e) => open()}>
+      <div className="nobo-select-container" onClick={(e) => open()}>
         <div
           className={
-            "urp-select-label" +
-            (internalSelectedString ? "" : " urp-select-label-empty")
+            "nobo-select-label" +
+            (internalSelectedString ? "" : " nobo-select-label-empty")
           }
         >
           {internalSelectedString
             ? internalSelectedString
             : placeholder || "Select Option"}
         </div>
-        <div className="urp-select-chevron">
+        <div className="nobo-select-chevron">
           <IonIcon icon={chevronDownOutline}></IonIcon>
         </div>
       </div>
-      <IonModal ref={modal} id="urp-select-modal">
+      <IonModal ref={modal} id="nobo-select-modal">
         <div className="wrapper">
           <IonList lines="none">
             {options &&
@@ -180,7 +180,7 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
                   button={true}
                   detail={false}
                   onClick={() => select(o)}
-                  className={isSelected(o) ? "urp-select-selected" : ""}
+                  className={isSelected(o) ? "nobo-select-selected" : ""}
                 >
                   <IonLabel>{o.label || o.value}</IonLabel>
                   <IonIcon icon={checkmarkOutline}></IonIcon>
@@ -189,9 +189,9 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
           </IonList>
         </div>
         {multiple ? (
-          <div className="urp-select-button-container">
+          <div className="nobo-select-button-container">
             <IonButton
-              className="urp-select-button-select"
+              className="nobo-select-button-select"
               onClick={(e) => close()}
             >
               Select
@@ -200,9 +200,9 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
         ) : (
           ""
         )}
-        <div className="urp-select-button-container">
+        <div className="nobo-select-button-container">
           <IonButton
-            className="urp-select-button-cancel"
+            className="nobo-select-button-cancel"
             onClick={(e) => cancel()}
           >
             Cancel

@@ -16,8 +16,8 @@ interface SearchWidgetProps {
 
 const SearchWidget: React.FC<SearchWidgetProps> = ({ placeholder }) => {
     return (
-        <div className='urp-search-widget-wrapper'>
-            <svg className='urp-search-widget' width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className='nobo-search-widget-wrapper'>
+            <svg className='nobo-search-widget' width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_d_816_9559)">
                     <circle cx="22.5" cy="22.5" r="14.5" fill="white" />
                 </g>
@@ -40,9 +40,9 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({ placeholder }) => {
                     </clipPath>
                 </defs>
             </svg>
-            <IonItem lines='none' className="urp-top-search-box">
-                {/* <IonLabel className="urp-top-search-box-label" >Search</IonLabel> */}
-                <IonInput className="urp-top-search-box-input"></IonInput>
+            <IonItem lines='none' className="nobo-top-search-box">
+                {/* <IonLabel className="nobo-top-search-box-label" >Search</IonLabel> */}
+                <IonInput className="nobo-top-search-box-input"></IonInput>
             </IonItem>
         </div>
     );

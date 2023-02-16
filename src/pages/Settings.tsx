@@ -33,7 +33,7 @@ const Settings: React.FC = () => {
   const userId = authService.getUserID();
 
   function emailSupport(subject: string) {
-    window.location.href = `mailto:support@urpplus.com?subject=${subject}`;
+    window.location.href = `mailto:support@noboplus.com?subject=${subject}`;
   }
 
   async function logout() {
@@ -53,7 +53,7 @@ const Settings: React.FC = () => {
 
   function openContactUs() {
     present({
-      cssClass: 'urp-action-sheet',
+      cssClass: 'nobo-action-sheet',
       buttons: [
         {
           text: 'Send Support Email',
@@ -411,7 +411,7 @@ const Settings: React.FC = () => {
         )}
         <IonRow>
           <IonCol
-            className="urp-center"
+            className="nobo-center"
             style={{ paddingTop: '2rem', textAlign: 'center' }}
             size="11"
           >
@@ -425,7 +425,7 @@ const Settings: React.FC = () => {
             </a>
           </IonCol>
           <IonCol
-            className="urp-center"
+            className="nobo-center"
             style={{
               paddingTop: '2rem',
               textAlign: 'center',
@@ -438,7 +438,7 @@ const Settings: React.FC = () => {
             </a>
           </IonCol>
           <IonCol
-            className="urp-center"
+            className="nobo-center"
             style={{ textAlign: 'center', textDecoration: 'underline' }}
             size="11"
           >

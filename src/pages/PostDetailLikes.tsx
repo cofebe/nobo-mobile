@@ -107,7 +107,7 @@ const PostDetailLikes: React.FC = () => {
       <IonSearchbar id="searchInput" value={searchText} onIonChange={(e) => {
         setSearchText(e.detail.value || '');
       }} enterkeyhint="search"></IonSearchbar>
-        <IonList className="urp-post-detail-background">
+        <IonList className="nobo-post-detail-background">
           {(likes || [])
             .filter(like => !searchText || (like.from_name.toLowerCase().includes(searchText.toLowerCase())))
             .map(like => <PostLikeItem like={like} postId={postId} />)

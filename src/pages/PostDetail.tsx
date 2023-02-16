@@ -111,7 +111,7 @@ const PostDetail: React.FC = () => {
           <IonRefresher slot="fixed" onIonRefresh={refresh}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
-          <IonList className="urp-post-detail-background">
+          <IonList className="nobo-post-detail-background">
             <FeedListItem message={message} zoomAction={(i: number) => {
               try {
                 if (message && message.photo_url && message.photo_url.length > 0) {

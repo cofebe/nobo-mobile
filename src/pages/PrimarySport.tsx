@@ -72,7 +72,7 @@ const PrimarySport: React.FC = () => {
   }
 
   return (
-    <IonPage className="urp-page" id="roles-page">
+    <IonPage className="nobo-page" id="roles-page">
       <IonContent scrollY>
         <IonRow>
           <IonCol class="ion-text-center">
@@ -86,10 +86,10 @@ const PrimarySport: React.FC = () => {
         </IonRow>
         <form
           style={{ paddingLeft: '10px', paddingRight: '10px' }}
-          className="urp-form"
+          className="nobo-form"
         >
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 detail={false}
@@ -109,7 +109,7 @@ const PrimarySport: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 // disabled={true}
@@ -130,7 +130,7 @@ const PrimarySport: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 // disabled={true}
@@ -151,7 +151,7 @@ const PrimarySport: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 // disabled={true}
@@ -172,7 +172,7 @@ const PrimarySport: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 // disabled={true}
@@ -193,7 +193,7 @@ const PrimarySport: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 // disabled={true}
@@ -214,7 +214,7 @@ const PrimarySport: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 detail={false}
@@ -234,7 +234,7 @@ const PrimarySport: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 detail={false}
@@ -254,7 +254,7 @@ const PrimarySport: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 detail={false}
@@ -274,7 +274,7 @@ const PrimarySport: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 detail={false}
@@ -294,7 +294,7 @@ const PrimarySport: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 detail={false}
@@ -315,7 +315,7 @@ const PrimarySport: React.FC = () => {
           </IonRow>
 
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               {selectedSport === '' && (
                 <IonButton
                   disabled={true}
@@ -332,7 +332,7 @@ const PrimarySport: React.FC = () => {
                     signup();
                   }}
                   color={btnColor}
-                  className="urp-green-btn"
+                  className="nobo-green-btn"
                   style={{ display: 'block', color: '#FFFFFF' }}
                 >
                   Lets Go!

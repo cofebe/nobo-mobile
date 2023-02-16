@@ -23,7 +23,7 @@ const OffersSection: React.FC<OffersSectionProps> = ({
   const universities = getUniversities();
 
   return (
-    <div id="urp-offers-section" className={"urp-offsers-section " + className}>
+    <div id="nobo-offers-section" className={"nobo-offsers-section " + className}>
       <IonContent>
         <div
           style={{
@@ -43,7 +43,7 @@ const OffersSection: React.FC<OffersSectionProps> = ({
               }
             }
             return (
-              <div key={schoolWebsite} className="urp-offer-item">
+              <div key={schoolWebsite} className="nobo-offer-item">
                 <img
                   className="logo-logo"
                   src={imgSrc}
@@ -58,12 +58,12 @@ const OffersSection: React.FC<OffersSectionProps> = ({
             );
           })}
           {offers.length === 0 && myProfile && (
-            <div className="urp-highlight-add-media-container urp-highlight-add-media-container">
-              <p className="urp-highlight-add-media-title">
+            <div className="nobo-highlight-add-media-container nobo-highlight-add-media-container">
+              <p className="nobo-highlight-add-media-title">
                 Uh! Looks like you haven’t added any offers to your account yet
               </p>
               <p
-                className="urp-highlight-add-media-text"
+                className="nobo-highlight-add-media-text"
                 onClick={(e) => {
                   e.preventDefault();
                   history.push(`edit-athlete/${userId}`);
@@ -74,8 +74,8 @@ const OffersSection: React.FC<OffersSectionProps> = ({
             </div>
           )}
           {offers.length === 0 && !myProfile && (
-            <div className="urp-highlight-add-media-container">
-              <p className="urp-highlight-add-media-title">
+            <div className="nobo-highlight-add-media-container">
+              <p className="nobo-highlight-add-media-title">
                 Uh! Looks like the user hasn't added any academics yet
               </p>
             </div>

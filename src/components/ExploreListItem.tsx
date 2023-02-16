@@ -50,7 +50,7 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
               className="explore-list-feed-image"
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = '../../assets/images/urp_logo_round.jpg';
+                currentTarget.src = '../../assets/images/nobo_logo_round.jpg';
               }}
               src={profile.basic_user_profile.profile_image.String}
               alt="avatar"
@@ -69,7 +69,7 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
               whiteSpace: 'nowrap',
             }}
           >
-            <h2 className="feed-list-urp-badge-line">
+            <h2 className="feed-list-nobo-badge-line">
               <p className="feed-list-feed-name">
                 {name}
               </p>
@@ -82,12 +82,12 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
           size="4"
         >
           <div style={{ width: '80%' }}>
-            <h2 className="feed-list-urp-badge-line">
+            <h2 className="feed-list-nobo-badge-line">
               <span>
                 {profile.athlete_user_profile.primary_sport.String ? (
                   <img
                     className="feed-list-logo-image"
-                    src={`assets/images/urp-badge-${profile.athlete_user_profile.primary_sport.String}.svg`}
+                    src={`assets/images/nobo-badge-${profile.athlete_user_profile.primary_sport.String}.svg`}
                     alt={profile.athlete_user_profile.primary_sport.String}
                   />
                 ) : (

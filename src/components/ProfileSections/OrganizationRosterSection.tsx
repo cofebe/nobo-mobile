@@ -19,7 +19,7 @@ const OrganizationRosterSection: React.FC<OrganizationRosterSectionProps> = ({
   className,
 }) => {
   return (
-    <div className={`${className} urp-organization-roster`}>
+    <div className={`${className} nobo-organization-roster`}>
       <IonItemSliding id="slidingWatchlistItem" className="roster-list-item">
         <IonItem className="roster-item" lines="none" detail={false}>
           <IonRow style={{ width: '100%' }}>
@@ -30,7 +30,7 @@ const OrganizationRosterSection: React.FC<OrganizationRosterSectionProps> = ({
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
                     currentTarget.src =
-                      '../../assets/images/urp_logo_round.svg';
+                      '../../assets/images/nobo_logo_round.svg';
                   }}
                   src="assets/images/users/player-1.jpeg"
                   alt="avatar"
@@ -60,8 +60,8 @@ const OrganizationRosterSection: React.FC<OrganizationRosterSectionProps> = ({
                     {/* {profile.athlete_user_profile.primary_sport.String ? ( */}
                     <img
                       className="feed-list-logo-image"
-                      // src={`assets/images/urp-badge-${profile.athlete_user_profile.primary_sport.String}.svg`}
-                      src={`assets/images/urp-badge-football.svg`}
+                      // src={`assets/images/nobo-badge-${profile.athlete_user_profile.primary_sport.String}.svg`}
+                      src={`assets/images/nobo-badge-football.svg`}
                       // alt={profile.athlete_user_profile.primary_sport.String}
                       alt="football"
                     />

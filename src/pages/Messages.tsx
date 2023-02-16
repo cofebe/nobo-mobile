@@ -268,7 +268,7 @@ const Messages: React.FC = () => {
             >
               <span
                 className={
-                  'urp-explore-account-tab-menu-item ' +
+                  'nobo-explore-account-tab-menu-item ' +
                   (watchlistOnly === true ? 'selected' : '')
                 }
               >
@@ -302,7 +302,7 @@ const Messages: React.FC = () => {
                         <img
                           onError={({ currentTarget }) => {
                             currentTarget.onerror = null; // prevents looping
-                            currentTarget.src = '../../assets/images/urp_logo_round.svg';
+                            currentTarget.src = '../../assets/images/nobo_logo_round.svg';
                           }}
                           src={getUserAvatar(c)}
                           alt="avatar"
@@ -349,12 +349,12 @@ const Messages: React.FC = () => {
             <IonCol class="ion-text-center">
               <img
                 className="logo-image logo-image-margin"
-                src="assets/images/urp_logo_round.svg"
+                src="assets/images/nobo_logo_round.svg"
                 width="150"
                 height="150"
                 alt="logo"
               />
-              <div className="urp-sub-header">No messages.</div>
+              <div className="nobo-sub-header">No messages.</div>
             </IonCol>)}
           </IonRow>
         </IonContent>

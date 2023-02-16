@@ -929,7 +929,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
     let validationResults = validateSignup(req);
     if (validationResults.valid) {
       console.log('Validation Valid: ', validationResults);
-      let spinner = document.querySelectorAll('.urp-spinner-container');
+      let spinner = document.querySelectorAll('.nobo-spinner-container');
       spinner[0].classList.add('active');
 
       userService
@@ -1072,7 +1072,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
     let validationResults = validateSignup(req);
     if (validationResults.valid) {
       console.log('Validation Valid: ', validationResults);
-      let spinner = document.querySelectorAll('.urp-spinner-container');
+      let spinner = document.querySelectorAll('.nobo-spinner-container');
       spinner[0].classList.add('active');
 
       authService
@@ -1219,16 +1219,16 @@ const SignUpTrainer: React.FC<Props> = (props) => {
   return (
     <IonPage
       id="sign-up-athlete-page"
-      className="urp-page sign-up-athlete-page"
+      className="nobo-page sign-up-athlete-page"
     >
       <div className="square-logo-desktop">
-        <img src="assets/images/urp-box-logo.png" alt="logo" />
+        <img src="assets/images/nobo-box-logo.png" alt="logo" />
       </div>
       <div className="header-desktop">
         <div></div>
       </div>
       {toggleCropper && (
-        <div className="urp-image-cropper">
+        <div className="nobo-image-cropper">
           <span
             onClick={(e) => {
               e.preventDefault();
@@ -1237,7 +1237,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
           >
             X
           </span>
-          <span className="urp-crop-header-text" style={{ color: 'FFFFFF' }}>
+          <span className="nobo-crop-header-text" style={{ color: 'FFFFFF' }}>
             Crop your profile photo
           </span>
           <span
@@ -1250,7 +1250,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
           </span>
           {/* <SwipeIcon></SwipeIcon> */}
           <Cropper
-            className="urp-profile-pic-cropper"
+            className="nobo-profile-pic-cropper"
             // src="https://static.clubs.nfl.com/image/private/t_editorial_landscape_8_desktop_mobile/f_auto/packers/nczkr5s3xzqebndsu9uk.jpg"
             src={`data:image/png;base64,${profilePicData?.base64String}`}
             // CropperJS options
@@ -1269,7 +1269,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
         </div>
       )}
       {toggleCropperBanner && (
-        <div className="urp-image-cropper">
+        <div className="nobo-image-cropper">
           <span
             onClick={(e) => {
               e.preventDefault();
@@ -1278,7 +1278,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
           >
             X
           </span>
-          <span className="urp-crop-header-text" style={{ color: '#FFFFFF' }}>
+          <span className="nobo-crop-header-text" style={{ color: '#FFFFFF' }}>
             Crop your banner photo
           </span>
           <span
@@ -1291,7 +1291,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
           </span>
           {/* <SwipeIcon></SwipeIcon> */}
           <Cropper
-            className="urp-banner-pic-cropper"
+            className="nobo-banner-pic-cropper"
             // src="https://static.clubs.nfl.com/image/private/t_editorial_landscape_8_desktop_mobile/f_auto/packers/nczkr5s3xzqebndsu9uk.jpg"
             src={`data:image/png;base64,${bannerPicData?.base64String}`}
             // CropperJS options
@@ -1316,12 +1316,12 @@ const SignUpTrainer: React.FC<Props> = (props) => {
           style={{ paddingTop: props.editMode ? '' : '40px' }}
         >
           {!props.editMode && (
-            <div className="urp-custom-progress-bar">
-              <div className="urp-progress-label">{progressStep.section}</div>
-              <div className="urp-progress-graphic">
+            <div className="nobo-custom-progress-bar">
+              <div className="nobo-progress-label">{progressStep.section}</div>
+              <div className="nobo-progress-graphic">
                 <div style={{ width: progressPercentage }}></div>
               </div>
-              <div className="urp-progress-count">
+              <div className="nobo-progress-count">
                 {progressStep.step}/{totalProgressItemCount}
               </div>
             </div>
@@ -1333,21 +1333,21 @@ const SignUpTrainer: React.FC<Props> = (props) => {
             {!props.editMode && (
               <IonBackButton
                 text="&nbsp;  Sign Up"
-                className="urp-nav-text"
+                className="nobo-nav-text"
               ></IonBackButton>
             )}
             {props.editMode && (
               <IonBackButton
                 text="&nbsp;  Edit Trainer Profile"
-                className="urp-nav-text"
+                className="nobo-nav-text"
               ></IonBackButton>
             )}
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent id="signup-sections" className="urp-content-area">
-        <div className="urp-spinner-container">
-          <IonSpinner className="urp-spinner" name="bubbles" />
+      <IonContent id="signup-sections" className="nobo-content-area">
+        <div className="nobo-spinner-container">
+          <IonSpinner className="nobo-spinner" name="bubbles" />
         </div>
         <IonList>
           <div className="toolbar-desktop">
@@ -1364,25 +1364,25 @@ const SignUpTrainer: React.FC<Props> = (props) => {
               </span>
             </div>
           </div>
-          <IonAccordionGroup className="urp-section-group">
-            <div className="urp-section">
+          <IonAccordionGroup className="nobo-section-group">
+            <div className="nobo-section">
               <IonAccordion id="basic-info" value="basic-info">
                 <IonItem
                   lines="none"
                   slot="header"
                   style={{ class: 'item-inner' }}
-                  className="urp-section-head"
+                  className="nobo-section-head"
                   onClick={(e) => scollToSection('basic-info')}
                 >
-                  <span className="urp-step-num">1</span>
-                  <h5 className="urp-section-title required">
+                  <span className="nobo-step-num">1</span>
+                  <h5 className="nobo-section-title required">
                     Basic Information
                   </h5>
                 </IonItem>
 
-                <IonList className="urp-list-input" slot="content">
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                <IonList className="nobo-list-input" slot="content">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       First Name
                     </IonLabel>
 
@@ -1396,8 +1396,8 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                       required
                     ></IonInput>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Last Name
                     </IonLabel>
 
@@ -1411,11 +1411,11 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                       required
                     ></IonInput>
                   </IonItem>
-                  <IonItem className="urp-input" lines="none">
+                  <IonItem className="nobo-input" lines="none">
                     <IonRow>
                       <IonCol>
                         <IonLabel
-                          className="urp-signup-label"
+                          className="nobo-signup-label"
                           position="stacked"
                         >
                           Profile Picture
@@ -1433,7 +1433,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                           ></IonIcon>
                           {profilePicPreview !== '' && (
                             <div
-                              className="urp-preview-profile-pic"
+                              className="nobo-preview-profile-pic"
                               style={{
                                 background: `url(${profilePicPreview})`,
                                 backgroundSize: 'contain',
@@ -1443,7 +1443,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                         </IonFabButton>
                         <a
                           href="#"
-                          className="urp-upload-photo"
+                          className="nobo-upload-photo"
                           onClick={(e) => {
                             e.preventDefault();
                             uploadProfilePic();
@@ -1459,8 +1459,8 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                       </IonCol>
                     </IonRow>
                   </IonItem>
-                  <IonItem className="urp-input" lines="none">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="none">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Banner Picture
                     </IonLabel>
                     {bannerPicPreview === '' && (
@@ -1470,7 +1470,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                           uploadBannerPic();
                         }}
                         color={btnColor}
-                        className="urp-upload-btn"
+                        className="nobo-upload-btn"
                         style={{
                           display: 'block',
                           marginLeft: '0',
@@ -1488,7 +1488,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                     )}
                     {bannerPicPreview !== '' && (
                       <div
-                        className="urp-banner-pic-previewer"
+                        className="nobo-banner-pic-previewer"
                         onClick={(e) => {
                           e.preventDefault();
                           uploadBannerPic();
@@ -1501,14 +1501,14 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                       ></div>
                     )}
                     <span
-                      className="urp-optional"
+                      className="nobo-optional"
                       style={{ paddingTop: 6, paddingLeft: '2px !important' }}
                     >
                       Banner picture must be in standard format .png, .jpeg
                     </span>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Position
                     </IonLabel>
                     <IonInput
@@ -1526,9 +1526,9 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                     <IonGrid style={{ paddingLeft: '0px' }}>
                       {/* <IonRow>
                         <IonCol size="5" style={{ paddingLeft: "0px" }}>
-                          <IonItem className="urp-input" lines="none">
+                          <IonItem className="nobo-input" lines="none">
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Class Year
@@ -1540,7 +1540,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                               }}
                               placeholder="Class"
                               border={true}
-                              className="urp-select-short"
+                              className="nobo-select-short"
                               //style={{
                               //  width: "80%",
                               //  marginRight: "10%",
@@ -1615,9 +1615,9 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                           </IonItem>
                         </IonCol>
                         <IonCol size="4" style={{ paddingLeft: "0px" }}>
-                          <IonItem className="urp-input" lines="none">
+                          <IonItem className="nobo-input" lines="none">
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Weight
@@ -1629,15 +1629,15 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                               }}
                               placeholder="lbs"
                               border={true}
-                              className="urp-select-short"
+                              className="nobo-select-short"
                               options={weightList}
                             />
                           </IonItem>
                         </IonCol>
                         <IonCol size="3">
-                          <IonItem className="urp-input" lines="none">
+                          <IonItem className="nobo-input" lines="none">
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Height
@@ -1657,24 +1657,24 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                       <IonRow>
                         <IonCol style={{ paddingLeft: '0px' }}>
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             Birthday{' '}
                             <span className="disclaimer-text">
                               {' '}
-                              Used for informational purposes only
+                              Used for informational pnobooses only
                             </span>
                           </IonLabel>
                         </IonCol>
                         <IonCol size="5" style={{ paddingLeft: '0px' }}>
                           <IonItem
                             style={{ marginTop: 0 }}
-                            className="urp-input"
+                            className="nobo-input"
                             lines="none"
                           >
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Month
@@ -1686,7 +1686,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                               }}
                               placeholder="Month"
                               border={true}
-                              className="urp-select-short"
+                              className="nobo-select-short"
                               //style={{
                               //  width: "80%",
                               //  marginRight: "10%",
@@ -1749,11 +1749,11 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                         <IonCol size="4" style={{ paddingLeft: '0px' }}>
                           <IonItem
                             style={{ marginTop: 0 }}
-                            className="urp-input"
+                            className="nobo-input"
                             lines="none"
                           >
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Day
@@ -1765,7 +1765,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                               }}
                               placeholder="Day"
                               border={true}
-                              className="urp-select-short"
+                              className="nobo-select-short"
                               options={birtdayDayList}
                             />
                           </IonItem>
@@ -1773,11 +1773,11 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                         <IonCol size="3">
                           <IonItem
                             style={{ marginTop: 0 }}
-                            className="urp-input"
+                            className="nobo-input"
                             lines="none"
                           >
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Year
@@ -1797,8 +1797,8 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                     </IonGrid>
                   </IonItem>
 
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       School / Organization
                     </IonLabel>
                     <IonInput
@@ -1860,8 +1860,8 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                       </IonList>
                     </IonPopover>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Country
                     </IonLabel>
                     <UrpSelect
@@ -1873,8 +1873,8 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                       })}
                     />
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       State
                     </IonLabel>
                     <UrpSelect
@@ -1886,8 +1886,8 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                       })}
                     />
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       City
                     </IonLabel>
                     <IonInput
@@ -1900,8 +1900,8 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                       required
                     ></IonInput>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Bio
                     </IonLabel>
                     <IonTextarea
@@ -1917,12 +1917,12 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkInstagramValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkInstagramValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      Instagram<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      Instagram<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkInstagram}
@@ -1940,12 +1940,12 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkTwitterValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkTwitterValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      Twitter<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      Twitter<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkTwitter}
@@ -1963,12 +1963,12 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkTikTokValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkTikTokValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      TikTok<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      TikTok<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkTikTok}
@@ -1986,12 +1986,12 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkHudlValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkHudlValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      Hudl<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      Hudl<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkHudl}
@@ -2009,12 +2009,12 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLink247SportsValid ? '' : ' invalid')
+                      'nobo-input' + (socialLink247SportsValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      247Sports<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      247Sports<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLink247Sports}
@@ -2032,12 +2032,12 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkRivalsValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkRivalsValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      Rivals<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      Rivals<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkRivals}
@@ -2055,12 +2055,12 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkMaxPrepsValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkMaxPrepsValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      MaxPreps<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      MaxPreps<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkMaxPreps}
@@ -2079,7 +2079,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                 </IonList>
               </IonAccordion>
             </div>
-            <div className="urp-section">
+            <div className="nobo-section">
               <IonAccordion
                 id="training-experience"
                 value="training-experience"
@@ -2087,19 +2087,19 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                 <IonItem
                   lines="none"
                   slot="header"
-                  className="urp-section-head"
+                  className="nobo-section-head"
                   onClick={(e) => scollToSection('training-experience')}
                 >
-                  <span className="urp-step-num">2</span>
-                  <h5 className="urp-section-title">Training Experience</h5>
+                  <span className="nobo-step-num">2</span>
+                  <h5 className="nobo-section-title">Training Experience</h5>
                 </IonItem>
-                <IonList className="urp-list-input" slot="content">
+                <IonList className="nobo-list-input" slot="content">
                   {previousTeamsTrained.map((element: any, index: any) => {
                     return (
                       <div key={index}>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             Team Trained
@@ -2123,7 +2123,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                             // required
                           ></IonInput>
                         </IonItem>
-                        <IonItem className="urp-input" lines="none">
+                        <IonItem className="nobo-input" lines="none">
                           <IonGrid style={{ paddingLeft: '0px' }}>
                             <IonRow>
                               <IonCol style={{ paddingLeft: '0px' }}>
@@ -2136,7 +2136,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                                   lines="full"
                                 >
                                   <IonLabel
-                                    className="urp-signup-label"
+                                    className="nobo-signup-label"
                                     position="stacked"
                                   >
                                     Start Year
@@ -2230,7 +2230,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                                   lines="full"
                                 >
                                   <IonLabel
-                                    className="urp-signup-label"
+                                    className="nobo-signup-label"
                                     position="stacked"
                                   >
                                     End Year
@@ -2306,7 +2306,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                               <IonCol>
                                 <IonItem lines="full">
                                   <IonLabel
-                                    className="urp-signup-label"
+                                    className="nobo-signup-label"
                                     position="stacked"
                                   >
                                     Position Trained
@@ -2335,9 +2335,9 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                             </IonRow>
                           </IonGrid>
                         </IonItem>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             School
@@ -2360,9 +2360,9 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                             }}
                           ></IonInput>
                         </IonItem>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             State
@@ -2385,9 +2385,9 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                             })}
                           />
                         </IonItem>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             City
@@ -2501,21 +2501,21 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                 </IonList>
               </IonAccordion>
             </div>
-            <div className="urp-section">
+            <div className="nobo-section">
               <IonAccordion id="playing-experience" value="playing-experience">
                 <IonItem
                   lines="none"
                   slot="header"
-                  className="urp-section-head"
+                  className="nobo-section-head"
                   onClick={(e) => scollToSection('playing-experience')}
                 >
-                  <span className="urp-step-num">3</span>
-                  <h5 className="urp-section-title">Playing Experience</h5>
+                  <span className="nobo-step-num">3</span>
+                  <h5 className="nobo-section-title">Playing Experience</h5>
                 </IonItem>
 
-                <IonList className="urp-list-input" slot="content">
-                  {/* <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                <IonList className="nobo-list-input" slot="content">
+                  {/* <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Bio
                     </IonLabel>
                     <IonTextarea
@@ -2532,9 +2532,9 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                   {previousTeams.map((element: any, index: any) => {
                     return (
                       <div key={index}>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             Last Team
@@ -2556,7 +2556,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                             // required
                           ></IonInput>
                         </IonItem>
-                        <IonItem className="urp-input" lines="none">
+                        <IonItem className="nobo-input" lines="none">
                           <IonGrid style={{ paddingLeft: '0px' }}>
                             <IonRow>
                               <IonCol style={{ paddingLeft: '0px' }}>
@@ -2569,7 +2569,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                                   lines="full"
                                 >
                                   <IonLabel
-                                    className="urp-signup-label"
+                                    className="nobo-signup-label"
                                     position="stacked"
                                   >
                                     Start Year
@@ -2651,7 +2651,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                                   lines="full"
                                 >
                                   <IonLabel
-                                    className="urp-signup-label"
+                                    className="nobo-signup-label"
                                     position="stacked"
                                   >
                                     End Year
@@ -2717,11 +2717,11 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                               <IonCol>
                                 <IonItem lines="full">
                                   <IonLabel
-                                    className="urp-signup-label"
+                                    className="nobo-signup-label"
                                     position="stacked"
                                   >
                                     Position(s)
-                                    <span className="urp-optional">
+                                    <span className="nobo-optional">
                                       Seperate with comma
                                     </span>
                                   </IonLabel>
@@ -2749,9 +2749,9 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                             </IonRow>
                           </IonGrid>
                         </IonItem>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             School
@@ -2772,9 +2772,9 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                             }}
                           ></IonInput>
                         </IonItem>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             State
@@ -2795,9 +2795,9 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                             })}
                           />
                         </IonItem>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             City
@@ -2920,7 +2920,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                     signUpTrainer();
                   }}
                   color={btnColor}
-                  className="urp-green-btn"
+                  className="nobo-green-btn"
                 >
                   Lets Go!
                 </IonButton>
@@ -2940,7 +2940,7 @@ const SignUpTrainer: React.FC<Props> = (props) => {
                     editTrainer();
                   }}
                   color={btnColor}
-                  className="urp-green-btn"
+                  className="nobo-green-btn"
                 >
                   Save
                 </IonButton>

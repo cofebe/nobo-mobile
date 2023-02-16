@@ -99,7 +99,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
     }
   }
 
-  const [postURL, setPostURL] = useState(`https://www.urpplus.com/home/post-detail/${message.post_id}`);
+  const [postURL, setPostURL] = useState(`https://www.noboplus.com/home/post-detail/${message.post_id}`);
 
   var options = {
     message: `${message.from_name}`,
@@ -215,7 +215,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
   function showReportingActionSheet() {
     console.log('showReportingActionSheet');
     presentReportingActionSheet({
-      cssClass: 'urp-action-sheet',
+      cssClass: 'nobo-action-sheet',
       header: 'Report Post',
       //subHeader: 'Subheader',
       buttons: [
@@ -313,7 +313,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
     console.log('showActionSheet');
     presentActionSheet({
       header: 'Post actions',
-      cssClass: 'urp-action-sheet',
+      cssClass: 'nobo-action-sheet',
       //subHeader: 'Subheader',
       buttons: actionSheetButtons,
       onDidDismiss: ({ detail }) => {
@@ -396,7 +396,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
             <img
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = '../../assets/images/urp_logo_round.svg';
+                currentTarget.src = '../../assets/images/nobo_logo_round.svg';
               }}
               src={message.profile_image}
               alt="avatar"
@@ -423,12 +423,12 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
           }}
         >
           <div style={{ width: '100%' }}>
-            <h2 className="feed-list-urp-badge-line">
+            <h2 className="feed-list-nobo-badge-line">
               <span>
                 {message.sport ? (
                   <img
                     className="feed-list-logo-image"
-                    src={`assets/images/urp-badge-${message.sport}.svg`}
+                    src={`assets/images/nobo-badge-${message.sport}.svg`}
                     alt={message.sport}
                   />
                 ) : (
@@ -509,7 +509,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
               return false;
             }
 
-            if (e.target.classList.contains('urp-zoom-image-icon')) {
+            if (e.target.classList.contains('nobo-zoom-image-icon')) {
               return false;
             }
 
@@ -549,9 +549,9 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
               // }}
             >
               {msgPhotos.map((mp, i: number) => (
-                <div className="urp-image-frame" key={i}>
+                <div className="nobo-image-frame" key={i}>
                   <div
-                    className="urp-zoom-image"
+                    className="nobo-zoom-image"
                     onClick={(e) => {
                       console.log('zoom');
                       if (zoomAction) {
@@ -562,7 +562,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
                     }}
                   >
                     <svg
-                      className="urp-zoom-image-icon"
+                      className="nobo-zoom-image-icon"
                       xmlns="http://www.w3.org/2000/svg"
                       id="Layer_1"
                       data-name="Layer 1"
@@ -574,13 +574,13 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
                     </svg>
                   </div>
                   {/* <img
-                    className='urp-post-image'
+                    className='nobo-post-image'
                     style={{ paddingTop: '0px', height: 300, sizeMo }}
                     src={mp.replace("'", '').replace("'", '')}
                     alt="Post"
                   /> */}
                   <div
-                    className="urp-post-image"
+                    className="nobo-post-image"
                     style={{
                       backgroundImage: `url(${mp
                         .replace("'", '')
@@ -638,7 +638,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
               <div className="video-container">
                 <iframe
                   title="highlight"
-                  className="urp-highlight-video"
+                  className="nobo-highlight-video"
                   src={message.video_url}
                 />
               </div>
@@ -698,7 +698,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
                 </svg>
               </div>
               <div>
-                <div className="feed-list-urp-comments-count">
+                <div className="feed-list-nobo-comments-count">
                   {message.comment_count}
                 </div>
               </div>
@@ -720,7 +720,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
                     />
                   </svg>
                 </div>
-                <div className="feed-list-urp-likes-count">
+                <div className="feed-list-nobo-likes-count">
                   {message.like_count}
                 </div>
               </div>
@@ -741,7 +741,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
                     />
                   </svg>
                 </div>
-                <div className="feed-list-urp-likes-count">
+                <div className="feed-list-nobo-likes-count">
                   {message.like_count}
                 </div>
               </div>

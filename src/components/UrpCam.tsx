@@ -27,7 +27,7 @@ export const takePicture = async (ucp:UrpCamProps) => {
 const UrpCam: React.FC<UrpCamProps> = ({active, quality}) => {
     const [imagePreview, setImagePreview] = useState({});
     return (
-        <div className="urp-image-capture">
+        <div className="nobo-image-capture">
             <a href="#" onClick={async (e) => {
               e.preventDefault();
               let previewSrc = await takePicture({active: true, quality: 90}) || "";

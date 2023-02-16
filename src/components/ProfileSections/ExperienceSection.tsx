@@ -50,17 +50,17 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
     noExperience = false;
 
     experiences.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>
           <div>{getSportPosition(sport, experience.position)}</div>
           <div>
             {experience.team}
-            <div className="urp-dot">&#183;</div>
+            <div className="nobo-dot">&#183;</div>
             {experience.startYear}-{experience.endYear}
           </div>
           <div>
             {experience.school}
-            <div className="urp-dot">&#183;</div>
+            <div className="nobo-dot">&#183;</div>
             {experience.city}, {experience.state}
           </div>
         </div>
@@ -71,12 +71,12 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
   if (noExperience) {
     if (myProfile) {
       experiences.push(
-        <div className="urp-highlight-add-media-container urp-highlight-add-media-container">
-          <p className="urp-highlight-add-media-title">
+        <div className="nobo-highlight-add-media-container nobo-highlight-add-media-container">
+          <p className="nobo-highlight-add-media-title">
             Uh! Looks like you haven’t added any experiences to your account yet
           </p>
           <p
-            className="urp-highlight-add-media-text"
+            className="nobo-highlight-add-media-text"
             onClick={(e) => {
               e.preventDefault();
               history.push(`edit-athlete/${userId}`);
@@ -88,8 +88,8 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
       );
     } else {
       experiences.push(
-        <div className="urp-highlight-add-media-container">
-          <p className="urp-highlight-add-media-title">
+        <div className="nobo-highlight-add-media-container">
+          <p className="nobo-highlight-add-media-title">
             Uh! Looks like the user hasn't added any experiences yet
           </p>
         </div>
@@ -97,7 +97,7 @@ const ExperienceSection: React.FC<ExperienceSectionProps> = ({
     }
   }
 
-  return <div className={`${className} urp-experience`}><IonContent>{experiences}</IonContent></div>;
+  return <div className={`${className} nobo-experience`}><IonContent>{experiences}</IonContent></div>;
 };
 
 export default ExperienceSection;

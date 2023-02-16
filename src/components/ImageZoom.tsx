@@ -22,7 +22,7 @@ const ImageZoom: React.FC<ImageZoomProps> = ({ show, imageUrl, onClose }) => {
   }
 
   return (
-    <div className={'urp-image-zoom ' + (show ? 'show' : 'hide')}>
+    <div className={'nobo-image-zoom ' + (show ? 'show' : 'hide')}>
       <TransformWrapper >
         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
           <>

@@ -37,9 +37,9 @@ const UrpHeader: React.FC = () => {
           <IonGrid>
             <IonRow>
               <IonCol size="9" style={{ paddingLeft: "2rem" }}>
-                <div className="urp-float-logo">
+                <div className="nobo-float-logo">
                   <img
-                    src="assets/images/urp_logo_withtagline.png"
+                    src="assets/images/nobo_logo_withtagline.png"
                     width="53px"
                     height="30px"
                     alt="logo with tagline"

@@ -20,7 +20,7 @@ const TermsAndConditions: React.FC = () => {
   const history = useHistory();
 
   function emailSupport(subject: string) {
-    window.location.href = `mailto:support@urpplus.com?subject=${subject}`;
+    window.location.href = `mailto:support@noboplus.com?subject=${subject}`;
   }
 
   return (
@@ -48,7 +48,7 @@ const TermsAndConditions: React.FC = () => {
             <h3>Terms of Use</h3>
             <h5>Welcome to URP+!</h5>
             These Terms of Use (“Terms”) govern your access and use of URP+’s
-            Software (“Software”), the URP+ website located at https://urpplus.com
+            Software (“Software”), the URP+ website located at https://noboplus.com
             (the “Website”), including any content, functionality, and services offered
             on or through the Software and/or Website (both collectively referred to as
             the “Service”) on the Internet or in cellular media whether as a guest or
@@ -57,7 +57,7 @@ const TermsAndConditions: React.FC = () => {
             you. It is therefore recommended that you carefully read these Terms.
             When you create a URP+ account or use, visit, or access the URP+
             Service you agree to these terms. These Terms include the URP+ Privacy
-            Policy [https://www.urpplus.com/privacy-policy the terms and conditions
+            Policy [https://www.noboplus.com/privacy-policy the terms and conditions
             of which are incorporated herein by this reference.
             If you do not agree to these Terms or any of its parts, please immediately
             discontinue your use of the Service.
@@ -83,24 +83,24 @@ const TermsAndConditions: React.FC = () => {
             <h5>THE LICENSE</h5>
             URP+ hereby grants you a non-exclusive, time-limited, non-transferable,
             non-sub-licensable, revocable license to use the Service (including the
-            Software) for non-commercial purposes, subject to these Terms.
+            Software) for non-commercial pnobooses, subject to these Terms.
             <h5>USING THE SERVICE</h5>
-            You may use the Service solely for private and personal purposes. You
+            You may use the Service solely for private and personal pnobooses. You
             may not use the Service commercially. For example, you may not: (i) offer
             to third parties a service of your own that uses the Service; (ii) resell the
             Service; (iii) offer to rent or lease the Service; or (iv) offer the Service to the
             public via communication or integrate it within a service of your own,
             without the prior written consent of URP+. For clarity, the examples listed
-            are made for illustrative purposes only; they do not constitute an exhaustive
+            are made for illustrative pnobooses only; they do not constitute an exhaustive
             list of restricted activities involving the Service.
             You may not copy, print, save or otherwise use data from the Site or the
             Service’s database. This clause does not limit the use of the database as
-            intended by the Software and for the purposes of private and personal use
+            intended by the Software and for the pnobooses of private and personal use
             of the Service.
             When using the Service you may not engage in scraping, data mining,
             harvesting, screen scraping, data aggregating, and indexing. You agree
             that you will not use any robot, spider, scraper or other automated means
-            to access the Website or the Service’s database for any purpose without
+            to access the Website or the Service’s database for any pnoboose without
             the express prior written permission of URP+.
             The Software may not be used in any way that is not expressly permitted
             by these Terms.
@@ -127,7 +127,7 @@ const TermsAndConditions: React.FC = () => {
             you can't create an account for someone else unless you have their
             express permission.
             • You can't do anything unlawful, misleading, or fraudulent or for an
-            illegal or unauthorized purpose.
+            illegal or unauthorized pnoboose.
             • You can't violate (or help or encourage others to violate) these Terms
             or our policies.
             • You can't attempt to create accounts or access or collect
@@ -216,7 +216,7 @@ const TermsAndConditions: React.FC = () => {
             Content.
             “URP+”, the URP+ logo, and other trade and/or service marks are the
             property of URP+ or its affiliates and you may not use such logos or marks
-            for any purpose that is not expressly authorized in these Terms without the
+            for any pnoboose that is not expressly authorized in these Terms without the
             prior written consent of URP+.
             The design, trade dress, and the ‘look and feel’ of the website and the
             Service are protected works under applicable copyright laws and URP+
@@ -268,7 +268,7 @@ const TermsAndConditions: React.FC = () => {
             challenged material from the website or Service. For clarity, only DMCA
             notices should go to the Copyright Agent; any other feedback, comments,
             requests for technical support, and other communications should be
-            directed to URP+ customer service through support@urpplus.com. You
+            directed to URP+ customer service through support@noboplus.com. You
             acknowledge that if you fail to comply with all of the requirements of this
             Section 5(A), your DMCA notice may not be valid.
             <h5>LIMITATION OF LIABILITY AND WARRANTY</h5>

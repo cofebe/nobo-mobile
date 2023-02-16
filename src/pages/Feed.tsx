@@ -215,7 +215,7 @@ const Feed: React.FC = () => {
   //}
 
   // const Popover = () => (
-  //   <IonContent className="urp-filter">
+  //   <IonContent className="nobo-filter">
   //     <IonSelectOption className="" onClick={ (e) => { e.preventDefault(); setFilter("sports"); filterFeed("sports"); dismiss(); }}>By Sports</IonSelectOption>
   //     <IonContent className="ion-padding" onClick={ (e) => { e.preventDefault(); setFilter("coaches"); filterFeed("coaches"); dismiss(); }}>Coaches</IonContent>
   //     <IonContent className="ion-padding" onClick={ (e) => { e.preventDefault(); setFilter("athletes"); filterFeed("athletes"); dismiss(); }}>Athletes</IonContent>
@@ -253,7 +253,7 @@ const Feed: React.FC = () => {
             {messages?.length ? (
               <IonList
                 lines="none"
-                className="urp-list-background"
+                className="nobo-list-background"
                 style={{ paddingBottom: '2em' }}
               >
                 {messages.map((m) => {
@@ -330,12 +330,12 @@ const Feed: React.FC = () => {
               </>
             )}
           </IonCol>
-          <IonCol className="urp-desktop">
-            <IonList lines="none" className="urp-list-background">
-              <div className="urp-desktop-messages" key="messages">
+          <IonCol className="nobo-desktop">
+            <IonList lines="none" className="nobo-list-background">
+              <div className="nobo-desktop-messages" key="messages">
                 <h3>Messages</h3>
               </div>
-              <div className="urp-desktop-notifications" key="notifications">
+              <div className="nobo-desktop-notifications" key="notifications">
                 <h3>Notifications</h3>
               </div>
             </IonList>

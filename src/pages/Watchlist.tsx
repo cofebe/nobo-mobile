@@ -134,8 +134,8 @@ const Watchlist: React.FC = () => {
             />
           </div>
         </IonHeader>
-        <IonList className="urp-list-background"></IonList>
-        <IonList className="urp-list-background">
+        <IonList className="nobo-list-background"></IonList>
+        <IonList className="nobo-list-background">
           {messages.map((m, i) => (
             <WatchListItem key={m.user_id + 1} notes={notes[i]} profile={m} />
           ))}

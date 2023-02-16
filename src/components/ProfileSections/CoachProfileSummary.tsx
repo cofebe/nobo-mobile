@@ -33,7 +33,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             alt="football"
             style={{ height: '1.3rem' }}
             className="logo-image"
-            src="assets/images/urp-badge-football.svg"
+            src="assets/images/nobo-badge-football.svg"
           />
         );
       case 'wbasketball':
@@ -42,7 +42,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             alt="basketball"
             style={{ height: '1.3rem' }}
             className="logo-image"
-            src="assets/images/urp-badge-basketball.svg"
+            src="assets/images/nobo-badge-basketball.svg"
           />
         );
       case 'mbasketball':
@@ -51,7 +51,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             alt="basketball"
             style={{ height: '1.3rem' }}
             className="logo-image"
-            src="assets/images/urp-badge-basketball.svg"
+            src="assets/images/nobo-badge-basketball.svg"
           />
         );
       case 'baseball':
@@ -60,7 +60,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             alt="baseball"
             style={{ height: '1.3rem' }}
             className="logo-image"
-            src="assets/images/urp-badge-softball.svg"
+            src="assets/images/nobo-badge-softball.svg"
           />
         );
       case 'msoccer':
@@ -69,7 +69,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             alt="soccer"
             style={{ height: '1.3rem' }}
             className="logo-image"
-            src="assets/images/urp-badge-soccer.svg"
+            src="assets/images/nobo-badge-soccer.svg"
           />
         );
       case 'wsoccer':
@@ -78,7 +78,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             alt="soccer"
             style={{ height: '1.3rem' }}
             className="logo-image"
-            src="assets/images/urp-badge-soccer.svg"
+            src="assets/images/nobo-badge-soccer.svg"
           />
         );
       case 'mvolleyball':
@@ -87,7 +87,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             alt="volleyball"
             style={{ height: '1.3rem' }}
             className="logo-image"
-            src="assets/images/urp-badge-volleyball.svg"
+            src="assets/images/nobo-badge-volleyball.svg"
           />
         );
       case 'wvolleyball':
@@ -96,7 +96,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             alt="volleyball"
             style={{ height: '1.3rem' }}
             className="logo-image"
-            src="assets/images/urp-badge-volleyball.svg"
+            src="assets/images/nobo-badge-volleyball.svg"
           />
         );
       case 'wlacrosse':
@@ -105,7 +105,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             alt="lacrosse"
             style={{ height: '1.3rem' }}
             className="logo-image"
-            src="assets/images/urp-badge-lacrosse.svg"
+            src="assets/images/nobo-badge-lacrosse.svg"
           />
         );
       case 'mlacrosse':
@@ -114,7 +114,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             alt="lacrosse"
             style={{ height: '1.3rem' }}
             className="logo-image"
-            src="assets/images/urp-badge-lacrosse.svg"
+            src="assets/images/nobo-badge-lacrosse.svg"
           />
         );
       case 'softball':
@@ -123,7 +123,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             alt="softball"
             style={{ height: '1.3rem' }}
             className="logo-image"
-            src="assets/images/urp-badge-softball.svg"
+            src="assets/images/nobo-badge-softball.svg"
           />
         );
       default:
@@ -144,7 +144,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
               <div>{profile.fromName}</div>
               <div
                 style={{ paddingTop: '0.5rem' }}
-                className={`urp-location-pin
+                className={`nobo-location-pin
                 }`}
               >
                 <svg
@@ -170,19 +170,19 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             </IonCol>
             <IonCol size="2" style={{ paddingTop: !myProfile && '12px' }}>
               <ProfileActionMenu openSocialShare={openSocialShare} />
-              <span className="urp-horizontal-badge-overlap">
-                <span className="urp-main-badge">
+              <span className="nobo-horizontal-badge-overlap">
+                <span className="nobo-main-badge">
                   {renderSportBadge(profile.sport)}
                 </span>
                 {/* {myProfile.otherSports &&
                   myProfile.otherSports.map((sport) => {
                     return (
-                      <span key={sport} className="urp-badge">
+                      <span key={sport} className="nobo-badge">
                         <img
                           alt={sport}
                           style={{ height: "1.3rem" }}
                           className="logo-image"
-                          src={`assets/images/urp-badge-${sport}.svg`}
+                          src={`assets/images/nobo-badge-${sport}.svg`}
                         />
                       </span>
                     );
@@ -207,12 +207,12 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
               <IonCol
                 className={
                   profile.data.length < 1
-                    ? 'profile-summary-padding urp-no-bio-height'
+                    ? 'profile-summary-padding nobo-no-bio-height'
                     : 'profile-summary-padding'
                 }
                 size="12"
               >
-                <IonItem className="urp-profile-summary-row noselect">
+                <IonItem className="nobo-profile-summary-row noselect">
                   <IonGrid
                     style={{
                       padding: '0',
@@ -221,14 +221,14 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
                       width: '100%',
                     }}
                   >
-                    <IonRow className="urp-profile-stats-top">
+                    <IonRow className="nobo-profile-stats-top">
                       <IonCol
                         style={{ paddingLeft: 0, paddingRight: 0 }}
                         size="3"
                         offset="3"
                       >
-                        <div className="urp-profile-stats-header">COACH</div>
-                        <div className="urp-profile-stats-value">
+                        <div className="nobo-profile-stats-header">COACH</div>
+                        <div className="nobo-profile-stats-value">
                           {profile?.position}
                         </div>
                       </IonCol>
@@ -236,8 +236,8 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
                         style={{ paddingLeft: 0, paddingRight: 0 }}
                         size="3"
                       >
-                        <div className="urp-profile-stats-header">SCHOOL</div>
-                        <div className="urp-profile-stats-value">
+                        <div className="nobo-profile-stats-header">SCHOOL</div>
+                        <div className="nobo-profile-stats-value">
                           {profile?.school}
                         </div>
                       </IonCol>
@@ -245,12 +245,12 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
                   </IonGrid>
                 </IonItem>
                 {profile.data ? (
-                  <div className="urp-profile-bio">
+                  <div className="nobo-profile-bio">
                     {profile.data.length > previewCharLen && previewMode
                       ? profile.data.substring(0, previewCharLen) + '...'
                       : profile.data}
                     <div
-                      className="urp-more-arrow"
+                      className="nobo-more-arrow"
                       style={{
                         width: '80vw',
                         textAlign: 'center',
@@ -310,8 +310,8 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
           <div className="name-location">
             <div className="name">{profile.fromName}</div>
             <div className="location">
-              {/*<p className="urp-active-time">Active 2hrs ago</p>*/}
-              <div className="urp-location-pin">
+              {/*<p className="nobo-active-time">Active 2hrs ago</p>*/}
+              <div className="nobo-location-pin">
                 <svg
                   width="9"
                   height="13"
@@ -335,7 +335,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
             </div>
           </div>
           <div className="stats">
-            <IonItem className="urp-profile-summary-row noselect">
+            <IonItem className="nobo-profile-summary-row noselect">
               <IonGrid
                 style={{
                   padding: '0',
@@ -344,16 +344,16 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
                   width: '100%',
                 }}
               >
-                <IonRow className="urp-profile-stats-top">
+                <IonRow className="nobo-profile-stats-top">
                   <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} size="2">
-                    <div className="urp-profile-stats-header">COACH</div>
-                    <div className="urp-profile-stats-value">
+                    <div className="nobo-profile-stats-header">COACH</div>
+                    <div className="nobo-profile-stats-value">
                       {profile?.position}
                     </div>
                   </IonCol>
                   <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} size="2">
-                    <div className="urp-profile-stats-header">SCHOOL</div>
-                    <div className="urp-profile-stats-value">
+                    <div className="nobo-profile-stats-header">SCHOOL</div>
+                    <div className="nobo-profile-stats-value">
                       {profile?.school}
                     </div>
                   </IonCol>
@@ -366,7 +366,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
         ''
       )}
       {isPlatform('desktop') && profile.data ? (
-        <div className="desktop-only urp-profile-bio">{profile.data}</div>
+        <div className="desktop-only nobo-profile-bio">{profile.data}</div>
       ) : (
         ''
       )}

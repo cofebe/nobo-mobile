@@ -895,7 +895,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
     let validationResults = validateSignup(req);
     if (validationResults.valid) {
       console.log('Validation Valid: ', validationResults);
-      let spinner = document.querySelectorAll('.urp-spinner-container');
+      let spinner = document.querySelectorAll('.nobo-spinner-container');
       spinner[0].classList.add('active');
 
       userService
@@ -991,7 +991,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
     let validationResults = validateSignup(req);
     if (validationResults.valid) {
       console.log('Validation Valid: ', validationResults);
-      let spinner = document.querySelectorAll('.urp-spinner-container');
+      let spinner = document.querySelectorAll('.nobo-spinner-container');
       spinner[0].classList.add('active');
 
       organizationService
@@ -1096,16 +1096,16 @@ const SignUpOrganization: React.FC<Props> = (props) => {
   return (
     <IonPage
       id="sign-up-athlete-page"
-      className="urp-page sign-up-athlete-page"
+      className="nobo-page sign-up-athlete-page"
     >
       <div className="square-logo-desktop">
-        <img src="assets/images/urp-box-logo.png" alt="logo" />
+        <img src="assets/images/nobo-box-logo.png" alt="logo" />
       </div>
       <div className="header-desktop">
         <div></div>
       </div>
       {toggleCropper && (
-        <div className="urp-image-cropper">
+        <div className="nobo-image-cropper">
           <span
             onClick={(e) => {
               e.preventDefault();
@@ -1114,7 +1114,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
           >
             X
           </span>
-          <span className="urp-crop-header-text" style={{ color: 'FFFFFF' }}>
+          <span className="nobo-crop-header-text" style={{ color: 'FFFFFF' }}>
             Crop your profile photo
           </span>
           <span
@@ -1127,7 +1127,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
           </span>
           {/* <SwipeIcon></SwipeIcon> */}
           <Cropper
-            className="urp-profile-pic-cropper"
+            className="nobo-profile-pic-cropper"
             // src="https://static.clubs.nfl.com/image/private/t_editorial_landscape_8_desktop_mobile/f_auto/packers/nczkr5s3xzqebndsu9uk.jpg"
             src={`data:image/png;base64,${profilePicData?.base64String}`}
             // CropperJS options
@@ -1146,7 +1146,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
         </div>
       )}
       {toggleCropperBanner && (
-        <div className="urp-image-cropper">
+        <div className="nobo-image-cropper">
           <span
             onClick={(e) => {
               e.preventDefault();
@@ -1155,7 +1155,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
           >
             X
           </span>
-          <span className="urp-crop-header-text" style={{ color: '#FFFFFF' }}>
+          <span className="nobo-crop-header-text" style={{ color: '#FFFFFF' }}>
             Crop your banner photo
           </span>
           <span
@@ -1168,7 +1168,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
           </span>
           {/* <SwipeIcon></SwipeIcon> */}
           <Cropper
-            className="urp-banner-pic-cropper"
+            className="nobo-banner-pic-cropper"
             // src="https://static.clubs.nfl.com/image/private/t_editorial_landscape_8_desktop_mobile/f_auto/packers/nczkr5s3xzqebndsu9uk.jpg"
             src={`data:image/png;base64,${bannerPicData?.base64String}`}
             // CropperJS options
@@ -1193,12 +1193,12 @@ const SignUpOrganization: React.FC<Props> = (props) => {
           style={{ paddingTop: props.editMode ? '' : '40px' }}
         >
           {!props.editMode && (
-            <div className="urp-custom-progress-bar">
-              <div className="urp-progress-label">{progressStep.section}</div>
-              <div className="urp-progress-graphic">
+            <div className="nobo-custom-progress-bar">
+              <div className="nobo-progress-label">{progressStep.section}</div>
+              <div className="nobo-progress-graphic">
                 <div style={{ width: progressPercentage }}></div>
               </div>
-              <div className="urp-progress-count">
+              <div className="nobo-progress-count">
                 {progressStep.step}/{totalProgressItemCount}
               </div>
             </div>
@@ -1210,21 +1210,21 @@ const SignUpOrganization: React.FC<Props> = (props) => {
             {!props.editMode && (
               <IonBackButton
                 text="&nbsp;  Create Organization"
-                className="urp-nav-text"
+                className="nobo-nav-text"
               ></IonBackButton>
             )}
             {props.editMode && (
               <IonBackButton
                 text="&nbsp;  Edit Trainer Profile"
-                className="urp-nav-text"
+                className="nobo-nav-text"
               ></IonBackButton>
             )}
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent id="signup-sections" className="urp-content-area">
-        <div className="urp-spinner-container">
-          <IonSpinner className="urp-spinner" name="bubbles" />
+      <IonContent id="signup-sections" className="nobo-content-area">
+        <div className="nobo-spinner-container">
+          <IonSpinner className="nobo-spinner" name="bubbles" />
         </div>
         <IonList>
           <div className="toolbar-desktop">
@@ -1241,25 +1241,25 @@ const SignUpOrganization: React.FC<Props> = (props) => {
               </span>
             </div>
           </div>
-          <IonAccordionGroup className="urp-section-group">
-            <div className="urp-section">
+          <IonAccordionGroup className="nobo-section-group">
+            <div className="nobo-section">
               <IonAccordion id="basic-info" value="basic-info">
                 <IonItem
                   lines="none"
                   slot="header"
                   style={{ class: 'item-inner' }}
-                  className="urp-section-head"
+                  className="nobo-section-head"
                   onClick={(e) => scollToSection('basic-info')}
                 >
-                  <span className="urp-step-num">1</span>
-                  <h5 className="urp-section-title required">
+                  <span className="nobo-step-num">1</span>
+                  <h5 className="nobo-section-title required">
                     Basic Information
                   </h5>
                 </IonItem>
 
-                <IonList className="urp-list-input" slot="content">
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                <IonList className="nobo-list-input" slot="content">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Organization Name
                     </IonLabel>
 
@@ -1273,11 +1273,11 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                       required
                     ></IonInput>
                   </IonItem>
-                  <IonItem className="urp-input" lines="none">
+                  <IonItem className="nobo-input" lines="none">
                     <IonRow>
                       <IonCol>
                         <IonLabel
-                          className="urp-signup-label"
+                          className="nobo-signup-label"
                           position="stacked"
                         >
                           Profile Picture
@@ -1295,7 +1295,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                           ></IonIcon>
                           {profilePicPreview !== '' && (
                             <div
-                              className="urp-preview-profile-pic"
+                              className="nobo-preview-profile-pic"
                               style={{
                                 background: `url(${profilePicPreview})`,
                                 backgroundSize: 'contain',
@@ -1305,7 +1305,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                         </IonFabButton>
                         <a
                           href="#"
-                          className="urp-upload-photo"
+                          className="nobo-upload-photo"
                           onClick={(e) => {
                             e.preventDefault();
                             uploadProfilePic();
@@ -1321,8 +1321,8 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                       </IonCol>
                     </IonRow>
                   </IonItem>
-                  <IonItem className="urp-input" lines="none">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="none">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Banner Picture
                     </IonLabel>
                     {bannerPicPreview === '' && (
@@ -1332,7 +1332,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                           uploadBannerPic();
                         }}
                         color={btnColor}
-                        className="urp-upload-btn"
+                        className="nobo-upload-btn"
                         style={{
                           display: 'block',
                           marginLeft: '0',
@@ -1350,7 +1350,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                     )}
                     {bannerPicPreview !== '' && (
                       <div
-                        className="urp-banner-pic-previewer"
+                        className="nobo-banner-pic-previewer"
                         onClick={(e) => {
                           e.preventDefault();
                           uploadBannerPic();
@@ -1363,14 +1363,14 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                       ></div>
                     )}
                     <span
-                      className="urp-optional"
+                      className="nobo-optional"
                       style={{ paddingTop: 6, paddingLeft: '2px !important' }}
                     >
                       Banner picture must be in standard format .png, .jpeg
                     </span>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Organization Type
                     </IonLabel>
                     <UrpSelect
@@ -1383,8 +1383,8 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                     />
                   </IonItem>
 
-{/*                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+{/*                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       School / Organization
                     </IonLabel>
                     <IonInput
@@ -1446,8 +1446,8 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                       </IonList>
                     </IonPopover>
                   </IonItem>*/}
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Country
                     </IonLabel>
                     <UrpSelect
@@ -1459,8 +1459,8 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                       })}
                     />
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       State
                     </IonLabel>
                     <UrpSelect
@@ -1472,8 +1472,8 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                       })}
                     />
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       City
                     </IonLabel>
                     <IonInput
@@ -1486,8 +1486,8 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                       required
                     ></IonInput>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Bio
                     </IonLabel>
                     <IonTextarea
@@ -1519,7 +1519,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                     SignUpOrganization();
                   }}
                   color={btnColor}
-                  className="urp-green-btn"
+                  className="nobo-green-btn"
                 >
                   Lets Go!
                 </IonButton>
@@ -1539,7 +1539,7 @@ const SignUpOrganization: React.FC<Props> = (props) => {
                     editOrganization();
                   }}
                   color={btnColor}
-                  className="urp-green-btn"
+                  className="nobo-green-btn"
                 >
                   Save
                 </IonButton>

@@ -167,8 +167,8 @@ const NILDealsSection: React.FC<NILDealsSectionProps> = ({
 
   return (
     <div
-      id="urp-nil-deals-section"
-      className={'urp-nil-deals-section ' + className}
+      id="nobo-nil-deals-section"
+      className={'nobo-nil-deals-section ' + className}
     >
       <IonContent style={{ fontSize: '10px' }}>
         <div
@@ -430,7 +430,7 @@ const NILDealsSection: React.FC<NILDealsSectionProps> = ({
               </IonItem>
               <IonItem style={{ fontSize: '12px' }} lines="full">
                 <IonLabel position="stacked">
-                  Source Link <span className="urp-optional">Optional</span>
+                  Source Link <span className="nobo-optional">Optional</span>
                 </IonLabel>
 
                 <IonItem
@@ -462,7 +462,7 @@ const NILDealsSection: React.FC<NILDealsSectionProps> = ({
               </IonItem>
               <IonItem style={{ fontSize: '12px' }} lines="full">
                 <IonLabel position="stacked">
-                  Description <span className="urp-optional">Optional</span>
+                  Description <span className="nobo-optional">Optional</span>
                 </IonLabel>
                 <IonItem
                   style={{

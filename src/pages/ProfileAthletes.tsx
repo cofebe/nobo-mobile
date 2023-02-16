@@ -126,7 +126,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         subscriptionService = new SubscriptionService(new InAppPurchase2());
         subscriptionService.register();
         setUserSubscribed(
-          subscriptionService.isSubscribed('com.urp.athlete.1month')
+          subscriptionService.isSubscribed('com.nobo.athlete.1month')
         );
       }
     };
@@ -201,7 +201,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
 
   function showReportingActionSheet() {
     presentProfileReportingActionSheet({
-      cssClass: 'urp-action-sheet',
+      cssClass: 'nobo-action-sheet',
       header: 'Report User',
       //subHeader: 'Subheader',
       buttons: [
@@ -297,7 +297,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
 
   function openShare() {
     present({
-      cssClass: 'urp-action-sheet',
+      cssClass: 'nobo-action-sheet',
       buttons: [
         {
           text: 'Report',
@@ -394,7 +394,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
   }
 
   function updateActionMenu() {
-    setProfileURL(`https://www.urpplus.com/home/athlete-profile/${userId}`);
+    setProfileURL(`https://www.noboplus.com/home/athlete-profile/${userId}`);
     console.log('Profile URL: ', profileURL);
   }
 
@@ -544,7 +544,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
           updateActionMenu();
 
           if (!profileAthlete.myProfile) {
-            let nextURL = `https://www.urpplus.com/home/athlete-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
+            let nextURL = `https://www.noboplus.com/home/athlete-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
             if (window.location.origin.includes('localhost')) {
               nextURL = `http://localhost:3000/home/athlete-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
             }
@@ -594,7 +594,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
           <IonContent className="ion-padding">
             <QrCode value={profileURL} name={athleteProfile.fromName}></QrCode>
             <IonButton
-              className="urp-qr-code-btn-close"
+              className="nobo-qr-code-btn-close"
               onClick={() => profileModal.current?.dismiss()}
             >
               Cancel
@@ -614,7 +614,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
             }`}
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
-              currentTarget.src = '../../assets/images/urp-default-banner.png';
+              currentTarget.src = '../../assets/images/nobo-default-banner.png';
             }}
             src={athleteProfile.profilePic}
             alt="avatar"
@@ -634,7 +634,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
                 }}
                 fill="clear"
                 color="#1A3A35"
-                className="urp-edit-profile-button"
+                className="nobo-edit-profile-button"
               >
                 Edit Profile
               </IonButton>
@@ -649,7 +649,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
           </div>
 
           <div>
-            <div className="urp-social-tops">
+            <div className="nobo-social-tops">
               {athleteProfile.socialLinks &&
                 athleteProfile.socialLinks.includes('247sports.com') && (
                   <Sports247Icon
@@ -769,8 +769,8 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
           </div>
         </div>
 
-        <div className="urp-menu-container">
-          <div className="urp-menu-container-shadow">
+        <div className="nobo-menu-container">
+          <div className="nobo-menu-container-shadow">
             <Swiper
               spaceBetween={1}
               slidesPerView={4}
@@ -792,7 +792,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
                 >
                   <span
                     className={
-                      'urp-tab-menu-item ' +
+                      'nobo-tab-menu-item ' +
                       (targetSection === s.state ? 'selected' : '')
                     }
                   >
@@ -806,7 +806,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'Highlights' && (
           <HighlightsSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll urp-highlight-video-container"
+            className="nobo-profile-section nobo-profile-section-scroll nobo-highlight-video-container"
             data={{ title: 'Highlights Title' }}
             highlights={athleteProfile.highlights}
             myProfile={profileAthlete.myProfile}
@@ -817,7 +817,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'Stats' && (
           <StatsSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             profile={athleteProfile}
             myProfile={profileAthlete.myProfile}
           ></StatsSection>
@@ -825,7 +825,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'Academics' && (
           <AcademicsSection
             userId={userId}
-            className="urp-academics-section urp-profile-section urp-profile-section-scroll"
+            className="nobo-academics-section nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Academic Title' }}
             academicData={academicsData}
             myProfile={profileAthlete.myProfile}
@@ -834,7 +834,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'Offers' && (
           <OffersSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Offers Title' }}
             offers={athleteProfile.offers}
             myProfile={profileAthlete.myProfile}
@@ -843,7 +843,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'Awards' && (
           <AwardsSection
             userId={userId}
-            className="urp-awards-section urp-profile-section urp-profile-section-scroll"
+            className="nobo-awards-section nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Awards Title' }}
             awardsString={athleteProfile.awards}
             myProfile={profileAthlete.myProfile}
@@ -852,7 +852,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'Measurements' && (
           <MeasurementsSection
             userId={userId}
-            className="urp-measurement-section urp-profile-section urp-profile-section-scroll"
+            className="nobo-measurement-section nobo-profile-section nobo-profile-section-scroll"
             measurementData={measurementData}
             data={{ title: 'Measurements Title' }}
             myProfile={profileAthlete.myProfile}
@@ -861,7 +861,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'Experience' && (
           <ExperienceSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Experience Title' }}
             sport={athleteProfile.sport}
             experiencesString={athleteProfile.experiences}
@@ -871,7 +871,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'Praise' && (
           <PraiseSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Praise Title' }}
             myProfile={profileAthlete.myProfile}
           ></PraiseSection>
@@ -879,7 +879,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'Posts' && (
           <PostsSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Posts Title' }}
             myProfile={profileAthlete.myProfile}
             userType="athlete"
@@ -888,7 +888,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'GameSchedule' && (
           <GameScheduleSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             profile={athleteProfile}
             myProfile={profileAthlete.myProfile}
           ></GameScheduleSection>
@@ -896,7 +896,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'Articles' && (
           <ArticlesSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Articles Title' }}
             myProfile={profileAthlete.myProfile}
             userType="athlete"
@@ -905,7 +905,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'NILDeals' && (
           <NILDealsSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'NIL Deals Title' }}
             myProfile={profileAthlete.myProfile}
             userType="athlete"
@@ -914,7 +914,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         {targetSection === 'PersonalTraining' && (
           <PersonalTrainingSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Personal Training Title' }}
             myProfile={profileAthlete.myProfile}
             userType="athlete"

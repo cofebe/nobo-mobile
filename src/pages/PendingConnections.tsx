@@ -104,7 +104,7 @@ const PendingConnections: React.FC = () => {
 
 
   return (
-    <IonPage className="urp-page">
+    <IonPage className="nobo-page">
       <IonHeader>
         <IonToolbar
           style={{

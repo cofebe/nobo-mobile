@@ -161,8 +161,8 @@ const ArticlesSection: React.FC<ArticlesSectionProps> = ({
 
   return (
     <div
-      id="urp-article-section"
-      className={'urp-article-section ' + className}
+      id="nobo-article-section"
+      className={'nobo-article-section ' + className}
     >
       <IonContent style={{ fontSize: '10px' }}>
         <div

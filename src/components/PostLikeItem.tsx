@@ -37,7 +37,7 @@ const PostLikeItem: React.FC<PostLikeItemProps> = ({ postId, like }) => {
               }}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = "../../assets/images/urp_logo_round.svg";
+                currentTarget.src = "../../assets/images/nobo_logo_round.svg";
               }}
               src={likeItem.profile_image}
               alt="avatar"
@@ -48,7 +48,7 @@ const PostLikeItem: React.FC<PostLikeItemProps> = ({ postId, like }) => {
           className="feed-content feed-content-center"
           size="7">
             <div>
-              <h2 className="feed-list-urp-badge-line">
+              <h2 className="feed-list-nobo-badge-line">
                 <p className="feed-list-feed-name">{likeItem.from_name}</p>
               </h2>
             </div>
@@ -57,12 +57,12 @@ const PostLikeItem: React.FC<PostLikeItemProps> = ({ postId, like }) => {
           className="feed-content-center feed-content-right"
           size="4">
             <div style={{width: "100%"}}>
-              <h2 className="feed-list-urp-badge-line">
+              <h2 className="feed-list-nobo-badge-line">
                 <span>
                   {likeItem.account_type === 'athlete' ? (
                     <img
                       className="feed-list-logo-image"
-                      src={`assets/images/urp-badge-${likeItem.sport}.svg`}
+                      src={`assets/images/nobo-badge-${likeItem.sport}.svg`}
                       alt={likeItem.sport}
                     />
                   ) : ''}

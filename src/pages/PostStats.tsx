@@ -124,10 +124,10 @@ const PostStats: React.FC = () => {
         <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
-        <IonList className="urp-post-detail-background">
-          <IonItem className="urp-post-stats-header-row">
+        <IonList className="nobo-post-detail-background">
+          <IonItem className="nobo-post-stats-header-row">
             <div>
-              <div className="urp-post-stats-header-select" onClick={(e) => {
+              <div className="nobo-post-stats-header-select" onClick={(e) => {
                 showActionSheet();
               }}>
                 {age > 0 ? `Last ${age} Day${age > 1 ? 's' : ''}` : 'All Time'}
@@ -135,38 +135,38 @@ const PostStats: React.FC = () => {
               </div>
             </div>
             <div>
-              <div className="urp-post-stats-header-dates">
+              <div className="nobo-post-stats-header-dates">
                 {/*May 10 - May 23*/}
               </div>
             </div>
           </IonItem>
-          <IonItem className="urp-post-stats-item">
-            <IonLabel className="urp-post-stats-label">Impressions</IonLabel>
-            <IonNote className="urp-post-stats-value">{stats?.impressions === undefined ? '' : stats?.impressions || 0}</IonNote>
+          <IonItem className="nobo-post-stats-item">
+            <IonLabel className="nobo-post-stats-label">Impressions</IonLabel>
+            <IonNote className="nobo-post-stats-value">{stats?.impressions === undefined ? '' : stats?.impressions || 0}</IonNote>
           </IonItem>
-          <IonItem className="urp-post-stats-item">
-            <IonLabel className="urp-post-stats-label">Profile visits</IonLabel>
-            <IonNote className="urp-post-stats-value">{stats?.profile_visits === undefined ? '' : stats?.profile_visits || 0}</IonNote>
+          <IonItem className="nobo-post-stats-item">
+            <IonLabel className="nobo-post-stats-label">Profile visits</IonLabel>
+            <IonNote className="nobo-post-stats-value">{stats?.profile_visits === undefined ? '' : stats?.profile_visits || 0}</IonNote>
           </IonItem>
           {/*
-          <IonItem className="urp-post-stats-item">
-            <IonLabel className="urp-post-stats-label">Mentions</IonLabel>
-            <IonNote className="urp-post-stats-value">{stats?.mentions === undefined ? '' : stats?.mentions || 0}</IonNote>
+          <IonItem className="nobo-post-stats-item">
+            <IonLabel className="nobo-post-stats-label">Mentions</IonLabel>
+            <IonNote className="nobo-post-stats-value">{stats?.mentions === undefined ? '' : stats?.mentions || 0}</IonNote>
           </IonItem>
           */}
           {/*
-          <IonItem className="urp-post-stats-item">
-            <IonLabel className="urp-post-stats-label">Followers</IonLabel>
-            <IonNote className="urp-post-stats-value">{stats?.follows === undefined ? '' : stats?.follows || 0}</IonNote>
+          <IonItem className="nobo-post-stats-item">
+            <IonLabel className="nobo-post-stats-label">Followers</IonLabel>
+            <IonNote className="nobo-post-stats-value">{stats?.follows === undefined ? '' : stats?.follows || 0}</IonNote>
           </IonItem>
           */}
-          <IonItem className="urp-post-stats-item">
-            <IonLabel className="urp-post-stats-label">Likes</IonLabel>
-            <IonNote className="urp-post-stats-value">{stats?.likes === undefined ? '' : stats?.likes || 0}</IonNote>
+          <IonItem className="nobo-post-stats-item">
+            <IonLabel className="nobo-post-stats-label">Likes</IonLabel>
+            <IonNote className="nobo-post-stats-value">{stats?.likes === undefined ? '' : stats?.likes || 0}</IonNote>
           </IonItem>
-          <IonItem className="urp-post-stats-item">
-            <IonLabel className="urp-post-stats-label">Comments</IonLabel>
-            <IonNote className="urp-post-stats-value">{stats?.comments === undefined ? '' : stats?.comments || 0}</IonNote>
+          <IonItem className="nobo-post-stats-item">
+            <IonLabel className="nobo-post-stats-label">Comments</IonLabel>
+            <IonNote className="nobo-post-stats-value">{stats?.comments === undefined ? '' : stats?.comments || 0}</IonNote>
           </IonItem>
         </IonList>
       </IonContent>

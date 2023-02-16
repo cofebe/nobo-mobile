@@ -429,7 +429,7 @@ const HighlightsSection: React.FC<HighlightsSectionProps> = ({
 
   if (showHighlight && allHighlights?.length > 0) {
     return (
-      <div className={'highlights-section urp-profile-section-mobile ' + className}>
+      <div className={'highlights-section nobo-profile-section-mobile ' + className}>
         <IonContent scrollY={false}>
           <div style={{ paddingBottom: '60px' }}>
             {allHighlights?.map((singleHiglight) => {
@@ -437,12 +437,12 @@ const HighlightsSection: React.FC<HighlightsSectionProps> = ({
                 validUrlRegex.test(singleHiglight.url) && (
                   <>
                     <div
-                      className="urp-highlight-video-container"
+                      className="nobo-highlight-video-container"
                       style={{ marginBottom: '10px' }}
                     >
                       <iframe
                         style={{ pointerEvents: isHovered ? 'none' : 'auto' }}
-                        className="urp-highlight-video"
+                        className="nobo-highlight-video"
                         src={embedLink(singleHiglight.url)}
                         title="Highlight video"
                       ></iframe>
@@ -597,11 +597,11 @@ const HighlightsSection: React.FC<HighlightsSectionProps> = ({
                 <IonItem lines="none">
                   {validUrlRegex.test(addHighlightPreview) && (
                     <div
-                      className="urp-highlight-video-container"
+                      className="nobo-highlight-video-container"
                       style={{ marginBottom: '10px' }}
                     >
                       <iframe
-                        className="urp-highlight-video"
+                        className="nobo-highlight-video"
                         src={embedLink(addHighlightPreview)}
                         title="Highlight video"
                       ></iframe>
@@ -652,8 +652,8 @@ const HighlightsSection: React.FC<HighlightsSectionProps> = ({
   if (!myProfile) {
     return (
       <div className={'highlights-section ' + className}>
-        <div className="urp-highlight-add-media-container">
-          <p className="urp-highlight-add-media-title">
+        <div className="nobo-highlight-add-media-container">
+          <p className="nobo-highlight-add-media-title">
             Uh! Looks like the user hasn't added any highlights yet
           </p>
         </div>
@@ -663,12 +663,12 @@ const HighlightsSection: React.FC<HighlightsSectionProps> = ({
 
   return (
     <div className={'highlights-section ' + className}>
-      <div className="urp-highlight-add-media-container">
-        <p className="urp-highlight-add-media-title">
+      <div className="nobo-highlight-add-media-container">
+        <p className="nobo-highlight-add-media-title">
           Uh! Looks like you haven’t added any highlights to your account yet
         </p>
         <p
-          className="urp-highlight-add-media-text"
+          className="nobo-highlight-add-media-text"
           onClick={(e) => {
             e.preventDefault();
             history.push(`edit-athlete/${userId}`);

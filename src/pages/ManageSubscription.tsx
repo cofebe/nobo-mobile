@@ -72,9 +72,9 @@ const ManageSubscription: React.FC = () => {
       subscriptionPricing = '$14.99';
     } else {
       subscriptionPricing = subscriptionService.getProductPriceString(
-        'com.urp.athlete.1month'
+        'com.nobo.athlete.1month'
       );
-      if (!subscriptionService.getProductPrice('com.urp.athlete.1month')) {
+      if (!subscriptionService.getProductPrice('com.nobo.athlete.1month')) {
         subscriptionPricing = '$14.99';
       }
     }
@@ -84,10 +84,10 @@ const ManageSubscription: React.FC = () => {
       subscriptionPricing = '$29.99';
     } else {
       subscriptionPricing = subscriptionService.getProductPriceString(
-        'com.urp.coachrecruiter.1month'
+        'com.nobo.coachrecruiter.1month'
       );
       if (
-        !subscriptionService.getProductPrice('com.urp.coachrecruiter.1month')
+        !subscriptionService.getProductPrice('com.nobo.coachrecruiter.1month')
       ) {
         subscriptionPricing = '$29.99';
       }
@@ -98,9 +98,9 @@ const ManageSubscription: React.FC = () => {
       subscriptionPricing = '$29.99';
     } else {
       subscriptionPricing = subscriptionService.getProductPriceString(
-        'com.urp.trainer.1month'
+        'com.nobo.trainer.1month'
       );
-      if (!subscriptionService.getProductPrice('com.urp.trainer.1month')) {
+      if (!subscriptionService.getProductPrice('com.nobo.trainer.1month')) {
         subscriptionPricing = '$29.99';
       }
     }
@@ -115,11 +115,11 @@ const ManageSubscription: React.FC = () => {
   useIonViewDidEnter(() => {
     let userSubscriptionId = '';
     if (userType === 'athlete') {
-      userSubscriptionId = 'com.urp.athlete.1month';
+      userSubscriptionId = 'com.nobo.athlete.1month';
     } else if (userType === 'coach') {
-      userSubscriptionId = 'com.urp.coachrecruiter.1month';
+      userSubscriptionId = 'com.nobo.coachrecruiter.1month';
     } else if (userType === 'trainer') {
-      userSubscriptionId = 'com.urp.trainer.1month';
+      userSubscriptionId = 'com.nobo.trainer.1month';
     }
     if (isPlatform('ios') && !environment.disableBrowser) {
       subscriptionService.refreshStore();
@@ -130,11 +130,11 @@ const ManageSubscription: React.FC = () => {
   function subscribe() {
     let userSubscriptionId = '';
     if (userType === 'athlete') {
-      userSubscriptionId = 'com.urp.athlete.1month';
+      userSubscriptionId = 'com.nobo.athlete.1month';
     } else if (userType === 'coach') {
-      userSubscriptionId = 'com.urp.coachrecruiter.1month';
+      userSubscriptionId = 'com.nobo.coachrecruiter.1month';
     } else if (userType === 'trainer') {
-      userSubscriptionId = 'com.urp.trainer.1month';
+      userSubscriptionId = 'com.nobo.trainer.1month';
     }
     if (isPlatform('ios') && !environment.disableBrowser) {
       presentLoading(loadingOptions);
@@ -315,7 +315,7 @@ const ManageSubscription: React.FC = () => {
                 disabled={!isActive || isSubscribed}
                 type="submit"
                 expand="block"
-                className="urp-upgrade-plan-btn"
+                className="nobo-upgrade-plan-btn"
               >
                 {isSubscribed ? 'Subscribed' : 'Upgrade Plan'}
               </IonButton>

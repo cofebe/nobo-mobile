@@ -132,27 +132,27 @@ const ForgotReset: React.FC = () => {
   }
 
   return (
-    <IonPage id="forgot-page" className="urp-page">
+    <IonPage id="forgot-page" className="nobo-page">
       <IonContent>
-        <div className="urp-spinner-login-container">
-          <IonSpinner className="urp-spinner" name="bubbles" />
+        <div className="nobo-spinner-login-container">
+          <IonSpinner className="nobo-spinner" name="bubbles" />
         </div>
         <IonRow className="breather-row">
           <IonCol>
             <img
               className="login-logo"
-              src="assets/images/urp_logo_round.jpg"
+              src="assets/images/nobo_logo_round.jpg"
               width="200"
               height="200"
               alt="logo"
             />
           </IonCol>
         </IonRow>
-        <IonGrid className="urp-desktop-login">
+        <IonGrid className="nobo-desktop-login">
           <IonRow>
             <IonCol offset="1" size="10">
               <IonItem lines="full">
-                <IonLabel className="urp-label" position="floating">
+                <IonLabel className="nobo-label" position="floating">
                   Email
                 </IonLabel>
                 <IonInput
@@ -165,7 +165,7 @@ const ForgotReset: React.FC = () => {
             </IonCol>
             <IonCol offset="1" size="10">
               <IonItem lines="full">
-                <IonLabel className="urp-label" position="floating">
+                <IonLabel className="nobo-label" position="floating">
                   Code
                 </IonLabel>
                 <IonInput
@@ -179,7 +179,7 @@ const ForgotReset: React.FC = () => {
             </IonCol>
             <IonCol offset="1" size="10">
               <IonItem lines="full">
-                <IonLabel className="urp-label" position="floating">
+                <IonLabel className="nobo-label" position="floating">
                   New Password
                 </IonLabel>
                 <IonInput
@@ -192,7 +192,7 @@ const ForgotReset: React.FC = () => {
             </IonCol>
             <IonCol offset="1" size="10">
               <IonItem lines="full">
-                <IonLabel className="urp-label" position="floating">
+                <IonLabel className="nobo-label" position="floating">
                   Confirm Password
                 </IonLabel>
                 <IonInput
@@ -205,7 +205,7 @@ const ForgotReset: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonButton
                 onClick={(e) => {
                   e.preventDefault();
@@ -215,12 +215,12 @@ const ForgotReset: React.FC = () => {
                 disabled={!validate()}
                 type="submit"
                 expand="block"
-                className="urp-login-btn"
+                className="nobo-login-btn"
               >
                 Let's Go!
               </IonButton>
             </IonCol>
-            <IonCol className="urp-center urp-forgot-text" size="11">
+            <IonCol className="nobo-center nobo-forgot-text" size="11">
               Already have an account?{' '}
               <a className="login-sign-up" href="/login">
                 Login

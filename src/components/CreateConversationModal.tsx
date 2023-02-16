@@ -151,7 +151,7 @@ const CreateConversationModal = forwardRef<Ref, CreateConversationModalProps>(({
                         <img
                           onError={({ currentTarget }) => {
                             currentTarget.onerror = null; // prevents looping
-                            currentTarget.src = '../../assets/images/urp_logo_round.svg';
+                            currentTarget.src = '../../assets/images/nobo_logo_round.svg';
                           }}
                           src={conn.profile_image}
                           alt="avatar"

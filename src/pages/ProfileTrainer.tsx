@@ -101,7 +101,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
       subscriptionService = new SubscriptionService(new InAppPurchase2());
       subscriptionService.register();
       setUserSubscribed(
-        subscriptionService.isSubscribed('com.urp.trainer.1month')
+        subscriptionService.isSubscribed('com.nobo.trainer.1month')
       );
     }
 
@@ -150,7 +150,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
 
   function showReportingActionSheet() {
     presentProfileReportingActionSheet({
-      cssClass: 'urp-action-sheet',
+      cssClass: 'nobo-action-sheet',
       header: 'Report User',
       //subHeader: 'Subheader',
       buttons: [
@@ -246,7 +246,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
 
   function openShare() {
     present({
-      cssClass: 'urp-action-sheet',
+      cssClass: 'nobo-action-sheet',
       buttons: [
         {
           text: 'Report',
@@ -340,7 +340,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
   }
 
   function updateActionMenu() {
-    setProfileURL(`https://www.urpplus.com/home/trainer-profile/${userId}`);
+    setProfileURL(`https://www.noboplus.com/home/trainer-profile/${userId}`);
   }
 
   // function showMessage(message: string) {
@@ -436,7 +436,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
           updateActionMenu();
 
           if (!profileTrainer.myProfile) {
-            let nextURL = `https://www.urpplus.com/home/trainer-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
+            let nextURL = `https://www.noboplus.com/home/trainer-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
             if (window.location.origin.includes('localhost')) {
               nextURL = `http://localhost:3000/home/trainer-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
             }
@@ -528,7 +528,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
             }`}
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
-              currentTarget.src = '../../assets/images/urp-default-banner.png';
+              currentTarget.src = '../../assets/images/nobo-default-banner.png';
             }}
             src={trainerProfile.profilePic}
             alt="avatar"
@@ -549,7 +549,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
                 }}
                 fill="clear"
                 color="#1A3A35"
-                className="urp-edit-profile-button"
+                className="nobo-edit-profile-button"
               >
                 Edit Profile
               </IonButton>
@@ -562,7 +562,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
                 }}
                 fill="clear"
                 color="#1A3A35"
-                className="urp-edit-profile-button"
+                className="nobo-edit-profile-button"
               >
                 Watchlist
               </IonButton>
@@ -576,7 +576,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
           </div>
 
           <div>
-            <div className="urp-social-tops">
+            <div className="nobo-social-tops">
               {trainerProfile.socialLinks &&
                 trainerProfile.socialLinks.includes('247sports.com') && (
                   <Sports247Icon
@@ -696,8 +696,8 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
           </div>
         </div>
 
-        <div className="urp-menu-container">
-          <div className="urp-menu-container-shadow">
+        <div className="nobo-menu-container">
+          <div className="nobo-menu-container-shadow">
             <Swiper
               spaceBetween={1}
               slidesPerView={2}
@@ -719,7 +719,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
                 >
                   <span
                     className={
-                      'urp-tab-menu-item ' +
+                      'nobo-tab-menu-item ' +
                       (targetSection === s.state ? 'selected' : '')
                     }
                   >
@@ -733,7 +733,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
         {targetSection === 'Training Experience' && (
           <TrainingExperienceSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             experiencesString={trainerProfile.training_experience}
             myProfile={profileTrainer.myProfile}
             data={{ title: 'Training Experience Title' }}
@@ -742,7 +742,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
         {targetSection === 'Playing Experience' && (
           <PlayingExperienceSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             experiencesString={trainerProfile.playing_experience}
             myProfile={profileTrainer.myProfile}
             data={{ title: 'Playing Experience Title' }}
@@ -751,7 +751,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
         )}
         {targetSection === 'Praise' && (
           <PraiseSection
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Praise Title' }}
           ></PraiseSection>
         )}
@@ -759,7 +759,7 @@ const ProfileTrainer: React.FC<ProfileTrainerProps> = (profileTrainer) => {
           <PostsSection
             userId={userId}
             myProfile={profileTrainer.myProfile}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Posts Title' }}
             userType="trainer"
           ></PostsSection>

@@ -50,7 +50,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.wingspan !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Wingspan</div>
         <div>{measurementData?.wingspan}</div>
       </IonItem>
@@ -62,7 +62,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.vertical !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Vertical</div>
         <div>{measurementData?.vertical}</div>
       </IonItem>
@@ -74,7 +74,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.attackJump !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Attack Jump</div>
         <div>{measurementData?.attackJump}</div>
       </IonItem>
@@ -86,7 +86,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.powerballToss !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Powerball Toss</div>
         <div>{measurementData?.powerballToss}</div>
       </IonItem>
@@ -98,7 +98,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.shotSpeed !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Shot Speed</div>
         <div>{measurementData?.shotSpeed}</div>
       </IonItem>
@@ -110,7 +110,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.tenYardSplit !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Ten Yard Split</div>
         <div>{measurementData?.tenYardSplit}</div>
       </IonItem>
@@ -122,7 +122,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.blockJump !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Block Jump</div>
         <div>{measurementData?.blockJump}</div>
       </IonItem>
@@ -134,7 +134,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.standingReach !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Standing Reach</div>
         <div>{measurementData?.standingReach}</div>
       </IonItem>
@@ -146,7 +146,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.laneAgilityDrill !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Lane Agility Drill</div>
         <div>{measurementData?.laneAgilityDrill}</div>
       </IonItem>
@@ -158,7 +158,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.shuttleRun !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Shuttle Run</div>
         <div>{measurementData?.shuttleRun}</div>
       </IonItem>
@@ -170,7 +170,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.threeForthsCourtSprint !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Three Fourths Court Sprint</div>
         <div>{measurementData?.threeForthsCourtSprint}</div>
       </IonItem>
@@ -179,7 +179,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
 
   if (measurementData?.bench !== undefined && measurementData?.bench !== '') {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Bench</div>
         <div>{measurementData?.bench}</div>
       </IonItem>
@@ -191,7 +191,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.armVelocity !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Arm Velocity</div>
         <div>{measurementData?.armVelocity}</div>
       </IonItem>
@@ -203,7 +203,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.batSpeed !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Bat Speed</div>
         <div>{measurementData?.batSpeed}</div>
       </IonItem>
@@ -215,7 +215,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.exitVelocity !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Exit Velocity</div>
         <div>{measurementData?.exitVelocity}</div>
       </IonItem>
@@ -227,7 +227,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.sixtyYardDash !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Sixty Yard Dash</div>
         <div>{measurementData?.sixtyYardDash}</div>
       </IonItem>
@@ -236,7 +236,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
 
   if (measurementData?.squat !== undefined && measurementData?.squat !== '') {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Squat</div>
         <div>{measurementData?.squat}</div>
       </IonItem>
@@ -248,7 +248,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.mileRun !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Mile Run</div>
         <div>{measurementData?.mileRun}</div>
       </IonItem>
@@ -260,7 +260,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.fortyYardDash !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>40 Yd Dash</div>
         <div>{measurementData?.fortyYardDash}</div>
       </IonItem>
@@ -269,12 +269,12 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
 
   if (measurementData === undefined && myProfile) {
     measurementsList.push(
-      <div className="urp-highlight-add-media-container urp-highlight-add-media-container">
-        <p className="urp-highlight-add-media-title">
+      <div className="nobo-highlight-add-media-container nobo-highlight-add-media-container">
+        <p className="nobo-highlight-add-media-title">
           Uh! Looks like you haven’t added any measurements to your account yet
         </p>
         <p
-          className="urp-highlight-add-media-text"
+          className="nobo-highlight-add-media-text"
           onClick={(e) => {
             e.preventDefault();
             history.push(`edit-athlete/${userId}`);
@@ -291,7 +291,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.shuttleTime !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>Shuttle Time</div>
         <div>{measurementData?.shuttleTime}</div>
       </IonItem>
@@ -303,7 +303,7 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
     measurementData?.threeConeDrill !== ''
   ) {
     measurementsList.push(
-      <IonItem lines="none" className="urp-section-item" detail={false}>
+      <IonItem lines="none" className="nobo-section-item" detail={false}>
         <div>3 Cone Drill</div>
         <div>{measurementData?.threeConeDrill}</div>
       </IonItem>
@@ -312,8 +312,8 @@ const MeasurementsSection: React.FC<MeasurementsSectionProps> = ({
 
   if (measurementData === undefined && !myProfile) {
     measurementsList.push(
-      <div className="urp-highlight-add-media-container">
-        <p className="urp-highlight-add-media-title">
+      <div className="nobo-highlight-add-media-container">
+        <p className="nobo-highlight-add-media-title">
           Uh! Looks like the user hasn't added any measurements yet
         </p>
       </div>

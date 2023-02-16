@@ -441,7 +441,7 @@ const Chat: React.FC = () => {
                   <img
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null; // prevents looping
-                      currentTarget.src = '../../assets/images/urp_logo_round.svg';
+                      currentTarget.src = '../../assets/images/nobo_logo_round.svg';
                     }}
                     src={them[0]?.profile_image}
                     alt="avatar"
@@ -478,7 +478,7 @@ const Chat: React.FC = () => {
                   <img
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null; // prevents looping
-                      currentTarget.src = '../../assets/images/urp_logo_round.svg';
+                      currentTarget.src = '../../assets/images/nobo_logo_round.svg';
                     }}
                     src={usersMap[msg.userId]?.profile_image}
                     alt="avatar"
@@ -501,7 +501,7 @@ const Chat: React.FC = () => {
                   <img
                     onError={({ currentTarget }) => {
                       currentTarget.onerror = null; // prevents looping
-                      currentTarget.src = '../../assets/images/urp_logo_round.svg';
+                      currentTarget.src = '../../assets/images/nobo_logo_round.svg';
                     }}
                     src={usersMap[msg.userId]?.profile_image}
                     alt="avatar"

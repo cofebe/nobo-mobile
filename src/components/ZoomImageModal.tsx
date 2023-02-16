@@ -132,8 +132,8 @@ const CreateCommentModal = forwardRef<Ref, CreateCommentModalProps>(({ postId, o
         </IonToolbar>
       </IonHeader>
       <IonContent className="post-comment-content" scrollY={false}>
-        <IonItem className="urp-post-input-area">
-          <div className="urp-post-input-text">
+        <IonItem className="nobo-post-input-area">
+          <div className="nobo-post-input-text">
             <IonTextarea
               className="post-comment-text"
               value={data}
@@ -154,9 +154,9 @@ const CreateCommentModal = forwardRef<Ref, CreateCommentModalProps>(({ postId, o
             src={profilePic}
             alt="avatar"
           ></img>
-          <div className="urp-post-tool-menu" style={{ display: "none" }}>
+          <div className="nobo-post-tool-menu" style={{ display: "none" }}>
             <svg
-              className="urp-add-image"
+              className="nobo-add-image"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -187,7 +187,7 @@ const CreateCommentModal = forwardRef<Ref, CreateCommentModalProps>(({ postId, o
             </svg>
             &nbsp; &nbsp;
             <svg
-              className="urp-add-video"
+              className="nobo-add-video"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -209,9 +209,9 @@ const CreateCommentModal = forwardRef<Ref, CreateCommentModalProps>(({ postId, o
             </svg>
           </div>
         </IonItem>
-        <IonGrid className="urp-add-location-grid" style={{ display: "none" }}>
+        <IonGrid className="nobo-add-location-grid" style={{ display: "none" }}>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem
                 onClick={(e) => {
                   e.preventDefault();
@@ -219,7 +219,7 @@ const CreateCommentModal = forwardRef<Ref, CreateCommentModalProps>(({ postId, o
                 button
                 detail={true}
               >
-                <IonLabel className="urp-add-location-label">
+                <IonLabel className="nobo-add-location-label">
                   Add Location
                 </IonLabel>
                 <IonNote slot="end"></IonNote>

@@ -18,9 +18,9 @@ const QrCode: React.FC<QrCodeProps> = ({ value, name }) => {
         <div className="qr-code" >
           <QRCode height="20" value={value} />
         </div>
-        <div className="urp-float-logo qr-code-urp-float-logo">
+        <div className="nobo-float-logo qr-code-nobo-float-logo">
           <img
-            src="assets/images/urp_logo_withtagline.png"
+            src="assets/images/nobo_logo_withtagline.png"
             width="83px"
             height="47px"
             alt="logo with tagline"

@@ -17,8 +17,8 @@ import {
     const [barValue, setBarValue] = useState(0)
     const barMax = 324;
     return (
-        <div className='urp-progress-bar-component'>
-            <svg width={barMax} height="33" viewBox={"0 0 " + barMax + " 33"} fill="#ffffff" xmlns="http://www.w3.org/2000/svg" className="urp-header-progress">
+        <div className='nobo-progress-bar-component'>
+            <svg width={barMax} height="33" viewBox={"0 0 " + barMax + " 33"} fill="#ffffff" xmlns="http://www.w3.org/2000/svg" className="nobo-header-progress">
                     {/* <line x1="2" y1="16" x2="324" y2="16" stroke="#DCE1E3" stroke-width="4" stroke-linecap="round" />
                     <line x1="2" y1="16" x2="53" y2="16" stroke="#398175" stroke-width="4" stroke-linecap="round" /> */}
                     <line x1="2" y1="16" x2="324" y2="16" stroke="#DCE1E3" stroke-width="4" stroke-linecap="round" />

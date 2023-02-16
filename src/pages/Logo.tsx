@@ -15,9 +15,9 @@ const Logo: React.FC = () => {
         paddingBottom: "3rem"
       }}
     >
-      <a href="mailto:info@urpplus.com">
+      <a href="mailto:info@noboplus.com">
         <img
-          src="/assets/images/urp_logo_large.png"
+          src="/assets/images/nobo_logo_large.png"
           alt="URP+"
           style={{ width: '300px' }}
         />
@@ -66,7 +66,7 @@ const Logo: React.FC = () => {
           </a>
         </div>
         <div>
-          <a target="_blank" href="https://www.twitter.com/urpplus">
+          <a target="_blank" href="https://www.twitter.com/noboplus">
             <svg
               width="24"
               height="20"
@@ -82,7 +82,7 @@ const Logo: React.FC = () => {
           </a>
         </div>
         <div>
-          <a target="_blank" href="https://www.TikTok.com/@urpplus">
+          <a target="_blank" href="https://www.TikTok.com/@noboplus">
             <svg
               width="18"
               height="20"
@@ -122,7 +122,7 @@ const Logo: React.FC = () => {
           </a>
         </div>
         <div>
-          <a target="_blank" href="https://www.LinkedIn.com/company/urpplus">
+          <a target="_blank" href="https://www.LinkedIn.com/company/noboplus">
             <svg
               fill="#ffffff"
               height="20"

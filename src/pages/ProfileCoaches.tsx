@@ -98,7 +98,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
       subscriptionService = new SubscriptionService(new InAppPurchase2());
       subscriptionService.register();
       setUserSubscribed(
-        subscriptionService.isSubscribed('com.urp.coachrecruiter.1month')
+        subscriptionService.isSubscribed('com.nobo.coachrecruiter.1month')
       );
     }
 
@@ -147,7 +147,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
 
   function showReportingActionSheet() {
     presentProfileReportingActionSheet({
-      cssClass: 'urp-action-sheet',
+      cssClass: 'nobo-action-sheet',
       header: 'Report User',
       //subHeader: 'Subheader',
       buttons: [
@@ -243,7 +243,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
 
   function openShare() {
     present({
-      cssClass: 'urp-action-sheet',
+      cssClass: 'nobo-action-sheet',
       buttons: [
         {
           text: 'Report',
@@ -338,7 +338,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
   }
 
   function updateActionMenu() {
-    setProfileURL(`https://www.urpplus.com/home/coach-profile/${userId}`);
+    setProfileURL(`https://www.noboplus.com/home/coach-profile/${userId}`);
   }
 
   // function showMessage(message: string) {
@@ -434,7 +434,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
           updateActionMenu();
 
           if (!profileCoach.myProfile) {
-            let nextURL = `https://www.urpplus.com/home/coach-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
+            let nextURL = `https://www.noboplus.com/home/coach-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
             if (window.location.origin.includes('localhost')) {
               nextURL = `http://localhost:3000/home/coach-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
             }
@@ -526,7 +526,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
             }`}
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
-              currentTarget.src = '../../assets/images/urp-default-banner.png';
+              currentTarget.src = '../../assets/images/nobo-default-banner.png';
             }}
             src={coachProfile.profilePic}
             alt="avatar"
@@ -547,7 +547,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
                 }}
                 fill="clear"
                 color="#1A3A35"
-                className="urp-edit-profile-button"
+                className="nobo-edit-profile-button"
               >
                 Edit Profile
               </IonButton>
@@ -560,7 +560,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
                 }}
                 fill="clear"
                 color="#1A3A35"
-                className="urp-edit-profile-button"
+                className="nobo-edit-profile-button"
               >
                 Watchlist
               </IonButton>
@@ -571,7 +571,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
           </div>
 
           <div>
-            <div className="urp-social-tops">
+            <div className="nobo-social-tops">
               {coachProfile.socialLinks &&
                 coachProfile.socialLinks.includes('247sports.com') && (
                   <Sports247Icon
@@ -691,8 +691,8 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
           </div>
         </div>
 
-        <div className="urp-menu-container">
-          <div className="urp-menu-container-shadow">
+        <div className="nobo-menu-container">
+          <div className="nobo-menu-container-shadow">
             <Swiper
               spaceBetween={1}
               slidesPerView={2}
@@ -714,7 +714,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
                 >
                   <span
                     className={
-                      'urp-tab-menu-item ' +
+                      'nobo-tab-menu-item ' +
                       (targetSection === s.state ? 'selected' : '')
                     }
                   >
@@ -728,7 +728,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
         {targetSection === 'Coaching Experience' && (
           <CoachingExperienceSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             experiencesString={coachProfile.coaching_experience}
             myProfile={profileCoach.myProfile}
             data={{ title: 'Coaching Experience Title' }}
@@ -737,7 +737,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
         {targetSection === 'Playing Experience' && (
           <PlayingExperienceSection
             userId={userId}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             experiencesString={coachProfile.playing_experience}
             myProfile={profileCoach.myProfile}
             data={{ title: 'Playing Experience Title' }}
@@ -746,7 +746,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
         )}
         {targetSection === 'Praise' && (
           <PraiseSection
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Praise Title' }}
           ></PraiseSection>
         )}
@@ -754,7 +754,7 @@ const ProfileCoaches: React.FC<ProfileCoachProps> = (profileCoach) => {
           <PostsSection
             userId={userId}
             myProfile={profileCoach.myProfile}
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Posts Title' }}
             userType="coach"
           ></PostsSection>

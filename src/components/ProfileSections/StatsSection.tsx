@@ -91,12 +91,12 @@ const StatsSection: React.FC<StatsSectionProps> = ({
     if (myProfile) {
       return (
         <div className={"profile-stats-list " + className}>
-          <div className="urp-highlight-add-media-container urp-highlight-add-media-container">
-            <p className="urp-highlight-add-media-title">
+          <div className="nobo-highlight-add-media-container nobo-highlight-add-media-container">
+            <p className="nobo-highlight-add-media-title">
               Uh! Looks like you haven’t added any stats to your account yet
             </p>
             <p
-              className="urp-highlight-add-media-text"
+              className="nobo-highlight-add-media-text"
               onClick={(e) => {
                 e.preventDefault();
                 history.push(`edit-athlete/${userId}`);
@@ -110,8 +110,8 @@ const StatsSection: React.FC<StatsSectionProps> = ({
     } else {
       return (
         <div className={"profile-stats-list " + className}>
-          <div className="urp-highlight-add-media-container">
-            <p className="urp-highlight-add-media-title">
+          <div className="nobo-highlight-add-media-container">
+            <p className="nobo-highlight-add-media-title">
               Uh! Looks like the user hasn't added any stats yet
             </p>
           </div>

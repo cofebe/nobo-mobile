@@ -109,7 +109,7 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
     //   subscriptionService = new SubscriptionService(new InAppPurchase2());
     //   subscriptionService.register();
     //   setUserSubscribed(
-    //     subscriptionService.isSubscribed('com.urp.trainer.1month')
+    //     subscriptionService.isSubscribed('com.nobo.trainer.1month')
     //   );
     // }
 
@@ -159,7 +159,7 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
 
   function showReportingActionSheet() {
     presentProfileReportingActionSheet({
-      cssClass: 'urp-action-sheet',
+      cssClass: 'nobo-action-sheet',
       header: 'Report Organization',
       //subHeader: 'Subheader',
       buttons: [
@@ -255,7 +255,7 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
 
   function openShare() {
     present({
-      cssClass: 'urp-action-sheet',
+      cssClass: 'nobo-action-sheet',
       buttons: [
         {
           text: 'Report',
@@ -349,7 +349,7 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
   }
 
   function updateActionMenu() {
-    setProfileURL(`https://www.urpplus.com/home/organization-profile/${userId}`);
+    setProfileURL(`https://www.noboplus.com/home/organization-profile/${userId}`);
   }
 
   // function showMessage(message: string) {
@@ -390,10 +390,10 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
             organization_name: data.organization_name,
             profile_picture:
               data.profile_image ||
-               `../../assets/images/urp_logo_round.jpg`,
+               `../../assets/images/nobo_logo_round.jpg`,
             banner_picture:
               data.banner_image ||
-              `../../assets/images/urp-default-background.svg`,
+              `../../assets/images/nobo-default-background.svg`,
             bio: data.bio ? data.bio : '',
             city: data.city ? data.city : '',
             country: data.country ? data.country : '',
@@ -412,7 +412,7 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
           updateActionMenu();
 
           if (!ProfileOrganization.myProfile) {
-            let nextURL = `https://www.urpplus.com/home/organization-profile/${id}`;
+            let nextURL = `https://www.noboplus.com/home/organization-profile/${id}`;
             if (window.location.origin.includes('localhost')) {
               nextURL = `http://localhost:3000/home/organization-profile/${id}`;
             }
@@ -503,7 +503,7 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
             }`}
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
-              currentTarget.src = '../../assets/images/urp-default-banner.png';
+              currentTarget.src = '../../assets/images/nobo-default-banner.png';
             }}
             src={organizationProfile.profile_picture}
             alt="avatar"
@@ -524,7 +524,7 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
                 }}
                 fill="clear"
                 color="#1A3A35"
-                className="urp-edit-profile-button"
+                className="nobo-edit-profile-button"
               >
                 Edit Profile
               </IonButton>
@@ -537,7 +537,7 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
                 }}
                 fill="clear"
                 color="#1A3A35"
-                className="urp-edit-profile-button"
+                className="nobo-edit-profile-button"
               >
                 Watchlist
               </IonButton>
@@ -551,7 +551,7 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
           </div>
 
           <div>
-            <div className="urp-social-tops">
+            <div className="nobo-social-tops">
               {trainerProfile.socialLinks &&
                 trainerProfile.socialLinks.includes('247sports.com') && (
                   <Sports247Icon
@@ -671,8 +671,8 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
           </div>
         </div>
 
-        <div className="urp-menu-container">
-          <div className="urp-menu-container-shadow">
+        <div className="nobo-menu-container">
+          <div className="nobo-menu-container-shadow">
             <Swiper
               spaceBetween={1}
               slidesPerView={2}
@@ -694,7 +694,7 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
                 >
                   <span
                     className={
-                      'urp-tab-menu-item ' +
+                      'nobo-tab-menu-item ' +
                       (targetSection === s.state ? 'selected' : '')
                     }
                   >
@@ -720,7 +720,7 @@ const ProfileOrganization: React.FC<ProfileTrainerProps> = (
             Coming Soon...
           </h2>
           /*<OrganizationRosterSection
-            className="urp-profile-section urp-profile-section-scroll"
+            className="nobo-profile-section nobo-profile-section-scroll"
             data={{ title: 'Past Roster' }}
           ></OrganizationRosterSection>*/
         )}

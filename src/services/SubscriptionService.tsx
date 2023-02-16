@@ -20,48 +20,48 @@ export class SubscriptionService {
 
     if (isPlatform('ios') && this.store && !environment.disableBrowser) {
       this.store.validator =
-        'https://validator.fovea.cc/v1/validate?appName=com.urpplus&apiKey=b01dea13-1b81-4165-a6ea-ad0eac7b59d6';
+        'https://validator.fovea.cc/v1/validate?appName=com.noboplus&apiKey=b01dea13-1b81-4165-a6ea-ad0eac7b59d6';
       // this.store.register([
       //   {
-      //     id: 'com.urp.athlete.1month',
+      //     id: 'com.nobo.athlete.1month',
       //     type: this.store.PAID_SUBSCRIPTION,
       //   },
       //   {
-      //     id: 'com.urp.promotedpost.1day',
+      //     id: 'com.nobo.promotedpost.1day',
       //     type: this.store.CONSUMABLE,
       //   },
       //   {
-      //     id: 'com.urp.promotedpost.2day',
+      //     id: 'com.nobo.promotedpost.2day',
       //     type: this.store.CONSUMABLE,
       //   },
       //   {
-      //     id: 'com.urp.promotedpost.3day',
+      //     id: 'com.nobo.promotedpost.3day',
       //     type: this.store.CONSUMABLE,
       //   },
       //   {
-      //     id: 'com.urp.promotedpost.4day',
+      //     id: 'com.nobo.promotedpost.4day',
       //     type: this.store.CONSUMABLE,
       //   },
       //   {
-      //     id: 'com.urp.promotedpost.5day',
+      //     id: 'com.nobo.promotedpost.5day',
       //     type: this.store.CONSUMABLE,
       //   },
       //   {
-      //     id: 'com.urp.promotedpost.6day',
+      //     id: 'com.nobo.promotedpost.6day',
       //     type: this.store.CONSUMABLE,
       //   },
       //   {
-      //     id: 'com.urp.promotedpost.1week',
+      //     id: 'com.nobo.promotedpost.1week',
       //     type: this.store.CONSUMABLE,
       //   },
       // ]);
 
-      // this.store.when('com.urp.athlete.1month').approved((product: any) => {
+      // this.store.when('com.nobo.athlete.1month').approved((product: any) => {
       //   console.log('Approved');
       //   product.verify();
       // });
 
-      // this.store.when('com.urp.athlete.1month').verified((product: any) => {
+      // this.store.when('com.nobo.athlete.1month').verified((product: any) => {
       //   console.log('Verified');
       //   product.finish();
       // });
@@ -80,7 +80,7 @@ export class SubscriptionService {
         this.products = this.store.products;
       });
 
-      // this.store.when('com.urp.athlete.1month').updated((product: any) => {
+      // this.store.when('com.nobo.athlete.1month').updated((product: any) => {
       //   console.log('Updated');
       //   product.finish();
       // });
@@ -95,61 +95,61 @@ export class SubscriptionService {
       //   product.finish();
       // });
 
-      this.store.when('com.urp.athlete.1month').error((err: any) => {
+      this.store.when('com.nobo.athlete.1month').error((err: any) => {
         console.log('Error');
         console.log(err);
       });
-      this.store.when('com.urp.coachrecruiter.1month').error((err: any) => {
+      this.store.when('com.nobo.coachrecruiter.1month').error((err: any) => {
         console.log('Error');
         console.log(err);
       });
-      this.store.when('com.urp.trainer.1month').error((err: any) => {
+      this.store.when('com.nobo.trainer.1month').error((err: any) => {
         console.log('Error');
         console.log(err);
       });
 
       //   this.store
-      //     .when('com.urp.coachrecruiter.1month')
+      //     .when('com.nobo.coachrecruiter.1month')
       //     .approved((product: any) => {
       //       console.log('Approved');
       //       product.verify();
       //     });
 
       //   this.store
-      //     .when('com.urp.coachrecruiter.1month')
+      //     .when('com.nobo.coachrecruiter.1month')
       //     .verified((product: any) => {
       //       console.log('Verified');
       //       product.finish();
       //     });
 
       //   this.store
-      //     .when('com.urp.coachrecruiter.1month')
+      //     .when('com.nobo.coachrecruiter.1month')
       //     .updated((product: any) => {
       //       console.log('Updated');
       //       product.finish();
       //     });
 
-      //   this.store.when('com.urp.coachrecruiter.1month').error((err: any) => {
+      //   this.store.when('com.nobo.coachrecruiter.1month').error((err: any) => {
       //     console.log('Error');
       //     console.log(err);
       //   });
 
-      //   this.store.when('com.urp.trainer.1month').approved((product: any) => {
+      //   this.store.when('com.nobo.trainer.1month').approved((product: any) => {
       //     console.log('Approved');
       //     product.verify();
       //   });
 
-      //   this.store.when('com.urp.trainer.1month').verified((product: any) => {
+      //   this.store.when('com.nobo.trainer.1month').verified((product: any) => {
       //     console.log('Verified');
       //     product.finish();
       //   });
 
-      //   this.store.when('com.urp.trainer.1month').updated((product: any) => {
+      //   this.store.when('com.nobo.trainer.1month').updated((product: any) => {
       //     console.log('Updated');
       //     product.finish();
       //   });
 
-      //   this.store.when('com.urp.trainer.1month').error((err: any) => {
+      //   this.store.when('com.nobo.trainer.1month').error((err: any) => {
       //     console.log('Error');
       //     console.log(err);
       //   });
@@ -177,43 +177,43 @@ export class SubscriptionService {
   register() {
     this.store.register([
       {
-        id: 'com.urp.athlete.1month',
+        id: 'com.nobo.athlete.1month',
         type: this.store.PAID_SUBSCRIPTION,
       },
       {
-        id: 'com.urp.coachrecruiter.1month',
+        id: 'com.nobo.coachrecruiter.1month',
         type: this.store.PAID_SUBSCRIPTION,
       },
       {
-        id: 'com.urp.trainer.1month',
+        id: 'com.nobo.trainer.1month',
         type: this.store.PAID_SUBSCRIPTION,
       },
       {
-        id: 'com.urp.promotedpost.1day',
+        id: 'com.nobo.promotedpost.1day',
         type: this.store.CONSUMABLE,
       },
       {
-        id: 'com.urp.promotedpost.2day',
+        id: 'com.nobo.promotedpost.2day',
         type: this.store.CONSUMABLE,
       },
       {
-        id: 'com.urp.promotedpost.3day',
+        id: 'com.nobo.promotedpost.3day',
         type: this.store.CONSUMABLE,
       },
       {
-        id: 'com.urp.promotedpost.4day',
+        id: 'com.nobo.promotedpost.4day',
         type: this.store.CONSUMABLE,
       },
       {
-        id: 'com.urp.promotedpost.5day',
+        id: 'com.nobo.promotedpost.5day',
         type: this.store.CONSUMABLE,
       },
       {
-        id: 'com.urp.promotedpost.6day',
+        id: 'com.nobo.promotedpost.6day',
         type: this.store.CONSUMABLE,
       },
       {
-        id: 'com.urp.promotedpost.1week',
+        id: 'com.nobo.promotedpost.1week',
         type: this.store.CONSUMABLE,
       },
     ]);

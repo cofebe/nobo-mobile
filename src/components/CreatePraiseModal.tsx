@@ -114,8 +114,8 @@ const CreatePraiseModal = forwardRef<Ref, CreatePraiseModalProps>(({ userId, onC
         </IonToolbar>
       </IonHeader>
       <IonContent className="post-praise-content" scrollY={false}>
-        <IonItem className="urp-post-input-area">
-          <div className="urp-post-input-text">
+        <IonItem className="nobo-post-input-area">
+          <div className="nobo-post-input-text">
             <IonTextarea
               className="post-praise-text"
               value={data}
@@ -136,9 +136,9 @@ const CreatePraiseModal = forwardRef<Ref, CreatePraiseModalProps>(({ userId, onC
             src={profilePic}
             alt="avatar"
           ></img>
-          <div className="urp-post-tool-menu" style={{ display: "none" }}>
+          <div className="nobo-post-tool-menu" style={{ display: "none" }}>
             <svg
-              className="urp-add-image"
+              className="nobo-add-image"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -169,7 +169,7 @@ const CreatePraiseModal = forwardRef<Ref, CreatePraiseModalProps>(({ userId, onC
             </svg>
             &nbsp; &nbsp;
             <svg
-              className="urp-add-video"
+              className="nobo-add-video"
               width="24"
               height="24"
               viewBox="0 0 24 24"

@@ -165,9 +165,9 @@ const publicKey =
   environment?.videoLibraryPublicKey || 'public_pqTTDCXhzT8ZmQ4RFQUCQYkKY0s=';
 const authenticationEndpoint =
   environment?.videoAuthenticationEndpoint ||
-  'https://api.urpplus.com/auth/video';
+  'https://api.noboplus.com/auth/video';
 const urlEndpoint =
-  environment?.videoUrlEndpoint || 'https://ik.imagekit.io/urpvideo/';
+  environment?.videoUrlEndpoint || 'https://ik.imagekit.io/nobovideo/';
 
 const SignUpAthlete: React.FC<Props> = (props) => {
   const history = useHistory();
@@ -210,7 +210,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       transcriptsVals.current.file.name
     );
     /*const response =*/ await fetch(
-      `http://urp.cofebe.com:8080/upload/${user.user['user_id']}/transcript`,
+      `http://nobo.cofebe.com:8080/upload/${user.user['user_id']}/transcript`,
       {
         method: 'POST',
         body: formData,
@@ -1291,7 +1291,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
     let validationResults = validateSignup(req);
     if (validationResults.valid) {
       console.log('Validation Valid: ', validationResults);
-      let spinner = document.querySelectorAll('.urp-spinner-container');
+      let spinner = document.querySelectorAll('.nobo-spinner-container');
       spinner[0].classList.add('active');
 
       userService
@@ -1443,7 +1443,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
     let validationResults = validateSignup(req);
     if (validationResults.valid) {
       console.log('Validation Valid: ', validationResults);
-      let spinner = document.querySelectorAll('.urp-spinner-container');
+      let spinner = document.querySelectorAll('.nobo-spinner-container');
       spinner[0].classList.add('active');
 
       authService
@@ -1786,16 +1786,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
   return (
     <IonPage
       id="sign-up-athlete-page"
-      className="urp-page sign-up-athlete-page"
+      className="nobo-page sign-up-athlete-page"
     >
       <div className="square-logo-desktop">
-        <img src="assets/images/urp-box-logo.png" alt="logo" />
+        <img src="assets/images/nobo-box-logo.png" alt="logo" />
       </div>
       <div className="header-desktop">
         <div></div>
       </div>
       {toggleCropper && (
-        <div className="urp-image-cropper">
+        <div className="nobo-image-cropper">
           <span
             onClick={(e) => {
               e.preventDefault();
@@ -1804,7 +1804,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
           >
             X
           </span>
-          <span className="urp-crop-header-text" style={{ color: 'FFFFFF' }}>
+          <span className="nobo-crop-header-text" style={{ color: 'FFFFFF' }}>
             Crop your profile photo
           </span>
           <span
@@ -1817,7 +1817,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
           </span>
           {/* <SwipeIcon></SwipeIcon> */}
           <Cropper
-            className="urp-profile-pic-cropper"
+            className="nobo-profile-pic-cropper"
             // src="https://static.clubs.nfl.com/image/private/t_editorial_landscape_8_desktop_mobile/f_auto/packers/nczkr5s3xzqebndsu9uk.jpg"
             src={`data:image/png;base64,${profilePicData?.base64String}`}
             // CropperJS options
@@ -1836,7 +1836,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
         </div>
       )}
       {toggleCropperBanner && (
-        <div className="urp-image-cropper">
+        <div className="nobo-image-cropper">
           <span
             onClick={(e) => {
               e.preventDefault();
@@ -1845,7 +1845,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
           >
             X
           </span>
-          <span className="urp-crop-header-text" style={{ color: '#FFFFFF' }}>
+          <span className="nobo-crop-header-text" style={{ color: '#FFFFFF' }}>
             Crop your banner photo
           </span>
           <span
@@ -1858,7 +1858,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
           </span>
           {/* <SwipeIcon></SwipeIcon> */}
           <Cropper
-            className="urp-banner-pic-cropper"
+            className="nobo-banner-pic-cropper"
             // src="https://static.clubs.nfl.com/image/private/t_editorial_landscape_8_desktop_mobile/f_auto/packers/nczkr5s3xzqebndsu9uk.jpg"
             src={`data:image/png;base64,${bannerPicData?.base64String}`}
             // CropperJS options
@@ -1883,12 +1883,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
           style={{ paddingTop: props.editMode ? '' : '40px' }}
         >
           {!props.editMode && (
-            <div className="urp-custom-progress-bar">
-              <div className="urp-progress-label">{progressStep.section}</div>
-              <div className="urp-progress-graphic">
+            <div className="nobo-custom-progress-bar">
+              <div className="nobo-progress-label">{progressStep.section}</div>
+              <div className="nobo-progress-graphic">
                 <div style={{ width: progressPercentage }}></div>
               </div>
-              <div className="urp-progress-count">
+              <div className="nobo-progress-count">
                 {progressStep.step}/{totalProgressItemCount}
               </div>
             </div>
@@ -1900,21 +1900,21 @@ const SignUpAthlete: React.FC<Props> = (props) => {
             {!props.editMode && (
               <IonBackButton
                 text="&nbsp;  Sign Up"
-                className="urp-nav-text"
+                className="nobo-nav-text"
               ></IonBackButton>
             )}
             {props.editMode && (
               <IonBackButton
                 text="&nbsp;  Edit Athlete Profile"
-                className="urp-nav-text"
+                className="nobo-nav-text"
               ></IonBackButton>
             )}
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent id="signup-sections" className="urp-content-area">
-        <div className="urp-spinner-container">
-          <IonSpinner className="urp-spinner" name="bubbles" />
+      <IonContent id="signup-sections" className="nobo-content-area">
+        <div className="nobo-spinner-container">
+          <IonSpinner className="nobo-spinner" name="bubbles" />
         </div>
         <IonList>
           <div className="toolbar-desktop">
@@ -1931,25 +1931,25 @@ const SignUpAthlete: React.FC<Props> = (props) => {
               </span>
             </div>
           </div>
-          <IonAccordionGroup className="urp-section-group">
-            <div className="urp-section">
+          <IonAccordionGroup className="nobo-section-group">
+            <div className="nobo-section">
               <IonAccordion id="basic-info" value="basic-info">
                 <IonItem
                   lines="none"
                   slot="header"
                   style={{ class: 'item-inner' }}
-                  className="urp-section-head"
+                  className="nobo-section-head"
                   onClick={(e) => scollToSection('basic-info')}
                 >
-                  <span className="urp-step-num">1</span>
-                  <h5 className="urp-section-title required">
+                  <span className="nobo-step-num">1</span>
+                  <h5 className="nobo-section-title required">
                     Basic Information
                   </h5>
                 </IonItem>
 
-                <IonList className="urp-list-input" slot="content">
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                <IonList className="nobo-list-input" slot="content">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       First Name
                     </IonLabel>
 
@@ -1963,8 +1963,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       required
                     ></IonInput>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Last Name
                     </IonLabel>
 
@@ -1978,11 +1978,11 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       required
                     ></IonInput>
                   </IonItem>
-                  <IonItem className="urp-input" lines="none">
+                  <IonItem className="nobo-input" lines="none">
                     <IonRow>
                       <IonCol>
                         <IonLabel
-                          className="urp-signup-label"
+                          className="nobo-signup-label"
                           position="stacked"
                         >
                           Profile Picture
@@ -2000,7 +2000,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           ></IonIcon>
                           {profilePicPreview !== '' && (
                             <div
-                              className="urp-preview-profile-pic"
+                              className="nobo-preview-profile-pic"
                               style={{
                                 background: `url(${profilePicPreview})`,
                                 backgroundSize: 'contain',
@@ -2010,7 +2010,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         </IonFabButton>
                         <a
                           href="#"
-                          className="urp-upload-photo"
+                          className="nobo-upload-photo"
                           onClick={(e) => {
                             e.preventDefault();
                             uploadProfilePic();
@@ -2026,8 +2026,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       </IonCol>
                     </IonRow>
                   </IonItem>
-                  <IonItem className="urp-input" lines="none">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="none">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Banner Picture
                     </IonLabel>
                     {bannerPicPreview === '' && (
@@ -2037,7 +2037,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           uploadBannerPic();
                         }}
                         color={btnColor}
-                        className="urp-upload-btn"
+                        className="nobo-upload-btn"
                         style={{
                           display: 'block',
                           marginLeft: '0',
@@ -2055,7 +2055,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     )}
                     {bannerPicPreview !== '' && (
                       <div
-                        className="urp-banner-pic-previewer"
+                        className="nobo-banner-pic-previewer"
                         onClick={(e) => {
                           e.preventDefault();
                           uploadBannerPic();
@@ -2068,14 +2068,14 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       ></div>
                     )}
                     <span
-                      className="urp-optional"
+                      className="nobo-optional"
                       style={{ paddingTop: 6, paddingLeft: '2px !important' }}
                     >
                       Banner picture must be in standard format .png, .jpeg
                     </span>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Position
                     </IonLabel>
                     <UrpSelect
@@ -2107,9 +2107,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     <IonGrid style={{ paddingLeft: '0px' }}>
                       <IonRow>
                         <IonCol size="5" style={{ paddingLeft: '0px' }}>
-                          <IonItem className="urp-input" lines="none">
+                          <IonItem className="nobo-input" lines="none">
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Class Year
@@ -2121,7 +2121,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               }}
                               placeholder="Class"
                               border={true}
-                              className="urp-select-short"
+                              className="nobo-select-short"
                               //style={{
                               //  width: "80%",
                               //  marginRight: "10%",
@@ -2196,9 +2196,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonItem>
                         </IonCol>
                         <IonCol size="4" style={{ paddingLeft: '0px' }}>
-                          <IonItem className="urp-input" lines="none">
+                          <IonItem className="nobo-input" lines="none">
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Weight
@@ -2210,15 +2210,15 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               }}
                               placeholder="lbs"
                               border={true}
-                              className="urp-select-short"
+                              className="nobo-select-short"
                               options={weightList}
                             />
                           </IonItem>
                         </IonCol>
                         <IonCol size="3">
-                          <IonItem className="urp-input" lines="none">
+                          <IonItem className="nobo-input" lines="none">
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Height
@@ -2238,24 +2238,24 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       <IonRow>
                         <IonCol style={{ paddingLeft: '0px' }}>
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             Birthday{' '}
                             <span className="disclaimer-text">
                               {' '}
-                              Used for informational purposes only
+                              Used for informational pnobooses only
                             </span>
                           </IonLabel>
                         </IonCol>
                         <IonCol size="5" style={{ paddingLeft: '0px' }}>
                           <IonItem
                             style={{ marginTop: 0 }}
-                            className="urp-input"
+                            className="nobo-input"
                             lines="none"
                           >
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Month
@@ -2267,7 +2267,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               }}
                               placeholder="Month"
                               border={true}
-                              className="urp-select-short"
+                              className="nobo-select-short"
                               //style={{
                               //  width: "80%",
                               //  marginRight: "10%",
@@ -2330,11 +2330,11 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonCol size="4" style={{ paddingLeft: '0px' }}>
                           <IonItem
                             style={{ marginTop: 0 }}
-                            className="urp-input"
+                            className="nobo-input"
                             lines="none"
                           >
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Day
@@ -2346,7 +2346,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               }}
                               placeholder="Day"
                               border={true}
-                              className="urp-select-short"
+                              className="nobo-select-short"
                               options={birtdayDayList}
                             />
                           </IonItem>
@@ -2354,11 +2354,11 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonCol size="3">
                           <IonItem
                             style={{ marginTop: 0 }}
-                            className="urp-input"
+                            className="nobo-input"
                             lines="none"
                           >
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               Year
@@ -2377,8 +2377,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       </IonRow>
                     </IonGrid>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       School / Organization
                     </IonLabel>
                     <IonInput
@@ -2438,8 +2438,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       </IonList>
                     </IonPopover>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Country
                     </IonLabel>
                     <UrpSelect
@@ -2451,8 +2451,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       })}
                     />
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       State
                     </IonLabel>
                     <UrpSelect
@@ -2464,8 +2464,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       })}
                     />
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       City
                     </IonLabel>
                     <IonInput
@@ -2478,8 +2478,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       required
                     ></IonInput>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Bio
                     </IonLabel>
                     <IonTextarea
@@ -2495,12 +2495,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkInstagramValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkInstagramValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      Instagram<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      Instagram<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkInstagram}
@@ -2518,12 +2518,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkTwitterValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkTwitterValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      Twitter<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      Twitter<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkTwitter}
@@ -2541,12 +2541,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkTikTokValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkTikTokValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      TikTok<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      TikTok<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkTikTok}
@@ -2564,12 +2564,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkHudlValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkHudlValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      Hudl<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      Hudl<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkHudl}
@@ -2587,12 +2587,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLink247SportsValid ? '' : ' invalid')
+                      'nobo-input' + (socialLink247SportsValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      247Sports<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      247Sports<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLink247Sports}
@@ -2610,12 +2610,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkRivalsValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkRivalsValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      Rivals<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      Rivals<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkRivals}
@@ -2633,12 +2633,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'urp-input' + (socialLinkMaxPrepsValid ? '' : ' invalid')
+                      'nobo-input' + (socialLinkMaxPrepsValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
-                    <IonLabel className="urp-signup-label" position="stacked">
-                      MaxPreps<span className="urp-optional">Optional</span>
+                    <IonLabel className="nobo-signup-label" position="stacked">
+                      MaxPreps<span className="nobo-optional">Optional</span>
                     </IonLabel>
                     <IonInput
                       value={socialLinkMaxPreps}
@@ -2657,23 +2657,23 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 </IonList>
               </IonAccordion>
             </div>
-            <div className="urp-section">
+            <div className="nobo-section">
               <IonAccordion id="stats" value="stats">
                 <IonItem
                   lines="none"
                   slot="header"
-                  className="urp-section-head"
+                  className="nobo-section-head"
                   onClick={(e) => scollToSection('stats')}
                 >
-                  <span className="urp-step-num">2</span>
-                  <h5 className="urp-section-title">Stats</h5>
-                  <span style={{ fontSize: '0.6em' }} className="urp-optional">
+                  <span className="nobo-step-num">2</span>
+                  <h5 className="nobo-section-title">Stats</h5>
+                  <span style={{ fontSize: '0.6em' }} className="nobo-optional">
                     Enter your stats for your primary sport
                   </span>
                 </IonItem>
 
                 <IonList
-                  className="urp-list-input stats-section"
+                  className="nobo-list-input stats-section"
                   slot="content"
                 >
                   {stats.map((s: any) => {
@@ -2869,20 +2869,20 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 </IonList>
               </IonAccordion>
             </div>
-            <div className="urp-section">
+            <div className="nobo-section">
               <IonAccordion id="background" value="background">
                 <IonItem
                   lines="none"
                   slot="header"
-                  className="urp-section-head"
+                  className="nobo-section-head"
                   onClick={(e) => scollToSection('background')}
                 >
-                  <span className="urp-step-num">3</span>
-                  <h5 className="urp-section-title">Background</h5>
+                  <span className="nobo-step-num">3</span>
+                  <h5 className="nobo-section-title">Background</h5>
                 </IonItem>
-                <IonList className="urp-list-input" slot="content">
-                  {/* <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                <IonList className="nobo-list-input" slot="content">
+                  {/* <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Bio
                     </IonLabel>
                     <IonTextarea
@@ -2897,9 +2897,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     ></IonTextarea>
                   </IonItem> */}
                   {isSectionActive('football') && (
-                    <IonItem className="urp-input" lines="none">
+                    <IonItem className="nobo-input" lines="none">
                       <IonLabel
-                        className="urp-signup-label urp-rating-label"
+                        className="nobo-signup-label nobo-rating-label"
                         position="stacked"
                       >
                         Your Rating
@@ -2908,7 +2908,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonCol size="7">
                           <div
                             style={{ display: 'block', cursor: 'pointer' }}
-                            className="urp-rating-input"
+                            className="nobo-rating-input"
                           >
                             <span style={{ marginLeft: '0' }}>
                               <svg
@@ -2967,7 +2967,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         >
                           <IonText
                             style={{ paddingTop: '5px' }}
-                            className="urp-optional"
+                            className="nobo-optional"
                             onClick={() => {
                               setRating(0);
                             }}
@@ -2978,7 +2978,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       </IonRow>
                     </IonItem>
                   )}
-                  <IonItem className="urp-input" lines="none">
+                  <IonItem className="nobo-input" lines="none">
                     <IonGrid style={{ paddingLeft: '0px' }}>
                       <IonRow>
                         <IonCol style={{ paddingLeft: '0px' }}>
@@ -2987,7 +2987,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             lines="full"
                           >
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               GPA
@@ -3033,7 +3033,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             lines="full"
                           >
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               SAT
@@ -3079,7 +3079,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             lines="full"
                           >
                             <IonLabel
-                              className="urp-signup-label"
+                              className="nobo-signup-label"
                               position="stacked"
                             >
                               ACT
@@ -3122,10 +3122,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       </IonRow>
                     </IonGrid>
                   </IonItem>
-                  <IonItem className="urp-input" lines="full">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="full">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Extracurriculars
-                      <span className="urp-optional">Seperate with comma</span>
+                      <span className="nobo-optional">Seperate with comma</span>
                     </IonLabel>
                     <IonInput
                       placeholder="Student Council"
@@ -3143,16 +3143,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       required
                     ></IonInput>
                   </IonItem>
-                  <IonItem className="urp-input" lines="none">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                  <IonItem className="nobo-input" lines="none">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       Additional Sport(s)
-                      <span className="urp-optional">
+                      <span className="nobo-optional">
                         Select all that apply
                       </span>
                     </IonLabel>
                     <UrpSelect
                       placeholder="Select Sport"
-                      className="urp-select"
+                      className="nobo-select"
                       value={otherSports}
                       onChange={(e) => setOtherSports(e)}
                       multiple={true}
@@ -3179,9 +3179,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   {awards.map((element: any, index: any) => {
                     return (
                       <div key={index}>
-                        <IonItem className="urp-input" lines="none">
+                        <IonItem className="nobo-input" lines="none">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             Awards / Recognition
@@ -3638,9 +3638,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   {previousTeams.map((element: any, index: any) => {
                     return (
                       <div key={index}>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             Previous Team
@@ -3666,7 +3666,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             // required
                           ></IonInput>
                         </IonItem>
-                        <IonItem className="urp-input" lines="none">
+                        <IonItem className="nobo-input" lines="none">
                           <IonGrid style={{ paddingLeft: '0px' }}>
                             <IonRow>
                               <IonCol style={{ paddingLeft: '0px' }}>
@@ -3679,7 +3679,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                   lines="full"
                                 >
                                   <IonLabel
-                                    className="urp-signup-label"
+                                    className="nobo-signup-label"
                                     position="stacked"
                                   >
                                     Start Year
@@ -3766,7 +3766,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                   lines="full"
                                 >
                                   <IonLabel
-                                    className="urp-signup-label"
+                                    className="nobo-signup-label"
                                     position="stacked"
                                   >
                                     End Year
@@ -3833,7 +3833,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <IonCol>
                                 <IonItem lines="full">
                                   <IonLabel
-                                    className="urp-signup-label"
+                                    className="nobo-signup-label"
                                     position="stacked"
                                   >
                                     Position
@@ -3874,9 +3874,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             </IonRow>
                           </IonGrid>
                         </IonItem>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             School
@@ -3897,9 +3897,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             }}
                           ></IonInput>
                         </IonItem>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             State
@@ -3920,9 +3920,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             })}
                           />
                         </IonItem>
-                        <IonItem className="urp-input" lines="full">
+                        <IonItem className="nobo-input" lines="full">
                           <IonLabel
-                            className="urp-signup-label"
+                            className="nobo-signup-label"
                             position="stacked"
                           >
                             City
@@ -4031,19 +4031,19 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 </IonList>
               </IonAccordion>
             </div>
-            <div className="urp-section">
+            <div className="nobo-section">
               <IonAccordion id="player-highlights" value="player-highlights">
                 <IonItem
                   lines="none"
                   slot="header"
-                  className="urp-section-head"
+                  className="nobo-section-head"
                   onClick={(e) => scollToSection('player-highlights')}
                 >
-                  <span className="urp-step-num">4</span>
-                  <h5 className="urp-section-title">Player Highlights</h5>
+                  <span className="nobo-step-num">4</span>
+                  <h5 className="nobo-section-title">Player Highlights</h5>
                 </IonItem>
 
-                <IonList className="urp-list-input" slot="content">
+                <IonList className="nobo-list-input" slot="content">
                   {uploadVideoOptionEnabled && (
                     <IonItem lines="none">
                       <UrpSelect
@@ -4065,7 +4065,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   {highlightLinkOrUpload === 'link' ? (
                     <>
                       <span
-                        className="urp-optional"
+                        className="nobo-optional"
                         style={{
                           color: '#d6d6d6',
                           paddingLeft: '0.5rem',
@@ -4083,7 +4083,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         </p>
                       </span>
                       {!uploadVideoMode && (
-                        <div className="urp-video-upload-button">
+                        <div className="nobo-video-upload-button">
                           Upload Video
                           <IKContext
                             publicKey={publicKey}
@@ -4091,7 +4091,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             authenticationEndpoint={authenticationEndpoint}
                           ></IKContext>
                           <IKUpload
-                            className="urp-video-file-uploader-control"
+                            className="nobo-video-file-uploader-control"
                             publicKey={publicKey}
                             authenticationEndpoint={authenticationEndpoint}
                             urlEndpoint={urlEndpoint}
@@ -4148,14 +4148,14 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       )}
                       {!uploadVideoMode && (
                         <>
-                          <div className="urp-upload-text-or">OR</div>
-                          <div className="urp-upload-text-signup">
+                          <div className="nobo-upload-text-or">OR</div>
+                          <div className="nobo-upload-text-signup">
                             Highlight Link
                           </div>
                           <IonItem
                             style={{ marginTop: 0 }}
                             className={
-                              'urp-input' +
+                              'nobo-input' +
                               (highlightLinkValid ? '' : ' invalid')
                             }
                             lines="full"
@@ -4183,7 +4183,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <input
                           type="file"
                           ref={videoUpload}
-                          className="urp-file-upload video"
+                          className="nobo-file-upload video"
                           onChange={(ev) => onVideoFileChange(ev)}
                         ></input>
                         <IonButton
@@ -4191,7 +4191,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             e.preventDefault();
                           }}
                           color={btnColor}
-                          className="urp-upload-btn"
+                          className="nobo-upload-btn"
                           style={{
                             display: 'block',
                             marginLeft: 'auto',
@@ -4212,10 +4212,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   {validUrlRegex.test(highlightLink) && (
                     <IonItem lines="none">
                       <div style={{ width: '100%' }}>
-                        <div className="urp-highlight-video-container">
+                        <div className="nobo-highlight-video-container">
                           <iframe
                             title="highlight"
-                            className="urp-highlight-video"
+                            className="nobo-highlight-video"
                             src={embedLink(highlightLink)}
                           />
                         </div>
@@ -4226,22 +4226,22 @@ const SignUpAthlete: React.FC<Props> = (props) => {
               </IonAccordion>
             </div>
 
-            <div className="urp-section">
+            <div className="nobo-section">
               <IonAccordion id="measurables" value="measurables">
                 <IonItem
                   lines="none"
                   slot="header"
-                  className="urp-section-head"
+                  className="nobo-section-head"
                   onClick={(e) => scollToSection('measurables')}
                 >
-                  <span className="urp-step-num">5</span>
-                  <h5 className="urp-section-title">Measureables</h5>
+                  <span className="nobo-step-num">5</span>
+                  <h5 className="nobo-section-title">Measureables</h5>
                 </IonItem>
                 {/* football */}
                 {isSectionActive('football') && (
-                  <IonList className="urp-list-input" slot="content">
-                    <IonItem lines="full" className="urp-blank">
-                      <IonLabel className="urp-signup-label" position="stacked">
+                  <IonList className="nobo-list-input" slot="content">
+                    <IonItem lines="full" className="nobo-blank">
+                      <IonLabel className="nobo-signup-label" position="stacked">
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4251,7 +4251,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Wingspan
@@ -4259,7 +4259,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.wingspan}
                                 placeholder="Wingspan"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4306,7 +4306,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Vertical
@@ -4314,7 +4314,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.vertical}
                                 placeholder="Vertical"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4335,7 +4335,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Squat
@@ -4343,7 +4343,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.squat}
                                 placeholder="lbs"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4376,7 +4376,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Shuttle Time
@@ -4384,7 +4384,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.shuttleTime}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4405,7 +4405,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 40 yd Dash
@@ -4413,7 +4413,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.fortyYardDash}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4428,7 +4428,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 3-Cone Drill
@@ -4436,7 +4436,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.threeConeDrill}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4457,9 +4457,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 {/* basketball */}
                 {(isSectionActive('wbasketball') ||
                   isSectionActive('mbasketball')) && (
-                  <IonList className="urp-list-input" slot="content">
-                    <IonItem lines="full" className="urp-blank">
-                      <IonLabel className="urp-signup-label" position="stacked">
+                  <IonList className="nobo-list-input" slot="content">
+                    <IonItem lines="full" className="nobo-blank">
+                      <IonLabel className="nobo-signup-label" position="stacked">
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4469,7 +4469,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Standing vertical
@@ -4477,7 +4477,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.vertical}
                                 placeholder="Vertical"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4492,7 +4492,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 3/4 Sprint
@@ -4500,7 +4500,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.threeForthsCourtSprint}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4523,7 +4523,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Lane agility drill
@@ -4531,7 +4531,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.laneAgilityDrill}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4546,7 +4546,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Shuttle Run
@@ -4554,7 +4554,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.shuttleRun}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4574,9 +4574,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
                 {/* baseball */}
                 {isSectionActive('baseball') && (
-                  <IonList className="urp-list-input" slot="content">
-                    <IonItem lines="full" className="urp-blank">
-                      <IonLabel className="urp-signup-label" position="stacked">
+                  <IonList className="nobo-list-input" slot="content">
+                    <IonItem lines="full" className="nobo-blank">
+                      <IonLabel className="nobo-signup-label" position="stacked">
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4586,7 +4586,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Bat Speed
@@ -4594,7 +4594,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.batSpeed}
                                 placeholder="Mph"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4609,7 +4609,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Arm Velocity
@@ -4617,7 +4617,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.armVelocity}
                                 placeholder="Mph"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4638,7 +4638,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Exit Velocity
@@ -4646,7 +4646,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.exitVelocity}
                                 placeholder="Mph"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4661,7 +4661,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 60 time
@@ -4669,7 +4669,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.sixtyYardDash}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4689,9 +4689,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
                 {/* softball */}
                 {isSectionActive('softball') && (
-                  <IonList className="urp-list-input" slot="content">
-                    <IonItem lines="full" className="urp-blank">
-                      <IonLabel className="urp-signup-label" position="stacked">
+                  <IonList className="nobo-list-input" slot="content">
+                    <IonItem lines="full" className="nobo-blank">
+                      <IonLabel className="nobo-signup-label" position="stacked">
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4701,7 +4701,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Bat Speed
@@ -4709,7 +4709,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.batSpeed}
                                 placeholder="Mph"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4724,7 +4724,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Arm Velocity
@@ -4732,7 +4732,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.armVelocity}
                                 placeholder="Mph"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4753,7 +4753,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Exit Velocity
@@ -4761,7 +4761,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.exitVelocity}
                                 placeholder="Mph"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4776,7 +4776,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 60 time
@@ -4784,7 +4784,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.sixtyYardDash}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4805,9 +4805,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 {/* Volleyball */}
                 {(isSectionActive('wvolleyball') ||
                   isSectionActive('mvolleyball')) && (
-                  <IonList className="urp-list-input" slot="content">
-                    <IonItem lines="full" className="urp-blank">
-                      <IonLabel className="urp-signup-label" position="stacked">
+                  <IonList className="nobo-list-input" slot="content">
+                    <IonItem lines="full" className="nobo-blank">
+                      <IonLabel className="nobo-signup-label" position="stacked">
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4817,7 +4817,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Standing Reach
@@ -4825,7 +4825,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.standingReach}
                                 placeholder="Reach"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4841,7 +4841,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Block Jump
@@ -4849,7 +4849,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.blockJump}
                                 placeholder="Vertical"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4871,7 +4871,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Vertical Jump
@@ -4879,7 +4879,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.vertical}
                                 placeholder="Vertical"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4895,7 +4895,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Attack Jump
@@ -4903,7 +4903,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.attackJump}
                                 placeholder="Vertical"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4923,9 +4923,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 {/* Lacrosse */}
                 {(isSectionActive('wlacrosse') ||
                   isSectionActive('mlacrosse')) && (
-                  <IonList className="urp-list-input" slot="content">
-                    <IonItem lines="full" className="urp-blank">
-                      <IonLabel className="urp-signup-label" position="stacked">
+                  <IonList className="nobo-list-input" slot="content">
+                    <IonItem lines="full" className="nobo-blank">
+                      <IonLabel className="nobo-signup-label" position="stacked">
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4935,7 +4935,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Power Ball Toss
@@ -4943,7 +4943,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.powerballToss}
                                 placeholder="Feet"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4958,7 +4958,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Vertical
@@ -4966,7 +4966,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.vertical}
                                 placeholder="Vertical"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -4987,7 +4987,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Shot Speed
@@ -4995,7 +4995,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.shotSpeed}
                                 placeholder="Mph"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -5010,7 +5010,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Shuttle Time
@@ -5018,7 +5018,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.shuttleTime}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -5039,7 +5039,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 40 yd Dash
@@ -5047,7 +5047,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.fortyYardDash}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -5062,7 +5062,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 10 yd Split
@@ -5070,7 +5070,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.tenYardSplit}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -5090,9 +5090,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
                 {/* Soccer */}
                 {(isSectionActive('wsoccer') || isSectionActive('msoccer')) && (
-                  <IonList className="urp-list-input" slot="content">
-                    <IonItem lines="full" className="urp-blank">
-                      <IonLabel className="urp-signup-label" position="stacked">
+                  <IonList className="nobo-list-input" slot="content">
+                    <IonItem lines="full" className="nobo-blank">
+                      <IonLabel className="nobo-signup-label" position="stacked">
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -5102,7 +5102,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 40 Yard Dash
@@ -5110,7 +5110,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.fortyYardDash}
                                 placeholder="Seconds"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -5125,7 +5125,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Vertical Jump
@@ -5133,7 +5133,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.vertical}
                                 placeholder="Vertical"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -5154,7 +5154,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           <IonCol>
                             <IonItem lines="none">
                               <IonLabel
-                                className="urp-signup-label"
+                                className="nobo-signup-label"
                                 position="stacked"
                               >
                                 Mile Run
@@ -5162,7 +5162,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <UrpSelect
                                 value={measurables?.mileRun}
                                 placeholder="Minutes"
-                                className="urp-select-half"
+                                className="nobo-select-half"
                                 border={true}
                                 onChange={(e) => {
                                   setMeasurables({
@@ -5181,19 +5181,19 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 )}
               </IonAccordion>
             </div>
-            <div className="urp-section">
+            <div className="nobo-section">
               <IonAccordion id="offers" value="offers">
                 <IonItem
                   lines="none"
                   slot="header"
-                  className="urp-section-head"
+                  className="nobo-section-head"
                   onClick={(e) => scollToSection('offers')}
                 >
-                  <span className="urp-step-num">6</span>
-                  <h5 className="urp-section-title">Offers</h5>
+                  <span className="nobo-step-num">6</span>
+                  <h5 className="nobo-section-title">Offers</h5>
                 </IonItem>
-                <IonList className="urp-list-input" slot="content">
-                  <IonItem className="urp-input" lines="full">
+                <IonList className="nobo-list-input" slot="content">
+                  <IonItem className="nobo-input" lines="full">
                     <IonInput
                       autofocus
                       value={offersBubble.join(',')}
@@ -5291,7 +5291,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 onClick={() => {
                                   setOffers(offers.filter((o) => o !== offer));
                                 }}
-                                className={'urp-signup-tab-menu-item'}
+                                className={'nobo-signup-tab-menu-item'}
                                 style={{
                                   display: 'flex',
                                   alignItems: 'center',
@@ -5322,26 +5322,26 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 </IonList>
               </IonAccordion>
             </div>
-            <div className="urp-section">
+            <div className="nobo-section">
               <IonAccordion id="uploads" value="uploads">
                 <IonItem
                   lines="none"
                   slot="header"
-                  className="urp-section-head"
+                  className="nobo-section-head"
                   onClick={(e) => scollToSection('uploads')}
                 >
-                  <span className="urp-step-num">7</span>
-                  <h5 className="urp-section-title">Transcript Upload</h5>
+                  <span className="nobo-step-num">7</span>
+                  <h5 className="nobo-section-title">Transcript Upload</h5>
                 </IonItem>
 
-                <IonList className="urp-list-input" slot="content">
-                  <IonItem lines="full" className="urp-blank">
-                    <IonLabel className="urp-signup-label" position="stacked">
+                <IonList className="nobo-list-input" slot="content">
+                  <IonItem lines="full" className="nobo-blank">
+                    <IonLabel className="nobo-signup-label" position="stacked">
                       BLANK AREA
                     </IonLabel>
                   </IonItem>
                   <span
-                    className="urp-optional"
+                    className="nobo-optional"
                     style={{
                       color: '#9BC9C1',
                       paddingLeft: '1rem',
@@ -5369,7 +5369,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       <input
                         type="file"
                         ref={transcriptsUpload}
-                        className="urp-file-upload transcripts"
+                        className="nobo-file-upload transcripts"
                         onChange={(ev) => onTranscriptFileChange(ev)}
                         accept="image/jpg,image/png,application/pdf"
                       ></input>
@@ -5379,7 +5379,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           uploadTranscripts();
                         }}
                         color={btnColor}
-                        className="urp-upload-btn"
+                        className="nobo-upload-btn"
                       >
                         +
                       </IonButton>
@@ -5408,7 +5408,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     signUpAthlete();
                   }}
                   color={btnColor}
-                  className="urp-green-btn"
+                  className="nobo-green-btn"
                 >
                   Lets Go!
                 </IonButton>
@@ -5428,7 +5428,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     editAthlete();
                   }}
                   color={btnColor}
-                  className="urp-green-btn"
+                  className="nobo-green-btn"
                 >
                   Save
                 </IonButton>

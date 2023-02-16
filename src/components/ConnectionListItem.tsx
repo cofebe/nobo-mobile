@@ -53,7 +53,7 @@ const ConnectionListItem: React.FC<ConnectionListItemProps> = ({ connection, onD
               </div>
               <div className="connection-sport">
                 {connection.primary_sport && (
-                  <img className="logo-image" src={`assets/images/urp-badge-${connection.primary_sport?.toLowerCase()}.svg`} alt="sport" />
+                  <img className="logo-image" src={`assets/images/nobo-badge-${connection.primary_sport?.toLowerCase()}.svg`} alt="sport" />
                 )}
               </div>
               <div className="connection-position">{connection.primary_position}</div>

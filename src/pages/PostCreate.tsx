@@ -35,8 +35,8 @@ interface InternalValues {
 }
 
 const publicKey = environment?.videoLibraryPublicKey || 'public_pqTTDCXhzT8ZmQ4RFQUCQYkKY0s=';
-const authenticationEndpoint = environment?.videoAuthenticationEndpoint || 'https://api.urpplus.com/auth/video';
-const urlEndpoint = environment?.videoUrlEndpoint || 'https://ik.imagekit.io/urpvideo/';
+const authenticationEndpoint = environment?.videoAuthenticationEndpoint || 'https://api.noboplus.com/auth/video';
+const urlEndpoint = environment?.videoUrlEndpoint || 'https://ik.imagekit.io/nobovideo/';
 
 const PostCreate: React.FC = () => {
   const [userId, setUserId] = useState<number>();
@@ -344,8 +344,8 @@ const PostCreate: React.FC = () => {
         <IonGrid className="post-grid">
           <IonRow>
             <IonCol size="12">
-              <IonItem className="urp-post-input-area">
-                <div className="urp-post-input-text">
+              <IonItem className="nobo-post-input-area">
+                <div className="nobo-post-input-text">
                   <IonTextarea
                     className="post-text"
                     value={data}
@@ -360,10 +360,10 @@ const PostCreate: React.FC = () => {
                   {validUrlRegex.test(highlightLink) && showVideoLink && (
                     <span>
                       <div style={{ width: '100%' }}>
-                        <div className="urp-highlight-video-container">
+                        <div className="nobo-highlight-video-container">
                           <iframe
                             title="highlight"
-                            className="urp-highlight-video"
+                            className="nobo-highlight-video"
                             src={embedLink(highlightLink)}
                           />
                         </div>
@@ -385,16 +385,16 @@ const PostCreate: React.FC = () => {
                   src={profilePic}
                   alt="avatar"
                 ></img>
-                <div className="urp-post-tool-menu" style={{ right: '30px' }}>
+                <div className="nobo-post-tool-menu" style={{ right: '30px' }}>
                   <input
                     type="file"
                     ref={postImgeFileUploadRef}
-                    className="urp-file-upload post-image"
+                    className="nobo-file-upload post-image"
                     onChange={(ev) => onPostImageFileChange(ev)}
                     accept="image/*"
                   ></input>
                   <svg
-                    className="urp-add-image"
+                    className="nobo-add-image"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -424,7 +424,7 @@ const PostCreate: React.FC = () => {
                   </svg>
                   &nbsp; &nbsp;
                   <svg
-                    className="urp-add-video"
+                    className="nobo-add-video"
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
@@ -449,10 +449,10 @@ const PostCreate: React.FC = () => {
                   onClick={() => {
                     setShowVideoLink(!showVideoLink);
                   }}
-                  className="urp-post-tool-menu"
+                  className="nobo-post-tool-menu"
                 >
                   <svg
-                    className="urp-add-image"
+                    className="nobo-add-image"
                     width="36"
                     height="36"
                     viewBox="0 0 36 36"
@@ -474,10 +474,10 @@ const PostCreate: React.FC = () => {
 
                 </div>
 
-                {/* <div className="urp-video-file-uploader-container">
+                {/* <div className="nobo-video-file-uploader-container">
                   &nbsp; &nbsp;
                   <svg
-                    className="urp-upload-video"
+                    className="nobo-upload-video"
                     width="35"
                     height="35"
                     viewBox="0 0 24 24"
@@ -499,11 +499,11 @@ const PostCreate: React.FC = () => {
 
                 </div> */}
               </IonItem>
-              <IonGrid id="open-modal" className="urp-add-location-grid">
+              <IonGrid id="open-modal" className="nobo-add-location-grid">
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonItem button detail={true}>
-                <IonLabel className="urp-add-location-label">
+                <IonLabel className="nobo-add-location-label">
                   Add Location
                 </IonLabel>
                 <IonNote slot="end"></IonNote>
@@ -519,7 +519,7 @@ const PostCreate: React.FC = () => {
                 <>
 
                   {/* <span
-                    className="urp-optional"
+                    className="nobo-optional"
                     style={{
                       color: '#d6d6d6',
                       paddingLeft: '0.5rem',
@@ -532,7 +532,7 @@ const PostCreate: React.FC = () => {
                     </p>
                   </span> */}
 {/*                  {!uploadVideoMode &&
-                    <div className='urp-video-upload-button'>
+                    <div className='nobo-video-upload-button'>
                       Upload Video
                       <IKContext
                         publicKey={publicKey}
@@ -540,7 +540,7 @@ const PostCreate: React.FC = () => {
                         authenticationEndpoint={authenticationEndpoint}
                       ></IKContext>
                       <IKUpload
-                        className="urp-video-file-uploader-control"
+                        className="nobo-video-file-uploader-control"
                         publicKey={publicKey}
                         authenticationEndpoint={authenticationEndpoint}
                         urlEndpoint={urlEndpoint}
@@ -588,11 +588,11 @@ const PostCreate: React.FC = () => {
 
                   {!uploadVideoMode &&
                     <>
-                      {/*<div className="urp-upload-text-or">OR</div>*/}
-                      <div className="urp-upload-text-hl">Highlight Link</div>
+                      {/*<div className="nobo-upload-text-or">OR</div>*/}
+                      <div className="nobo-upload-text-hl">Highlight Link</div>
                       <IonItem
                         className={
-                          'urp-input' + (highlightLinkValid ? '' : ' invalid')
+                          'nobo-input' + (highlightLinkValid ? '' : ' invalid')
                         }
                         lines="full"
                       >
@@ -621,7 +621,7 @@ const PostCreate: React.FC = () => {
             </IonRow>
           )}
         </IonGrid>
-        <div className="urp-post-image-gallery">
+        <div className="nobo-post-image-gallery">
           {postImages.trim() !== '' &&
             postImages.split(',')?.map((pi) => {
               if (pi !== '') {
@@ -629,7 +629,7 @@ const PostCreate: React.FC = () => {
                   <div className="">
                     <img src={pi} alt="Post" />
                     <div
-                      className="urp-image-remove"
+                      className="nobo-image-remove"
                       onClick={() => {
                         removePostImage(pi);
                       }}

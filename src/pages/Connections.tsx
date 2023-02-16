@@ -101,7 +101,7 @@ const Connections: React.FC = () => {
 
 
   return (
-    <IonPage className="urp-page">
+    <IonPage className="nobo-page">
       <UrpHeader></UrpHeader>
       <IonContent className="connections-content" scrollY={true}>
         <IonRow className="connections-search-container">

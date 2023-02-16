@@ -482,10 +482,10 @@ const Explore: React.FC = () => {
                 key={searchState}
                 data-path={searchState}
               >
-                <span className={'urp-explore-tab-menu-item selected'}>
+                <span className={'nobo-explore-tab-menu-item selected'}>
                   {searchState}
                   <IonIcon
-                    className="urp-explore-close-item"
+                    className="nobo-explore-close-item"
                     size="small"
                     slot="icon-only"
                     color="#00816d"
@@ -506,10 +506,10 @@ const Explore: React.FC = () => {
                 key={searchSchool}
                 data-path={searchSchool}
               >
-                <span className={'urp-explore-tab-menu-item selected'}>
+                <span className={'nobo-explore-tab-menu-item selected'}>
                   {searchSchool}
                   <IonIcon
-                    className="urp-explore-close-item"
+                    className="nobo-explore-close-item"
                     size="small"
                     slot="icon-only"
                     color="#00816d"
@@ -530,10 +530,10 @@ const Explore: React.FC = () => {
                 key={searchCountry}
                 data-path={searchCountry}
               >
-                <span className={'urp-explore-tab-menu-item selected'}>
+                <span className={'nobo-explore-tab-menu-item selected'}>
                   {searchCountry}
                   <IonIcon
-                    className="urp-explore-close-item"
+                    className="nobo-explore-close-item"
                     size="small"
                     slot="icon-only"
                     color="#00816d"
@@ -556,10 +556,10 @@ const Explore: React.FC = () => {
                 key={searchSport}
                 data-path={searchSport}
               >
-                <span className={'urp-explore-tab-menu-item selected'}>
+                <span className={'nobo-explore-tab-menu-item selected'}>
                   {searchSport}
                   <IonIcon
-                    className="urp-explore-close-item"
+                    className="nobo-explore-close-item"
                     size="small"
                     slot="icon-only"
                     color="#00816d"
@@ -580,10 +580,10 @@ const Explore: React.FC = () => {
                 key={searchPosition}
                 data-path={searchPosition}
               >
-                <span className={'urp-explore-tab-menu-item selected'}>
+                <span className={'nobo-explore-tab-menu-item selected'}>
                   {searchPosition}
                   <IonIcon
-                    className="urp-explore-close-item"
+                    className="nobo-explore-close-item"
                     size="small"
                     slot="icon-only"
                     color="#00816d"
@@ -604,10 +604,10 @@ const Explore: React.FC = () => {
                 key={searchClass}
                 data-path={searchClass}
               >
-                <span className={'urp-explore-tab-menu-item selected'}>
+                <span className={'nobo-explore-tab-menu-item selected'}>
                   {searchClass}
                   <IonIcon
-                    className="urp-explore-close-item"
+                    className="nobo-explore-close-item"
                     size="small"
                     slot="icon-only"
                     color="#00816d"
@@ -628,10 +628,10 @@ const Explore: React.FC = () => {
                 key={searchRank}
                 data-path={searchRank}
               >
-                <span className={'urp-explore-tab-menu-item selected'}>
+                <span className={'nobo-explore-tab-menu-item selected'}>
                   {searchRank} Star
                   <IonIcon
-                    className="urp-explore-close-item"
+                    className="nobo-explore-close-item"
                     size="small"
                     slot="icon-only"
                     color="#00816d"
@@ -652,10 +652,10 @@ const Explore: React.FC = () => {
                 key={searchAward}
                 data-path={searchAward}
               >
-                <span className={'urp-explore-tab-menu-item selected'}>
+                <span className={'nobo-explore-tab-menu-item selected'}>
                   {searchAward}
                   <IonIcon
-                    className="urp-explore-close-item"
+                    className="nobo-explore-close-item"
                     size="small"
                     slot="icon-only"
                     color="#00816d"
@@ -692,7 +692,7 @@ const Explore: React.FC = () => {
               >
                 <span
                   className={
-                    'urp-explore-account-tab-menu-item ' +
+                    'nobo-explore-account-tab-menu-item ' +
                     (searchAccountType === t ? 'selected' : '')
                   }
                 >
@@ -702,9 +702,9 @@ const Explore: React.FC = () => {
             ))}
           </Swiper>
         </IonRow>
-        {/*{ (searchState !== "") && <div className="urp-explore-tab-menu-item selected">{searchState}</div> } */}
+        {/*{ (searchState !== "") && <div className="nobo-explore-tab-menu-item selected">{searchState}</div> } */}
         <IonRow className="explore-filter-row">
-          <IonCol className="urp-center" size="12">
+          <IonCol className="nobo-center" size="12">
             <IonItem
               className="home-explore-bg"
               onClick={(e) => {
@@ -723,7 +723,7 @@ const Explore: React.FC = () => {
           </IonCol>
         </IonRow>
         <IonRow className="explore-filter-row">
-          <IonCol className="urp-center" size="12">
+          <IonCol className="nobo-center" size="12">
             <IonItem
               className="home-explore-bg"
               onClick={(e) => {
@@ -742,7 +742,7 @@ const Explore: React.FC = () => {
           </IonCol>
         </IonRow>
         <IonRow className="explore-filter-row">
-          <IonCol className="urp-center" size="12">
+          <IonCol className="nobo-center" size="12">
             <IonItem
               className="home-explore-bg"
               onClick={(e) => {
@@ -761,7 +761,7 @@ const Explore: React.FC = () => {
           </IonCol>
         </IonRow>
         <IonRow className="explore-filter-row">
-          <IonCol className="urp-center" size="12">
+          <IonCol className="nobo-center" size="12">
             <IonItem
               className="home-explore-bg"
               button
@@ -814,14 +814,14 @@ const Explore: React.FC = () => {
                   >
                     <span
                       className={
-                        'urp-explore-tab-menu-item ' +
+                        'nobo-explore-tab-menu-item ' +
                         (targetSection === s.state ? 'selected' : '')
                       }
                     >
                       {s.name}
                       {targetSection === s.state && (
                         <IonIcon
-                          className="urp-explore-close-item"
+                          className="nobo-explore-close-item"
                           size="small"
                           slot="icon-only"
                           color="#00816d"
@@ -836,7 +836,7 @@ const Explore: React.FC = () => {
           </IonCol>
         </IonRow>
         <IonRow className="explore-filter-row">
-          <IonCol className="urp-center" size="12">
+          <IonCol className="nobo-center" size="12">
             <IonAccordionGroup>
               <IonAccordion disabled={targetSection === ''} value="colors">
                 <IonItem className="home-explore-bg" slot="header" button>
@@ -877,7 +877,7 @@ const Explore: React.FC = () => {
           </IonCol>
         </IonRow>
         <IonRow className="explore-filter-row">
-          <IonCol className="urp-center" size="12">
+          <IonCol className="nobo-center" size="12">
             <IonAccordionGroup>
               <IonAccordion value="colors">
                 <IonItem className="home-explore-bg" slot="header" button disabled={searchAccountType === "Organization" ? true : false}>
@@ -915,7 +915,7 @@ const Explore: React.FC = () => {
           </IonCol>
         </IonRow>
         <IonRow className="explore-filter-row">
-          <IonCol className="urp-center" size="12">
+          <IonCol className="nobo-center" size="12">
             <IonAccordionGroup>
               <IonAccordion value="colors">
                 <IonItem className="home-explore-bg" slot="header" button disabled={searchAccountType === "Organization" ? true : false}>
@@ -953,7 +953,7 @@ const Explore: React.FC = () => {
           </IonCol>
         </IonRow>
         <IonRow className="explore-filter-row">
-          <IonCol className="urp-center" size="12">
+          <IonCol className="nobo-center" size="12">
             <IonAccordionGroup>
               <IonAccordion value="colors">
                 <IonItem className="home-explore-bg" slot="header" button disabled={searchAccountType === "Organization" ? true : false}>
@@ -993,7 +993,7 @@ const Explore: React.FC = () => {
         </IonRow>
 
         <IonRow className="explore-filter-row">
-          <IonCol className="urp-center" size="11">
+          <IonCol className="nobo-center" size="11">
             <IonButton
               onClick={(e) => {
                 e.preventDefault();
@@ -1002,7 +1002,7 @@ const Explore: React.FC = () => {
               color={btnColor}
               type="submit"
               expand="block"
-              className="urp-explore-btn"
+              className="nobo-explore-btn"
             >
               Explore
             </IonButton>
@@ -1012,7 +1012,7 @@ const Explore: React.FC = () => {
 
       <IonContent className="explore-states home-explore-bg" fullscreen>
         <IonRow>
-          <IonCol className="urp-center" size="11">
+          <IonCol className="nobo-center" size="11">
             <IonToolbar className="home-explore-toolbar">
               <IonButtons
                 slot="start"
@@ -1043,7 +1043,7 @@ const Explore: React.FC = () => {
           </IonLabel>
           {states.map((s) => (
             <IonCol
-              className="urp-center"
+              className="nobo-center"
               size="11"
               onClick={(e) => {
                 setSearchStates(s);
@@ -1052,7 +1052,7 @@ const Explore: React.FC = () => {
               <IonItem
                 className={
                   'home-explore-bg ' + (searchState === s)
-                    ? 'urp-explore-highlight'
+                    ? 'nobo-explore-highlight'
                     : ''
                 }
               >
@@ -1069,7 +1069,7 @@ const Explore: React.FC = () => {
 
       <IonContent className="explore-schools home-explore-bg" fullscreen>
         <IonRow>
-          <IonCol className="urp-center" size="11">
+          <IonCol className="nobo-center" size="11">
             <IonToolbar className="home-explore-toolbar">
               <IonButtons
                 slot="start"
@@ -1102,7 +1102,7 @@ const Explore: React.FC = () => {
             if (index < 100) {
               return (
                 <IonCol
-                  className="urp-center"
+                  className="nobo-center"
                   size="11"
                   onClick={(e) => {
                     setSearchSchool(s);
@@ -1121,7 +1121,7 @@ const Explore: React.FC = () => {
 
       <IonContent className="explore-countries home-explore-bg" fullscreen>
         <IonRow>
-          <IonCol className="urp-center" size="11">
+          <IonCol className="nobo-center" size="11">
             <IonToolbar className="home-explore-toolbar">
               <IonButtons
                 slot="start"
@@ -1153,7 +1153,7 @@ const Explore: React.FC = () => {
           {countries.map((s) => {
             return (
               <IonCol
-                className="urp-center"
+                className="nobo-center"
                 size="11"
                 onClick={(e) => {
                   setSearchCountries(s);

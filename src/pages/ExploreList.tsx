@@ -377,7 +377,7 @@ const ExploreList: React.FC = () => {
                 key={searchAccountType}
                 data-path={searchAccountType}
               >
-                <span className={'urp-explore-list-tab-menu-item'}>
+                <span className={'nobo-explore-list-tab-menu-item'}>
                   {searchAccountType}
                 </span>
               </SwiperSlide>
@@ -388,7 +388,7 @@ const ExploreList: React.FC = () => {
                 key={searchState}
                 data-path={searchState}
               >
-                <span className={'urp-explore-list-tab-menu-item'}>
+                <span className={'nobo-explore-list-tab-menu-item'}>
                   {searchState}
                 </span>
               </SwiperSlide>
@@ -399,7 +399,7 @@ const ExploreList: React.FC = () => {
                 key={searchSchool}
                 data-path={searchSchool}
               >
-                <span className={'urp-explore-list-tab-menu-item'}>
+                <span className={'nobo-explore-list-tab-menu-item'}>
                   {searchSchool}
                 </span>
               </SwiperSlide>
@@ -410,7 +410,7 @@ const ExploreList: React.FC = () => {
                 key={searchCountry}
                 data-path={searchCountry}
               >
-                <span className={'urp-explore-list-tab-menu-item'}>
+                <span className={'nobo-explore-list-tab-menu-item'}>
                   {searchCountry}
                 </span>
               </SwiperSlide>
@@ -421,7 +421,7 @@ const ExploreList: React.FC = () => {
                 key={searchSport}
                 data-path={searchSport}
               >
-                <span className={'urp-explore-list-tab-menu-item'}>
+                <span className={'nobo-explore-list-tab-menu-item'}>
                   {searchSport}
                 </span>
               </SwiperSlide>
@@ -432,7 +432,7 @@ const ExploreList: React.FC = () => {
                 key={searchPosition}
                 data-path={searchPosition}
               >
-                <span className={'urp-explore-list-tab-menu-item'}>
+                <span className={'nobo-explore-list-tab-menu-item'}>
                   {searchPosition}
                 </span>
               </SwiperSlide>
@@ -443,7 +443,7 @@ const ExploreList: React.FC = () => {
                 key={searchClass}
                 data-path={searchClass}
               >
-                <span className={'urp-explore-list-tab-menu-item'}>
+                <span className={'nobo-explore-list-tab-menu-item'}>
                   {searchClass}
                 </span>
               </SwiperSlide>
@@ -454,7 +454,7 @@ const ExploreList: React.FC = () => {
                 key={searchRank}
                 data-path={searchRank}
               >
-                <span className={'urp-explore-list-tab-menu-item'}>
+                <span className={'nobo-explore-list-tab-menu-item'}>
                   {searchRank} Star
                 </span>
               </SwiperSlide>
@@ -465,7 +465,7 @@ const ExploreList: React.FC = () => {
                 key={searchAward}
                 data-path={searchAward}
               >
-                <span className={'urp-explore-list-tab-menu-item'}>
+                <span className={'nobo-explore-list-tab-menu-item'}>
                   {searchAward}
                 </span>
               </SwiperSlide>

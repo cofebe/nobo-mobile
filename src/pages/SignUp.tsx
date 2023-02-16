@@ -45,7 +45,7 @@ const Register: React.FC = () => {
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&^.[\]{}()"#/\\,><':;|_~`=+-])[A-Za-z\d@$!%*?&^.[\]{}()"#/\\,><':;|_~`=+-]{8,}$/;
     const isPasswordValid = passwordRegex.test(password);
     if (email && isPasswordValid && password) {
-      // let signup = document.querySelectorAll(".urp-signup-spinner-container");
+      // let signup = document.querySelectorAll(".nobo-signup-spinner-container");
       // signup[0].classList.add("active");
       try {
         await Auth.signUp({
@@ -56,11 +56,11 @@ const Register: React.FC = () => {
           },
         });
         console.log('confirmSignUp');
-        let signup = document.querySelectorAll('.urp-signup-container');
+        let signup = document.querySelectorAll('.nobo-signup-container');
         signup[0].classList.remove('active');
         signup[1].classList.remove('active');
 
-        let confirm = document.querySelectorAll('.urp-confirm-container');
+        let confirm = document.querySelectorAll('.nobo-confirm-container');
         confirm[0].classList.add('active');
 
         signIn(true);
@@ -184,11 +184,11 @@ const Register: React.FC = () => {
   return (
     <IonPage id="register-page">
       <IonContent>
-        <IonRow className="urp-sign-up-breather-row urp-signup-container active">
+        <IonRow className="nobo-sign-up-breather-row nobo-signup-container active">
           <IonCol>
             <img
               className="login-logo"
-              src="assets/images/urp_logo_round.jpg"
+              src="assets/images/nobo_logo_round.jpg"
               width="200"
               height="200"
               alt="logo"
@@ -196,14 +196,14 @@ const Register: React.FC = () => {
           </IonCol>
         </IonRow>
 
-        <IonGrid className="urp-desktop-login urp-signup-container active">
+        <IonGrid className="nobo-desktop-login nobo-signup-container active">
           <IonRow>
             <IonCol offset="1" size="10">
-              <IonLabel class="urp-label">Create an Account</IonLabel>
+              <IonLabel class="nobo-label">Create an Account</IonLabel>
             </IonCol>
             <IonCol offset="1" size="10">
               <IonItem lines="full">
-                <IonLabel class="urp-label" position="floating">
+                <IonLabel class="nobo-label" position="floating">
                   Email
                 </IonLabel>
                 <IonInput
@@ -216,7 +216,7 @@ const Register: React.FC = () => {
             </IonCol>
             <IonCol offset="1" size="10">
               <IonItem lines="full">
-                <IonLabel class="urp-label" position="floating">
+                <IonLabel class="nobo-label" position="floating">
                   Password
                 </IonLabel>
                 <IonInput
@@ -229,7 +229,7 @@ const Register: React.FC = () => {
             </IonCol>
             <IonCol offset="1" size="10">
               <IonItem lines="full">
-                <IonLabel class="urp-label" position="floating">
+                <IonLabel class="nobo-label" position="floating">
                   Confirm Password
                 </IonLabel>
                 <IonInput
@@ -241,11 +241,11 @@ const Register: React.FC = () => {
               </IonItem>
             </IonCol>
           </IonRow>
-          <div className="urp-signup-spinner-container">
-            <IonSpinner className="urp-spinner" name="bubbles" />
+          <div className="nobo-signup-spinner-container">
+            <IonSpinner className="nobo-spinner" name="bubbles" />
           </div>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonButton
                 onClick={(e) => {
                   e.preventDefault();
@@ -255,12 +255,12 @@ const Register: React.FC = () => {
                 disabled={!validate()}
                 type="submit"
                 expand="block"
-                className="urp-login-btn"
+                className="nobo-login-btn"
               >
                 Create Account
               </IonButton>
             </IonCol>
-            <IonCol className="urp-center login-sign-up-container" size="11">
+            <IonCol className="nobo-center login-sign-up-container" size="11">
               Already have an account?{' '}
               <a className="login-sign-up" href="/login">
                 Sign In
@@ -269,8 +269,8 @@ const Register: React.FC = () => {
           </IonRow>
         </IonGrid>
 
-        <IonGrid className="urp-desktop-login urp-confirm-container">
-          <span className="urp-confirm-email-image">
+        <IonGrid className="nobo-desktop-login nobo-confirm-container">
+          <span className="nobo-confirm-email-image">
             <svg
               width="62"
               height="62"
@@ -297,17 +297,17 @@ const Register: React.FC = () => {
             </svg>
           </span>
           <IonRow>
-            <IonText class="urp-confirm-title">Confirm Your Email</IonText>
-            <IonText class="urp-confirm-text">
+            <IonText class="nobo-confirm-title">Confirm Your Email</IonText>
+            <IonText class="nobo-confirm-text">
               Thank you for signing up! We sent a confirmation email to
             </IonText>
-            <IonText class="urp-confirm-text urp-confirm-email">
+            <IonText class="nobo-confirm-text nobo-confirm-email">
               {email}
             </IonText>
-            <IonText class="urp-confirm-text">
+            <IonText class="nobo-confirm-text">
               Check your email and click on the confirmation link to continue
             </IonText>
-            <IonCol className="urp-center" size="12">
+            <IonCol className="nobo-center" size="12">
               <IonButton
                 onClick={(e) => {
                   e.preventDefault();
@@ -316,13 +316,13 @@ const Register: React.FC = () => {
                 color={btnColor}
                 type="submit"
                 expand="block"
-                className="urp-login-btn"
+                className="nobo-login-btn"
                 style={{ marginTop: '20px' }}
               >
                 Return to Sign Up
               </IonButton>
             </IonCol>
-            <IonText class="urp-resend-text urp-confirm-text">
+            <IonText class="nobo-resend-text nobo-confirm-text">
               Didn’t get a verification email?
               <a
                 href="#"
@@ -336,8 +336,8 @@ const Register: React.FC = () => {
               </a>
             </IonText>
           </IonRow>
-          <div className="urp-confirm-spinner-container active">
-            <IonSpinner className="urp-spinner" name="bubbles" />
+          <div className="nobo-confirm-spinner-container active">
+            <IonSpinner className="nobo-spinner" name="bubbles" />
           </div>
         </IonGrid>
       </IonContent>

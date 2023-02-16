@@ -364,7 +364,7 @@ const Home: React.FC = () => {
             </Route>
           </IonRouterOutlet>
         )}
-        <IonTabBar className={'urp-nav-bar ' + (isDesktop ? 'desktop' : '')} slot={navbarLocation}>
+        <IonTabBar className={'nobo-nav-bar ' + (isDesktop ? 'desktop' : '')} slot={navbarLocation}>
           {isBrowser ? (
             <IonTabButton
               tab="logo"
@@ -374,7 +374,7 @@ const Home: React.FC = () => {
               onClick={(e) => setActiveTab('home', e)}
             >
               <img
-                src="assets/images/urp_logo_rounded_small.png"
+                src="assets/images/nobo_logo_rounded_small.png"
                 alt="URP+"
                 style={{ width: '42px' }}
               />
@@ -390,7 +390,7 @@ const Home: React.FC = () => {
               onClick={(e) => setActiveTab('home', e)}
             >
               <img
-                className="urp-nav-btn"
+                className="nobo-nav-btn"
                 src={`assets/images/navigation/nav-home${appMode === 'home' ? '-focus' : ''}.svg`}
                 style={{ width: '1.62rem' }}
                 alt="home"
@@ -407,7 +407,7 @@ const Home: React.FC = () => {
               onClick={(e) => setActiveTab('explore', e)}
             >
               <img
-                className="urp-nav-btn"
+                className="nobo-nav-btn"
                 src={`assets/images/navigation/nav-explore${
                   appMode === 'explore' ? '-focus' : ''
                 }.svg`}
@@ -426,7 +426,7 @@ const Home: React.FC = () => {
               onClick={(e) => setActiveTab('messages', e)}
             >
               <img
-                className="urp-nav-btn"
+                className="nobo-nav-btn"
                 src={`assets/images/navigation/nav-messages${
                   appMode === 'messages' ? '-focus' : ''
                 }.svg`}
@@ -445,7 +445,7 @@ const Home: React.FC = () => {
               onClick={(e) => setActiveTab('connections', e)}
             >
               <img
-                className="urp-nav-btn"
+                className="nobo-nav-btn"
                 src={`assets/images/navigation/nav-connections${
                   appMode === 'connections' ? '-focus' : ''
                 }.svg`}
@@ -464,7 +464,7 @@ const Home: React.FC = () => {
               onClick={(e) => setActiveTab('my-profile', e)}
             >
               <img
-                className="urp-nav-btn"
+                className="nobo-nav-btn"
                 src={`assets/images/navigation/nav-profile${
                   appMode === 'my-profile' ? '-focus' : ''
                 }.svg`}

@@ -39,8 +39,8 @@ const AwardsSection: React.FC<AwardsSectionProps> = ({
     ) {
       showAward = true;
       awards.push(
-        <IonItem lines="none" className="urp-section-item" detail={false}>
-          <div className="urp-section-item-label">{award.award}</div>
+        <IonItem lines="none" className="nobo-section-item" detail={false}>
+          <div className="nobo-section-item-label">{award.award}</div>
           <div>{award.description}</div>
         </IonItem>
       );
@@ -49,12 +49,12 @@ const AwardsSection: React.FC<AwardsSectionProps> = ({
 
   if (!showAward && myProfile) {
     awards.push(
-      <div className="urp-highlight-add-media-container urp-highlight-add-media-container">
-        <p className="urp-highlight-add-media-title">
+      <div className="nobo-highlight-add-media-container nobo-highlight-add-media-container">
+        <p className="nobo-highlight-add-media-title">
           Uh! Looks like you haven’t added any awards to your account yet
         </p>
         <p
-          className="urp-highlight-add-media-text"
+          className="nobo-highlight-add-media-text"
           onClick={(e) => {
             e.preventDefault();
             history.push(`edit-athlete/${userId}`);
@@ -68,15 +68,15 @@ const AwardsSection: React.FC<AwardsSectionProps> = ({
 
   if (!showAward && !myProfile) {
     awards.push(
-      <div className="urp-highlight-add-media-container">
-        <p className="urp-highlight-add-media-title">
+      <div className="nobo-highlight-add-media-container">
+        <p className="nobo-highlight-add-media-title">
           Uh! Looks like the user hasn't added any awards yet
         </p>
       </div>
     );
   }
 
-  return <div className={className + " urp-awards-section"}><IonContent>{awards}</IonContent></div>;
+  return <div className={className + " nobo-awards-section"}><IonContent>{awards}</IonContent></div>;
 };
 
 export default AwardsSection;

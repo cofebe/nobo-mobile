@@ -18,26 +18,26 @@ const Roles: React.FC = () => {
   const history = useHistory();
   const btnColor = '#00816D';
   return (
-    <IonPage className="urp-page" id="roles-page">
+    <IonPage className="nobo-page" id="roles-page">
       <IonContent scrollY={false}>
-        <IonGrid className="urp-desktop-login">
+        <IonGrid className="nobo-desktop-login">
           <IonRow>
             <IonCol class="ion-text-center">
               <img
                 className="logo-image logo-image-margin"
-                src="assets/images/urp_logo_round.svg"
+                src="assets/images/nobo_logo_round.svg"
                 width="150"
                 height="150"
                 alt="logo"
               />
-              <div className="urp-sub-header">Select your Role</div>
+              <div className="nobo-sub-header">Select your Role</div>
             </IonCol>
           </IonRow>
-          <form className="urp-form">
+          <form className="nobo-form">
             <IonRow>
-              <IonCol className="urp-center" size="11">
+              <IonCol className="nobo-center" size="11">
                 <IonButton
-                  className="urp-basic-btn"
+                  className="nobo-basic-btn"
                   onClick={(e) => {
                     e.preventDefault();
                     history.push({
@@ -53,9 +53,9 @@ const Roles: React.FC = () => {
               </IonCol>
             </IonRow>
             <IonRow>
-              <IonCol className="urp-center" size="11">
+              <IonCol className="nobo-center" size="11">
                 <IonButton
-                  className="urp-basic-btn"
+                  className="nobo-basic-btn"
                   onClick={(e) => {
                     e.preventDefault();
                     history.push({
@@ -71,9 +71,9 @@ const Roles: React.FC = () => {
               </IonCol>
             </IonRow>
             <IonRow>
-              <IonCol className="urp-center" size="11">
+              <IonCol className="nobo-center" size="11">
                 <IonButton
-                  className="urp-basic-btn"
+                  className="nobo-basic-btn"
                   onClick={(e) => {
                     e.preventDefault();
                     history.push({

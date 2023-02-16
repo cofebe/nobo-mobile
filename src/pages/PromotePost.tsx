@@ -41,51 +41,51 @@ const PromotePost: React.FC = () => {
     if (environment.disableBrowser) {
       switch (cost) {
         case 0.99:
-          setAppleProductId('com.urp.promotedpost.1day');
+          setAppleProductId('com.nobo.promotedpost.1day');
           break;
         case 1.99:
-          setAppleProductId('com.urp.promotedpost.2day');
+          setAppleProductId('com.nobo.promotedpost.2day');
           break;
         case 2.99:
-          setAppleProductId('com.urp.promotedpost.3day');
+          setAppleProductId('com.nobo.promotedpost.3day');
           break;
         case 3.99:
-          setAppleProductId('com.urp.promotedpost.4day');
+          setAppleProductId('com.nobo.promotedpost.4day');
           break;
         case 4.99:
-          setAppleProductId('com.urp.promotedpost.5day');
+          setAppleProductId('com.nobo.promotedpost.5day');
           break;
         case 5.99:
-          setAppleProductId('com.urp.promotedpost.6day');
+          setAppleProductId('com.nobo.promotedpost.6day');
           break;
         case 6.99:
-          setAppleProductId('com.urp.promotedpost.1week');
+          setAppleProductId('com.nobo.promotedpost.1week');
           break;
         default:
           setAppleProductId('');
       }
     } else {
       switch (cost) {
-        case subscriptionService.getProductPrice('com.urp.promotedpost.1day'):
-          setAppleProductId('com.urp.promotedpost.1day');
+        case subscriptionService.getProductPrice('com.nobo.promotedpost.1day'):
+          setAppleProductId('com.nobo.promotedpost.1day');
           break;
-        case subscriptionService.getProductPrice('com.urp.promotedpost.2day'):
-          setAppleProductId('com.urp.promotedpost.2day');
+        case subscriptionService.getProductPrice('com.nobo.promotedpost.2day'):
+          setAppleProductId('com.nobo.promotedpost.2day');
           break;
-        case subscriptionService.getProductPrice('com.urp.promotedpost.3day'):
-          setAppleProductId('com.urp.promotedpost.3day');
+        case subscriptionService.getProductPrice('com.nobo.promotedpost.3day'):
+          setAppleProductId('com.nobo.promotedpost.3day');
           break;
-        case subscriptionService.getProductPrice('com.urp.promotedpost.4day'):
-          setAppleProductId('com.urp.promotedpost.4day');
+        case subscriptionService.getProductPrice('com.nobo.promotedpost.4day'):
+          setAppleProductId('com.nobo.promotedpost.4day');
           break;
-        case subscriptionService.getProductPrice('com.urp.promotedpost.5day'):
-          setAppleProductId('com.urp.promotedpost.5day');
+        case subscriptionService.getProductPrice('com.nobo.promotedpost.5day'):
+          setAppleProductId('com.nobo.promotedpost.5day');
           break;
-        case subscriptionService.getProductPrice('com.urp.promotedpost.6day'):
-          setAppleProductId('com.urp.promotedpost.6day');
+        case subscriptionService.getProductPrice('com.nobo.promotedpost.6day'):
+          setAppleProductId('com.nobo.promotedpost.6day');
           break;
-        case subscriptionService.getProductPrice('com.urp.promotedpost.1week'):
-          setAppleProductId('com.urp.promotedpost.1week');
+        case subscriptionService.getProductPrice('com.nobo.promotedpost.1week'):
+          setAppleProductId('com.nobo.promotedpost.1week');
           break;
         default:
           setAppleProductId('');
@@ -134,31 +134,31 @@ const PromotePost: React.FC = () => {
       switch (duration) {
         case 1:
           return subscriptionService.getProductPrice(
-            'com.urp.promotedpost.1day'
+            'com.nobo.promotedpost.1day'
           );
         case 2:
           return subscriptionService.getProductPrice(
-            'com.urp.promotedpost.2day'
+            'com.nobo.promotedpost.2day'
           );
         case 3:
           return subscriptionService.getProductPrice(
-            'com.urp.promotedpost.3day'
+            'com.nobo.promotedpost.3day'
           );
         case 4:
           return subscriptionService.getProductPrice(
-            'com.urp.promotedpost.4day'
+            'com.nobo.promotedpost.4day'
           );
         case 5:
           return subscriptionService.getProductPrice(
-            'com.urp.promotedpost.5day'
+            'com.nobo.promotedpost.5day'
           );
         case 6:
           return subscriptionService.getProductPrice(
-            'com.urp.promotedpost.6day'
+            'com.nobo.promotedpost.6day'
           );
         case 7:
           return subscriptionService.getProductPrice(
-            'com.urp.promotedpost.1week'
+            'com.nobo.promotedpost.1week'
           );
         default:
           return 0;
@@ -279,7 +279,7 @@ const PromotePost: React.FC = () => {
                 color="#00816D"
                 type="submit"
                 expand="block"
-                className="urp-upgrade-plan-btn"
+                className="nobo-upgrade-plan-btn"
               >
                 Promote Post
               </IonButton>

@@ -206,8 +206,8 @@ const PersonalTrainingSection: React.FC<PersonalTrainingSectionProps> = ({
 
   return (
     <div
-      id="urp-personal-training-section"
-      className={'urp-personal-training-section ' + className}
+      id="nobo-personal-training-section"
+      className={'nobo-personal-training-section ' + className}
     >
       <IonContent style={{ fontSize: '10px' }}>
         <div
@@ -535,7 +535,7 @@ const PersonalTrainingSection: React.FC<PersonalTrainingSectionProps> = ({
               </IonItem>
               <IonItem style={{ fontSize: '12px' }} lines="full">
                 <IonLabel position="stacked">
-                  Description <span className="urp-optional">Optional</span>
+                  Description <span className="nobo-optional">Optional</span>
                 </IonLabel>
                 <IonItem
                   style={{

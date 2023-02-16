@@ -13,11 +13,11 @@ interface NotificationsItemProps {
 const NotificationItem: React.FC<NotificationsItemProps> = ({notification}) => {
 
   return (
-    <IonRow className="urp-notification-container">
-      <IonCol className="urp-notification-name" size="5">
+    <IonRow className="nobo-notification-container">
+      <IonCol className="nobo-notification-name" size="5">
         {notification.subject}
       </IonCol>
-      <IonCol className="urp-notification-message" size="6">
+      <IonCol className="nobo-notification-message" size="6">
         {notification.message}
       </IonCol>
     </IonRow>

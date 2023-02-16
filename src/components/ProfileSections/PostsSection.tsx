@@ -68,27 +68,27 @@ const PostsSection: React.FC<PostsSectionProps> = ({ className, myProfile, userI
   };
 
   return (
-    <div className={'urp-post-section ' + className}>
+    <div className={'nobo-post-section ' + className}>
       <IonContent className="posts-content">
         <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
-        <IonList lines='none' className="urp-list-background">
+        <IonList lines='none' className="nobo-list-background">
           {messages.length > 0 && messages.map(m => <div><FeedListItem key={m.post_id} message={m} disableProfileLink={true} />
 
           </div>)}
           { messages.length === 0 && myProfile &&
-          <div className="urp-highlight-add-media-container urp-highlight-add-media-container">
-              <p className="urp-highlight-add-media-title">Uh! Looks  like you haven’t added any posts to your account yet</p>
-              <p className="urp-highlight-add-media-text"
+          <div className="nobo-highlight-add-media-container nobo-highlight-add-media-container">
+              <p className="nobo-highlight-add-media-title">Uh! Looks  like you haven’t added any posts to your account yet</p>
+              <p className="nobo-highlight-add-media-text"
                   onClick={(e) => {
                       e.preventDefault();
                       history.push("/home/feed");
                   }}>Add Posts</p>
           </div>}
           { messages.length === 0 && !myProfile &&
-            <div className="urp-highlight-add-media-container">
-              <p className="urp-highlight-add-media-title">Uh! Looks like the user hasn't added any posts yet</p>
+            <div className="nobo-highlight-add-media-container">
+              <p className="nobo-highlight-add-media-title">Uh! Looks like the user hasn't added any posts yet</p>
             </div>
           }
         </IonList>

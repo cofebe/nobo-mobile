@@ -69,14 +69,14 @@ const PraiseSection: React.FC<PraiseSectionProps> = ({
   };
 
   return (
-    <div className={"urp-praise-section " + className}>
+    <div className={"nobo-praise-section " + className}>
       <IonContent className="posts-content">
         <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
-        <IonList lines="none" className="urp-list-background">
+        <IonList lines="none" className="nobo-list-background">
           {praises.map((p) => (
-            <IonItem key={p.praise_id} className="urp-praise-item" onClick={(e) => {
+            <IonItem key={p.praise_id} className="nobo-praise-item" onClick={(e) => {
               e.preventDefault();
               viewUser(history, p.user_id, p.account_type);
             }}>

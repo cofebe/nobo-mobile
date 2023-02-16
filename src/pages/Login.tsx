@@ -95,7 +95,7 @@ const Login: React.FC = () => {
     const isPasswordValid = passwordRegex.test(password);
     if (email && isPasswordValid && password) {
       setShowErrorPassword(false);
-      let spinner = document.querySelectorAll('.urp-spinner-login-container');
+      let spinner = document.querySelectorAll('.nobo-spinner-login-container');
       spinner[0].classList.add('active');
 
       try {
@@ -198,7 +198,7 @@ const Login: React.FC = () => {
       })
       .catch((err) => {
         showError(0, err);
-        let spinner = document.querySelectorAll('.urp-spinner-login-container');
+        let spinner = document.querySelectorAll('.nobo-spinner-login-container');
         spinner[0].classList.add('active');
         spinner[0].classList.remove('active');
         console.log('Error Email: ', email);
@@ -250,25 +250,25 @@ const Login: React.FC = () => {
   return (
     <IonPage id="login-page">
       <IonContent>
-        <div className="urp-spinner-login-container">
-          <IonSpinner className="urp-spinner" name="bubbles" />
+        <div className="nobo-spinner-login-container">
+          <IonSpinner className="nobo-spinner" name="bubbles" />
         </div>
         <IonRow className="breather-row">
           <IonCol>
             <img
               className="login-logo"
-              src="assets/images/urp_logo_round.jpg"
+              src="assets/images/nobo_logo_round.jpg"
               width="200"
               height="200"
               alt="logo"
             />
           </IonCol>
         </IonRow>
-        <IonGrid className="urp-desktop-login">
+        <IonGrid className="nobo-desktop-login">
           <IonRow>
             <IonCol offset="1" size="10">
               <IonItem lines="full">
-                <IonLabel className="urp-label" position="floating">
+                <IonLabel className="nobo-label" position="floating">
                   Email
                 </IonLabel>
                 <IonInput
@@ -281,7 +281,7 @@ const Login: React.FC = () => {
             </IonCol>
             <IonCol offset="1" size="10">
               <IonItem lines="full">
-                <IonLabel className="urp-label" position="floating">
+                <IonLabel className="nobo-label" position="floating">
                   Password
                 </IonLabel>
                 <IonInput
@@ -306,7 +306,7 @@ const Login: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol className="urp-center" size="11">
+            <IonCol className="nobo-center" size="11">
               <IonButton
                 onClick={(e) => {
                   e.preventDefault();
@@ -316,12 +316,12 @@ const Login: React.FC = () => {
                 disabled={!validate()}
                 type="submit"
                 expand="block"
-                className="urp-login-btn"
+                className="nobo-login-btn"
               >
                 Login
               </IonButton>
             </IonCol>
-            <IonCol className="urp-center login-sign-up-container" size="11">
+            <IonCol className="nobo-center login-sign-up-container" size="11">
               Don't have an account?{' '}
               <a className="login-sign-up" href="/signup">
                 Sign Up

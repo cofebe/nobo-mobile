@@ -26,9 +26,9 @@ const Splash: React.FC = () => {
   }
 
   return (
-    <IonPage id="urp-splash-page">
-      <div className="urp-splash-backdrop">
-        <img className="splash-logo" src="assets/images/urp_logo_rounded.png" width="200" height="200" alt="logo" />
+    <IonPage id="nobo-splash-page">
+      <div className="nobo-splash-backdrop">
+        <img className="splash-logo" src="assets/images/nobo_logo_rounded.png" width="200" height="200" alt="logo" />
       </div>
     </IonPage>
   )

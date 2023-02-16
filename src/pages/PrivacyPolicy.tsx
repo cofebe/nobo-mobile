@@ -20,7 +20,7 @@ const PrivacyPolicy: React.FC = () => {
   const history = useHistory();
 
   function emailSupport(subject: string) {
-    window.location.href = `mailto:support@urpplus.com?subject=${subject}`;
+    window.location.href = `mailto:support@noboplus.com?subject=${subject}`;
   }
 
   return (
@@ -69,7 +69,7 @@ const PrivacyPolicy: React.FC = () => {
             our policies and practices, do not download, register with, or use our
             Service. By downloading, registering with, or using the Service, you agree
             to this privacy policy. This policy may change from time to time (see
-            https://www.urpplus.com/privacy-policy) Your continued use of our Service after we
+            https://www.noboplus.com/privacy-policy) Your continued use of our Service after we
             revise this policy means you accept those changes, so please check the
             policy periodically for updates.
             <h4>CHILDREN UNDER THE AGE OF 13</h4>
@@ -156,7 +156,7 @@ const PrivacyPolicy: React.FC = () => {
             addition, we may disclose children's personal information:
             <p style={{paddingLeft: "1rem"}}>• To third parties we use to support the internal operations of our
             Service and who are bound by contractual or other obligations
-            to use the information only for such purpose and to keep the
+            to use the information only for such pnoboose and to keep the
             information confidential.</p>
             <p style={{paddingLeft: "1rem"}}>• If we are required to do so by law or legal process, such as to
             comply with any court order or subpoena or to respond to any
@@ -186,7 +186,7 @@ const PrivacyPolicy: React.FC = () => {
             by:
             <p style={{paddingLeft: "1rem"}}>- Logging into your child’s account and visiting his or her
             account profile page.</p>
-            <p style={{paddingLeft: "1rem"}}>- Sending us an email at support@urpplus.com. To protect
+            <p style={{paddingLeft: "1rem"}}>- Sending us an email at support@noboplus.com. To protect
             your privacy and security, we may require you to take certain
             steps or provide additional information to verify your identity
             before we provide any information or make corrections.</p>
@@ -219,7 +219,7 @@ const PrivacyPolicy: React.FC = () => {
             <p style={{paddingLeft: "1rem"}}>• Records and copies of your correspondence (including email
             addresses and phone numbers), if you contact us.</p>
             <p style={{paddingLeft: "1rem"}}>• Your responses to surveys that we might ask you to complete for
-            research purposes.</p>
+            research pnobooses.</p>
             <p style={{paddingLeft: "1rem"}}>• Your search queries on the Service.</p>
             You may also provide information for publication or display ("Posted") on
             public areas of the app or websites you access through the Service
@@ -248,7 +248,7 @@ const PrivacyPolicy: React.FC = () => {
             information about the location of your device.</p>
             If you do not want us to collect this information do not download the
             Application or access the Website or delete it from your device. You may
-            opt out at any time by contacting us at support@urpplus.com. For more
+            opt out at any time by contacting us at support@noboplus.com. For more
             information, see <a id="how-we-use">"Choices About How We Use and Disclose Your
             Information."</a> Note, however, that opting out of the Service’s collection of
             location information will disable its location-based features.
@@ -276,7 +276,7 @@ const PrivacyPolicy: React.FC = () => {
             including any personal information, to:
             <p style={{paddingLeft: "1rem"}}>• Provide you with the Service and its contents, and any other
             information, products or services that you request from us.</p>
-            <p style={{paddingLeft: "1rem"}}>• Fulfill any other purpose for which you provide it.</p>
+            <p style={{paddingLeft: "1rem"}}>• Fulfill any other pnoboose for which you provide it.</p>
             <p style={{paddingLeft: "1rem"}}>• Carry out our obligations and enforce our rights arising from any
             contracts entered into between you and us, including for billing and
             collection.</p>
@@ -299,9 +299,9 @@ const PrivacyPolicy: React.FC = () => {
             <p style={{paddingLeft: "1rem"}}>• To contractors, service providers, and other third parties we use to</p>
             support our business and who are bound by contractual obligations to
             keep personal information confidential and use it only for the
-            purposes for which we disclose it to them.
-            <p style={{paddingLeft: "1rem"}}>• To fulfill the purpose for which you provide it.</p>
-            <p style={{paddingLeft: "1rem"}}>• For any other purpose disclosed by us when you provide the</p>
+            pnobooses for which we disclose it to them.
+            <p style={{paddingLeft: "1rem"}}>• To fulfill the pnoboose for which you provide it.</p>
+            <p style={{paddingLeft: "1rem"}}>• For any other pnoboose disclosed by us when you provide the</p>
             information.
             <p style={{paddingLeft: "1rem"}}>• With your consent.</p>
             <p style={{paddingLeft: "1rem"}}>• To comply with any court order, law, or legal process, including to
@@ -330,25 +330,25 @@ const PrivacyPolicy: React.FC = () => {
             <p style={{paddingLeft: "1rem"}}>• Promotion by the Company. If you do not want us to use your email
             address or contact information to promote our own or third parties’
             products or services, you can opt-out by emailing us at
-            support@urpplus.com. You can also always opt-out by logging into
+            support@noboplus.com. You can also always opt-out by logging into
             the Service and adjusting your user preferences in your account
             profile by checking or unchecking the relevant boxes or by sending us
-            an email stating your request to support@urpplus.com.</p>
+            an email stating your request to support@noboplus.com.</p>
             <p style={{paddingLeft: "1rem"}}>• Targeted Advertising by the Company. If you do not want us to use
             information that we collect or that you provide to us to deliver
             advertisements according to our advertisers’ target-audience
-            preferences, you can opt-out by emailing us at support@urpplus.com.
+            preferences, you can opt-out by emailing us at support@noboplus.com.
             You can also always adjust your user advertising preferences in your
             account profile or by sending us an email stating your request to
-            support@urpplus.com.</p>
+            support@noboplus.com.</p>
             <p style={{paddingLeft: "1rem"}}>• Disclosure of Your Information for Third- Party Advertising and
             Marketing. If you do not want us to share your personal information
             with unaffiliated or non-agent third parties for advertising and
-            marketing purposes, you can opt-out by emailing us at
-            support@urpplus.com. You can also always opt-out by logging into
+            marketing pnobooses, you can opt-out by emailing us at
+            support@noboplus.com. You can also always opt-out by logging into
             the Service and adjusting your user preferences in your account
             profile by checking or unchecking the relevant boxes or by sending us
-            an email stating your request to support@urpplus.com.</p>
+            an email stating your request to support@noboplus.com.</p>
 
             We do not control third parties' collection or use of your information to
             serve interest-based advertising. However, these third parties may
@@ -363,7 +363,7 @@ const PrivacyPolicy: React.FC = () => {
             <h4>Accessing and Correcting Your Personal Information</h4>
             You can review and change your personal information by logging into the
             Service and visiting your account profile page.
-            You may also send us an email at support@urpplus.com to request access
+            You may also send us an email at support@noboplus.com to request access
             to, correct, or delete any personal information that you have provided to us.
             We cannot delete your personal information except by also deleting your
             user account. We may not accommodate a request to change information if
@@ -384,8 +384,8 @@ const PrivacyPolicy: React.FC = () => {
             https://thecpra.org/. [California’s "Shine the Light" law (Civil Code Section §
             1798.83) permits users of our Service that are California residents to
             request certain information regarding our disclosure of personal information
-            to third parties for their direct marketing purposes. To make such a request,
-            please send an email to support@urpplus.com.
+            to third parties for their direct marketing pnobooses. To make such a request,
+            please send an email to support@noboplus.com.
             <h4>Data Security</h4>
             We have implemented measures designed to secure your personal
             information from accidental loss and from unauthorized access, use,
@@ -419,7 +419,7 @@ const PrivacyPolicy: React.FC = () => {
             <p>27472 Portola Pkwy</p>
             <p>Suite 205-108</p>
             <p>Foothill Ranch, CA 92610</p>
-            <p>support@urpplus.com</p>
+            <p>support@noboplus.com</p>
           </IonCol>
         </IonRow>
       </IonContent>

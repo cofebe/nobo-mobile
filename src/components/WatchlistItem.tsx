@@ -58,7 +58,7 @@ const WatchlistItem: React.FC<WatchlistItemProps> = ({ profile, notes }) => {
                 // className="watchlist-list-feed-image"
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null; // prevents looping
-                  currentTarget.src = '../../assets/images/urp_logo_round.svg';
+                  currentTarget.src = '../../assets/images/nobo_logo_round.svg';
                 }}
                 src={profile.basic_user_profile.profile_image.String}
                 alt="avatar"
@@ -87,7 +87,7 @@ const WatchlistItem: React.FC<WatchlistItemProps> = ({ profile, notes }) => {
                   {profile.athlete_user_profile.primary_sport.String ? (
                     <img
                       className="feed-list-logo-image"
-                      src={`assets/images/urp-badge-${profile.athlete_user_profile.primary_sport.String}.svg`}
+                      src={`assets/images/nobo-badge-${profile.athlete_user_profile.primary_sport.String}.svg`}
                       alt={profile.athlete_user_profile.primary_sport.String}
                     />
                   ) : (

@@ -1,6 +1,6 @@
 {
-  "appId": "com.urp.urp",
-  "appName": "URP+",
+  "appId": "com.the.nobo",
+  "appName": "The NOBO",
   "webDir": "build",
   "bundledWebRuntime": false,
   "plugins": {

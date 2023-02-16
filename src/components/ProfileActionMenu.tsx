@@ -23,7 +23,7 @@ const ProfileActionMenu: React.FC<ProfileActionMenuProps> = ({
   style,
 }) => {
   return (
-    <IonItem style={style} className="urp-action-menu">
+    <IonItem style={style} className="nobo-action-menu">
       <div
         onClick={(e) => {
           e.preventDefault();

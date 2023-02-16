@@ -86,7 +86,7 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
               }}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = '../../assets/images/urp_logo_round.svg';
+                currentTarget.src = '../../assets/images/nobo_logo_round.svg';
               }}
               src={msgComment.profile_image}
               alt="avatar"
@@ -95,7 +95,7 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
         </IonCol>
         <IonCol className="feed-content" size="10" sizeMd="5" sizeLg="5">
           <h2
-            className="feed-list-urp-badge-line"
+            className="feed-list-nobo-badge-line"
             onClick={(e) => {
               e.preventDefault();
               viewUser(history, msgComment.user_id, msgComment.account_type);
@@ -124,7 +124,7 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
                     />
                   </svg>
                 </div>
-                <div className="feed-list-urp-likes-count">
+                <div className="feed-list-nobo-likes-count">
                   {/*msgComment.like_count*/}
                 </div>
               </div>
@@ -145,7 +145,7 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
                     />
                   </svg>
                 </div>
-                <div className="feed-list-urp-likes-count">
+                <div className="feed-list-nobo-likes-count">
                   {/*msgComment.like_count*/}
                 </div>
               </div>

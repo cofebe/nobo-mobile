@@ -62,11 +62,11 @@ const ProfileFollowButton: React.FC<ProfileFollowButtonProps> = ({
 
     if (data.my_user_type === 'coach') {
       setUserSubscribed(
-        subscriptionService.isSubscribed('com.urp.coachrecruiter.1month')
+        subscriptionService.isSubscribed('com.nobo.coachrecruiter.1month')
       );
     } else if (data.my_user_type === 'trainer') {
       setUserSubscribed(
-        subscriptionService.isSubscribed('com.urp.trainer.1month')
+        subscriptionService.isSubscribed('com.nobo.trainer.1month')
       );
     }
 
@@ -286,15 +286,15 @@ const ProfileFollowButton: React.FC<ProfileFollowButtonProps> = ({
         ))}
       </div>
       {showBottomMenu && profile !== undefined && (
-        <div className="urp-watchlist-praiseModal-back">
-          <div className="urp-watchlist-bottom-menu">
+        <div className="nobo-watchlist-praiseModal-back">
+          <div className="nobo-watchlist-bottom-menu">
             <div style={{ paddingTop: '12px' }}>
               <WatchlistItem profile={profile}></WatchlistItem>
             </div>
 
-            <div className="urp-add-to-watchlist">
+            <div className="nobo-add-to-watchlist">
               <IonItem lines="full">
-                <IonLabel class="urp-label" position="floating">
+                <IonLabel class="nobo-label" position="floating">
                   Add Note
                 </IonLabel>
                 <IonInput
@@ -305,7 +305,7 @@ const ProfileFollowButton: React.FC<ProfileFollowButtonProps> = ({
                   onIonChange={(e) => setWatchlistNotes(e.detail.value!)}
                 ></IonInput>
               </IonItem>
-              <div className="urp-watchlist-add-button">
+              <div className="nobo-watchlist-add-button">
                 <a
                   href="#"
                   onClick={(e) => {

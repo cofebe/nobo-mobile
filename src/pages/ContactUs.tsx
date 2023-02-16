@@ -20,7 +20,7 @@ const ContactUs: React.FC = () => {
   const history = useHistory();
 
   function emailSupport(subject: string) {
-    window.location.href = `mailto:support@urpplus.com?subject=${subject}`;
+    window.location.href = `mailto:support@noboplus.com?subject=${subject}`;
   }
 
   return (
