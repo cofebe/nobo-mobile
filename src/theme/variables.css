@@ -3,7 +3,7 @@ http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
 :root {
-  --ion-color-primary: rgba(0, 214, 182, 1);
+  --ion-color-primary: #d6980e;
   --ion-color-primary-rgb: 0, 0, 0;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -60,8 +60,25 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-tint: #f5f6f9;
 }
 
-ion-toast.error-message {
+/* ion-toast.error-message {
   color: #ffffff;
   --background: #dfcc31;
   --button-color: #ffffff !important;
+} */
+
+.nobo-button {
+  background-color: #d6980e;
+  border: 0.5px solid #ffffff;
+  border-radius: 5px;
+}
+
+.nobo-disabled-button {
+  background-color: #e8dabb;
+  border: 0.5px solid #ffffff;
+  border-radius: 5px;
+}
+
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url(../../public/assets/fonts/NunitoSans-Regular.ttf);
 }

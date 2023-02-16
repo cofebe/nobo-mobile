@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
-import {
-  IonPage,
-  useIonViewWillEnter,
-} from '@ionic/react';
+import { useHistory } from 'react-router-dom';
+import { IonPage, useIonViewWillEnter } from '@ionic/react';
 import './URP.css';
 import './Splash.css';
 
@@ -20,18 +17,25 @@ const Splash: React.FC = () => {
   const waitSeconds = 1;
 
   function preloadAppContentAndNav() {
-    setTimeout(()=>{
-      history.push('/login');
-    }, waitSeconds * 500);
+    setTimeout(() => {
+      history.push('/get-started');
+    }, waitSeconds * 2000);
   }
 
   return (
-    <IonPage id="nobo-splash-page">
-      <div className="nobo-splash-backdrop">
-        <img className="splash-logo" src="assets/images/nobo_logo_rounded.png" width="200" height="200" alt="logo" />
+    <IonPage
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+      id="nobo-splash-page"
+    >
+      <div>
+        <img className="splash-logo" src="assets/images/nobo_logo.png" alt="logo" />
       </div>
     </IonPage>
-  )
+  );
 };
 
 export default Splash;

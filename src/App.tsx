@@ -49,6 +49,7 @@ import './theme/variables.css';
 
 import { Amplify } from 'aws-amplify';
 import awsconfig from './aws-exports.js';
+import GetStarted from './pages/GetStarted';
 Amplify.configure(awsconfig);
 
 setupIonicReact({
@@ -92,6 +93,9 @@ const App: React.FC = () => (
     ) : (
       <IonReactRouter>
         <IonRouterOutlet>
+          <Route path="/get-started" exact={true}>
+            <GetStarted />
+          </Route>
           <Route path="/login" exact={true}>
             <Login />
           </Route>

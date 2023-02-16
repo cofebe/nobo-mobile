@@ -1,8 +1,7 @@
-
 .pending-connection-item {
   border-radius: 10px;
   /* background-color: white;*/
-  --background: #F9FBFB;
+  --background: #f9fbfb;
   border-bottom: 1px solid #ececec;
   padding: 0 10px;
   --padding-start: 0;
@@ -35,16 +34,16 @@
     display: flex;
     align-items: center;
 
-    ion-button {
-      --background: transparent;
-      --color: #00D6B6;
-      --padding-start: 6px;
-      --padding-end: 6px;
-    }
+    // ion-button {
+    //   --background: transparent;
+    //   --color: #00D6B6;
+    //   --padding-start: 6px;
+    //   --padding-end: 6px;
+    // }
 
     .sep {
       width: 1px;
-      background-color: #CCDBDC;
+      background-color: #ccdbdc;
       height: 20px;
     }
   }
