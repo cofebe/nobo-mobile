@@ -1,12 +1,12 @@
-.urp-academics-section {
+.nobo-academics-section {
 
 }
 
-.urp-academics-section.urp-profile-section > ion-item > span:nth-child(1) {
+.nobo-academics-section.nobo-profile-section > ion-item > span:nth-child(1) {
     left:-18px;
 }
 
-.urp-academics-section .urp-academics-item > div:nth-child(2) {
+.nobo-academics-section .nobo-academics-item > div:nth-child(2) {
     margin-left: 16px;
     text-align: right;
 }

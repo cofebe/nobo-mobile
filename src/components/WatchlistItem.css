@@ -52,12 +52,12 @@ ion-footer ion-title {
   font-weight: normal;
 }
 
-ion-item.watchlist-item .urp-badge-line span {
+ion-item.watchlist-item .nobo-badge-line span {
   margin-left: 10px;
   vertical-align: middle;
 }
 
-ion-item.watchlist-item .urp-badge-line {
+ion-item.watchlist-item .nobo-badge-line {
   font-weight: bold;
   font-size: 1rem;
   margin-top: .5rem;

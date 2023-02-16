@@ -1,12 +1,12 @@
-.highlights-section .urp-highlights-section {
+.highlights-section .nobo-highlights-section {
 }
 
-.highlights-section .urp-section-item {
+.highlights-section .nobo-section-item {
   --background: #ffffff;
   /*box-shadow: 0 0 0 0;*/
 }
 
-.highlights-section .urp-highlight-video-container {
+.highlights-section .nobo-highlight-video-container {
   /* height: 30vh !important; */
   /* --background: #ffffff; */
   position: relative;
@@ -14,7 +14,7 @@
   padding-bottom: 56.25%;
 }
 
-.highlights-section .urp-highlight-add-media-container {
+.highlights-section .nobo-highlight-add-media-container {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
   /* height: 100%;*/
 }
 
-.highlights-section .urp-highlight-video {
+.highlights-section .nobo-highlight-video {
   border-radius: 15px;
   border: 0;
   width: 100%;
@@ -36,12 +36,12 @@
   bottom: 0;
 }
 
-.highlights-section .urp-highlight-add-media-title {
+.highlights-section .nobo-highlight-add-media-title {
   font-size: 0.85rem;
   color: rgba(196, 196, 196, 1);
 }
 
-.highlights-section .urp-highlight-add-media-text {
+.highlights-section .nobo-highlight-add-media-text {
   color: rgba(0, 214, 182, 1);
   font-weight: 500;
   font-size: 15px;

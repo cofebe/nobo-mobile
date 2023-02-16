@@ -1,4 +1,4 @@
-.urp-label {
+.nobo-label {
 	font-size: 15px;
 	color: rgba(26, 58, 53, 1) !important;
 }
@@ -7,7 +7,7 @@
 	margin-bottom: 10%;
 }
 
-.urp-login-btn {
+.nobo-login-btn {
 	margin-top: 40px;
 }
 
@@ -23,23 +23,23 @@ ion-item.invalid ion-input {
 	--color: #FF0101;
 }
 
-.urp-desktop-signup {
+.nobo-desktop-signup {
 	width: 100%;
 	text-align: center;
 }
 
-.urp-sign-up-breather-row {
+.nobo-sign-up-breather-row {
 	margin-top: 80px;
 }
 
-.urp-signup-logo {
+.nobo-signup-logo {
 	padding-bottom: 10%;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.urp-confirm-email-image {
+.nobo-confirm-email-image {
 	display: flex;
 	justify-content: center;
 	margin-left: auto;
@@ -47,7 +47,7 @@ ion-item.invalid ion-input {
 	padding-bottom: 22px;
 }
 
-.urp-confirm-title {
+.nobo-confirm-title {
 	font-size: 30px;
 	font-weight: 600;
 	margin-left: auto;
@@ -55,24 +55,24 @@ ion-item.invalid ion-input {
 	padding-bottom: 1rem;
 }
 
-.urp-confirm-text {
+.nobo-confirm-text {
 	text-align: center;
 	margin-left: auto;
 	padding-bottom: 1rem;
 	margin-right: auto;
 }
 
-.urp-resend-text {
+.nobo-resend-text {
 	margin-top: 5px;
 }
 
-.urp-confirm-email {
+.nobo-confirm-email {
 	color: rgba(57, 129, 117, 1);
 	font-size: 1rem;
 	font-weight: 700;
 }
 
-.urp-confirm-spinner-container {
+.nobo-confirm-spinner-container {
 	margin-top: 5rem;
   display: none;
   height: 100%;
@@ -83,11 +83,11 @@ ion-item.invalid ion-input {
   opacity: 0.7;
 }
 
-.urp-confirm-spinner-container.active {
+.nobo-confirm-spinner-container.active {
   display: flex;
 }
 
-.urp-signup-spinner-container {
+.nobo-signup-spinner-container {
   margin-top: 5rem;
   display: none;
   height: 100%;
@@ -98,25 +98,25 @@ ion-item.invalid ion-input {
   opacity: 0.7;
 }
 
-.urp-signup-spinner-container.active {
+.nobo-signup-spinner-container.active {
   display: flex;
 }
 
-.urp-signup-container {
+.nobo-signup-container {
 	display: none;
 }
 
-.urp-signup-container.active {
+.nobo-signup-container.active {
 	display: block;
 }
 
-.urp-confirm-container {
+.nobo-confirm-container {
 	margin-top: 12rem;
 	padding-left: 1.5rem;
 	padding-right: 1.5rem;
 	display: none;
 }
 
-.urp-confirm-container.active {
+.nobo-confirm-container.active {
 	display: block;
 }

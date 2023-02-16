@@ -66,7 +66,7 @@ ion-button.cancel-btn {
 	z-index: 10000;
 }
 
-.urp-add-video {
+.nobo-add-video {
 	display:none;
 }
 
@@ -74,7 +74,7 @@ ion-button.cancel-btn {
 	margin-left: 100px;
 }
 
-.post-create .urp-post-input-text {
+.post-create .nobo-post-input-text {
 	width: 100%;
 }
 
@@ -100,7 +100,7 @@ ion-button.cancel-btn {
 	z-index: 10000;
 }
 
-.urp-post-input-area {
+.nobo-post-input-area {
 	/* background: #d4e7e429; */
 	/* margin-top: 64px;*/
 	/* height: 200px; */
@@ -114,7 +114,7 @@ ion-button.cancel-btn {
 	--inner-padding-end: 0;
 }
 
-.urp-post-tool-menu {
+.nobo-post-tool-menu {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -122,24 +122,24 @@ ion-button.cancel-btn {
 	z-index: 1000000;
 }
 
-.urp-post-tool-menu svg {
+.nobo-post-tool-menu svg {
 	height: 36px;
 	width: 36px;
 	transition: height 0.25s, width 0.25s;
 }
 
-.urp-post-input-area.item-has-focus .urp-post-tool-menu svg,
-.urp-post-input-area.item-has-value .urp-post-tool-menu svg {
+.nobo-post-input-area.item-has-focus .nobo-post-tool-menu svg,
+.nobo-post-input-area.item-has-value .nobo-post-tool-menu svg {
 	height: 24px;
 	width: 24px;
 }
 
-.urp-add-location-grid {
+.nobo-add-location-grid {
 	--ion-grid-padding: 0px;
 	--ion-grid-column-padding: 0px;
 }
 
-.urp-add-location-grid ion-item {
+.nobo-add-location-grid ion-item {
 	--min-height: 36px;
 	--padding-start: 10px;
 	--padding-end: 10px;
@@ -147,20 +147,20 @@ ion-button.cancel-btn {
 	--detail-icon-opacity: 1;
 }
 
-.urp-add-location-grid ion-label {
+.nobo-add-location-grid ion-label {
 	font-size: 10px !important;
 	margin-top: 4px;
 	margin-bottom: 4px;
 }
 
-.urp-file-upload.post-image {
+.nobo-file-upload.post-image {
     position: absolute;
     width: 36px;
     border-radius: 50%;
     height: 36px;
     opacity: 0;
 }
-.urp-post-image-gallery {
+.nobo-post-image-gallery {
     position: absolute;
     left: 20px;
     right: 20px;
@@ -172,14 +172,14 @@ ion-button.cancel-btn {
 	text-align: center;
 }
 
-.urp-post-image-gallery img {
+.nobo-post-image-gallery img {
     width: 200px;
     border-radius: 1px;
     border: 5px dashed #93c0b759;
     margin: 11px;
 }
 
-.urp-image-remove {
+.nobo-image-remove {
     right: 10px;
     bottom: 10px;
     height: 20px;
@@ -189,7 +189,7 @@ ion-button.cancel-btn {
 	text-decoration: underline;
 }
 
-.urp-post-image {
+.nobo-post-image {
 	text-align: center;
 }
 
@@ -221,7 +221,7 @@ ion-button.cancel-btn {
 
 
 
-.urp-video-file-uploader-control {
+.nobo-video-file-uploader-control {
     position: relative;
     width: 100%;
     height: 35px;
@@ -234,13 +234,13 @@ ion-button.cancel-btn {
     top: -33px;
 }
 
-.urp-video-file-uploader-container {
+.nobo-video-file-uploader-container {
 	position: absolute;
     right: 43px;
     z-index: 100000;
 }
 
-.urp-video-upload-button {
+.nobo-video-upload-button {
     background-color: #05d5b6;
     height: 36px;
 	margin-top:20px;
@@ -255,7 +255,7 @@ ion-button.cancel-btn {
     width: 184px;
 }
 
-.urp-upload-text-or {
+.nobo-upload-text-or {
     margin: auto;
     color: #a1ccc5;
     margin-left: auto;
@@ -266,7 +266,7 @@ ion-button.cancel-btn {
 	font-size:1.1em;
 }
 
-.urp-upload-text-hl {
+.nobo-upload-text-hl {
     font-size: 1.1em;
     color: #395450;
     font-weight: 500;

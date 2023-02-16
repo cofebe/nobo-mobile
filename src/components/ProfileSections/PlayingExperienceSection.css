@@ -1,24 +1,24 @@
-ion-item.urp-playing-experience {
+ion-item.nobo-playing-experience {
 }
 
-div.urp-profile-section.urp-playing-experience > ion-item > span:nth-child(1) {
+div.nobo-profile-section.nobo-playing-experience > ion-item > span:nth-child(1) {
     font-size: 1em;
 }
 
-div.urp-profile-section.urp-playing-experience > ion-item > span:nth-child(2) {
+div.nobo-profile-section.nobo-playing-experience > ion-item > span:nth-child(2) {
     font-size: .75em;
     color: #1A3A35;
 }
 
-div.urp-profile-section.urp-playing-experience > ion-item > span:nth-child(3) {
+div.nobo-profile-section.nobo-playing-experience > ion-item > span:nth-child(3) {
     font-size: .75em;
     color: #1A3A35;
 }
 
-div.urp-profile-section.urp-playing-experience > ion-item {
+div.nobo-profile-section.nobo-playing-experience > ion-item {
 }
 
-div.urp-profile-section.urp-playing-experience .urp-dot {
+div.nobo-profile-section.nobo-playing-experience .nobo-dot {
     margin-left: 5px;
     margin-right: 5px;
     color: #1A3A35;

@@ -73,7 +73,7 @@
       z-index: 10000;
   }
 
-  .urp-add-video {
+  .nobo-add-video {
       display:none;
   }
 
@@ -81,7 +81,7 @@
       margin-left: 100px;
   }
 
-  .urp-post-input-text {
+  .nobo-post-input-text {
       width: 100%;
   }
 
@@ -107,7 +107,7 @@
       z-index: 10000;
   }
 
-  .urp-post-input-area {
+  .nobo-post-input-area {
       /* background: #d4e7e429; */
       /* margin-top: 64px;*/
       /* height: 200px; */
@@ -120,7 +120,7 @@
       --inner-padding-end: 0;
   }
 
-  .urp-post-tool-menu {
+  .nobo-post-tool-menu {
       position: absolute;
       top: 0;
       right: 0;
@@ -128,24 +128,24 @@
       z-index: 1000000;
   }
 
-  .urp-post-tool-menu svg {
+  .nobo-post-tool-menu svg {
       height: 36px;
       width: 36px;
       transition: height 0.25s, width 0.25s;
   }
 
-  .urp-post-input-area.item-has-focus .urp-post-tool-menu svg,
-  .urp-post-input-area.item-has-value .urp-post-tool-menu svg {
+  .nobo-post-input-area.item-has-focus .nobo-post-tool-menu svg,
+  .nobo-post-input-area.item-has-value .nobo-post-tool-menu svg {
       height: 24px;
       width: 24px;
   }
 
-  .urp-add-location-grid {
+  .nobo-add-location-grid {
       --ion-grid-padding: 0px;
       --ion-grid-column-padding: 0px;
   }
 
-  .urp-add-location-grid ion-item {
+  .nobo-add-location-grid ion-item {
       --min-height: 36px;
       --padding-start: 10px;
       --padding-end: 10px;
@@ -153,7 +153,7 @@
       --detail-icon-opacity: 1;
   }
 
-  .urp-add-location-grid ion-label {
+  .nobo-add-location-grid ion-label {
       font-size: 10px !important;
       margin-top: 4px;
       margin-bottom: 4px;

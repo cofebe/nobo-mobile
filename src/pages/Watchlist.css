@@ -37,7 +37,7 @@
   margin-right: 20px;
   float: right;
 }
-.watchlist-listing-page .urp-comments-count {
+.watchlist-listing-page .nobo-comments-count {
   top: 8px;
   position: absolute;
   right: 61px;
@@ -45,7 +45,7 @@
   color: #00d6b6;
 }
 
-.watchlist-listing-page .urp-likes-count {
+.watchlist-listing-page .nobo-likes-count {
   top: 8px;
   position: absolute;
   right: 5px;
@@ -53,7 +53,7 @@
   color: #00d6b6;
 }
 
-.watchlist-listing-page .urp-float-logo {
+.watchlist-listing-page .nobo-float-logo {
   text-align: center;
 }
 
@@ -61,7 +61,7 @@
   border-bottom: none;
 }
 
-.watchlist-listing-page .urp-list-background {
+.watchlist-listing-page .nobo-list-background {
   background-color: #f9fbfb;
 }
 
@@ -71,7 +71,7 @@
 }
 
 /* V2 additions*/
-.watchlist-listing-page .urp-profile-header-v2 {
+.watchlist-listing-page .nobo-profile-header-v2 {
   position: absolute;
   top: 125px;
   left: 0;
@@ -91,14 +91,14 @@
   font-size: 1.4em;
 }
 
-.watchlist-listing-page .urp-header-stars {
+.watchlist-listing-page .nobo-header-stars {
 }
 
-.watchlist-listing-page .urp-location-pin {
+.watchlist-listing-page .nobo-location-pin {
   margin-left: -35px;
 }
 
-.watchlist-listing-page .urp-location-pin div {
+.watchlist-listing-page .nobo-location-pin div {
   color: #3c91e5;
   font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue',
     Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -107,22 +107,22 @@
   padding-left: 7px;
 }
 
-.watchlist-listing-page .urp-social-tops svg {
+.watchlist-listing-page .nobo-social-tops svg {
   margin-left: 5px;
 }
 
-.watchlist-listing-page.urp-action-menu {
+.watchlist-listing-page.nobo-action-menu {
   top: 33px;
   right: 58px;
 }
 
-.urp-post-item-detail-header {
+.nobo-post-item-detail-header {
   border-bottom: 1px solid #686363;
   background-color: white;
   border-radius: 15px 15px 0 0;
 }
 
-.urp-post-item-detail-header .feed-item {
+.nobo-post-item-detail-header .feed-item {
   margin-top: 0;
   margin-bottom: 0;
   border-radius: 15px;
@@ -130,7 +130,7 @@
   box-shadow: none;
 }
 
-.urp-post-item-detail-header .feed-bottom {
+.nobo-post-item-detail-header .feed-bottom {
   margin-top: -31px;
 }
 
@@ -138,7 +138,7 @@
   border-top: none;
 }
 
-.urp-watchlist-title {
+.nobo-watchlist-title {
   position: absolute;
   left: 0;
   right: 0;
@@ -148,11 +148,11 @@
   top: 16px;
 }
 
-.watchlist-listing-page .urp-post-item-detail-header {
+.watchlist-listing-page .nobo-post-item-detail-header {
   height: 70px;
 }
 
-.urp-search-widget-placement {
+.nobo-search-widget-placement {
   position: fixed;
   top: 102px;
   left: 72px;
@@ -161,7 +161,7 @@
   /* background-color: red; */
 }
 
-.watchlist-listing-page .urp-post-item-detail-header {
+.watchlist-listing-page .nobo-post-item-detail-header {
   border-bottom: none;
   margin-bottom: -8px;
 }

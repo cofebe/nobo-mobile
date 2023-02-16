@@ -1,25 +1,25 @@
-.urp-coaching-experience-section {
+.nobo-coaching-experience-section {
 
 }
 
-.urp-coaching-experience {
+.nobo-coaching-experience {
 
 }
 
-div.urp-profile-section.urp-coaching-experience > ion-item > span:nth-child(1) {
+div.nobo-profile-section.nobo-coaching-experience > ion-item > span:nth-child(1) {
     position: absolute;
     top: 10px;
     font-size: 1em;
     margin-left: -5px;
 }
 
-div.urp-profile-section.urp-coaching-experience > ion-item > span:nth-child(2) {
+div.nobo-profile-section.nobo-coaching-experience > ion-item > span:nth-child(2) {
     position: absolute;
     left: 7px;
     top: 40px;
     font-size: .75em;
 }
 
-div.urp-profile-section.urp-coaching-experience > ion-item {
+div.nobo-profile-section.nobo-coaching-experience > ion-item {
     height: 65px;
 }

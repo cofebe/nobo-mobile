@@ -1,19 +1,19 @@
-.urp-search-widget-wrapper {
+.nobo-search-widget-wrapper {
 
 }
 
-.urp-search-widget {
+.nobo-search-widget {
     position: absolute;
     z-index: 10000;
 }
 
-.urp-top-search-box{
+.nobo-top-search-box{
     position:absolute;
     left: 50px;
     right: 40px;
 }
 
-.urp-top-search-box-input ion-input {
+.nobo-top-search-box-input ion-input {
     --padding-end: 120px;
 } 
 

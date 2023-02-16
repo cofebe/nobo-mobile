@@ -45,7 +45,7 @@ ion-toolbar {
   font-size: 6em;
 }
 
-.urp-section {
+.nobo-section {
   border-radius: 5px !important;
   padding: 10px 16px;
   margin-top: 20px;
@@ -60,11 +60,11 @@ ion-toolbar {
   /* background-color: #f8fafa; */
 }
 
-.urp-content-area {
+.nobo-content-area {
   --background: #f8fafa;
 }
 
-.urp-content-area.inner-scroll {
+.nobo-content-area.inner-scroll {
   /* background-color: #f8fafa; */
 }
 
@@ -79,14 +79,14 @@ ion-toolbar {
     stroke: #1A3A35;
 } */
 
-.urp-section-title {
+.nobo-section-title {
   margin-left: 0.5rem;
   margin-top: auto;
   margin-bottom: auto;
   color: #1a3a35 !important;
 }
 
-.urp-step-num {
+.nobo-step-num {
   border: 1px solid rgba(0, 0, 0, 0.788);
   padding: 4px;
   margin-right: 10px;
@@ -101,16 +101,16 @@ ion-toolbar {
   background-color: #f8fafa;
 }
 
-.urp-list-input {
+.nobo-list-input {
   background-color: #ffffff;
 }
 
-.urp-input {
+.nobo-input {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-.urp-signup-label {
+.nobo-signup-label {
   font-size: 0.93em;
   font-weight: 500;
 }
@@ -150,13 +150,13 @@ ion-select::part(text) {
   margin-bottom: 15px;
 }
 
-.urp-section-head {
+.nobo-section-head {
   border-bottom: none;
   --inner-padding-end: 0;
   --inner-padding-start: 0;
 }
 
-.urp-green-btn {
+.nobo-green-btn {
   display: block;
   width: 85vw;
   color: '#FFFFFF';
@@ -175,7 +175,7 @@ ion-select::part(text) {
   margin-right: auto;
 }
 
-.urp-upload-btn {
+.nobo-upload-btn {
   border: 1px dashed #00d6b6;
   background: linear-gradient(90deg, #e0faf6 21%, #e0faf6 51%, #00d6b659 110%);
   text-transform: capitalize;
@@ -191,7 +191,7 @@ ion-select::part(text) {
   margin-right: 0;
 }
 
-div.urp-upload-text-signup {
+div.nobo-upload-text-signup {
   font-size: 1.1em;
   color: #395450;
   font-weight: 500;
@@ -208,7 +208,7 @@ div.urp-upload-text-signup {
   --border-width: 0 0 0 0;
 }
 
-.urp-blank {
+.nobo-blank {
   color: rgba(212, 212, 212, 0);
   position: relative;
   height: 0px;
@@ -221,7 +221,7 @@ div.urp-upload-text-signup {
   font-size: 0.92em;
 }
 
-.urp-optional {
+.nobo-optional {
   color: #d6d6d6;
   padding-left: 8px;
   font-size: 0.8em;
@@ -234,22 +234,22 @@ div.urp-upload-text-signup {
   font-weight: 400;
 }
 
-.urp-rating-input {
+.nobo-rating-input {
   height: 2.5rem;
   padding-top: 0.6rem;
   margin-bottom: 0.3rem;
 }
 
-.urp-rating-label {
+.nobo-rating-label {
   padding-top: 6px;
 }
 
-.urp-select-short {
+.nobo-select-short {
   margin-right: 10%;
   width: 85% !important;
 }
 
-.xurp-select {
+.xnobo-select {
   margin-top: 1rem;
   margin-right: auto;
   margin-left: auto;
@@ -277,7 +277,7 @@ div.urp-upload-text-signup {
   background-repeat: no-repeat; */
 }
 
-.urp-header-progress {
+.nobo-header-progress {
   background-color: transparent;
   position: absolute;
   z-index: 100000;
@@ -288,11 +288,11 @@ div.urp-upload-text-signup {
   /* margin-left:-30px; */
 }
 
-.urp-select-half {
+.nobo-select-half {
   width: 28vw !important;
 }
 
-.xurp-select-half {
+.xnobo-select-half {
   border: 1px solid rgba(100, 100, 100, 0.1);
   margin-right: 10px;
   margin-left: 0;
@@ -305,7 +305,7 @@ div.urp-upload-text-signup {
   color: #148f7c;
 }
 
-.urp-2-col {
+.nobo-2-col {
   text-align: left;
 }
 
@@ -313,7 +313,7 @@ div.select-icon {
   top: 10px;
 }
 
-.urp-nav-text {
+.nobo-nav-text {
   padding-top: 6px;
   font-weight: 500;
   margin-left: 6px;
@@ -322,7 +322,7 @@ div.select-icon {
   font-size: 1.1em;
 }
 
-.urp-upload-photo {
+.nobo-upload-photo {
   color: #00d6b6;
   font-size: 0.8rem;
 }
@@ -342,7 +342,7 @@ div.select-icon {
   color: red;
 }
 
-.urp-file-upload.video {
+.nobo-file-upload.video {
   opacity: 0;
   position: absolute;
   background-color: #c3f6ed;
@@ -353,17 +353,17 @@ div.select-icon {
   z-index: 100000;
 }
 
-.urp-highlight-video-container {
+.nobo-highlight-video-container {
   width: 100%;
 }
 
-.urp-highlight-video {
+.nobo-highlight-video {
   width: 100%;
   border: 0;
   border-radius: 5px;
 }
 
-.urp-file-upload.transcripts {
+.nobo-file-upload.transcripts {
   opacity: 0;
   position: absolute;
   top: 28px;
@@ -372,7 +372,7 @@ div.select-icon {
   z-index: 100000;
 }
 
-#sign-up-athlete-page .urp-image-cropper {
+#sign-up-athlete-page .nobo-image-cropper {
   position: absolute;
   top: 1px;
   left: 1px;
@@ -394,7 +394,7 @@ div.select-icon {
 element.style {
 }
 
-#sign-up-athlete-page .urp-image-cropper span:nth-of-type(1) {
+#sign-up-athlete-page .nobo-image-cropper span:nth-of-type(1) {
   position: absolute;
   font-weight: bolder;
   top: 10px;
@@ -414,7 +414,7 @@ element.style {
 }
 
 /* close cropper*/
-#sign-up-athlete-page .urp-image-cropper span:nth-of-type(1) {
+#sign-up-athlete-page .nobo-image-cropper span:nth-of-type(1) {
   position: absolute;
   font-weight: bolder;
   top: 10px;
@@ -422,7 +422,7 @@ element.style {
   z-index: 100000;
 }
 
-#sign-up-athlete-page .urp-image-cropper span:nth-of-type(2) {
+#sign-up-athlete-page .nobo-image-cropper span:nth-of-type(2) {
   position: absolute;
   top: 30px;
   left: 0;
@@ -440,12 +440,12 @@ element.style {
   opacity: 1 !important;
 }
 
-.urp-profile-pic-cropper .cropper-view-box {
+.nobo-profile-pic-cropper .cropper-view-box {
   border-radius: 50%;
 }
 
 /* Done Button */
-#sign-up-athlete-page .urp-image-cropper span:nth-of-type(3) {
+#sign-up-athlete-page .nobo-image-cropper span:nth-of-type(3) {
   position: absolute;
   bottom: 100px;
   left: 20px;
@@ -456,7 +456,7 @@ element.style {
   color: #00d6b6;
 }
 
-.urp-spinner-container {
+.nobo-spinner-container {
   display: none;
   height: 100%;
   position: fixed;
@@ -467,11 +467,11 @@ element.style {
   opacity: 0.7;
 }
 
-.urp-spinner-container.active {
+.nobo-spinner-container.active {
   display: flex;
 }
 
-.urp-spinner {
+.nobo-spinner {
   --color: #a4fefc;
   transform: scale(3);
   margin-right: auto;
@@ -482,7 +482,7 @@ element.style {
   padding-left: 10px;
 }
 
-.urp-preview-profile-pic {
+.nobo-preview-profile-pic {
   position: absolute;
   top: 0;
   left: 0;
@@ -491,7 +491,7 @@ element.style {
   background-size: contain !important;
 }
 
-.urp-banner-pic-previewer {
+.nobo-banner-pic-previewer {
   /* width: 100vw; */
   width: calc(100vw - 62px);
   background: red;
@@ -523,7 +523,7 @@ element.style {
   top: 94px;
 }
 
-.urp-crop-header-text {
+.nobo-crop-header-text {
   color: rgb(255 255 255);
   background-color: #1f1f1f;
   height: 50px;
@@ -536,7 +536,7 @@ element.style {
   margin: auto;
 }
 
-.urp-section-group {
+.nobo-section-group {
   min-height: 120vh;
 }
 
@@ -556,7 +556,7 @@ element.style {
     display: block;
   }
 
-  #sign-up-athlete-page .urp-section-group {
+  #sign-up-athlete-page .nobo-section-group {
     margin-top: 10px;
   }
 
@@ -633,7 +633,7 @@ element.style {
   }
 
   /* DESKTOP BUTTONS */
-  #sign-up-athlete-page .urp-upload-btn {
+  #sign-up-athlete-page .nobo-upload-btn {
     /* display:none !important; */
     box-shadow: none !important;
     padding-top: 0 !important;
@@ -665,7 +665,7 @@ element.style {
 }
 
 #sign-up-athlete-page
-  > div.urp-image-cropper
+  > div.nobo-image-cropper
   > div
   > div
   > div.cropper-drag-box.cropper-move.cropper-modal {
@@ -673,11 +673,11 @@ element.style {
   opacity: 0 !important;
 }
 
-#sign-up-athlete-page > div.urp-image-cropper > div > div {
+#sign-up-athlete-page > div.nobo-image-cropper > div > div {
   top: 200px !important;
 }
 
-#sign-up-athlete-page > div.urp-image-cropper > div {
+#sign-up-athlete-page > div.nobo-image-cropper > div {
   height: 100%;
   background-color: white;
   height: 60%;
@@ -690,14 +690,14 @@ element.style {
 }
 
 #sign-up-athlete-page
-  > div.urp-image-cropper
+  > div.nobo-image-cropper
   > div
   > div
   > div.cropper-crop-box {
   margin: auto !important;
 }
 
-.urp-custom-progress-bar {
+.nobo-custom-progress-bar {
   position: absolute;
   width: 100%;
   top: 5px;
@@ -705,7 +705,7 @@ element.style {
   z-index: 100000;
 }
 
-.urp-progress-label {
+.nobo-progress-label {
   position: absolute;
   left: 32px;
   right: 92.33%;
@@ -719,7 +719,7 @@ element.style {
   color: #00816d;
 }
 
-.urp-progress-graphic {
+.nobo-progress-graphic {
   height: 6px;
   background: #dce1e3;
   border-radius: 5px;
@@ -731,13 +731,13 @@ element.style {
   overflow: hidden;
 }
 
-.urp-progress-graphic div {
+.nobo-progress-graphic div {
   height: 6px;
   background: rgb(57, 129, 117);
   border-radius: 5px;
 }
 
-.urp-progress-count {
+.nobo-progress-count {
   position: absolute;
   left: 32px;
   right: 92.33%;
@@ -751,7 +751,7 @@ element.style {
   color: #00816d;
 }
 
-#sign-up-athlete-page .urp-signup-tab-menu-item {
+#sign-up-athlete-page .nobo-signup-tab-menu-item {
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
   padding: 6px;
@@ -767,13 +767,13 @@ element.style {
   border: 1px solid #9bc9c1;
 }
 
-#sign-up-athlete-page .urp-stats-add-btn {
+#sign-up-athlete-page .nobo-stats-add-btn {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
 }
 
-#sign-up-athlete-page .urp-stats-remove-btn {
+#sign-up-athlete-page .nobo-stats-remove-btn {
   padding: 5px 0px 0px;
   text-decoration-line: underline;
   font-size: 12px;
@@ -791,16 +791,16 @@ element.style {
           display: flex;
           align-items: center;
 
-          .urp-select {
+          .nobo-select {
             border: 1px solid #1a3a35;
             height: 40px;
             border-radius: 20px;
             width: fit-content;
 
-            .urp-select-container {
+            .nobo-select-container {
               padding: 10px 16px;
 
-              .urp-select-chevron {
+              .nobo-select-chevron {
                 margin-left: 16px;
               }
             }

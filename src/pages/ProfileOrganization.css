@@ -12,7 +12,7 @@
   z-index: 10000;
 }
 
-.home-page-organization-profile .urp-profile-bottom-section-wrapper {
+.home-page-organization-profile .nobo-profile-bottom-section-wrapper {
   background-color: #ffffff;
   border-radius: 15px;
   border: 1px solid rgba(100, 100, 100, 0.1);
@@ -24,7 +24,7 @@
   padding-left: 7px;
   padding-right: 3px;
 }
-.home-page-organization-profile .urp-profile-tabs {
+.home-page-organization-profile .nobo-profile-tabs {
   padding: 3px;
   border-radius: 15px;
   margin-bottom: 20px;
@@ -36,13 +36,13 @@
   overflow: visible;
 }
 
-.home-page-organization-profile .urp-profile-tabs > ion-grid > ion-row > ion-col > div:nth-child(1) {
+.home-page-organization-profile .nobo-profile-tabs > ion-grid > ion-row > ion-col > div:nth-child(1) {
   font-size: 0.7em;
   color: #1a3a35;
 }
 
 /*
-    .urp-edit-profile-button {
+    .nobo-edit-profile-button {
       background-color: #ffffff;
       color: #1A3A35;
       border: 1px solid #1A3A35;
@@ -54,7 +54,7 @@
       font-weight: 600;
   } */
 /* small version */
-.home-page-organization-profile .home-page-organization-profile .urp-edit-profile-button {
+.home-page-organization-profile .home-page-organization-profile .nobo-edit-profile-button {
   background-color: #ffffff;
   color: #1a3a35;
   /* border: 1px solid #1A3A35; */
@@ -82,7 +82,7 @@
   margin-right: 20px;
   float: right;
 }
-.home-page-organization-profile .urp-comments-count {
+.home-page-organization-profile .nobo-comments-count {
   top: 8px;
   position: absolute;
   right: 61px;
@@ -90,7 +90,7 @@
   color: #00d6b6;
 }
 
-.home-page-organization-profile .urp-likes-count {
+.home-page-organization-profile .nobo-likes-count {
   top: 8px;
   position: absolute;
   right: 5px;
@@ -98,7 +98,7 @@
   color: #00d6b6;
 }
 
-.home-page-organization-profile .urp-float-logo {
+.home-page-organization-profile .nobo-float-logo {
   text-align: center;
 }
 
@@ -106,7 +106,7 @@
   border-bottom: none;
 }
 
-.home-page-organization-profile .urp-list-background {
+.home-page-organization-profile .nobo-list-background {
   background-color: #ffffff;
 }
 
@@ -118,7 +118,7 @@
 .home-page-organization-profile .swiper-slide-active {
 }
 
-.home-page-organization-profile .home-page-organization-profile .urp-tab-menu-item {
+.home-page-organization-profile .home-page-organization-profile .nobo-tab-menu-item {
   padding: 6px;
   padding-left: 10px;
   padding-right: 10px;
@@ -132,7 +132,7 @@
   border-radius: 5px !important;
 }
 
-.home-page-organization-profile .home-page-organization-profile .urp-tab-menu-item.selected {
+.home-page-organization-profile .home-page-organization-profile .nobo-tab-menu-item.selected {
   color: #00816d !important;
   background-color: #99e1d954;
   line-height: 4;
@@ -152,18 +152,18 @@
   user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
 }
-.home-page-organization-profile .urp-menu-container {
+.home-page-organization-profile .nobo-menu-container {
   position: absolute;
   left: 5px;
   right: 5px;
 }
 
-.home-page-organization-profile .home-page-organization-profile .urp-profile-section {
+.home-page-organization-profile .home-page-organization-profile .nobo-profile-section {
   margin: 0 !important;
   top: 50px;
 }
 
-.home-page-organization-profile .home-page-organization-profile .urp-profile-tabs {
+.home-page-organization-profile .home-page-organization-profile .nobo-profile-tabs {
   padding: 3px;
   border-radius: 15px;
   margin-bottom: 20px;
@@ -175,7 +175,7 @@
   overflow: visible;
 }
 
-.home-page-organization-profile .urp-section-item {
+.home-page-organization-profile .nobo-section-item {
   margin-left: 7px;
   margin-right: 7px;
   margin-top: 10px;
@@ -188,16 +188,16 @@
   height: 80px;
 }
 
-.home-page-organization-profile .urp-profile-section > ion-item {
+.home-page-organization-profile .nobo-profile-section > ion-item {
   overflow: visible;
 }
 
-.home-page-organization-profile .urp-profile-section > ion-item div {
+.home-page-organization-profile .nobo-profile-section > ion-item div {
   margin-top: 28px;
   margin-left: 10px;
 }
 
-.home-page-organization-profile .urp-profile-section > ion-item > span:nth-child(1) {
+.home-page-organization-profile .nobo-profile-section > ion-item > span:nth-child(1) {
   color: #00816d;
   font-weight: 500;
   font-size: 0.9em;
@@ -206,7 +206,7 @@
   left: 11px;
 }
 
-.home-page-organization-profile .urp-profile-section > ion-item > span:nth-child(2) {
+.home-page-organization-profile .nobo-profile-section > ion-item > span:nth-child(2) {
   color: #1a3a35;
   font-weight: 500;
   font-size: 1em;
@@ -215,7 +215,7 @@
   right: 18px;
 }
 
-.home-page-organization-profile .urp-spacer {
+.home-page-organization-profile .nobo-spacer {
   width: 8px;
   border: none !important;
   background: none ipor !important;
@@ -228,7 +228,7 @@
 }
 
 /* V2 additions*/
-.home-page-organization-profile .home-page-organization-profile .urp-profile-header-v2 {
+.home-page-organization-profile .home-page-organization-profile .nobo-profile-header-v2 {
   position: absolute;
   top: 125px;
   left: 0;
@@ -244,18 +244,18 @@
   );
 }
 
-.home-page-organization-profile .home-page-organization-profile .urp-profile-header-v2 .feed-name {
+.home-page-organization-profile .home-page-organization-profile .nobo-profile-header-v2 .feed-name {
   font-size: 1.4em;
 }
 
-.home-page-organization-profile .home-page-organization-profile .urp-header-stars {
+.home-page-organization-profile .home-page-organization-profile .nobo-header-stars {
 }
 
-.home-page-organization-profile .home-page-organization-profile .urp-location-pin {
+.home-page-organization-profile .home-page-organization-profile .nobo-location-pin {
   /* margin-left: -35px; */
 }
 
-.home-page-organization-profile .home-page-organization-profile .urp-location-pin div {
+.home-page-organization-profile .home-page-organization-profile .nobo-location-pin div {
   color: #3c91e5;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
     Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -264,11 +264,11 @@
   padding-left: 7px;
 }
 
-.home-page-organization-profile .home-page-organization-profile .urp-social-tops svg {
+.home-page-organization-profile .home-page-organization-profile .nobo-social-tops svg {
   margin-left: 5px;
 }
 
-.home-page-organization-profile .home-page-organization-profile .urp-action-menu {
+.home-page-organization-profile .home-page-organization-profile .nobo-action-menu {
   top: 33px;
   right: 58px;
 }

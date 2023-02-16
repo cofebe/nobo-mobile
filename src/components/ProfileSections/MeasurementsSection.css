@@ -1,11 +1,11 @@
-.urp-measurement-section.urp-profile-section {
+.nobo-measurement-section.nobo-profile-section {
   overflow-y: auto;
 }
 
-.urp-measurement-section ion-item > div:nth-child(1) {
+.nobo-measurement-section ion-item > div:nth-child(1) {
 }
 
-.urp-measurement-section ion-item > div:nth-child(2) {
+.nobo-measurement-section ion-item > div:nth-child(2) {
   /*font-weight: 500 !important;*/
   /*font-size: 20px !important;*/
 }

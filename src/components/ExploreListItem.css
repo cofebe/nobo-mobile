@@ -57,7 +57,7 @@ ion-footer ion-title {
   font-weight: normal;
 }
 
-ion-item.explore-list-item .feed-list-urp-badge-line {
+ion-item.explore-list-item .feed-list-nobo-badge-line {
   display: flex;
   align-items: flex-end;
   gap: 5%;
@@ -243,7 +243,7 @@ ion-item.explore-list-item .feed-list-feed-message {
   display: block;
 }
 
-ion-item.explore-list-item .feed-list-urp-comments-count {
+ion-item.explore-list-item .feed-list-nobo-comments-count {
   top: 8px;
   position: absolute;
   right: 70px;
@@ -272,14 +272,14 @@ ion-item.explore-list-item .feed-list-bottom-icons > div {
   align-items: center;
 }
 
-ion-item.explore-list-item .feed-list-urp-likes-count {
+ion-item.explore-list-item .feed-list-nobo-likes-count {
   font-size: 0.8em;
   color: #00d6b6;
   margin-left: 4px;
   padding-bottom: 3px;
 }
 
-.urp-explore-list-spinner-container {
+.nobo-explore-list-spinner-container {
   margin-top: 5rem;
   display: none;
   height: 100%;
@@ -291,11 +291,11 @@ ion-item.explore-list-item .feed-list-urp-likes-count {
   background-color: #f9fbfb;
 }
 
-.urp-explore-list-spinner-container.active {
+.nobo-explore-list-spinner-container.active {
   display: flex;
 }
 
-.urp-explore-list-tab-menu-item {
+.nobo-explore-list-tab-menu-item {
   margin-right: 1rem;
   padding: 6px;
   padding-left: 10px;

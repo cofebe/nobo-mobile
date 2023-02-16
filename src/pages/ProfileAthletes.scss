@@ -1,17 +1,17 @@
-.urp-profile-section {
+.nobo-profile-section {
   height: 50vh;
-  .urp-list-background {
+  .nobo-list-background {
     background-color: #ffffff;
   }
 }
 
-.urp-action-sheet .action-sheet-button-inner {
+.nobo-action-sheet .action-sheet-button-inner {
   // color: #1a3a35;
   font-size: 15px;
   // text-align: left;
 }
 
-.urp-qr-code-btn-close {
+.nobo-qr-code-btn-close {
   width: 100%;
   margin-top: 2rem;
   --background: #d6d6d6;
@@ -57,7 +57,7 @@
   }
 
   /* V1 */
-  /* .urp-profile-bottom-section-wrapper {
+  /* .nobo-profile-bottom-section-wrapper {
     border-radius: 15px;
     border: 1px solid rgba(100, 100, 100, 0.1);
     box-shadow: 0px 0px 5px 3px rgb(0 0 0 / 5%);
@@ -69,7 +69,7 @@
     padding-right: 3px;
   } */
   /*V2*/
-  .urp-profile-bottom-section-wrapper {
+  .nobo-profile-bottom-section-wrapper {
     background-color: #ffffff;
     box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.05);
     height: 50vh;
@@ -78,7 +78,7 @@
     border-radius: 8px;
   }
 
-  .urp-profile-section {
+  .nobo-profile-section {
     margin: 0 !important;
 
     @media (min-width: 568px) {
@@ -86,7 +86,7 @@
     }
   }
 
-  .urp-profile-tabs {
+  .nobo-profile-tabs {
     padding-top: 4px;
     padding-bottom: 20px;
     overflow: visible;
@@ -94,12 +94,12 @@
     --padding-end: 0;
   }
 
-  .urp-profile-tabs > ion-grid > ion-row > ion-col > div:nth-child(1) {
+  .nobo-profile-tabs > ion-grid > ion-row > ion-col > div:nth-child(1) {
     font-size: 0.7em;
     color: #1a3a35;
   }
 
-  /* .urp-edit-profile-button {
+  /* .nobo-edit-profile-button {
       background-color: #ffffff;
       color: #1A3A35;
       border: 1px solid #1A3A35;
@@ -112,7 +112,7 @@
   } */
 
   /* small version */
-  .urp-edit-profile-button {
+  .nobo-edit-profile-button {
     background-color: #ffffff;
     color: #1a3a35;
     /* border: 1px solid #1A3A35; */
@@ -187,7 +187,7 @@
     float: right;
   }
 
-  .urp-comments-count {
+  .nobo-comments-count {
     top: 8px;
     position: absolute;
     right: 61px;
@@ -195,7 +195,7 @@
     color: #00d6b6;
   }
 
-  .urp-likes-count {
+  .nobo-likes-count {
     top: 8px;
     position: absolute;
     right: 5px;
@@ -203,7 +203,7 @@
     color: #00d6b6;
   }
 
-  .urp-float-logo {
+  .nobo-float-logo {
     text-align: center;
   }
 
@@ -216,7 +216,7 @@
     --background: #f9fbfb;
   }
   /*
-  .urp-list-background {
+  .nobo-list-background {
     background-color: #F9FBFB;
     max-width: 100vw;
   }
@@ -229,7 +229,7 @@
   .swiper-slide-active {
   }
 
-  .urp-tab-menu-item {
+  .nobo-tab-menu-item {
     margin-right: 1rem;
     padding: 6px;
     padding-left: 10px;
@@ -250,7 +250,7 @@
     }
   }
 
-  .urp-tab-menu-item.selected {
+  .nobo-tab-menu-item.selected {
     color: #ffffff !important;
     font-weight: 600;
     background-color: #1a3a35;
@@ -269,13 +269,13 @@
                                       supported by Chrome, Edge, Opera and Firefox */
   }
 
-  .urp-menu-container {
+  .nobo-menu-container {
     // max-width: 100%;
     margin-top: 20px;
     // overflow-x: hidden;
   }
 
-  .urp-menu-container-shadow {
+  .nobo-menu-container-shadow {
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 12px;
@@ -288,7 +288,7 @@
     }
   }
 
-  .urp-profile-section.urp-profile-section-scroll {
+  .nobo-profile-section.nobo-profile-section-scroll {
     padding-left: 0px;
     padding-right: 0px;
     height: 100%;
@@ -300,12 +300,12 @@
     margin-bottom: 1rem;
   }
 
-  .urp-profile-section.urp-profile-section-scroll ion-content {
+  .nobo-profile-section.nobo-profile-section-scroll ion-content {
     --padding-start: 20px;
     --padding-end: 20px;
   }
 
-  .urp-profile-section {
+  .nobo-profile-section {
     max-width: 100%;
     padding-left: 20px;
     padding-right: 20px;
@@ -321,7 +321,7 @@
     */
   }
 
-  .urp-section-item {
+  .nobo-section-item {
     margin-top: 4px;
     margin-bottom: 20px;
 
@@ -336,24 +336,24 @@
     --padding-end: 25px;
   }
 
-  .urp-profile-section > ion-item > div {
+  .nobo-profile-section > ion-item > div {
     /*~~~ border: 1px solid red; */
   }
 
-  .urp-section-item > div:nth-child(1) {
+  .nobo-section-item > div:nth-child(1) {
     color: #00816d;
     font-weight: 400;
     font-size: 12px;
     flex: 1;
   }
 
-  .urp-section-item > div:nth-child(2) {
+  .nobo-section-item > div:nth-child(2) {
     color: #1a3a35;
     font-weight: 400;
     font-size: 15px;
   }
 
-  .urp-profile-section .urp-highlight-add-media-container {
+  .nobo-profile-section .nobo-highlight-add-media-container {
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -362,12 +362,12 @@
     margin: 2rem;
   }
 
-  .urp-profile-section .urp-highlight-add-media-title {
+  .nobo-profile-section .nobo-highlight-add-media-title {
     font-size: 10px;
     color: #c4c4c4;
   }
 
-  .urp-profile-section .urp-highlight-add-media-text {
+  .nobo-profile-section .nobo-highlight-add-media-text {
     color: #00d6b6;
     font-weight: 500;
     font-size: 12px;
@@ -376,7 +376,7 @@
   }
 
   /*
-  .urp-section-item {
+  .nobo-section-item {
     margin-left: 7px;
     margin-right: 7px;
     margin-top: 10px;
@@ -391,11 +391,11 @@
   */
 
   /*
-  .urp-profile-section > ion-item > div:nth-child(1) svg {
+  .nobo-profile-section > ion-item > div:nth-child(1) svg {
     display: block;
   }
 
-  .urp-profile-section > ion-item > div:nth-child(2) {
+  .nobo-profile-section > ion-item > div:nth-child(2) {
     color: #00816d;
     font-weight: 300;
     font-size: 10px;
@@ -406,7 +406,7 @@
     margin-left: 16px;
   }
 
-  .urp-profile-section > ion-item > div:nth-child(3) {
+  .nobo-profile-section > ion-item > div:nth-child(3) {
     color: #1a3a35;
     font-weight: 400;
     font-size: 15px;
@@ -416,7 +416,7 @@
   }
   */
   /*
-  .urp-menu-container {
+  .nobo-menu-container {
     position: absolute;
     left: 5px;
     right: 5px;
@@ -424,7 +424,7 @@
   */
 
   /*
-  .urp-profile-section {
+  .nobo-profile-section {
     position: absolute;
     top: 44px;
     left: 0;
@@ -432,11 +432,11 @@
   }
   */
 
-  .urp-spacer {
+  .nobo-spacer {
     width: 8px !important;
   }
 
-  .urp-highlight-video-container {
+  .nobo-highlight-video-container {
     /*margin-top: 1rem;*/
     /*@media(max-width: 1088px) {
       height: 100vh;
@@ -448,7 +448,7 @@
     margin-bottom: 30px;
   }
 
-  .urp-profile-header-v2 {
+  .nobo-profile-header-v2 {
     position: absolute;
     top: 125px;
     left: 0;
@@ -465,7 +465,7 @@
     z-index: 100;
   }
 
-  .urp-profile-header-content {
+  .nobo-profile-header-content {
     background-color: #fafbfb;
     font-weight: bold;
     font-size: 1rem;
@@ -475,14 +475,14 @@
     margin-right: 8vw;
   }
 
-  .urp-profile-first-row {
+  .nobo-profile-first-row {
     display: flex;
     justify-content: space-between;
     display: inline;
     width: 100%;
   }
 
-  .urp-profile-name {
+  .nobo-profile-name {
     display: inline;
     margin: 0;
   }
@@ -502,28 +502,28 @@
     padding: 0;
   }
 
-  .urp-profile-actions {
+  .nobo-profile-actions {
     float: right;
   }
 
-  .urp-profile-second-row {
+  .nobo-profile-second-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .urp-profile-third-row {
+  .nobo-profile-third-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .urp-profile-header-v2 .feed-name {
+  .nobo-profile-header-v2 .feed-name {
     font-size: 1.4em;
     font-weight: 500;
   }
 
-  .urp-active-time {
+  .nobo-active-time {
     color: #9bc9c1;
     display: inline;
     font-size: 0.75rem;
@@ -531,27 +531,27 @@
     margin: 0;
   }
 
-  .urp-header-stars {
+  .nobo-header-stars {
     float: left;
   }
 
-  .urp-profile-primary-sport {
+  .nobo-profile-primary-sport {
     float: right;
     font-weight: 400;
     font-size: 0.7rem;
     margin: 0;
   }
 
-  .urp-social-tops {
+  .nobo-social-tops {
     margin-top: 0.2rem;
     float: right;
   }
 
-  .urp-social-tops svg {
+  .nobo-social-tops svg {
     margin-left: 0.6rem;
   }
 
-  .urp-watchlist-modal-back {
+  .nobo-watchlist-modal-back {
     position: fixed;
     top: 0;
     left: 0;
@@ -561,7 +561,7 @@
     z-index: 100000;
   }
 
-  .urp-watchlist-bottom-menu {
+  .nobo-watchlist-bottom-menu {
     position: fixed;
     bottom: -20px;
     left: 0;
@@ -576,7 +576,7 @@
     z-index: 100000;
   }
 
-  .urp-add-to-watchlist {
+  .nobo-add-to-watchlist {
     position: fixed;
     bottom: 51px;
     left: 1px;
@@ -586,7 +586,7 @@
     height: 60px;
   }
 
-  .urp-watchlist-add-button {
+  .nobo-watchlist-add-button {
     text-align: right;
     color: rgb(0, 214, 182);
     font-size: 0.9em;
@@ -595,7 +595,7 @@
     padding-top: 10px;
   }
 
-  .urp-watchlist-add-button a {
+  .nobo-watchlist-add-button a {
     text-align: right;
     color: rgb(0, 214, 182);
     font-size: 0.9em;
@@ -604,7 +604,7 @@
     padding-top: 10px;
   }
 
-  .urp-ap-action-menu-placement {
+  .nobo-ap-action-menu-placement {
     position: absolute;
     width: 50px;
     height: 50px;

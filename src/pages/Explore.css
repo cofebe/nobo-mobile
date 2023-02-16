@@ -37,7 +37,7 @@ ion-item.home-explore-bg ion-icon {
   margin-bottom: 0rem;
 }
 
-.urp-explore-btn {
+.nobo-explore-btn {
   background: #00d6b6;
   color: #ffffff;
   text-transform: capitalize;
@@ -123,7 +123,7 @@ ion-item.home-explore-bg ion-icon {
   background: #ffffff;
 }
 
-.urp-explore-tab-menu-item {
+.nobo-explore-tab-menu-item {
   margin-right: 1rem;
   padding: 6px;
   padding-left: 10px;
@@ -139,7 +139,7 @@ ion-item.home-explore-bg ion-icon {
   border: 1px solid #9bc9c1;
 }
 
-.urp-explore-tab-menu-item.selected {
+.nobo-explore-tab-menu-item.selected {
   font-weight: 600;
   background-color: rgba(153, 225, 217, 0.4);
   line-height: 4;
@@ -151,7 +151,7 @@ ion-item.home-explore-bg ion-icon {
   padding-right: 10px;
 }
 
-.urp-explore-account-tab-menu-item {
+.nobo-explore-account-tab-menu-item {
   width: 104px;
   margin-right: 1rem;
   padding: 6px;
@@ -166,7 +166,7 @@ ion-item.home-explore-bg ion-icon {
   line-height: 4;
 }
 
-.urp-explore-account-tab-menu-item.selected {
+.nobo-explore-account-tab-menu-item.selected {
   color: #00d6b6;
   font-weight: 600;
   background-color: rgba(153, 225, 217, 0.4);
@@ -180,12 +180,12 @@ ion-item.home-explore-bg ion-icon {
   padding-right: 14px;
 }
 
-.urp-explore-highlight {
+.nobo-explore-highlight {
   border-radius: 5px;
   --background: #f8fafa;
 }
 
-ion-icon.urp-explore-close-item {
+ion-icon.nobo-explore-close-item {
   position: relative;
   top: 5px;
   left: 5px;

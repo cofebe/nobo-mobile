@@ -59,7 +59,7 @@ Keyboard.setResizeMode({ mode: KeyboardResize.Body }).catch(() => {
   /* do nothing */
 });
 
-document.title = 'URP+';
+document.title = 'The NOBO';
 
 const isDesktop = isPlatform('desktop');
 let isBrowser = isDesktop || isPlatform('mobileweb');

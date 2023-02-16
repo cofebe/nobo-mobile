@@ -9,12 +9,12 @@
       font-weight: 500;
     }
 
-    .urp-action-menu {
+    .nobo-action-menu {
       margin-right: 34px;
     }
   }
 
-  .urp-location-pin {
+  .nobo-location-pin {
     /*margin-left: 10px;*/
     display: flex;
     align-items: center;
@@ -29,16 +29,16 @@
     }
   }
 
-  .urp-horizontal-badge-overlap {
+  .nobo-horizontal-badge-overlap {
     overflow: hidden;
     white-space: nowrap;
 
-    .urp-main-badge {
+    .nobo-main-badge {
       position: relative;
       z-index: 10;
     }
 
-    .urp-badge {
+    .nobo-badge {
       position: relative;
       top: 0;
 
@@ -64,7 +64,7 @@
     }
   }
 
-  .urp-profile-item-top {
+  .nobo-profile-item-top {
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 25px;
@@ -75,7 +75,7 @@
     border: 1px solid red;
   }
 
-  .urp-profile-item-bottom {
+  .nobo-profile-item-bottom {
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 40px;
@@ -100,7 +100,7 @@
   .stats-grid {
     padding: 0;
 
-    .urp-profile-summary-row {
+    .nobo-profile-summary-row {
       --background: #f9fbfb;
       --padding-start: 0;
       --padding-end: 0;
@@ -186,12 +186,12 @@
     font-weight: normal;
   }
 
-  .urp-badge-line span {
+  .nobo-badge-line span {
     margin-left: 10px;
     vertical-align: middle;
   }
 
-  .urp-badge-line {
+  .nobo-badge-line {
     font-weight: bold;
     font-size: 1rem;
     margin-top: 0.5rem;
@@ -285,7 +285,7 @@
     padding-right: 10px;
   }
 
-  .urp-profile-bio {
+  .nobo-profile-bio {
     color: #1a3a35;
     font-size: 12px;
     font-weight: 300;
@@ -298,25 +298,25 @@
     max-width: 1088px;
   }
 
-  .urp-profile-stats-header {
+  .nobo-profile-stats-header {
     font-weight: 300;
     font-size: 10px !important;
   }
 
-  .urp-profile-stats-value {
+  .nobo-profile-stats-value {
     padding-top: 4px;
     font-weight: 300;
   }
 
-  .urp-social-tops {
+  .nobo-social-tops {
     padding: 4px;
   }
 
-  .urp-profile-item-top.organization .feed-l2 {
+  .nobo-profile-item-top.organization .feed-l2 {
     margin-top: 70px;
   }
 
-  .urp-no-bio-height {
+  .nobo-no-bio-height {
     /*height: 58px;*/
   }
 
@@ -363,7 +363,7 @@
       position: relative;
     }
 
-    &.urp-profile-bio {
+    &.nobo-profile-bio {
       margin-left: 20px;
       margin-right: 20px;
       padding: 0;

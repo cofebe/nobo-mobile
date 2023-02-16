@@ -13,7 +13,7 @@
   font-size: 0.8em;
 }
 
-.urp-login-btn {
+.nobo-login-btn {
   margin-top: 80px;
   background: rgb(0, 129, 109);
   background: linear-gradient(
@@ -39,7 +39,7 @@
     font-weight: bold;
 }
 
-.urp-spinner-login-container {
+.nobo-spinner-login-container {
   display: none;
   height: 100%;
   position: fixed;
@@ -50,11 +50,11 @@
   opacity: 0.7;
 }
 
-.urp-spinner-login-container.active {
+.nobo-spinner-login-container.active {
   display: flex;
 }
 
-.urp-spinner {
+.nobo-spinner {
   --color: #a4fefc;
   transform: scale(3);
   margin-right: auto;
@@ -66,7 +66,7 @@
         margin-bottom: 5%;
     }
 
-    .urp-desktop-login {
+    .nobo-desktop-login {
         display: block;
         width: 30%;
     }
