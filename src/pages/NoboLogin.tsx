@@ -1,4 +1,11 @@
-import { IonButton, IonPage, IonRow, IonCol, IonGrid, IonInput } from '@ionic/react';
+import {
+  IonButton,
+  IonPage,
+  IonRow,
+  IonCol,
+  IonGrid,
+  IonInput,
+} from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 
 import './NoboLogin.scss';
@@ -15,30 +22,59 @@ const NoboLogin: React.FC = () => {
                 history.push('/get-started');
               }}
             >
-              <img height={40} src="assets/images/nobo-back-icon.png" alt="logo" />
+              <img
+                height={40}
+                src="assets/images/nobo-back-icon.png"
+                alt="logo"
+              />
             </div>
           </IonCol>
         </IonRow>
         <IonRow className="logo-margin-top">
-          <IonCol class="ion-justify-content-center" style={{ display: 'flex' }}>
-            <img height={65} src="assets/images/nobo-logo-white.png" alt="logo" />
+          <IonCol
+            class="ion-justify-content-center"
+            style={{ display: 'flex' }}
+          >
+            <img
+              height={65}
+              src="assets/images/nobo-logo-white.png"
+              alt="logo"
+            />
           </IonCol>
         </IonRow>
         <IonRow>
           <IonGrid className="login-box">
-            <IonRow style={{ paddingTop: 20 }} class="ion-justify-content-center">
-              <IonCol size="5" style={{ textAlign: 'center', fontSize: 20, fontWeight: 400, fontFamily: 'Baskerville', letterSpacing: '.05rem' }}>
+            <IonRow
+              style={{ paddingTop: 20 }}
+              class="ion-justify-content-center"
+            >
+              <IonCol
+                size="5"
+                style={{
+                  textAlign: 'center',
+                  fontSize: 20,
+                  fontWeight: 400,
+                  fontFamily: 'Baskerville',
+                  letterSpacing: '.05rem',
+                }}
+              >
                 LOGIN
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol>
-                <IonInput className="nobo-input" placeholder="USERNAME"></IonInput>
+                <IonInput
+                  className="nobo-input"
+                  placeholder="USERNAME"
+                ></IonInput>
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol>
-                <IonInput className="nobo-input" placeholder="PASSWORD"></IonInput>
+                <IonInput
+                  className="nobo-input"
+                  placeholder="PASSWORD"
+                ></IonInput>
               </IonCol>
             </IonRow>
             <IonRow>
@@ -63,8 +99,9 @@ const NoboLogin: React.FC = () => {
                 </IonButton>
               </IonCol>
             </IonRow>
-            <IonRow style={{ paddingBottom: 20 }}>
+            <IonRow style={{ paddingBottom: 12 }}>
               <IonCol
+                size="8"
                 style={{
                   fontFamily: 'Nunito Sans',
                   fontWeight: '600',
@@ -76,6 +113,7 @@ const NoboLogin: React.FC = () => {
                 Don't have an account?
               </IonCol>
               <IonCol
+                size="4"
                 style={{
                   textDecorationLine: 'underline',
                   fontFamily: 'Nunito Sans',
