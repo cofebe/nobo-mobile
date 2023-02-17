@@ -28,11 +28,16 @@ const Splash: React.FC = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#ffffff',
       }}
       id="nobo-splash-page"
     >
       <div>
-        <img className="splash-logo" src="assets/images/nobo_logo.png" alt="logo" />
+        <img
+          className="splash-logo"
+          src="assets/images/nobo_logo.png"
+          alt="logo"
+        />
       </div>
     </IonPage>
   );
