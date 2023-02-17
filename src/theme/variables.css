@@ -4,11 +4,11 @@ http://ionicframework.com/docs/theming/ */
 /** Ionic CSS Variables **/
 :root {
   --ion-color-primary: #d6980e;
-  --ion-color-primary-rgb: 0, 0, 0;
+  --ion-color-primary-rgb: 214, 152, 14;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #000000;
-  --ion-color-primary-tint: #1a1a1a;
+  --ion-color-primary-shade: #d5ab4f;
+  --ion-color-primary-tint: #fcf2db;
 
   /* --ion-color-secondary: #00816d;
   --ion-color-secondary-rgb: 0, 129, 109;
@@ -83,7 +83,7 @@ http://ionicframework.com/docs/theming/ */
 }
 
 ion-input.nobo-input {
-  --placeholder-color: black;
+  --padding-start: 5px;
   --background: #ffffff;
   border: 1px solid #000000;
   border-radius: 2px;
