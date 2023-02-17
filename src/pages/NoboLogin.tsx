@@ -26,7 +26,7 @@ const NoboLogin: React.FC = () => {
         </IonRow>
         <IonRow>
           <IonGrid className="login-box">
-            <IonRow style={{ padding: '25px 0' }} class="ion-justify-content-center">
+            <IonRow style={{ paddingTop: 20 }} class="ion-justify-content-center">
               <IonCol size="5" style={{ textAlign: 'center', fontSize: 20, fontWeight: 400, fontFamily: 'Baskerville', letterSpacing: '.05rem' }}>
                 LOGIN
               </IonCol>
@@ -36,7 +36,7 @@ const NoboLogin: React.FC = () => {
                 <IonInput className="nobo-input" placeholder="USERNAME"></IonInput>
               </IonCol>
             </IonRow>
-            <IonRow style={{ padding: '20px 0' }}>
+            <IonRow>
               <IonCol>
                 <IonInput className="nobo-input" placeholder="PASSWORD"></IonInput>
               </IonCol>
