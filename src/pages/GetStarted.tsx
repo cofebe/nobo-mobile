@@ -1,10 +1,12 @@
 import { IonButton, IonPage } from '@ionic/react';
+import { useHistory } from 'react-router-dom';
 
 import './GetStarted.scss';
 
 const GetStarted: React.FC = () => {
+  const history = useHistory();
   return (
-    <IonPage>
+    <IonPage className="get-started-page">
       <div className="background-image">
         <div
           style={{
@@ -35,6 +37,7 @@ const GetStarted: React.FC = () => {
               fontSize: '10px',
               fontWeight: '700',
               lineHeight: '15px',
+              border: '0.5px solid #ffffff',
             }}
             // id="open-subscription-modal"
             onClick={() => {}}
@@ -65,7 +68,11 @@ const GetStarted: React.FC = () => {
               fontFamily: 'Nunito Sans',
               fontWeight: '700',
               color: '#D6980E',
+              fontSize: '15px',
               marginLeft: '24px',
+            }}
+            onClick={() => {
+              history.push('/nobo-login');
             }}
           >
             Login

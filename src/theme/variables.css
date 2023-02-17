@@ -10,7 +10,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-primary-shade: #000000;
   --ion-color-primary-tint: #1a1a1a;
 
-  --ion-color-secondary: #00816d;
+  /* --ion-color-secondary: #00816d;
   --ion-color-secondary-rgb: 0, 129, 109;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
@@ -57,7 +57,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
-  --ion-color-light-tint: #f5f6f9;
+  --ion-color-light-tint: #f5f6f9; */
 }
 
 /* ion-toast.error-message {
@@ -68,7 +68,6 @@ http://ionicframework.com/docs/theming/ */
 
 .nobo-button {
   background-color: #d6980e;
-  border: 0.5px solid #ffffff;
   border-radius: 5px;
 }
 
@@ -81,4 +80,11 @@ http://ionicframework.com/docs/theming/ */
 @font-face {
   font-family: 'Nunito Sans';
   src: url(../../public/assets/fonts/NunitoSans-Regular.ttf);
+}
+
+ion-input.nobo-input {
+  --placeholder-color: black;
+  --background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 2px;
 }

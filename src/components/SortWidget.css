@@ -1,6 +1,6 @@
-ion-select {
-  --placeholder-color: #dddddd;
-}
+/* ion-select { */
+/* --placeholder-color: #dddddd; */
+/* } */
 
 .sort-widget {
   height: 1rem;
@@ -8,7 +8,7 @@ ion-select {
 }
 
 .sort-widget-options .select-interface-option {
-  color: #00D6B6;
+  color: #00d6b6;
 }
 
 .sort-widget-options .select-interface-option .alert-radio-label {

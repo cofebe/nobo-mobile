@@ -1,10 +1,5 @@
 import { Route } from 'react-router-dom';
-import {
-  IonApp,
-  IonRouterOutlet,
-  setupIonicReact,
-  isPlatform,
-} from '@ionic/react';
+import { IonApp, IonRouterOutlet, setupIonicReact, isPlatform } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './Home';
 import Splash from './pages/Splash';
@@ -50,6 +45,7 @@ import './theme/variables.css';
 import { Amplify } from 'aws-amplify';
 import awsconfig from './aws-exports.js';
 import GetStarted from './pages/GetStarted';
+import NoboLogin from './pages/NoboLogin';
 Amplify.configure(awsconfig);
 
 setupIonicReact({
@@ -95,6 +91,9 @@ const App: React.FC = () => (
         <IonRouterOutlet>
           <Route path="/get-started" exact={true}>
             <GetStarted />
+          </Route>
+          <Route path="/nobo-login" exact={true}>
+            <NoboLogin />
           </Route>
           <Route path="/login" exact={true}>
             <Login />
