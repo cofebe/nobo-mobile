@@ -1,18 +1,21 @@
 .splash-logo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 35vh;
-    background-color: #398175;
+  animation: logo-animation 2s ease-in-out forwards;
+  height: 51px;
+  width: 168px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: 35vh;
+  background-color: #398175;  */
 }
 
-
-/* Splash Page Backdrop */
-.nobo-splash-backdrop {
-    background: #398175;
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    left: 0;
-    top: 0;
+@keyframes logo-animation {
+  from {
+    height: 51px;
+    width: 168px;
+  }
+  to {
+    height: 81px;
+    width: 266px;
+  }
 }
