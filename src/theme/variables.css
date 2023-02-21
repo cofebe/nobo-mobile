@@ -17,6 +17,9 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-secondary-shade: white;
   --ion-color-secondary-tint: white;
 
+  --ion-tab-bar-background: white;
+  --ion-tab-bar-border-color: white;
+
   /* --ion-color-secondary: #00816d;
   --ion-color-secondary-rgb: 0, 129, 109;
   --ion-color-secondary-contrast: #ffffff;

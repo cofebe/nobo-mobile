@@ -226,146 +226,146 @@ const Home: React.FC = () => {
 
   return (
     <IonContent scrollY={false}>
-      {/* <IonTabs> */}
-      {isBrowser ? (
-        <IonRouterOutlet>
-          <Route path="/home/athlete-profile/:id" exact={true}>
-            <ProfileAthletes myProfile={false} />
-          </Route>
-          <Route path="/home/coach-profile/:id" exact={true}>
-            <ProfileCoaches myProfile={false} />
-          </Route>
-          <Route path="/home/trainer-profile/:id" exact={true}>
-            <ProfileTrainer myProfile={false} />
-          </Route>
-          <Route path="/home/organization-profile/:id" exact={true}>
-            <ProfileOrganization myProfile={false} />
-          </Route>
-          <Route exact path="/home/explore">
-            <Explore />
-          </Route>
-          <Route exact path="/home/explore/list">
-            <ExploreList />
-          </Route>
-          <Route exact path="/home/post-detail/:id/likes">
-            <PostDetailLikes />
-          </Route>
-          <Route exact path="/home/post-detail/:id">
-            <PostDetail />
-          </Route>
-          <Route>
-            <Logo />
-          </Route>
-        </IonRouterOutlet>
-      ) : (
-        <IonRouterOutlet>
-          <Redirect exact path="/home" to="/home/nobo-feed" />
-          {/* <Redirect exact path="/home/athletes" to="/home/feed" /> */}
-          <Route exact path="/home/nobo-feed">
-            <NoboHomePage />
-          </Route>
-          <Route exact path="/home/post-promote/:id">
-            <PromotePost />
-          </Route>
-          <Route exact path="/home/post-detail/:id/likes">
-            <PostDetailLikes />
-          </Route>
-          <Route exact path="/home/post-detail/:id">
-            <PostDetail />
-          </Route>
-          <Route exact path="/home/post-stats/:id">
-            <PostStats />
-          </Route>
-          <Route exact path="/home/profile-insights/:id">
-            <ProfileInsights />
-          </Route>
-          <Route exact path="/home/edit-coach">
-            <SignUpCoach editMode={true} />
-          </Route>
-          <Route exact path="/home/edit-coach/:id">
-            <SignUpCoach editMode={true} />
-          </Route>
-          <Route exact path="/home/edit-trainer">
-            <SignUpTrainer editMode={true} />
-          </Route>
-          <Route exact path="/home/edit-trainer/:id">
-            <SignUpTrainer editMode={true} />
-          </Route>
-          <Route exact path="/home/edit-athlete">
-            <SignUpAthlete editMode={true} />
-          </Route>
-          <Route exact path="/home/edit-athlete/:id">
-            <SignUpAthlete editMode={true} />
-          </Route>
-          <Route path="/home/my-athlete-profile" exact={true}>
-            <ProfileAthletes myProfile={true} />
-          </Route>
-          <Route path="/home/athlete-profile/:id" exact={true}>
-            <ProfileAthletes myProfile={false} />
-          </Route>
-          <Route path="/home/my-trainer-profile" exact={true}>
-            <ProfileTrainer myProfile={true} />
-          </Route>
-          <Route path="/home/trainer-profile/:id" exact={true}>
-            <ProfileTrainer myProfile={false} />
-          </Route>
-          <Route path="/home/my-coach-profile" exact={true}>
-            <ProfileCoaches myProfile={true} />
-          </Route>
-          <Route path="/home/coach-profile/:id" exact={true}>
-            <ProfileCoaches myProfile={false} />
-          </Route>
-          <Route path="/home/all-organizations" exact={true}>
-            <AllOrganizations />
-          </Route>
-          <Route path="/home/organization-profile" exact={true}>
-            <ProfileOrganization myProfile={true} />
-          </Route>
-          <Route path="/home/organization-profile/:id" exact={true}>
-            <ProfileOrganization myProfile={false} />
-          </Route>
-          <Route exact path="/home/add-organization/:id">
-            <SignUpOrganization editMode={false} />
-          </Route>
-          <Route exact path="/home/edit-organization">
-            <SignUpOrganization editMode={true} />
-          </Route>
-          <Route exact path="/home/edit-organization/:id">
-            <SignUpOrganization editMode={true} />
-          </Route>
-          <Route path="/home/roles">
-            <Roles />
-          </Route>
-          <Route exact path="/home/explore">
-            <Explore />
-          </Route>
-          <Route exact path="/home/explore/list">
-            <ExploreList />
-          </Route>
-          <Route exact path="/home/messages">
-            <Messages />
-          </Route>
-          <Route exact path="/home/connections">
-            <Connections />
-          </Route>
-          <Route exact path="/home/connections/pending">
-            <PendingConnections />
-          </Route>
-          <Route exact path="/home/notifications">
-            <Notifications />
-          </Route>
-          <Route exact path="/home/watchlist">
-            <Watchlist />
-          </Route>
-          {/* <Route exact path="/home">
+      <IonTabs className="nobo-nav-bar-background">
+        {isBrowser ? (
+          <IonRouterOutlet>
+            <Route path="/home/athlete-profile/:id" exact={true}>
+              <ProfileAthletes myProfile={false} />
+            </Route>
+            <Route path="/home/coach-profile/:id" exact={true}>
+              <ProfileCoaches myProfile={false} />
+            </Route>
+            <Route path="/home/trainer-profile/:id" exact={true}>
+              <ProfileTrainer myProfile={false} />
+            </Route>
+            <Route path="/home/organization-profile/:id" exact={true}>
+              <ProfileOrganization myProfile={false} />
+            </Route>
+            <Route exact path="/home/explore">
+              <Explore />
+            </Route>
+            <Route exact path="/home/explore/list">
+              <ExploreList />
+            </Route>
+            <Route exact path="/home/post-detail/:id/likes">
+              <PostDetailLikes />
+            </Route>
+            <Route exact path="/home/post-detail/:id">
+              <PostDetail />
+            </Route>
+            <Route>
+              <Logo />
+            </Route>
+          </IonRouterOutlet>
+        ) : (
+          <IonRouterOutlet>
+            <Redirect exact path="/home" to="/home/nobo-feed" />
+            {/* <Redirect exact path="/home/athletes" to="/home/feed" /> */}
+            <Route exact path="/home/nobo-feed">
+              <NoboHomePage />
+            </Route>
+            <Route exact path="/home/post-promote/:id">
+              <PromotePost />
+            </Route>
+            <Route exact path="/home/post-detail/:id/likes">
+              <PostDetailLikes />
+            </Route>
+            <Route exact path="/home/post-detail/:id">
+              <PostDetail />
+            </Route>
+            <Route exact path="/home/post-stats/:id">
+              <PostStats />
+            </Route>
+            <Route exact path="/home/profile-insights/:id">
+              <ProfileInsights />
+            </Route>
+            <Route exact path="/home/edit-coach">
+              <SignUpCoach editMode={true} />
+            </Route>
+            <Route exact path="/home/edit-coach/:id">
+              <SignUpCoach editMode={true} />
+            </Route>
+            <Route exact path="/home/edit-trainer">
+              <SignUpTrainer editMode={true} />
+            </Route>
+            <Route exact path="/home/edit-trainer/:id">
+              <SignUpTrainer editMode={true} />
+            </Route>
+            <Route exact path="/home/edit-athlete">
+              <SignUpAthlete editMode={true} />
+            </Route>
+            <Route exact path="/home/edit-athlete/:id">
+              <SignUpAthlete editMode={true} />
+            </Route>
+            <Route path="/home/my-athlete-profile" exact={true}>
+              <ProfileAthletes myProfile={true} />
+            </Route>
+            <Route path="/home/athlete-profile/:id" exact={true}>
+              <ProfileAthletes myProfile={false} />
+            </Route>
+            <Route path="/home/my-trainer-profile" exact={true}>
+              <ProfileTrainer myProfile={true} />
+            </Route>
+            <Route path="/home/trainer-profile/:id" exact={true}>
+              <ProfileTrainer myProfile={false} />
+            </Route>
+            <Route path="/home/my-coach-profile" exact={true}>
+              <ProfileCoaches myProfile={true} />
+            </Route>
+            <Route path="/home/coach-profile/:id" exact={true}>
+              <ProfileCoaches myProfile={false} />
+            </Route>
+            <Route path="/home/all-organizations" exact={true}>
+              <AllOrganizations />
+            </Route>
+            <Route path="/home/organization-profile" exact={true}>
+              <ProfileOrganization myProfile={true} />
+            </Route>
+            <Route path="/home/organization-profile/:id" exact={true}>
+              <ProfileOrganization myProfile={false} />
+            </Route>
+            <Route exact path="/home/add-organization/:id">
+              <SignUpOrganization editMode={false} />
+            </Route>
+            <Route exact path="/home/edit-organization">
+              <SignUpOrganization editMode={true} />
+            </Route>
+            <Route exact path="/home/edit-organization/:id">
+              <SignUpOrganization editMode={true} />
+            </Route>
+            <Route path="/home/roles">
+              <Roles />
+            </Route>
+            <Route exact path="/home/explore">
+              <Explore />
+            </Route>
+            <Route exact path="/home/explore/list">
+              <ExploreList />
+            </Route>
+            <Route exact path="/home/messages">
+              <Messages />
+            </Route>
+            <Route exact path="/home/connections">
+              <Connections />
+            </Route>
+            <Route exact path="/home/connections/pending">
+              <PendingConnections />
+            </Route>
+            <Route exact path="/home/notifications">
+              <Notifications />
+            </Route>
+            <Route exact path="/home/watchlist">
+              <Watchlist />
+            </Route>
+            {/* <Route exact path="/home">
               <Redirect to="/home/feed" />
             </Route> */}
-          <Route path="/home/post-create" exact={true}>
-            <PostCreate />
-          </Route>
-        </IonRouterOutlet>
-      )}
-      {/* <IonTabBar
+            <Route path="/home/post-create" exact={true}>
+              <PostCreate />
+            </Route>
+          </IonRouterOutlet>
+        )}
+        <IonTabBar
           className={'nobo-nav-bar ' + (isDesktop ? 'desktop' : '')}
           slot={navbarLocation}
         >
@@ -389,100 +389,165 @@ const Home: React.FC = () => {
           {!isBrowser ? (
             <IonTabButton
               tab="home"
-              href="/home/feed"
+              // href="/home/feed"
               selected={appMode === 'home'}
               onClick={(e) => setActiveTab('home', e)}
             >
               <img
                 className="nobo-nav-btn"
-                src={`assets/images/navigation/nav-home${
+                src={`assets/images/nobo-home-icon${
                   appMode === 'home' ? '-focus' : ''
                 }.svg`}
                 style={{ width: '1.62rem' }}
                 alt="home"
               />
+              {appMode === 'home' && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 8,
+                    fontSize: 8,
+                    fontFamily: 'Nunito Sans',
+                    fontWeight: 600,
+                  }}
+                >
+                  HOME
+                </div>
+              )}
             </IonTabButton>
           ) : (
             ''
           )}
           {!isBrowser ? (
             <IonTabButton
-              tab="explore"
-              href="/home/explore"
-              selected={appMode === 'explore'}
-              onClick={(e) => setActiveTab('explore', e)}
+              tab="stylefeed"
+              // href="/home/explore"
+              selected={appMode === 'stylefeed'}
+              onClick={(e) => setActiveTab('stylefeed', e)}
             >
               <img
                 className="nobo-nav-btn"
-                src={`assets/images/navigation/nav-explore${
-                  appMode === 'explore' ? '-focus' : ''
+                src={`assets/images/nobo-style-feed-icon${
+                  appMode === 'stylefeed' ? '-focus' : ''
                 }.svg`}
                 style={{ width: '1.31rem' }}
-                alt="explore"
+                alt="stylefeed"
               />
+              {appMode === 'stylefeed' && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 8,
+                    fontSize: 8,
+                    fontFamily: 'Nunito Sans',
+                    fontWeight: 600,
+                  }}
+                >
+                  STYLE FEED
+                </div>
+              )}
             </IonTabButton>
           ) : (
             ''
           )}
           {!isBrowser ? (
             <IonTabButton
-              tab="messages"
-              href="/home/messages"
-              selected={appMode === 'messages'}
-              onClick={(e) => setActiveTab('messages', e)}
+              tab="list"
+              // href="/home/messages"
+              selected={appMode === 'list'}
+              onClick={(e) => setActiveTab('list', e)}
             >
-              <img
-                className="nobo-nav-btn"
-                src={`assets/images/navigation/nav-messages${
-                  appMode === 'messages' ? '-focus' : ''
-                }.svg`}
-                style={{ width: '1.68rem' }}
-                alt="messages"
-              />
+              <div
+                style={{
+                  height: 50,
+                  width: 50,
+                  boxShadow: '0px 0px 16px #dfdfdf',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 8,
+                  backgroundColor: appMode === 'list' ? '#d6980e' : '#fff',
+                }}
+              >
+                <img
+                  className="nobo-nav-btn"
+                  src={`assets/images/nobo-plus-icon${
+                    appMode === 'list' ? '-focus' : ''
+                  }.png`}
+                  style={{ width: '1.68rem' }}
+                  alt="list"
+                />
+              </div>
             </IonTabButton>
           ) : (
             ''
           )}
           {!isBrowser ? (
             <IonTabButton
-              tab="connections"
-              href="/home/connections"
-              selected={appMode === 'connections'}
-              onClick={(e) => setActiveTab('connections', e)}
+              tab="notifications"
+              // href="/home/connections"
+              selected={appMode === 'notifications'}
+              onClick={(e) => setActiveTab('notifications', e)}
             >
               <img
                 className="nobo-nav-btn"
-                src={`assets/images/navigation/nav-connections${
-                  appMode === 'connections' ? '-focus' : ''
+                src={`assets/images/nobo-notifications-icon${
+                  appMode === 'notifications' ? '-focus' : ''
                 }.svg`}
                 style={{ width: '1.5rem' }}
-                alt="connections"
+                alt="notifications"
               />
+              {appMode === 'notifications' && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 8,
+                    fontSize: 8,
+                    fontFamily: 'Nunito Sans',
+                    fontWeight: 600,
+                  }}
+                >
+                  NOTIFICATIONS
+                </div>
+              )}
             </IonTabButton>
           ) : (
             ''
           )}
           {!isBrowser ? (
             <IonTabButton
-              tab="profile"
+              tab="closet"
               href={profileURL}
-              selected={appMode === 'my-profile'}
-              onClick={(e) => setActiveTab('my-profile', e)}
+              selected={appMode === 'closet'}
+              onClick={(e) => setActiveTab('closet', e)}
             >
               <img
                 className="nobo-nav-btn"
-                src={`assets/images/navigation/nav-profile${
-                  appMode === 'my-profile' ? '-focus' : ''
+                src={`assets/images/nobo-closet-icon${
+                  appMode === 'closet' ? '-focus' : ''
                 }.svg`}
                 style={{ width: '1.18rem' }}
                 alt="profile"
               />
+              {appMode === 'closet' && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 8,
+                    fontSize: 8,
+                    fontFamily: 'Nunito Sans',
+                    fontWeight: 600,
+                  }}
+                >
+                  CLOSET
+                </div>
+              )}
             </IonTabButton>
           ) : (
             ''
           )}
         </IonTabBar>
-      </IonTabs> */}
+      </IonTabs>
     </IonContent>
   );
 };

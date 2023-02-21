@@ -12,6 +12,7 @@ import {
   IonPage,
   IonContent,
 } from '@ionic/react';
+import './NoboHomePage.scss';
 import NoboHeader from '../components/NoboHeader';
 
 const NoboHomePage: React.FC = () => {
@@ -19,7 +20,7 @@ const NoboHomePage: React.FC = () => {
     console.log('sectionName', sectionName);
   };
   return (
-    <IonPage>
+    <IonPage className="nobo-home-page">
       <NoboHeader sectionNameCallback={getSectionName} />
     </IonPage>
   );
