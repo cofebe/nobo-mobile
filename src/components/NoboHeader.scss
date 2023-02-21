@@ -1,0 +1,33 @@
+.home-header {
+  background-color: #fefcf7;
+  box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.23);
+  height: auto;
+  min-height: 5rem;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  --opacity-scale: 0 !important;
+
+  .home-header-toolbar {
+    --background: #fefcf7;
+  }
+
+  .home-page .nobo-float-logo {
+    float: left;
+  }
+
+  .header-section-button {
+    font-size: 12px;
+    font-family: Nunito Sans;
+    font-weight: 600;
+    --border: 1px solid #0000;
+    --border-style: solid;
+    --border-width: 1px;
+    --border-radius: 100px;
+  }
+
+  @media (min-width: 900px) {
+    .home-header {
+      display: none;
+    }
+  }
+}

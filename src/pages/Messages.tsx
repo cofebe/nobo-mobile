@@ -19,7 +19,7 @@ import { searchOutline } from 'ionicons/icons';
 import './URP.css';
 import './Messages.scss';
 import { Profile } from '../data/profile';
-import UrpHeader from '../components/UrpHeader';
+// import UrpHeader from '../components/NoboHeader';
 import CreateConversationModal from '../components/CreateConversationModal';
 import { MessagingService } from '../services/MessagingService';
 import { UserService } from '../services/UserService';
@@ -54,13 +54,15 @@ const Messages: React.FC = () => {
 
   useIonViewWillEnter(async () => {
     console.log('Messages.useIonViewWillEnter');
-    setWatchListOnly(false)
+    setWatchListOnly(false);
     await loadConversations();
 
     if (!subscriptions._) {
-      subscriptions._ = messagingService.getConversationCreates().subscribe(() => {
-        loadConversations();
-      });
+      subscriptions._ = messagingService
+        .getConversationCreates()
+        .subscribe(() => {
+          loadConversations();
+        });
     }
 
     let watchListItems: any = [];
@@ -109,8 +111,12 @@ const Messages: React.FC = () => {
         convo.userIds = JSON.parse(convo.userIds)
           .map((u: any) => +u)
           .filter((u: any) => u !== myUserId);
-        convo.lastMessageCreatedAt = (convo.lastMessageCreatedAt ? new Date(convo.lastMessageCreatedAt * 1000) : null);
-        convo.lastReadAt = (convo.lastReadAt ? new Date(convo.lastReadAt * 1000) : null);
+        convo.lastMessageCreatedAt = convo.lastMessageCreatedAt
+          ? new Date(convo.lastMessageCreatedAt * 1000)
+          : null;
+        convo.lastReadAt = convo.lastReadAt
+          ? new Date(convo.lastReadAt * 1000)
+          : null;
 
         for (const userId of convo.userIds) {
           userIdsMap[userId] = userId;
@@ -128,13 +134,17 @@ const Messages: React.FC = () => {
           return -1;
         }
 
-        return b.lastMessageCreatedAt.getTime() - a.lastMessageCreatedAt.getTime();
+        return (
+          b.lastMessageCreatedAt.getTime() - a.lastMessageCreatedAt.getTime()
+        );
       });
 
-      const promises = Object.keys(userIdsMap).map(userId => userService.getProfile(+userId));
+      const promises = Object.keys(userIdsMap).map((userId) =>
+        userService.getProfile(+userId)
+      );
       Promise.all(promises)
-        .then(responses => Promise.all(responses.map(res => res.json())))
-        .then(users => {
+        .then((responses) => Promise.all(responses.map((res) => res.json())))
+        .then((users) => {
           //console.log('promises:users', users);
           const usersMap: any = {};
           for (const user of users) {
@@ -152,9 +162,11 @@ const Messages: React.FC = () => {
 
           for (const convo of conversations) {
             if (!subscriptions[convo.id]) {
-              subscriptions[convo.id] = messagingService.getConversationUpdates(convo.id).subscribe(() => {
-                loadConversations();
-              });
+              subscriptions[convo.id] = messagingService
+                .getConversationUpdates(convo.id)
+                .subscribe(() => {
+                  loadConversations();
+                });
             }
           }
 
@@ -162,7 +174,7 @@ const Messages: React.FC = () => {
           setIsLoading(isLoading);
           dismissLoading();
         })
-        .catch(err => {
+        .catch((err) => {
           console.error('getProfile:err =', err);
 
           isLoading = false;
@@ -231,131 +243,147 @@ const Messages: React.FC = () => {
     return convo.lastMessageText;
   }
 
-
-
   function sortWatchlist(sort: boolean) {
     if (sort) {
-      let watchlistUserId: number[] = []
-      messages.map( (val) => {
-        watchlistUserId.push(val.user_id)
-      })
+      let watchlistUserId: number[] = [];
+      messages.map((val) => {
+        watchlistUserId.push(val.user_id);
+      });
 
-      let watchlistConversations = conversations.filter( c => {
-        return watchlistUserId.includes(c.userIds[0])
-      })
+      let watchlistConversations = conversations.filter((c) => {
+        return watchlistUserId.includes(c.userIds[0]);
+      });
 
-      setConversations(watchlistConversations)
+      setConversations(watchlistConversations);
     } else {
-      loadConversations()
+      loadConversations();
     }
   }
 
   return (
     <IonPage className="messaging-page">
-      <UrpHeader></UrpHeader>
+      {/* <UrpHeader></UrpHeader> */}
       {conversations.length > 0 ? (
         <IonContent scrollY={true} className="messaging-content">
-        { messages.length > 0 && (
-          <IonRow className="filter-container">
-            <SwiperSlide
-              onClick={() => {
-                setWatchListOnly(!watchlistOnly);
-                sortWatchlist(!watchlistOnly);
-              }}
-              className={'noselect explore-sports-slide'}
-              key='Watchlist'
-              data-path='Watchlist'
-            >
-              <span
-                className={
-                  'nobo-explore-account-tab-menu-item ' +
-                  (watchlistOnly === true ? 'selected' : '')
-                }
+          {messages.length > 0 && (
+            <IonRow className="filter-container">
+              <SwiperSlide
+                onClick={() => {
+                  setWatchListOnly(!watchlistOnly);
+                  sortWatchlist(!watchlistOnly);
+                }}
+                className={'noselect explore-sports-slide'}
+                key="Watchlist"
+                data-path="Watchlist"
               >
-                Watchlist Only
-              </span>
-            </SwiperSlide>
-          </IonRow>)}
+                <span
+                  className={
+                    'nobo-explore-account-tab-menu-item ' +
+                    (watchlistOnly === true ? 'selected' : '')
+                  }
+                >
+                  Watchlist Only
+                </span>
+              </SwiperSlide>
+            </IonRow>
+          )}
           <IonItem className="search-item">
             <IonRow className="search-container">
               <IonCol size="9" className="search-col">
                 <IonIcon icon={searchOutline} />
-                <IonInput className="search" placeholder="Search" value={filter} onIonChange={(e: any) => setFilter(e.target.value?.toLowerCase())} />
+                <IonInput
+                  className="search"
+                  placeholder="Search"
+                  value={filter}
+                  onIonChange={(e: any) =>
+                    setFilter(e.target.value?.toLowerCase())
+                  }
+                />
               </IonCol>
             </IonRow>
           </IonItem>
           <IonList>
             {conversations
-              .filter(c => !!c.lastMessageCreatedAt)
-              .filter(c => getUserName(c).toLowerCase().includes(filter) || getText(c).toLowerCase().includes(filter))
-              .map(c => (
-                <IonItem key={c.id} className="messaging-item" lines="none" onClick={(e) => {
-                  e.preventDefault();
-                  unsubscribe();
-                  history.push(`/chat/${c.id}`);
-                }
-            }>
-                <IonRow>
-                  <IonCol>
-                    {c.userIds.length === 1 ? (
-                      <IonAvatar>
-                        <img
-                          onError={({ currentTarget }) => {
-                            currentTarget.onerror = null; // prevents looping
-                            currentTarget.src = '../../assets/images/nobo_logo_round.svg';
-                          }}
-                          src={getUserAvatar(c)}
-                          alt="avatar"
-                        />
-                      </IonAvatar>
-                    ) : (
-                      <div className="group-avatar">
-                        <div>
-                          +{c.userIds.length}
+              .filter((c) => !!c.lastMessageCreatedAt)
+              .filter(
+                (c) =>
+                  getUserName(c).toLowerCase().includes(filter) ||
+                  getText(c).toLowerCase().includes(filter)
+              )
+              .map((c) => (
+                <IonItem
+                  key={c.id}
+                  className="messaging-item"
+                  lines="none"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    unsubscribe();
+                    history.push(`/chat/${c.id}`);
+                  }}
+                >
+                  <IonRow>
+                    <IonCol>
+                      {c.userIds.length === 1 ? (
+                        <IonAvatar>
+                          <img
+                            onError={({ currentTarget }) => {
+                              currentTarget.onerror = null; // prevents looping
+                              currentTarget.src =
+                                '../../assets/images/nobo_logo_round.svg';
+                            }}
+                            src={getUserAvatar(c)}
+                            alt="avatar"
+                          />
+                        </IonAvatar>
+                      ) : (
+                        <div className="group-avatar">
+                          <div>+{c.userIds.length}</div>
+                        </div>
+                      )}
+                      <div className="name-text-date-unread">
+                        <div className="text-date">&nbsp;</div>
+                        <div className="name-unread">
+                          <div className="name">{getUserName(c)}</div>
+                          <div className="unread">
+                            {isUnread(c) ? (
+                              <div className="unread-dot"></div>
+                            ) : (
+                              ''
+                            )}
+                          </div>
+                        </div>
+                        <div className="text-date">
+                          <div
+                            className={'text ' + (isUnread(c) ? 'unread' : '')}
+                          >
+                            {getText(c)}
+                          </div>
+                          <div className="date">
+                            {formatDate(c.lastMessageCreatedAt)}
+                          </div>
                         </div>
                       </div>
-                    )}
-                    <div className="name-text-date-unread">
-                      <div className="text-date">&nbsp;</div>
-                      <div className="name-unread">
-                        <div className="name">
-                          {getUserName(c)}
-                        </div>
-                        <div className="unread">
-                          {isUnread(c) ? (
-                            <div className="unread-dot"></div>
-                          ) : ''}
-                        </div>
-                      </div>
-                      <div className="text-date">
-                        <div className={'text ' + (isUnread(c) ? 'unread' : '')}>
-                          {getText(c)}
-                        </div>
-                        <div className="date">
-                          {formatDate(c.lastMessageCreatedAt)}
-                        </div>
-                      </div>
-                    </div>
-                  </IonCol>
-                </IonRow>
-              </IonItem>
-            ))}
+                    </IonCol>
+                  </IonRow>
+                </IonItem>
+              ))}
           </IonList>
         </IonContent>
       ) : (
         <IonContent scrollY={false}>
           <IonRow>
-            { (!isLoading && conversations.length < 1) && (
-            <IonCol class="ion-text-center">
-              <img
-                className="logo-image logo-image-margin"
-                src="assets/images/nobo_logo_round.svg"
-                width="150"
-                height="150"
-                alt="logo"
-              />
-              <div className="nobo-sub-header">No messages.</div>
-            </IonCol>)}
+            {!isLoading && conversations.length < 1 && (
+              <IonCol class="ion-text-center">
+                <img
+                  className="logo-image logo-image-margin"
+                  src="assets/images/nobo_logo_round.svg"
+                  width="150"
+                  height="150"
+                  alt="logo"
+                />
+                <div className="nobo-sub-header">No messages.</div>
+              </IonCol>
+            )}
           </IonRow>
         </IonContent>
       )}
@@ -370,15 +398,19 @@ const Messages: React.FC = () => {
         alt="new chat"
       />
 
-      <CreateConversationModal ref={modal} onCancel={() => {
+      <CreateConversationModal
+        ref={modal}
+        onCancel={() => {
           modal.current?.dismiss();
-        }} onOpen={(convoId: string) => {
+        }}
+        onOpen={(convoId: string) => {
           modal.current?.dismiss();
           if (convoId) {
             unsubscribe();
             history.push(`/chat/${convoId}`);
           }
-        }}/>
+        }}
+      />
     </IonPage>
   );
 };

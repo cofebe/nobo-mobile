@@ -14,7 +14,7 @@ import { Profile, AthleteUserProfile } from '../data/profile';
 import WatchListItem from '../components/WatchlistItem';
 import { UserService } from '../services/UserService';
 import SortWidget from '../components/SortWidget';
-import UrpHeader from '../components/UrpHeader';
+// import UrpHeader from '../components/NoboHeader';
 
 const Watchlist: React.FC = () => {
   const [messages, setMessages] = useState<Profile[]>([]);
@@ -111,7 +111,7 @@ const Watchlist: React.FC = () => {
 
   return (
     <IonPage className="home-page">
-      <UrpHeader></UrpHeader>
+      {/* <UrpHeader></UrpHeader> */}
       <IonContent style={{ '--background': '#f9fbfb' }} fullscreen>
         <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>

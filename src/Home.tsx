@@ -49,6 +49,7 @@ import SignUpTrainer from './pages/SignUpTrainer';
 import { viewUser } from './util';
 import SignUpOrganization from './pages/SignUpOrganization';
 import AllOrganizations from './pages/AllOrganizations';
+import NoboHomePage from './pages/NoboHomePage';
 
 Amplify.configure(awsconfig);
 
@@ -136,16 +137,16 @@ const Home: React.FC = () => {
     );
   }
 
-  Auth.currentAuthenticatedUser({
-    bypassCache: false,
-  }).catch((err) => {
-    console.log('Error getting current authenticated user:', err);
-    if (isBrowser && isPublic(window.location.pathname)) {
-      // do nothing; allow anonymous access
-      return;
-    }
-    window.location.href = '/login';
-  });
+  // Auth.currentAuthenticatedUser({
+  //   bypassCache: false,
+  // }).catch((err) => {
+  //   console.log('Error getting current authenticated user:', err);
+  //   if (isBrowser && isPublic(window.location.pathname)) {
+  //     // do nothing; allow anonymous access
+  //     return;
+  //   }
+  //   window.location.href = '/login';
+  // });
 
   function setActiveTab(name: string, ev?: Event) {
     console.log('setActiveTab', name);
@@ -225,146 +226,149 @@ const Home: React.FC = () => {
 
   return (
     <IonContent scrollY={false}>
-      <IonTabs>
-        {isBrowser ? (
-          <IonRouterOutlet>
-            <Route path="/home/athlete-profile/:id" exact={true}>
-              <ProfileAthletes myProfile={false} />
-            </Route>
-            <Route path="/home/coach-profile/:id" exact={true}>
-              <ProfileCoaches myProfile={false} />
-            </Route>
-            <Route path="/home/trainer-profile/:id" exact={true}>
-              <ProfileTrainer myProfile={false} />
-            </Route>
-            <Route path="/home/organization-profile/:id" exact={true}>
-              <ProfileOrganization myProfile={false} />
-            </Route>
-            <Route exact path="/home/explore">
-              <Explore />
-            </Route>
-            <Route exact path="/home/explore/list">
-              <ExploreList />
-            </Route>
-            <Route exact path="/home/post-detail/:id/likes">
-              <PostDetailLikes />
-            </Route>
-            <Route exact path="/home/post-detail/:id">
-              <PostDetail />
-            </Route>
-            <Route>
-              <Logo />
-            </Route>
-          </IonRouterOutlet>
-        ) : (
-          <IonRouterOutlet>
-            <Redirect exact path="/home" to="/home/feed" />
-            <Redirect exact path="/home/athletes" to="/home/feed" />
-            <Route exact path="/home/feed">
-              <Feed />
-            </Route>
-            <Route exact path="/home/post-promote/:id">
-              <PromotePost />
-            </Route>
-            <Route exact path="/home/post-detail/:id/likes">
-              <PostDetailLikes />
-            </Route>
-            <Route exact path="/home/post-detail/:id">
-              <PostDetail />
-            </Route>
-            <Route exact path="/home/post-stats/:id">
-              <PostStats />
-            </Route>
-            <Route exact path="/home/profile-insights/:id">
-              <ProfileInsights />
-            </Route>
-            <Route exact path="/home/edit-coach">
-              <SignUpCoach editMode={true} />
-            </Route>
-            <Route exact path="/home/edit-coach/:id">
-              <SignUpCoach editMode={true} />
-            </Route>
-            <Route exact path="/home/edit-trainer">
-              <SignUpTrainer editMode={true} />
-            </Route>
-            <Route exact path="/home/edit-trainer/:id">
-              <SignUpTrainer editMode={true} />
-            </Route>
-            <Route exact path="/home/edit-athlete">
-              <SignUpAthlete editMode={true} />
-            </Route>
-            <Route exact path="/home/edit-athlete/:id">
-              <SignUpAthlete editMode={true} />
-            </Route>
-            <Route path="/home/my-athlete-profile" exact={true}>
-              <ProfileAthletes myProfile={true} />
-            </Route>
-            <Route path="/home/athlete-profile/:id" exact={true}>
-              <ProfileAthletes myProfile={false} />
-            </Route>
-            <Route path="/home/my-trainer-profile" exact={true}>
-              <ProfileTrainer myProfile={true} />
-            </Route>
-            <Route path="/home/trainer-profile/:id" exact={true}>
-              <ProfileTrainer myProfile={false} />
-            </Route>
-            <Route path="/home/my-coach-profile" exact={true}>
-              <ProfileCoaches myProfile={true} />
-            </Route>
-            <Route path="/home/coach-profile/:id" exact={true}>
-              <ProfileCoaches myProfile={false} />
-            </Route>
-            <Route path="/home/all-organizations" exact={true}>
-              <AllOrganizations />
-            </Route>
-            <Route path="/home/organization-profile" exact={true}>
-              <ProfileOrganization myProfile={true} />
-            </Route>
-            <Route path="/home/organization-profile/:id" exact={true}>
-              <ProfileOrganization myProfile={false} />
-            </Route>
-            <Route exact path="/home/add-organization/:id">
-              <SignUpOrganization editMode={false} />
-            </Route>
-            <Route exact path="/home/edit-organization">
-              <SignUpOrganization editMode={true} />
-            </Route>
-            <Route exact path="/home/edit-organization/:id">
-              <SignUpOrganization editMode={true} />
-            </Route>
-            <Route path="/home/roles">
-              <Roles />
-            </Route>
-            <Route exact path="/home/explore">
-              <Explore />
-            </Route>
-            <Route exact path="/home/explore/list">
-              <ExploreList />
-            </Route>
-            <Route exact path="/home/messages">
-              <Messages />
-            </Route>
-            <Route exact path="/home/connections">
-              <Connections />
-            </Route>
-            <Route exact path="/home/connections/pending">
-              <PendingConnections />
-            </Route>
-            <Route exact path="/home/notifications">
-              <Notifications />
-            </Route>
-            <Route exact path="/home/watchlist">
-              <Watchlist />
-            </Route>
-            <Route exact path="/home">
+      {/* <IonTabs> */}
+      {isBrowser ? (
+        <IonRouterOutlet>
+          <Route path="/home/athlete-profile/:id" exact={true}>
+            <ProfileAthletes myProfile={false} />
+          </Route>
+          <Route path="/home/coach-profile/:id" exact={true}>
+            <ProfileCoaches myProfile={false} />
+          </Route>
+          <Route path="/home/trainer-profile/:id" exact={true}>
+            <ProfileTrainer myProfile={false} />
+          </Route>
+          <Route path="/home/organization-profile/:id" exact={true}>
+            <ProfileOrganization myProfile={false} />
+          </Route>
+          <Route exact path="/home/explore">
+            <Explore />
+          </Route>
+          <Route exact path="/home/explore/list">
+            <ExploreList />
+          </Route>
+          <Route exact path="/home/post-detail/:id/likes">
+            <PostDetailLikes />
+          </Route>
+          <Route exact path="/home/post-detail/:id">
+            <PostDetail />
+          </Route>
+          <Route>
+            <Logo />
+          </Route>
+        </IonRouterOutlet>
+      ) : (
+        <IonRouterOutlet>
+          <Redirect exact path="/home" to="/home/nobo-feed" />
+          {/* <Redirect exact path="/home/athletes" to="/home/feed" /> */}
+          <Route exact path="/home/nobo-feed">
+            <NoboHomePage />
+          </Route>
+          <Route exact path="/home/post-promote/:id">
+            <PromotePost />
+          </Route>
+          <Route exact path="/home/post-detail/:id/likes">
+            <PostDetailLikes />
+          </Route>
+          <Route exact path="/home/post-detail/:id">
+            <PostDetail />
+          </Route>
+          <Route exact path="/home/post-stats/:id">
+            <PostStats />
+          </Route>
+          <Route exact path="/home/profile-insights/:id">
+            <ProfileInsights />
+          </Route>
+          <Route exact path="/home/edit-coach">
+            <SignUpCoach editMode={true} />
+          </Route>
+          <Route exact path="/home/edit-coach/:id">
+            <SignUpCoach editMode={true} />
+          </Route>
+          <Route exact path="/home/edit-trainer">
+            <SignUpTrainer editMode={true} />
+          </Route>
+          <Route exact path="/home/edit-trainer/:id">
+            <SignUpTrainer editMode={true} />
+          </Route>
+          <Route exact path="/home/edit-athlete">
+            <SignUpAthlete editMode={true} />
+          </Route>
+          <Route exact path="/home/edit-athlete/:id">
+            <SignUpAthlete editMode={true} />
+          </Route>
+          <Route path="/home/my-athlete-profile" exact={true}>
+            <ProfileAthletes myProfile={true} />
+          </Route>
+          <Route path="/home/athlete-profile/:id" exact={true}>
+            <ProfileAthletes myProfile={false} />
+          </Route>
+          <Route path="/home/my-trainer-profile" exact={true}>
+            <ProfileTrainer myProfile={true} />
+          </Route>
+          <Route path="/home/trainer-profile/:id" exact={true}>
+            <ProfileTrainer myProfile={false} />
+          </Route>
+          <Route path="/home/my-coach-profile" exact={true}>
+            <ProfileCoaches myProfile={true} />
+          </Route>
+          <Route path="/home/coach-profile/:id" exact={true}>
+            <ProfileCoaches myProfile={false} />
+          </Route>
+          <Route path="/home/all-organizations" exact={true}>
+            <AllOrganizations />
+          </Route>
+          <Route path="/home/organization-profile" exact={true}>
+            <ProfileOrganization myProfile={true} />
+          </Route>
+          <Route path="/home/organization-profile/:id" exact={true}>
+            <ProfileOrganization myProfile={false} />
+          </Route>
+          <Route exact path="/home/add-organization/:id">
+            <SignUpOrganization editMode={false} />
+          </Route>
+          <Route exact path="/home/edit-organization">
+            <SignUpOrganization editMode={true} />
+          </Route>
+          <Route exact path="/home/edit-organization/:id">
+            <SignUpOrganization editMode={true} />
+          </Route>
+          <Route path="/home/roles">
+            <Roles />
+          </Route>
+          <Route exact path="/home/explore">
+            <Explore />
+          </Route>
+          <Route exact path="/home/explore/list">
+            <ExploreList />
+          </Route>
+          <Route exact path="/home/messages">
+            <Messages />
+          </Route>
+          <Route exact path="/home/connections">
+            <Connections />
+          </Route>
+          <Route exact path="/home/connections/pending">
+            <PendingConnections />
+          </Route>
+          <Route exact path="/home/notifications">
+            <Notifications />
+          </Route>
+          <Route exact path="/home/watchlist">
+            <Watchlist />
+          </Route>
+          {/* <Route exact path="/home">
               <Redirect to="/home/feed" />
-            </Route>
-            <Route path="/home/post-create" exact={true}>
-              <PostCreate />
-            </Route>
-          </IonRouterOutlet>
-        )}
-        <IonTabBar className={'nobo-nav-bar ' + (isDesktop ? 'desktop' : '')} slot={navbarLocation}>
+            </Route> */}
+          <Route path="/home/post-create" exact={true}>
+            <PostCreate />
+          </Route>
+        </IonRouterOutlet>
+      )}
+      {/* <IonTabBar
+          className={'nobo-nav-bar ' + (isDesktop ? 'desktop' : '')}
+          slot={navbarLocation}
+        >
           {isBrowser ? (
             <IonTabButton
               tab="logo"
@@ -391,7 +395,9 @@ const Home: React.FC = () => {
             >
               <img
                 className="nobo-nav-btn"
-                src={`assets/images/navigation/nav-home${appMode === 'home' ? '-focus' : ''}.svg`}
+                src={`assets/images/navigation/nav-home${
+                  appMode === 'home' ? '-focus' : ''
+                }.svg`}
                 style={{ width: '1.62rem' }}
                 alt="home"
               />
@@ -476,7 +482,7 @@ const Home: React.FC = () => {
             ''
           )}
         </IonTabBar>
-      </IonTabs>
+      </IonTabs> */}
     </IonContent>
   );
 };

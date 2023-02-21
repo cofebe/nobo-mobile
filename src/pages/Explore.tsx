@@ -27,7 +27,7 @@ import {
   IonText,
 } from '@ionic/react';
 import './Explore.css';
-import UrpHeader from '../components/UrpHeader';
+// import UrpHeader from '../components/NoboHeader';
 import { chevronBackOutline, checkmark } from 'ionicons/icons';
 
 const Explore: React.FC = () => {
@@ -434,7 +434,7 @@ const Explore: React.FC = () => {
 
   return (
     <IonPage className="home-explore">
-      <UrpHeader></UrpHeader>
+      {/* <UrpHeader></UrpHeader> */}
       <IonContent
         className="home-content home-explore-bg"
         scrollY={true}
@@ -713,7 +713,7 @@ const Explore: React.FC = () => {
               }}
               button
               detail={true}
-              disabled={searchAccountType === "Organization" ? true : false}
+              disabled={searchAccountType === 'Organization' ? true : false}
             >
               <IonLabel style={{ color: '#00816D' }}>States</IonLabel>
               <IonNote style={{ color: '#00816D' }} slot="end">
@@ -732,7 +732,7 @@ const Explore: React.FC = () => {
               }}
               button
               detail={true}
-              disabled={searchAccountType === "Organization" ? true : false}
+              disabled={searchAccountType === 'Organization' ? true : false}
             >
               <IonLabel style={{ color: '#00816D' }}>Schools</IonLabel>
               <IonNote style={{ color: '#00816D' }} slot="end">
@@ -751,7 +751,7 @@ const Explore: React.FC = () => {
               }}
               button
               detail={true}
-              disabled={searchAccountType === "Organization" ? true : false}
+              disabled={searchAccountType === 'Organization' ? true : false}
             >
               <IonLabel style={{ color: '#00816D' }}>Countries</IonLabel>
               <IonNote style={{ color: '#00816D' }} slot="end">
@@ -767,7 +767,7 @@ const Explore: React.FC = () => {
               button
               detail={false}
               lines="none"
-              disabled={searchAccountType === "Organization" ? true : false}
+              disabled={searchAccountType === 'Organization' ? true : false}
             >
               <IonLabel style={{ color: '#00816D' }}>Sports</IonLabel>
             </IonItem>
@@ -880,13 +880,20 @@ const Explore: React.FC = () => {
           <IonCol className="nobo-center" size="12">
             <IonAccordionGroup>
               <IonAccordion value="colors">
-                <IonItem className="home-explore-bg" slot="header" button disabled={searchAccountType === "Organization" ? true : false}>
+                <IonItem
+                  className="home-explore-bg"
+                  slot="header"
+                  button
+                  disabled={searchAccountType === 'Organization' ? true : false}
+                >
                   <IonLabel style={{ color: '#00816D' }}>Class</IonLabel>
                 </IonItem>
                 <IonList slot="content">
                   {classes.map((c) => (
                     <IonItem
-                      disabled={searchAccountType === "Organization" ? true : false}
+                      disabled={
+                        searchAccountType === 'Organization' ? true : false
+                      }
                       className="home-explore-bg"
                       key={c.label}
                       onClick={(e) => {
@@ -918,13 +925,20 @@ const Explore: React.FC = () => {
           <IonCol className="nobo-center" size="12">
             <IonAccordionGroup>
               <IonAccordion value="colors">
-                <IonItem className="home-explore-bg" slot="header" button disabled={searchAccountType === "Organization" ? true : false}>
+                <IonItem
+                  className="home-explore-bg"
+                  slot="header"
+                  button
+                  disabled={searchAccountType === 'Organization' ? true : false}
+                >
                   <IonLabel style={{ color: '#00816D' }}>Rank</IonLabel>
                 </IonItem>
                 <IonList slot="content">
                   {ratings.map((r) => (
                     <IonItem
-                      disabled={searchAccountType === "Organization" ? true : false}
+                      disabled={
+                        searchAccountType === 'Organization' ? true : false
+                      }
                       className="home-explore-bg"
                       key={r.toString() + 'star'}
                       onClick={(e) => {
@@ -956,13 +970,20 @@ const Explore: React.FC = () => {
           <IonCol className="nobo-center" size="12">
             <IonAccordionGroup>
               <IonAccordion value="colors">
-                <IonItem className="home-explore-bg" slot="header" button disabled={searchAccountType === "Organization" ? true : false}>
+                <IonItem
+                  className="home-explore-bg"
+                  slot="header"
+                  button
+                  disabled={searchAccountType === 'Organization' ? true : false}
+                >
                   <IonLabel style={{ color: '#00816D' }}>Awards</IonLabel>
                 </IonItem>
                 <IonList slot="content">
                   {awards.map((a) => (
                     <IonItem
-                      disabled={searchAccountType === "Organization" ? true : false}
+                      disabled={
+                        searchAccountType === 'Organization' ? true : false
+                      }
                       className="home-explore-bg"
                       key={a}
                       onClick={(e) => {

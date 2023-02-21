@@ -26,7 +26,7 @@ import { ExploreService } from '../services/ExploreService';
 import { UserService } from '../services/UserService';
 import { SubscriptionService } from '../services/SubscriptionService';
 import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
-import UrpHeader from '../components/UrpHeader';
+// import UrpHeader from '../components/NoboHeader';
 import { loadingOptions } from '../util';
 import { isPlatform } from '@ionic/react';
 
@@ -237,7 +237,7 @@ const Feed: React.FC = () => {
         imageUrl={imageZoom}
         onClose={() => setImageZoom('')}
       ></ImageZoom>
-      <UrpHeader></UrpHeader>
+      {/* <UrpHeader></UrpHeader> */}
       <IonContent
         className="home-content"
         scrollY={true}

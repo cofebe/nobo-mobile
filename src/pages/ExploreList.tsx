@@ -19,7 +19,7 @@ import {
 import './ExploreList.css';
 import ExploreListItem from '../components/ExploreListItem';
 import { ExploreService } from '../services/ExploreService';
-import UrpHeader from '../components/UrpHeader';
+// import UrpHeader from '../components/NoboHeader';
 import { loadingOptions } from '../util';
 import SortWidget from '../components/SortWidget';
 
@@ -55,7 +55,9 @@ const ExploreList: React.FC = () => {
     loadResults(0);
 
     if (!atBottomOfFeedListElem) {
-      atBottomOfFeedListElem = document.querySelector('#atBottomOfFeedListExplore');
+      atBottomOfFeedListElem = document.querySelector(
+        '#atBottomOfFeedListExplore'
+      );
     }
   });
 
@@ -169,8 +171,8 @@ const ExploreList: React.FC = () => {
       .then((data) => {
         console.log('here', data);
 
-        if (searchAccountType === "Organization") {
-          messages = messages.concat(data.organizations || [])
+        if (searchAccountType === 'Organization') {
+          messages = messages.concat(data.organizations || []);
         }
         messages = messages.concat(data.users || []);
         setMessages(messages);
@@ -206,7 +208,9 @@ const ExploreList: React.FC = () => {
 
   function scroll(e: any) {
     if (!atBottomOfFeedListElem) {
-      atBottomOfFeedListElem = document.querySelector('#atBottomOfFeedListExplore');
+      atBottomOfFeedListElem = document.querySelector(
+        '#atBottomOfFeedListExplore'
+      );
     }
 
     if (atBottomOfFeedListElem) {
@@ -299,7 +303,7 @@ const ExploreList: React.FC = () => {
 
   return (
     <IonPage className="explore-list">
-      <UrpHeader></UrpHeader>
+      {/* <UrpHeader></UrpHeader> */}
       <IonContent
         className="explore-list-page"
         fullscreen

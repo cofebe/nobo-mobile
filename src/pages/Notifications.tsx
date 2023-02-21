@@ -5,45 +5,44 @@ import {
   IonList,
   IonRow,
   IonCol,
-} from "@ionic/react";
-import { useState } from "react";
+} from '@ionic/react';
+import { useState } from 'react';
 // import "./Notifications.css";
-import UrpHeader from '../components/UrpHeader';
-import { NotificationService } from "../services/NotificationService";
-import NotificationItem from "../components/NotificationItem";
+// import UrpHeader from '../components/NoboHeader';
+import { NotificationService } from '../services/NotificationService';
+import NotificationItem from '../components/NotificationItem';
 import { Notification } from '../data/notifications';
 
 const Notifications: React.FC = () => {
-
   const notificationService = new NotificationService();
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
-  notificationService.resetNotifcationCount()
+  notificationService.resetNotifcationCount();
 
   useIonViewWillEnter(() => {
     // some initialization code
-    loadNotifications(0)
+    loadNotifications(0);
   });
 
   function loadNotifications(pg: number) {
-    let storage: any = window.localStorage.getItem("persistedState");
+    let storage: any = window.localStorage.getItem('persistedState');
     let user = JSON.parse(storage);
 
     notificationService
-      .getNotifications(user.user["user_id"])
+      .getNotifications(user.user['user_id'])
       .then((res) => res.json())
       .then((data) => {
-        setNotifications(data)
-      })
+        setNotifications(data);
+      });
   }
 
   return (
     <IonPage>
-      <UrpHeader></UrpHeader>
+      {/* <UrpHeader></UrpHeader> */}
       <IonContent className="home-notifications-bg" scrollY={true}>
-        <IonList style={{marginTop: "40px"}}>
+        <IonList style={{ marginTop: '40px' }}>
           {notifications.map((m) => {
-            return (<NotificationItem notification={m}></NotificationItem>)
+            return <NotificationItem notification={m}></NotificationItem>;
           })}
         </IonList>
       </IonContent>
