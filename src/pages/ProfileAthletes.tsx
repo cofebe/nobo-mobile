@@ -22,6 +22,7 @@ import {
   IonIcon,
   IonButtons,
   IonModal,
+  IonRow,
   //useIonToast,
 } from '@ionic/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -38,6 +39,7 @@ import AcademicsSection, {
 } from '../components/ProfileSections/AcademicsSection';
 import ProfileFollowButton from '../components/ProfileFollowButton';
 import HighlightsSection from '../components/ProfileSections/HighlightsSection';
+import ProductList from '../components/ProductList';
 import OffersSection from '../components/ProfileSections/OffersSection';
 import AwardsSection from '../components/ProfileSections/AwardsSection';
 import NILDealsSection from '../components/ProfileSections/NILDealsSection';
@@ -83,23 +85,19 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
   >();
   const [academicsData, setAcademicData] = useState<AcademicData | undefined>();
 
-  const [targetSection, setTargetSection] = useState('Highlights');
+  const [targetSection, setTargetSection] = useState('Feed');
+
+  const [profileItems, setProfileItems] = useState<string[]>(['assets/images/test/product.jpeg', 'assets/images/test/product.jpeg', 'assets/images/test/product.jpeg', 'assets/images/test/product.jpeg']);
 
   const [arrayOfSocials, setArrayOfSocials] = useState<string[]>([]);
 
   const [userSubscribed, setUserSubscribed] = useState(false);
 
   const [slides, setSlides] = useState<any[]>([
-    { name: 'Highlights', section: '/option', state: 'Highlights' },
-    { name: 'Stats', section: '/option', state: 'Stats' },
-    { name: 'Academics', section: '/option', state: 'Academics' },
-    { name: 'Awards', section: '/option', state: 'Awards' },
-    { name: 'Measurements', section: '/option', state: 'Measurements' },
-    { name: 'Experience', section: '/option', state: 'Experience' },
-    { name: 'Offers', section: '/option', state: 'Offers' },
-
-    { name: 'Praise', section: '/option', state: 'Praise' },
-    { name: 'Posts', section: '/option', state: 'Posts' },
+    { name: 'Feed', section: '/option', state: 'Feed' },
+    { name: 'Trade', section: '/option', state: 'Trade' },
+    { name: 'Purchased', section: '/option', state: 'Purchased' },
+    { name: 'Review', section: '/option', state: 'Review' },
   ]);
 
   const isDesktop = isPlatform('desktop');
@@ -354,7 +352,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
     setAthleteProfile(emptyProfile);
     setMeasurementData(undefined);
     setAcademicData(undefined);
-    setTargetSection('Highlights');
+    setTargetSection('Feed');
     setArrayOfSocials([]);
     setSocialData({});
   }
@@ -563,7 +561,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
 
   return (
     <IonPage className="home-page-athlete-profile" style={{ backgroundColor: '#F9FBFB' }}>
-    <IonContent className="athlete-profile-content" scrollY={false}>
+    <IonContent className="athlete-profile-content" scrollY={true}>
       {!isBrowser && !profileAthlete.myProfile && (
         <IonButtons
           style={{
@@ -607,6 +605,19 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
           className="profile-banner-container"
           style={{ backgroundImage: `url(${athleteProfile.bannerPic})` }}
         ></div>
+        {profileAthlete.myProfile && (
+          <IonButton
+            onClick={(e) => {
+              e.preventDefault();
+              history.push(`edit-athlete/${userId}`);
+            }}
+            fill="clear"
+            color="#1A3A35"
+            className="nobo-edit-profile-button"
+          >
+            Edit
+          </IonButton>
+        )}
         <div className="profile-bubble-container">
           <img
             className={`profile-bubble ${
@@ -614,7 +625,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
             }`}
             onError={({ currentTarget }) => {
               currentTarget.onerror = null; // prevents looping
-              currentTarget.src = '../../assets/images/nobo-default-banner.png';
+              currentTarget.src = '../../assets/images/urp-default-banner.png';
             }}
             src={athleteProfile.profilePic}
             alt="avatar"
@@ -624,301 +635,41 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
           profile={athleteProfile}
           openSocialShare={openShare}
         ></ProfileSummary>
-        <div className="profile-action-social">
-          <div>
-            {profileAthlete.myProfile && (
-              <IonButton
-                onClick={(e) => {
-                  e.preventDefault();
-                  history.push(`edit-athlete/${userId}`);
-                }}
-                fill="clear"
-                color="#1A3A35"
-                className="nobo-edit-profile-button"
-              >
-                Edit Profile
-              </IonButton>
-            )}
-            {!isBrowser && myUserId !== athleteProfile.id && (
-              <ProfileFollowButton
-                userId={athleteProfile.id}
-                data={socialData}
-                athleteProfile={fullAthleteProfile}
-              />
-            )}
-          </div>
 
-          <div>
-            <div className="nobo-social-tops">
-              {athleteProfile.socialLinks &&
-                athleteProfile.socialLinks.includes('247sports.com') && (
-                  <Sports247Icon
-                    onClick={(e) =>
-                      InAppBrowser.create(
-                        arrayOfSocials[4],
-                        '_blank',
-                        'location=yes'
-                      )
-                    }
-                  />
-                )}
-              {athleteProfile.socialLinks &&
-                athleteProfile.socialLinks.includes('hudl.com') && (
-                  <HudleIcon
-                    onClick={(e) =>
-                      InAppBrowser.create(
-                        arrayOfSocials[3],
-                        '_blank',
-                        'location=yes'
-                      )
-                    }
-                  />
-                )}
-              {athleteProfile.socialLinks &&
-                athleteProfile.socialLinks.includes('rivals.com') && (
-                  <RivalsIcon
-                    onClick={(e) =>
-                      InAppBrowser.create(
-                        arrayOfSocials[5],
-                        '_blank',
-                        'location=yes'
-                      )
-                    }
-                  />
-                )}
-              {athleteProfile.socialLinks &&
-                athleteProfile.socialLinks.includes('maxpreps.com') && (
-                  <MaxPrepsIcon
-                    onClick={(e) =>
-                      InAppBrowser.create(
-                        arrayOfSocials[6],
-                        '_blank',
-                        'location=yes'
-                      )
-                    }
-                  />
-                )}
-              {athleteProfile.socialLinks &&
-                athleteProfile.socialLinks.includes('instagram.com') && (
-                  <svg
-                    onClick={(e) =>
-                      InAppBrowser.create(
-                        arrayOfSocials[0],
-                        '_blank',
-                        'location=yes'
-                      )
-                    }
-                    width="15"
-                    height="15"
-                    viewBox="0 0 15 15"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M7.50167 3.65419C5.3734 3.65419 3.65672 5.37125 3.65672 7.5C3.65672 9.62875 5.3734 11.3458 7.50167 11.3458C9.62995 11.3458 11.3466 9.62875 11.3466 7.5C11.3466 5.37125 9.62995 3.65419 7.50167 3.65419ZM7.50167 10.0003C6.12633 10.0003 5.00195 8.879 5.00195 7.5C5.00195 6.121 6.12298 4.99972 7.50167 4.99972C8.88037 4.99972 10.0014 6.121 10.0014 7.5C10.0014 8.879 8.87702 10.0003 7.50167 10.0003ZM12.4007 3.49688C12.4007 3.99559 11.9992 4.3939 11.5039 4.3939C11.0053 4.3939 10.6071 3.99225 10.6071 3.49688C10.6071 3.00151 11.0086 2.59985 11.5039 2.59985C11.9992 2.59985 12.4007 3.00151 12.4007 3.49688ZM14.9473 4.40729C14.8904 3.20568 14.616 2.1413 13.7359 1.26436C12.8592 0.387426 11.795 0.112964 10.5937 0.0527167C9.35555 -0.0175722 5.64445 -0.0175722 4.4063 0.0527167C3.20831 0.109617 2.14417 0.384079 1.26408 1.26102C0.383993 2.13796 0.112939 3.20233 0.052705 4.40394C-0.0175683 5.64236 -0.0175683 9.35429 0.052705 10.5927C0.109593 11.7943 0.383993 12.8587 1.26408 13.7356C2.14417 14.6126 3.20496 14.887 4.4063 14.9473C5.64445 15.0176 9.35555 15.0176 10.5937 14.9473C11.795 14.8904 12.8592 14.6159 13.7359 13.7356C14.6127 12.8587 14.8871 11.7943 14.9473 10.5927C15.0176 9.35429 15.0176 5.64571 14.9473 4.40729ZM13.3477 11.9215C13.0867 12.5775 12.5814 13.083 11.9222 13.3474C10.935 13.739 8.59258 13.6486 7.50167 13.6486C6.41076 13.6486 4.06497 13.7356 3.08115 13.3474C2.42526 13.0863 1.91997 12.5809 1.65561 11.9215C1.26408 10.9341 1.35443 8.59115 1.35443 7.5C1.35443 6.40885 1.26743 4.06253 1.65561 3.07849C1.91662 2.42246 2.42192 1.91705 3.08115 1.65263C4.06832 1.26102 6.41076 1.35139 7.50167 1.35139C8.59258 1.35139 10.9384 1.26436 11.9222 1.65263C12.5781 1.9137 13.0834 2.41911 13.3477 3.07849C13.7393 4.06588 13.6489 6.40885 13.6489 7.5C13.6489 8.59115 13.7393 10.9375 13.3477 11.9215Z"
-                      fill="#1A3A35"
-                    />
-                  </svg>
-                )}
-              {athleteProfile.socialLinks &&
-                athleteProfile.socialLinks.includes('twitter.com') && (
-                  <svg
-                    onClick={(e) =>
-                      InAppBrowser.create(
-                        arrayOfSocials[1],
-                        '_blank',
-                        'location=yes'
-                      )
-                    }
-                    width="19"
-                    height="15"
-                    viewBox="0 0 19 15"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M16.5703 3.73827C16.582 3.90232 16.582 4.06641 16.582 4.23047C16.582 9.23435 12.7735 15 5.81251 15C3.66796 15 1.67579 14.3789 0 13.3008C0.304699 13.3359 0.597638 13.3477 0.91406 13.3477C2.68356 13.3477 4.31249 12.75 5.61328 11.7305C3.94922 11.6953 2.55468 10.6055 2.0742 9.10547C2.3086 9.1406 2.54296 9.16405 2.78907 9.16405C3.12891 9.16405 3.46878 9.11715 3.78516 9.03516C2.05079 8.68357 0.749969 7.16015 0.749969 5.32031V5.27345C1.25386 5.5547 1.83984 5.73048 2.46089 5.75389C1.44136 5.07419 0.773416 3.91405 0.773416 2.60154C0.773416 1.89842 0.960881 1.25389 1.28903 0.691389C3.15232 2.98826 5.95311 4.48824 9.09371 4.65233C9.03513 4.37108 8.99996 4.07814 8.99996 3.78516C8.99996 1.6992 10.6875 0 12.7851 0C13.875 0 14.8593 0.45703 15.5507 1.19531C16.4062 1.03126 17.2265 0.714835 17.9531 0.281252C17.6718 1.16018 17.0742 1.89846 16.289 2.36718C17.0508 2.28519 17.789 2.0742 18.4687 1.78126C17.9532 2.53123 17.3086 3.19917 16.5703 3.73827Z"
-                      fill="#1A3A35"
-                    />
-                  </svg>
-                )}
-              {athleteProfile.socialLinks &&
-                athleteProfile.socialLinks.includes('tiktok.com') && (
-                  <svg
-                    onClick={(e) =>
-                      InAppBrowser.create(
-                        arrayOfSocials[2],
-                        '_blank',
-                        'location=yes'
-                      )
-                    }
-                    style={{ marginLeft: '7px' }}
-                    width="13"
-                    height="15"
-                    viewBox="0 0 13 15"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13 6.16651C11.6713 6.16651 10.4395 5.73899 9.43444 5.01271V10.2536C9.43444 12.8712 7.31809 15 4.71722 15C3.71216 15 2.77977 14.6812 2.01386 14.14C0.797592 13.2806 0 11.8592 0 10.2536C0 7.63594 2.11635 5.50648 4.71784 5.50648C4.93401 5.50648 5.14521 5.52461 5.35331 5.55273V6.16338V8.18534C5.15205 8.12221 4.9396 8.08534 4.71784 8.08534C3.53015 8.08534 2.5636 9.05788 2.5636 10.2536C2.5636 11.0861 3.03321 11.8092 3.71899 12.1724C4.01778 12.3305 4.35756 12.4211 4.71846 12.4211C5.87882 12.4211 6.8255 11.4924 6.86898 10.3348L6.87084 0H9.43382C9.43382 0.223759 9.45556 0.441893 9.49407 0.654402C9.67484 1.63694 10.2544 2.4801 11.0576 3.007C11.6166 3.37389 12.2838 3.58827 12.9994 3.58827V6.16651H13Z"
-                      fill="#1A3A35"
-                    />
-                  </svg>
-                )}
+        <IonRow className="nobo-menu-container">
+          <div className="nobo-menu-circle" onClick={ () => setTargetSection('Feed')}>
+            <div className="circle-background">
+              <img className={targetSection === 'Feed' ? 'nobo-profile-menu-selected' : ''} src="assets/images/navigation/nav-profile-items.svg"/>
             </div>
           </div>
-        </div>
-
-        <div className="nobo-menu-container">
-          <div className="nobo-menu-container-shadow">
-            <Swiper
-              spaceBetween={1}
-              slidesPerView={4}
-              centeredSlides={false}
-              observer={true}
-              width={340}
-            >
-              {slides.map((s) => (
-                <SwiperSlide
-                  onClick={() => {
-                    if (s.name === '') {
-                    } else {
-                      setTargetSection(s.state);
-                    }
-                  }}
-                  className={'noselect explore-sports-slide'}
-                  key={s.name}
-                  data-path={s.section}
-                >
-                  <span
-                    className={
-                      'nobo-tab-menu-item ' +
-                      (targetSection === s.state ? 'selected' : '')
-                    }
-                  >
-                    {s.name}
-                  </span>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+          <div className="nobo-menu-circle" onClick={ () => setTargetSection('Trades')}>
+            <div className="circle-background">
+              <img className={targetSection === 'Trades' ? 'nobo-profile-menu-selected' : ''} src="assets/images/navigation/nav-trade.svg"/>
+            </div>
           </div>
-        </div>
-        {targetSection === 'Highlights' && (
-          <HighlightsSection
-            userId={userId}
-            className="nobo-profile-section nobo-profile-section-scroll nobo-highlight-video-container"
-            data={{ title: 'Highlights Title' }}
-            highlights={athleteProfile.highlights}
-            myProfile={profileAthlete.myProfile}
-            athleteProfile={athleteProfile}
-            isPremium={userSubscribed}
-          ></HighlightsSection>
+          <div className="nobo-menu-circle" onClick={ () => setTargetSection('Purchase')}>
+            <div className="circle-background">
+              <img className={targetSection === 'Purchase' ? 'nobo-profile-menu-selected' : ''} src="assets/images/navigation/nav-profile-purchased.svg"/>
+            </div>
+          </div>
+          <div className="nobo-menu-circle" onClick={ () => setTargetSection('Reviews')}>
+            <div className="circle-background">
+              <img className={targetSection === 'Reviews' ? 'nobo-profile-menu-selected' : ''} src="assets/images/navigation/nav-profile-reviews.svg"/>
+            </div>
+          </div>
+        </IonRow>
+        {targetSection === 'Feed' && (
+          <ProductList type="" images={profileItems}></ProductList>
         )}
-        {targetSection === 'Stats' && (
-          <StatsSection
-            userId={userId}
-            className="nobo-profile-section nobo-profile-section-scroll"
-            profile={athleteProfile}
-            myProfile={profileAthlete.myProfile}
-          ></StatsSection>
+        {targetSection === 'Trades' && (
+          <ProductList type="trades" images={profileItems}></ProductList>
         )}
-        {targetSection === 'Academics' && (
-          <AcademicsSection
-            userId={userId}
-            className="nobo-academics-section nobo-profile-section nobo-profile-section-scroll"
-            data={{ title: 'Academic Title' }}
-            academicData={academicsData}
-            myProfile={profileAthlete.myProfile}
-          ></AcademicsSection>
+        {targetSection === 'Purchase' && (
+          <ProductList type="purchase" images={profileItems}></ProductList>
         )}
-        {targetSection === 'Offers' && (
-          <OffersSection
-            userId={userId}
-            className="nobo-profile-section nobo-profile-section-scroll"
-            data={{ title: 'Offers Title' }}
-            offers={athleteProfile.offers}
-            myProfile={profileAthlete.myProfile}
-          ></OffersSection>
-        )}
-        {targetSection === 'Awards' && (
-          <AwardsSection
-            userId={userId}
-            className="nobo-awards-section nobo-profile-section nobo-profile-section-scroll"
-            data={{ title: 'Awards Title' }}
-            awardsString={athleteProfile.awards}
-            myProfile={profileAthlete.myProfile}
-          ></AwardsSection>
-        )}
-        {targetSection === 'Measurements' && (
-          <MeasurementsSection
-            userId={userId}
-            className="nobo-measurement-section nobo-profile-section nobo-profile-section-scroll"
-            measurementData={measurementData}
-            data={{ title: 'Measurements Title' }}
-            myProfile={profileAthlete.myProfile}
-          ></MeasurementsSection>
-        )}
-        {targetSection === 'Experience' && (
-          <ExperienceSection
-            userId={userId}
-            className="nobo-profile-section nobo-profile-section-scroll"
-            data={{ title: 'Experience Title' }}
-            sport={athleteProfile.sport}
-            experiencesString={athleteProfile.experiences}
-            myProfile={profileAthlete.myProfile}
-          ></ExperienceSection>
-        )}
-        {targetSection === 'Praise' && (
-          <PraiseSection
-            userId={userId}
-            className="nobo-profile-section nobo-profile-section-scroll"
-            data={{ title: 'Praise Title' }}
-            myProfile={profileAthlete.myProfile}
-          ></PraiseSection>
-        )}
-        {targetSection === 'Posts' && (
-          <PostsSection
-            userId={userId}
-            className="nobo-profile-section nobo-profile-section-scroll"
-            data={{ title: 'Posts Title' }}
-            myProfile={profileAthlete.myProfile}
-            userType="athlete"
-          ></PostsSection>
-        )}
-        {targetSection === 'GameSchedule' && (
-          <GameScheduleSection
-            userId={userId}
-            className="nobo-profile-section nobo-profile-section-scroll"
-            profile={athleteProfile}
-            myProfile={profileAthlete.myProfile}
-          ></GameScheduleSection>
-        )}
-        {targetSection === 'Articles' && (
-          <ArticlesSection
-            userId={userId}
-            className="nobo-profile-section nobo-profile-section-scroll"
-            data={{ title: 'Articles Title' }}
-            myProfile={profileAthlete.myProfile}
-            userType="athlete"
-          ></ArticlesSection>
-        )}
-        {targetSection === 'NILDeals' && (
-          <NILDealsSection
-            userId={userId}
-            className="nobo-profile-section nobo-profile-section-scroll"
-            data={{ title: 'NIL Deals Title' }}
-            myProfile={profileAthlete.myProfile}
-            userType="athlete"
-          ></NILDealsSection>
-        )}
-        {targetSection === 'PersonalTraining' && (
-          <PersonalTrainingSection
-            userId={userId}
-            className="nobo-profile-section nobo-profile-section-scroll"
-            data={{ title: 'Personal Training Title' }}
-            myProfile={profileAthlete.myProfile}
-            userType="athlete"
-          ></PersonalTrainingSection>
+        {targetSection === 'Reviews' && (
+          /*<ReviewList images={profileItems}></ReviewList*/
+          <p>Reviews</p>
         )}
       </IonContent>
     </IonPage>

@@ -22,6 +22,7 @@
 .home-page-athlete-profile {
 
   .athlete-profile-content {
+    --background: #FEFCF7;
     max-width: 1088px;
     width: 100%;
   }
@@ -100,6 +101,7 @@
   }
 
   /* .nobo-edit-profile-button {
+      float: right;
       background-color: #ffffff;
       color: #1A3A35;
       border: 1px solid #1A3A35;
@@ -113,16 +115,16 @@
 
   /* small version */
   .nobo-edit-profile-button {
+    float: right;
     background-color: #ffffff;
-    color: #1a3a35;
-    /* border: 1px solid #1A3A35; */
+    color: #D6980E;
     border-radius: 5px;
-    height: 25px;
-    width: 103px;
+    height: 32px;
+    width: 80px;
     font-weight: 500;
     font-size: 0.7em;
     text-transform: capitalize;
-    border: 1px solid rgba(100, 100, 100, 0.1);
+    border: 1px solid #D6980E;
     box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.05);
     margin-right: 10px;
   }
@@ -160,12 +162,13 @@
     z-index: 100;
 
     .profile-bubble {
-      position: absolute;
       top: 0px;
       left: 12px;
       transform: translateY(-35%);
-      width: 75px;
-      height: 75px;
+      width: 70px;
+      height: 70px;
+      margin-left: 14px;
+      margin-bottom: -22px;
       border-radius: 50%;
     }
     .profile-bubble-premium-border {
@@ -269,23 +272,29 @@
                                       supported by Chrome, Edge, Opera and Firefox */
   }
 
-  .nobo-menu-container {
-    // max-width: 100%;
-    margin-top: 20px;
-    // overflow-x: hidden;
+  .circle-background {
+    background-color: white;
+    border-radius: 50%;
+    max-width: 54px;
+    padding: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   }
 
-  .nobo-menu-container-shadow {
-    padding-left: 20px;
-    padding-right: 20px;
+  .nobo-menu-container {
+    height: 54px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-left: 63px;
+    padding-right: 63px;
     padding-bottom: 12px;
+  }
 
-    @media (max-width: 567px) {
-      background-color: white;
-      box-shadow: 0px -5px 8px rgba(26, 58, 53, 0.05);
-      border-radius: 8px;
-      padding: 12px 20px;
-    }
+  .nobo-profile-menu-selected {
+    filter: invert(1);
   }
 
   .nobo-profile-section.nobo-profile-section-scroll {
@@ -413,13 +422,6 @@
     position: initial;
     top: initial;
     left: initial;
-  }
-  */
-  /*
-  .nobo-menu-container {
-    position: absolute;
-    left: 5px;
-    right: 5px;
   }
   */
 
