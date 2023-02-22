@@ -19,6 +19,7 @@ http://ionicframework.com/docs/theming/ */
 
   --ion-tab-bar-background: white;
   --ion-tab-bar-border-color: white;
+  --ion-font-family: 'Nunito Sans';
 
   /* --ion-color-secondary: #00816d;
   --ion-color-secondary-rgb: 0, 129, 109;
@@ -96,5 +97,6 @@ ion-input.nobo-input {
   --padding-start: 5px;
   --background: #ffffff;
   border: 1px solid #000000;
+  letter-spacing: 0.05rem;
   border-radius: 2px;
 }

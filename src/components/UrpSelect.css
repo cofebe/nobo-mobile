@@ -29,11 +29,11 @@
   white-space: nowrap;
 }
 .nobo-select .nobo-select-container .nobo-select-label.nobo-select-label-empty {
-  color: #9BC9C1;
+  color: #9bc9c1;
 }
 
 .nobo-select .nobo-select-container .nobo-select-chevron ion-icon {
-  color: #9BC9C1 !important;
+  /* color: #9BC9C1 !important; */
 }
 
 #nobo-select-modal {
@@ -83,5 +83,5 @@
 
 #nobo-select-modal ion-button.nobo-select-button-cancel {
   --background: white;
-  --color: #9BC9C1;
+  --color: #9bc9c1;
 }

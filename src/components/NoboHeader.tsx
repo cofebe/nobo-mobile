@@ -7,6 +7,7 @@ import {
   IonBadge,
   useIonViewWillEnter,
   IonButton,
+  useIonActionSheet,
 } from '@ionic/react';
 import './NoboHeader.scss';
 import { useHistory } from 'react-router-dom';
@@ -15,10 +16,15 @@ import { useState } from 'react';
 
 interface NoboHeaderProps {
   sectionNameCallback: (sectionName: string) => void;
+  sectionCategoryCallback: (sectionCategory: string) => void;
 }
 
-const NoboHeader: React.FC<NoboHeaderProps> = ({ sectionNameCallback }) => {
+const NoboHeader: React.FC<NoboHeaderProps> = ({
+  sectionNameCallback,
+  sectionCategoryCallback,
+}) => {
   const history = useHistory();
+  const [present, dismiss] = useIonActionSheet();
   // const notificationService = new NotificationService();
 
   // const [badgeCount, setBadgeCount] = useState<number>(
@@ -26,6 +32,7 @@ const NoboHeader: React.FC<NoboHeaderProps> = ({ sectionNameCallback }) => {
   // );
 
   const [activeButton, setActiveButton] = useState<string>('explore');
+  const [activeCategory, setActiveCategory] = useState<string>('WOMEN');
 
   const handleSectionButtonClick = (section: string) => {
     setActiveButton(section);
@@ -48,6 +55,48 @@ const NoboHeader: React.FC<NoboHeaderProps> = ({ sectionNameCallback }) => {
   //   }, 1000)
   //   update();
   // }
+
+  const openCategoryOptions = () => {
+    present({
+      cssClass: 'nobo-action-sheet',
+      buttons: [
+        {
+          text: "WOMEN'S",
+          data: {
+            action: 'women',
+          },
+        },
+        {
+          text: "MEN'S",
+          data: {
+            action: 'men',
+          },
+        },
+        {
+          text: 'SNEAKERS',
+          data: {
+            action: 'sneakers',
+          },
+        },
+      ],
+      onDidDismiss: ({ detail }) => {
+        if (detail.data == undefined) return;
+        if (detail.data.action !== undefined) {
+          console.log(detail);
+        }
+        if (detail.data.action === 'women') {
+          setActiveCategory('WOMEN');
+          sectionCategoryCallback('women');
+        } else if (detail.data.action === 'men') {
+          setActiveCategory('MEN');
+          sectionCategoryCallback('men');
+        } else if (detail.data.action === 'sneakers') {
+          setActiveCategory('SNEAKERS');
+          sectionCategoryCallback('sneakers');
+        }
+      },
+    });
+  };
 
   return (
     <IonHeader className="home-header">
@@ -106,17 +155,26 @@ const NoboHeader: React.FC<NoboHeaderProps> = ({ sectionNameCallback }) => {
           >
             <IonCol>
               <div
+                onClick={() => {
+                  openCategoryOptions();
+                }}
                 style={{
                   textAlign: 'end',
                   fontFamily: 'Nunito Sans',
                   fontWeight: 600,
                 }}
               >
-                WOMEN
+                {activeCategory}
               </div>
             </IonCol>
             <IonCol
-              style={{ paddingLeft: 0, display: 'flex', alignItems: 'center' }}
+              style={{
+                paddingLeft: 0,
+                display: 'flex',
+                alignItems: 'center',
+                position: 'relative',
+                top: 2,
+              }}
             >
               <div>
                 <img
