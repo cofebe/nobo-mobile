@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   IonBadge,
   IonButton,
@@ -11,14 +11,47 @@ import {
   IonToolbar,
   IonPage,
   IonContent,
+  useIonViewWillEnter,
 } from '@ionic/react';
 import './NoboHomePage.scss';
 import NoboHeader from '../components/NoboHeader';
 import NoboHomeItem from '../components/NoboHomeItem';
+import { NoboProductsService } from '../services/NoboProductsService';
+import { environment } from '../environments/environment';
 
 const NoboHomePage: React.FC = () => {
+  const noboProductsService = new NoboProductsService();
   const [sectionName, setSectionName] = useState('explore');
   const [sectionCategory, setSectionCategory] = useState('women');
+  const [products, setProducts] = useState<any>([]);
+
+  useIonViewWillEnter(() => {
+    getProducts('women', 'sell', false);
+  });
+
+  useEffect(() => {
+    if (sectionName === 'explore') {
+      getProducts(sectionCategory, 'explore', false);
+    } else if (sectionName === 'trade') {
+      getProducts(sectionCategory, 'trade', false);
+    } else if (sectionName === 'sale') {
+      getProducts(sectionCategory, 'sell', true);
+    } else if (sectionName === 'shop') {
+      getProducts(sectionCategory, 'sell', false);
+    }
+  }, [sectionName, sectionCategory]);
+
+  const getProducts = (group: string, action: string, onSale: boolean) => {
+    noboProductsService
+      .getProducts(group, action, onSale)
+      .then((products) => {
+        console.log('products', products.docs);
+        setProducts(products.docs);
+      })
+      .catch((error) => {
+        console.log('error', error);
+      });
+  };
 
   const getSectionName = (sectionName: string) => {
     console.log('sectionName', sectionName);
@@ -29,78 +62,6 @@ const NoboHomePage: React.FC = () => {
     console.log('sectionCategory', sectionCategory);
     setSectionCategory(sectionCategory);
   };
-
-  const images = [
-    {
-      image: 'assets/images/nobo-splash-1.png',
-      price: '$1.99-$2.99',
-      tradeOrBuy: 'trade',
-      isBig: true,
-      // detailsHref: '/details',
-    },
-    {
-      image: 'assets/images/nobo-splash-2.png',
-      price: '$2.99',
-      tradeOrBuy: 'buy',
-      isBig: false,
-      // detailsHref: '/details',
-    },
-    {
-      image: 'assets/images/nobo-splash-3.png',
-      price: '$103.00-$123.00',
-      tradeOrBuy: 'trade',
-      isBig: false,
-      // detailsHref: '/details',
-    },
-  ];
-
-  const shopImages = [
-    {
-      image: 'assets/images/nobo-splash-1.png',
-      price: '$2.99',
-      tradeOrBuy: 'buy',
-      isBig: true,
-      // detailsHref: '/details',
-    },
-    {
-      image: 'assets/images/nobo-splash-2.png',
-      price: '$2.99',
-      tradeOrBuy: 'buy',
-      isBig: false,
-      // detailsHref: '/details',
-    },
-    {
-      image: 'assets/images/nobo-splash-3.png',
-      price: '$103.00',
-      tradeOrBuy: 'buy',
-      isBig: false,
-      // detailsHref: '/details',
-    },
-  ];
-
-  const tradeImages = [
-    {
-      image: 'assets/images/nobo-splash-1.png',
-      price: '$1.99-$2.99',
-      tradeOrBuy: 'trade',
-      isBig: false,
-      // detailsHref: '/details',
-    },
-    {
-      image: 'assets/images/nobo-splash-2.png',
-      price: '$2.99-$6.99',
-      tradeOrBuy: 'trade',
-      isBig: false,
-      // detailsHref: '/details',
-    },
-    {
-      image: 'assets/images/nobo-splash-3.png',
-      price: '$103.00-$123.00',
-      tradeOrBuy: 'trade',
-      isBig: false,
-      // detailsHref: '/details',
-    },
-  ];
 
   return (
     <IonPage className="nobo-home-page">
@@ -121,12 +82,7 @@ const NoboHomePage: React.FC = () => {
           {/* <IonGrid> */}
           <IonRow>
             <IonCol style={{ height: 350 }} size="12">
-              <NoboHomeItem
-                tradeOrBuy="trade"
-                price="1.99"
-                image="assets/images/nobo-splash-2.png"
-                isBig
-              />
+              <NoboHomeItem product={products[0]} isBig />
             </IonCol>
           </IonRow>
           <IonRow>
@@ -140,17 +96,12 @@ const NoboHomePage: React.FC = () => {
             </IonCol>
           </IonRow>
           <IonRow>
-            {images.map((image, index) => (
+            {products.slice(1).map((product: any, index: any) => (
               <IonCol style={{ height: 175 }} key={index} size="6">
-                <NoboHomeItem
-                  image={image.image}
-                  price={image.price}
-                  tradeOrBuy={image.tradeOrBuy}
-                />
+                <NoboHomeItem product={product} />
               </IonCol>
             ))}
           </IonRow>
-          {/* </IonGrid> */}
         </IonContent>
       )}
       {sectionName === 'trade' && (
@@ -164,13 +115,9 @@ const NoboHomePage: React.FC = () => {
           }}
         >
           <IonRow>
-            {tradeImages.map((image, index) => (
+            {products.map((product: any, index: any) => (
               <IonCol style={{ height: 175 }} key={index} size="6">
-                <NoboHomeItem
-                  image={image.image}
-                  price={image.price}
-                  tradeOrBuy={image.tradeOrBuy}
-                />
+                <NoboHomeItem product={product} />
               </IonCol>
             ))}
           </IonRow>
@@ -187,12 +134,13 @@ const NoboHomePage: React.FC = () => {
           }}
         >
           <IonRow>
-            {shopImages.map((image, index) => (
+            {products.map((product: any, index: any) => (
               <IonCol style={{ height: 175 }} key={index} size="6">
                 <NoboHomeItem
-                  image={image.image}
-                  price={image.price}
-                  tradeOrBuy={image.tradeOrBuy}
+                  product={product}
+                  // image={environment.serverUrl + product.image}
+                  // price={'$' + product.price}
+                  // tradeOrBuy={product.action}
                 />
               </IonCol>
             ))}
@@ -210,13 +158,9 @@ const NoboHomePage: React.FC = () => {
           }}
         >
           <IonRow>
-            {images.map((image, index) => (
+            {products.map((product: any, index: any) => (
               <IonCol style={{ height: 175 }} key={index} size="6">
-                <NoboHomeItem
-                  image={image.image}
-                  price={image.price}
-                  tradeOrBuy={image.tradeOrBuy}
-                />
+                <NoboHomeItem product={product} />
               </IonCol>
             ))}
           </IonRow>

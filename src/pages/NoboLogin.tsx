@@ -6,12 +6,36 @@ import {
   IonGrid,
   IonInput,
 } from '@ionic/react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { NoboUserService } from '../services/NoboUserService';
 
 import './NoboLogin.scss';
 
 const NoboLogin: React.FC = () => {
   const history = useHistory();
+  const noboUserService = new NoboUserService();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
+
+  const login = () => {
+    noboUserService
+      .login({ email, password })
+      .then((res: any) => res.json())
+      .then((data: any) => {
+        console.log('login', data);
+        if (data.error) {
+          setError(data.error);
+        } else {
+          history.push('/home/nobo-home');
+        }
+      })
+      .catch((err: any) => {
+        console.log('login error', err);
+      });
+  };
+
   return (
     <IonPage className="nobo-login-page">
       <div className="background-image">
@@ -66,6 +90,9 @@ const NoboLogin: React.FC = () => {
                 <IonInput
                   className="nobo-input"
                   placeholder="USERNAME"
+                  onIonChange={(e: any) => {
+                    setEmail(e.target.value);
+                  }}
                 ></IonInput>
               </IonCol>
             </IonRow>
@@ -74,6 +101,9 @@ const NoboLogin: React.FC = () => {
                 <IonInput
                   className="nobo-input"
                   placeholder="PASSWORD"
+                  onIonChange={(e: any) => {
+                    setPassword(e.target.value);
+                  }}
                 ></IonInput>
               </IonCol>
             </IonRow>
@@ -88,7 +118,9 @@ const NoboLogin: React.FC = () => {
                     lineHeight: '15px',
                   }}
                   // id="open-subscription-modal"
-                  onClick={() => {}}
+                  onClick={() => {
+                    login();
+                  }}
                   //   color={btnColor}
                   // disabled={!isActive || isSubscribed}
                   type="submit"

@@ -14,20 +14,18 @@ import {
   IonItem,
 } from '@ionic/react';
 import './NoboHomeItem.scss';
+import { environment } from '../environments/environment';
+import { calculateEstPrice } from '../helpers/tradeFees';
 
 interface NoboItemProps {
   children?: React.ReactNode;
-  tradeOrBuy: string;
-  price: string;
-  image: string;
+  product: any;
   isBig?: boolean;
 }
 
 const NoboHomeItem: React.FC<NoboItemProps> = ({
   children,
-  tradeOrBuy,
-  price,
-  image,
+  product,
   isBig,
 }) => {
   return (
@@ -46,14 +44,14 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
       ) : (
         <div className="nobo-details-card-small">
           <div>
-            {tradeOrBuy === 'buy' ? (
+            {product?.action === 'sell' ? (
               <>
-                <div>{price}</div>
+                <div>{'$' + product?.price}</div>
                 <div>COST</div>
               </>
             ) : (
               <>
-                <div>{price}</div>
+                <div>{calculateEstPrice(product?.price)}</div>
                 <div>Est. Price</div>
               </>
             )}
@@ -75,14 +73,18 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
           height: '28px',
         }}
         src={`assets/images/nobo-${
-          tradeOrBuy === 'buy' ? 'buy-' : 'trade-'
+          product?.action === 'sell' ? 'buy-' : 'trade-'
         }icon.png`}
         alt="nobo-buy-icon"
       />
       <img
         style={{ height: '100%', width: '100%', borderRadius: 10 }}
         alt="nobo-item"
-        src={image}
+        src={
+          product?.image[0] === '/'
+            ? environment.serverUrl + product?.image
+            : product?.image
+        }
       />
     </div>
   );

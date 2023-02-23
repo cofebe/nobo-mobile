@@ -27,7 +27,7 @@ import Watchlist from './pages/Watchlist';
 import ProfileInsights from './pages/ProfileInsights';
 import { AuthService } from './services/AuthService';
 import { UserService } from './services/UserService';
-import { Amplify/*, Auth*/ } from 'aws-amplify';
+import { Amplify /*, Auth*/ } from 'aws-amplify';
 import awsconfig from './aws-exports.js';
 import SignUpAthlete from './pages/SignUpAthlete';
 import {
@@ -186,9 +186,9 @@ const Home: React.FC = () => {
     <IonContent scrollY={false}>
       <IonTabs className="nobo-nav-bar-background">
         <IonRouterOutlet>
-          <Redirect exact path="/home" to="/home/nobo-feed" />
+          <Redirect exact path="/home" to="/home/nobo-home" />
           {/* <Redirect exact path="/home/athletes" to="/home/feed" /> */}
-          <Route exact path="/home/nobo-feed">
+          <Route exact path="/home/nobo-home">
             <NoboHomePage />
           </Route>
           <Route exact path="/home/post-promote/:id">
