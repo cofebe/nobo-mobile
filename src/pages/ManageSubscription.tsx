@@ -11,8 +11,6 @@ import {
   IonCheckbox,
   IonButtons,
   IonIcon,
-  IonModal,
-  IonList,
   useIonLoading,
 } from '@ionic/react';
 
@@ -21,9 +19,8 @@ import { useHistory } from 'react-router-dom';
 import { chevronBackOutline, star } from 'ionicons/icons';
 
 import './ManageSubscription.scss';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { loadingOptions } from '../util';
-import { environment } from '../environments/environment';
 
 import { SubscriptionService } from '../services/SubscriptionService';
 import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
@@ -53,7 +50,6 @@ const trainerSubscriptionBenefits = [
 const ManageSubscription: React.FC = () => {
   const history = useHistory();
   const [presentLoading, dismissLoading] = useIonLoading();
-  const modal = useRef<HTMLIonModalElement>(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const btnColor = '#00816D';
   const [isActive, setIsActive] = useState(false);
@@ -68,41 +64,29 @@ const ManageSubscription: React.FC = () => {
   let subscriptionBenefits = [] as string[];
 
   if (userType === 'athlete') {
-    if (environment.disableBrowser) {
+    subscriptionPricing = subscriptionService.getProductPriceString(
+      'com.nobo.athlete.1month'
+    );
+    if (!subscriptionService.getProductPrice('com.nobo.athlete.1month')) {
       subscriptionPricing = '$14.99';
-    } else {
-      subscriptionPricing = subscriptionService.getProductPriceString(
-        'com.nobo.athlete.1month'
-      );
-      if (!subscriptionService.getProductPrice('com.nobo.athlete.1month')) {
-        subscriptionPricing = '$14.99';
-      }
     }
     subscriptionBenefits = athleteSubscriptionBenefits;
   } else if (userType === 'coach') {
-    if (environment.disableBrowser) {
+    subscriptionPricing = subscriptionService.getProductPriceString(
+      'com.nobo.coachrecruiter.1month'
+    );
+    if (
+      !subscriptionService.getProductPrice('com.nobo.coachrecruiter.1month')
+    ) {
       subscriptionPricing = '$29.99';
-    } else {
-      subscriptionPricing = subscriptionService.getProductPriceString(
-        'com.nobo.coachrecruiter.1month'
-      );
-      if (
-        !subscriptionService.getProductPrice('com.nobo.coachrecruiter.1month')
-      ) {
-        subscriptionPricing = '$29.99';
-      }
     }
     subscriptionBenefits = coachSubscriptionBenefits;
   } else if (userType === 'trainer') {
-    if (environment.disableBrowser) {
+    subscriptionPricing = subscriptionService.getProductPriceString(
+      'com.nobo.trainer.1month'
+    );
+    if (!subscriptionService.getProductPrice('com.nobo.trainer.1month')) {
       subscriptionPricing = '$29.99';
-    } else {
-      subscriptionPricing = subscriptionService.getProductPriceString(
-        'com.nobo.trainer.1month'
-      );
-      if (!subscriptionService.getProductPrice('com.nobo.trainer.1month')) {
-        subscriptionPricing = '$29.99';
-      }
     }
     subscriptionBenefits = trainerSubscriptionBenefits;
   }
@@ -121,7 +105,7 @@ const ManageSubscription: React.FC = () => {
     } else if (userType === 'trainer') {
       userSubscriptionId = 'com.nobo.trainer.1month';
     }
-    if (isPlatform('ios') && !environment.disableBrowser) {
+    if (isPlatform('ios')) {
       subscriptionService.refreshStore();
       setIsSubscribed(subscriptionService.isSubscribed(userSubscriptionId));
     }
@@ -136,7 +120,7 @@ const ManageSubscription: React.FC = () => {
     } else if (userType === 'trainer') {
       userSubscriptionId = 'com.nobo.trainer.1month';
     }
-    if (isPlatform('ios') && !environment.disableBrowser) {
+    if (isPlatform('ios')) {
       presentLoading(loadingOptions);
       setTimeout(() => {
         dismissLoading();

@@ -5,8 +5,6 @@
 
 export const environment = {
   development: true,
-  disableBrowser: false, // set to true for in-browser development
-  // disableBrowser: true,
   serverUrl: 'https://api.noboplus.com',
   // serverUrl: 'https://api-testing.noboplus.com',
   // serverUrl: 'http://localhost:8080',

@@ -23,7 +23,6 @@ import { SubscriptionService } from '../services/SubscriptionService';
 import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
 import { isPlatform } from '@ionic/react';
 import { loadingOptions } from '../util';
-import { environment } from '../environments/environment';
 
 const PromotePost: React.FC = () => {
   let store = new InAppPurchase2();
@@ -38,58 +37,30 @@ const PromotePost: React.FC = () => {
   const [appleProductId, setAppleProductId] = useState<string>('');
 
   useEffect(() => {
-    if (environment.disableBrowser) {
-      switch (cost) {
-        case 0.99:
-          setAppleProductId('com.nobo.promotedpost.1day');
-          break;
-        case 1.99:
-          setAppleProductId('com.nobo.promotedpost.2day');
-          break;
-        case 2.99:
-          setAppleProductId('com.nobo.promotedpost.3day');
-          break;
-        case 3.99:
-          setAppleProductId('com.nobo.promotedpost.4day');
-          break;
-        case 4.99:
-          setAppleProductId('com.nobo.promotedpost.5day');
-          break;
-        case 5.99:
-          setAppleProductId('com.nobo.promotedpost.6day');
-          break;
-        case 6.99:
-          setAppleProductId('com.nobo.promotedpost.1week');
-          break;
-        default:
-          setAppleProductId('');
-      }
-    } else {
-      switch (cost) {
-        case subscriptionService.getProductPrice('com.nobo.promotedpost.1day'):
-          setAppleProductId('com.nobo.promotedpost.1day');
-          break;
-        case subscriptionService.getProductPrice('com.nobo.promotedpost.2day'):
-          setAppleProductId('com.nobo.promotedpost.2day');
-          break;
-        case subscriptionService.getProductPrice('com.nobo.promotedpost.3day'):
-          setAppleProductId('com.nobo.promotedpost.3day');
-          break;
-        case subscriptionService.getProductPrice('com.nobo.promotedpost.4day'):
-          setAppleProductId('com.nobo.promotedpost.4day');
-          break;
-        case subscriptionService.getProductPrice('com.nobo.promotedpost.5day'):
-          setAppleProductId('com.nobo.promotedpost.5day');
-          break;
-        case subscriptionService.getProductPrice('com.nobo.promotedpost.6day'):
-          setAppleProductId('com.nobo.promotedpost.6day');
-          break;
-        case subscriptionService.getProductPrice('com.nobo.promotedpost.1week'):
-          setAppleProductId('com.nobo.promotedpost.1week');
-          break;
-        default:
-          setAppleProductId('');
-      }
+    switch (cost) {
+      case subscriptionService.getProductPrice('com.nobo.promotedpost.1day'):
+        setAppleProductId('com.nobo.promotedpost.1day');
+        break;
+      case subscriptionService.getProductPrice('com.nobo.promotedpost.2day'):
+        setAppleProductId('com.nobo.promotedpost.2day');
+        break;
+      case subscriptionService.getProductPrice('com.nobo.promotedpost.3day'):
+        setAppleProductId('com.nobo.promotedpost.3day');
+        break;
+      case subscriptionService.getProductPrice('com.nobo.promotedpost.4day'):
+        setAppleProductId('com.nobo.promotedpost.4day');
+        break;
+      case subscriptionService.getProductPrice('com.nobo.promotedpost.5day'):
+        setAppleProductId('com.nobo.promotedpost.5day');
+        break;
+      case subscriptionService.getProductPrice('com.nobo.promotedpost.6day'):
+        setAppleProductId('com.nobo.promotedpost.6day');
+        break;
+      case subscriptionService.getProductPrice('com.nobo.promotedpost.1week'):
+        setAppleProductId('com.nobo.promotedpost.1week');
+        break;
+      default:
+        setAppleProductId('');
     }
   }, [cost]);
 
@@ -97,7 +68,7 @@ const PromotePost: React.FC = () => {
 
   useIonViewWillEnter(() => {
     // subscriptionService = new SubscriptionService(new InAppPurchase2());
-    if (isPlatform('ios') && !environment.disableBrowser) {
+    if (isPlatform('ios')) {
       subscriptionService.refreshStore();
     }
   });
@@ -111,58 +82,37 @@ const PromotePost: React.FC = () => {
 
   function calculateCost(duration: number) {
     console.log('This is the store ', store);
-    if (environment.disableBrowser) {
-      switch (duration) {
-        case 1:
-          return 1.99;
-        case 2:
-          return 4.99;
-        case 3:
-          return 7.99;
-        case 4:
-          return 10.99;
-        case 5:
-          return 13.99;
-        case 6:
-          return 16.99;
-        case 7:
-          return 19.99;
-        default:
-          return 0;
-      }
-    } else {
-      switch (duration) {
-        case 1:
-          return subscriptionService.getProductPrice(
-            'com.nobo.promotedpost.1day'
-          );
-        case 2:
-          return subscriptionService.getProductPrice(
-            'com.nobo.promotedpost.2day'
-          );
-        case 3:
-          return subscriptionService.getProductPrice(
-            'com.nobo.promotedpost.3day'
-          );
-        case 4:
-          return subscriptionService.getProductPrice(
-            'com.nobo.promotedpost.4day'
-          );
-        case 5:
-          return subscriptionService.getProductPrice(
-            'com.nobo.promotedpost.5day'
-          );
-        case 6:
-          return subscriptionService.getProductPrice(
-            'com.nobo.promotedpost.6day'
-          );
-        case 7:
-          return subscriptionService.getProductPrice(
-            'com.nobo.promotedpost.1week'
-          );
-        default:
-          return 0;
-      }
+    switch (duration) {
+      case 1:
+        return subscriptionService.getProductPrice(
+          'com.nobo.promotedpost.1day'
+        );
+      case 2:
+        return subscriptionService.getProductPrice(
+          'com.nobo.promotedpost.2day'
+        );
+      case 3:
+        return subscriptionService.getProductPrice(
+          'com.nobo.promotedpost.3day'
+        );
+      case 4:
+        return subscriptionService.getProductPrice(
+          'com.nobo.promotedpost.4day'
+        );
+      case 5:
+        return subscriptionService.getProductPrice(
+          'com.nobo.promotedpost.5day'
+        );
+      case 6:
+        return subscriptionService.getProductPrice(
+          'com.nobo.promotedpost.6day'
+        );
+      case 7:
+        return subscriptionService.getProductPrice(
+          'com.nobo.promotedpost.1week'
+        );
+      default:
+        return 0;
     }
 
     // if (duration === 7) {
@@ -251,7 +201,7 @@ const PromotePost: React.FC = () => {
                 id="open-subscription-modal"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (isPlatform('ios') && !environment.disableBrowser) {
+                  if (isPlatform('ios')) {
                     presentLoading(loadingOptions);
                     subscriptionService
                       .purchasePromotedPost(appleProductId)

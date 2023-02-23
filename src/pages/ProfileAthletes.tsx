@@ -3,12 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { isPlatform } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { AthleteProfile, emptyProfile } from '../data/athlete-detail';
-import { ReactComponent as Sports247Icon } from '../components/sports247-icon.svg';
-import { ReactComponent as HudleIcon } from '../components/hudl-icon.svg';
-import { ReactComponent as MaxPrepsIcon } from '../components/max-prep-white-icon.svg';
-import { ReactComponent as RivalsIcon } from '../components/rivals-icon.svg';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing';
-import { environment } from '../environments/environment';
 
 import {
   IonButton,
@@ -25,36 +20,20 @@ import {
   IonRow,
   //useIonToast,
 } from '@ionic/react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.min.css';
-import 'swiper/swiper.min.css';
+//import { Swiper, SwiperSlide } from 'swiper/react';
+//import 'swiper/swiper-bundle.min.css';
+//import 'swiper/swiper.min.css';
 import { UserService } from '../services/UserService';
 import { ReportService } from '../services/ReportService';
 import { SubscriptionService } from '../services/SubscriptionService';
 import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
 
 import './ProfileAthletes.scss';
-import AcademicsSection, {
-  AcademicData,
-} from '../components/ProfileSections/AcademicsSection';
-import ProfileFollowButton from '../components/ProfileFollowButton';
-import HighlightsSection from '../components/ProfileSections/HighlightsSection';
+import { AcademicData } from '../components/ProfileSections/AcademicsSection';
+//import ProfileFollowButton from '../components/ProfileFollowButton';
 import ProductList from '../components/ProductList';
-import OffersSection from '../components/ProfileSections/OffersSection';
-import AwardsSection from '../components/ProfileSections/AwardsSection';
-import NILDealsSection from '../components/ProfileSections/NILDealsSection';
-import MeasurementsSection, {
-  MeasurementData,
-} from '../components/ProfileSections/MeasurementsSection';
-import PraiseSection from '../components/ProfileSections/PraiseSection';
-import GameScheduleSection from '../components/ProfileSections/GameScheduleSection';
-import ArticlesSection from '../components/ProfileSections/ArticlesSection';
-import PostsSection from '../components/ProfileSections/PostsSection';
-import ExperienceSection from '../components/ProfileSections/ExperienceSection';
-import PersonalTrainingSection from '../components/ProfileSections/PersonalTrainingSection';
-import StatsSection from '../components/ProfileSections/StatsSection';
+import { MeasurementData } from '../components/ProfileSections/MeasurementsSection';
 import QrCode from '../components/QrCode';
-import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser';
 import { chevronBackOutline } from 'ionicons/icons';
 import { loadingOptions } from '../util';
 import { Profile } from '../data/profile';
@@ -100,13 +79,6 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
     { name: 'Review', section: '/option', state: 'Review' },
   ]);
 
-  const isDesktop = isPlatform('desktop');
-  const isMobileWeb = isPlatform('mobileweb');
-  let isBrowser = isDesktop || isMobileWeb;
-  if (environment.disableBrowser) {
-    isBrowser = false;
-  }
-
   useIonViewDidEnter(() => {
     reset();
     console.log('useIonViewDidEnter userId: ', userId);
@@ -117,7 +89,6 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
       userService.recordProfileVisit(userId, history.location);
 
       if (
-        !environment.disableBrowser &&
         isPlatform('ios') &&
         profileAthlete.myProfile
       ) {
@@ -562,7 +533,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
   return (
     <IonPage className="home-page-athlete-profile" style={{ backgroundColor: '#F9FBFB' }}>
     <IonContent className="athlete-profile-content" scrollY={true}>
-      {!isBrowser && !profileAthlete.myProfile && (
+      {!profileAthlete.myProfile && (
         <IonButtons
           style={{
             position: "absolute",
