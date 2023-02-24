@@ -8,11 +8,7 @@ export class BaseService {
 
     const headers: { [key: string]: string } = {
     };
-    if (user) {
-      headers['X-URP-UserId'] = user.user['user_id'];
-    } else {
-      headers['X-URP-UserId'] = '1';
-    }
+
     return Object.assign(headers, others || {});
   }
 
@@ -31,11 +27,8 @@ export class BaseService {
 
     const storage: any = window.localStorage.getItem('persistedState');
     const user = (storage ? JSON.parse(storage) : undefined);
-    if (user) {
-      const session = await Auth.currentSession();
-      const accessToken = session.getAccessToken().getJwtToken();
-      headers['Authorization'] =  accessToken;
-    }
+
+    headers['Authorization'] =  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y1NzExZDQ4ZmNmYmQxZTY2NWZkZjMiLCJlbWFpbCI6ImNocmlzQGNvZmViZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc3ODkzMDQsInJlZnJlc2giOjE2NzcxODU0MDQsImlhdCI6MTY3NzE4NDUwNH0.aqRaKJwNgQCrpDmAyBhFB21L78QgANimoFOiCzGsxKE";
 
     return await fetch(url, {
       method,

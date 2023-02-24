@@ -1,6 +1,6 @@
 import { BaseService } from './BaseService';
 import { environment } from '../environments/environment';
-const API_URL = environment.serverUrl + '/user';
+const API_URL = environment.serverUrl + '/api';
 
 export class UserService extends BaseService {
   getUserCache() {
@@ -13,8 +13,29 @@ export class UserService extends BaseService {
     return user;
   }
 
-  async getProfile(userId: number) {
-    return await super.fetch('GET', `/user/${userId}`);
+  // https://thenobo.com/api/users/61e9e3cde9d5a06abb991653/profile
+  async getProfile(userId: any) {
+    userId = "61e9e3cde9d5a06abb991653";
+
+    return await super.fetch('GET', `api/users/${userId}/profile`);
+  }
+
+  async getProducts(userId: any, productType: string) {
+    userId = "61e9e3cde9d5a06abb991653";
+
+    let perPage = 100;
+    let page = 1;
+    let filter = {"active": true, "sold": {"$in": [true, false]}, "retailPrice": {"$gt": 0}, "action": productType, "vendor": "61e9e3cde9d5a06abb991653"};
+    let sort = {"createdAt": -1};
+
+    let queryParams = new URLSearchParams({
+      perPage: perPage.toString(),
+      page: page.toString(),
+      filter: JSON.stringify(filter),
+      sort: JSON.stringify(sort)
+    }).toString();
+  
+    return await super.fetch('GET', `api/products/all?${queryParams}`);
   }
 
   async updateProfile(data = {}, userId: number) {

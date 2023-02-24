@@ -1,6 +1,9 @@
-import { IonContent, IonItem } from "@ionic/react";
+import { IonContent, IonItem, useIonViewDidEnter } from "@ionic/react";
+import { useState, useEffect } from "react";
 import "./ProductList.css";
 import { useHistory } from "react-router-dom";
+import { UserService } from "../services/UserService";
+import { Products, Product } from "../data/products";
 
 interface ProductListProps {
   type: string;
@@ -10,14 +13,34 @@ interface ProductListProps {
 
 const ProductList: React.FC<ProductListProps> = ({type, images}) => {
   const history = useHistory();
+  const userService = new UserService();
+  const [products, setProducts] = useState<Products>();
 
-  if (type === "trades") {
+  useIonViewDidEnter(() => {
+    load();
+  })
+
+  function load() {
+    userService
+      .getProducts("1", type)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("ProductList: ", data)
+        setProducts(data)
+      })
+  }
+
+  useEffect(() => {
+    load()
+  }, [type])
+
+  if (type === "trade" && products !== undefined) {
     return (
       <div className="image-grid image-grid-trade">
-        {images.map((image, index) => (
-          <div key={index} style={{ position: 'relative' }}>
+        {products?.docs.map((product, index) => (
+          <div key={index} style={{ position: 'relative', borderRadius: '10px' }}>
             <img
-              src={image}
+              src={product.image.includes("https://") ? product.image : `https://thenobo.com${product.image}`}
               alt={`Image ${index + 1}`}
               onClick={() => history.push(`assets/images/test/${index}`)}
             />
@@ -43,22 +66,22 @@ const ProductList: React.FC<ProductListProps> = ({type, images}) => {
             <p style={{ position: 'absolute', textAlign: 'center', top: '10px', right: '20px', width: '30px', height: '10px', fontSize: '10px', fontWeight: 700 }}>
               Size <br/>7
             </p>
-            <div style={{ position: 'absolute', bottom: '0', width: '100%', height: '58px', fontSize: '10px', background: 'rgba(255, 255, 255, 0.8)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '16px' }}>
-              <div style={{ fontWeight: 'bold' }}>Brand name</div>
-              <div>Product name</div>
+            <div style={{ position: 'absolute', bottom: '0', width: '100%', height: '58px', fontSize: '10px', background: 'rgba(255, 255, 255, 1)', display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: '14px', marginRight: '14px' }}>
+              <div style={{ fontWeight: 'bold' }}>{product.brand}</div>
+              <div>{product.name}</div>
               <div>Est. $2,700 - $3,300</div>
             </div>
           </div>
         ))}
       </div>
     );
-  } else if (type === "purchase") {
+  } else if (type === "sell") {
     return (
       <div className="image-grid">
-        {images.map((image, index) => (
-          <div key={index} style={{ position: 'relative' }}>
+        {products?.docs.map((product, index) => (
+          <div key={index} style={{ position: 'relative', borderRadius: '10px' }}>
             <img
-              src={image}
+              src={product.image.includes("https://") ? product.image : `https://thenobo.com${product.image}`}
               alt={`Image ${index + 1}`}
               onClick={() => history.push(`assets/images/test/${index}`)}
             />
@@ -84,10 +107,10 @@ const ProductList: React.FC<ProductListProps> = ({type, images}) => {
             <p style={{ position: 'absolute', textAlign: 'center', top: '10px', right: '20px', width: '30px', height: '10px', fontSize: '10px', fontWeight: 700 }}>
               Size <br/>7
             </p>
-            <div style={{ position: 'absolute', bottom: '0', width: '100%', height: '58px', fontSize: '10px', background: 'rgba(255, 255, 255, 0.8)', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '16px' }}>
-              <div style={{ fontWeight: 'bold' }}>Brand name</div>
-              <div>Product name</div>
-              <div>Est. $2,700 - $3,300</div>
+            <div style={{ fontFamily: 'Nunito Sans', position: 'absolute', bottom: '0', width: '100%', height: '58px', fontSize: '10px', background: 'rgba(255, 255, 255, 1)', display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: '14px', marginRight: '14px' }}>
+              <div style={{ fontWeight: 'bold' }}>{product.brand}</div>
+              <div>{product.name}</div>
+              <div>Cost ${product.price}.00</div>
             </div>
           </div>
         ))}

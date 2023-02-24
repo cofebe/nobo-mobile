@@ -286,11 +286,15 @@
   .nobo-menu-container {
     height: 54px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    padding-left: 63px;
-    padding-right: 63px;
+    margin-top: 12px;
     padding-bottom: 12px;
+
+    .nobo-menu-circle {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
   }
 
   .nobo-profile-menu-selected {

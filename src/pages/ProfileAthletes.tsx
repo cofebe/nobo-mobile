@@ -2,7 +2,7 @@ import ProfileSummary from '../components/ProfileSections/ProfileSummary';
 import { useState, useRef, useEffect } from 'react';
 import { isPlatform } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
-import { AthleteProfile, emptyProfile } from '../data/athlete-detail';
+import { NoboProfile, emptyProfile } from '../data/nobo-profile';
 import { ReactComponent as Sports247Icon } from '../components/sports247-icon.svg';
 import { ReactComponent as HudleIcon } from '../components/hudl-icon.svg';
 import { ReactComponent as MaxPrepsIcon } from '../components/max-prep-white-icon.svg';
@@ -75,8 +75,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
   const profileModal = useRef<HTMLIonModalElement>(null);
   const [present] = useIonActionSheet();
   const [presentProfileReportingActionSheet] = useIonActionSheet();
-  let [athleteProfile, setAthleteProfile] =
-    useState<AthleteProfile>(emptyProfile);
+  let [noboProfile, setNoboProfile] = useState<NoboProfile>(emptyProfile);
   const [socialData, setSocialData] = useState<any>({});
   let [fullAthleteProfile, setFullAthleteProfile] = useState<Profile>();
 
@@ -349,7 +348,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
     userId = nonExistentID;
     setUserId(nonExistentID);
     setProfileURL('');
-    setAthleteProfile(emptyProfile);
+    setNoboProfile(emptyProfile);
     setMeasurementData(undefined);
     setAcademicData(undefined);
     setTargetSection('Feed');
@@ -411,12 +410,12 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
   //   });
   // }
 
-  function getProfile(id: number = 0) {
-    if (id < 1 || isNaN(id) || id === undefined) {
-      console.log('Userid not set: ', id);
-      return;
-    }
-    console.log('GetProfile: ', id);
+  function getProfile(id: any = "") {
+    // if (id < 1 || isNaN(id) || id === undefined) {
+    //   console.log('Userid not set: ', id);
+    //   return;
+    // }
+    // console.log('GetProfile: ', id);
 
     presentLoading(loadingOptions);
     userService
@@ -426,120 +425,11 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         console.log('Profile: ', data);
         if (data === null) {
           console.log('Done');
-          athleteProfile = emptyProfile;
-          setAthleteProfile(emptyProfile);
+          // noboProfile = emptyProfile;
+          setNoboProfile(emptyProfile);
         } else {
-          setFullAthleteProfile(data);
-          let updateProfile = {
-            rating: data.athlete_user_profile.rating.Int16,
-            fromName:
-              data.basic_user_profile.first_name.String +
-              ' ' +
-              data.basic_user_profile.last_name.String,
-            firstName: data.basic_user_profile.first_name.String,
-            lastName: data.basic_user_profile.last_name.String,
-            subject: 'New event: Trip to Vegas',
-            date: '9:32pm May 8, 2022',
-            data: data.basic_user_profile.bio
-              ? data.basic_user_profile.bio.String
-              : '',
-            id: data.user_id,
-            school: data.basic_user_profile.school
-              ? data.basic_user_profile.school.String
-              : '',
-            height: data.athlete_user_profile.height
-              ? data.athlete_user_profile.height.String
-              : '',
-            weight: data.athlete_user_profile.weight
-              ? data.athlete_user_profile.weight.String
-              : '',
-            year: data.basic_user_profile.class_year
-              ? data.basic_user_profile.class_year.String
-              : '',
-            profilePic:
-              data.basic_user_profile.profile_image?.String ||
-              `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/pictures/${userId}/profile.jpeg?fail`,
-            bannerPic:
-              data.basic_user_profile.banner_image?.String ||
-              `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/pictures/${userId}/banner.jpeg?fail`,
-            sport: data.athlete_user_profile.primary_sport
-              ? data.athlete_user_profile.primary_sport.String
-              : '',
-            position: data.athlete_user_profile.primary_position
-              ? data.athlete_user_profile.primary_position.String.replace(
-                  /"/g,
-                  ''
-                )
-              : '',
-            highlights: data.athlete_user_profile.highlights
-              ? data.athlete_user_profile.highlights
-              : [],
-            stats: data.athlete_user_profile.athlete_stats?.stats2
-              ? data.athlete_user_profile.athlete_stats?.stats2
-              : [],
-            academics: data.athlete_user_profile.athlete_academics
-              ? data.athlete_user_profile.athlete_academics
-              : [],
-            offers: data.athlete_user_profile.athlete_offers
-              ? data.athlete_user_profile.athlete_offers
-              : [],
-            awards: data.athlete_user_profile.athlete_awards
-              ? data.athlete_user_profile.athlete_awards
-              : [],
-            measurements: data.athlete_user_profile.athlete_measurements
-              ? data.athlete_user_profile.athlete_measurements
-              : {},
-            country: data.basic_user_profile.country
-              ? data.basic_user_profile.country.String.replace(/"/g, '')
-              : '',
-            state: data.basic_user_profile.state
-              ? data.basic_user_profile.state.String.replace(/"/g, '')
-              : '',
-            city: data.basic_user_profile.city
-              ? data.basic_user_profile.city.String
-              : '',
-            gpa: data.athlete_user_profile.gpa
-              ? data.athlete_user_profile.gpa.String
-              : '',
-            sat: data.athlete_user_profile.sat
-              ? data.athlete_user_profile.sat.String
-              : '',
-            act: data.athlete_user_profile.act
-              ? data.athlete_user_profile.act.String
-              : '',
-            extraCurriculars: data.athlete_user_profile.extra_curriculars
-              ? data.athlete_user_profile.extra_curriculars
-              : [],
-            socialLinks: data.athlete_user_profile.social_links
-              ? data.athlete_user_profile.social_links.String.replace(
-                  '{',
-                  ''
-                ).replace('}', '')
-              : '',
-            otherSports: data.athlete_user_profile.other_sports
-              ? data.athlete_user_profile.other_sports
-              : [],
-            experiences: data.athlete_user_profile.athlete_experiences
-              ? data.athlete_user_profile.athlete_experiences
-              : [],
-          };
-          let listOfSocials = updateProfile.socialLinks.split(',');
-          console.log('Socials: ', listOfSocials);
-          !profileAthlete.myProfile &&
-            setUserSubscribed(data.is_premium?.String === 'true');
-          setArrayOfSocials(listOfSocials);
-          athleteProfile = updateProfile;
-          setAthleteProfile(updateProfile);
-          setMeasurementData(data?.athlete_user_profile?.athlete_measurements);
-          setAcademicData({
-            gpa: data?.athlete_user_profile?.gpa?.String,
-            sat: data?.athlete_user_profile?.sat?.String,
-            act: data?.athlete_user_profile?.act?.String,
-            extracurriculars: data?.athlete_user_profile?.extra_curriculars,
-          });
-          setSocialData(data?.social_data);
-
-          updateActionMenu();
+          console.log("Set NOBO Profile: ", data['user'])
+          setNoboProfile(data['user'])
 
           if (!profileAthlete.myProfile) {
             let nextURL = `https://www.noboplus.com/home/athlete-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
@@ -590,7 +480,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
           breakpoints={[0, 0.75, 0.85]}
         >
           <IonContent className="ion-padding">
-            <QrCode value={profileURL} name={athleteProfile.fromName}></QrCode>
+            {/*<QrCode value={profileURL} name={noboProfile.firstName + " " + noboProfile.lastName}></QrCode>*/}
             <IonButton
               className="nobo-qr-code-btn-close"
               onClick={() => profileModal.current?.dismiss()}
@@ -603,7 +493,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
 
         <div
           className="profile-banner-container"
-          style={{ backgroundImage: `url(${athleteProfile.bannerPic})` }}
+          style={{ backgroundImage: `url(${noboProfile.profileBg})` }}
         ></div>
         {profileAthlete.myProfile && (
           <IonButton
@@ -627,12 +517,12 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
               currentTarget.onerror = null; // prevents looping
               currentTarget.src = '../../assets/images/urp-default-banner.png';
             }}
-            src={athleteProfile.profilePic}
+            src={noboProfile.avatar}
             alt="avatar"
           />
         </div>
         <ProfileSummary
-          profile={athleteProfile}
+          profile={noboProfile}
           openSocialShare={openShare}
         ></ProfileSummary>
 
@@ -662,10 +552,10 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
           <ProductList type="" images={profileItems}></ProductList>
         )}
         {targetSection === 'Trades' && (
-          <ProductList type="trades" images={profileItems}></ProductList>
+          <ProductList type="trade" images={profileItems}></ProductList>
         )}
         {targetSection === 'Purchase' && (
-          <ProductList type="purchase" images={profileItems}></ProductList>
+          <ProductList type="sell" images={profileItems}></ProductList>
         )}
         {targetSection === 'Reviews' && (
           /*<ReviewList images={profileItems}></ReviewList*/
