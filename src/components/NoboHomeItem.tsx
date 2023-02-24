@@ -74,7 +74,7 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
         }}
         src={`assets/images/nobo-${
           product?.action === 'sell' ? 'buy-' : 'trade-'
-        }icon.png`}
+        }icon.svg`}
         alt="nobo-buy-icon"
       />
       <img

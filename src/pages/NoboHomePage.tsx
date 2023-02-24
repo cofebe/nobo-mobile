@@ -26,7 +26,7 @@ const NoboHomePage: React.FC = () => {
   const [products, setProducts] = useState<any>([]);
 
   useIonViewWillEnter(() => {
-    getProducts('women', 'sell', false);
+    getProducts('women', 'explore', false);
   });
 
   useEffect(() => {
