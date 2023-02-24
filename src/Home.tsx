@@ -249,7 +249,7 @@ const Home: React.FC = () => {
             <PostCreate />
           </Route>
         </IonRouterOutlet>
-        <IonTabBar className="nobo-nav-bar">
+        <IonTabBar className="nobo-nav-bar" slot="bottom">
           <IonTabButton
             tab="home"
             // href="/home/feed"
