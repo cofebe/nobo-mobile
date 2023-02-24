@@ -5,7 +5,6 @@ import {
 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
 import { isPlatform } from '@ionic/react';
 import { AuthService } from './AuthService';
-import { environment } from '../environments/environment';
 
 export class SubscriptionService {
   private products: IAPProducts | undefined;
@@ -18,7 +17,7 @@ export class SubscriptionService {
 
     this.store.verbosity = this.store.DEBUG;
 
-    if (isPlatform('ios') && this.store && !environment.disableBrowser) {
+    if (isPlatform('ios') && this.store) {
       this.store.validator =
         'https://validator.fovea.cc/v1/validate?appName=com.noboplus&apiKey=b01dea13-1b81-4165-a6ea-ad0eac7b59d6';
       // this.store.register([

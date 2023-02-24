@@ -2,7 +2,6 @@ import FeedListItem from '../components/FeedListItem';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { FeedItem } from '../data/athlete-feed';
-import { environment } from '../environments/environment';
 import {
   IonCol,
   IonContent,
@@ -53,7 +52,7 @@ const Feed: React.FC = () => {
     setProfileMessages(profileMessages);
     page = 0;
     setPage(0);
-    if (!environment.disableBrowser && isPlatform('ios')) {
+    if (isPlatform('ios')) {
       const subscriptionService = new SubscriptionService(new InAppPurchase2());
       subscriptionService.register();
     }
