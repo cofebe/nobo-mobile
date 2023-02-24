@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { NoboUserService } from '../services/NoboUserService';
 
 import './NoboLogin.scss';
+import Splash from './Splash';
 
 const NoboLogin: React.FC = () => {
   const history = useHistory();
@@ -18,8 +19,10 @@ const NoboLogin: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const login = () => {
+    setIsLoading(true); // Set loading to true when login button is clicked
     noboUserService
       .login({ email, password })
       .then((res: any) => res.json())
@@ -28,12 +31,16 @@ const NoboLogin: React.FC = () => {
         if (data.error) {
           setError(data.error);
         } else {
-          history.push('/home/nobo-home');
+          history.push('/');
+          setTimeout(() => {
+            history.push('/home/nobo-home');
+          }, 3000);
         }
       })
       .catch((err: any) => {
         console.log('login error', err);
-      });
+      })
+      .finally(() => setIsLoading(false)); // Set loading to false when promise is resolved
   };
 
   return (
@@ -159,31 +166,6 @@ const NoboLogin: React.FC = () => {
             </IonRow>
           </IonGrid>
         </IonRow>
-        {/* <div style={{ display: 'flex', marginTop: '16px', marginLeft: '30px' }}>
-          <div
-            style={{
-              fontFamily: 'Nunito Sans',
-              fontWeight: '600',
-              fontSize: '15px',
-              lineHeight: '22.5px',
-              color: '#FFFFFF',
-            }}
-          >
-            Don't have an account?
-          </div>
-          <div
-            style={{
-              textDecorationLine: 'underline',
-              fontFamily: 'Nunito Sans',
-              fontWeight: '700',
-              color: '#D6980E',
-              marginLeft: '24px',
-            }}
-            onClick={() => {}}
-          >
-            Sign up
-          </div>
-        </div> */}
       </div>
     </IonPage>
   );
