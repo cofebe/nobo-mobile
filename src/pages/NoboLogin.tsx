@@ -19,10 +19,8 @@ const NoboLogin: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const login = () => {
-    setIsLoading(true); // Set loading to true when login button is clicked
     noboUserService
       .login({ email, password })
       .then((res: any) => res.json())
@@ -39,8 +37,7 @@ const NoboLogin: React.FC = () => {
       })
       .catch((err: any) => {
         console.log('login error', err);
-      })
-      .finally(() => setIsLoading(false)); // Set loading to false when promise is resolved
+      });
   };
 
   return (
