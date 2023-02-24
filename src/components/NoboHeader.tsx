@@ -133,14 +133,6 @@ const NoboHeader: React.FC<NoboHeaderProps> = ({
               >
                 <div>
                   <img
-                    // className="splash-logo"
-                    height={40}
-                    src="assets/images/nobo-account-icon.png"
-                    alt="logo"
-                  />
-                </div>
-                <div>
-                  <img
                     height={40}
                     src="assets/images/nobo-cart-icon.png"
                     alt="logo"

@@ -58,7 +58,7 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
           </div>
           <div>
             <img
-              src="assets/images/nobo-square-right.png"
+              src="assets/images/nobo-square-right-black.png"
               alt="nobo-square-right"
               height={16}
             />

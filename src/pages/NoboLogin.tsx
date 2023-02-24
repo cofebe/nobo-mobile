@@ -5,6 +5,7 @@ import {
   IonCol,
   IonGrid,
   IonInput,
+  useIonViewWillEnter,
 } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -18,16 +19,20 @@ const NoboLogin: React.FC = () => {
   const noboUserService = new NoboUserService();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<boolean>(false);
+
+  useIonViewWillEnter(() => {
+    setError(false);
+  });
 
   const login = () => {
     noboUserService
       .login({ email, password })
       .then((res: any) => res.json())
       .then((data: any) => {
-        console.log('login', data);
         if (data.error) {
-          setError(data.error);
+          console.log('login error', data.error);
+          setError(true);
         } else {
           history.push('/');
           setTimeout(() => {
@@ -37,6 +42,7 @@ const NoboLogin: React.FC = () => {
       })
       .catch((err: any) => {
         console.log('login error', err);
+        setError(true);
       });
   };
 
@@ -103,8 +109,13 @@ const NoboLogin: React.FC = () => {
             <IonRow>
               <IonCol>
                 <IonInput
+                  style={{
+                    border: error ? '1px solid red' : '',
+                    color: error ? 'red' : '',
+                  }}
                   className="nobo-input"
                   placeholder="PASSWORD"
+                  type="password"
                   onIonChange={(e: any) => {
                     setPassword(e.target.value);
                   }}
