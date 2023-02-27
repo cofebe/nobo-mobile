@@ -6,7 +6,6 @@
 export const environment = {
   development: true,
   serverUrl: 'https://thenobo.codepilot.com',
-  // serverUrl: 'https://api-testing.noboplus.com',
   // serverUrl: 'http://localhost:8080',
   videoAuthenticationEndpoint: 'https://api.noboplus.com:3001/auth',
   videoUrlEndpoint: 'https://ik.imagekit.io/nobovideo/',
