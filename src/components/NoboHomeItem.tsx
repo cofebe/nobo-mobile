@@ -1,18 +1,4 @@
-import { useState } from 'react';
-import {
-  IonBadge,
-  IonButton,
-  IonCol,
-  IonGrid,
-  IonHeader,
-  IonIcon,
-  IonImg,
-  IonRow,
-  IonToolbar,
-  IonPage,
-  IonContent,
-  IonItem,
-} from '@ionic/react';
+import { useHistory } from 'react-router-dom';
 import './NoboHomeItem.scss';
 import { environment } from '../environments/environment';
 import { calculateEstPrice } from '../helpers/tradeFees';
@@ -28,6 +14,8 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
   product,
   isBig,
 }) => {
+  const history = useHistory();
+
   return (
     <div
       className="nobo-home-item"
@@ -37,6 +25,12 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
         alignItems: 'center',
         height: '100%',
         width: '100%',
+      }}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('product', product);
+        history.push(`/home/product/${product._id}`);
       }}
     >
       {isBig ? (

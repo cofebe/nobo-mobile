@@ -80,7 +80,9 @@ const NoboHeader: React.FC<NoboHeaderProps> = ({
         },
       ],
       onDidDismiss: ({ detail }) => {
-        if (detail.data == undefined) return;
+        if (detail.data === undefined) {
+          return;
+        }
         if (detail.data.action !== undefined) {
           console.log(detail);
         }
@@ -129,6 +131,9 @@ const NoboHeader: React.FC<NoboHeaderProps> = ({
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'flex-end',
+                }}
+                onClick={(e) => {
+                  history.push('/cart');
                 }}
               >
                 <div>

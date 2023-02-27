@@ -38,11 +38,8 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-import { Amplify } from 'aws-amplify';
-import awsconfig from './aws-exports.js';
 import GetStarted from './pages/GetStarted';
-import NoboLogin from './pages/NoboLogin';
-Amplify.configure(awsconfig);
+import ShoppingCart from './pages/ShoppingCart';
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -61,12 +58,14 @@ const App: React.FC = () => (
         <Route path="/get-started" exact={true}>
           <GetStarted />
         </Route>
-        <Route path="/nobo-login" exact={true}>
-          <NoboLogin />
-        </Route>
         <Route path="/login" exact={true}>
           <Login />
         </Route>
+        <Route path="/cart" exact={true}>
+          <ShoppingCart />
+        </Route>
+
+
         <Route path="/signup" exact={true}>
           <SignUp />
         </Route>

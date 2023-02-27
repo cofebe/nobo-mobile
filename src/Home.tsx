@@ -17,7 +17,6 @@ import Roles from './pages/Roles';
 import './pages/URP.css';
 import ProfileAthletes from './pages/ProfileAthletes';
 import Explore from './pages/Explore';
-import ExploreList from './pages/ExploreList';
 import PostCreate from './pages/PostCreate';
 import Connections from './pages/Connections';
 import PendingConnections from './pages/PendingConnections';
@@ -25,6 +24,7 @@ import Notifications from './pages/Notifications';
 import Messages from './pages/Messages';
 import Watchlist from './pages/Watchlist';
 import ProfileInsights from './pages/ProfileInsights';
+import ProductDetail from './pages/ProductDetail';
 import { AuthService } from './services/AuthService';
 import { UserService } from './services/UserService';
 import { Amplify /*, Auth*/ } from 'aws-amplify';
@@ -39,7 +39,6 @@ import {
 import { NotificationService } from './services/NotificationService';
 
 import { viewUser } from './util';
-import NoboHomePage from './pages/NoboHomePage';
 
 Amplify.configure(awsconfig);
 
@@ -188,9 +187,14 @@ const Home: React.FC = () => {
         <IonRouterOutlet>
           <Redirect exact path="/home" to="/home/nobo-home" />
           {/* <Redirect exact path="/home/athletes" to="/home/feed" /> */}
-          <Route exact path="/home/nobo-home">
-            <NoboHomePage />
+          <Route exact path="/home/product/:id">
+            <ProductDetail />
           </Route>
+          <Route exact path="/home/explore">
+            <Explore />
+          </Route>
+
+
           <Route exact path="/home/post-promote/:id">
             <PromotePost />
           </Route>
@@ -220,12 +224,6 @@ const Home: React.FC = () => {
           </Route>
           <Route path="/home/roles">
             <Roles />
-          </Route>
-          <Route exact path="/home/explore">
-            <Explore />
-          </Route>
-          <Route exact path="/home/explore/list">
-            <ExploreList />
           </Route>
           <Route exact path="/home/messages">
             <Messages />

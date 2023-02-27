@@ -34,7 +34,7 @@ export class UserService extends BaseService {
       filter: JSON.stringify(filter),
       sort: JSON.stringify(sort)
     }).toString();
-  
+
     return await super.fetch('GET', `api/products/all?${queryParams}`);
   }
 
@@ -287,5 +287,23 @@ export class UserService extends BaseService {
 
   async getProfileInsights(userId: number, age: number) {
     return await super.fetch('GET', `/user/${userId}/insights?age=${age}`);
+  }
+
+  async login(data = {}) {
+    const response = await fetch(API_URL + '/users/login', {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.status === 401) {
+      console.log('Unauthorized');
+      throw response;
+    }
+
+    return response;
   }
 }

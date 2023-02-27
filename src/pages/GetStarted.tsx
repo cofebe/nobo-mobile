@@ -98,7 +98,7 @@ const GetStarted: React.FC = () => {
               marginLeft: '24px',
             }}
             onClick={() => {
-              history.push('/nobo-login');
+              history.push('/login');
             }}
           >
             Login
