@@ -4,32 +4,25 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  IonBadge,
   useIonViewWillEnter,
   IonButton,
   useIonActionSheet,
 } from '@ionic/react';
-import './NoboHeader.scss';
+import './NoboExploreHeader.scss';
 import { useHistory } from 'react-router-dom';
-// import { NotificationService } from '../services/NotificationService';
 import { useState } from 'react';
 
-interface NoboHeaderProps {
+interface NoboExploreHeaderProps {
   sectionNameCallback: (sectionName: string) => void;
   sectionCategoryCallback: (sectionCategory: string) => void;
 }
 
-const NoboHeader: React.FC<NoboHeaderProps> = ({
+const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
   sectionNameCallback,
   sectionCategoryCallback,
 }) => {
   const history = useHistory();
-  const [present, dismiss] = useIonActionSheet();
-  // const notificationService = new NotificationService();
-
-  // const [badgeCount, setBadgeCount] = useState<number>(
-  //   notificationService.getNotifcationCount()
-  // );
+  const [present] = useIonActionSheet();
 
   const [activeButton, setActiveButton] = useState<string>('explore');
   const [activeCategory, setActiveCategory] = useState<string>('WOMEN');
@@ -42,19 +35,6 @@ const NoboHeader: React.FC<NoboHeaderProps> = ({
   useIonViewWillEnter(() => {
     sectionNameCallback('explore');
   });
-
-  // useIonViewWillEnter( () => {
-  //   update();
-  // })
-
-  // function update() {
-  //   console.log("Update start")
-  //   setTimeout( () => {
-  //     setBadgeCount(notificationService.getNotifcationCount())
-  //     console.log("updated header")
-  //   }, 1000)
-  //   update();
-  // }
 
   const openCategoryOptions = () => {
     present({
@@ -270,4 +250,4 @@ const NoboHeader: React.FC<NoboHeaderProps> = ({
   );
 };
 
-export default NoboHeader;
+export default NoboExploreHeader;

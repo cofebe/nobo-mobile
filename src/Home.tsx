@@ -7,6 +7,7 @@ import {
   IonTabButton,
   IonTabs,
   useIonViewWillEnter,
+  isPlatform,
 } from '@ionic/react';
 //import Feed from './pages/Feed';
 import PostDetail from './pages/PostDetail';
@@ -51,59 +52,61 @@ const Home: React.FC = () => {
   let [userType, setUserType] = useState<string>();
   let [profileURL, setProfileURL] = useState<string>();
 
-  PushNotifications.requestPermissions().then((result) => {
-    if (result.receive === 'granted') {
-      console.log('Push Granted');
-      PushNotifications.register();
-    } else {
-      console.log('Push Denied');
-    }
-  });
-
-  PushNotifications.addListener('registration', (token: Token) => {
-    let user = userService.getUserCache();
-    let req = {
-      device_token: token.value,
-    };
-    try {
-      userService
-        .setUserDeviceToken(user.user.user_id, req)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log('Success setUserDeviceToken');
-        });
-    } catch (err) {
-      console.log('Error: ', err);
-    }
-  });
-
-  PushNotifications.addListener('registrationError', (error: any) => {
-    console.log('Error on registration: ' + JSON.stringify(error));
-  });
-
-  PushNotifications.addListener(
-    'pushNotificationReceived',
-    (notification: PushNotificationSchema) => {
-      notificationService.incrementNotifcationCount();
-      console.log('Push received: ' + JSON.stringify(notification));
-    }
-  );
-
-  PushNotifications.addListener(
-    'pushNotificationActionPerformed',
-    (notification: ActionPerformed) => {
-      const data = notification.notification.data;
-      if (
-        data !== undefined &&
-        data.FromUserId !== undefined &&
-        data.FromUserType !== undefined
-      ) {
-        viewUser(history, data.FromUserId, data.FromUserType);
+  if (!isPlatform('desktop') && !isPlatform('mobileweb')) {
+    PushNotifications.requestPermissions().then((result) => {
+      if (result.receive === 'granted') {
+        console.log('Push Granted');
+        PushNotifications.register();
+      } else {
+        console.log('Push Denied');
       }
-    }
-  );
+    });
 
-  PushNotifications.removeAllDeliveredNotifications();
+    PushNotifications.addListener('registration', (token: Token) => {
+      let user = userService.getUserCache();
+      let req = {
+        device_token: token.value,
+      };
+      try {
+        userService
+          .setUserDeviceToken(user.user.user_id, req)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log('Success setUserDeviceToken');
+          });
+      } catch (err) {
+        console.log('Error: ', err);
+      }
+    });
+
+    PushNotifications.addListener('registrationError', (error: any) => {
+      console.log('Error on registration: ' + JSON.stringify(error));
+    });
+
+    PushNotifications.addListener(
+      'pushNotificationReceived',
+      (notification: PushNotificationSchema) => {
+        notificationService.incrementNotifcationCount();
+        console.log('Push received: ' + JSON.stringify(notification));
+      }
+    );
+
+    PushNotifications.addListener(
+      'pushNotificationActionPerformed',
+      (notification: ActionPerformed) => {
+        const data = notification.notification.data;
+        if (
+          data !== undefined &&
+          data.FromUserId !== undefined &&
+          data.FromUserType !== undefined
+        ) {
+          viewUser(history, data.FromUserId, data.FromUserType);
+        }
+      }
+    );
+
+    PushNotifications.removeAllDeliveredNotifications();
+  }
 
   function setActiveTab(name: string, ev?: Event) {
     console.log('setActiveTab', name);
