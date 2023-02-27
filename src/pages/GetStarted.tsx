@@ -1,9 +1,9 @@
 import { IonButton, IonPage } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import backgroundImage1 from './nobo-splash-1.png';
-import backgroundImage2 from './nobo-splash-2.png';
-import backgroundImage3 from './nobo-splash-3.png';
+import backgroundImage1 from '../assets/nobo-splash-1.png';
+import backgroundImage2 from '../assets/nobo-splash-2.png';
+import backgroundImage3 from '../assets/nobo-splash-3.png';
 
 import './GetStarted.scss';
 

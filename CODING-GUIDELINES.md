@@ -8,4 +8,4 @@
 1. Let’s not namespace styles or components. (i.e., `nobo-header` or `NoboProductsService`)
 1. No `fetch()` calls outside of services.
 1. Refrain from using `any` as much as possible. Let’s type everything so we know what we’re working with. Place these definitions in the service files. (See [ProductService](src/services/ProductService.tsx).)
-1. Only create components for things used on multiple pages. For example, on the notifications screen, there’s no need for a component per notification since it won’t be used anywhere else.
+1. Only create components for things used on multiple pages or are large enough to warrant their own component. For example, on the notifications screen, there’s no need for a component per notification since it won’t be used anywhere else and isn't large enough to be on its own.
