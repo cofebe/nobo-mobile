@@ -115,6 +115,7 @@
 
   /* small version */
   .nobo-edit-profile-button {
+    margin-top: 1rem;
     float: right;
     background-color: #ffffff;
     color: #D6980E;
@@ -126,7 +127,7 @@
     text-transform: capitalize;
     border: 1px solid #D6980E;
     box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.05);
-    margin-right: 10px;
+    margin-right: 20px;
   }
 
   /* border: 1px solid rgba(100,100,100,.1);
@@ -158,6 +159,7 @@
 
   .profile-bubble-container {
     position: relative;
+    top: -15px;
     overflow: visible;
     z-index: 100;
 
@@ -167,9 +169,11 @@
       transform: translateY(-35%);
       width: 70px;
       height: 70px;
-      margin-left: 14px;
+      margin-left: 24px;
       margin-bottom: -22px;
       border-radius: 50%;
+      border: solid 1px black;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
     }
     .profile-bubble-premium-border {
       border: 4px solid #f8cf40;
@@ -273,14 +277,18 @@
   }
 
   .circle-background {
-    background-color: white;
     border-radius: 50%;
-    max-width: 54px;
+    width: 54px;
+    height: 54px;
     padding: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .circle-background > img {
+    max-width: 150%;
   }
 
   .nobo-menu-container {
@@ -290,6 +298,7 @@
     align-items: center;
     margin-top: 12px;
     padding-bottom: 12px;
+    margin-bottom: 24px;
 
     .nobo-menu-circle {
       padding-left: 8px;

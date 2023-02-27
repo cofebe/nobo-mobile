@@ -66,9 +66,9 @@ const ProductList: React.FC<ProductListProps> = ({type, images}) => {
             <p style={{ position: 'absolute', textAlign: 'center', top: '10px', right: '20px', width: '30px', height: '10px', fontSize: '10px', fontWeight: 700 }}>
               Size <br/>7
             </p>
-            <div style={{ position: 'absolute', bottom: '0', width: '100%', height: '58px', fontSize: '10px', background: 'rgba(255, 255, 255, 1)', display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: '14px', marginRight: '14px' }}>
+            <div style={{ position: 'absolute', bottom: '0', width: '100%', height: '58px', fontSize: '10px', background: 'rgba(255, 255, 255, 1)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
               <div style={{ fontWeight: 'bold' }}>{product.brand}</div>
-              <div>{product.name}</div>
+              <div style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '20ch'}}>{product.name}</div>
               <div>Est. $2,700 - $3,300</div>
             </div>
           </div>
@@ -107,9 +107,9 @@ const ProductList: React.FC<ProductListProps> = ({type, images}) => {
             <p style={{ position: 'absolute', textAlign: 'center', top: '10px', right: '20px', width: '30px', height: '10px', fontSize: '10px', fontWeight: 700 }}>
               Size <br/>7
             </p>
-            <div style={{ fontFamily: 'Nunito Sans', position: 'absolute', bottom: '0', width: '100%', height: '58px', fontSize: '10px', background: 'rgba(255, 255, 255, 1)', display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: '14px', marginRight: '14px' }}>
+            <div style={{ fontFamily: 'Nunito Sans', position: 'absolute', bottom: '0', width: '100%', height: '58px', fontSize: '10px', background: 'rgba(255, 255, 255, 1)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
               <div style={{ fontWeight: 'bold' }}>{product.brand}</div>
-              <div>{product.name}</div>
+              <div style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '20ch'}}>{product.name}</div>
               <div>Cost ${product.price}.00</div>
             </div>
           </div>

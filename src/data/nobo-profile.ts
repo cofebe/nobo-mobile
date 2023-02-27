@@ -22,7 +22,7 @@ export interface NoboProfile {
 }
 
 export const emptyProfile = {
-  profileBg: "",
+  profileBg: "assets/images/nobo_logo.png",
   emailVerified: "",
   blocked: false,
   favorites: [],
@@ -37,7 +37,7 @@ export const emptyProfile = {
   lastName: "",
   memberSince: "",
   displayName: "",
-  avatar: "",
+  avatar: "assets/images/nobo_logo.png",
   experiencePreferences: "",
   orders: "",
   tradeCloset: 0,

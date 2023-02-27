@@ -2,6 +2,11 @@
   --ion-item-background: transparent;
   font-family: Nunito Sans;
 
+  .profile-summary-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   ion-grid {
     .profile-name {
       padding-left: 0;
@@ -299,9 +304,12 @@
     //height: auto;
     //display: block;
     max-width: 1088px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   .nobo-profile-stats-header {
+    text-align: center;
     color: #ACACAC;
     font-family: Nunito Sans;
     font-weight: 600;

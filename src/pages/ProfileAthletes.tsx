@@ -32,6 +32,7 @@ import './ProfileAthletes.scss';
 import { AcademicData } from '../components/ProfileSections/AcademicsSection';
 //import ProfileFollowButton from '../components/ProfileFollowButton';
 import ProductList from '../components/ProductList';
+import ReviewList from '../components/ReviewList';
 import { MeasurementData } from '../components/ProfileSections/MeasurementsSection';
 import QrCode from '../components/QrCode';
 import { chevronBackOutline } from 'ionicons/icons';
@@ -66,6 +67,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
   const [targetSection, setTargetSection] = useState('Feed');
 
   const [profileItems, setProfileItems] = useState<string[]>(['assets/images/test/product.jpeg', 'assets/images/test/product.jpeg', 'assets/images/test/product.jpeg', 'assets/images/test/product.jpeg']);
+  const [reviewData, setReviewData] = useState<any[]>(['1', '2', '3']);
 
   const [arrayOfSocials, setArrayOfSocials] = useState<string[]>([]);
 
@@ -484,10 +486,6 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
             className={`profile-bubble ${
               userSubscribed && 'profile-bubble-premium-border'
             }`}
-            onError={({ currentTarget }) => {
-              currentTarget.onerror = null; // prevents looping
-              currentTarget.src = '../../assets/images/urp-default-banner.png';
-            }}
             src={noboProfile.avatar}
             alt="avatar"
           />
@@ -529,9 +527,9 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
           <ProductList type="sell" images={profileItems}></ProductList>
         )}
         {targetSection === 'Reviews' && (
-          /*<ReviewList images={profileItems}></ReviewList*/
-          <p>Reviews</p>
+          <ReviewList reviewData={reviewData}></ReviewList>
         )}
+        <div style={{height: '5vh'}}></div>
       </IonContent>
     </IonPage>
   );

@@ -27,15 +27,16 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
       }
     >
       {!isPlatform('desktop') ? (
-        <IonGrid className="mobile-only stats-grid">
+        <IonGrid className="mobile-only profile-summary-container">
           <IonRow style={{ maxHeight: '48px' }}>
-            <IonCol offset="1" size="7" className="profile-name">
+            <IonCol size="7" className="profile-name">
               <div>@{myProfile.displayName}</div>
               <div style={{ paddingTop: '8px' }}>
                 <div
                   style={{
                     fontSize: '12px',
-                    fontWeight: '700'
+                    fontWeight: '700',
+                    textTransform: 'uppercase',
                   }}
                 >
                   {myProfile.firstName + " " + myProfile.lastName}
@@ -45,7 +46,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
           </IonRow>
             {myProfile.blurbText ? (
               <IonRow>
-                <IonCol style={{paddingLeft: '0'}} offset="1">
+                <IonCol style={{paddingLeft: '0'}}>
                   <div
                     className="nobo-profile-bio"
                     style={{ textAlign: 'left' }}
@@ -103,19 +104,19 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
               ''
             )}
             <IonRow className="nobo-profile-stats-top">
-              <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} offset="1" size="2">
+              <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} size="4">
                 <div className="nobo-profile-stats-header">FOLLOWERS</div>
                 <div className="nobo-profile-stats-value">
                   {myProfile.followers.length}
                 </div>
               </IonCol>
-              <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} offset="1" size="2">
+              <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} size="4">
                 <div className="nobo-profile-stats-header">FOLLOWING</div>
                 <div className="nobo-profile-stats-value">
                   {myProfile.following.length}
                 </div>
               </IonCol>
-              <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} offset="1" size="2">
+              <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} size="4">
                 <div className="nobo-profile-stats-header">REVIEWS</div>
                 <div className="nobo-profile-stats-value">
                   {myProfile.reviews.length}
