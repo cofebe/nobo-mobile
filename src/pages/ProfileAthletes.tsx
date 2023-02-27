@@ -498,22 +498,22 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         <IonRow className="nobo-menu-container">
           <div className="nobo-menu-circle" onClick={ () => setTargetSection('Feed')}>
             <div className="circle-background">
-              <img className={targetSection === 'Feed' ? 'nobo-profile-menu-selected' : ''} src="assets/images/navigation/nav-profile-items.svg"/>
+              <img className={targetSection === 'Feed' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-items.svg"/>
             </div>
           </div>
           <div className="nobo-menu-circle" onClick={ () => setTargetSection('Trades')}>
             <div className="circle-background">
-              <img className={targetSection === 'Trades' ? 'nobo-profile-menu-selected' : ''} src="assets/images/navigation/nav-trade.svg"/>
+              <img className={targetSection === 'Trades' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-trade.svg"/>
             </div>
           </div>
           <div className="nobo-menu-circle" onClick={ () => setTargetSection('Purchase')}>
             <div className="circle-background">
-              <img className={targetSection === 'Purchase' ? 'nobo-profile-menu-selected' : ''} src="assets/images/navigation/nav-profile-purchased.svg"/>
+              <img className={targetSection === 'Purchase' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-purchased.svg"/>
             </div>
           </div>
           <div className="nobo-menu-circle" onClick={ () => setTargetSection('Reviews')}>
             <div className="circle-background">
-              <img className={targetSection === 'Reviews' ? 'nobo-profile-menu-selected' : ''} src="assets/images/navigation/nav-profile-reviews.svg"/>
+              <img className={targetSection === 'Reviews' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-reviews.svg"/>
             </div>
           </div>
         </IonRow>

@@ -306,8 +306,12 @@
     }
   }
 
+  .nobo-profile-menu-not-selected {
+    filter: brightness(1%) invert(80%);
+  }
+
   .nobo-profile-menu-selected {
-    filter: invert(1);
+    filter: brightness(1%) invert(0%);
   }
 
   .nobo-profile-section.nobo-profile-section-scroll {

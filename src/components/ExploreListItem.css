@@ -70,8 +70,8 @@ ion-item.explore-list-item .explore-list-feed-image {
   margin-top: 4px;
   margin-left: 10px;
   margin-right: 10px;
-  width: 50px;
-  height: 50px;
+  width: 31px;
+  height: 31px;
 }
 
 ion-item.explore-list-item .feed-list-promoted {
@@ -168,11 +168,6 @@ ion-item.explore-list-item .feed-content-image {
   padding-right: 1.2rem;
 }
 
-ion-item.explore-list-item .feed-content-center {
-  display: flex;
-  align-items: center;
-}
-
 ion-item.explore-list-item .feed-content-right {
   display: flex;
   justify-content: center;
@@ -195,7 +190,7 @@ ion-item.explore-list-item .explore-list-item {
 }
 
 ion-item.explore-list-item .explore-list-item-content {
-  margin-bottom: 5px;
+  background-color: #fefcf6;
   width: 100%;
 }
 
@@ -312,6 +307,7 @@ ion-item.explore-list-item .feed-list-nobo-likes-count {
 }
 
 .explore-feed-first-row {
+  font-family: 'Nunito Sans';
   margin-top: 5px;
   height: 30px;
 }
