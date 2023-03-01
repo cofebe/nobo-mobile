@@ -219,10 +219,10 @@ const Home: React.FC = () => {
           <Route exact path="/home/edit-athlete/:id">
             <SignUpAthlete editMode={true} />
           </Route>
-          <Route path="/home/my-athlete-profile" exact={true}>
+          <Route path="/home/my-profile" exact={true}>
             <ProfileAthletes myProfile={true} />
           </Route>
-          <Route path="/home/athlete-profile/:id" exact={true}>
+          <Route path="/home/profile/:id" exact={true}>
             <ProfileAthletes myProfile={false} />
           </Route>
           <Route path="/home/roles">
