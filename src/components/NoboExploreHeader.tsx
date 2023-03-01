@@ -90,7 +90,7 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
                 <img
                   // className="splash-logo"
                   height={40}
-                  src="assets/images/nobo-settings-icon.png"
+                  src="assets/images/account-settings.svg"
                   alt="logo"
                 />
               </div>
@@ -119,7 +119,7 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
                 <div>
                   <img
                     height={40}
-                    src="assets/images/nobo-cart-icon.png"
+                    src="assets/images/shopping-cart.svg"
                     alt="logo"
                   />
                 </div>
