@@ -93,7 +93,7 @@ export interface ProductTradeOffers {
 
 export interface ProductAttribute {
   id: string;
-  value: string;
+  value: string|string[];
 }
 
 export interface Image {
@@ -102,6 +102,8 @@ export interface Image {
 }
 
 export interface ProductVendor {
+  _id: string;
+  rating: number;
   profileBg: string;
   emailVerified: string;
   blocked: boolean;

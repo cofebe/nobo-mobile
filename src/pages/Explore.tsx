@@ -7,7 +7,7 @@ import {
   useIonViewWillEnter,
 } from '@ionic/react';
 import './Explore.scss';
-import NoboExploreHeader from '../components/NoboExploreHeader';
+import ExploreHeader from '../components/ExploreHeader';
 import NoboHomeItem from '../components/NoboHomeItem';
 import { ProductService } from '../services/ProductService';
 
@@ -57,7 +57,7 @@ const Explore: React.FC = () => {
 
   return (
     <IonPage className="nobo-home-page">
-      <NoboExploreHeader
+      <ExploreHeader
         sectionCategoryCallback={getSectionCategory}
         sectionNameCallback={getSectionName}
       />

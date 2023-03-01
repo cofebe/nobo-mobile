@@ -1,163 +1,301 @@
+.page-header {
+  background-color: #FEFCF7;
+  border-bottom: 1px solid black;
+  position: relative;
+
+  .cart {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    height: 29px;
+    width: 29px;
+  }
+
+  .titles {
+    font-size: 12px;
+    margin: 40px 20px 14px;
+    position: relative;
+    text-align: center;
+    font-weight: 700;
+
+    .username {
+      color: #707070;
+    }
+
+    .title {
+      color: black;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    .back-arrow {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 23px;
+      width: 23px;
+    }
+  }
+}
+
 .product-detail-page {
-  background-color: white;
+  background-color: #F5F5F5;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 10px;
 
-  ion-list {
-    background-color: white;
-  }
+  .product-details-card {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px #EDEAE3;
+    border-radius: 5px;
+    padding: 16px 11px 10px;
 
-  .product-detail-background {
-    margin: 20px;
-    margin-bottom: 0;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #1A3A35;
-  }
+    .product-images-row {
 
-  .feed-header {
-    background-color: #1A3A35;
-    color: white;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position-x: center;
-    height: 90px;
-    background-color: #1a3a35;
-  }
+      .product-images {
+        .img {
+          width: 66px;
+          height: 75px;
+          border-radius: 5px;
+          background-color: #D9D9D9;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 8px;
+          margin-bottom: 8px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
 
-  .home-header {
-    background-color: #1a3a35;
-    height: auto;
-    --opacity-scale: 0 !important;
-  }
+        .scroller {
+          text-align: center;
+          line-height: 0.5;
 
-  .home-header-toolbar {
-    --background: #1a3a35;
-  }
+          &.disabled {
+            ion-icon {
+              color: #EDEAE3;
+            }
+          }
 
-  .home-content {
-    --background: #1a3a35;
-  }
+          &.enabled {
+            ion-icon {
+              color: #D6980E;
+            }
+          }
+        }
+      }
 
-  .home-toolbar {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    --background: #F9FBFB !important;
-    position: sticky;
-  }
-
-  .home-filter {
-    margin-right: 20px;
-    float: right;
-  }
-  .comments-count {
-    top: 8px;
-    position: absolute;
-    right: 61px;
-    font-size: .8em;
-    color:#00D6B6;
-  }
-
-  .likes-count {
-    top: 8px;
-    position: absolute;
-    right: 5px;
-    font-size: .8em;
-    color:#00D6B6;
-  }
-
-
-  .float-logo {
-    text-align: center;
-  }
-
-  .item-inner {
-    border-bottom:none;
-  }
-
-  .product-detail-page .list-background {
-    background-color: #F9FBFB;
-  }
-
-  .product-detail-page .floating-button {
-    font-size: 4rem;
-    position: fixed;
-    bottom: 10px;
-    right: calc(10px + var(--ion-safe-area-right, 0px));
-    z-index: 999;
-  }
-
-  /* V2 additions*/
-  .product-detail-page .profile-header-v2 {
-    position: absolute;
-    top: 125px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    padding-left: 68px;
-    background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 79%, rgba(0,0,0,0) 106%);
-  }
-
-  .product-detail-page .feed-name {
-    font-size: 1.4em;
-  }
-
-  .product-detail-page .header-stars {
-
-  }
-
-  .product-detail-page .location-pin {
-    margin-left: -35px;
-  }
-
-  .product-detail-page .location-pin div {
-    color: #3c91e5;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    display: inline;
-    margin-top: 0px;
-    padding-left: 7px;
-  }
-
-  .product-detail-page .social-tops svg {
-    margin-left: 5px;
-  }
-
-  .product-detail-page.action-menu {
-    top: 33px;
-    right: 58px;
-  }
-
-  .post-item-detail-header {
-    border-bottom: 1px solid #686363;
-    background-color: white;
-    border-radius: 15px 15px 0 0;
-  }
-
-  .post-item-detail-header .feed-item {
-    margin-top: 0;
-    margin-bottom: 0;
-    border-radius: 15px;
-    background-color: white;
-    box-shadow: none;
-  }
-
-  .post-item-detail-header .feed-bottom {
-    margin-top: -31px;
-  }
-
-  .feed-bottom-icons {
-    border-top: none;
-  }
-
-  .feed-item-item-content {
-    & > ion-col:first-child {
-      padding-left: 0;
-
-      .feed-list-feed-image {
-        margin-left: 0;
+      .product-large {
+        .img {
+          width: 175px;
+          height: 200px;
+          border-radius: 5px;
+          background-color: #D9D9D9;
+          margin-left: auto;
+          margin-right: auto;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
       }
     }
 
-    .feed-content {
-      padding-left: 0;
+    .product-brand {
+      font-size: 12px;
+      color: black;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    .product-name {
+      font-size: 15px;
+      color: black;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 0;
+      padding-top: 4px;
+      margin-top: -3px;
+    }
+
+    .product-price {
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 10px;
+      padding-top: 0px;
+
+      span {
+        font-size: 9.5px;
+        color: #ACACAC;
+        margin-right: 4px;
+      }
+    }
+
+    .buttons {
+      margin-top: 10px;
+    }
+
+    .button-container {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      &.left {
+        padding-left: 0;
+      }
+
+      &.right {
+        padding-right: 0;
+      }
+    }
+  }
+
+  .trade-tooltip {
+    ion-col {
+      text-align: right;
+      display: flex;
+      align-items: center;
+      font-size: 10px;
+      color: #D6980E;
+      justify-content: flex-end;
+      padding-right: 0;
+
+      img {
+        height: 10px;
+        margin-right: 4px;
+      }
+    }
+  }
+
+  .product-details {
+    padding-left: 0;
+    padding-right: 0;
+
+    .title {
+      font-size: 12px;
+      color: #707070;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    .blurb {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-size: 10px;
+    }
+
+    .owner {
+
+      .avatar {
+        height: 20px;
+        width: 20px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 10px;
+      }
+
+      .username {
+        font-size: 12px;
+        color: black;
+        margin-top: 3px;
+      }
+
+      .rating {
+      }
+    }
+  }
+
+  .product-info {
+    text-transform: uppercase;
+
+    .label {
+      font-size: 10px;
+      color: #707070;
+      padding-top: 7px;
+      padding-bottom: 0;
+    }
+
+    .value {
+      font-size: 12px;
+      text-align: right;
+    }
+  }
+}
+
+.trade-tooltip-container {
+
+  .trade-tooltip {
+    padding: 20px;
+
+    .header {
+      font-size: 20px;
+      font-family: Baskerville;
+      text-align: center;
+    }
+
+    .close {
+      ion-col {
+        text-align: center;
+        font-size: 10px;
+        color: #D6980E;
+        text-transform: uppercase;
+      }
+    }
+
+    .bullet {
+      margin-top: 20px;
+
+      .label {
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .value {
+        font-size: 12px;
+
+        h1 {
+          margin: 0;
+          padding: 0;
+          margin-bottom: 8px;
+          font-size: 12px;
+          font-weight: 700;
+          text-transform: uppercase;
+        }
+
+        a {
+          color: black;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .table-container {
+
+      table {
+        font-size: 12px;
+        width: 100%;
+        margin-top: 10px;
+
+        td,
+        th {
+          text-align: center;
+          border: 1px solid black;
+          width: 50%;
+          padding: 10px;
+        }
+
+        th {
+          font-weight: 400;
+          text-transform: uppercase;
+        }
+
+        td {
+        }
+      }
     }
   }
 }
