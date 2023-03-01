@@ -8,7 +8,7 @@ import {
   IonButton,
   useIonActionSheet,
 } from '@ionic/react';
-import './NoboExploreHeader.scss';
+import './ExploreHeader.scss';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
