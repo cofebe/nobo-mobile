@@ -115,6 +115,11 @@ const ReviewList: React.FC<ReviewListProps> = ({reviewData}) => {
           </IonRow>
         </IonItem>
       ))}
+      {reviewData.length === 0 && (
+        <div style={{backgroundColor: '#fefcf6', height: '10vh', width: '100%', textAlign: 'center'}}>
+          <h3 style={{backgroundColor: '#fefcf6', color: 'black'}}>User has not received any reviews.</h3>
+        </div>
+      )}
       </div>
     );
 };

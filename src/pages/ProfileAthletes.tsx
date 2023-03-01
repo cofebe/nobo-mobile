@@ -67,7 +67,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
   const [targetSection, setTargetSection] = useState('Feed');
 
   const [profileItems, setProfileItems] = useState<string[]>(['assets/images/test/product.jpeg', 'assets/images/test/product.jpeg', 'assets/images/test/product.jpeg', 'assets/images/test/product.jpeg']);
-  const [reviewData, setReviewData] = useState<any[]>(['1', '2', '3']);
+  const [reviewData, setReviewData] = useState<any[]>([]);
 
   const [arrayOfSocials, setArrayOfSocials] = useState<string[]>([]);
 
@@ -140,7 +140,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
   }, [userSubscribed]);
 
   var options = {
-    subject: 'Share Athlete Profile',
+    subject: 'Share Profile',
     files: ['', ''],
     url: profileURL,
     chooserTitle: 'Pick an app',
@@ -177,8 +177,6 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
       buttons: [
         {
           text: "It's spam",
-          // role: 'destructive',
-          // icon: 'warning',
           data: {
             action: () => {
               reportUser("It's spam");
@@ -187,8 +185,6 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         },
         {
           text: 'Nude or sexual activity',
-          // role: 'destructive',
-          // icon: 'warning',
           data: {
             action: () => {
               reportUser('Nude or sexual activity');
@@ -197,8 +193,6 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         },
         {
           text: 'Hate speech or symbols',
-          // role: 'destructive',
-          // icon: 'warning',
           data: {
             action: () => {
               reportUser('Hate speech or symbols');
@@ -207,8 +201,6 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         },
         {
           text: 'False Information',
-          // role: 'destructive',
-          // icon: 'warning',
           data: {
             action: () => {
               reportUser('False Information');
@@ -217,32 +209,26 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         },
         {
           text: "I just don't like it",
-          // role: 'destructive',
-          // icon: 'warning',
           data: {
             action: () => {
               reportUser("I just don't like it");
-            }, // noop
+            },
           },
         },
         {
           text: 'Bullying or harassment',
-          // role: 'destructive',
-          // icon: 'warning',
           data: {
             action: () => {
               reportUser('Bullying or harassment');
-            }, // noop
+            },
           },
         },
         {
           text: 'Scam or fraud',
-          // role: 'destructive',
-          // icon: 'warning',
           data: {
             action: () => {
               reportUser('Scam or fraud');
-            }, // noop
+            },
           },
         },
         {
@@ -254,7 +240,6 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         },
       ],
       onDidDismiss: ({ detail }) => {
-        // console.log('showActionSheet:detail', detail);
         const action = detail.data?.action;
         if (typeof action === 'function') {
           action();
@@ -340,22 +325,24 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
     let userIdStr: any = addressBarPathName.substring(
       addressBarPathName.lastIndexOf('/') + 1
     );
+    console.log("loadProfile: ", userIdStr)
     if (isNaN(userIdStr)) {
       userIdStr = userIdStr.substring(userIdStr.lastIndexOf('-') + 1);
+      console.log("loadProfile after: ", userIdStr)
     }
-    userId = parseInt(userIdStr);
+    userId = userIdStr;
     console.log('View User Profile: ', userId);
     console.log('myProfile value: ', profileAthlete.myProfile);
 
-    if (
-      profileAthlete.myProfile ||
-      userId < 1 ||
-      isNaN(userId) ||
-      userId === undefined
-    ) {
-      console.log('myProfile : ', myUserId);
-      userId = myUserId;
-    }
+    // if (
+    //   profileAthlete.myProfile ||
+    //   userId < 1 ||
+    //   isNaN(userId) ||
+    //   userId === undefined
+    // ) {
+    //   console.log('myProfile : ', myUserId);
+    //   userId = myUserId;
+    // }
 
     setUserId(userId);
     //updateActionMenu();
@@ -388,7 +375,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
     //   console.log('Userid not set: ', id);
     //   return;
     // }
-    // console.log('GetProfile: ', id);
+    console.log('GetProfile: ', id);
 
     presentLoading(loadingOptions);
     userService

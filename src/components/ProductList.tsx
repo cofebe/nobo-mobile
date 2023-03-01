@@ -67,9 +67,9 @@ const ProductList: React.FC<ProductListProps> = ({type, images}) => {
               {/*Size <br/>7*/}
             </p>
             <div className="image-grid-bottom-container">
-              <div style={{ fontWeight: 'bold' }}>{product.brand}</div>
-              <div style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '20ch'}}>{product.name}</div>
-              <div>Est. $2,700 - $3,300</div>
+              <div style={{ fontWeight: 'bold', letterSpacing: '.5px' }}>{product.brand}</div>
+              <div style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '20ch', fontWeight: '700', letterSpacing: '.5px'}}>{product.name}</div>
+              <div><span style={{color: '#ACACAC', paddingRight: '1ch' }}>Cost</span> ${product.price}.00</div>
             </div>
           </div>
         ))}
@@ -108,9 +108,9 @@ const ProductList: React.FC<ProductListProps> = ({type, images}) => {
               {/*Size <br/>7*/}
             </p>
             <div className="image-grid-bottom-container">
-              <div style={{ fontWeight: 'bold' }}>{product.brand}</div>
-              <div style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '20ch'}}>{product.name}</div>
-              <div>Cost ${product.price}.00</div>
+              <div style={{ fontWeight: 'bold', letterSpacing: '.5px' }}>{product.brand}</div>
+              <div style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '20ch', fontWeight: '700', letterSpacing: '.5px'}}>{product.name}</div>
+              <div><span style={{color: '#ACACAC', paddingRight: '1ch' }}>Cost</span> ${product.price}.00</div>
             </div>
           </div>
         ))}

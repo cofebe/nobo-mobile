@@ -15,7 +15,7 @@ export class UserService extends BaseService {
 
   // https://thenobo.com/api/users/61e9e3cde9d5a06abb991653/profile
   async getProfile(userId: any) {
-    userId = "61e9e3cde9d5a06abb991653";
+    // userId = "61e9e3cde9d5a06abb991653";
 
     return await super.fetch('GET', `api/users/${userId}/profile`);
   }
