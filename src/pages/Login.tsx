@@ -9,7 +9,7 @@ import {
 } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserService } from '../services/UserService';
+import { UserService, User } from '../services/UserService';
 
 import './Login.scss';
 
@@ -26,18 +26,12 @@ const Login: React.FC = () => {
 
   const login = () => {
     userService
-      .login({ email, password })
-      .then((res: any) => res.json())
-      .then((data: any) => {
-        if (data.error) {
-          console.log('login error', data.error);
-          setError(true);
-        } else {
-          history.push('/');
-          setTimeout(() => {
-            history.push('/home/explore');
-          }, 3000);
-        }
+      .login(email, password)
+      .then((data: User) => {
+        history.push('/');
+        setTimeout(() => {
+          history.push('/home/explore');
+        }, 3000);
       })
       .catch((err: any) => {
         console.log('login error', err);

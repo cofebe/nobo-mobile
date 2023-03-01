@@ -33,17 +33,17 @@ const Explore: React.FC = () => {
     }
   }, [sectionName, sectionCategory]);
 
-  const getProducts = (group: string, action: string, onSale: boolean) => {
+  function getProducts(group: string, action: string, onSale: boolean) {
     productService
       .getProducts(group, action, onSale)
       .then((products) => {
-        console.log('products', products.docs);
+        //console.log('products', products.docs);
         setProducts(products.docs);
       })
       .catch((error) => {
         console.log('error', error);
       });
-  };
+  }
 
   const getSectionName = (sectionName: string) => {
     console.log('sectionName', sectionName);

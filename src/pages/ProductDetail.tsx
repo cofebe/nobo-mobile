@@ -296,6 +296,7 @@ const ProductDetail: React.FC = () => {
               e.preventDefault();
               e.stopPropagation();
               console.log('go to profile', product.vendor._id);
+              history.push(`/home/profile/${product.vendor._id}`);
             }}>
               <IonCol size="1">
                 <div className="avatar" style={{ backgroundImage: getImageUrl(product.vendor.avatar) }}></div>

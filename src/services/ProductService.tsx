@@ -1,12 +1,9 @@
 import { BaseService } from './BaseService';
-import { environment } from '../environments/environment';
-
-const API_URL = environment.serverUrl + '/api/products';
 
 export class ProductService extends BaseService {
 
   async getProducts(group: string, action: string, onSale: boolean) {
-    let params;
+    let params: URLSearchParams;
     if (action === 'explore') {
       params = new URLSearchParams({
         filter: JSON.stringify({
@@ -32,22 +29,27 @@ export class ProductService extends BaseService {
       });
     }
 
-    const response = await fetch(API_URL + '/all?' + params, {
-      method: 'GET',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    console.log('getProducts res: ', response);
-    return response.json();
+    const response = await super.fetch('GET', `/api/products/all?${params}`);
+    //console.log('getProducts res: ', response);
+    const json = await response.json();
+    return json;
   }
 
   async getProduct(productId: string): Promise<ProductResponse> {
-    return await super.fetch('GET', `/api/products/${productId}`)
-    .then(res => res.json());
+    const res = await super.fetch('GET', `/api/products/${productId}`)
+    const json: ProductResponse = await res.json();
+    return json;
   }
+
+  async addToCart(productId: string): Promise<boolean> {
+    const res = await super.fetch('POST', '/api/orders/cart', { id: productId });
+    const json: SuccessResponse = await res.json();
+    return json.success;
+  }
+}
+
+export interface SuccessResponse {
+  success: boolean;
 }
 
 export interface ProductResponse {
@@ -56,34 +58,35 @@ export interface ProductResponse {
 }
 
 export interface Product {
-  tradeOffers: ProductTradeOffers;
-  attributes: ProductAttribute[];
-  images: Image[];
-  tags: string[];
-  sold: boolean;
-  active: boolean;
-  rejected: boolean;
-  receivedByNobo: boolean;
-  returnRequested: boolean;
-  returnBy: string;
-  giveaway: string;
   _id: string;
-  group: string;
-  vendor: ProductVendor;
   action: string;
-  name: string;
+  active: boolean;
+  attributes: ProductAttribute[];
   brand: string;
-  description: string;
-  receipt: string;
-  price: number;
-  retailPrice: number;
   category: ProductCategory;
+  createdAt: string;
+  description: string;
+  giveaway: string;
+  group: string;
+  image: string;
+  images: Image[];
+  link: string;
+  name: string;
+  onSale: boolean;
   parentCategory: ProductCategory;
   postentialTradeItems: string[];
-  createdAt: string;
+  price: number;
+  receipt: string;
+  receivedByNobo: boolean;
+  rejected: boolean;
+  retailPrice: number;
+  returnBy: string;
+  returnRequested: boolean;
+  sold: boolean;
+  tags: string[];
+  tradeOffers: ProductTradeOffers;
   updatedAt: string;
-  image: string;
-  link: string;
+  vendor: ProductVendor;
 }
 
 export interface ProductTradeOffers {

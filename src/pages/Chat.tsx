@@ -168,7 +168,7 @@ const Chat: React.FC = () => {
   function loadUsers() {
     return new Promise((resolve, reject) => {
       console.log('Chat.loadUsers()', convoId, nextToken);
-      const myUserId = authService.getUserID();
+      const myUserId = authService.getUserId();
       messagingService.getConversation(convoId)
         .then(convo => {
           //console.log('convo', convo);
