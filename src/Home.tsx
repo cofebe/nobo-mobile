@@ -16,7 +16,7 @@ import PostDetailLikes from './pages/PostDetailLikes';
 import PostStats from './pages/PostStats';
 import Roles from './pages/Roles';
 import './pages/URP.css';
-import ProfileAthletes from './pages/ProfileAthletes';
+import ProfilePage from './pages/Profile';
 import Explore from './pages/Explore';
 import PostCreate from './pages/PostCreate';
 import Connections from './pages/Connections';
@@ -220,10 +220,10 @@ const Home: React.FC = () => {
             <SignUpAthlete editMode={true} />
           </Route>
           <Route path="/home/my-profile" exact={true}>
-            <ProfileAthletes myProfile={true} />
+            <ProfilePage myProfile={true} />
           </Route>
           <Route path="/home/profile/:id" exact={true}>
-            <ProfileAthletes myProfile={false} />
+            <ProfilePage myProfile={false} />
           </Route>
           <Route path="/home/roles">
             <Roles />

@@ -28,7 +28,7 @@ import { ReportService } from '../services/ReportService';
 import { SubscriptionService } from '../services/SubscriptionService';
 import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
 
-import './ProfileAthletes.scss';
+import './Profile.scss';
 import { AcademicData } from '../components/ProfileSections/AcademicsSection';
 //import ProfileFollowButton from '../components/ProfileFollowButton';
 import ProductList from '../components/ProductList';
@@ -39,11 +39,11 @@ import { chevronBackOutline } from 'ionicons/icons';
 import { loadingOptions } from '../util';
 import { Profile } from '../data/profile';
 
-interface ProfileAthleteProps {
+interface ProfileProps {
   myProfile: boolean;
 }
 
-const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
+const ProfilePage: React.FC<ProfileProps> = (profile) => {
   const history = useHistory();
   const userService = new UserService();
   const reportService = new ReportService();
@@ -91,7 +91,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
 
       if (
         isPlatform('ios') &&
-        profileAthlete.myProfile
+        profile.myProfile
       ) {
         subscriptionService = new SubscriptionService(new InAppPurchase2());
         subscriptionService.register();
@@ -116,7 +116,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
   });
 
   useEffect(() => {
-    if (userSubscribed && profileAthlete.myProfile) {
+    if (userSubscribed && profile.myProfile) {
       setSlides([
         { name: 'Highlights', section: '/option', state: 'Highlights' },
         { name: 'Stats', section: '/option', state: 'Stats' },
@@ -287,8 +287,8 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
         return (
           b.who === 'all' ||
           !b.who ||
-          (b.who === 'me' && profileAthlete.myProfile) ||
-          (b.who === 'notme' && !profileAthlete.myProfile)
+          (b.who === 'me' && profile.myProfile) ||
+          (b.who === 'notme' && !profile.myProfile)
         );
       }),
       onDidDismiss: ({ detail }) => {
@@ -332,10 +332,10 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
     }
     userId = userIdStr;
     console.log('View User Profile: ', userId);
-    console.log('myProfile value: ', profileAthlete.myProfile);
+    console.log('myProfile value: ', profile.myProfile);
 
     // if (
-    //   profileAthlete.myProfile ||
+    //   profile.myProfile ||
     //   userId < 1 ||
     //   isNaN(userId) ||
     //   userId === undefined
@@ -391,7 +391,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
           console.log("Set NOBO Profile: ", data['user'])
           setNoboProfile(data['user'])
 
-          if (!profileAthlete.myProfile) {
+          if (!profile.myProfile) {
             let nextURL = `https://www.noboplus.com/home/athlete-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
             if (window.location.origin.includes('localhost')) {
               nextURL = `http://localhost:3000/home/athlete-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
@@ -412,7 +412,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
   return (
     <IonPage className="home-page-athlete-profile" style={{ backgroundColor: '#F9FBFB' }}>
     <IonContent className="athlete-profile-content" scrollY={true}>
-      {!profileAthlete.myProfile && (
+      {!profile.myProfile && (
         <IonButtons
           style={{
             position: "absolute",
@@ -455,7 +455,7 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
           className="profile-banner-container"
           style={{ backgroundImage: `url(${noboProfile.profileBg})` }}
         ></div>
-        {profileAthlete.myProfile && (
+        {profile.myProfile && (
           <IonButton
             onClick={(e) => {
               e.preventDefault();
@@ -522,4 +522,4 @@ const ProfileAthletes: React.FC<ProfileAthleteProps> = (profileAthlete) => {
   );
 };
 
-export default ProfileAthletes;
+export default ProfilePage;
