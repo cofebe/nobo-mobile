@@ -1,5 +1,8 @@
 import { BaseService } from './BaseService';
 import { environment } from '../environments/environment';
+import { AuthService } from './AuthService';
+import { User, LoginResponse } from '../models';
+
 const API_URL = environment.serverUrl + '/api';
 
 export class UserService extends BaseService {
@@ -13,11 +16,22 @@ export class UserService extends BaseService {
     return user;
   }
 
-  // https://thenobo.com/api/users/61e9e3cde9d5a06abb991653/profile
-  async getProfile(userId: any) {
-    // userId = "61e9e3cde9d5a06abb991653";
+  async getMe(): Promise<User> {
+    const res = await super.fetch('GET', '/api/users/me');
+    const json: LoginResponse = await res.json();
 
-    return await super.fetch('GET', `api/users/${userId}/profile`);
+    if (json.token) {
+      const authService = new AuthService();
+      authService.setUserToken(json.token);
+      authService.setUserId(json.user._id);
+      authService.setUserDisplayName(json.user.displayName);
+    }
+
+    return json.user;
+  }
+
+  async getProfile(userId: any) {
+    return await super.fetch('GET', `/api/users/${userId}/profile`);
   }
 
   async getProducts(userId: any, productType: string) {
@@ -229,7 +243,7 @@ export class UserService extends BaseService {
     return response;
   }
 
-  async deleteAccount(userID: number, data = {}) {
+  async deleteAccount(userID: string|number, data = {}) {
     const response = await fetch(API_URL + `/delete/${userID}`, {
       method: 'POST',
       cache: 'no-cache',
@@ -289,21 +303,24 @@ export class UserService extends BaseService {
     return await super.fetch('GET', `/user/${userId}/insights?age=${age}`);
   }
 
-  async login(data = {}) {
-    const response = await fetch(API_URL + '/users/login', {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+  async login(email: string, password: string): Promise<User> {
+    const res = await super.fetch('POST', '/api/users/login', { email, password });
+    //console.log('res', res);
+    const json: LoginResponse = await res.json();
+    //console.log('json', json);
 
-    if (response.status === 401) {
-      console.log('Unauthorized');
-      throw response;
+    if (res.status === 404) {
+      console.log('404', json.error);
+      throw json.error;
     }
 
-    return response;
+    if (json.token) {
+      const authService = new AuthService();
+      authService.setUserToken(json.token);
+      authService.setUserId(json.user._id);
+      authService.setUserDisplayName(json.user.displayName);
+    }
+
+    return json.user;
   }
 }

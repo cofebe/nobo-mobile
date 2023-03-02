@@ -1,163 +1,167 @@
-.product-detail-page {
-  background-color: white;
+.cart-container {
+  background-color: #FEFCF7;
 
-  ion-list {
-    background-color: white;
+  .cart-header {
+    position: relative;
+
+    .cart-header-toolbar {
+      padding: 0;
+      --background: #FEFCF7;
+
+      .close-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+
+        img {
+          height: 30px;
+          width: 30px;
+        }
+      }
+
+      .title {
+        font-size: 12px;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 35px;
+        text-transform: uppercase;
+      }
+    }
   }
 
-  .product-detail-background {
-    margin: 20px;
-    margin-bottom: 0;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #1A3A35;
-  }
-
-  .feed-header {
-    background-color: #1A3A35;
-    color: white;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position-x: center;
-    height: 90px;
-    background-color: #1a3a35;
-  }
-
-  .home-header {
-    background-color: #1a3a35;
-    height: auto;
-    --opacity-scale: 0 !important;
-  }
-
-  .home-header-toolbar {
-    --background: #1a3a35;
-  }
-
-  .home-content {
-    --background: #1a3a35;
-  }
-
-  .home-toolbar {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    --background: #F9FBFB !important;
-    position: sticky;
-  }
-
-  .home-filter {
-    margin-right: 20px;
-    float: right;
-  }
-  .comments-count {
-    top: 8px;
+  .empty-cart {
+    font-size: 10px;
+    font-weight: 600;
+    color: #707070;
     position: absolute;
-    right: 61px;
-    font-size: .8em;
-    color:#00D6B6;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-transform: uppercase;
   }
 
-  .likes-count {
-    top: 8px;
-    position: absolute;
-    right: 5px;
-    font-size: .8em;
-    color:#00D6B6;
-  }
+  .cart-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 20px;
+    --padding-top: 60px;
+    --background: #FEFCF7;
 
+    .cart-item {
+      background: white;
+      box-shadow: 0px 0px 10px #EDEAE3;
+      border-radius: 5px;
+      display: flex;
+      align-items: flex-start;
+      padding: 16px;
+      margin-bottom: 14px;
 
-  .float-logo {
-    text-align: center;
-  }
+      .product-image-container {
+        margin-right: 8px;
 
-  .item-inner {
-    border-bottom:none;
-  }
+        .product-image {
+          height: 90px;
+          width: 80px;
+          background-color: #d9d9d9;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          border-radius: 5px;
+        }
+      }
 
-  .product-detail-page .list-background {
-    background-color: #F9FBFB;
-  }
+      .product-info-container {
+        flex: 1;
+        position: relative;
 
-  .product-detail-page .floating-button {
-    font-size: 4rem;
-    position: fixed;
-    bottom: 10px;
-    right: calc(10px + var(--ion-safe-area-right, 0px));
-    z-index: 999;
-  }
+        .remove {
+          position: absolute;
+          top: 0;
+          right: 0;
+          text-transform: uppercase;
+          font-size: 10px;
+          color: #ACACAC;
+        }
 
-  /* V2 additions*/
-  .product-detail-page .profile-header-v2 {
-    position: absolute;
-    top: 125px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    padding-left: 68px;
-    background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 79%, rgba(0,0,0,0) 106%);
-  }
+        .brand {
+          font-size: 10px;
+          font-weight: 700;
+        }
 
-  .product-detail-page .feed-name {
-    font-size: 1.4em;
-  }
+        .name {
+          font-size: 10px;
+          font-weight: 600;
+          margin-top: 4px;
+        }
 
-  .product-detail-page .header-stars {
+        .username {
+          font-size: 10px;
+          margin-top: 4px;
 
-  }
+          span {
+            color: #D6980E;
+          }
+        }
 
-  .product-detail-page .location-pin {
-    margin-left: -35px;
-  }
-
-  .product-detail-page .location-pin div {
-    color: #3c91e5;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    display: inline;
-    margin-top: 0px;
-    padding-left: 7px;
-  }
-
-  .product-detail-page .social-tops svg {
-    margin-left: 5px;
-  }
-
-  .product-detail-page.action-menu {
-    top: 33px;
-    right: 58px;
-  }
-
-  .post-item-detail-header {
-    border-bottom: 1px solid #686363;
-    background-color: white;
-    border-radius: 15px 15px 0 0;
-  }
-
-  .post-item-detail-header .feed-item {
-    margin-top: 0;
-    margin-bottom: 0;
-    border-radius: 15px;
-    background-color: white;
-    box-shadow: none;
-  }
-
-  .post-item-detail-header .feed-bottom {
-    margin-top: -31px;
-  }
-
-  .feed-bottom-icons {
-    border-top: none;
-  }
-
-  .feed-item-item-content {
-    & > ion-col:first-child {
-      padding-left: 0;
-
-      .feed-list-feed-image {
-        margin-left: 0;
+        .price {
+          font-size: 20px;
+          font-weight: 600;
+          margin-top: 24px;
+        }
       }
     }
 
-    .feed-content {
-      padding-left: 0;
+    .order-summary {
+      font-size: 12px;
+
+      .title {
+          text-transform: uppercase;
+          font-weight: 600;
+          color: #707070;
+          border-bottom: 1px solid black;
+          padding-bottom: 8px;
+      }
+
+      .summary-info {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+
+        .label {
+          text-transform: uppercase;
+          font-weight: 700;
+        }
+
+        .value {
+          font-weight: 700;
+          text-align: right;
+        }
+      }
+    }
+  }
+
+  .footer {
+    margin-top: 30px;
+
+    .promo-code-container {
+
+      ion-input {
+        border: 1px solid black;
+        font-size: 10px;
+        --padding-start: 16px;
+        --padding-end: 16px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+
+        ::placeholder {
+          color: #ACACAC;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    .button-container {
+      margin-top: 20px;
     }
   }
 }

@@ -30,7 +30,7 @@ const Settings: React.FC = () => {
   const authService = new AuthService();
   const [present] = useIonActionSheet();
 
-  const userId = authService.getUserID();
+  const userId = authService.getUserId();
 
   function emailSupport(subject: string) {
     window.location.href = `mailto:support@noboplus.com?subject=${subject}`;
@@ -84,7 +84,7 @@ const Settings: React.FC = () => {
         if (detail.data.action == 'deleteAccount') {
           // emailSupport('Delete Account Request');
           userService
-            .deleteAccount(userId, { user_id: userId })
+            .deleteAccount(userId || '', { user_id: userId })
             .then((res) => {
               res.json();
               console.log(res);

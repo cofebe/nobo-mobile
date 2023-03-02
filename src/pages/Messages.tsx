@@ -102,7 +102,7 @@ const Messages: React.FC = () => {
     setIsLoading(isLoading);
     presentLoading(loadingOptions);
     try {
-      const myUserId = authService.getUserID();
+      const myUserId = authService.getUserId();
       const convos = await messagingService.getConversations();
       console.log('convos', convos);
 

@@ -10,7 +10,9 @@ import {
 } from '@ionic/react';
 import './ExploreHeader.scss';
 import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { shoppingCartStore } from '../cart-store';
+import { ShoppingCart } from '../models';
 
 interface NoboExploreHeaderProps {
   sectionNameCallback: (sectionName: string) => void;
@@ -26,6 +28,17 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
 
   const [activeButton, setActiveButton] = useState<string>('explore');
   const [activeCategory, setActiveCategory] = useState<string>('WOMEN');
+  const [cart, setCart] = useState<ShoppingCart>(shoppingCartStore.initialState);
+
+  useEffect(() => {
+    const subscription = shoppingCartStore.subscribe((cart: ShoppingCart) => {
+      setCart(cart);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   const handleSectionButtonClick = (section: string) => {
     setActiveButton(section);
@@ -81,15 +94,15 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
   };
 
   return (
-    <IonHeader className="home-header">
-      <IonToolbar className="home-header-toolbar">
+    <IonHeader className="explore-header">
+      <IonToolbar className="explore-header-toolbar">
         <IonGrid>
           <IonRow class="ion-align-items-center">
             <IonCol size="3">
               <div>
                 <img
                   // className="splash-logo"
-                  height={40}
+                  height={24}
                   src="assets/images/account-settings.svg"
                   alt="logo"
                 />
@@ -116,12 +129,15 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
                   history.push('/cart');
                 }}
               >
-                <div>
+                <div className="cart-container">
                   <img
-                    height={40}
+                    height={24}
                     src="assets/images/shopping-cart.svg"
                     alt="logo"
                   />
+                  {cart.products.length ? (
+                    <div className="dot"></div>
+                  ) : ''}
                 </div>
               </div>
             </IonCol>

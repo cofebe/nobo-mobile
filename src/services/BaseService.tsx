@@ -1,13 +1,17 @@
 import { environment } from '../environments/environment';
-import { Auth } from 'aws-amplify';
+import { AuthService } from './AuthService';
 
 export class BaseService {
-  getHeaders(others: { [key: string]: string } | null | undefined): { [key: string]: string } {
-    const storage: any = window.localStorage.getItem('persistedState');
-    const user = (storage ? JSON.parse(storage) : undefined);
+  authService: AuthService = new AuthService();
 
+  getHeaders(others: { [key: string]: string } | null | undefined): { [key: string]: string } {
     const headers: { [key: string]: string } = {
     };
+
+    const token = this.authService.getUserToken();
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
+    }
 
     return Object.assign(headers, others || {});
   }
@@ -24,11 +28,6 @@ export class BaseService {
         body = JSON.stringify(data);
       }
     }
-
-    const storage: any = window.localStorage.getItem('persistedState');
-    const user = (storage ? JSON.parse(storage) : undefined);
-
-    headers['Authorization'] =  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y1NzExZDQ4ZmNmYmQxZTY2NWZkZjMiLCJlbWFpbCI6ImNocmlzQGNvZmViZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE2Nzc3ODkzMDQsInJlZnJlc2giOjE2NzcxODU0MDQsImlhdCI6MTY3NzE4NDUwNH0.aqRaKJwNgQCrpDmAyBhFB21L78QgANimoFOiCzGsxKE";
 
     return await fetch(url, {
       method,

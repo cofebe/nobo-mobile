@@ -60,7 +60,7 @@ export class MessagingService extends BaseService {
   }
 
   async getUserConversation(convoId: string) {
-    const userId = this.authService.getUserID();
+    const userId = this.authService.getUserId();
     const gql = `
       query ListUserConversations($filter: ModelUserConversationFilterInput) {
         listUserConversations(filter: $filter) {
@@ -89,7 +89,7 @@ export class MessagingService extends BaseService {
   }
 
   async getOrCreateConversation(userIds: number | number[]) {
-    const myUserId = this.authService.getUserID().toString();
+    const myUserId = this.authService.getUserId() || '';
     const theirUserIds = (Array.isArray(userIds) ? userIds : [userIds]).map(id => id.toString());
     const allUserIds = theirUserIds.concat([myUserId]);
     //console.log('myUserId', myUserId, 'theirUserIds', theirUserIds, 'allUserIds', allUserIds);
@@ -193,7 +193,7 @@ export class MessagingService extends BaseService {
     console.log('MessagingService.createMessage', convoId, text, fileUrl, fileMimeType);
 
     const createdAt = Math.floor(new Date().getTime() / 1000);
-    const userId = this.authService.getUserID();
+    const userId = this.authService.getUserId();
 
     const createMessageInput = {
       id: new Date().getTime().toString(),
@@ -236,7 +236,7 @@ export class MessagingService extends BaseService {
       lastMessageText: text.trim(),
       lastMessageFileUrl: fileUrl,
       lastMessageFileMimeType: fileMimeType,
-      lastMessageUserId: userId.toString(),
+      lastMessageUserId: userId || '',
     };
     //console.log('updateConversationGQL', updateConversationGQL, 'updateConversationInput', updateConversationInput);
 
@@ -302,7 +302,7 @@ export class MessagingService extends BaseService {
   }
 
   async getConversations() {
-    const userId = this.authService.getUserID();
+    const userId = this.authService.getUserId();
     const gql = `
       query ListUserConversations($filter: ModelUserConversationFilterInput) {
         listUserConversations(filter: $filter) {
@@ -359,7 +359,7 @@ export class MessagingService extends BaseService {
   }
 
   getConversationCreates() {
-    const userId = this.authService.getUserID();
+    const userId = this.authService.getUserId();
     const gql = `
       subscription {
         onCreateConversation(filter: { userIds: { contains: "${userId}" } }) {

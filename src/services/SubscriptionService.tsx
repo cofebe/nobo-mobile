@@ -165,7 +165,7 @@ export class SubscriptionService {
       //     );
       //   });
 
-      const myUserId = this.authService.getUserID();
+      const myUserId = this.authService.getUserId() || '';
       console.log('User ID: ', myUserId);
 
       this.store.applicationUsername = myUserId;
