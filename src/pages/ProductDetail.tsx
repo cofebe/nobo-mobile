@@ -15,11 +15,11 @@ import './ProductDetail.scss';
 import { caretUpOutline, caretDownOutline } from 'ionicons/icons';
 import { ProductService } from '../services/ProductService';
 import { AuthService } from '../services/AuthService';
-import { ProductResponse, Product, ShoppingCart } from '../models';
+import { ProductResponse, Product } from '../models';
 //import ImageZoom from '../components/ImageZoom';
 import Button from '../components/Button';
 import { formatPrice, getImageUrl } from '../utils';
-import { shoppingCartStore } from '../cart-store';
+import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 
 const ProductDetail: React.FC = () => {
   const params: any = useParams();
@@ -36,14 +36,14 @@ const ProductDetail: React.FC = () => {
   const [imageIndex, setImageIndex] = useState<number>(0);
   const [showPrevious, setShowPrevious] = useState<boolean>(false);
   const [showNext, setShowNext] = useState<boolean>(false);
-  const [cart, setCart] = useState<ShoppingCart>(shoppingCartStore.initialState);
+  const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
 
   const tooltipModal = useRef<HTMLIonModalElement>(null);
 
   //console.log('ProductDetail:', productId);
 
   useEffect(() => {
-    const subscription = shoppingCartStore.subscribe((cart: ShoppingCart) => {
+    const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
       setCart(cart);
     });
 

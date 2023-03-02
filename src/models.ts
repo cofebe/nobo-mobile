@@ -157,3 +157,24 @@ export interface TaxShippingResponse {
   salesTax: number;
   shipping: number;
 }
+
+export interface PaymentMethodsResponse {
+  customer: any; // not used; placeholder
+  cards: PaymentMethod[];
+}
+
+export interface PaymentMethod {
+  id: string;
+  address_line1: string;
+  address_line2: string;
+  address_city: string;
+  address_state: string;
+  address_zip: string;
+  address_country: string;
+  brand: string;
+  exp_month: number;
+  exp_year: number;
+  last4: string;
+  name: string;
+  // other unused properties not included
+}

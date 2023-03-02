@@ -14,13 +14,12 @@ import {
 import './ShoppingCart.scss';
 import Button from '../components/Button';
 import {
-  ShoppingCart,
-  Product,
   Address,
+  Product,
   User,
   TaxShippingResponse,
 } from '../models';
-import { shoppingCartStore } from '../cart-store';
+import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import { ProductService } from '../services/ProductService';
 import { UserService } from '../services/UserService';
 import { formatPrice, getImageUrl } from '../utils';
@@ -29,20 +28,13 @@ const ShoppingCartPage: React.FC = () => {
   const history = useHistory();
   const productService = new ProductService();
   const userService = new UserService();
-  let [cart, setCart] = useState<Product[]>([]);
-  const [subtotal, setSubtotal] = useState<number>(0);
+  const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
   const [promoCode, setPromoCode] = useState<string>('');
-  const [shipping, setShipping] = useState<number>(0);
-  const [tax, setTax] = useState<number>(0);
-  const [total, setTotal] = useState<number>(0);
-  let [shippingAddresses, setShippingAddresses] = useState<Address[]>([]);
+  const [shippingAddress, setShippingAddress] = useState<Address>();
 
   useEffect(() => {
-    const subscription = shoppingCartStore.subscribe((shoppingCart: ShoppingCart) => {
-      cart = shoppingCart.products;
+    const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
       setCart(cart);
-
-      updateTotals();
     });
 
     return () => {
@@ -61,34 +53,38 @@ const ShoppingCartPage: React.FC = () => {
     userService
       .getMe()
       .then((user: User) => {
-        shippingAddresses = user.shippingAddress;
-        setShippingAddresses(shippingAddresses);
-        updateTotals();
+        const addr = user.shippingAddress.find(a => a.default);
+        setShippingAddress(addr);
+        if (addr) {
+          productService
+            .getTaxAndShipping(addr)
+            .then((res: TaxShippingResponse) => {
+              shoppingCartStore.beginUpdate();
+              shoppingCartStore.setShippingAddress(addr);
+              shoppingCartStore.setTax(res.salesTax);
+              shoppingCartStore.setShipping(res.shipping);
+              shoppingCartStore.endUpdate();
+            });
+        }
       });
   });
-
-  function updateTotals() {
-    const subtotal = cart.reduce((total, curr) => total + curr.price, 0);
-    setSubtotal(subtotal);
-    setTotal(total);
-
-    const addr = shippingAddresses.find(a => a.default);
-    if (addr) {
-      productService
-        .getTaxAndShipping(addr)
-        .then((res: TaxShippingResponse) => {
-          setTax(res.salesTax);
-          setShipping(res.shipping);
-          setTotal(subtotal + res.salesTax + res.shipping);
-        });
-    }
-  }
 
   function remove(product: Product) {
     productService.addToCart(product._id)
       .then((success: boolean) => {
         if (success) {
           shoppingCartStore.removeProduct(product._id);
+
+          if (shippingAddress) {
+            productService
+              .getTaxAndShipping(shippingAddress)
+              .then((res: TaxShippingResponse) => {
+                shoppingCartStore.beginUpdate();
+                shoppingCartStore.setTax(res.salesTax);
+                shoppingCartStore.setShipping(res.shipping);
+                shoppingCartStore.endUpdate();
+              });
+          }
         } else {
           window.alert('Unable to remove item from cart!');
         }
@@ -122,9 +118,9 @@ const ShoppingCartPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="cart-content" scrollY={false}>
-        {cart.length ? (
+        {cart.products.length ? (
           <div>
-            {cart.map(product => (
+            {cart.products.map(product => (
               <div className="cart-item" key={product._id}>
                 <div className="product-image-container">
                   <div className="product-image" style={{ backgroundImage: getImageUrl(product.images[0].url) }}></div>
@@ -148,19 +144,19 @@ const ShoppingCartPage: React.FC = () => {
               <div className="title">Order Summary</div>
               <div className="summary-info">
                 <div className="label">Subtotal</div>
-                <div className="value">{formatPrice(subtotal)}</div>
+                <div className="value">{formatPrice(cart.subtotal)}</div>
               </div>
               <div className="summary-info">
                 <div className="label">Shipping</div>
-                <div className="value">{formatPrice(shipping)}</div>
+                <div className="value">{formatPrice(cart.shipping)}</div>
               </div>
               <div className="summary-info">
                 <div className="label">Sales Tax</div>
-                <div className="value">{formatPrice(tax)}</div>
+                <div className="value">{formatPrice(cart.tax)}</div>
               </div>
               <div className="summary-info total">
                 <div className="label">Your Total</div>
-                <div className="value">{formatPrice(total)}</div>
+                <div className="value">{formatPrice(cart.total)}</div>
               </div>
             </div>
             <div className="footer">
