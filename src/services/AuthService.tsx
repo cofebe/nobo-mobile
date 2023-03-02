@@ -4,6 +4,7 @@ const API_URL = environment.serverUrl + '/auth';
 const API_URL_USER = environment.serverUrl + '/user';
 
 const USER_ID_KEY = 'appUserId';
+const USER_NAME_KEY = 'appUsername';
 const USER_TOKEN_KEY = 'appUserToken';
 
 export class AuthService {
@@ -15,6 +16,15 @@ export class AuthService {
 
   setUserId(userId: string) {
     window.localStorage[USER_ID_KEY] = userId;
+  }
+
+  getUserDisplayName() {
+    const storage = window.localStorage.getItem(USER_NAME_KEY);
+    return storage;
+  }
+
+  setUserDisplayName(username: string) {
+    window.localStorage[USER_NAME_KEY] = username;
   }
 
   getUserToken() {
@@ -49,6 +59,9 @@ export class AuthService {
     try {
       if (window.localStorage.getItem(USER_ID_KEY)) {
         window.localStorage.removeItem(USER_ID_KEY);
+      }
+      if (window.localStorage.getItem(USER_NAME_KEY)) {
+        window.localStorage.removeItem(USER_NAME_KEY);
       }
       if (window.localStorage.getItem(USER_TOKEN_KEY)) {
         window.localStorage.removeItem(USER_TOKEN_KEY);

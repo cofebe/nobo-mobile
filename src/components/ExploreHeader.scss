@@ -1,4 +1,4 @@
-.home-header {
+.explore-header {
   background-color: #fefcf7;
   box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.23);
   height: auto;
@@ -7,11 +7,25 @@
   padding-bottom: 0.5rem;
   --opacity-scale: 0 !important;
 
-  .home-header-toolbar {
+  .cart-container {
+    position: relative;
+
+    .dot {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      height: 8px;
+      width: 8px;
+      border-radius: 4px;
+      background-color: #D6980E;
+    }
+  }
+
+  .explore-header-toolbar {
     --background: #fefcf7;
   }
 
-  .home-page .nobo-float-logo {
+  .explore-page .nobo-float-logo {
     float: left;
   }
 
@@ -26,7 +40,7 @@
   }
 
   @media (min-width: 900px) {
-    .home-header {
+    .explore-header {
       display: none;
     }
   }

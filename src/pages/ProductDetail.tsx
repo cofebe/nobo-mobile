@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import {
   IonModal,
@@ -13,14 +13,18 @@ import {
 } from '@ionic/react';
 import './ProductDetail.scss';
 import { caretUpOutline, caretDownOutline } from 'ionicons/icons';
-import { ProductService, ProductResponse, Product } from '../services/ProductService';
+import { ProductService } from '../services/ProductService';
+import { AuthService } from '../services/AuthService';
+import { ProductResponse, Product, ShoppingCart } from '../models';
 //import ImageZoom from '../components/ImageZoom';
 import Button from '../components/Button';
-import { formatPrice } from '../utils';
+import { formatPrice, getImageUrl } from '../utils';
+import { shoppingCartStore } from '../cart-store';
 
 const ProductDetail: React.FC = () => {
   const params: any = useParams();
   const productService = new ProductService();
+  const authService = new AuthService();
   const history = useHistory();
   let [productId, setProductId] = useState<string>(params.id);
   const [product, setProduct] = useState<Product>();
@@ -32,20 +36,31 @@ const ProductDetail: React.FC = () => {
   const [imageIndex, setImageIndex] = useState<number>(0);
   const [showPrevious, setShowPrevious] = useState<boolean>(false);
   const [showNext, setShowNext] = useState<boolean>(false);
+  const [cart, setCart] = useState<ShoppingCart>(shoppingCartStore.initialState);
 
-  const modal = useRef<HTMLIonModalElement>(null);
+  const tooltipModal = useRef<HTMLIonModalElement>(null);
 
-  console.log('ProductDetail:', productId);
+  //console.log('ProductDetail:', productId);
+
+  useEffect(() => {
+    const subscription = shoppingCartStore.subscribe((cart: ShoppingCart) => {
+      setCart(cart);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   useIonViewWillEnter(() => {
     productId = params.id;
     setProductId(productId);
 
-    console.log('productService.getProduct():', productId)
+    //console.log('productService.getProduct():', productId)
     productService
       .getProduct(productId)
       .then((data: ProductResponse) => {
-        console.log('getProduct:', data);
+        //console.log('getProduct:', data);
         setProduct(data.product);
         setImageSource(data.product.images[0].url);
         setPrice(data.product.price);
@@ -55,6 +70,13 @@ const ProductDetail: React.FC = () => {
         setImageIndex(0);
         setImage1(data.product.images[0].url);
         setImage2(data.product.images.length > 1 ? data.product.images[1].url : '');
+      });
+
+    productService
+      .getCart()
+      .then((products: Product[]) => {
+        //console.log('getCart', products);
+        shoppingCartStore.setProducts(products);
       });
   });
 
@@ -83,14 +105,6 @@ const ProductDetail: React.FC = () => {
     }
   }
 
-  function getImageUrl(url: string) {
-    if (!url.startsWith('http')) {
-      url = 'https://thenobo.codepilot.com' + url;
-    }
-
-    return `url(${url})`;
-  }
-
   function getAttributeValue(key: string, defaultValue: string = ''): string {
     if (!product) {
       return defaultValue;
@@ -115,10 +129,24 @@ const ProductDetail: React.FC = () => {
 
   function addToCart() {
     console.log('add to cart');
+    if (product) {
+      productService.addToCart(product._id)
+        .then((success: boolean) => {
+          if (success) {
+            shoppingCartStore.addProduct(product);
+          } else {
+            window.alert('Unable to add item to cart!');
+          }
+        });
+    }
   }
 
   function message() {
     console.log('message');
+  }
+
+  function showCart() {
+    history.push('/cart');
   }
 
   return (
@@ -128,14 +156,18 @@ const ProductDetail: React.FC = () => {
         backgroundColor: '#FEFCF7',
         borderBottom: '1px solid black',
       }} className="page-header">
-        <img
-          src="assets/images/shopping-cart.svg"
-          className="cart"
-          alt="cart"
-          onClick={() => {
-            history.push('/cart');
-          }}
-        />
+        <div className="cart">
+          <img
+            src="assets/images/shopping-cart.svg"
+            alt="cart"
+            onClick={() => {
+              showCart();
+            }}
+          />
+          {cart?.products.length ? (
+            <div className="dot"></div>
+          ) : ''}
+        </div>
         <div className="titles">
           <img
             src="assets/images/arrow-left.svg"
@@ -145,7 +177,7 @@ const ProductDetail: React.FC = () => {
               history.goBack()
             }}
           />
-          <div className="username">@NBonner</div>
+          <div className="username">@{authService.getUserDisplayName()}</div>
           <div className="title">Purchase Item</div>
         </div>
       </IonHeader>
@@ -249,11 +281,19 @@ const ProductDetail: React.FC = () => {
                 }} />
               </IonCol>
               <IonCol size="6" className="button-container right">
-                <Button label="Add to Cart" type="primary" onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  addToCart();
-                }} />
+                {cart.products.find(p => p._id === product._id) ? (
+                  <Button label="View Cart" type="secondary" onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    showCart();
+                  }} />
+                ) : (
+                  <Button label="Add to Cart" type="primary" onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    addToCart();
+                  }} />
+                )}
               </IonCol>
               </IonRow>
               <IonRow className="">
@@ -269,7 +309,7 @@ const ProductDetail: React.FC = () => {
           <IonGrid className="trade-tooltip" onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            modal.current?.present();
+            tooltipModal.current?.present();
           }}>
             <IonRow>
               <IonCol>
@@ -431,7 +471,7 @@ const ProductDetail: React.FC = () => {
                 </IonCol>
                 <IonCol size="8" className="value">
                   {getAttributeValues('condition-details').map(c => (
-                    <div>{c}</div>
+                    <div key={c}>{c}</div>
                   ))}
                 </IonCol>
               </IonRow>
@@ -455,28 +495,10 @@ const ProductDetail: React.FC = () => {
               </IonCol>
             </IonRow>
           </IonGrid>
-          {/*
-          <IonRefresher slot="fixed" onIonRefresh={refresh}>
-            <IonRefresherContent></IonRefresherContent>
-          </IonRefresher>
-          <IonList className="product-detail-background">
-            <FeedListItem message={message} zoomAction={(i: number) => {
-              try {
-                if (message && message.photo_url && message.photo_url.length > 0) {
-                  let targetIndex = i;
-                  let zoomImageUrl = (message.photo_url || "").replace('[', '').replace(']', '').split("'").join('').split(',')[targetIndex];
-                  setImageZoom(zoomImageUrl);
-                }
-              } catch (exZoomPicNoExist) {
-              }
-            }} />
-          </IonList>
-          */}
         </IonContent>
-
       ) : ''}
 
-      <IonModal className="trade-tooltip-container" ref={modal} backdropDismiss={false} swipeToClose={false}>
+      <IonModal className="trade-tooltip-container" ref={tooltipModal} backdropDismiss={false} swipeToClose={false}>
         <IonContent>
           <IonGrid className="trade-tooltip">
             <IonRow className="header">
@@ -542,7 +564,7 @@ const ProductDetail: React.FC = () => {
             <IonRow className="close" onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              modal.current?.dismiss();
+              tooltipModal.current?.dismiss();
             }}>
               <IonCol>
                 Close

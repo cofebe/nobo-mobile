@@ -1,6 +1,7 @@
 import { BaseService } from './BaseService';
 import { environment } from '../environments/environment';
 import { AuthService } from './AuthService';
+import { User, LoginResponse } from '../models';
 
 const API_URL = environment.serverUrl + '/api';
 
@@ -23,6 +24,7 @@ export class UserService extends BaseService {
       const authService = new AuthService();
       authService.setUserToken(json.token);
       authService.setUserId(json.user._id);
+      authService.setUserDisplayName(json.user.displayName);
     }
 
     return json.user;
@@ -316,51 +318,9 @@ export class UserService extends BaseService {
       const authService = new AuthService();
       authService.setUserToken(json.token);
       authService.setUserId(json.user._id);
+      authService.setUserDisplayName(json.user.displayName);
     }
 
     return json.user;
   }
 }
-
-export interface LoginResponse {
-  token: string;
-  user: User;
-  error: string;
-}
-
-export interface User {
-  _id: string;
-  avatar: string;
-  blocked: boolean;
-  blurbText: string;
-  cart: ShoppingCart;
-  createdAt: string;
-  displayName: string;
-  email: string;
-  emailVerified: string;
-  experiencePreferences: string;
-  favoriteBrands: string[];
-  favorites: string[];
-  firstName: string;
-  followers: string[];
-  following: string[];
-  lastName: string;
-  memberSince: string;
-  notifications: string[];
-  profileBg: string;
-  rating: number;
-  reviews: string[];
-  role: string;
-  salesSchedule: string[];
-  sellCloset: number;
-  shippingAddress: string[];
-  tradeCloset: number;
-  unfinishedOnboardActivity: string;
-  updatedAt: string;
-}
-
-export interface ShoppingCart {
-  _id: string;
-  products: string[];
-}
-

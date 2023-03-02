@@ -1,4 +1,12 @@
 
+export function getImageUrl(url: string) {
+  if (!url.startsWith('http')) {
+    url = 'https://thenobo.codepilot.com' + url;
+  }
+
+  return `url(${url})`;
+}
+
 export function formatPrice(val: number, includeDecimals: boolean = true): string {
   let ret = '$';
   ret += val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

@@ -9,7 +9,8 @@ import {
 } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserService, User } from '../services/UserService';
+import { UserService } from '../services/UserService';
+import { User } from '../models';
 
 import './Login.scss';
 

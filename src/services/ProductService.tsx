@@ -1,4 +1,5 @@
 import { BaseService } from './BaseService';
+import { Product, ProductResponse, SuccessResponse, ShoppingCartResponse } from '../models';
 
 export class ProductService extends BaseService {
 
@@ -46,92 +47,10 @@ export class ProductService extends BaseService {
     const json: SuccessResponse = await res.json();
     return json.success;
   }
-}
 
-export interface SuccessResponse {
-  success: boolean;
-}
-
-export interface ProductResponse {
-  product: Product;
-  tags: any;
-}
-
-export interface Product {
-  _id: string;
-  action: string;
-  active: boolean;
-  attributes: ProductAttribute[];
-  brand: string;
-  category: ProductCategory;
-  createdAt: string;
-  description: string;
-  giveaway: string;
-  group: string;
-  image: string;
-  images: Image[];
-  link: string;
-  name: string;
-  onSale: boolean;
-  parentCategory: ProductCategory;
-  postentialTradeItems: string[];
-  price: number;
-  receipt: string;
-  receivedByNobo: boolean;
-  rejected: boolean;
-  retailPrice: number;
-  returnBy: string;
-  returnRequested: boolean;
-  sold: boolean;
-  tags: string[];
-  tradeOffers: ProductTradeOffers;
-  updatedAt: string;
-  vendor: ProductVendor;
-}
-
-export interface ProductTradeOffers {
-  incoming: string[];
-  outgoing: string[];
-}
-
-export interface ProductAttribute {
-  id: string;
-  value: string|string[];
-}
-
-export interface Image {
-  url: string;
-  originalName: string;
-}
-
-export interface ProductVendor {
-  _id: string;
-  rating: number;
-  profileBg: string;
-  emailVerified: string;
-  blocked: boolean;
-  blurbText: string;
-  reviews: string[];
-  cache: ProductVendorCache;
-  firstName: string;
-  lastName: string;
-  avatar: string;
-  memberSince: string;
-  displayName: string;
-  experiencePreferences: string;
-  orders: number;
-}
-
-export interface ProductVendorCache {
-  sellCloset: number;
-  tradeCloset: number;
-}
-
-export interface ProductCategory {
-  parent: string;
-  _id: string;
-  name: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
+  async getCart(): Promise<Product[]> {
+    const res = await super.fetch('GET', '/api/products/cart');
+    const json: ShoppingCartResponse = await res.json();
+    return json.products;
+  }
 }
