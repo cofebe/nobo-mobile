@@ -86,17 +86,28 @@
         .brand {
           font-size: 10px;
           font-weight: 700;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 175px;
         }
 
         .name {
           font-size: 10px;
           font-weight: 600;
           margin-top: 4px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 175px;
         }
 
         .username {
           font-size: 10px;
           margin-top: 4px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 175px;
 
           span {
             color: #D6980E;
@@ -118,7 +129,6 @@
           text-transform: uppercase;
           font-weight: 600;
           color: #707070;
-          border-bottom: 1px solid black;
           padding-bottom: 8px;
       }
 
@@ -128,13 +138,22 @@
         justify-content: space-between;
 
         .label {
-          text-transform: uppercase;
-          font-weight: 700;
+          color: #ACACAC;
         }
 
         .value {
-          font-weight: 700;
           text-align: right;
+        }
+
+        &.total {
+          font-weight: 700;
+          border-top: 1px solid black;
+          padding-top: 8px;
+
+          .label {
+            color: black;
+            text-transform: uppercase;
+          }
         }
       }
     }

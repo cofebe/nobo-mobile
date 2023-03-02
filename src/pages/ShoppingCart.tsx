@@ -13,25 +13,36 @@ import {
 } from '@ionic/react';
 import './ShoppingCart.scss';
 import Button from '../components/Button';
-import { ShoppingCart, Product } from '../models';
+import {
+  ShoppingCart,
+  Product,
+  Address,
+  User,
+  TaxShippingResponse,
+} from '../models';
 import { shoppingCartStore } from '../cart-store';
 import { ProductService } from '../services/ProductService';
+import { UserService } from '../services/UserService';
 import { formatPrice, getImageUrl } from '../utils';
 
 const ShoppingCartPage: React.FC = () => {
   const history = useHistory();
   const productService = new ProductService();
-  const [cart, setCart] = useState<Product[]>([]);
+  const userService = new UserService();
+  let [cart, setCart] = useState<Product[]>([]);
   const [subtotal, setSubtotal] = useState<number>(0);
   const [promoCode, setPromoCode] = useState<string>('');
+  const [shipping, setShipping] = useState<number>(0);
+  const [tax, setTax] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
+  let [shippingAddresses, setShippingAddresses] = useState<Address[]>([]);
 
   useEffect(() => {
-    const subscription = shoppingCartStore.subscribe((cart: ShoppingCart) => {
-      const products = cart.products;
-      setCart(products);
+    const subscription = shoppingCartStore.subscribe((shoppingCart: ShoppingCart) => {
+      cart = shoppingCart.products;
+      setCart(cart);
 
-      const subtotal = products.reduce((total, curr) => total + curr.price, 0);
-      setSubtotal(subtotal);
+      updateTotals();
     });
 
     return () => {
@@ -46,7 +57,32 @@ const ShoppingCartPage: React.FC = () => {
         //console.log('getCart', products);
         shoppingCartStore.setProducts(products);
       });
+
+    userService
+      .getMe()
+      .then((user: User) => {
+        shippingAddresses = user.shippingAddress;
+        setShippingAddresses(shippingAddresses);
+        updateTotals();
+      });
   });
+
+  function updateTotals() {
+    const subtotal = cart.reduce((total, curr) => total + curr.price, 0);
+    setSubtotal(subtotal);
+    setTotal(total);
+
+    const addr = shippingAddresses.find(a => a.default);
+    if (addr) {
+      productService
+        .getTaxAndShipping(addr)
+        .then((res: TaxShippingResponse) => {
+          setTax(res.salesTax);
+          setShipping(res.shipping);
+          setTotal(subtotal + res.salesTax + res.shipping);
+        });
+    }
+  }
 
   function remove(product: Product) {
     productService.addToCart(product._id)
@@ -113,6 +149,18 @@ const ShoppingCartPage: React.FC = () => {
               <div className="summary-info">
                 <div className="label">Subtotal</div>
                 <div className="value">{formatPrice(subtotal)}</div>
+              </div>
+              <div className="summary-info">
+                <div className="label">Shipping</div>
+                <div className="value">{formatPrice(shipping)}</div>
+              </div>
+              <div className="summary-info">
+                <div className="label">Sales Tax</div>
+                <div className="value">{formatPrice(tax)}</div>
+              </div>
+              <div className="summary-info total">
+                <div className="label">Your Total</div>
+                <div className="value">{formatPrice(total)}</div>
               </div>
             </div>
             <div className="footer">

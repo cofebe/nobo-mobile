@@ -29,10 +29,25 @@ export interface User {
   role: string;
   salesSchedule: string[];
   sellCloset: number;
-  shippingAddress: string[];
+  shippingAddress: Address[];
   tradeCloset: number;
   unfinishedOnboardActivity: string;
   updatedAt: string;
+}
+
+export interface Address {
+  address1: string;
+  address2: string;
+  city: string;
+  country: string;
+  default: boolean;
+  ep_deliverable: boolean;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  postalCode: string;
+  state: string;
+  _id: string;
 }
 
 export interface ShoppingCartShort {
@@ -136,4 +151,9 @@ export interface ProductCategory {
 export interface ShoppingCartResponse {
   coupon: boolean;
   products: Product[];
+}
+
+export interface TaxShippingResponse {
+  salesTax: number;
+  shipping: number;
 }
