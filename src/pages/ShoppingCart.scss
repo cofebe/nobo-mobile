@@ -165,17 +165,6 @@
     .promo-code-container {
 
       ion-input {
-        border: 1px solid black;
-        font-size: 10px;
-        --padding-start: 16px;
-        --padding-end: 16px;
-        --padding-top: 10px;
-        --padding-bottom: 10px;
-
-        ::placeholder {
-          color: #ACACAC;
-          text-transform: uppercase;
-        }
       }
     }
 

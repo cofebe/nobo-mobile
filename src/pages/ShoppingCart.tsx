@@ -23,6 +23,7 @@ import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import { ProductService } from '../services/ProductService';
 import { UserService } from '../services/UserService';
 import { formatPrice, getImageUrl } from '../utils';
+import Input from '../components/Input';
 
 const ShoppingCartPage: React.FC = () => {
   const history = useHistory();
@@ -161,9 +162,10 @@ const ShoppingCartPage: React.FC = () => {
             </div>
             <div className="footer">
               <div className="promo-code-container">
-                <IonInput
+                <Input
                   value={promoCode}
-                  onIonChange={(e: any) => setPromoCode(e.target.value)}
+                  small={true}
+                  onChange={(val) => setPromoCode(val)}
                   placeholder="Enter promo code" />
               </div>
               <div className="button-container">

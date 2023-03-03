@@ -8,13 +8,12 @@ interface InputProps {
   className?: string;
   placeholder?: string;
   value?: string;
-  //onBlur?: () => void;
-  //onFocus?: () => void;
   onChange: (val: string) => void;
   disabled?: boolean;
   readonly?: boolean;
   invalid?: boolean;
   required?: boolean;
+  small?: boolean;
   errorMessage?: string;
 }
 
@@ -27,6 +26,7 @@ const Input: React.FC<InputProps> = ({
   readonly = false,
   required = false,
   invalid = false,
+  small = false,
   errorMessage,
 }) => {
   const [isDirty, setIsDirty] = useState<boolean>(false);
@@ -40,7 +40,7 @@ const Input: React.FC<InputProps> = ({
   }
 
   return (
-    <div className={'app-input-container ' + (invalid || errorMessage || (required && isDirty && !internalValue) ? 'invalid' : '')}>
+    <div className={'app-input-container ' + (invalid || errorMessage || (required && isDirty && !internalValue) ? 'invalid' : '') + (small ? ' small' : '')}>
       <IonInput
         className={className}
         placeholder={placeholder}
