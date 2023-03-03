@@ -4,6 +4,10 @@ const API_URL = environment.serverUrl + '/feed';
 
 export class FeedService extends BaseService {
 
+    async getProfileFeed(userID: string) {
+        return await super.fetch('GET', `api/feed/${userID}`);
+    }
+
     async getFeed(userID: number, page: number, filter?: string) {
         return await super.fetch('GET', `/feed?filter=${encodeURIComponent(filter || '')}&page=${page}`);
     }

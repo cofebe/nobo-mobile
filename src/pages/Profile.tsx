@@ -49,7 +49,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
   const reportService = new ReportService();
   let subscriptionService: any;
   // const subscriptionService = new SubscriptionService(new InAppPurchase2());
-  let [userId, setUserId] = useState<number>(0);
+  let [userId, setUserId] = useState<string>("");
   const [profileURL, setProfileURL] = useState('');
   const [presentLoading, dismissLoading] = useIonLoading();
   const profileModal = useRef<HTMLIonModalElement>(null);
@@ -87,7 +87,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
     const onPageLoad = () => {
       loadProfile();
 
-      userService.recordProfileVisit(userId, history.location);
+      // userService.recordProfileVisit(userId, history.location);
 
       if (
         isPlatform('ios') &&
@@ -302,16 +302,11 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
   }
 
   function reset() {
-    let nonExistentID = 0;
+    let nonExistentID = "";
     userId = nonExistentID;
     setUserId(nonExistentID);
     setProfileURL('');
     setNoboProfile(emptyProfile);
-    setMeasurementData(undefined);
-    setAcademicData(undefined);
-    setTargetSection('Feed');
-    setArrayOfSocials([]);
-    setSocialData({});
   }
 
   let storage: any = window.localStorage.getItem('persistedState');
@@ -320,7 +315,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
 
   function loadProfile() {
     let addressBarPathName = history.location.pathname;
-    userId = 0;
+    userId = "";
 
     let userIdStr: any = addressBarPathName.substring(
       addressBarPathName.lastIndexOf('/') + 1
@@ -505,13 +500,13 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
           </div>
         </IonRow>
         {targetSection === 'Feed' && (
-          <ProductList type="" images={profileItems}></ProductList>
+          <ProductList type="" userId={userId}></ProductList>
         )}
         {targetSection === 'Trades' && (
-          <ProductList type="trade" images={profileItems}></ProductList>
+          <ProductList type="trade" userId={userId}></ProductList>
         )}
         {targetSection === 'Purchase' && (
-          <ProductList type="sell" images={profileItems}></ProductList>
+          <ProductList type="sell" userId={userId}></ProductList>
         )}
         {targetSection === 'Reviews' && (
           <ReviewList reviewData={reviewData}></ReviewList>
