@@ -92,7 +92,7 @@ const ShoppingCartPage: React.FC = () => {
   }
 
   function checkout() {
-    console.log('checkout');
+    history.push('/checkout/shipping');
   }
 
   return (
