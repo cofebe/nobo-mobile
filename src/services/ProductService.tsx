@@ -1,5 +1,12 @@
 import { BaseService } from './BaseService';
-import { Product, ProductResponse, SuccessResponse, ShoppingCartResponse } from '../models';
+import {
+  Product,
+  ProductResponse,
+  SuccessResponse,
+  ShoppingCartResponse,
+  TaxShippingResponse,
+  Address,
+} from '../models';
 
 export class ProductService extends BaseService {
 
@@ -52,5 +59,11 @@ export class ProductService extends BaseService {
     const res = await super.fetch('GET', '/api/products/cart');
     const json: ShoppingCartResponse = await res.json();
     return json.products;
+  }
+
+  async getTaxAndShipping(address: Address): Promise<TaxShippingResponse> {
+    const res = await super.fetch('POST', '/api/orders/calculate-taxes-shipping', { address });
+    const json: TaxShippingResponse = await res.json();
+    return json;
   }
 }

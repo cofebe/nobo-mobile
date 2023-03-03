@@ -13,25 +13,28 @@ import {
 } from '@ionic/react';
 import './ShoppingCart.scss';
 import Button from '../components/Button';
-import { ShoppingCart, Product } from '../models';
-import { shoppingCartStore } from '../cart-store';
+import {
+  Address,
+  Product,
+  User,
+  TaxShippingResponse,
+} from '../models';
+import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import { ProductService } from '../services/ProductService';
+import { UserService } from '../services/UserService';
 import { formatPrice, getImageUrl } from '../utils';
 
 const ShoppingCartPage: React.FC = () => {
   const history = useHistory();
   const productService = new ProductService();
-  const [cart, setCart] = useState<Product[]>([]);
-  const [subtotal, setSubtotal] = useState<number>(0);
+  const userService = new UserService();
+  const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
   const [promoCode, setPromoCode] = useState<string>('');
+  const [shippingAddress, setShippingAddress] = useState<Address>();
 
   useEffect(() => {
-    const subscription = shoppingCartStore.subscribe((cart: ShoppingCart) => {
-      const products = cart.products;
-      setCart(products);
-
-      const subtotal = products.reduce((total, curr) => total + curr.price, 0);
-      setSubtotal(subtotal);
+    const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
+      setCart(cart);
     });
 
     return () => {
@@ -46,6 +49,24 @@ const ShoppingCartPage: React.FC = () => {
         //console.log('getCart', products);
         shoppingCartStore.setProducts(products);
       });
+
+    userService
+      .getMe()
+      .then((user: User) => {
+        const addr = user.shippingAddress.find(a => a.default);
+        setShippingAddress(addr);
+        if (addr) {
+          productService
+            .getTaxAndShipping(addr)
+            .then((res: TaxShippingResponse) => {
+              shoppingCartStore.beginUpdate();
+              shoppingCartStore.setShippingAddress(addr);
+              shoppingCartStore.setTax(res.salesTax);
+              shoppingCartStore.setShipping(res.shipping);
+              shoppingCartStore.endUpdate();
+            });
+        }
+      });
   });
 
   function remove(product: Product) {
@@ -53,6 +74,17 @@ const ShoppingCartPage: React.FC = () => {
       .then((success: boolean) => {
         if (success) {
           shoppingCartStore.removeProduct(product._id);
+
+          if (shippingAddress) {
+            productService
+              .getTaxAndShipping(shippingAddress)
+              .then((res: TaxShippingResponse) => {
+                shoppingCartStore.beginUpdate();
+                shoppingCartStore.setTax(res.salesTax);
+                shoppingCartStore.setShipping(res.shipping);
+                shoppingCartStore.endUpdate();
+              });
+          }
         } else {
           window.alert('Unable to remove item from cart!');
         }
@@ -86,9 +118,9 @@ const ShoppingCartPage: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="cart-content" scrollY={false}>
-        {cart.length ? (
+        {cart.products.length ? (
           <div>
-            {cart.map(product => (
+            {cart.products.map(product => (
               <div className="cart-item" key={product._id}>
                 <div className="product-image-container">
                   <div className="product-image" style={{ backgroundImage: getImageUrl(product.images[0].url) }}></div>
@@ -112,7 +144,19 @@ const ShoppingCartPage: React.FC = () => {
               <div className="title">Order Summary</div>
               <div className="summary-info">
                 <div className="label">Subtotal</div>
-                <div className="value">{formatPrice(subtotal)}</div>
+                <div className="value">{formatPrice(cart.subtotal)}</div>
+              </div>
+              <div className="summary-info">
+                <div className="label">Shipping</div>
+                <div className="value">{formatPrice(cart.shipping)}</div>
+              </div>
+              <div className="summary-info">
+                <div className="label">Sales Tax</div>
+                <div className="value">{formatPrice(cart.tax)}</div>
+              </div>
+              <div className="summary-info total">
+                <div className="label">Your Total</div>
+                <div className="value">{formatPrice(cart.total)}</div>
               </div>
             </div>
             <div className="footer">

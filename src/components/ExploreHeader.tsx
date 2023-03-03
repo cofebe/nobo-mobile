@@ -11,8 +11,7 @@ import {
 import './ExploreHeader.scss';
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { shoppingCartStore } from '../cart-store';
-import { ShoppingCart } from '../models';
+import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 
 interface NoboExploreHeaderProps {
   sectionNameCallback: (sectionName: string) => void;
@@ -28,10 +27,10 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
 
   const [activeButton, setActiveButton] = useState<string>('explore');
   const [activeCategory, setActiveCategory] = useState<string>('WOMEN');
-  const [cart, setCart] = useState<ShoppingCart>(shoppingCartStore.initialState);
+  const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
 
   useEffect(() => {
-    const subscription = shoppingCartStore.subscribe((cart: ShoppingCart) => {
+    const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
       setCart(cart);
     });
 
