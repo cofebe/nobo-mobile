@@ -164,6 +164,7 @@
     z-index: 100;
 
     .profile-bubble {
+      object-fit: cover;
       top: 0px;
       left: 12px;
       transform: translateY(-35%);

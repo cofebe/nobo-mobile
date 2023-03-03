@@ -35,11 +35,10 @@ export class UserService extends BaseService {
   }
 
   async getProducts(userId: any, productType: string) {
-    userId = "61e9e3cde9d5a06abb991653";
 
     let perPage = 100;
     let page = 1;
-    let filter = {"active": true, "sold": {"$in": [true, false]}, "retailPrice": {"$gt": 0}, "action": productType, "vendor": "61e9e3cde9d5a06abb991653"};
+    let filter = {"active": true, "sold": {"$in": [true, false]}, "retailPrice": {"$gt": 0}, "action": productType, "vendor": userId};
     let sort = {"createdAt": -1};
 
     let queryParams = new URLSearchParams({

@@ -45,7 +45,7 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
   function load() {
     if (type !== "") {
       userService
-        .getProducts("1", type)
+        .getProducts(userId, type)
         .then((res) => res.json())
         .then((data) => {
           console.log("ProductList: ", data)
@@ -112,7 +112,7 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
             <div className="image-grid-bottom-container" style={{borderBottomLeftRadius: '5px', borderBottomRightRadius: '5px'}}>
               <div style={{ fontWeight: 'bold', letterSpacing: '.5px' }}>{product.brand}</div>
               <div style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '20ch', fontWeight: '700', letterSpacing: '.5px'}}>{product.name}</div>
-              <div><span style={{color: '#ACACAC', paddingRight: '1ch' }}>Cost</span> ${product.price}.00</div>
+              <div><span style={{color: '#ACACAC', paddingRight: '1ch' }}>Est.</span> ${product.price}.00</div>
             </div>
           </div>
         ))}

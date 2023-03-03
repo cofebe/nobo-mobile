@@ -18,11 +18,7 @@ import {
   IonButtons,
   IonModal,
   IonRow,
-  //useIonToast,
 } from '@ionic/react';
-//import { Swiper, SwiperSlide } from 'swiper/react';
-//import 'swiper/swiper-bundle.min.css';
-//import 'swiper/swiper.min.css';
 import { UserService } from '../services/UserService';
 import { ReportService } from '../services/ReportService';
 import { SubscriptionService } from '../services/SubscriptionService';
@@ -30,11 +26,9 @@ import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
 
 import './Profile.scss';
 import { AcademicData } from '../components/ProfileSections/AcademicsSection';
-//import ProfileFollowButton from '../components/ProfileFollowButton';
 import ProductList from '../components/ProductList';
 import ReviewList from '../components/ReviewList';
 import { MeasurementData } from '../components/ProfileSections/MeasurementsSection';
-import QrCode from '../components/QrCode';
 import { chevronBackOutline } from 'ionicons/icons';
 import { loadingOptions } from '../util';
 import { Profile } from '../data/profile';
@@ -48,7 +42,6 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
   const userService = new UserService();
   const reportService = new ReportService();
   let subscriptionService: any;
-  // const subscriptionService = new SubscriptionService(new InAppPurchase2());
   let [userId, setUserId] = useState<string>("");
   const [profileURL, setProfileURL] = useState('');
   const [presentLoading, dismissLoading] = useIonLoading();
@@ -87,8 +80,6 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
     const onPageLoad = () => {
       loadProfile();
 
-      // userService.recordProfileVisit(userId, history.location);
-
       if (
         isPlatform('ios') &&
         profile.myProfile
@@ -105,7 +96,6 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
       onPageLoad();
     } else {
       window.addEventListener('load', onPageLoad);
-      // Remove the event listener when component unmounts
       return () => window.removeEventListener('load', onPageLoad);
     }
   });
@@ -114,30 +104,6 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
     console.log('useIonViewDidLeave');
     reset();
   });
-
-  useEffect(() => {
-    if (userSubscribed && profile.myProfile) {
-      setSlides([
-        { name: 'Highlights', section: '/option', state: 'Highlights' },
-        { name: 'Stats', section: '/option', state: 'Stats' },
-        { name: 'Academics', section: '/option', state: 'Academics' },
-        { name: 'Awards', section: '/option', state: 'Awards' },
-        { name: 'Measurements', section: '/option', state: 'Measurements' },
-        { name: 'Experience', section: '/option', state: 'Experience' },
-        { name: 'Offers', section: '/option', state: 'Offers' },
-        { name: 'Praise', section: '/option', state: 'Praise' },
-        { name: 'Posts', section: '/option', state: 'Posts' },
-        { name: 'Schedule', section: '/option', state: 'GameSchedule' },
-        { name: 'Articles', section: '/option', state: 'Articles' },
-        { name: 'NIL', section: '/option', state: 'NILDeals' },
-        {
-          name: 'Personal Training',
-          section: '/option',
-          state: 'PersonalTraining',
-        },
-      ]);
-    }
-  }, [userSubscribed]);
 
   var options = {
     subject: 'Share Profile',
@@ -173,7 +139,6 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
     presentProfileReportingActionSheet({
       cssClass: 'nobo-action-sheet',
       header: 'Report User',
-      //subHeader: 'Subheader',
       buttons: [
         {
           text: "It's spam",
@@ -329,47 +294,17 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
     console.log('View User Profile: ', userId);
     console.log('myProfile value: ', profile.myProfile);
 
-    // if (
-    //   profile.myProfile ||
-    //   userId < 1 ||
-    //   isNaN(userId) ||
-    //   userId === undefined
-    // ) {
-    //   console.log('myProfile : ', myUserId);
-    //   userId = myUserId;
-    // }
-
     setUserId(userId);
-    //updateActionMenu();
     getProfile(userId);
     return userId;
   }
 
   function updateActionMenu() {
-    setProfileURL(`https://www.noboplus.com/home/athlete-profile/${userId}`);
+    setProfileURL(`https://www.noboplus.com/home/profile/${userId}`);
     console.log('Profile URL: ', profileURL);
   }
 
-  // function showMessage(message: string) {
-  //   // let mess = `Connection Request Sent to ${coachProfile.fromName}`;
-  //   let errColor = "primary";
-
-  //   present({
-  //     buttons: [{ handler: () => dismiss() }],
-  //     message,
-  //     color: errColor,
-  //     duration: 5000,
-  //     position: "top",
-  //     onDidDismiss: () => console.log("dismissed"),
-  //     onWillDismiss: () => console.log("will dismiss"),
-  //   });
-  // }
-
   function getProfile(id: any = "") {
-    // if (id < 1 || isNaN(id) || id === undefined) {
-    //   console.log('Userid not set: ', id);
-    //   return;
-    // }
     console.log('GetProfile: ', id);
 
     presentLoading(loadingOptions);
@@ -380,22 +315,10 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
         console.log('Profile: ', data);
         if (data === null) {
           console.log('Done');
-          // noboProfile = emptyProfile;
           setNoboProfile(emptyProfile);
         } else {
           console.log("Set NOBO Profile: ", data['user'])
           setNoboProfile(data['user'])
-
-          if (!profile.myProfile) {
-            let nextURL = `https://www.noboplus.com/home/athlete-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
-            if (window.location.origin.includes('localhost')) {
-              nextURL = `http://localhost:3000/home/athlete-profile/${data.basic_user_profile.first_name.String}-${data.basic_user_profile.last_name.String}-${id}`;
-            }
-            const nextTitle = 'URP+ Athlete Profile';
-            // document.title = `${data.basic_user_profile.first_name.String} ${data.basic_user_profile.last_name.String} | URP+ `
-            const nextState = { additionalInformation: 'URP+ Athlete Profile' };
-            window.history.replaceState(nextState, nextTitle, nextURL);
-          }
         }
         dismissLoading();
       })
@@ -435,7 +358,6 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
           breakpoints={[0, 0.75, 0.85]}
         >
           <IonContent className="ion-padding">
-            {/*<QrCode value={profileURL} name={noboProfile.firstName + " " + noboProfile.lastName}></QrCode>*/}
             <IonButton
               className="nobo-qr-code-btn-close"
               onClick={() => profileModal.current?.dismiss()}
