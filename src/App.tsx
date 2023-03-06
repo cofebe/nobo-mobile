@@ -9,6 +9,7 @@ import Forgot from './pages/Forgot';
 import ForgotReset from './pages/ForgotReset';
 import Roles from './pages/Roles';
 import Chat from './pages/Chat';
+import CheckoutShipping from './pages/CheckoutShipping';
 import SignUpAthlete from './pages/SignUpAthlete';
 import FilterSearch from './pages/FilterSearch';
 import ContactUs from './pages/ContactUs';
@@ -63,6 +64,9 @@ const App: React.FC = () => (
         </Route>
         <Route path="/cart" exact={true}>
           <ShoppingCart />
+        </Route>
+        <Route path="/checkout/shipping" exact={true}>
+          <CheckoutShipping />
         </Route>
 
 
