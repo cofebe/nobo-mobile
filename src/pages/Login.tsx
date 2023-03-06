@@ -40,6 +40,14 @@ const Login: React.FC = () => {
       });
   };
 
+  const validate = () => {
+    if (email && password) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <IonPage className="nobo-login-page">
       <div className="background-image">
@@ -132,6 +140,7 @@ const Login: React.FC = () => {
                   }}
                   //   color={btnColor}
                   // disabled={!isActive || isSubscribed}
+                  disabled={!validate()}
                   type="submit"
                   expand="block"
                   className="nobo-button"
