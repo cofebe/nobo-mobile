@@ -10,6 +10,7 @@ import {
   isPlatform,
 } from '@ionic/react';
 //import Feed from './pages/Feed';
+import StyleFeedPage from './pages/StyleFeed'
 import PostDetail from './pages/PostDetail';
 import PromotePost from './pages/PromotePost';
 import PostDetailLikes from './pages/PostDetailLikes';
@@ -223,7 +224,10 @@ const Home: React.FC = () => {
             <ProfilePage myProfile={true} />
           </Route>
           <Route path="/home/profile/:id" exact={true}>
-            <ProfilePage myProfile={true} />
+            <ProfilePage myProfile={false} />
+          </Route>
+          <Route path="/home/style-feed" exact={true}>
+            <StyleFeedPage />
           </Route>
           <Route path="/home/roles">
             <Roles />

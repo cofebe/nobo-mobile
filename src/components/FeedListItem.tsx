@@ -471,35 +471,6 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
           </div>
         </IonCol>
         <IonCol
-          className="feed-content feed-content-stats"
-          size="11"
-          offset="1"
-          onClick={(e) => {
-            e.preventDefault();
-            viewUser_(history, message.user_id, message.account_type);
-          }}
-        >
-          <div>
-            {message?.account_type === 'athlete' ? (
-              <h3 className="feed-l2">
-                <span>{message?.school}</span>
-                <span className="feed-border">|</span>
-                <span>{message?.height}</span>
-                <span className="feed-border">|</span>
-                <span>{message?.weight + 'lbs'}</span>
-                <span className="feed-border">|</span>
-                <span>
-                  <span>{message?.year}</span>
-                </span>
-              </h3>
-            ) : (
-              <h3 className="feed-l2">
-                <span>{message?.school}</span>
-              </h3>
-            )}
-          </div>
-        </IonCol>
-        <IonCol
           className="feed-content"
           size="12"
           onClick={(e: any) => {

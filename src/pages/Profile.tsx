@@ -360,6 +360,10 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
         ></div>
         {profile.myProfile && (
           <div
+            onClick={(e) => {
+              e.preventDefault();
+              history.push(`/home/style-feed`);
+            }}
             className="profile-header-container"
             style={{ backgroundImage: `url('assets/images/my-profile-header.svg')` }}
           ></div>
