@@ -1,21 +1,16 @@
 import { BaseService } from './BaseService';
 import { environment } from '../environments/environment';
 import { AuthService } from './AuthService';
-import { User, LoginResponse } from '../models';
+import {
+  User,
+  LoginResponse,
+  AddressRequest,
+  CreateShippingAddressResponse,
+} from '../models';
 
 const API_URL = environment.serverUrl + '/api';
 
 export class UserService extends BaseService {
-  getUserCache() {
-    let user: any = {};
-    if (window.localStorage.getItem('persistedState')) {
-      let storage: any = window.localStorage.getItem('persistedState');
-      user = JSON.parse(storage);
-    }
-
-    return user;
-  }
-
   async getMe(): Promise<User> {
     const res = await super.fetch('GET', '/api/users/me');
     const json: LoginResponse = await res.json();
@@ -35,13 +30,12 @@ export class UserService extends BaseService {
   }
 
   async getProducts(userId: any, productType: string) {
+    const perPage = 100;
+    const page = 1;
+    const filter = {"active": true, "sold": {"$in": [true, false]}, "retailPrice": {"$gt": 0}, "action": productType, "vendor": userId};
+    const sort = {"createdAt": -1};
 
-    let perPage = 100;
-    let page = 1;
-    let filter = {"active": true, "sold": {"$in": [true, false]}, "retailPrice": {"$gt": 0}, "action": productType, "vendor": userId};
-    let sort = {"createdAt": -1};
-
-    let queryParams = new URLSearchParams({
+    const queryParams = new URLSearchParams({
       perPage: perPage.toString(),
       page: page.toString(),
       filter: JSON.stringify(filter),
@@ -49,6 +43,58 @@ export class UserService extends BaseService {
     }).toString();
 
     return await super.fetch('GET', `api/products/all?${queryParams}`);
+  }
+
+  async login(email: string, password: string): Promise<User> {
+    const res = await super.fetch('POST', '/api/users/login', { email, password });
+    //console.log('res', res);
+    const json: LoginResponse = await res.json();
+    //console.log('json', json);
+
+    if (res.status === 404) {
+      console.log('404', json.error);
+      throw json.error;
+    }
+
+    if (json.token) {
+      const authService = new AuthService();
+      authService.setUserToken(json.token);
+      authService.setUserId(json.user._id);
+      authService.setUserDisplayName(json.user.displayName);
+    }
+
+    return json.user;
+  }
+
+  async addShippingAddress(data: AddressRequest): Promise<User> {
+    const body = {
+      action: 'add',
+      address: data,
+    };
+    const res = await super.fetch('POST', '/api/users/shipping-address', body);
+    const json: CreateShippingAddressResponse = await res.json();
+    return json.currentUser;
+  }
+
+  async setDefaultShippingAddress(index: number): Promise<User> {
+    const body = {
+      action: 'default',
+      index,
+    };
+    const res = await super.fetch('POST', '/api/users/shipping-address', body);
+    const json: CreateShippingAddressResponse = await res.json();
+    return json.currentUser;
+  }
+
+  // From URP
+  getUserCache() {
+    let user: any = {};
+    if (window.localStorage.getItem('persistedState')) {
+      let storage: any = window.localStorage.getItem('persistedState');
+      user = JSON.parse(storage);
+    }
+
+    return user;
   }
 
   async updateProfile(data = {}, userId: number) {
@@ -80,168 +126,6 @@ export class UserService extends BaseService {
     return response;
   }
 
-  async savePersonalTrainers(userId: number, data = {}) {
-    const response = await fetch(API_URL + `/${userId}/personalTrainer`, {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return response;
-  }
-
-  async removePersonalTrainer(userID: number, personalTrainerID: number) {
-    const response = await fetch(
-      API_URL + `/${userID}/personalTrainer/${personalTrainerID}`,
-      {
-        method: 'DELETE',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({}),
-      }
-    );
-    return response;
-  }
-
-  async getPersonalTrainers(userId: number) {
-    return await super.fetch('GET', `/user/${userId}/personalTrainer`);
-  }
-
-  async updatePersonalTrainer(
-    userId: number,
-    personalTrainerID: number,
-    data = {}
-  ) {
-    const response = await fetch(
-      API_URL + `/${userId}/personalTrainer/${personalTrainerID}`,
-      {
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      }
-    );
-    return response;
-  }
-
-  async saveArticles(userId: number, data = {}) {
-    const response = await fetch(API_URL + `/${userId}/article`, {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return response;
-  }
-
-  async removeArticle(userID: number, articleID: number) {
-    const response = await fetch(API_URL + `/${userID}/article/${articleID}`, {
-      method: 'DELETE',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({}),
-    });
-    return response;
-  }
-
-  async getArticles(userId: number) {
-    return await super.fetch('GET', `/user/${userId}/article`);
-  }
-
-  async updateArticle(userId: number, articleID: number, data = {}) {
-    const response = await fetch(API_URL + `/${userId}/article/${articleID}`, {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return response;
-  }
-
-  async saveNilDeals(userId: number, data = {}) {
-    const response = await fetch(API_URL + `/${userId}/nil`, {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return response;
-  }
-
-  async updateNilDeal(userId: number, nilID: number, data = {}) {
-    const response = await fetch(API_URL + `/${userId}/nil/${nilID}`, {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return response;
-  }
-
-  async removeNilDeal(userID: number, nilID: number) {
-    const response = await fetch(API_URL + `/${userID}/nil/${nilID}`, {
-      method: 'DELETE',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({}),
-    });
-    return response;
-  }
-
-  async saveGame(userId: number, data = {}) {
-    const response = await fetch(API_URL + `/${userId}/game`, {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return response;
-  }
-
-  async updateGame(userId: number, gameID: number, data = {}) {
-    const response = await fetch(API_URL + `/${userId}/game/${gameID}`, {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return response;
-  }
-
-  async removeGame(userID: number, gameID: number) {
-    const response = await fetch(API_URL + `/${userID}/game/${gameID}`, {
-      method: 'DELETE',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({}),
-    });
-    return response;
-  }
-
   async deleteAccount(userID: string|number, data = {}) {
     const response = await fetch(API_URL + `/delete/${userID}`, {
       method: 'POST',
@@ -254,24 +138,12 @@ export class UserService extends BaseService {
     return response;
   }
 
-  async getGameSchedule(userId: number) {
-    return await super.fetch('GET', `/user/${userId}/games`);
-  }
-
-  async getNILDeals(userId: number) {
-    return await super.fetch('GET', `/user/${userId}/nil`);
-  }
-
   async getWatchlist(userId: number) {
     return await super.fetch('GET', `/user/${userId}/watchlist`);
   }
 
   async addToWatchlist(userId: number, data = {}) {
     return await super.fetch('POST', `/user/${userId}/watchlist`, data);
-  }
-
-  async removeFromWatchlist(userId: number) {
-    return await super.fetch('DELETE', `/user/${userId}/watchlist`, {});
   }
 
   async followUser(userId: number) {
@@ -290,36 +162,7 @@ export class UserService extends BaseService {
     return await super.fetch('POST', `/user/${userId}/praise`, req);
   }
 
-  async recordProfileVisit(userId: number, location: any) {
-    console.log('recordProfileVisit', userId, location);
-
-    const data: any = location?.state || {};
-
-    return await super.fetch('POST', `/user/${userId}/visit`, data);
-  }
-
   async getProfileInsights(userId: number, age: number) {
     return await super.fetch('GET', `/user/${userId}/insights?age=${age}`);
-  }
-
-  async login(email: string, password: string): Promise<User> {
-    const res = await super.fetch('POST', '/api/users/login', { email, password });
-    //console.log('res', res);
-    const json: LoginResponse = await res.json();
-    //console.log('json', json);
-
-    if (res.status === 404) {
-      console.log('404', json.error);
-      throw json.error;
-    }
-
-    if (json.token) {
-      const authService = new AuthService();
-      authService.setUserToken(json.token);
-      authService.setUserId(json.user._id);
-      authService.setUserDisplayName(json.user.displayName);
-    }
-
-    return json.user;
   }
 }

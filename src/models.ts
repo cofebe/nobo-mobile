@@ -50,6 +50,22 @@ export interface Address {
   _id: string;
 }
 
+export interface AddressRequest {
+  address1: string;
+  address2: string;
+  city: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  postalCode: string;
+  state: string;
+  notes: string;
+}
+
+export interface CreateShippingAddressResponse {
+  currentUser: User;
+}
+
 export interface ShoppingCartShort {
   _id: string;
   products: string[];

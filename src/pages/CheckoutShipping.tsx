@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonContent,
@@ -18,6 +18,7 @@ import {
 } from '../models';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import { UserService } from '../services/UserService';
+import CreateShippingAddressModal from '../components/CreateShippingAddressModal';
 
 const CheckoutShipping: React.FC = () => {
   const history = useHistory();
@@ -25,9 +26,15 @@ const CheckoutShipping: React.FC = () => {
   const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
   const [shippingAddresses, setShippingAddresses] = useState<Address[]>([]);
 
+  const modal = useRef<HTMLIonModalElement>(null);
+
   useEffect(() => {
     const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
       setCart(cart);
+
+      if (cart.total === 0) {
+        history.goBack();
+      }
     });
 
     return () => {
@@ -40,6 +47,13 @@ const CheckoutShipping: React.FC = () => {
       .getMe()
       .then((user: User) => {
         setShippingAddresses(user.shippingAddress);
+
+        if (!cart.shippingAddress) {
+          const addr = user.shippingAddress.find(a => a.default);
+          if (addr) {
+            shoppingCartStore.setShippingAddress(addr);
+          }
+        }
       });
   });
 
@@ -48,7 +62,7 @@ const CheckoutShipping: React.FC = () => {
   }
 
   function addNew() {
-    console.log('addNew');
+    modal.current?.present();
   }
 
   function next() {
@@ -85,7 +99,7 @@ const CheckoutShipping: React.FC = () => {
           addNew();
         }}>
           <div>
-            <img src="/assets/images/arrow-left.svg" alt="add shipping address" />
+            <img src="assets/images/add-square.svg" alt="add shipping address" />
           </div>
           <div>
             New Address
@@ -117,7 +131,7 @@ const CheckoutShipping: React.FC = () => {
             ))}
             <div className="footer">
               <div className="button-container">
-                <Button label="Next" large={true} onClick={(e: any) => {
+                <Button label="Next" large={true} disabled={!cart.shippingAddress} onClick={(e: any) => {
                   e.preventDefault();
                   e.stopPropagation();
                   next();
@@ -131,6 +145,19 @@ const CheckoutShipping: React.FC = () => {
           </div>
         )}
       </IonContent>
+
+      <CreateShippingAddressModal ref={modal} onClose={(addresses: Address[]) => {
+        console.log('add address', addresses);
+          setShippingAddresses(addresses);
+
+          if (!cart.shippingAddress) {
+            const addr = addresses.find(a => a.default);
+            if (addr) {
+              shoppingCartStore.setShippingAddress(addr);
+            }
+          }
+          modal.current?.dismiss();
+      }} />
     </IonPage>
   );
 };
