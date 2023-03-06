@@ -223,7 +223,7 @@ const Home: React.FC = () => {
             <ProfilePage myProfile={true} />
           </Route>
           <Route path="/home/profile/:id" exact={true}>
-            <ProfilePage myProfile={false} />
+            <ProfilePage myProfile={true} />
           </Route>
           <Route path="/home/roles">
             <Roles />

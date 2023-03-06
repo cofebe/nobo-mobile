@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { FeedService } from "../services/FeedService";
 import { UserService } from "../services/UserService";
 import { Products, Product } from "../data/products";
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing';
 
 interface ProductListProps {
   type: string;
@@ -66,6 +67,19 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
     }
   }
 
+  function shareItem(itemUrl: string) {
+    var options = {
+      subject: 'Share Item',
+      files: ['', ''],
+      url: itemUrl,
+      chooserTitle: 'Pick an app',
+      appPackageName: 'com.apple.social.facebook',
+      iPadCoordinates: '0,0,0,0',
+    };
+
+    SocialSharing.shareWithOptions(options);
+  }
+
   useEffect(() => {
     load()
   }, [type])
@@ -89,6 +103,7 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
               <path d="M8.01982 0C7.50392 0.00830248 6.99927 0.157306 6.55684 0.431963C6.11441 0.706621 5.74986 1.09721 5.5 1.56428C5.25014 1.09721 4.88559 0.706621 4.44316 0.431963C4.00073 0.157306 3.49608 0.00830248 2.98018 0C2.15778 0.0369694 1.38294 0.409202 0.824953 1.03538C0.266963 1.66155 -0.0288219 2.49077 0.00221794 3.34186C0.00221794 5.49724 2.19492 7.85124 4.03392 9.44728C4.44453 9.80428 4.96367 10 5.5 10C6.03633 10 6.55547 9.80428 6.96607 9.44728C8.80508 7.85124 10.9978 5.49724 10.9978 3.34186C11.0288 2.49077 10.733 1.66155 10.175 1.03538C9.61706 0.409202 8.84222 0.0369694 8.01982 0ZM6.37735 8.72202C6.13178 8.93598 5.82105 9.05332 5.5 9.05332C5.17895 9.05332 4.86822 8.93598 4.62265 8.72202C2.26868 6.67851 0.918515 4.71795 0.918515 3.34186C0.887196 2.74209 1.08637 2.15383 1.47258 1.70539C1.8588 1.25695 2.40073 0.984712 2.98018 0.948046C3.55963 0.984712 4.10157 1.25695 4.48778 1.70539C4.874 2.15383 5.07317 2.74209 5.04185 3.34186C5.04185 3.46758 5.09012 3.58815 5.17604 3.67705C5.26196 3.76594 5.37849 3.81588 5.5 3.81588C5.62151 3.81588 5.73804 3.76594 5.82396 3.67705C5.90988 3.58815 5.95815 3.46758 5.95815 3.34186C5.92683 2.74209 6.126 2.15383 6.51222 1.70539C6.89843 1.25695 7.44037 0.984712 8.01982 0.948046C8.59927 0.984712 9.1412 1.25695 9.52742 1.70539C9.91363 2.15383 10.1128 2.74209 10.0815 3.34186C10.0815 4.71795 8.73132 6.67851 6.37735 8.72013V8.72202Z" fill="#000000"/>
             </svg>
             <svg
+              onClick={() => shareItem(`assets/${index}`)}
               style={{ position: 'absolute', top: '10px', left: '30px', width: '11px', height: '10px' }}
               width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_175_8158)">
@@ -170,9 +185,15 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
       return (
         <div className="image-grid">
           {feed.map((feedItem: any, index: any) => (
-            <div className="image-grid-container" key={index}>
+            <div className="image-grid-container" key={index} style={{boxShadow: 'none'}}>
               {feedItem.images && feedItem.images[0] && (
-                <div className="image-grid-container" style={{ backgroundImage: `url(${feedItem.images[0].url.includes("https://") ? feedItem.images[0].url : `https://thenobo.com${feedItem.images[0].url}`})`, backgroundSize: 'cover',  backgroundPosition: 'center', minHeight: '168px' }} onClick={() => history.push(`assets/images/test/${index}`)}></div>
+                <div className="image-grid-container" style={{ backgroundImage: `url(${feedItem.images[0].url.includes("https://") ? feedItem.images[0].url : `https://thenobo.com${feedItem.images[0].url}`})`, backgroundSize: 'cover',  backgroundPosition: 'center', minHeight: '168px', boxShadow: 'none' }} onClick={() => history.push(`assets/images/test/${index}`)}></div>
+              )}
+              {feedItem.feedText && !(feedItem.images && feedItem.images[0]) && (
+                <div
+                  className="image-grid-container image-grid-container-text"
+                  style={{maxWidth: '168px', minHeight: '168px', display: 'flex', justifyContent: 'center', alignItems: 'center', boxShadow: 'none'}}
+                  dangerouslySetInnerHTML={{__html: feedItem.feedText}}></div>
               )}
             </div>
           ))}

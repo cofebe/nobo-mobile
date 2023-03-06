@@ -126,7 +126,26 @@
     font-size: 0.7em;
     text-transform: capitalize;
     border: 1px solid #D6980E;
-    box-shadow: 2px 3px 5px 1px rgba(0, 0, 0, 0.05);
+    margin-right: 20px;
+  }
+
+  .nobo-follow-profile-button {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+    font-size: 0.7em;
+    line-height: 15px;
+    text-align: left;
+    vertical-align: middle;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+    float: right;
+    background-color: #D6980E;
+    color: #ffffff;
+    border-radius: 5px;
+    height: 32px;
+    width: 80px;
+    text-transform: capitalize;
+    border: 1px solid #D6980E;
     margin-right: 20px;
   }
 
@@ -155,6 +174,17 @@
     @media (min-width: 562px) {
       height: 290px;
     }
+  }
+
+  .profile-header-container {
+    position: absolute;
+    top: 45px;
+    height: 45px;
+    width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
   }
 
   .profile-bubble-container {
@@ -299,7 +329,7 @@
     align-items: center;
     margin-top: 12px;
     padding-bottom: 12px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 
     .nobo-menu-circle {
       padding-left: 8px;

@@ -43,6 +43,11 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({
                 </div>
               </div>
             </IonCol>
+            {!myProfile && (
+            <IonCol offset="3" size="2">
+              <ProfileActionMenu openSocialShare={openSocialShare} />
+            </IonCol>
+            )}
           </IonRow>
             {myProfile.blurbText ? (
               <IonRow>

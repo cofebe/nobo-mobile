@@ -116,12 +116,8 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
 
   async function reportUser(reportType: string) {
     console.log('reportPost', reportType);
-    let req = {
-      user_id: myUserId,
-      user_id_reported: userId,
-      category: reportType,
-    };
-    await reportService.reportUser(req);
+
+    window.location.href = `mailto:support@thenobo.com?subject=${reportType}&body=${userId}`;
   }
 
   function shareProfile(result: any) {
@@ -228,20 +224,6 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
           },
         },
         {
-          text: 'Share',
-          who: 'all',
-          data: {
-            action: 'share',
-          },
-        },
-        {
-          text: 'QR Code',
-          who: 'all',
-          data: {
-            action: 'qrCode',
-          },
-        },
-        {
           text: 'Cancel',
           role: 'cancel',
           data: {
@@ -280,17 +262,21 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
 
   function loadProfile() {
     let addressBarPathName = history.location.pathname;
-    userId = "";
+    userId = "61e9e3cde9d5a06abb991653";
 
     let userIdStr: any = addressBarPathName.substring(
       addressBarPathName.lastIndexOf('/') + 1
     );
     console.log("loadProfile: ", userIdStr)
-    if (isNaN(userIdStr)) {
+    if (isNaN(userIdStr) && userIdStr.length > 10) {
       userIdStr = userIdStr.substring(userIdStr.lastIndexOf('-') + 1);
       console.log("loadProfile after: ", userIdStr)
     }
-    userId = userIdStr;
+
+    if (userIdStr !== "my-profile") {
+      userId = userIdStr;
+    }
+
     console.log('View User Profile: ', userId);
     console.log('myProfile value: ', profile.myProfile);
 
@@ -329,7 +315,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
 
   return (
     <IonPage className="home-page-athlete-profile" style={{ backgroundColor: '#F9FBFB' }}>
-    <IonContent className="athlete-profile-content" scrollY={true}>
+    <IonContent className="athlete-profile-content" scrollY={false}>
       {!profile.myProfile && (
         <IonButtons
           style={{
@@ -373,6 +359,12 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
           style={{ backgroundImage: `url(${noboProfile.profileBg})` }}
         ></div>
         {profile.myProfile && (
+          <div
+            className="profile-header-container"
+            style={{ backgroundImage: `url('assets/images/my-profile-header.svg')` }}
+          ></div>
+        )}
+        {profile.myProfile && (
           <IonButton
             onClick={(e) => {
               e.preventDefault();
@@ -383,6 +375,15 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
             className="nobo-edit-profile-button"
           >
             Edit
+          </IonButton>
+        )}
+        {!profile.myProfile && (
+          <IonButton
+            fill="clear"
+            color="#1A3A35"
+            className="nobo-follow-profile-button"
+          >
+            FOLLOW
           </IonButton>
         )}
         <div className="profile-bubble-container">
