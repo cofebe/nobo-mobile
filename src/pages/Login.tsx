@@ -12,6 +12,8 @@ import { useHistory } from 'react-router-dom';
 import { UserService } from '../services/UserService';
 import { User } from '../models';
 
+import Input from '../components/Input';
+
 import './Login.scss';
 
 const Login: React.FC = () => {
@@ -99,29 +101,34 @@ const Login: React.FC = () => {
             </IonRow>
             <IonRow>
               <IonCol>
-                <IonInput
-                  className="nobo-input"
+                <Input
+                  invalid={error}
+                  value={email}
+                  className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
                   placeholder="USERNAME"
-                  onIonChange={(e: any) => {
-                    setEmail(e.target.value);
+                  onChange={(val) => {
+                    setEmail(val);
                   }}
-                ></IonInput>
+                />
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol>
-                <IonInput
-                  style={{
-                    border: error ? '1px solid red' : '',
-                    color: error ? 'red' : '',
-                  }}
-                  className="nobo-input"
+                <Input
+                  invalid={error}
+                  // style={{
+                  //   border: error ? '1px solid red' : '',
+                  //   color: error ? 'red' : '',
+                  // }}
+                  value={password}
+                  className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
                   placeholder="PASSWORD"
                   type="password"
-                  onIonChange={(e: any) => {
-                    setPassword(e.target.value);
+                  errorMessage={error ? 'Invalid username or password' : ''}
+                  onChange={(val) => {
+                    setPassword(val);
                   }}
-                ></IonInput>
+                ></Input>
               </IonCol>
             </IonRow>
             <IonRow>

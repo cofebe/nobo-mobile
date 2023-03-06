@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import {
-  IonInput,
-} from '@ionic/react';
+import { IonInput } from '@ionic/react';
+import { TextFieldTypes } from '@ionic/core';
 import './Input.scss';
 
 interface InputProps {
@@ -15,6 +14,7 @@ interface InputProps {
   required?: boolean;
   small?: boolean;
   errorMessage?: string;
+  type?: TextFieldTypes;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -28,6 +28,7 @@ const Input: React.FC<InputProps> = ({
   invalid = false,
   small = false,
   errorMessage,
+  type = 'text',
 }) => {
   const [isDirty, setIsDirty] = useState<boolean>(false);
   const [internalValue, setInternalValue] = useState<string>('');
@@ -40,7 +41,15 @@ const Input: React.FC<InputProps> = ({
   }
 
   return (
-    <div className={'app-input-container ' + (invalid || errorMessage || (required && isDirty && !internalValue) ? 'invalid' : '') + (small ? ' small' : '')}>
+    <div
+      className={
+        'app-input-container ' +
+        (invalid || errorMessage || (required && isDirty && !internalValue)
+          ? 'invalid'
+          : '') +
+        (small ? ' small' : '')
+      }
+    >
       <IonInput
         className={className}
         placeholder={placeholder}
@@ -49,10 +58,9 @@ const Input: React.FC<InputProps> = ({
         disabled={disabled}
         readonly={readonly}
         required={required}
+        type={type}
       />
-      {errorMessage ? (
-        <div className="error-message">{errorMessage}</div>
-      ) : ''}
+      {errorMessage ? <div className="error-message">{errorMessage}</div> : ''}
     </div>
   );
 };

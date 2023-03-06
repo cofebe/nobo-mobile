@@ -94,6 +94,7 @@ http://ionicframework.com/docs/theming/ */
 }
 
 ion-input.nobo-input {
+  height: 2.3125rem;
   --padding-start: 5px;
   --background: #ffffff;
   border: 1px solid #000000;
