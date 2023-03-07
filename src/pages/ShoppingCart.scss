@@ -130,6 +130,15 @@
           font-weight: 600;
           color: #707070;
           padding-bottom: 8px;
+          display: flex;
+          align-items: center;
+
+          ion-icon {
+            display: block;
+            margin-left: 16px;
+            height: 10px;
+            color: #D6980E;
+          }
       }
 
       .summary-info {

@@ -70,6 +70,26 @@ const CheckoutPayment: React.FC = () => {
     history.push('/checkout/summary');
   }
 
+  function getCardImage(brand: string): string {
+    switch (brand) {
+      case 'MasterCard':
+      case 'mastercard':
+      case 'mc':
+        return 'assets/images/cc-mastercard.svg';
+      case 'Discover':
+      case 'discover':
+        return 'assets/images/cc-discover.svg';
+      case 'American Express':
+      case 'AMEX':
+      case 'amex':
+        return 'assets/images/cc-amex.svg';
+      case 'Visa':
+      case 'visa':
+      default:
+        return 'assets/images/cc-visa.svg';
+    }
+  }
+
   return (
     <IonPage className="checkout-payment-container">
       <IonHeader className="checkout-payment-header">
@@ -116,12 +136,19 @@ const CheckoutPayment: React.FC = () => {
                     select(pm);
                   }
                 }}>
-                <div className="select">
-                  <img src={cart.paymentMethod?.id === pm.id ? '/assets/images/checkmark-checked.svg' : '/assets/images/checkmark-unchecked.svg'} alt="select" />
-              </div>
-                <div className="name">{pm.name}</div>
-                <div className="last4">* &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; {pm.last4}</div>
-                <div className="expiration">Exp. {pm.exp_month}/{pm.exp_year}</div>
+                <div className="left">
+                  <div className="logo-container">
+                    <img src={getCardImage(pm.brand)} />
+                  </div>
+                </div>
+                <div className="right">
+                  <div className="select">
+                    <img src={cart.paymentMethod?.id === pm.id ? '/assets/images/checkmark-checked.svg' : '/assets/images/checkmark-unchecked.svg'} alt="select" />
+                  </div>
+                  <div className="name">{pm.name}</div>
+                  <div className="last4">* &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; {pm.last4}</div>
+                  <div className="expiration">Exp. {pm.exp_month}/{pm.exp_year}</div>
+                </div>
               </div>
             ))}
             <div className="footer">

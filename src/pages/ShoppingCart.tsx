@@ -9,8 +9,10 @@ import {
   IonToolbar,
   IonInput,
   IonPage,
+  IonIcon,
   useIonViewWillEnter,
 } from '@ionic/react';
+import { caretUpOutline, caretDownOutline } from 'ionicons/icons';
 import './ShoppingCart.scss';
 import Button from '../components/Button';
 import {
@@ -32,6 +34,7 @@ const ShoppingCartPage: React.FC = () => {
   const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
   const [promoCode, setPromoCode] = useState<string>('');
   const [shippingAddress, setShippingAddress] = useState<Address>();
+  const [showDetails, setShowDetails] = useState<boolean>(true);
 
   useEffect(() => {
     const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
@@ -142,19 +145,28 @@ const ShoppingCartPage: React.FC = () => {
               </div>
             ))}
             <div className="order-summary">
-              <div className="title">Order Summary</div>
-              <div className="summary-info">
-                <div className="label">Subtotal</div>
-                <div className="value">{formatPrice(cart.subtotal)}</div>
+              <div className="title">
+                <div>Order Summary</div>
+                <div><IonIcon icon={showDetails ? caretUpOutline : caretDownOutline} onClick={(e) => {
+                  setShowDetails(!showDetails);
+                }} /></div>
               </div>
-              <div className="summary-info">
-                <div className="label">Shipping</div>
-                <div className="value">{formatPrice(cart.shipping)}</div>
-              </div>
-              <div className="summary-info">
-                <div className="label">Sales Tax</div>
-                <div className="value">{formatPrice(cart.tax)}</div>
-              </div>
+              {showDetails ? (
+                <div>
+                  <div className="summary-info">
+                    <div className="label">Subtotal</div>
+                    <div className="value">{formatPrice(cart.subtotal)}</div>
+                  </div>
+                  <div className="summary-info">
+                    <div className="label">Shipping</div>
+                    <div className="value">{formatPrice(cart.shipping)}</div>
+                  </div>
+                  <div className="summary-info">
+                    <div className="label">Sales Tax</div>
+                    <div className="value">{formatPrice(cart.tax)}</div>
+                  </div>
+                </div>
+              ) : ''}
               <div className="summary-info total">
                 <div className="label">Your Total</div>
                 <div className="value">{formatPrice(cart.total)}</div>

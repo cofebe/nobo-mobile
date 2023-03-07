@@ -64,42 +64,69 @@
       font-size: 12px;
       position: relative;
       border: 1px solid white;
+      display: flex;
+      align-items: start;
 
       &.selected {
         border: 1px solid #D6980E;
       }
 
-      .select {
-        position: absolute;
-        top: 16px;
-        right: 16px;
+      .left {
+        margin-right: 12px;
 
-        img {
-          height: 16px;
-          width: 16px;
+        .logo-container {
+          background-color: white;
+          box-shadow: 0px 0px 4px rgba(112, 112, 112, 0.24);
+          border-radius: 5px;
+          position: relative;
+          height: 40px;
+          width: 40px;
+
+          img {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 32px;
+            max-height: 32px;
+          }
         }
       }
 
-      .name {
-        font-size: 15px;
-        font-weight: 600;
-        text-transform: uppercase;
-      }
+      .right {
+        .select {
+          position: absolute;
+          top: 16px;
+          right: 16px;
 
-      .last4,
-      .expiration {
-        margin-top: 10px;
-      }
+          img {
+            height: 16px;
+            width: 16px;
+          }
+        }
 
-      .last4 {
-        font-size: 15px;
-        font-weight: 600;
-      }
+        .name {
+          font-size: 15px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
 
-      .expiration {
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
+        .last4,
+        .expiration {
+          margin-top: 10px;
+        }
+
+        .last4 {
+          font-size: 15px;
+          font-weight: 600;
+        }
+
+        .expiration {
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
       }
     }
   }

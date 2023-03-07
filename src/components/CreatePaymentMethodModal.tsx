@@ -37,6 +37,8 @@ const CreatePaymentMethodModal = forwardRef<Ref, CreatePaymentMethodModalProps>(
   const [shippingAddress, setShippingAddress] = useState<Address>();
   const [copyShipping, setCopyShipping] = useState<boolean>(false);
 
+  // https://stripe.com/docs/stripe-js/react
+  // https://stripe.com/docs/js/elements_object/create_element?type=card#elements_create-options
   const elementOptions = {
     classes: {
       base: 'stripe-element',
@@ -108,6 +110,7 @@ const CreatePaymentMethodModal = forwardRef<Ref, CreatePaymentMethodModalProps>(
       address_country: 'US',
       currency: 'USD'
     };
+    // https://stripe.com/docs/js/tokens_sources/create_token?type=cardElement
     stripe.createToken(cardNumberElem, data).then(ret => {
       console.log('createToken:ret', ret);
       console.log('Creating payment method', ret);
@@ -156,7 +159,7 @@ const CreatePaymentMethodModal = forwardRef<Ref, CreatePaymentMethodModalProps>(
           <IonGrid>
             <IonRow>
               <IonCol size="12">
-                New Shipping Address
+                New Payment Method
               </IonCol>
             </IonRow>
           </IonGrid>
