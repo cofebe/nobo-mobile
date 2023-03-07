@@ -8,8 +8,12 @@ export function getImageUrl(url: string) {
 }
 
 export function formatPrice(val: number, includeDecimals: boolean = true): string {
+  if (val === null || val === undefined) {
+    return val;
+  }
+
   let ret = '$';
-  ret += val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  ret += val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   if (includeDecimals) {
     if(!ret.includes('.')) {
       ret += '.00';

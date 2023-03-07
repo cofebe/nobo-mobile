@@ -1,7 +1,5 @@
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Product, PaymentMethod, Address } from './models';
-
-const shoppingCartSubject = new Subject<ShoppingCartState>();
 
 export interface ShoppingCartState {
   //id: string;
@@ -27,6 +25,8 @@ const shoppingCartInitialState: ShoppingCartState = {
 
 let shoppingCartState = shoppingCartInitialState;
 let shoppingCartStateUpdating = false;
+
+const shoppingCartSubject = new BehaviorSubject<ShoppingCartState>(shoppingCartInitialState);
 
 function recalculateState(state: ShoppingCartState): ShoppingCartState {
   state.subtotal = state.products.reduce((total, curr) => total + curr.price, 0);

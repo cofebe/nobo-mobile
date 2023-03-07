@@ -9,31 +9,36 @@ import {
   useIonActionSheet,
 } from '@ionic/react';
 import './ExploreHeader.scss';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 
-interface NoboExploreHeaderProps {
-  sectionNameCallback: (sectionName: string) => void;
-  sectionCategoryCallback: (sectionCategory: string) => void;
-}
-
-const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
-  sectionNameCallback,
-  sectionCategoryCallback,
-}) => {
+const NoboExploreHeader: React.FC = () => {
   const history = useHistory();
+  const params: any = useParams();
   const [present] = useIonActionSheet();
 
-  const [activeButton, setActiveButton] = useState<string>('explore');
-  const [activeCategory, setActiveCategory] = useState<string>('WOMEN');
-  const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
+  const [activeButton, setActiveButton] = useState(params.sectionName);
+  const [activeCategory, setActiveCategory] = useState(params.sectionCategory);
+  const [activeCategoryTitle, setActiveCategoryTitle] =
+    useState<string>('WOMAN');
+  const [cart, setCart] = useState<ShoppingCartState>(
+    shoppingCartStore.initialState
+  );
 
   useEffect(() => {
-    const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
-      setCart(cart);
-    });
-
+    const subscription = shoppingCartStore.subscribe(
+      (cart: ShoppingCartState) => {
+        setCart(cart);
+      }
+    );
+    if (activeCategory === 'men') {
+      setActiveCategoryTitle('MEN');
+    } else if (activeCategory === 'women') {
+      setActiveCategoryTitle('WOMEN');
+    } else if (activeCategory === 'sneakers') {
+      setActiveCategoryTitle('SNEAKERS');
+    }
     return () => {
       subscription.unsubscribe();
     };
@@ -41,12 +46,11 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
 
   const handleSectionButtonClick = (section: string) => {
     setActiveButton(section);
-    sectionNameCallback(section);
   };
 
-  useIonViewWillEnter(() => {
-    sectionNameCallback('explore');
-  });
+  // useIonViewWillEnter(() => {
+  //   // sectionNameCallback('explore');
+  // });
 
   const openCategoryOptions = () => {
     present({
@@ -79,14 +83,17 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
           console.log(detail);
         }
         if (detail.data.action === 'women') {
-          setActiveCategory('WOMEN');
-          sectionCategoryCallback('women');
+          setActiveCategoryTitle('WOMEN');
+          setActiveCategory('women');
+          history.replace(`/home/explore/women/${activeButton}`);
         } else if (detail.data.action === 'men') {
-          setActiveCategory('MEN');
-          sectionCategoryCallback('men');
+          setActiveCategoryTitle('MEN');
+          setActiveCategory('men');
+          history.replace(`/home/explore/men/${activeButton}`);
         } else if (detail.data.action === 'sneakers') {
-          setActiveCategory('SNEAKERS');
-          sectionCategoryCallback('sneakers');
+          setActiveCategoryTitle('SNEAKERS');
+          setActiveCategory('sneakers');
+          history.replace(`/home/explore/sneakers/${activeButton}`);
         }
       },
     });
@@ -134,9 +141,7 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
                     src="assets/images/shopping-cart.svg"
                     alt="logo"
                   />
-                  {cart.products.length ? (
-                    <div className="dot"></div>
-                  ) : ''}
+                  {cart.products.length ? <div className="dot"></div> : ''}
                 </div>
               </div>
             </IonCol>
@@ -156,7 +161,7 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
                   fontWeight: 600,
                 }}
               >
-                {activeCategory}
+                {activeCategoryTitle}
               </div>
             </IonCol>
             <IonCol
@@ -180,6 +185,8 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
           <IonRow>
             <IonCol size="3">
               <IonButton
+                routerLink={`/home/explore/${activeCategory}/explore`}
+                routerDirection="none"
                 onClick={() => {
                   handleSectionButtonClick('explore');
                 }}
@@ -200,6 +207,8 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
             </IonCol>
             <IonCol size="3">
               <IonButton
+                routerLink={`/home/explore/${activeCategory}/trade`}
+                routerDirection="none"
                 onClick={() => {
                   handleSectionButtonClick('trade');
                 }}
@@ -220,6 +229,8 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
             </IonCol>
             <IonCol size="3">
               <IonButton
+                routerLink={`/home/explore/${activeCategory}/shop`}
+                routerDirection="none"
                 onClick={() => {
                   handleSectionButtonClick('shop');
                 }}
@@ -240,6 +251,8 @@ const NoboExploreHeader: React.FC<NoboExploreHeaderProps> = ({
             </IonCol>
             <IonCol size="3">
               <IonButton
+                routerLink={`/home/explore/${activeCategory}/sale`}
+                routerDirection="none"
                 onClick={() => {
                   handleSectionButtonClick('sale');
                 }}

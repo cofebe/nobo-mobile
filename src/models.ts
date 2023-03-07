@@ -50,6 +50,22 @@ export interface Address {
   _id: string;
 }
 
+export interface AddressRequest {
+  address1: string;
+  address2: string;
+  city: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  postalCode: string;
+  state: string;
+  notes: string;
+}
+
+export interface CreateShippingAddressResponse {
+  currentUser: User;
+}
+
 export interface ShoppingCartShort {
   _id: string;
   products: string[];
@@ -163,6 +179,14 @@ export interface PaymentMethodsResponse {
   cards: PaymentMethod[];
 }
 
+export interface PaymentCustomer {
+  default_source: string;
+  id: string;
+  name: string;
+  object: string;
+  // other unused properties
+}
+
 export interface PaymentMethod {
   id: string;
   address_line1: string;
@@ -176,5 +200,14 @@ export interface PaymentMethod {
   exp_year: number;
   last4: string;
   name: string;
-  // other unused properties not included
+
+  // these are unused
+  object: string;
+  address_line1_check: string;
+  address_zip_check: string;
+  country: string;
+  cvc_check: string;
+  dynamic_last4: string;
+  funding: string;
+  tokenization_method: string;
 }

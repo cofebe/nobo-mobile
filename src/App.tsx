@@ -1,6 +1,9 @@
 import { Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import { environment } from './environments/environment';
 import Home from './Home';
 import Splash from './pages/Splash';
 import Login from './pages/Login';
@@ -10,6 +13,7 @@ import ForgotReset from './pages/ForgotReset';
 import Roles from './pages/Roles';
 import Chat from './pages/Chat';
 import CheckoutShipping from './pages/CheckoutShipping';
+import CheckoutPayment from './pages/CheckoutPayment';
 import SignUpAthlete from './pages/SignUpAthlete';
 import FilterSearch from './pages/FilterSearch';
 import ContactUs from './pages/ContactUs';
@@ -50,9 +54,12 @@ Keyboard.setResizeMode({ mode: KeyboardResize.Body }).catch(() => {
   /* do nothing */
 });
 
+const stripePromise = loadStripe(environment.stripeApiKey);
+
 document.title = 'The NOBO';
 
 const App: React.FC = () => (
+  <Elements stripe={stripePromise}>
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
@@ -67,6 +74,9 @@ const App: React.FC = () => (
         </Route>
         <Route path="/checkout/shipping" exact={true}>
           <CheckoutShipping />
+        </Route>
+        <Route path="/checkout/payment" exact={true}>
+          <CheckoutPayment />
         </Route>
 
 
@@ -118,6 +128,7 @@ const App: React.FC = () => (
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
+  </Elements>
 );
 
 export default App;
