@@ -211,18 +211,3 @@ export interface PaymentMethod {
   funding: string;
   tokenization_method: string;
 }
-
-export interface PaymentMethodRequest {
-  token: PaymentMethodRequest_Token;
-}
-
-export interface PaymentMethodRequest_Token {
-  id: string;
-  object: string;
-  card: PaymentMethod;
-  //client_id: string;
-  created: string;
-  livemode: boolean;
-  type: string;
-  used: false;
-}
