@@ -10,34 +10,46 @@ import './Explore.scss';
 import ExploreHeader from '../components/ExploreHeader';
 import NoboHomeItem from '../components/NoboHomeItem';
 import { ProductService } from '../services/ProductService';
+import { useHistory, useParams } from 'react-router';
 
 const Explore: React.FC = () => {
   const productService = new ProductService();
-  const [sectionName, setSectionName] = useState('explore');
-  const [sectionCategory, setSectionCategory] = useState('women');
+  const history = useHistory();
+  const params: any = useParams();
+  const [sectionName, setSectionName] = useState(params.sectionName);
+  const [sectionCategory, setSectionCategory] = useState(
+    params.sectionCategory
+  );
   const [products, setProducts] = useState<any>([]);
 
   useIonViewWillEnter(() => {
-    getProducts('women', 'explore', false);
+    const ionRouterOutlet = document.querySelector(
+      'ion-router-outlet'
+    ) as HTMLElement;
+    if (ionRouterOutlet) {
+      ionRouterOutlet.style.setProperty('--animation-duration', '0s');
+    }
+    console.log('params', params);
+    setSectionName(params.sectionName);
+    setSectionCategory(params.sectionCategory);
   });
 
   useEffect(() => {
-    if (sectionName === 'explore') {
-      getProducts(sectionCategory, 'explore', false);
-    } else if (sectionName === 'trade') {
-      getProducts(sectionCategory, 'trade', false);
-    } else if (sectionName === 'sale') {
-      getProducts(sectionCategory, 'sell', true);
-    } else if (sectionName === 'shop') {
-      getProducts(sectionCategory, 'sell', false);
+    if (params.sectionName === 'explore') {
+      getProducts(params.sectionCategory, 'explore', false);
+    } else if (params.sectionName === 'trade') {
+      getProducts(params.sectionCategory, 'trade', false);
+    } else if (params.sectionName === 'sale') {
+      getProducts(params.sectionCategory, 'sell', true);
+    } else if (params.sectionName === 'shop') {
+      getProducts(params.sectionCategory, 'sell', false);
     }
-  }, [sectionName, sectionCategory]);
+  }, [params]);
 
   function getProducts(group: string, action: string, onSale: boolean) {
     productService
       .getProducts(group, action, onSale)
       .then((products) => {
-        //console.log('products', products.docs);
         setProducts(products.docs);
       })
       .catch((error) => {
@@ -45,23 +57,10 @@ const Explore: React.FC = () => {
       });
   }
 
-  const getSectionName = (sectionName: string) => {
-    console.log('sectionName', sectionName);
-    setSectionName(sectionName);
-  };
-
-  const getSectionCategory = (sectionCategory: string) => {
-    console.log('sectionCategory', sectionCategory);
-    setSectionCategory(sectionCategory);
-  };
-
   return (
-    <IonPage className="nobo-home-page">
-      <ExploreHeader
-        sectionCategoryCallback={getSectionCategory}
-        sectionNameCallback={getSectionName}
-      />
-      {sectionName === 'explore' && (
+    <IonPage className="nobo-explore-page">
+      <ExploreHeader />
+      {params.sectionName === 'explore' && (
         <IonContent
           style={{
             '--padding-bottom': '10px',
@@ -71,7 +70,6 @@ const Explore: React.FC = () => {
             '--background': '#FEFCF7',
           }}
         >
-          {/* <IonGrid> */}
           <IonRow>
             <IonCol style={{ height: 350 }} size="12">
               <NoboHomeItem product={products[0]} isBig />
@@ -96,7 +94,7 @@ const Explore: React.FC = () => {
           </IonRow>
         </IonContent>
       )}
-      {sectionName === 'trade' && (
+      {params.sectionName === 'trade' && (
         <IonContent
           style={{
             '--padding-bottom': '10px',
@@ -115,7 +113,7 @@ const Explore: React.FC = () => {
           </IonRow>
         </IonContent>
       )}
-      {sectionName === 'shop' && (
+      {params.sectionName === 'shop' && (
         <IonContent
           style={{
             '--padding-bottom': '10px',
@@ -128,18 +126,13 @@ const Explore: React.FC = () => {
           <IonRow>
             {products.map((product: any, index: any) => (
               <IonCol style={{ height: 175 }} key={index} size="6">
-                <NoboHomeItem
-                  product={product}
-                  // image={environment.serverUrl + product.image}
-                  // price={'$' + product.price}
-                  // tradeOrBuy={product.action}
-                />
+                <NoboHomeItem product={product} />
               </IonCol>
             ))}
           </IonRow>
         </IonContent>
       )}
-      {sectionName === 'sale' && (
+      {params.sectionName === 'sale' && (
         <IonContent
           style={{
             '--padding-bottom': '10px',

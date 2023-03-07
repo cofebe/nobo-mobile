@@ -189,15 +189,12 @@ const Home: React.FC = () => {
       <IonTabs className="nobo-nav-bar-background">
         <IonRouterOutlet>
           <Redirect exact path="/home" to="/home/nobo-home" />
-          {/* <Redirect exact path="/home/athletes" to="/home/feed" /> */}
           <Route exact path="/home/product/:id">
             <ProductDetail />
           </Route>
-          <Route exact path="/home/explore">
+          <Route exact path="/home/explore/:sectionCategory/:sectionName">
             <Explore />
           </Route>
-
-
           <Route exact path="/home/post-promote/:id">
             <PromotePost />
           </Route>
