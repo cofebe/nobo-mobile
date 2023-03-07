@@ -5,8 +5,6 @@ import {
   AddressRequest,
   CreateShippingAddressResponse,
   LoginResponse,
-  PaymentMethod,
-  PaymentMethodRequest,
   PaymentMethodsResponse,
   SuccessResponse,
   User,

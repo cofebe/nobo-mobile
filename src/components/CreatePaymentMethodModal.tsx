@@ -11,7 +11,7 @@ import {
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 import './CreatePaymentMethodModal.scss';
 import { UserService } from '../services/UserService';
-import { User, Address, PaymentMethod, PaymentMethodRequest } from '../models';
+import { User, Address } from '../models';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
