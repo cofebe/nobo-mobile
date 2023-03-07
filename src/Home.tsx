@@ -9,13 +9,20 @@ import {
   useIonViewWillEnter,
   isPlatform,
 } from '@ionic/react';
+import {
+  ActionPerformed,
+  PushNotificationSchema,
+  PushNotifications,
+  Token,
+} from '@capacitor/push-notifications';
+import { Amplify /*, Auth*/ } from 'aws-amplify';
+import './pages/URP.css';
 //import Feed from './pages/Feed';
 import PostDetail from './pages/PostDetail';
 import PromotePost from './pages/PromotePost';
 import PostDetailLikes from './pages/PostDetailLikes';
 import PostStats from './pages/PostStats';
 import Roles from './pages/Roles';
-import './pages/URP.css';
 import ProfilePage from './pages/Profile';
 import Explore from './pages/Explore';
 import PostCreate from './pages/PostCreate';
@@ -28,15 +35,8 @@ import ProfileInsights from './pages/ProfileInsights';
 import ProductDetail from './pages/ProductDetail';
 import { AuthService } from './services/AuthService';
 import { UserService } from './services/UserService';
-import { Amplify /*, Auth*/ } from 'aws-amplify';
 import awsconfig from './aws-exports.js';
 import SignUpAthlete from './pages/SignUpAthlete';
-import {
-  ActionPerformed,
-  PushNotificationSchema,
-  PushNotifications,
-  Token,
-} from '@capacitor/push-notifications';
 import { NotificationService } from './services/NotificationService';
 
 import { viewUser } from './util';

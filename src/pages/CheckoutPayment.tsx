@@ -10,21 +10,22 @@ import {
   IonPage,
   useIonViewWillEnter,
 } from '@ionic/react';
-import './CheckoutShipping.scss';
+import './CheckoutPayment.scss';
 import Button from '../components/Button';
 import {
   Address,
-  User,
+  PaymentMethod,
+  PaymentMethodsResponse,
 } from '../models';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import { UserService } from '../services/UserService';
-import CreateShippingAddressModal from '../components/CreateShippingAddressModal';
+import CreatePaymentMethodModal from '../components/CreatePaymentMethodModal';
 
-const CheckoutShipping: React.FC = () => {
+const CheckoutPayment: React.FC = () => {
   const history = useHistory();
   const userService = new UserService();
   const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
-  const [shippingAddresses, setShippingAddresses] = useState<Address[]>([]);
+  const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
 
   const modal = useRef<HTMLIonModalElement>(null);
 
@@ -44,21 +45,21 @@ const CheckoutShipping: React.FC = () => {
 
   useIonViewWillEnter(() => {
     userService
-      .getMe()
-      .then((user: User) => {
-        setShippingAddresses(user.shippingAddress);
+      .getPaymentMethods()
+      .then((res: PaymentMethodsResponse) => {
+        setPaymentMethods(res.cards);
 
-        if (!cart.shippingAddress) {
-          const addr = user.shippingAddress.find(a => a.default);
-          if (addr) {
-            shoppingCartStore.setShippingAddress(addr);
+        if (!cart.paymentMethod) {
+          const pm = res.cards.find(c => c.id === res.customer.default_source);
+          if (pm) {
+            shoppingCartStore.setPaymentMethod(pm);
           }
         }
       });
   });
 
-  function select(addr: Address) {
-    shoppingCartStore.setShippingAddress(addr);
+  function select(pm: PaymentMethod) {
+    shoppingCartStore.setPaymentMethod(pm);
   }
 
   function addNew() {
@@ -66,13 +67,13 @@ const CheckoutShipping: React.FC = () => {
   }
 
   function next() {
-    history.push('/checkout/payment');
+    history.push('/checkout/summary');
   }
 
   return (
-    <IonPage className="checkout-shipping-container">
-      <IonHeader className="checkout-shipping-header">
-        <IonToolbar className="checkout-shipping-header-toolbar">
+    <IonPage className="checkout-payment-container">
+      <IonHeader className="checkout-payment-header">
+        <IonToolbar className="checkout-payment-header-toolbar">
           <IonGrid>
             <IonRow>
               <IonCol size="12">
@@ -85,14 +86,14 @@ const CheckoutShipping: React.FC = () => {
                     <img src="assets/images/arrow-left.svg" alt="back" />
                   </div>
 
-                  Shipping Address
+                  Payment
                 </div>
               </IonCol>
             </IonRow>
           </IonGrid>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="checkout-shipping-content" scrollY={false}>
+      <IonContent className="checkout-payment-content" scrollY={false}>
         <div className="add-container" onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -102,36 +103,30 @@ const CheckoutShipping: React.FC = () => {
             <img src="assets/images/add-square.svg" alt="add shipping address" />
           </div>
           <div>
-            New Address
+            New Card
           </div>
         </div>
-        {shippingAddresses.length ? (
+        {paymentMethods.length ? (
           <div>
-            {shippingAddresses.map(addr => (
-              <div className={'checkout-shipping-item ' + (cart.shippingAddress?._id === addr._id ? 'selected' : '')} key={addr._id} onClick={(e) => {
+            {paymentMethods.map(pm => (
+              <div className={'checkout-payment-item ' + (cart.paymentMethod?.id === pm.id ? 'selected' : '')} key={pm.id} onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  if (cart.shippingAddress?._id !== addr._id) {
-                    select(addr);
+                  if (cart.paymentMethod?.id !== pm.id) {
+                    select(pm);
                   }
                 }}>
                 <div className="select">
-                  <img src={cart.shippingAddress?._id === addr._id ? '/assets/images/checkmark-checked.svg' : '/assets/images/checkmark-unchecked.svg'} alt="select" />
+                  <img src={cart.paymentMethod?.id === pm.id ? '/assets/images/checkmark-checked.svg' : '/assets/images/checkmark-unchecked.svg'} alt="select" />
               </div>
-                <div className="name">{addr.firstName} {addr.lastName}</div>
-                <div className="address1">{addr.address1}</div>
-                {addr.address2 ? (
-                  <div className="address2">{addr.address2}</div>
-                ) : ''}
-                <div className="city">{addr.city}</div>
-                <div className="state">{addr.state}</div>
-                <div className="zip">{addr.postalCode}</div>
-                <div className="phone">{addr.phone}</div>
+                <div className="name">{pm.name}</div>
+                <div className="last4">* &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; {pm.last4}</div>
+                <div className="expiration">Exp. {pm.exp_month}/{pm.exp_year}</div>
               </div>
             ))}
             <div className="footer">
               <div className="button-container">
-                <Button label="Next" large={true} disabled={!cart.shippingAddress} onClick={(e: any) => {
+                <Button label="Next" large={true} disabled={!cart.paymentMethod} onClick={(e: any) => {
                   e.preventDefault();
                   e.stopPropagation();
                   next();
@@ -141,25 +136,29 @@ const CheckoutShipping: React.FC = () => {
           </div>
         ) : (
           <div className="empty-cart">
-            No shipping addresses defined!
+            No payment methods defined!
           </div>
         )}
       </IonContent>
 
-      <CreateShippingAddressModal ref={modal} onClose={(addresses: Address[]) => {
-        console.log('add address', addresses);
-        setShippingAddresses(addresses);
+      <CreatePaymentMethodModal ref={modal} onClose={() => {
+        console.log('add payment method');
+        userService
+          .getPaymentMethods()
+          .then((res: PaymentMethodsResponse) => {
+            setPaymentMethods(res.cards);
 
-        if (!cart.shippingAddress) {
-          const addr = addresses.find(a => a.default);
-          if (addr) {
-            shoppingCartStore.setShippingAddress(addr);
-          }
-        }
-        modal.current?.dismiss();
+            if (!cart.paymentMethod) {
+              const pm = res.cards.find(c => c.id === res.customer.default_source);
+              if (pm) {
+                shoppingCartStore.setPaymentMethod(pm);
+              }
+            }
+            modal.current?.dismiss();
+          });
       }} />
     </IonPage>
   );
 };
 
-export default CheckoutShipping;
+export default CheckoutPayment;

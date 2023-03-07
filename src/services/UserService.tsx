@@ -2,10 +2,14 @@ import { BaseService } from './BaseService';
 import { environment } from '../environments/environment';
 import { AuthService } from './AuthService';
 import {
-  User,
-  LoginResponse,
   AddressRequest,
   CreateShippingAddressResponse,
+  LoginResponse,
+  PaymentMethod,
+  PaymentMethodRequest,
+  PaymentMethodsResponse,
+  SuccessResponse,
+  User,
 } from '../models';
 
 const API_URL = environment.serverUrl + '/api';
@@ -84,6 +88,27 @@ export class UserService extends BaseService {
     const res = await super.fetch('POST', '/api/users/shipping-address', body);
     const json: CreateShippingAddressResponse = await res.json();
     return json.currentUser;
+  }
+
+  async getPaymentMethods(): Promise<PaymentMethodsResponse> {
+    const res = await super.fetch('GET', '/api/orders/payment-methods');
+    const json: PaymentMethodsResponse = await res.json();
+    return json;
+  }
+
+  async addPaymentMethod(data: any): Promise<boolean> {
+    const res = await super.fetch('POST', '/api/orders/add-payment-method', data);
+    const json: SuccessResponse = await res.json();
+    return json.success;
+  }
+
+  async setDefaultPaymentMethod(id: string): Promise<boolean> {
+    const body = {
+      cardID: id,
+    };
+    const res = await super.fetch('POST', '/api/orders/default-payment-method', body);
+    const json: SuccessResponse = await res.json();
+    return json.success;
   }
 
   // From URP

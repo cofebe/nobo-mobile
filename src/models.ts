@@ -179,6 +179,14 @@ export interface PaymentMethodsResponse {
   cards: PaymentMethod[];
 }
 
+export interface PaymentCustomer {
+  default_source: string;
+  id: string;
+  name: string;
+  object: string;
+  // other unused properties
+}
+
 export interface PaymentMethod {
   id: string;
   address_line1: string;
@@ -192,5 +200,29 @@ export interface PaymentMethod {
   exp_year: number;
   last4: string;
   name: string;
-  // other unused properties not included
+
+  // these are unused
+  object: string;
+  address_line1_check: string;
+  address_zip_check: string;
+  country: string;
+  cvc_check: string;
+  dynamic_last4: string;
+  funding: string;
+  tokenization_method: string;
+}
+
+export interface PaymentMethodRequest {
+  token: PaymentMethodRequest_Token;
+}
+
+export interface PaymentMethodRequest_Token {
+  id: string;
+  object: string;
+  card: PaymentMethod;
+  //client_id: string;
+  created: string;
+  livemode: boolean;
+  type: string;
+  used: false;
 }
