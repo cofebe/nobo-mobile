@@ -211,3 +211,35 @@ export interface PaymentMethod {
   funding: string;
   tokenization_method: string;
 }
+
+export interface Order {
+  products: string[] | Product[];
+  fromVendors: User[];
+  _id: string;
+  shippingAddress: Address;
+  customer: string;
+  status: string;
+  taxes: any;
+  shippingFees: any;
+  subtotal: number;
+  createdAt: string;
+  updatedAt: string;
+  uniqueNumber: string;
+  salesTax: number;
+  shipping: number;
+  total: number;
+  charge: any;
+}
+
+export interface OrdersResponse {
+  docs: Order[];
+  totalDocs: number;
+  limit: number;
+  totalPages: number;
+  page: number;
+  pagingCounter: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+  prevPage: string;
+  nextPage: string;
+}

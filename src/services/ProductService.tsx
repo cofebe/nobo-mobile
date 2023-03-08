@@ -6,6 +6,8 @@ import {
   ShoppingCartResponse,
   TaxShippingResponse,
   Address,
+  Order,
+  OrdersResponse,
 } from '../models';
 
 export class ProductService extends BaseService {
@@ -83,6 +85,21 @@ export class ProductService extends BaseService {
       { address }
     );
     const json: TaxShippingResponse = await res.json();
+    return json;
+  }
+
+  async placeOrder(address: Address, paymentMethodId: string): Promise<Order> {
+    const res = await super.fetch('POST', '/api/orders/finalize', {
+      shippingAddress: address,
+      source: paymentMethodId,
+    });
+    const json: Order = await res.json();
+    return json;
+  }
+
+  async getOrders(): Promise<OrdersResponse> {
+    const res = await super.fetch('GET', '/api/orders/my-purchases');
+    const json: OrdersResponse = await res.json();
     return json;
   }
 }

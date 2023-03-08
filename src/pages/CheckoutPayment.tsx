@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonContent,
@@ -9,41 +9,46 @@ import {
   IonToolbar,
   IonPage,
   useIonViewWillEnter,
+  useIonViewWillLeave,
 } from '@ionic/react';
 import './CheckoutPayment.scss';
 import Button from '../components/Button';
 import {
-  Address,
+  User,
   PaymentMethod,
   PaymentMethodsResponse,
 } from '../models';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import { UserService } from '../services/UserService';
 import CreatePaymentMethodModal from '../components/CreatePaymentMethodModal';
+import { getCardImage } from '../utils';
 
 const CheckoutPayment: React.FC = () => {
   const history = useHistory();
   const userService = new UserService();
   const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
+  const [experience, setExperience] = useState<string>('women');
+  let subscription: any;
 
   const modal = useRef<HTMLIonModalElement>(null);
 
-  useEffect(() => {
-    const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
+  useIonViewWillEnter(() => {
+    subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
+      if (cart.isInitial) {
+        return;
+      }
+
       setCart(cart);
 
-      if (cart.total === 0) {
-        history.goBack();
+      if (!cart.products.length) {
+        const url = `/home/explore/${experience}/explore`;
+        console.log('Checkout payment: No products in cart. Redirecting to', url);
+        history.push(url);
+        return;
       }
     });
 
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
-
-  useIonViewWillEnter(() => {
     userService
       .getPaymentMethods()
       .then((res: PaymentMethodsResponse) => {
@@ -56,6 +61,16 @@ const CheckoutPayment: React.FC = () => {
           }
         }
       });
+
+    userService
+      .getMe()
+      .then((user: User) => {
+        setExperience(user.experiencePreferences);
+      });
+  });
+
+  useIonViewWillLeave(() => {
+    subscription?.unsubscribe();
   });
 
   function select(pm: PaymentMethod) {
@@ -68,26 +83,6 @@ const CheckoutPayment: React.FC = () => {
 
   function next() {
     history.push('/checkout/summary');
-  }
-
-  function getCardImage(brand: string): string {
-    switch (brand) {
-      case 'MasterCard':
-      case 'mastercard':
-      case 'mc':
-        return 'assets/images/cc-mastercard.svg';
-      case 'Discover':
-      case 'discover':
-        return 'assets/images/cc-discover.svg';
-      case 'American Express':
-      case 'AMEX':
-      case 'amex':
-        return 'assets/images/cc-amex.svg';
-      case 'Visa':
-      case 'visa':
-      default:
-        return 'assets/images/cc-visa.svg';
-    }
   }
 
   return (
@@ -138,7 +133,7 @@ const CheckoutPayment: React.FC = () => {
                 }}>
                 <div className="left">
                   <div className="logo-container">
-                    <img src={getCardImage(pm.brand)} />
+                    <img src={getCardImage(pm.brand)} alt="card brand" />
                   </div>
                 </div>
                 <div className="right">
