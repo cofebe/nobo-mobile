@@ -7,7 +7,6 @@ import {
   TaxShippingResponse,
   Address,
   Order,
-  OrdersResponse,
 } from '../models';
 
 export class ProductService extends BaseService {
@@ -94,12 +93,6 @@ export class ProductService extends BaseService {
       source: paymentMethodId,
     });
     const json: Order = await res.json();
-    return json;
-  }
-
-  async getOrders(): Promise<OrdersResponse> {
-    const res = await super.fetch('GET', '/api/orders/my-purchases');
-    const json: OrdersResponse = await res.json();
     return json;
   }
 }

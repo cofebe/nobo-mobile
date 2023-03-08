@@ -15,6 +15,7 @@ import Chat from './pages/Chat';
 import CheckoutShipping from './pages/CheckoutShipping';
 import CheckoutPayment from './pages/CheckoutPayment';
 import CheckoutSummary from './pages/CheckoutSummary';
+import CheckoutComplete from './pages/CheckoutComplete';
 import SignUpAthlete from './pages/SignUpAthlete';
 import FilterSearch from './pages/FilterSearch';
 import ContactUs from './pages/ContactUs';
@@ -81,6 +82,9 @@ const App: React.FC = () => (
         </Route>
         <Route path="/checkout/summary" exact={true}>
           <CheckoutSummary />
+        </Route>
+        <Route path="/checkout/order/:id" exact={true}>
+          <CheckoutComplete />
         </Route>
 
 

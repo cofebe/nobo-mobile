@@ -213,7 +213,26 @@ export interface PaymentMethod {
 }
 
 export interface Order {
-  products: string[] | Product[];
+  products: string[];
+  fromVendors: User[];
+  _id: string;
+  shippingAddress: Address;
+  customer: string;
+  status: string;
+  taxes: any;
+  shippingFees: any;
+  subtotal: number;
+  createdAt: string;
+  updatedAt: string;
+  uniqueNumber: string;
+  salesTax: number;
+  shipping: number;
+  total: number;
+  charge: any;
+}
+
+export interface FullOrder {
+  products: Product[];
   fromVendors: User[];
   _id: string;
   shippingAddress: Address;
@@ -232,7 +251,7 @@ export interface Order {
 }
 
 export interface OrdersResponse {
-  docs: Order[];
+  docs: FullOrder[];
   totalDocs: number;
   limit: number;
   totalPages: number;
@@ -242,4 +261,8 @@ export interface OrdersResponse {
   hasNextPage: boolean;
   prevPage: string;
   nextPage: string;
+}
+
+export interface OrderResponse {
+  order: FullOrder;
 }

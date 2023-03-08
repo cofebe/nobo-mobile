@@ -156,12 +156,13 @@ const ShoppingCartPage: React.FC = () => {
 
     productService.placeOrder(shippingAddress, paymentMethod.id).then((order: Order) => {
       console.log('order', order);
+      shoppingCartStore.reset();
       history.push(`/checkout/order/${order._id}`);
     });
   }
 
   return (
-    <IonPage className="cart-container">
+    <IonPage className="checkout-summary-container">
       <IonHeader className="cart-header">
         <IonToolbar className="cart-header-toolbar">
           <IonGrid>

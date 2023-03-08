@@ -1,4 +1,4 @@
-.checkout-summary-container {
+.checkout-complete-container {
   background-color: #FEFCF7;
 
   .cart-header {
@@ -10,24 +10,11 @@
 
       .title {
         position: relative;
-        font-size: 15px;
-        font-weight: 600;
+        font-size: 20px;
         text-align: center;
+        font-family: Baskerville;
         margin-top: 35px;
         text-transform: uppercase;
-
-        .back-button {
-          position: absolute;
-          top: 50%;
-          left: 20px;
-          transform: translateY(-50%);
-
-          img {
-            height: 24px;
-            width: 24px;
-            display: block;
-          }
-        }
       }
     }
   }
@@ -36,8 +23,29 @@
     --padding-start: 20px;
     --padding-end: 20px;
     --padding-bottom: 20px;
-    --padding-top: 40px;
+    --padding-top: 10px;
     --background: #FEFCF7;
+
+    .thank-container {
+      margin-bottom: 24px;
+
+      .top {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .text {
+        font-size: 12px;
+        color: #707070;
+        margin-top: 14px;
+        line-height: 20px;
+
+        .link {
+          text-decoration: underline;
+        }
+      }
+    }
 
     .cart-placeholder-item {
       background: white;
@@ -99,15 +107,6 @@
         flex: 1;
         position: relative;
 
-        .remove {
-          position: absolute;
-          top: 0;
-          right: 0;
-          text-transform: uppercase;
-          font-size: 10px;
-          color: #ACACAC;
-        }
-
         .brand {
           font-size: 10px;
           font-weight: 700;
@@ -147,10 +146,68 @@
       }
     }
 
-    .email-summary,
-    .billing-summary,
-    .shipping-summary,
-    .payment-summary,
+    .checkout-payment-item {
+      background: #FEFCF7;
+      box-shadow: 0px 0px 10px #EDEAE3;
+      border-radius: 5px;
+      padding: 16px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      font-size: 12px;
+      position: relative;
+      border: 1px solid white;
+      display: flex;
+      align-items: flex-start;
+
+      .left {
+        margin-right: 12px;
+
+        .logo-container {
+          background-color: white;
+          box-shadow: 0px 0px 4px rgba(112, 112, 112, 0.24);
+          border-radius: 5px;
+          position: relative;
+          height: 40px;
+          width: 40px;
+
+          img {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 32px;
+            max-height: 32px;
+          }
+        }
+      }
+
+      .right {
+
+        .name {
+          font-size: 15px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+
+        .last4,
+        .expiration {
+          margin-top: 4px;
+        }
+
+        .last4 {
+          font-size: 15px;
+          font-weight: 600;
+        }
+
+        .expiration {
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+      }
+    }
+
     .order-summary {
       font-size: 12px;
 
@@ -168,43 +225,6 @@
             height: 10px;
             color: #D6980E;
           }
-      }
-
-      .email {
-        font-size: 10px;
-        padding-top: 6px;
-        padding-bottom: 14px;
-        text-transform: uppercase;
-      }
-
-      .details {
-        font-size: 8px;
-        padding-left: 20px;
-        padding-bottom: 8px;
-
-        .phone {
-          margin-top: 8px;
-        }
-
-        &.payment {
-          padding-left: 0;
-          display: flex;
-          align-items: flex-start;
-
-          .logo-container {
-            background-color: white;
-            box-shadow: 0px 0px 4px rgba(112, 112, 112, 0.24);
-            border-radius: 5px;
-            padding: 4px 6px;
-            margin-right: 10px;
-
-            img {
-              display: block;
-              max-width: 24px;
-              max-height: 24px;
-            }
-          }
-        }
       }
 
       .summary-info {
@@ -238,7 +258,13 @@
     margin-top: 30px;
 
     .button-container {
-      margin-top: 20px;
+      margin-top: 60px;
+      padding-left: 20px;
+      padding-right: 20px;
+
+      ion-button {
+        margin-bottom: 14px;
+      }
     }
   }
 }

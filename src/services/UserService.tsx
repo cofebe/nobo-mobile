@@ -8,6 +8,9 @@ import {
   PaymentMethodsResponse,
   SuccessResponse,
   User,
+  FullOrder,
+  OrderResponse,
+  OrdersResponse,
 } from '../models';
 
 const API_URL = environment.serverUrl + '/api';
@@ -109,7 +112,19 @@ export class UserService extends BaseService {
     return json.success;
   }
 
-  // From URP
+  async getOrders(): Promise<OrdersResponse> {
+    const res = await super.fetch('GET', '/api/orders/my-purchases');
+    const json: OrdersResponse = await res.json();
+    return json;
+  }
+
+  async getOrder(id: string): Promise<FullOrder> {
+    const res = await super.fetch('GET', `/api/orders/my-purchases/${id}`);
+    const json: OrderResponse = await res.json();
+    return json.order;
+  }
+
+  // From URP /////////////////////////////////////////////////////////////////
   getUserCache() {
     let user: any = {};
     if (window.localStorage.getItem('persistedState')) {
