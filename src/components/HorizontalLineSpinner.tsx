@@ -7,7 +7,7 @@ const HorizontalLineSpinner: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentLine((currentLine + 1) % 7);
-    }, 1500);
+    }, 750);
 
     return () => clearInterval(interval);
   }, [currentLine]);
