@@ -7,12 +7,14 @@ interface NoboItemProps {
   children?: React.ReactNode;
   product: any;
   isBig?: boolean;
+  isSneaker?: boolean;
 }
 
 const NoboHomeItem: React.FC<NoboItemProps> = ({
   children,
   product,
   isBig,
+  isSneaker,
 }) => {
   const history = useHistory();
 
@@ -30,7 +32,9 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
         e.preventDefault();
         e.stopPropagation();
         console.log('product', product);
-        history.push(`/home/product/${product._id}`);
+        isSneaker
+          ? history.push(`/home/product/sneakers/${product._id}`)
+          : history.push(`/home/product/${product._id}`);
       }}
     >
       {isBig ? (
