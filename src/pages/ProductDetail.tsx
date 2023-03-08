@@ -263,19 +263,24 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                 {product.name}
               </IonCol>
             </IonRow>
-            <IonRow>
-              <IonCol size="10" offset="1" className="product-price">
-                <span>Cost</span> {formatPrice(price)}
-              </IonCol>
-            </IonRow>
-            <IonRow className="product-info">
-              <IonCol size="4" className="label">
-                Condition
-              </IonCol>
-              <IonCol size="8" className="value">
-                {getAttributeValue('condition')}
-              </IonCol>
-            </IonRow>
+            {!isSneaker && (
+              <>
+                <IonRow>
+                  <IonCol size="10" offset="1" className="product-price">
+                    <span>Cost</span> {formatPrice(price)}
+                  </IonCol>
+                </IonRow>
+
+                <IonRow className="product-info">
+                  <IonCol size="4" className="label">
+                    Condition
+                  </IonCol>
+                  <IonCol size="8" className="value">
+                    {getAttributeValue('condition')}
+                  </IonCol>
+                </IonRow>
+              </>
+            )}
             {getAttributeValue('materialAny') ? (
               <IonRow className="product-info">
                 <IonCol size="4" className="label">
@@ -287,6 +292,46 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
               </IonRow>
             ) : (
               ''
+            )}
+            {/* {getAttributeValue('yearReleased') && isSneaker && (
+              <IonRow className="product-info">
+                <IonCol size="4" className="label">
+                  Year Released
+                </IonCol>
+                <IonCol size="8" className="value">
+                  {getAttributeValue('yearReleased')}
+                </IonCol>
+              </IonRow>
+            )} */}
+            {getAttributeValue('material') && isSneaker && (
+              <IonRow className="product-info">
+                <IonCol size="4" className="label">
+                  Material
+                </IonCol>
+                <IonCol size="8" className="value">
+                  {getAttributeValue('material')}
+                </IonCol>
+              </IonRow>
+            )}
+            {/* {getAttributeValue('SKU') && isSneaker && (
+              <IonRow className="product-info">
+                <IonCol size="4" className="label">
+                  SKU
+                </IonCol>
+                <IonCol size="8" className="value">
+                  {getAttributeValue('SKU')}
+                </IonCol>
+              </IonRow>
+            )} */}
+            {getAttributeValue('colorway') && isSneaker && (
+              <IonRow className="product-info">
+                <IonCol size="4" className="label">
+                  Colorway
+                </IonCol>
+                <IonCol size="8" className="value">
+                  {getAttributeValue('colorway')}
+                </IonCol>
+              </IonRow>
             )}
             {getAttributeValue('size') ? (
               <IonRow className="product-info">
@@ -300,30 +345,31 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
             ) : (
               ''
             )}
-            <IonRow className="product-info">
-              <IonCol size="4" className="label">
-                Color
-              </IonCol>
-              <IonCol size="8" className="value">
-                {getAttributeValue('color')}
-              </IonCol>
-            </IonRow>
-            <IonRow className="buttons">
-              <IonCol size="6" className="button-container left">
-                <Button
-                  label="Offer"
-                  type="faded"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    offer();
-                  }}
-                />
-              </IonCol>
-              <IonCol size="6" className="button-container right">
-                {cart.products.find((p) => p._id === product._id) ? (
+            {!isSneaker && (
+              <IonRow className="product-info">
+                <IonCol size="4" className="label">
+                  Color
+                </IonCol>
+                <IonCol size="8" className="value">
+                  {getAttributeValue('color')}
+                </IonCol>
+              </IonRow>
+            )}
+            {isSneaker ? (
+              <IonRow className="buttons">
+                <IonCol size="6" className="button-container left">
                   <Button
-                    label="View Cart"
+                    label="Buy New"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      offer();
+                    }}
+                  />
+                </IonCol>
+                <IonCol size="6" className="button-container right">
+                  <Button
+                    label="Buy Used"
                     type="secondary"
                     onClick={(e) => {
                       e.preventDefault();
@@ -331,32 +377,62 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                       showCart();
                     }}
                   />
-                ) : (
+                </IonCol>
+              </IonRow>
+            ) : (
+              <IonRow className="buttons">
+                <IonCol size="6" className="button-container left">
                   <Button
-                    label="Add to Cart"
-                    type="primary"
+                    label="Offer"
+                    type="faded"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      addToCart();
+                      offer();
                     }}
                   />
-                )}
-              </IonCol>
-            </IonRow>
-            <IonRow className="">
-              <IonCol size="12" className="button-container left right">
-                <Button
-                  label="Message"
-                  type="secondary"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    message();
-                  }}
-                />
-              </IonCol>
-            </IonRow>
+                </IonCol>
+                <IonCol size="6" className="button-container right">
+                  {cart.products.find((p) => p._id === product._id) ? (
+                    <Button
+                      label="View Cart"
+                      type="secondary"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        showCart();
+                      }}
+                    />
+                  ) : (
+                    <Button
+                      label="Add to Cart"
+                      type="primary"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        addToCart();
+                      }}
+                    />
+                  )}
+                </IonCol>
+              </IonRow>
+            )}
+
+            {!isSneaker && (
+              <IonRow className="">
+                <IonCol size="12" className="button-container left right">
+                  <Button
+                    label="Message"
+                    type="secondary"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      message();
+                    }}
+                  />
+                </IonCol>
+              </IonRow>
+            )}
           </IonGrid>
           <IonGrid
             className="trade-tooltip"
@@ -383,81 +459,85 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
             <IonRow className="blurb">
               <IonCol>{product.description}</IonCol>
             </IonRow>
-            <IonRow className="title">
-              <IonCol>Owner</IonCol>
-            </IonRow>
             {!isSneaker && (
-              <IonRow
-                className="owner"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  console.log('go to profile', product.vendor._id);
-                  history.push(`/home/profile/${product.vendor._id}`);
-                }}
-              >
-                <IonCol size="1">
-                  <div
-                    className="avatar"
-                    style={{
-                      backgroundImage: getImageUrl(product.vendor.avatar),
-                    }}
-                  ></div>
-                </IonCol>
-                <IonCol size="11">
-                  <div className="username">@{product.vendor.displayName}</div>
-                  <div className="rating">
-                    <svg
-                      width="91"
-                      height="11"
-                      viewBox="0 0 91 11"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g>
-                        <path
-                          d="M5.85224 0.382694L4.37846 3.22723L1.08106 3.68484C0.489741 3.76648 0.252761 4.46043 0.681581 4.85789L3.06717 7.07078L2.50294 10.1968C2.40137 10.7618 3.02655 11.185 3.55016 10.9208L6.49998 9.4448L9.44981 10.9208C9.97342 11.1829 10.5986 10.7618 10.497 10.1968L9.9328 7.07078L12.3184 4.85789C12.7472 4.46043 12.5102 3.76648 11.9189 3.68484L8.62151 3.22723L7.14773 0.382694C6.88367 -0.124337 6.11856 -0.130782 5.85224 0.382694Z"
-                          fill={
-                            product.vendor.rating > 0 ? '#000' : '#ACACAC66'
-                          }
-                        />
-                      </g>
-                      <g>
-                        <path
-                          d="M24.8522 0.382694L23.3785 3.22723L20.0811 3.68484C19.4897 3.76648 19.2528 4.46043 19.6816 4.85789L22.0672 7.07078L21.5029 10.1968C21.4014 10.7618 22.0265 11.185 22.5502 10.9208L25.5 9.4448L28.4498 10.9208C28.9734 11.1829 29.5986 10.7618 29.497 10.1968L28.9328 7.07078L31.3184 4.85789C31.7472 4.46043 31.5102 3.76648 30.9189 3.68484L27.6215 3.22723L26.1477 0.382694C25.8837 -0.124337 25.1186 -0.130782 24.8522 0.382694Z"
-                          fill={
-                            product.vendor.rating > 1 ? '#000' : '#ACACAC66'
-                          }
-                        />
-                      </g>
-                      <g>
-                        <path
-                          d="M43.8522 0.382694L42.3785 3.22723L39.0811 3.68484C38.4897 3.76648 38.2528 4.46043 38.6816 4.85789L41.0672 7.07078L40.5029 10.1968C40.4014 10.7618 41.0265 11.185 41.5502 10.9208L44.5 9.4448L47.4498 10.9208C47.9734 11.1829 48.5986 10.7618 48.497 10.1968L47.9328 7.07078L50.3184 4.85789C50.7472 4.46043 50.5102 3.76648 49.9189 3.68484L46.6215 3.22723L45.1477 0.382694C44.8837 -0.124337 44.1186 -0.130782 43.8522 0.382694Z"
-                          fill={
-                            product.vendor.rating > 2 ? '#000' : '#ACACAC66'
-                          }
-                        />
-                      </g>
-                      <g>
-                        <path
-                          d="M62.8522 0.382694L61.3785 3.22723L58.0811 3.68484C57.4897 3.76648 57.2528 4.46043 57.6816 4.85789L60.0672 7.07078L59.5029 10.1968C59.4014 10.7618 60.0265 11.185 60.5502 10.9208L63.5 9.4448L66.4498 10.9208C66.9734 11.1829 67.5986 10.7618 67.497 10.1968L66.9328 7.07078L69.3184 4.85789C69.7472 4.46043 69.5102 3.76648 68.9189 3.68484L65.6215 3.22723L64.1477 0.382694C63.8837 -0.124337 63.1186 -0.130782 62.8522 0.382694Z"
-                          fill={
-                            product.vendor.rating > 3 ? '#000' : '#ACACAC66'
-                          }
-                        />
-                      </g>
-                      <g>
-                        <path
-                          d="M83.8522 0.382694L82.3785 3.22723L79.0811 3.68484C78.4897 3.76648 78.2528 4.46043 78.6816 4.85789L81.0672 7.07078L80.5029 10.1968C80.4014 10.7618 81.0265 11.185 81.5502 10.9208L84.5 9.4448L87.4498 10.9208C87.9734 11.1829 88.5986 10.7618 88.497 10.1968L87.9328 7.07078L90.3184 4.85789C90.7472 4.46043 90.5102 3.76648 89.9189 3.68484L86.6215 3.22723L85.1477 0.382694C84.8837 -0.124337 84.1186 -0.130782 83.8522 0.382694Z"
-                          fill={
-                            product.vendor.rating > 4 ? '#000' : '#ACACAC66'
-                          }
-                        />
-                      </g>
-                    </svg>
-                  </div>
-                </IonCol>
-              </IonRow>
+              <>
+                <IonRow className="title">
+                  <IonCol>Owner</IonCol>
+                </IonRow>
+                <IonRow
+                  className="owner"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('go to profile', product.vendor._id);
+                    history.push(`/home/profile/${product.vendor._id}`);
+                  }}
+                >
+                  <IonCol size="1">
+                    <div
+                      className="avatar"
+                      style={{
+                        backgroundImage: getImageUrl(product.vendor.avatar),
+                      }}
+                    ></div>
+                  </IonCol>
+                  <IonCol size="11">
+                    <div className="username">
+                      @{product.vendor.displayName}
+                    </div>
+                    <div className="rating">
+                      <svg
+                        width="91"
+                        height="11"
+                        viewBox="0 0 91 11"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g>
+                          <path
+                            d="M5.85224 0.382694L4.37846 3.22723L1.08106 3.68484C0.489741 3.76648 0.252761 4.46043 0.681581 4.85789L3.06717 7.07078L2.50294 10.1968C2.40137 10.7618 3.02655 11.185 3.55016 10.9208L6.49998 9.4448L9.44981 10.9208C9.97342 11.1829 10.5986 10.7618 10.497 10.1968L9.9328 7.07078L12.3184 4.85789C12.7472 4.46043 12.5102 3.76648 11.9189 3.68484L8.62151 3.22723L7.14773 0.382694C6.88367 -0.124337 6.11856 -0.130782 5.85224 0.382694Z"
+                            fill={
+                              product.vendor.rating > 0 ? '#000' : '#ACACAC66'
+                            }
+                          />
+                        </g>
+                        <g>
+                          <path
+                            d="M24.8522 0.382694L23.3785 3.22723L20.0811 3.68484C19.4897 3.76648 19.2528 4.46043 19.6816 4.85789L22.0672 7.07078L21.5029 10.1968C21.4014 10.7618 22.0265 11.185 22.5502 10.9208L25.5 9.4448L28.4498 10.9208C28.9734 11.1829 29.5986 10.7618 29.497 10.1968L28.9328 7.07078L31.3184 4.85789C31.7472 4.46043 31.5102 3.76648 30.9189 3.68484L27.6215 3.22723L26.1477 0.382694C25.8837 -0.124337 25.1186 -0.130782 24.8522 0.382694Z"
+                            fill={
+                              product.vendor.rating > 1 ? '#000' : '#ACACAC66'
+                            }
+                          />
+                        </g>
+                        <g>
+                          <path
+                            d="M43.8522 0.382694L42.3785 3.22723L39.0811 3.68484C38.4897 3.76648 38.2528 4.46043 38.6816 4.85789L41.0672 7.07078L40.5029 10.1968C40.4014 10.7618 41.0265 11.185 41.5502 10.9208L44.5 9.4448L47.4498 10.9208C47.9734 11.1829 48.5986 10.7618 48.497 10.1968L47.9328 7.07078L50.3184 4.85789C50.7472 4.46043 50.5102 3.76648 49.9189 3.68484L46.6215 3.22723L45.1477 0.382694C44.8837 -0.124337 44.1186 -0.130782 43.8522 0.382694Z"
+                            fill={
+                              product.vendor.rating > 2 ? '#000' : '#ACACAC66'
+                            }
+                          />
+                        </g>
+                        <g>
+                          <path
+                            d="M62.8522 0.382694L61.3785 3.22723L58.0811 3.68484C57.4897 3.76648 57.2528 4.46043 57.6816 4.85789L60.0672 7.07078L59.5029 10.1968C59.4014 10.7618 60.0265 11.185 60.5502 10.9208L63.5 9.4448L66.4498 10.9208C66.9734 11.1829 67.5986 10.7618 67.497 10.1968L66.9328 7.07078L69.3184 4.85789C69.7472 4.46043 69.5102 3.76648 68.9189 3.68484L65.6215 3.22723L64.1477 0.382694C63.8837 -0.124337 63.1186 -0.130782 62.8522 0.382694Z"
+                            fill={
+                              product.vendor.rating > 3 ? '#000' : '#ACACAC66'
+                            }
+                          />
+                        </g>
+                        <g>
+                          <path
+                            d="M83.8522 0.382694L82.3785 3.22723L79.0811 3.68484C78.4897 3.76648 78.2528 4.46043 78.6816 4.85789L81.0672 7.07078L80.5029 10.1968C80.4014 10.7618 81.0265 11.185 81.5502 10.9208L84.5 9.4448L87.4498 10.9208C87.9734 11.1829 88.5986 10.7618 88.497 10.1968L87.9328 7.07078L90.3184 4.85789C90.7472 4.46043 90.5102 3.76648 89.9189 3.68484L86.6215 3.22723L85.1477 0.382694C84.8837 -0.124337 84.1186 -0.130782 83.8522 0.382694Z"
+                            fill={
+                              product.vendor.rating > 4 ? '#000' : '#ACACAC66'
+                            }
+                          />
+                        </g>
+                      </svg>
+                    </div>
+                  </IonCol>
+                </IonRow>
+              </>
             )}
 
             <IonRow className="title">
@@ -585,14 +665,35 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
             ) : (
               ''
             )}
-            <IonRow className="product-info">
-              <IonCol size="4" className="label">
-                Est. Retail Price
-              </IonCol>
-              <IonCol size="8" className="value">
-                {formatPrice(product.retailPrice)}
-              </IonCol>
-            </IonRow>
+            {isSneaker ? (
+              <>
+                <IonRow className="product-info">
+                  <IonCol size="4" className="label">
+                    SKU
+                  </IonCol>
+                  <IonCol size="8" className="value">
+                    {getAttributeValue('SKU') || 'NOT INCLUDED'}
+                  </IonCol>
+                </IonRow>
+                <IonRow className="product-info">
+                  <IonCol size="4" className="label">
+                    YEAR RELEASED
+                  </IonCol>
+                  <IonCol size="8" className="value">
+                    {getAttributeValue('yearReleased') || 'NOT INCLUDED'}
+                  </IonCol>
+                </IonRow>
+              </>
+            ) : (
+              <IonRow className="product-info">
+                <IonCol size="4" className="label">
+                  Est. Retail Price
+                </IonCol>
+                <IonCol size="8" className="value">
+                  {formatPrice(product.retailPrice)}
+                </IonCol>
+              </IonRow>
+            )}
           </IonGrid>
         </IonContent>
       ) : (
