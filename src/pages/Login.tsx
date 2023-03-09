@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserService } from '../services/UserService';
 import { User } from '../models';
+import { loadingStore } from '../loading-store';
 
 import Input from '../components/Input';
 
@@ -28,12 +29,13 @@ const Login: React.FC = () => {
   });
 
   const login = () => {
+    loadingStore.increment('Login:timeout');
     userService
       .login(email, password)
-      .then((data: User) => {
-        history.push('/');
+      .then((user: User) => {
         setTimeout(() => {
-          history.push('/home/explore/men/explore');
+          loadingStore.decrement('Login:timeout');
+          history.push(`/home/explore/${user.experiencePreferences}/explore`);
         }, 3000);
       })
       .catch((err: any) => {
