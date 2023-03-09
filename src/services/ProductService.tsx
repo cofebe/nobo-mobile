@@ -63,6 +63,17 @@ export class ProductService extends BaseService {
     return json;
   }
 
+  async getFilteredProducts(ids: string[]) {
+    const params = new URLSearchParams({
+      filter: JSON.stringify({
+        _id: { $in: ids },
+      }),
+    });
+    const res = await super.fetch('GET', `/api/products/all?${params}`);
+    const json = await res.json();
+    return json;
+  }
+
   async addToCart(productId: string): Promise<boolean> {
     const res = await super.fetch('POST', '/api/orders/cart', {
       id: productId,

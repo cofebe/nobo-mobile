@@ -102,7 +102,7 @@ export interface Product {
   name: string;
   onSale: boolean;
   parentCategory: ProductCategory;
-  postentialTradeItems: string[];
+  potentialTradeItems: string[];
   price: number;
   receipt: string;
   receivedByNobo: boolean;
@@ -115,6 +115,16 @@ export interface Product {
   tradeOffers: ProductTradeOffers;
   updatedAt: string;
   vendor: ProductVendor;
+  shop?: ProductShop;
+  trade?: ProductTrade;
+}
+export interface ProductShop {
+  new: { [key: string]: any };
+  used: { [key: string]: any };
+}
+
+export interface ProductTrade {
+  [key: string]: string[];
 }
 
 export interface ProductTradeOffers {
@@ -124,7 +134,7 @@ export interface ProductTradeOffers {
 
 export interface ProductAttribute {
   id: string;
-  value: string|string[];
+  value: string | string[];
 }
 
 export interface Image {
