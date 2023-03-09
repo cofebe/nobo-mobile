@@ -305,6 +305,9 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
           console.log('Done');
           setNoboProfile(emptyProfile);
         } else {
+          if (!data['user'].profileBg || data['user'].profileBg === "/NOBO_defaultcoverimage.jpeg" ) {
+            data['user'].profileBg = "https://thenobo.codepilot.com/NOBO_defaultcoverimage.jpeg";
+          }
           console.log("Set NOBO Profile: ", data['user'])
           setNoboProfile(data['user'])
         }
