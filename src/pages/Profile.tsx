@@ -19,6 +19,7 @@ import {
   IonModal,
   IonRow,
 } from '@ionic/react';
+import { AuthService } from '../services/AuthService';
 import { UserService } from '../services/UserService';
 import { ReportService } from '../services/ReportService';
 import { SubscriptionService } from '../services/SubscriptionService';
@@ -39,6 +40,7 @@ interface ProfileProps {
 
 const ProfilePage: React.FC<ProfileProps> = (profile) => {
   const history = useHistory();
+  const authService = new AuthService();
   const userService = new UserService();
   const reportService = new ReportService();
   let subscriptionService: any;
@@ -256,10 +258,6 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
     setNoboProfile(emptyProfile);
   }
 
-  let storage: any = window.localStorage.getItem('persistedState');
-  let user = storage ? JSON.parse(storage) : undefined;
-  const myUserId = user?.user['user_id'];
-
   function loadProfile() {
     let addressBarPathName = history.location.pathname;
     userId = "61e9e3cde9d5a06abb991653";
@@ -271,6 +269,10 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
     if (isNaN(userIdStr) && userIdStr.length > 10) {
       userIdStr = userIdStr.substring(userIdStr.lastIndexOf('-') + 1);
       console.log("loadProfile after: ", userIdStr)
+    } else {
+      let myUserId = authService.getUserId();
+      console.log('myProfile : ', myUserId);
+      userId = myUserId || '';
     }
 
     if (userIdStr !== "my-profile") {
