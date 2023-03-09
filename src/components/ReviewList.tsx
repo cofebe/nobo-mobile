@@ -117,7 +117,7 @@ const ReviewList: React.FC<ReviewListProps> = ({reviewData}) => {
       ))}
       {reviewData.length === 0 && (
         <div style={{backgroundColor: '#fefcf6', height: '10vh', width: '100%', textAlign: 'center'}}>
-          <h5 style={{backgroundColor: '#fefcf6', color: '#ACACAC'}}>User has not received any reviews.</h5>
+          <h5 style={{backgroundColor: '#fefcf6', color: '#ACACAC'}}>Profile has not received any reviews.</h5>
         </div>
       )}
       </div>

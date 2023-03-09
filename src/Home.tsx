@@ -254,7 +254,7 @@ const Home: React.FC = () => {
         <IonTabBar className="nobo-nav-bar" slot="bottom">
           <IonTabButton
             tab="home"
-            // href="/home/feed"
+            href="/home/explore/women/explore"
             selected={appMode === 'home'}
             onClick={(e) => setActiveTab('home', e)}
           >
@@ -282,7 +282,7 @@ const Home: React.FC = () => {
           </IonTabButton>
           <IonTabButton
             tab="stylefeed"
-            // href="/home/explore"
+            href="/home/style-feed"
             selected={appMode === 'stylefeed'}
             onClick={(e) => setActiveTab('stylefeed', e)}
           >
@@ -338,7 +338,7 @@ const Home: React.FC = () => {
           </IonTabButton>
           <IonTabButton
             tab="notifications"
-            // href="/home/connections"
+            href="/home/notifications"
             selected={appMode === 'notifications'}
             onClick={(e) => setActiveTab('notifications', e)}
           >
@@ -366,7 +366,7 @@ const Home: React.FC = () => {
           </IonTabButton>
           <IonTabButton
             tab="closet"
-            href={profileURL}
+            href="/home/my-profile"
             selected={appMode === 'closet'}
             onClick={(e) => setActiveTab('closet', e)}
           >
