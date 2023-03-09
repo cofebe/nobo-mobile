@@ -41,7 +41,7 @@
     .add-container {
       display: flex;
       align-items: center;
-      justify-content: end;
+      justify-content: flex-end;
       text-transform: uppercase;
       color: #D6980E;
       font-size: 12px;
@@ -65,7 +65,7 @@
       position: relative;
       border: 1px solid white;
       display: flex;
-      align-items: start;
+      align-items: flex-start;
 
       &.selected {
         border: 1px solid #D6980E;
@@ -114,7 +114,7 @@
 
         .last4,
         .expiration {
-          margin-top: 10px;
+          margin-top: 4px;
         }
 
         .last4 {

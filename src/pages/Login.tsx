@@ -33,7 +33,7 @@ const Login: React.FC = () => {
       .then((data: User) => {
         history.push('/');
         setTimeout(() => {
-          history.push('/home/explore/women/explore');
+          history.push('/home/explore/men/explore');
         }, 3000);
       })
       .catch((err: any) => {

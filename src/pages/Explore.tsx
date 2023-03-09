@@ -72,7 +72,11 @@ const Explore: React.FC = () => {
         >
           <IonRow>
             <IonCol style={{ height: 350 }} size="12">
-              <NoboHomeItem product={products[0]} isBig />
+              <NoboHomeItem
+                isSneaker={params.sectionCategory === 'sneakers'}
+                product={products[0]}
+                isBig
+              />
             </IonCol>
           </IonRow>
           <IonRow>
@@ -88,7 +92,10 @@ const Explore: React.FC = () => {
           <IonRow>
             {products.slice(1).map((product: any, index: any) => (
               <IonCol style={{ height: 175 }} key={index} size="6">
-                <NoboHomeItem product={product} />
+                <NoboHomeItem
+                  isSneaker={params.sectionCategory === 'sneakers'}
+                  product={product}
+                />
               </IonCol>
             ))}
           </IonRow>
@@ -107,7 +114,10 @@ const Explore: React.FC = () => {
           <IonRow>
             {products.map((product: any, index: any) => (
               <IonCol style={{ height: 175 }} key={index} size="6">
-                <NoboHomeItem product={product} />
+                <NoboHomeItem
+                  isSneaker={params.sectionCategory === 'sneakers'}
+                  product={product}
+                />
               </IonCol>
             ))}
           </IonRow>
@@ -126,7 +136,10 @@ const Explore: React.FC = () => {
           <IonRow>
             {products.map((product: any, index: any) => (
               <IonCol style={{ height: 175 }} key={index} size="6">
-                <NoboHomeItem product={product} />
+                <NoboHomeItem
+                  isSneaker={params.sectionCategory === 'sneakers'}
+                  product={product}
+                />
               </IonCol>
             ))}
           </IonRow>
@@ -145,7 +158,10 @@ const Explore: React.FC = () => {
           <IonRow>
             {products.map((product: any, index: any) => (
               <IonCol style={{ height: 175 }} key={index} size="6">
-                <NoboHomeItem product={product} />
+                <NoboHomeItem
+                  isSneaker={params.sectionCategory === 'sneakers'}
+                  product={product}
+                />
               </IonCol>
             ))}
           </IonRow>

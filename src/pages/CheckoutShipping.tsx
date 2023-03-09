@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonContent,
@@ -9,6 +9,7 @@ import {
   IonToolbar,
   IonPage,
   useIonViewWillEnter,
+  useIonViewWillLeave,
 } from '@ionic/react';
 import './CheckoutShipping.scss';
 import Button from '../components/Button';
@@ -25,28 +26,32 @@ const CheckoutShipping: React.FC = () => {
   const userService = new UserService();
   const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
   const [shippingAddresses, setShippingAddresses] = useState<Address[]>([]);
+  const [experience, setExperience] = useState<string>('women');
+  let subscription: any;
 
   const modal = useRef<HTMLIonModalElement>(null);
 
-  useEffect(() => {
-    const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
+  useIonViewWillEnter(() => {
+    subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
+      if (cart.isInitial) {
+        return;
+      }
+
       setCart(cart);
 
-      if (cart.total === 0) {
-        history.goBack();
+      if (!cart.products.length) {
+        const url = `/home/explore/${experience}/explore`;
+        console.log('Checkout shipping: No products in cart. Redirecting to', url);
+        history.push(url);
+        return;
       }
     });
 
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
-
-  useIonViewWillEnter(() => {
     userService
       .getMe()
       .then((user: User) => {
         setShippingAddresses(user.shippingAddress);
+        setExperience(user.experiencePreferences);
 
         if (!cart.shippingAddress) {
           const addr = user.shippingAddress.find(a => a.default);
@@ -55,6 +60,10 @@ const CheckoutShipping: React.FC = () => {
           }
         }
       });
+  });
+
+  useIonViewWillLeave(() => {
+    subscription?.unsubscribe();
   });
 
   function select(addr: Address) {

@@ -10,6 +10,7 @@ export interface ShoppingCartState {
   tax: number;
   subtotal: number;
   total: number;
+  isInitial: boolean;
 }
 
 const shoppingCartInitialState: ShoppingCartState = {
@@ -21,6 +22,7 @@ const shoppingCartInitialState: ShoppingCartState = {
   tax: 0,
   subtotal: 0,
   total: 0,
+  isInitial: true,
 };
 
 let shoppingCartState = shoppingCartInitialState;
@@ -37,6 +39,10 @@ function recalculateState(state: ShoppingCartState): ShoppingCartState {
 export const shoppingCartStore  = {
   // get the initial/empty state
   initialState: shoppingCartInitialState,
+  reset: () => {
+    shoppingCartState = shoppingCartInitialState;
+    shoppingCartSubject.next(shoppingCartState);
+  },
 
   // get the current state
   getCurrent: () => {
@@ -62,6 +68,7 @@ export const shoppingCartStore  = {
     shoppingCartState = recalculateState({
       ...shoppingCartState,
       products,
+      isInitial: false,
     });
     if (!shoppingCartStateUpdating) {
       shoppingCartSubject.next(shoppingCartState);
@@ -72,6 +79,7 @@ export const shoppingCartStore  = {
       shoppingCartState = recalculateState({
         ...shoppingCartState,
         shipping,
+        isInitial: false,
       });
       if (!shoppingCartStateUpdating) {
         shoppingCartSubject.next(shoppingCartState);
@@ -83,6 +91,7 @@ export const shoppingCartStore  = {
       shoppingCartState = recalculateState({
         ...shoppingCartState,
         tax,
+        isInitial: false,
       });
       if (!shoppingCartStateUpdating) {
         shoppingCartSubject.next(shoppingCartState);
@@ -103,6 +112,7 @@ export const shoppingCartStore  = {
     shoppingCartState = {
       ...shoppingCartState,
       shippingAddress: addr,
+      isInitial: false,
     };
     if (!shoppingCartStateUpdating) {
       shoppingCartSubject.next(shoppingCartState);
@@ -122,6 +132,7 @@ export const shoppingCartStore  = {
     shoppingCartState = {
       ...shoppingCartState,
       paymentMethod: pm,
+      isInitial: false,
     };
     if (!shoppingCartStateUpdating) {
       shoppingCartSubject.next(shoppingCartState);
@@ -138,6 +149,7 @@ export const shoppingCartStore  = {
             ...shoppingCartState.products,
             product,
           ],
+          isInitial: false,
         });
         if (!shoppingCartStateUpdating) {
           shoppingCartSubject.next(shoppingCartState);
@@ -151,6 +163,7 @@ export const shoppingCartStore  = {
         shoppingCartState = recalculateState({
           ...shoppingCartState,
           products: shoppingCartState.products.filter(p => p._id !== productId),
+          isInitial: false,
         });
         if (!shoppingCartStateUpdating) {
           shoppingCartSubject.next(shoppingCartState);

@@ -24,3 +24,23 @@ export function formatPrice(val: number, includeDecimals: boolean = true): strin
   }
   return ret;
 }
+
+export function getCardImage(brand: string): string {
+  switch (brand) {
+    case 'MasterCard':
+    case 'mastercard':
+    case 'mc':
+      return 'assets/images/cc-mastercard.svg';
+    case 'Discover':
+    case 'discover':
+      return 'assets/images/cc-discover.svg';
+    case 'American Express':
+    case 'AMEX':
+    case 'amex':
+      return 'assets/images/cc-amex.svg';
+    case 'Visa':
+    case 'visa':
+    default:
+      return 'assets/images/cc-visa.svg';
+  }
+}

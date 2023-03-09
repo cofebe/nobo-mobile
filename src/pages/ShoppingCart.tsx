@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonContent,
@@ -7,10 +7,10 @@ import {
   IonRow,
   IonCol,
   IonToolbar,
-  IonInput,
   IonPage,
   IonIcon,
   useIonViewWillEnter,
+  useIonViewWillLeave,
 } from '@ionic/react';
 import { caretUpOutline, caretDownOutline } from 'ionicons/icons';
 import './ShoppingCart.scss';
@@ -35,18 +35,13 @@ const ShoppingCartPage: React.FC = () => {
   const [promoCode, setPromoCode] = useState<string>('');
   const [shippingAddress, setShippingAddress] = useState<Address>();
   const [showDetails, setShowDetails] = useState<boolean>(true);
+  let subscription: any;
 
-  useEffect(() => {
-    const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
+  useIonViewWillEnter(() => {
+    subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
       setCart(cart);
     });
 
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
-
-  useIonViewWillEnter(() => {
     productService
       .getCart()
       .then((products: Product[]) => {
@@ -71,6 +66,10 @@ const ShoppingCartPage: React.FC = () => {
             });
         }
       });
+  });
+
+  useIonViewWillLeave(() => {
+    subscription?.unsubscribe();
   });
 
   function remove(product: Product) {
@@ -121,7 +120,7 @@ const ShoppingCartPage: React.FC = () => {
           </IonGrid>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="cart-content" scrollY={false}>
+      <IonContent className="cart-content">
         {cart.products.length ? (
           <div>
             {cart.products.map(product => (
