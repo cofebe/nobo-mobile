@@ -1,5 +1,6 @@
 import { environment } from '../environments/environment';
 import { AuthService } from './AuthService';
+import { loadingStore } from '../loading-store';
 
 export class BaseService {
   authService: AuthService = new AuthService();
@@ -29,11 +30,16 @@ export class BaseService {
       }
     }
 
-    return await fetch(url, {
-      method,
-      cache: 'no-cache',
-      headers: this.getHeaders(headers),
-      body,
-    });
+    loadingStore.increment(url);
+    try {
+      return await fetch(url, {
+        method,
+        cache: 'no-cache',
+        headers: this.getHeaders(headers),
+        body,
+      });
+    } finally {
+      loadingStore.decrement(url);
+    }
   }
 }
