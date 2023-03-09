@@ -8,7 +8,7 @@ import {
   IonCol,
   IonGrid,
 } from '@ionic/react';
-import './URP.css';
+import '../styles.scss';
 import './Roles.css';
 
 const Roles: React.FC = () => {

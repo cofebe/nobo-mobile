@@ -226,7 +226,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
   }
 
   function reset() {
-    let nonExistentID = '';
+    const nonExistentID = '';
     userId = nonExistentID;
     setUserId(nonExistentID);
     setProfileURL('');
@@ -234,9 +234,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
   }
 
   function loadProfile() {
-    let addressBarPathName = history.location.pathname;
-    userId = '61e9e3cde9d5a06abb991653';
-
+    const addressBarPathName = history.location.pathname;
     let userIdStr: any = addressBarPathName.substring(
       addressBarPathName.lastIndexOf('/') + 1
     );
@@ -245,7 +243,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
       userIdStr = userIdStr.substring(userIdStr.lastIndexOf('-') + 1);
       console.log('loadProfile after: ', userIdStr)
     } else {
-      let myUserId = authService.getUserId();
+      const myUserId = authService.getUserId();
       console.log('myProfile : ', myUserId);
       userId = myUserId || '';
     }

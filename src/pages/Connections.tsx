@@ -10,7 +10,7 @@ import {
   IonInput,
 } from '@ionic/react';
 import { searchOutline } from 'ionicons/icons';
-import './URP.css';
+import '../styles.scss';
 import './Connections.scss';
 import { ConnectionItem } from '../data/connection-list';
 import ConnectionListItem from '../components/ConnectionListItem';

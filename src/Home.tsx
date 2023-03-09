@@ -16,7 +16,7 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { Amplify /*, Auth*/ } from 'aws-amplify';
-import './pages/URP.css';
+import './styles.scss';
 //import Feed from './pages/Feed';
 import StyleFeedPage from './pages/StyleFeed'
 import PostDetail from './pages/PostDetail';
@@ -187,7 +187,7 @@ const Home: React.FC = () => {
 
   return (
     <IonContent scrollY={false}>
-      <IonTabs className="nobo-nav-bar-background">
+      <IonTabs className="nav-bar-background">
         <IonRouterOutlet>
           <Redirect exact path="/home" to="/home/nobo-home" />
           <Route exact path="/home/product/:id">
@@ -254,7 +254,7 @@ const Home: React.FC = () => {
             <PostCreate />
           </Route>
         </IonRouterOutlet>
-        <IonTabBar className="nobo-nav-bar" slot="bottom">
+        <IonTabBar className="nav-bar" slot="bottom">
           <IonTabButton
             tab="home"
             href="/home/explore/women/explore"
@@ -262,7 +262,7 @@ const Home: React.FC = () => {
             onClick={(e) => setActiveTab('home', e)}
           >
             <img
-              className="nobo-nav-btn"
+              className="nav-btn"
               src={`assets/images/nobo-home-icon${
                 appMode === 'home' ? '-focus' : ''
               }.svg`}
@@ -290,7 +290,7 @@ const Home: React.FC = () => {
             onClick={(e) => setActiveTab('stylefeed', e)}
           >
             <img
-              className="nobo-nav-btn"
+              className="nav-btn"
               src={`assets/images/nobo-style-feed-icon${
                 appMode === 'stylefeed' ? '-focus' : ''
               }.svg`}
@@ -330,7 +330,7 @@ const Home: React.FC = () => {
               }}
             >
               <img
-                className="nobo-nav-btn"
+                className="nav-btn"
                 src={`assets/images/nobo-plus-icon${
                   appMode === 'list' ? '-focus' : ''
                 }.png`}
@@ -346,7 +346,7 @@ const Home: React.FC = () => {
             onClick={(e) => setActiveTab('notifications', e)}
           >
             <img
-              className="nobo-nav-btn"
+              className="nav-btn"
               src={`assets/images/nobo-notifications-icon${
                 appMode === 'notifications' ? '-focus' : ''
               }.svg`}
@@ -374,7 +374,7 @@ const Home: React.FC = () => {
             onClick={(e) => setActiveTab('closet', e)}
           >
             <img
-              className="nobo-nav-btn"
+              className="nav-btn"
               src={`assets/images/nobo-closet-icon${
                 appMode === 'closet' ? '-focus' : ''
               }.svg`}

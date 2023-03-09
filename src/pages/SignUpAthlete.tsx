@@ -27,7 +27,7 @@ import {
   useIonToast,
   IonPopover,
 } from '@ionic/react';
-import './URP.css';
+import '../styles.scss';
 import './SignUpAthlete.scss';
 import './cropper.css';
 import SignupAddStatsCategoryModal from '../components/SignupAddStatsCategoryModal';

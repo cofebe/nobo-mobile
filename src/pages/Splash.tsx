@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { IonPage, useIonViewWillEnter } from '@ionic/react';
-import './URP.css';
+import '../styles.scss';
 import './Splash.css';
 
 const Splash: React.FC = () => {
