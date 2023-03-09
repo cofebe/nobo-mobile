@@ -1,5 +1,5 @@
 import ProfileSummary from '../components/ProfileSections/ProfileSummary';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { isPlatform } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { NoboProfile, emptyProfile } from '../data/nobo-profile';
@@ -21,18 +21,14 @@ import {
 } from '@ionic/react';
 import { AuthService } from '../services/AuthService';
 import { UserService } from '../services/UserService';
-import { ReportService } from '../services/ReportService';
 import { SubscriptionService } from '../services/SubscriptionService';
 import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
 
 import './Profile.scss';
-import { AcademicData } from '../components/ProfileSections/AcademicsSection';
 import ProductList from '../components/ProductList';
 import ReviewList from '../components/ReviewList';
-import { MeasurementData } from '../components/ProfileSections/MeasurementsSection';
 import { chevronBackOutline } from 'ionicons/icons';
 import { loadingOptions } from '../util';
-import { Profile } from '../data/profile';
 
 interface ProfileProps {
   myProfile: boolean;
@@ -42,42 +38,20 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
   const history = useHistory();
   const authService = new AuthService();
   const userService = new UserService();
-  const reportService = new ReportService();
   let subscriptionService: any;
-  let [userId, setUserId] = useState<string>("");
+  let [userId, setUserId] = useState<string>('');
   const [profileURL, setProfileURL] = useState('');
   const [presentLoading, dismissLoading] = useIonLoading();
   const profileModal = useRef<HTMLIonModalElement>(null);
   const [present] = useIonActionSheet();
   const [presentProfileReportingActionSheet] = useIonActionSheet();
   let [noboProfile, setNoboProfile] = useState<NoboProfile>(emptyProfile);
-  const [socialData, setSocialData] = useState<any>({});
-  let [fullAthleteProfile, setFullAthleteProfile] = useState<Profile>();
-
-  const [measurementData, setMeasurementData] = useState<
-    MeasurementData | undefined
-  >();
-  const [academicsData, setAcademicData] = useState<AcademicData | undefined>();
-
-  const [targetSection, setTargetSection] = useState('Feed');
-
-  const [profileItems, setProfileItems] = useState<string[]>(['assets/images/test/product.jpeg', 'assets/images/test/product.jpeg', 'assets/images/test/product.jpeg', 'assets/images/test/product.jpeg']);
-  const [reviewData, setReviewData] = useState<any[]>([]);
-
-  const [arrayOfSocials, setArrayOfSocials] = useState<string[]>([]);
-
   const [userSubscribed, setUserSubscribed] = useState(false);
-
-  const [slides, setSlides] = useState<any[]>([
-    { name: 'Feed', section: '/option', state: 'Feed' },
-    { name: 'Trade', section: '/option', state: 'Trade' },
-    { name: 'Purchased', section: '/option', state: 'Purchased' },
-    { name: 'Review', section: '/option', state: 'Review' },
-  ]);
+  const [targetSection, setTargetSection] = useState('Feed');
+  const [reviewData, setReviewData] = useState<any[]>([]);
 
   useIonViewDidEnter(() => {
     reset();
-    console.log('useIonViewDidEnter userId: ', userId);
 
     const onPageLoad = () => {
       loadProfile();
@@ -103,7 +77,6 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
   });
 
   useIonViewDidLeave(() => {
-    console.log('useIonViewDidLeave');
     reset();
   });
 
@@ -139,10 +112,10 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
       header: 'Report User',
       buttons: [
         {
-          text: "It's spam",
+          text: 'It\'s spam',
           data: {
             action: () => {
-              reportUser("It's spam");
+              reportUser('It\'s spam');
             }, // noop
           },
         },
@@ -171,10 +144,10 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
           },
         },
         {
-          text: "I just don't like it",
+          text: 'I just don\'t like it',
           data: {
             action: () => {
-              reportUser("I just don't like it");
+              reportUser('I just don\'t like it');
             },
           },
         },
@@ -241,7 +214,9 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
         );
       }),
       onDidDismiss: ({ detail }) => {
-        if (detail.data == undefined) return;
+        if (detail.data === undefined) {
+          return;
+        }
 
         if (detail.data.action !== undefined) {
           shareProfile(detail.data.action);
@@ -251,7 +226,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
   }
 
   function reset() {
-    let nonExistentID = "";
+    let nonExistentID = '';
     userId = nonExistentID;
     setUserId(nonExistentID);
     setProfileURL('');
@@ -260,22 +235,22 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
 
   function loadProfile() {
     let addressBarPathName = history.location.pathname;
-    userId = "61e9e3cde9d5a06abb991653";
+    userId = '61e9e3cde9d5a06abb991653';
 
     let userIdStr: any = addressBarPathName.substring(
       addressBarPathName.lastIndexOf('/') + 1
     );
-    console.log("loadProfile: ", userIdStr)
+    console.log('loadProfile: ', userIdStr)
     if (isNaN(userIdStr) && userIdStr.length > 10) {
       userIdStr = userIdStr.substring(userIdStr.lastIndexOf('-') + 1);
-      console.log("loadProfile after: ", userIdStr)
+      console.log('loadProfile after: ', userIdStr)
     } else {
       let myUserId = authService.getUserId();
       console.log('myProfile : ', myUserId);
       userId = myUserId || '';
     }
 
-    if (userIdStr !== "my-profile") {
+    if (userIdStr !== 'my-profile') {
       userId = userIdStr;
     }
 
@@ -287,12 +262,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
     return userId;
   }
 
-  function updateActionMenu() {
-    setProfileURL(`https://www.noboplus.com/home/profile/${userId}`);
-    console.log('Profile URL: ', profileURL);
-  }
-
-  function getProfile(id: any = "") {
+  function getProfile(id: any = '') {
     console.log('GetProfile: ', id);
 
     presentLoading(loadingOptions);
@@ -305,7 +275,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
           console.log('Done');
           setNoboProfile(emptyProfile);
         } else {
-          console.log("Set NOBO Profile: ", data['user'])
+          console.log('Set NOBO Profile: ', data['user'])
           setNoboProfile(data['user'])
         }
         dismissLoading();
@@ -409,22 +379,22 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
         <IonRow className="nobo-menu-container">
           <div className="nobo-menu-circle" onClick={ () => setTargetSection('Feed')}>
             <div className="circle-background">
-              <img className={targetSection === 'Feed' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-items.svg"/>
+              <img className={targetSection === 'Feed' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-items.svg" alt="feed" />
             </div>
           </div>
           <div className="nobo-menu-circle" onClick={ () => setTargetSection('Trades')}>
             <div className="circle-background">
-              <img className={targetSection === 'Trades' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-trade.svg"/>
+              <img className={targetSection === 'Trades' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-trade.svg" alt="trades" />
             </div>
           </div>
           <div className="nobo-menu-circle" onClick={ () => setTargetSection('Purchase')}>
             <div className="circle-background">
-              <img className={targetSection === 'Purchase' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-purchased.svg"/>
+              <img className={targetSection === 'Purchase' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-purchased.svg" alt="purchase" />
             </div>
           </div>
           <div className="nobo-menu-circle" onClick={ () => setTargetSection('Reviews')}>
             <div className="circle-background">
-              <img className={targetSection === 'Reviews' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-reviews.svg"/>
+              <img className={targetSection === 'Reviews' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-reviews.svg" alt="reviews" />
             </div>
           </div>
         </IonRow>

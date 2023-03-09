@@ -1,30 +1,17 @@
 import {
-IonAvatar,
-IonCol,
-IonContent,
-IonItem,
-IonRow,
-useIonViewDidEnter } from "@ionic/react";
-import { useState, useEffect } from "react";
+  IonAvatar,
+  IonCol,
+  IonItem,
+  IonRow,
+} from "@ionic/react";
+import { useEffect } from "react";
 import "./ExploreListItem.css";
-import { useHistory } from "react-router-dom";
-import { UserService } from "../services/UserService";
-import { Products, Product } from "../data/products";
 
 interface ReviewListProps {
   reviewData: any;
 }
 
-
 const ReviewList: React.FC<ReviewListProps> = ({reviewData}) => {
-  const history = useHistory();
-  const userService = new UserService();
-  const [products, setProducts] = useState<Products>();
-
-  useIonViewDidEnter(() => {
-    load();
-  })
-
   let rating = 5;
 
   function load() {
