@@ -21,7 +21,7 @@ import {
 import { UserService } from '../services/UserService';
 import { formatPrice, getImageUrl, getCardImage } from '../utils';
 
-const ShoppingCartPage: React.FC = () => {
+const CheckoutComplete: React.FC = () => {
   const params: any = useParams();
   const history = useHistory();
   const userService = new UserService();
@@ -199,4 +199,4 @@ const ShoppingCartPage: React.FC = () => {
   );
 };
 
-export default ShoppingCartPage;
+export default CheckoutComplete;

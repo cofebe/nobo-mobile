@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import {
   IonModal,
@@ -10,6 +10,7 @@ import {
   IonCol,
   IonIcon,
   useIonViewWillEnter,
+  useIonViewWillLeave,
 } from '@ionic/react';
 import './ProductDetail.scss';
 import { caretUpOutline, caretDownOutline } from 'ionicons/icons';
@@ -43,24 +44,19 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
   const [cart, setCart] = useState<ShoppingCartState>(
     shoppingCartStore.initialState
   );
+  let subscription: any;
 
   const tooltipModal = useRef<HTMLIonModalElement>(null);
 
   //console.log('ProductDetail:', productId);
 
-  useEffect(() => {
-    const subscription = shoppingCartStore.subscribe(
+  useIonViewWillEnter(() => {
+    subscription = shoppingCartStore.subscribe(
       (cart: ShoppingCartState) => {
         setCart(cart);
       }
     );
 
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
-
-  useIonViewWillEnter(() => {
     productId = params.id;
     setProductId(productId);
 
@@ -88,6 +84,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
       //console.log('getCart', products);
       shoppingCartStore.setProducts(products);
     });
+  });
+
+  useIonViewWillLeave(() => {
+    subscription.unsubscribe();
   });
 
   function updateImages(index: number) {

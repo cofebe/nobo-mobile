@@ -29,7 +29,7 @@ import { ProductService } from '../services/ProductService';
 import { UserService } from '../services/UserService';
 import { formatPrice, getImageUrl, getCardImage } from '../utils';
 
-const ShoppingCartPage: React.FC = () => {
+const CheckoutSummary: React.FC = () => {
   const history = useHistory();
   const productService = new ProductService();
   const userService = new UserService();
@@ -331,4 +331,4 @@ const ShoppingCartPage: React.FC = () => {
   );
 };
 
-export default ShoppingCartPage;
+export default CheckoutSummary;
