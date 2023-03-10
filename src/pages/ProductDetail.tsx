@@ -1063,6 +1063,57 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                     </div>
                   </IonCol>
                 </IonRow>
+                <IonRow className="title">
+                  <IonCol>Additional Details</IonCol>
+                </IonRow>
+                {getSneakerAttributeValue('smokingHome') ? (
+                  <IonRow className="product-info">
+                    <IonCol size="4" className="label">
+                      IS THE PRODUCT COMING FROM A SMOKING HOME?
+                    </IonCol>
+                    <IonCol size="8" className="value">
+                      {getSneakerAttributeValue('smokingHome')}
+                    </IonCol>
+                  </IonRow>
+                ) : (
+                  ''
+                )}
+                {getSneakerAttributeValue('petHome') ? (
+                  <IonRow className="product-info">
+                    <IonCol size="4" className="label">
+                      IS THE PRODUCT COMING FROM A PET FREE HOME?
+                    </IonCol>
+                    <IonCol size="8" className="value">
+                      {getSneakerAttributeValue('petHome')}
+                    </IonCol>
+                  </IonRow>
+                ) : (
+                  ''
+                )}
+                {getSneakerAttributeValue('box') ? (
+                  <IonRow className="product-info">
+                    <IonCol size="4" className="label">
+                      Box
+                    </IonCol>
+                    <IonCol size="8" className="value">
+                      {getSneakerAttributeValue('box')}
+                    </IonCol>
+                  </IonRow>
+                ) : (
+                  ''
+                )}
+                {selectedSneakerDetails.retailPrice ? (
+                  <IonRow className="product-info">
+                    <IonCol size="4" className="label">
+                      EST. RETAIL PRICE
+                    </IonCol>
+                    <IonCol size="8" className="value">
+                      {formatPrice(selectedSneakerDetails.retailPrice)}
+                    </IonCol>
+                  </IonRow>
+                ) : (
+                  ''
+                )}
               </>
             )}
 
