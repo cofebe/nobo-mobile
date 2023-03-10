@@ -301,6 +301,21 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
       {product ? (
         <IonContent className="product-detail-page" fullscreen>
           <IonGrid className="product-details-card">
+            {isSneaker && sneakersSteps > 0 && (
+              <IonRow>
+                <IonCol size="3">
+                  <img
+                    src="assets/images/arrow-left.svg"
+                    className="back-arrow"
+                    alt="back"
+                    onClick={() => {
+                      setSneakersSteps(sneakersSteps - 1);
+                    }}
+                  />
+                </IonCol>
+              </IonRow>
+            )}
+
             <IonRow className="product-images-row">
               <IonCol size="3" className="product-images">
                 <div
