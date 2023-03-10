@@ -1,0 +1,64 @@
+.offer-complete-container {
+  background-color: #fefcf7;
+
+  .offer-header {
+    position: relative;
+
+    .offer-header-toolbar {
+      padding: 0;
+      --background: #fefcf7;
+
+      .title {
+        position: relative;
+        font-size: 20px;
+        text-align: center;
+        font-family: Baskerville;
+        margin-top: 35px;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .offer-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 20px;
+    --padding-top: 10px;
+    --background: #fefcf7;
+
+    .thank-container {
+      margin-bottom: 24px;
+
+      .top {
+        text-align: center;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .text {
+        font-size: 12px;
+        color: #707070;
+        margin-top: 14px;
+        line-height: 20px;
+
+        .link {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .footer {
+    margin-top: 30px;
+
+    .button-container {
+      margin-top: 60px;
+      padding-left: 20px;
+      padding-right: 20px;
+
+      ion-button {
+        margin-bottom: 14px;
+      }
+    }
+  }
+}

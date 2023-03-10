@@ -1,0 +1,45 @@
+.create-offer-container {
+  --height: 330px;
+  --backdrop-opacity: 0.1;
+  align-items: end;
+
+  &::part(content) {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+
+  ion-header {
+    ion-toolbar {
+      --background: white;
+      --padding-top: 0;
+      --padding-bottom: 0;
+
+      ion-grid {
+        padding: 0;
+
+        ion-col {
+          padding-top: 20px;
+          padding-bottom: 0;
+          text-align: center;
+          text-transform: uppercase;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  .offer-content {
+    --background: white;
+
+    ion-grid {
+      padding: 20px;
+
+      ion-row {
+        margin-bottom: 10px;
+
+        .buttons {
+        }
+      }
+    }
+  }
+}
