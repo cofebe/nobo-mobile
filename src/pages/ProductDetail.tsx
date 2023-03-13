@@ -1436,6 +1436,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
           }} />
       )}
       <CreateOfferModal
+        productId={params.id}
         ref={offerModal}
         onClose={() => {
           offerModal.current?.dismiss();

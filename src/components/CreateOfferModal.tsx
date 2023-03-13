@@ -8,25 +8,32 @@ import {
   IonCol,
   IonToolbar,
   IonModal,
+  useIonViewDidEnter,
 } from '@ionic/react';
 import './CreateOfferModal.scss';
 import { UserService } from '../services/UserService';
-import { User } from '../models';
+import { User, Product } from '../models';
 import Textarea from '../components/Textarea';
 import Button from '../components/Button';
+import Input from './Input';
 
 export interface CreateOfferModalProps {
+  productId: string;
   onClose: () => void;
 }
 
 export type Ref = HTMLIonModalElement;
 
 const CreateOfferModal = forwardRef<Ref, CreateOfferModalProps>(
-  ({ onClose }, ref) => {
+  ({ onClose, productId }, ref) => {
     const userService = new UserService();
     const [offer, setOffer] = useState<any>('');
     const [isDefault, setIsDefault] = useState<boolean>(false);
     const history = useHistory();
+
+    useIonViewDidEnter(() => {
+      reset();
+    });
 
     useEffect(() => {
       reset();
@@ -106,9 +113,19 @@ const CreateOfferModal = forwardRef<Ref, CreateOfferModalProps>(
               <IonRow>
                 <IonCol size="12">SEND AN OFFER</IonCol>
               </IonRow>
-              <IonRow>
+              <IonRow class="ion-justify-content-center">
                 <IonCol size="10">
                   <div>Make sure you send a competitive offer.</div>
+                </IonCol>
+              </IonRow>
+              <IonRow class="ion-justify-content-center">
+                <IonCol size="10">
+                  <Input value={offer} onChange={(val) => setOffer(val)} />
+                </IonCol>
+              </IonRow>
+              <IonRow class="ion-justify-content-center">
+                <IonCol size="10">
+                  <div>IF YOUR OFFER IS ACCEPTED YOUR CARD WILL BE CHARGED</div>
                 </IonCol>
               </IonRow>
             </IonGrid>
@@ -126,7 +143,9 @@ const CreateOfferModal = forwardRef<Ref, CreateOfferModalProps>(
                   onClick={() => {
                     //close modal
                     onClose();
-                    history.push(`/offer-submitted/123123`);
+                    history.push(`/offer-submitted/${productId}`, {
+                      offer: offer,
+                    });
                   }}
                 />
               </IonCol>

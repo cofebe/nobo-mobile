@@ -13,25 +13,32 @@ import {
 } from '@ionic/react';
 import './OfferComplete.scss';
 import Button from '../components/Button';
-import { User } from '../models';
+import { User, Product } from '../models';
 import { UserService } from '../services/UserService';
+import { ProductService } from '../services/ProductService';
 
 const OfferComplete: React.FC = () => {
   const params: any = useParams();
   const history = useHistory();
   const userService = new UserService();
-  const [showOrderSummary, setShowOrderSummary] = useState<boolean>(true);
-  const [showCart, setShowCart] = useState<boolean>(false);
-  const [cartImage, setCartImage] = useState<string>('');
+  const productService = new ProductService();
   const [name, setName] = useState<string>('');
-  const [cardBrand, setCardBrand] = useState<string>('');
-  const [cardLast4, setCardLast4] = useState<string>('');
-  const [cardName, setCardName] = useState<string>('');
-  const [cardExpMonth, setCardExpMonth] = useState<number>(0);
-  const [cardExpYear, setCardExpYear] = useState<number>(0);
+  const [product, setProduct] = useState<Product>();
   let [experience, setExperience] = useState<string>('women');
 
   useIonViewWillEnter(() => {
+    console.log('params id', params.id);
+    productService
+      .getProduct(params.id)
+      .then((product: any) => {
+        console.log('product', product);
+        console.log('This is the history ', history);
+        setProduct(product.product);
+      })
+      .catch((err: any) => {
+        console.log('err', err);
+      });
+
     // userService.getOrder(params.id).then((order: FullOrder) => {
     //   setOrder(order);
     //   setCartImage(order.products[0].images[0].url);
@@ -45,7 +52,7 @@ const OfferComplete: React.FC = () => {
     userService.getMe().then((user: User) => {
       experience = user.experiencePreferences;
       setExperience(experience);
-      //   setName(user.firstName);
+      setName(user.firstName);
     });
     // setShowCart(false);
     // setShowOrderSummary(true);
@@ -74,8 +81,8 @@ const OfferComplete: React.FC = () => {
               />
             </div>
             <div>
-              You're offer to <span>USERNAME</span> for their{' '}
-              <span>PRODUCT NAME</span> was submitted
+              You're offer to <span>@{product?.vendor?.displayName}</span> for
+              their <span>{product?.name}</span> was submitted
             </div>
           </div>
           <div>You will only be charged if the offer is accepted</div>
