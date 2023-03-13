@@ -19,7 +19,8 @@ import { AuthService } from '../services/AuthService';
 import { ProductResponse, Product } from '../models';
 //import ImageZoom from '../components/ImageZoom';
 import Button from '../components/Button';
-import { formatPrice, getImageUrl } from '../utils';
+import OfferTradeModal from '../components/OfferTradeModal';
+import { formatPrice, getImageUrl, getMinTradeFee, getMaxTradeFee } from '../utils';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 
 interface ProductDetailProps {
@@ -57,6 +58,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
     useState<Product>();
 
   const tooltipModal = useRef<HTMLIonModalElement>(null);
+  const offerTradeModal = useRef<HTMLIonModalElement>(null);
 
   interface sneaekerSizeChart {
     size: string;
@@ -264,6 +266,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
 
   function offerTrade() {
     console.log('offer trade');
+    offerTradeModal.current?.present();
   }
 
   function showCart() {
@@ -387,7 +390,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                 {product.name}
               </IonCol>
             </IonRow>
-            {!isSneaker && (
+            {!isSneaker && !isTrade && (
               <>
                 <IonRow>
                   <IonCol size="10" offset="1" className="product-price">
@@ -395,6 +398,32 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                   </IonCol>
                 </IonRow>
 
+                <IonRow className="product-info">
+                  <IonCol size="4" className="label">
+                    Condition
+                  </IonCol>
+                  <IonCol size="8" className="value">
+                    {getAttributeValue('condition')}
+                  </IonCol>
+                </IonRow>
+              </>
+            )}
+            {!isSneaker && isTrade && (
+              <>
+                <IonRow>
+                  <IonCol size="10" offset="1" className="product-price">
+                    <span>Est. Price</span> {formatPrice(getMinTradeFee(price))} - {formatPrice(getMaxTradeFee(price))}
+                  </IonCol>
+                </IonRow>
+
+                <IonRow className="product-info">
+                  <IonCol size="4" className="label">
+                    Product Value
+                  </IonCol>
+                  <IonCol size="8" className="value">
+                    {formatPrice(price)}
+                  </IonCol>
+                </IonRow>
                 <IonRow className="product-info">
                   <IonCol size="4" className="label">
                     Condition
@@ -1401,6 +1430,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
           </IonGrid>
         </IonContent>
       </IonModal>
+
+      {product && isTrade && (
+        <OfferTradeModal ref={offerTradeModal} product={product}
+          onClose={() => {
+            offerTradeModal.current?.dismiss();
+          }} />
+      )}
     </IonPage>
   );
 };

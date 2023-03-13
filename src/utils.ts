@@ -44,3 +44,33 @@ export function getCardImage(brand: string): string {
       return 'assets/images/cc-visa.svg';
   }
 }
+
+export function getMinTradeValue(price: number): number {
+  return price * 0.8;
+}
+
+export function getMaxTradeValue(price: number): number {
+  return price * 1.2;
+}
+
+export function getTradeFee(price1: number, price2: number): number {
+  const sum = price1 + price2;
+  let feePercentage: number = 0;
+  if (feePercentage < 20000) {
+      feePercentage = 0.12;
+  } else if (feePercentage < 50000) {
+    feePercentage = 0.08;
+  } else {
+    feePercentage = 0.04;
+  }
+
+  return sum / 2 * feePercentage;
+}
+
+export function getMinTradeFee(price: number): number {
+  return getTradeFee(price, getMinTradeValue(price));
+}
+
+export function getMaxTradeFee(price: number): number {
+  return getTradeFee(price, getMaxTradeValue(price));
+}
