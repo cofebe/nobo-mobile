@@ -303,7 +303,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
             }}
           />
           <div className="username">@{authService.getUserDisplayName()}</div>
-          <div className="title">{isTrade ? 'Trade Item' : 'Purchase Item'}</div>
+          <div className="title">
+            {isTrade ? 'Trade Item' : 'Purchase Item'}
+          </div>
         </div>
       </IonHeader>
       {product ? (
@@ -854,18 +856,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
               })}
             {isSneaker && sneakersSteps === 3 && selectedSneakerDetails && (
               <IonRow className="buttons">
-                <IonCol size="6" className="button-container left">
-                  <Button
-                    label="Offer"
-                    type="faded"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      offer();
-                    }}
-                  />
-                </IonCol>
-                <IonCol size="6" className="button-container right">
+                <IonCol size="12" className="button-container right">
                   {cart.products.find(
                     (p) => p._id === selectedSneakerDetails._id
                   ) ? (
@@ -948,7 +939,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
               <IonCol>Product Details</IonCol>
             </IonRow>
             <IonRow className="blurb">
-              <IonCol>{product.description}</IonCol>
+              {isSneaker && sneakersSteps === 3 && selectedSneakerDetails ? (
+                <IonCol>{selectedSneakerDetails.description}</IonCol>
+              ) : (
+                <IonCol>{product.description}</IonCol>
+              )}
             </IonRow>
             {!isSneaker && (
               <>
