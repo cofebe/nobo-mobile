@@ -31,9 +31,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
   const productService = new ProductService();
   const authService = new AuthService();
   const history = useHistory();
+  let subscription: any;
   let [productId, setProductId] = useState<string>(params.id);
   const [product, setProduct] = useState<Product>();
   //const [imageZoom, setImageZoom] = useState('');
+  const [isTrade, setIsTrade] = useState<boolean>(false);
   const [imageSource, setImageSource] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
   const [image1, setImage1] = useState<string>();
@@ -44,7 +46,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
   const [cart, setCart] = useState<ShoppingCartState>(
     shoppingCartStore.initialState
   );
-  let subscription: any;
   // const [showUsedSneakers, setShowUsedSneakers] = useState<boolean>(false);
   // const [showNewSneakers, setShowNewSneakers] = useState<boolean>(false);
   const [sneakersSteps, setSneakersSteps] = useState<number>(0);
@@ -146,7 +147,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
         console.log('getProduct:', data.product);
         //console.log('getProduct:', data);
         setProduct(data.product);
-        // console.log('getProduct:', data.product);
+        setIsTrade(data.product.action === 'trade');
         setImageSource(data.product.images[0].url);
         !isSneaker && setPrice(data.product.price);
 
@@ -170,7 +171,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
   });
 
   function updateImages(index: number) {
-    console.log('updateImages', index, product?.images);
+    //console.log('updateImages', index, product?.images);
     setImageIndex(index);
     if (product) {
       setImage1(product.images[index].url);
@@ -261,6 +262,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
     console.log('message');
   }
 
+  function offerTrade() {
+    console.log('offer trade');
+  }
+
   function showCart() {
     history.push('/cart');
   }
@@ -295,7 +300,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
             }}
           />
           <div className="username">@{authService.getUserDisplayName()}</div>
-          <div className="title">Purchase Item</div>
+          <div className="title">{isTrade ? 'Trade Item' : 'Purchase Item'}</div>
         </div>
       </IonHeader>
       {product ? (
@@ -560,7 +565,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                 </IonCol>
               </IonRow>
             )}
-            {!isSneaker && (
+            {!isSneaker && !isTrade && (
               <IonRow className="buttons">
                 <IonCol size="6" className="button-container left">
                   <Button
@@ -595,6 +600,32 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                       }}
                     />
                   )}
+                </IonCol>
+              </IonRow>
+            )}
+            {!isSneaker && isTrade && (
+              <IonRow className="buttons">
+                <IonCol size="6" className="button-container left">
+                  <Button
+                    label="Message"
+                    type="secondary"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      message();
+                    }}
+                  />
+                </IonCol>
+                <IonCol size="6" className="button-container right">
+                  <Button
+                    label="Offer Trade"
+                    type="primary"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      offerTrade();
+                    }}
+                  />
                 </IonCol>
               </IonRow>
             )}
@@ -832,7 +863,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                 </IonCol>
               </IonRow>
             )}
-            {!isSneaker && (
+            {!isSneaker && !isTrade && (
               <IonRow className="">
                 <IonCol size="12" className="button-container left right">
                   <Button
@@ -863,24 +894,26 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
               </IonRow>
             )}
           </IonGrid>
-          <IonGrid
-            className="trade-tooltip"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              tooltipModal.current?.present();
-            }}
-          >
-            <IonRow>
-              <IonCol>
-                <img
-                  src="assets/images/question-mark-tooltip.svg"
-                  alt="how do trades work?"
-                />
-                <div>How do trades work?</div>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
+          {isTrade && (
+            <IonGrid
+              className="trade-tooltip"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                tooltipModal.current?.present();
+              }}
+            >
+              <IonRow>
+                <IonCol>
+                  <img
+                    src="assets/images/question-mark-tooltip.svg"
+                    alt="how do trades work?"
+                  />
+                  <div>How do trades work?</div>
+                </IonCol>
+              </IonRow>
+            </IonGrid>
+          )}
           <IonGrid className="product-details">
             <IonRow className="title">
               <IonCol>Product Details</IonCol>
