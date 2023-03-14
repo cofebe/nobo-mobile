@@ -20,7 +20,12 @@ import { ProductResponse, Product } from '../models';
 //import ImageZoom from '../components/ImageZoom';
 import Button from '../components/Button';
 import OfferTradeModal from '../components/OfferTradeModal';
-import { formatPrice, getImageUrl, getMinTradeFee, getMaxTradeFee } from '../utils';
+import {
+  formatPrice,
+  getImageUrl,
+  getMinTradeFee,
+  getMaxTradeFee,
+} from '../utils';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import CreateOfferModal from '../components/CreateOfferModal';
 
@@ -48,12 +53,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
   const [cart, setCart] = useState<ShoppingCartState>(
     shoppingCartStore.initialState
   );
-  // const [showUsedSneakers, setShowUsedSneakers] = useState<boolean>(false);
-  // const [showNewSneakers, setShowNewSneakers] = useState<boolean>(false);
   const [sneakersSteps, setSneakersSteps] = useState<number>(0);
   const [sneakersIsNew, setSneakersIsNew] = useState<boolean>(true);
-  // const [usedSneakersSteps, setUsedSneakersSteps] = useState<number>(0);
-  // const [newSneakersSteps, setNewSneakersSteps] = useState<number>(0);
   const [selectedSneakers, setSelectedSneakers] = useState<Product[]>();
   const [selectedSneakerDetails, setSelectedSneakerDetails] =
     useState<Product>();
@@ -79,14 +80,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
   const [mensSneakerSizes, setMensSneakerSizes] =
     useState<sneaekerSizeChart[]>(mensSneakerSizesList);
 
-  // let womensSneakerSizesList: sneaekerSizeChart[] = [];
-  // for (let i = 5; i <= 18; i += 0.5) {
-  //   womensSneakerSizesList.push({
-  //     size: i + 'W',
-  //     active: false
-  //   });
-  // }
-
   const activeSneakerSizes = (product: Product, isNew: boolean) => {
     isNew
       ? mensSneakerSizesList.forEach((size) => {
@@ -108,11 +101,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
           }
         });
     setMensSneakerSizes(mensSneakerSizesList);
-    // womensSneakerSizesList.forEach((size) => {
-    //   if (product.sizes.includes(size.size)) {
-    //     size.active = true;
-    //   }
-    // });
   };
 
   const showSelectedSneakerSizes = (sneakerIds: Array<string>) => {
@@ -122,19 +110,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
       .then((products) => {
         console.log('getFilteredProducts', products);
         setSneakersSteps(2);
-        // if (isNew) {
-        //   setNewSneakersSteps(2);
-        // } else {
-        //   setUsedSneakersSteps(2);
-        // }
         setSelectedSneakers(products.docs);
       })
       .catch((error) => {
         console.log('Error: ', error);
       });
   };
-
-  //console.log('ProductDetail:', productId);
 
   useIonViewWillEnter(() => {
     subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
@@ -144,12 +125,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
     productId = params.id;
     setProductId(productId);
 
-    //console.log('productService.getProduct():', productId)
     productService
       .getProduct(productId, isSneaker)
       .then((data: ProductResponse) => {
         console.log('getProduct:', data.product);
-        //console.log('getProduct:', data);
         setProduct(data.product);
         setIsTrade(data.product.action === 'trade');
         setImageSource(data.product.images[0].url);
@@ -165,7 +144,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
       });
 
     productService.getCart().then((products: Product[]) => {
-      //console.log('getCart', products);
       shoppingCartStore.setProducts(products);
     });
   });
@@ -175,7 +153,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
   });
 
   function updateImages(index: number) {
-    //console.log('updateImages', index, product?.images);
     setImageIndex(index);
     if (product) {
       setImage1(product.images[index].url);
@@ -278,7 +255,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
 
   return (
     <IonPage className="product-detail-page">
-      {/*<ImageZoom show={!!imageZoom} imageUrl={imageZoom} onClose={() => setImageZoom('')}></ImageZoom>*/}
       <IonHeader
         style={{
           backgroundColor: '#FEFCF7',
@@ -417,7 +393,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
               <>
                 <IonRow>
                   <IonCol size="10" offset="1" className="product-price">
-                    <span>Est. Price</span> {formatPrice(getMinTradeFee(price))} - {formatPrice(getMaxTradeFee(price))}
+                    <span>Est. Price</span> {formatPrice(getMinTradeFee(price))}{' '}
+                    - {formatPrice(getMaxTradeFee(price))}
                   </IonCol>
                 </IonRow>
 
@@ -451,16 +428,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
             ) : (
               ''
             )}
-            {/* {getAttributeValue('yearReleased') && isSneaker && (
-              <IonRow className="product-info">
-                <IonCol size="4" className="label">
-                  Year Released
-                </IonCol>
-                <IonCol size="8" className="value">
-                  {getAttributeValue('yearReleased')}
-                </IonCol>
-              </IonRow>
-            )} */}
             {getAttributeValue('material') &&
               isSneaker &&
               sneakersSteps === 0 && (
@@ -473,16 +440,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                   </IonCol>
                 </IonRow>
               )}
-            {/* {getAttributeValue('SKU') && isSneaker && (
-              <IonRow className="product-info">
-                <IonCol size="4" className="label">
-                  SKU
-                </IonCol>
-                <IonCol size="8" className="value">
-                  {getAttributeValue('SKU')}
-                </IonCol>
-              </IonRow>
-            )} */}
             {getAttributeValue('colorway') &&
               isSneaker &&
               sneakersSteps === 0 && (
@@ -570,13 +527,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      // setShowNewSneakers(true);
-                      // setUsedSneakersSteps(0);
-                      // setNewSneakersSteps(1);
                       setSneakersSteps(1);
                       setSneakersIsNew(true);
                       activeSneakerSizes(product, true);
-                      // offer();
                     }}
                   />
                 </IonCol>
@@ -587,13 +540,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      // setShowUsedSneakers(true);
-                      // setNewSneakersSteps(0);
-                      // setUsedSneakersSteps(1);
                       setSneakersSteps(1);
                       setSneakersIsNew(false);
                       activeSneakerSizes(product, false);
-                      // showCart();
                     }}
                   />
                 </IonCol>
@@ -720,13 +669,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
               !sneakersIsNew &&
               selectedSneakers?.map((sneaker, index) => {
                 return (
-                  <IonRow
-                    // style={{
-                    //   padding: '24px 14px',
-                    //   borderTop: '1px solid black',
-                    // }}
-                    class="ion-justify-content-center ion-align-items-center selected-sneakers-container"
-                  >
+                  <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
                     <IonCol size="4">
                       <div className="selected-sneakers-price">
                         {formatPrice(sneaker.price)}
@@ -760,20 +703,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            // setSelectedSneakerDetails(selectedSneakers[index]);
                             addSneakerToCart(selectedSneakers[index]);
                           }}
                         />
                       )}
                       <div
-                        // style={{
-                        //   color: '#D6980E',
-                        //   textDecorationLine: 'underline',
-                        //   fontSize: '10px',
-                        //   fontWeight: '700',
-                        //   textAlign: 'end',
-                        //   letterSpacing: '.1em',
-                        // }}
                         className="selected-sneakers-view-details"
                         onClick={() => {
                           setSneakersSteps(3);
@@ -791,13 +725,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
               sneakersIsNew &&
               selectedSneakers?.map((sneaker, index) => {
                 return (
-                  <IonRow
-                    // style={{
-                    //   padding: '24px 14px',
-                    //   borderTop: '1px solid black',
-                    // }}
-                    class="ion-justify-content-center ion-align-items-center selected-sneakers-container"
-                  >
+                  <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
                     <IonCol size="4">
                       <div className="selected-sneakers-price">
                         {formatPrice(sneaker.price)}
@@ -831,20 +759,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            // setSelectedSneakerDetails(selectedSneakers[index]);
                             addSneakerToCart(selectedSneakers[index]);
                           }}
                         />
                       )}
                       <div
-                        // style={{
-                        //   color: '#D6980E',
-                        //   textDecorationLine: 'underline',
-                        //   fontSize: '10px',
-                        //   fontWeight: '700',
-                        //   textAlign: 'end',
-                        //   letterSpacing: '.1em',
-                        // }}
                         className="selected-sneakers-view-details"
                         onClick={() => {
                           setSneakersSteps(3);
@@ -1430,10 +1349,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
       </IonModal>
 
       {product && isTrade && (
-        <OfferTradeModal ref={offerTradeModal} product={product}
+        <OfferTradeModal
+          ref={offerTradeModal}
+          product={product}
           onClose={() => {
             offerTradeModal.current?.dismiss();
-          }} />
+          }}
+        />
       )}
       <CreateOfferModal
         productId={params.id}
@@ -1441,11 +1363,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
         onClose={() => {
           offerModal.current?.dismiss();
         }}
-        // onClose={(offer: any) => {
-        //   console.log('create offer address', offer);
-
-        //   offerModal.current?.dismiss();
-        // }}
       />
     </IonPage>
   );

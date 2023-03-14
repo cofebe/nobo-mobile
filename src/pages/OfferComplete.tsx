@@ -8,7 +8,6 @@ import {
   IonCol,
   IonToolbar,
   IonPage,
-  IonIcon,
   useIonViewWillEnter,
 } from '@ionic/react';
 import './OfferComplete.scss';
@@ -22,7 +21,6 @@ const OfferComplete: React.FC = () => {
   const history = useHistory();
   const userService = new UserService();
   const productService = new ProductService();
-  const [name, setName] = useState<string>('');
   const [product, setProduct] = useState<Product>();
   let [experience, setExperience] = useState<string>('women');
 
@@ -38,24 +36,10 @@ const OfferComplete: React.FC = () => {
       .catch((err: any) => {
         console.log('err', err);
       });
-
-    // userService.getOrder(params.id).then((order: FullOrder) => {
-    //   setOrder(order);
-    //   setCartImage(order.products[0].images[0].url);
-    //   //console.log('getCart', products);
-    //   setCardBrand(order.charge.source.brand);
-    //   setCardName(order.charge.source.name);
-    //   setCardLast4(order.charge.source.last4);
-    //   setCardExpMonth(order.charge.source.exp_month);
-    //   setCardExpYear(order.charge.source.exp_year);
-    // });
     userService.getMe().then((user: User) => {
       experience = user.experiencePreferences;
       setExperience(experience);
-      setName(user.firstName);
     });
-    // setShowCart(false);
-    // setShowOrderSummary(true);
   });
 
   return (
@@ -82,11 +66,12 @@ const OfferComplete: React.FC = () => {
             </div>
             <div className="offer-submitted">
               You're offer to{' '}
-              <span onClick={()=>{
-                history.push(
-                  `/home/profile/${product?.vendor._id}`
-                );
-              }} className="offer-owner">
+              <span
+                onClick={() => {
+                  history.push(`/home/profile/${product?.vendor._id}`);
+                }}
+                className="offer-owner"
+              >
                 @{product?.vendor?.displayName}
               </span>{' '}
               for their <span className="primary-color">{product?.name}</span>{' '}
@@ -114,7 +99,6 @@ const OfferComplete: React.FC = () => {
               onClick={(e: any) => {
                 e.preventDefault();
                 e.stopPropagation();
-                // goToMyOffers();
               }}
             />
             <Button
