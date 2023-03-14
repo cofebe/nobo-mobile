@@ -22,6 +22,7 @@ import Button from '../components/Button';
 import OfferTradeModal from '../components/OfferTradeModal';
 import { formatPrice, getImageUrl, getMinTradeFee, getMaxTradeFee } from '../utils';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
+import CreateOfferModal from '../components/CreateOfferModal';
 
 interface ProductDetailProps {
   isSneaker?: boolean;
@@ -59,6 +60,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
 
   const tooltipModal = useRef<HTMLIonModalElement>(null);
   const offerTradeModal = useRef<HTMLIonModalElement>(null);
+  const offerModal = useRef<HTMLIonModalElement>(null);
 
   interface sneaekerSizeChart {
     size: string;
@@ -231,6 +233,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
   }
 
   function offer() {
+    offerModal.current?.present();
     console.log('offer');
   }
 
@@ -1432,6 +1435,18 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
             offerTradeModal.current?.dismiss();
           }} />
       )}
+      <CreateOfferModal
+        productId={params.id}
+        ref={offerModal}
+        onClose={() => {
+          offerModal.current?.dismiss();
+        }}
+        // onClose={(offer: any) => {
+        //   console.log('create offer address', offer);
+
+        //   offerModal.current?.dismiss();
+        // }}
+      />
     </IonPage>
   );
 };

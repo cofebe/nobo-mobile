@@ -1,0 +1,90 @@
+.create-offer-container {
+  --height: 330px;
+  --backdrop-opacity: 0.1;
+  align-items: end;
+
+  .send-offer-title {
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    color: #000000;
+  }
+
+  .competitive-offer-prompt {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #707070;
+  }
+
+  .offer-input-left-padding {
+    padding-left: 28px;
+  }
+
+  .offer-input {
+    border: 0;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 41px;
+    letter-spacing: 0.1em;
+    --placeholder-color: #d6980e;
+    --placeholder-opacity: 1;
+    text-align: left;
+    color: #d6980e;
+    &::before {
+      content: '$';
+      position: relative;
+      left: 10px;
+    }
+  }
+
+  .card-charged-warning {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.1em;
+  }
+
+  &::part(content) {
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+  }
+
+  ion-header {
+    ion-toolbar {
+      --background: white;
+      --padding-top: 0;
+      --padding-bottom: 0;
+
+      ion-grid {
+        padding: 0;
+
+        ion-col {
+          padding-top: 20px;
+          //   padding-bottom: 0;
+          text-align: center;
+          //   text-transform: uppercase;
+          //   font-size: 15px;
+        }
+      }
+    }
+  }
+
+  .offer-content {
+    --background: white;
+
+    ion-grid {
+      padding: 20px;
+
+      ion-row {
+        margin-bottom: 10px;
+
+        .buttons {
+        }
+      }
+    }
+  }
+}

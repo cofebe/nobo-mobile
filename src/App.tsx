@@ -51,7 +51,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-
+import OfferComplete from './pages/OfferComplete';
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -154,8 +154,9 @@ const App: React.FC = () => {
             <Route path="/checkout/order/:id" exact={true}>
               <CheckoutComplete />
             </Route>
-
-
+            <Route path="/offer-submitted/:id" exact={true}>
+              <OfferComplete />
+            </Route>
             <Route path="/signup" exact={true}>
               <SignUp />
             </Route>
@@ -203,9 +204,7 @@ const App: React.FC = () => {
             </Route>
           </IonRouterOutlet>
         </IonReactRouter>
-        {showLoading ? (
-          <HorizontalLineSpinner />
-        ) : ''}
+        {showLoading ? <HorizontalLineSpinner /> : ''}
       </IonApp>
     </Elements>
   );
