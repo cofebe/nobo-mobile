@@ -82,7 +82,11 @@ const OfferComplete: React.FC = () => {
             </div>
             <div className="offer-submitted">
               You're offer to{' '}
-              <span className="offer-owner">
+              <span onClick={()=>{
+                history.push(
+                  `/home/profile/${product?.vendor._id}`
+                );
+              }} className="offer-owner">
                 @{product?.vendor?.displayName}
               </span>{' '}
               for their <span className="primary-color">{product?.name}</span>{' '}
