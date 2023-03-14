@@ -80,16 +80,24 @@ const OfferComplete: React.FC = () => {
                 alt="order complete"
               />
             </div>
-            <div>
-              You're offer to <span>@{product?.vendor?.displayName}</span> for
-              their <span>{product?.name}</span> was submitted
+            <div className="offer-submitted">
+              You're offer to{' '}
+              <span className="offer-owner">
+                @{product?.vendor?.displayName}
+              </span>{' '}
+              for their <span className="primary-color">{product?.name}</span>{' '}
+              was submitted
             </div>
           </div>
-          <div>You will only be charged if the offer is accepted</div>
+          <div className="offer-card-charged-warning">
+            YOU WILL ONLY BE CHARGED IF THE OFFER IS ACCEPTED
+          </div>
           <div className="text">
             <div>
-              Hi {name}, your order has been received. We have notified your
-              seller(s) and will update you when your order has been shipped!
+              If the other party accepts your request, you will be charged and
+              the product will be shipped. An email notification, with your
+              offer details has been sent to your inbox. You can always check
+              the status of your offer in YOUR OFFERS.
             </div>
           </div>
         </div>

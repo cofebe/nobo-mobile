@@ -3,11 +3,11 @@ import { SuccessResponse } from '../models';
 
 export class OfferService extends BaseService {
   async createBuyOffer(productId: string, price: number): Promise<boolean> {
-    const res = await super.fetch('POST', '/api/orders/cart', {
+    const res = await super.fetch('POST', '/api/offers/create-offer', {
       productId: productId,
       price: price,
     });
-    const json: SuccessResponse = await res.json();
-    return json.success;
+    const json = await res.json();
+    return json;
   }
 }

@@ -12,6 +12,7 @@ import {
 } from '@ionic/react';
 import './CreateOfferModal.scss';
 import { UserService } from '../services/UserService';
+import { OfferService } from '../services/OfferService';
 import { User, Product } from '../models';
 import Textarea from '../components/Textarea';
 import Button from '../components/Button';
@@ -27,6 +28,7 @@ export type Ref = HTMLIonModalElement;
 const CreateOfferModal = forwardRef<Ref, CreateOfferModalProps>(
   ({ onClose, productId }, ref) => {
     const userService = new UserService();
+    const offerService = new OfferService();
     const [offer, setOffer] = useState<any>('');
     const [isDefault, setIsDefault] = useState<boolean>(false);
     const history = useHistory();
@@ -38,6 +40,23 @@ const CreateOfferModal = forwardRef<Ref, CreateOfferModalProps>(
     useEffect(() => {
       reset();
     }, []);
+
+    const submitOffer = () => {
+      offerService
+        .createBuyOffer(productId, offer)
+        .then((res) => {
+          if (res) {
+            console.log('res', res);
+            onClose();
+            history.push(`/offer-submitted/${productId}`, {
+              offer: offer,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log('err', err);
+        });
+    };
 
     // function validate() {
     //   return (
@@ -111,20 +130,27 @@ const CreateOfferModal = forwardRef<Ref, CreateOfferModalProps>(
           <IonToolbar className="offer-header-toolbar">
             <IonGrid>
               <IonRow>
-                <IonCol size="12">SEND AN OFFER</IonCol>
+                <IonCol className="send-offer-title" size="12">
+                  SEND AN OFFER
+                </IonCol>
               </IonRow>
               <IonRow class="ion-justify-content-center">
-                <IonCol size="10">
+                <IonCol className="competitive-offer-prompt" size="10">
                   <div>Make sure you send a competitive offer.</div>
                 </IonCol>
               </IonRow>
               <IonRow class="ion-justify-content-center">
-                <IonCol size="10">
-                  <Input value={offer} onChange={(val) => setOffer(val)} />
+                <IonCol className="offer-input-left-padding" size="7">
+                  <Input
+                    className="offer-input"
+                    value={offer}
+                    placeholder="__.00"
+                    onChange={(val) => setOffer(val)}
+                  />
                 </IonCol>
               </IonRow>
               <IonRow class="ion-justify-content-center">
-                <IonCol size="10">
+                <IonCol className="card-charged-warning" size="10">
                   <div>IF YOUR OFFER IS ACCEPTED YOUR CARD WILL BE CHARGED</div>
                 </IonCol>
               </IonRow>
@@ -142,10 +168,11 @@ const CreateOfferModal = forwardRef<Ref, CreateOfferModalProps>(
                   //   onClick={(e) => submit(e)}
                   onClick={() => {
                     //close modal
-                    onClose();
-                    history.push(`/offer-submitted/${productId}`, {
-                      offer: offer,
-                    });
+                    // onClose();
+                    submitOffer();
+                    // history.push(`/offer-submitted/${productId}`, {
+                    //   offer: offer,
+                    // });
                   }}
                 />
               </IonCol>

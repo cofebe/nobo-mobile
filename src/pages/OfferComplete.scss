@@ -26,6 +26,31 @@
     --padding-top: 10px;
     --background: #fefcf7;
 
+    .offer-submitted {
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      line-height: 20px;
+    }
+
+    .offer-card-charged-warning {
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      color: #d6980e;
+      padding-top: 24px;
+    }
+
+    .offer-owner {
+      color: #d6980e;
+      font-style: italic;
+    }
+
+    .primary-color {
+      color: #d6980e;
+    }
+
     .thank-container {
       margin-bottom: 24px;
 
@@ -36,10 +61,11 @@
       }
 
       .text {
+        font-weight: 400;
         font-size: 12px;
-        color: #707070;
-        margin-top: 14px;
-        line-height: 20px;
+        padding-top: 16px;
+        line-height: 16px;
+        text-align: center;
 
         .link {
           text-decoration: underline;
@@ -52,7 +78,7 @@
     margin-top: 30px;
 
     .button-container {
-      margin-top: 60px;
+      margin-top: 333px;
       padding-left: 20px;
       padding-right: 20px;
 
