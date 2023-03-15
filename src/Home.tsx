@@ -18,7 +18,7 @@ import {
 import { Amplify /*, Auth*/ } from 'aws-amplify';
 import './styles.scss';
 //import Feed from './pages/Feed';
-import StyleFeedPage from './pages/StyleFeed'
+import StyleFeedPage from './pages/StyleFeed';
 import PostDetail from './pages/PostDetail';
 import PromotePost from './pages/PromotePost';
 import PostDetailLikes from './pages/PostDetailLikes';
@@ -39,6 +39,7 @@ import { UserService } from './services/UserService';
 import awsconfig from './aws-exports.js';
 import SignUpAthlete from './pages/SignUpAthlete';
 import { NotificationService } from './services/NotificationService';
+import { User } from './models';
 
 import { viewUser } from './util';
 
@@ -52,6 +53,7 @@ const Home: React.FC = () => {
   const [appMode, setAppMode] = useState('home');
   let [userType, setUserType] = useState<string>();
   let [profileURL, setProfileURL] = useState<string>();
+  const [experience, setExperience] = useState<string>('women');
 
   if (!isPlatform('desktop') && !isPlatform('mobileweb')) {
     PushNotifications.requestPermissions().then((result) => {
@@ -160,29 +162,15 @@ const Home: React.FC = () => {
           setProfileURL(profileURL);
         });
     }
-
-    console.log('ionViewWillEnter', history.location.pathname);
-    if (history.location.pathname.includes('explore')) {
-      setActiveTab('explore');
-    } else if (
-      history.location.pathname === '/home/messages' ||
-      history.location.pathname.startsWith('/home/chat/')
-    ) {
-      setActiveTab('messages');
-    } else if (
-      history.location.pathname === '/home/connections' ||
-      history.location.pathname === '/home/watchlist'
-    ) {
-      setActiveTab('connections');
-    } else if (
-      history.location.pathname.match('home/my-athlete-profile$') ||
-      history.location.pathname.match('home/my-coach-profile$') ||
-      history.location.pathname.match('home/my-trainer-profile$')
-    ) {
-      setActiveTab('my-profile');
-    } else {
-      setActiveTab('home');
-    }
+    userService
+      .getMe()
+      .then((user: User) => {
+        const userExperience = user.experiencePreferences;
+        setExperience(userExperience);
+      })
+      .catch((err) => {
+        console.log('Error getting user experience', err);
+      });
   });
 
   return (
@@ -257,7 +245,7 @@ const Home: React.FC = () => {
         <IonTabBar className="nav-bar" slot="bottom">
           <IonTabButton
             tab="home"
-            href="/home/explore/women/explore"
+            href={`/home/explore/${experience}/explore`}
             selected={appMode === 'home'}
             onClick={(e) => setActiveTab('home', e)}
           >

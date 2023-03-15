@@ -5,22 +5,14 @@ import '../styles.scss';
 import './Splash.css';
 
 const Splash: React.FC = () => {
-  useEffect(() => {
-    preloadAppContentAndNav();
-  });
+  const history = useHistory();
 
   useIonViewWillEnter(() => {
-    // some initialization code
-  });
-
-  const history = useHistory();
-  const waitSeconds = 1;
-
-  function preloadAppContentAndNav() {
     setTimeout(() => {
       history.push('/get-started');
-    }, waitSeconds * 2000);
-  }
+    }, 2000);
+    // some initialization code
+  });
 
   return (
     <IonPage
