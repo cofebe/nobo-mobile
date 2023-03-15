@@ -182,7 +182,7 @@ const Home: React.FC = () => {
             <ProductDetail />
           </Route>
           <Route exact path="/home/product/sneakers/:id">
-            <ProductDetail isSneaker={true} />
+            <ProductDetail />
           </Route>
           <Route exact path="/home/explore/:sectionCategory/:sectionName">
             <Explore />

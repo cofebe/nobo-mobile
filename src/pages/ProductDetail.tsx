@@ -29,11 +29,7 @@ import {
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import CreateOfferModal from '../components/CreateOfferModal';
 
-interface ProductDetailProps {
-  isSneaker?: boolean;
-}
-
-const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
+const ProductDetail: React.FC = () => {
   const params: any = useParams();
   const productService = new ProductService();
   const authService = new AuthService();
@@ -50,6 +46,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
   const [imageIndex, setImageIndex] = useState<number>(0);
   const [showPrevious, setShowPrevious] = useState<boolean>(false);
   const [showNext, setShowNext] = useState<boolean>(false);
+  const [isSneaker, setIsSneaker] = useState<boolean>(false);
   const [cart, setCart] = useState<ShoppingCartState>(
     shoppingCartStore.initialState
   );
@@ -118,6 +115,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
   };
 
   useIonViewWillEnter(() => {
+    let isSneakerUrl = history.location.pathname.includes('sneakers');
+    isSneakerUrl ? setIsSneaker(true) : setIsSneaker(false);
     subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
       setCart(cart);
     });
@@ -126,13 +125,13 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ isSneaker = false }) => {
     setProductId(productId);
 
     productService
-      .getProduct(productId, isSneaker)
+      .getProduct(productId, isSneakerUrl)
       .then((data: ProductResponse) => {
         console.log('getProduct:', data.product);
         setProduct(data.product);
         setIsTrade(data.product.action === 'trade');
         setImageSource(data.product.images[0].url);
-        !isSneaker && setPrice(data.product.price);
+        !isSneakerUrl && setPrice(data.product.price);
 
         setShowPrevious(false);
         setShowNext(data.product.images.length > 2);

@@ -1,22 +1,31 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import './NoboHomeItem.scss';
 import { environment } from '../environments/environment';
 import { calculateEstPrice } from '../helpers/tradeFees';
+import { useState, useEffect } from 'react';
 
 interface NoboItemProps {
   children?: React.ReactNode;
   product: any;
   isBig?: boolean;
-  isSneaker?: boolean;
 }
 
 const NoboHomeItem: React.FC<NoboItemProps> = ({
   children,
   product,
   isBig,
-  isSneaker,
 }) => {
   const history = useHistory();
+  const params: any = useParams();
+  const [isSneaker, setIsSneaker] = useState(false);
+
+  useEffect(() => {
+    if (params.sectionCategory === 'sneakers') {
+      setIsSneaker(true);
+    } else {
+      setIsSneaker(false);
+    }
+  }, [params]);
 
   return (
     <div
