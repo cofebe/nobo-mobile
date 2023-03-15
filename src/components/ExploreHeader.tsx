@@ -4,12 +4,11 @@ import {
   IonGrid,
   IonRow,
   IonCol,
-  useIonViewWillEnter,
   IonButton,
   useIonActionSheet,
 } from '@ionic/react';
 import './ExploreHeader.scss';
-import { useHistory, useParams, Link } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 
@@ -39,6 +38,8 @@ const NoboExploreHeader: React.FC = () => {
     } else if (activeCategory === 'sneakers') {
       setActiveCategoryTitle('SNEAKERS');
     }
+    setActiveButton(params.sectionName);
+
     return () => {
       subscription.unsubscribe();
     };
@@ -47,10 +48,6 @@ const NoboExploreHeader: React.FC = () => {
   const handleSectionButtonClick = (section: string) => {
     setActiveButton(section);
   };
-
-  // useIonViewWillEnter(() => {
-  //   // sectionNameCallback('explore');
-  // });
 
   const openCategoryOptions = () => {
     present({
