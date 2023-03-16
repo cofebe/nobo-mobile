@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Redirect, Route, useHistory } from 'react-router-dom';
 import {
   IonContent,
@@ -40,6 +40,7 @@ import awsconfig from './aws-exports.js';
 import SignUpAthlete from './pages/SignUpAthlete';
 import { NotificationService } from './services/NotificationService';
 import { User } from './models';
+import ListItemModal from './components/ListItemModal';
 
 import { viewUser } from './util';
 
@@ -47,6 +48,7 @@ Amplify.configure(awsconfig);
 
 const Home: React.FC = () => {
   const history = useHistory();
+  const listItemModal = useRef<HTMLIonModalElement>(null);
   const authService = new AuthService();
   const userService = new UserService();
   const notificationService = new NotificationService();
@@ -303,7 +305,10 @@ const Home: React.FC = () => {
             tab="list"
             // href="/home/messages"
             selected={appMode === 'list'}
-            onClick={(e) => setActiveTab('list', e)}
+            onClick={(e) => {
+              listItemModal.current?.present();
+              setActiveTab('list', e);
+            }}
           >
             <div
               style={{
@@ -385,6 +390,12 @@ const Home: React.FC = () => {
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
+      <ListItemModal
+        ref={listItemModal}
+        onClose={() => {
+          listItemModal.current?.dismiss();
+        }}
+      />
     </IonContent>
   );
 };
