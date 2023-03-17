@@ -18,12 +18,21 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
   const history = useHistory();
   const params: any = useParams();
   const [isSneaker, setIsSneaker] = useState(false);
+  const [isSneakerTrade, setIsSneakerTrade] = useState(false);
 
   useEffect(() => {
     if (params.sectionCategory === 'sneakers') {
       setIsSneaker(true);
     } else {
       setIsSneaker(false);
+    }
+    if (
+      params.sectionName === 'trade' &&
+      params.sectionCategory === 'sneakers'
+    ) {
+      setIsSneakerTrade(true);
+    } else {
+      setIsSneakerTrade(false);
     }
   }, [params]);
 
@@ -41,9 +50,13 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
         e.preventDefault();
         e.stopPropagation();
         console.log('product', product);
-        isSneaker
-          ? history.push(`/home/product/sneakers/${product._id}`)
-          : history.push(`/home/product/${product._id}`);
+        if (isSneakerTrade) {
+          history.push(`/home/product/sneakers/trade/${product._id}`);
+        } else {
+          isSneaker
+            ? history.push(`/home/product/sneakers/${product._id}`)
+            : history.push(`/home/product/${product._id}`);
+        }
       }}
     >
       {isBig ? (
@@ -52,9 +65,21 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
         <div className="nobo-details-card-small">
           <div>
             {product?.action === 'sell' ? (
+              isSneaker ? (
+                <>
+                  <div>{product?.brand}</div>
+                  <div>{product?.name}</div>
+                </>
+              ) : (
+                <>
+                  <div>{'$' + product?.price}</div>
+                  <div>COST</div>
+                </>
+              )
+            ) : isSneaker ? (
               <>
-                <div>{'$' + product?.price}</div>
-                <div>COST</div>
+                <div>{product?.brand}</div>
+                <div>{product?.name}</div>
               </>
             ) : (
               <>

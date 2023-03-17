@@ -76,14 +76,22 @@
     color: black;
   }
 
+  .selected-sneakers-margin-top {
+    margin-top: 17px;
+  }
+
   .selected-sneakers-container {
     padding: 24px 0;
     border-top: 1px solid black;
-    margin-top: 17px;
   }
 
   .selcted-sneakers-price {
     font-size: 15px;
+    font-weight: 700;
+  }
+
+  .selected-sneakers-trade-price {
+    font-size: 12px;
     font-weight: 700;
   }
 

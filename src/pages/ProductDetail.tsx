@@ -28,6 +28,7 @@ import {
 } from '../utils';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import CreateOfferModal from '../components/CreateOfferModal';
+import { calculateEstPrice } from '../helpers/tradeFees';
 
 const ProductDetail: React.FC = () => {
   const params: any = useParams();
@@ -77,6 +78,16 @@ const ProductDetail: React.FC = () => {
   const [mensSneakerSizes, setMensSneakerSizes] =
     useState<sneaekerSizeChart[]>(mensSneakerSizesList);
 
+  const activeTradeSneakerSizes = (product: Product) => {
+    mensSneakerSizesList.forEach((size) => {
+      if (product.trade && Object.keys(product.trade).includes(size.size)) {
+        size.active = true;
+        size.sneakerIds = product.trade[size.size];
+      }
+    });
+    setMensSneakerSizes(mensSneakerSizesList);
+  };
+
   const activeSneakerSizes = (product: Product, isNew: boolean) => {
     isNew
       ? mensSneakerSizesList.forEach((size) => {
@@ -116,7 +127,7 @@ const ProductDetail: React.FC = () => {
 
   useIonViewWillEnter(() => {
     let isSneakerUrl = history.location.pathname.includes('sneakers');
-    isSneakerUrl ? setIsSneaker(true) : setIsSneaker(false);
+    let isTradeUrl = history.location.pathname.includes('trade');
     subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
       setCart(cart);
     });
@@ -129,7 +140,8 @@ const ProductDetail: React.FC = () => {
       .then((data: ProductResponse) => {
         console.log('getProduct:', data.product);
         setProduct(data.product);
-        setIsTrade(data.product.action === 'trade');
+        activeTradeSneakerSizes(data.product);
+        setIsTrade(data.product.action === 'trade' || isTradeUrl);
         setImageSource(data.product.images[0].url);
         !isSneakerUrl && setPrice(data.product.price);
 
@@ -145,6 +157,10 @@ const ProductDetail: React.FC = () => {
     productService.getCart().then((products: Product[]) => {
       shoppingCartStore.setProducts(products);
     });
+    isSneakerUrl ? setIsSneaker(true) : setIsSneaker(false);
+    if (isTradeUrl && isSneakerUrl) {
+      setSneakersSteps(1);
+    }
   });
 
   useIonViewWillLeave(() => {
@@ -289,7 +305,21 @@ const ProductDetail: React.FC = () => {
       {product ? (
         <IonContent className="product-detail-page" fullscreen>
           <IonGrid className="product-details-card">
-            {isSneaker && sneakersSteps > 0 && (
+            {isSneaker && sneakersSteps > 0 && !isTrade && (
+              <IonRow>
+                <IonCol size="3">
+                  <img
+                    src="assets/images/arrow-left.svg"
+                    className="back-arrow"
+                    alt="back"
+                    onClick={() => {
+                      setSneakersSteps(sneakersSteps - 1);
+                    }}
+                  />
+                </IonCol>
+              </IonRow>
+            )}
+            {isSneaker && sneakersSteps > 1 && isTrade && (
               <IonRow>
                 <IonCol size="3">
                   <img
@@ -663,145 +693,199 @@ const ProductDetail: React.FC = () => {
                   })}
               </IonRow>
             )}
-            {isSneaker &&
-              sneakersSteps === 2 &&
-              !sneakersIsNew &&
-              selectedSneakers?.map((sneaker, index) => {
-                return (
-                  <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
-                    <IonCol size="4">
-                      <div className="selected-sneakers-price">
-                        {formatPrice(sneaker.price)}
-                      </div>
-                      <div className="selected-sneakers-tags">
-                        {sneaker.attributes[6].value === 'New With Tags'
-                          ? 'WITH NEW TAGS'
-                          : 'NO TAGS'}
-                      </div>
-                    </IonCol>
-                    <IonCol size="4">
-                      <div>@{sneaker.vendor.displayName}</div>
-                    </IonCol>
-                    <IonCol size="4">
-                      {cart.products.find(
-                        (p) => p._id === selectedSneakers[index]._id
-                      ) ? (
-                        <Button
-                          label="View Cart"
-                          type="secondary"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            showCart();
+            {isSneaker && sneakersSteps === 2 && isTrade && (
+              <div className="selected-sneakers-margin-top">
+                {selectedSneakers?.map((sneaker, index) => {
+                  return (
+                    <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
+                      <IonCol size="8">
+                        <div className="selected-sneakers-trade-price">
+                          EST. PRICE {calculateEstPrice(sneaker.price)}
+                        </div>
+                      </IonCol>
+                      <IonCol size="4">
+                        <div
+                          className="selected-sneakers-view-details"
+                          onClick={() => {
+                            setSneakersSteps(3);
+                            setSelectedSneakerDetails(selectedSneakers[index]);
                           }}
-                        />
-                      ) : (
-                        <Button
-                          label="Add to Cart"
-                          type="primary"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            addSneakerToCart(selectedSneakers[index]);
+                        >
+                          VIEW DETAILS
+                        </div>
+                      </IonCol>
+                    </IonRow>
+                  );
+                })}
+              </div>
+            )}
+
+            {isSneaker && sneakersSteps === 2 && !sneakersIsNew && !isTrade && (
+              <div className="selected-sneakers-margin-top">
+                {selectedSneakers?.map((sneaker, index) => {
+                  return (
+                    <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
+                      <IonCol size="4">
+                        <div className="selected-sneakers-price">
+                          {formatPrice(sneaker.price)}
+                        </div>
+                        <div className="selected-sneakers-tags">
+                          {sneaker.attributes[6].value}
+                        </div>
+                      </IonCol>
+                      <IonCol size="4">
+                        <div>@{sneaker.vendor.displayName}</div>
+                      </IonCol>
+                      <IonCol size="4">
+                        {cart.products.find(
+                          (p) => p._id === selectedSneakers[index]._id
+                        ) ? (
+                          <Button
+                            label="View Cart"
+                            type="secondary"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              showCart();
+                            }}
+                          />
+                        ) : (
+                          <Button
+                            label="Add to Cart"
+                            type="primary"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              addSneakerToCart(selectedSneakers[index]);
+                            }}
+                          />
+                        )}
+                        <div
+                          className="selected-sneakers-view-details"
+                          onClick={() => {
+                            setSneakersSteps(3);
+                            setSelectedSneakerDetails(selectedSneakers[index]);
                           }}
-                        />
-                      )}
-                      <div
-                        className="selected-sneakers-view-details"
-                        onClick={() => {
-                          setSneakersSteps(3);
-                          setSelectedSneakerDetails(selectedSneakers[index]);
-                        }}
-                      >
-                        VIEW DETAILS
-                      </div>
-                    </IonCol>
-                  </IonRow>
-                );
-              })}
-            {isSneaker &&
-              sneakersSteps === 2 &&
-              sneakersIsNew &&
-              selectedSneakers?.map((sneaker, index) => {
-                return (
-                  <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
-                    <IonCol size="4">
-                      <div className="selected-sneakers-price">
-                        {formatPrice(sneaker.price)}
-                      </div>
-                      <div className="selected-sneakers-tags">
-                        {sneaker.attributes[6].value === 'New With Tags'
-                          ? 'WITH NEW TAGS'
-                          : 'NO TAGS'}
-                      </div>
-                    </IonCol>
-                    <IonCol size="4">
-                      <div>@{sneaker.vendor.displayName}</div>
-                    </IonCol>
-                    <IonCol size="4">
-                      {cart.products.find(
-                        (p) => p._id === selectedSneakers[index]._id
-                      ) ? (
-                        <Button
-                          label="View Cart"
-                          type="secondary"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            showCart();
+                        >
+                          VIEW DETAILS
+                        </div>
+                      </IonCol>
+                    </IonRow>
+                  );
+                })}
+              </div>
+            )}
+            {isSneaker && sneakersSteps === 2 && sneakersIsNew && !isTrade && (
+              <div className="selected-sneakers-margin-top">
+                {selectedSneakers?.map((sneaker, index) => {
+                  return (
+                    <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
+                      <IonCol size="4">
+                        <div className="selected-sneakers-price">
+                          {formatPrice(sneaker.price)}
+                        </div>
+                        <div className="selected-sneakers-tags">
+                          {sneaker.attributes[6].value}
+                        </div>
+                      </IonCol>
+                      <IonCol size="4">
+                        <div>@{sneaker.vendor.displayName}</div>
+                      </IonCol>
+                      <IonCol size="4">
+                        {cart.products.find(
+                          (p) => p._id === selectedSneakers[index]._id
+                        ) ? (
+                          <Button
+                            label="View Cart"
+                            type="secondary"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              showCart();
+                            }}
+                          />
+                        ) : (
+                          <Button
+                            label="Add to Cart"
+                            type="primary"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              addSneakerToCart(selectedSneakers[index]);
+                            }}
+                          />
+                        )}
+                        <div
+                          className="selected-sneakers-view-details"
+                          onClick={() => {
+                            setSneakersSteps(3);
+                            setSelectedSneakerDetails(selectedSneakers[index]);
                           }}
-                        />
-                      ) : (
-                        <Button
-                          label="Add to Cart"
-                          type="primary"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            addSneakerToCart(selectedSneakers[index]);
-                          }}
-                        />
-                      )}
-                      <div
-                        className="selected-sneakers-view-details"
-                        onClick={() => {
-                          setSneakersSteps(3);
-                          setSelectedSneakerDetails(selectedSneakers[index]);
-                        }}
-                      >
-                        VIEW DETAILS
-                      </div>
-                    </IonCol>
-                  </IonRow>
-                );
-              })}
+                        >
+                          VIEW DETAILS
+                        </div>
+                      </IonCol>
+                    </IonRow>
+                  );
+                })}
+              </div>
+            )}
             {isSneaker && sneakersSteps === 3 && selectedSneakerDetails && (
               <IonRow className="buttons">
-                <IonCol size="12" className="button-container right">
-                  {cart.products.find(
-                    (p) => p._id === selectedSneakerDetails._id
-                  ) ? (
-                    <Button
-                      label="View Cart"
-                      type="secondary"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        showCart();
-                      }}
-                    />
-                  ) : (
-                    <Button
-                      label="Add to Cart"
-                      type="primary"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        addSneakerToCart(selectedSneakerDetails);
-                      }}
-                    />
-                  )}
-                </IonCol>
+                {isTrade ? (
+                  <>
+                    <IonCol size="6" className="button-container left">
+                      <Button
+                        label="Message"
+                        type="secondary"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          message();
+                        }}
+                      />
+                    </IonCol>
+                    <IonCol size="6" className="button-container right">
+                      <Button
+                        label="Offer Trade"
+                        type="primary"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          offerTrade();
+                        }}
+                      />
+                    </IonCol>
+                  </>
+                ) : (
+                  <>
+                    <IonCol size="12" className="button-container right">
+                      {cart.products.find(
+                        (p) => p._id === selectedSneakerDetails._id
+                      ) ? (
+                        <Button
+                          label="View Cart"
+                          type="secondary"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            showCart();
+                          }}
+                        />
+                      ) : (
+                        <Button
+                          label="Add to Cart"
+                          type="primary"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            addSneakerToCart(selectedSneakerDetails);
+                          }}
+                        />
+                      )}
+                    </IonCol>
+                  </>
+                )}
               </IonRow>
             )}
             {!isSneaker && !isTrade && (
@@ -819,7 +903,7 @@ const ProductDetail: React.FC = () => {
                 </IonCol>
               </IonRow>
             )}
-            {isSneaker && sneakersSteps === 3 && (
+            {isSneaker && sneakersSteps === 3 && !isTrade && (
               <IonRow className="">
                 <IonCol size="12" className="button-container left right">
                   <Button
