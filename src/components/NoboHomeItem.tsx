@@ -97,18 +97,35 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
           </div>
         </div>
       )}
-      <img
-        style={{
-          position: 'absolute',
-          top: '10px',
-          left: '10px',
-          height: '28px',
-        }}
-        src={`assets/images/nobo-${
-          product?.action === 'sell' ? 'buy-' : 'trade-'
-        }icon.svg`}
-        alt="nobo-buy-icon"
-      />
+      {isSneaker && params.sectionName !== 'explore' && (
+        <img
+          style={{
+            position: 'absolute',
+            top: '10px',
+            left: '10px',
+            height: '28px',
+          }}
+          src={`assets/images/nobo-${
+            isSneakerTrade ? 'trade-' : 'buy-'
+          }icon.svg`}
+          alt="nobo-buy-icon"
+        />
+      )}
+      {!isSneaker && (
+        <img
+          style={{
+            position: 'absolute',
+            top: '10px',
+            left: '10px',
+            height: '28px',
+          }}
+          src={`assets/images/nobo-${
+            product?.action === 'sell' ? 'buy-' : 'trade-'
+          }icon.svg`}
+          alt="nobo-buy-icon"
+        />
+      )}
+
       <img
         style={{ height: '100%', width: '100%', borderRadius: 10 }}
         alt="nobo-item"

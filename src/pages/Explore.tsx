@@ -75,16 +75,18 @@ const Explore: React.FC = () => {
               <NoboHomeItem product={products[0]} isBig />
             </IonCol>
           </IonRow>
-          <IonRow>
-            <IonCol
-              style={{
-                fontWeight: 600,
-                fontSize: 12,
-              }}
-            >
-              FEATURED ITEMS
-            </IonCol>
-          </IonRow>
+          {products.length > 1 && (
+            <IonRow>
+              <IonCol
+                style={{
+                  fontWeight: 600,
+                  fontSize: 12,
+                }}
+              >
+                FEATURED ITEMS
+              </IonCol>
+            </IonRow>
+          )}
           <IonRow>
             {products.slice(1).map((product: any, index: any) => (
               <IonCol style={{ height: 175 }} key={index} size="6">
