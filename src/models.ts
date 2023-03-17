@@ -25,7 +25,7 @@ export interface User {
   notifications: string[];
   profileBg: string;
   rating: number;
-  reviews: string[];
+  reviews: UserReview[];
   role: string;
   salesSchedule: string[];
   sellCloset: number;
@@ -33,6 +33,18 @@ export interface User {
   tradeCloset: number;
   unfinishedOnboardActivity: string;
   updatedAt: string;
+}
+
+export interface UserReview {
+  _id: string;
+  product: Product;
+  buyer: User;
+  createdAt: string;
+  ratingNum: number;
+  reviewText: string;
+  reviewType: string;
+  seller: string;
+  updatedat: string;
 }
 
 export interface Address {
