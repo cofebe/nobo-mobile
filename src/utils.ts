@@ -13,7 +13,7 @@ export function formatPrice(val: number, includeDecimals: boolean = true): strin
   }
 
   let ret = '$';
-  ret += val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  ret += val.toFixed(includeDecimals ? 2 : 0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   if (includeDecimals) {
     if(!ret.includes('.')) {
       ret += '.00';

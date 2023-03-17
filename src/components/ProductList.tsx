@@ -5,7 +5,8 @@ import { SocialSharing } from '@awesome-cordova-plugins/social-sharing';
 import './ProductList.css';
 import { FeedService } from '../services/FeedService';
 import { UserService } from '../services/UserService';
-import { Products } from '../data/products';
+import ProductCard from './ProductCard';
+import { ProductsResponse } from '../models';
 
 interface ProductListProps {
   type: string;
@@ -36,7 +37,7 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
   const history = useHistory();
   const feedService = new FeedService();
   const userService = new UserService();
-  const [products, setProducts] = useState<Products>();
+  const [products, setProducts] = useState<ProductsResponse>();
   const [feed, setFeed] = useState<FeedItem[]>([]);
 
   useIonViewDidEnter(() => {
@@ -47,7 +48,6 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
     if (type !== '') {
       userService
         .getProducts(userId, type)
-        .then((res) => res.json())
         .then((data) => {
           console.log('ProductList: ', data)
           setProducts(data)
@@ -85,14 +85,8 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
       return (
         <div className="image-grid image-grid-trade">
           {products?.docs.map((product, index) => (
-            <div className="image-grid-container-card" key={index} style={{ position: 'relative' }}
-              onClick={() => history.push(`/home/product/${product._id}`)}
-            >
-              <img
-                style={{borderTopLeftRadius: '5px', borderTopRightRadius: '5px'}}
-                src={product.image.includes("https://") ? product.image : `https://thenobo.com${product.image}`}
-                alt={`Product Img ${index + 1}`}
-              />
+            <div className="image-grid-container-card" key={index}>
+              <ProductCard product={product} priceLabel="Est. Price:" />
               <svg
                 viewBox="0 0 11 10"
                 style={{ position: 'absolute', top: '10px', left: '10px', width: '11px', height: '10px' }}
@@ -118,17 +112,6 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
                   </clipPath>
                 </defs>
               </svg>
-              <p style={{ position: 'absolute', textAlign: 'center', top: '-5px', right: '10px', width: '30px', height: '10px', fontSize: '10px', fontWeight: 700 }}>
-                {product.attributes.filter((item: any) => item.id === 'size').map((item: any) => {
-                  return <span key={item.id}>Size <br/>{item.value}</span>;
-                })}
-
-              </p>
-              <div className="image-grid-bottom-container" style={{borderBottomLeftRadius: '5px', borderBottomRightRadius: '5px'}}>
-                <div style={{ fontWeight: 'bold', letterSpacing: '.5px' }}>{product.brand}</div>
-                <div style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '20ch', fontWeight: '700', letterSpacing: '.5px'}}>{product.name}</div>
-                <div><span style={{color: '#ACACAC', paddingRight: '1ch' }}>Est.</span> ${product.price}.00</div>
-              </div>
             </div>
           ))}
         </div>
@@ -145,14 +128,8 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
       return (
         <div className="image-grid">
           {products?.docs.map((product, index) => (
-            <div className="image-grid-container-card" key={index} style={{ position: 'relative' }}
-              onClick={() => history.push(`/home/product/${product._id}`)}
-            >
-              <img
-                style={{borderTopLeftRadius: '5px', borderTopRightRadius: '5px'}}
-                src={product.image.includes("https://") ? product.image : `https://thenobo.com${product.image}`}
-                alt={`Product Img ${index + 1}`}
-              />
+            <div className="image-grid-container-card" key={index}>
+              <ProductCard product={product} priceLabel="Cost:" />
               <svg
                 viewBox="0 0 11 10"
                 style={{ position: 'absolute', top: '10px', left: '10px', width: '11px', height: '10px' }}
@@ -177,16 +154,6 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
                   </clipPath>
                 </defs>
               </svg>
-              <p style={{ position: 'absolute', textAlign: 'center', top: '-5px', right: '10px', width: '30px', height: '10px', fontSize: '10px', fontWeight: 700 }}>
-                {product.attributes.filter((item: any) => item.id === 'size').map((item: any) => {
-                  return <span key={item.id}>Size <br/>{item.value}</span>;
-                })}
-              </p>
-              <div className="image-grid-bottom-container" style={{borderBottomLeftRadius: '5px', borderBottomRightRadius: '5px'}}>
-                <div style={{ fontWeight: 'bold', letterSpacing: '.5px' }}>{product.brand}</div>
-                <div style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '20ch', fontWeight: '700', letterSpacing: '.5px'}}>{product.name}</div>
-                <div><span style={{color: '#ACACAC', paddingRight: '1ch' }}>Cost</span> ${product.price}.00</div>
-              </div>
             </div>
           ))}
         </div>

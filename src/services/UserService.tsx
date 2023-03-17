@@ -11,6 +11,7 @@ import {
   FullOrder,
   OrderResponse,
   OrdersResponse,
+  ProductsResponse,
 } from '../models';
 
 const API_URL = environment.serverUrl + '/api';
@@ -34,11 +35,23 @@ export class UserService extends BaseService {
     return await super.fetch('GET', `/api/users/${userId}/profile`);
   }
 
-  async getProducts(userId: any, productType: string) {
+  async getProducts(userId: any, productType: string): Promise<ProductsResponse> {
     const perPage = 100;
     const page = 1;
-    const filter = {"active": true, "sold": {"$in": [true, false]}, "retailPrice": {"$gt": 0}, "action": productType, "vendor": userId};
-    const sort = {"createdAt": -1};
+    const filter = {
+      active: true,
+      sold: {
+        $in: [true, false],
+      },
+      retailPrice: {
+        $gt: 0,
+      },
+      action: productType,
+      vendor: userId,
+    };
+    const sort = {
+      createdAt: -1,
+    };
 
     const queryParams = new URLSearchParams({
       perPage: perPage.toString(),
@@ -47,7 +60,9 @@ export class UserService extends BaseService {
       sort: JSON.stringify(sort)
     }).toString();
 
-    return await super.fetch('GET', `api/products/all?${queryParams}`);
+    const res = await super.fetch('GET', `api/products/all?${queryParams}`);
+    const json: ProductsResponse = await res.json();
+    return json;
   }
 
   async login(email: string, password: string): Promise<User> {

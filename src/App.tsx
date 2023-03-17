@@ -157,6 +157,14 @@ const App: React.FC = () => {
             <Route path="/offer-submitted/:id" exact={true}>
               <OfferComplete />
             </Route>
+            {/*<Route path="/trade/:productId/:tradeProductId/summary" exact={true}>
+              <TradeOfferSummary />
+            </Route>*/}
+            {/*<Route path="/trade/:productId/:tradeProductId/complete" exact={true}>
+              <TradeOfferComplete />
+            </Route>*/}
+
+
             <Route path="/signup" exact={true}>
               <SignUp />
             </Route>
