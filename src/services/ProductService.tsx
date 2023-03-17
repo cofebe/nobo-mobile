@@ -88,11 +88,15 @@ export class ProductService extends BaseService {
     return json.products;
   }
 
-  async getTaxAndShipping(address: Address): Promise<TaxShippingResponse> {
+  async getTaxAndShipping(address: Address, productOffered?: string, productWanted?: string): Promise<TaxShippingResponse> {
     const res = await super.fetch(
       'POST',
-      '/api/orders/calculate-taxes-shipping',
-      { address }
+      `/api/${productOffered ? 'trades' : 'orders'}/calculate-taxes-shipping`,
+      {
+        address,
+        productOffered,
+        productWanted,
+      }
     );
     const json: TaxShippingResponse = await res.json();
     return json;
@@ -104,6 +108,15 @@ export class ProductService extends BaseService {
       source: paymentMethodId,
     });
     const json: Order = await res.json();
+    return json;
+  }
+
+  async createBuyOffer(productId: string, price: number): Promise<boolean> {
+    const res = await super.fetch('POST', '/api/offers/create-offer', {
+      productId: productId,
+      price: price,
+    });
+    const json = await res.json();
     return json;
   }
 }

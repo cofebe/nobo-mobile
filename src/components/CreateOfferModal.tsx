@@ -11,7 +11,7 @@ import {
   useIonViewDidEnter,
 } from '@ionic/react';
 import './CreateOfferModal.scss';
-import { OfferService } from '../services/OfferService';
+import { ProductService } from '../services/ProductService';
 import Button from '../components/Button';
 import Input from './Input';
 
@@ -24,7 +24,7 @@ export type Ref = HTMLIonModalElement;
 
 const CreateOfferModal = forwardRef<Ref, CreateOfferModalProps>(
   ({ onClose, productId }, ref) => {
-    const offerService = new OfferService();
+    const offerService = new ProductService();
     const [offer, setOffer] = useState<any>('');
     const history = useHistory();
 
