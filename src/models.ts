@@ -176,6 +176,7 @@ export interface Product {
     new: { [key: string]: any };
     used: { [key: string]: any };
   };
+  trade: { [key: string]: string[] };
 }
 
 //export interface Product {
