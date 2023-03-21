@@ -37,7 +37,9 @@ const ProductCard: React.FC<ProductCardProps> = ({product, priceLabel, onClick})
     <div className="product-card" onClick={(e) => {
       e.preventDefault();
       e.stopPropagation();
-      click();
+      if (!product.sold) {
+        click();
+      }
     }}>
       <div className="image-container" style={{ backgroundImage: getImageUrl(product.image) }}></div>
       <p>
@@ -50,6 +52,11 @@ const ProductCard: React.FC<ProductCardProps> = ({product, priceLabel, onClick})
         <div className="name">{product.name}</div>
         <div className="price"><span>{priceLabel}</span> {price}</div>
       </div>
+      {product.sold && (
+        <div className="sold-overlay">
+          <div className="text">Sold</div>
+        </div>
+      )}
     </div>
   );
 }
