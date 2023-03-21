@@ -382,3 +382,53 @@ export interface OrdersResponse {
 export interface OrderResponse {
   order: FullOrder;
 }
+
+export interface TradeResponse {
+  salesTax: {
+    iniitiator: {
+      order_total_amount: number;
+      shipping: number;
+      taxable_amount: number;
+      amount_to_collect: number;
+      rate: number;
+      has_nexus: boolean;
+      freight_taxable: boolean;
+      tax_source: string;
+      jurisdictions: {
+        country: string;
+        state: string;
+        county: string;
+      };
+    };
+    recipient: {
+      order_total_amount: number;
+      shipping: number;
+      taxable_amount: number;
+      amount_to_collect: number;
+      rate: number;
+      has_nexus: boolean;
+      freight_taxable: boolean;
+      tax_source: string;
+      jurisdictions: {
+        country: string;
+        state: string;
+        county: string;
+      };
+    };
+  };
+  shippingAddress: {
+    initiator: Address;
+  };
+  paymentMethod: {
+    initiator: string;
+  };
+  status: string;
+  _id: string;
+  recipient: string;
+  products: {
+    offered: string;
+    requested: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}

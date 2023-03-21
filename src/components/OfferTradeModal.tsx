@@ -13,8 +13,10 @@ import './OfferTradeModal.scss';
 import { UserService } from '../services/UserService';
 import { AuthService } from '../services/AuthService';
 import { Product } from '../models';
-import Button from '../components/Button';
-import ProductCard from '../components/ProductCard';
+import Button from './Button';
+import ProductCard from './ProductCard';
+import TradeFeeModal from './TradeFeeModal';
+import { tradeStore, TradeState } from '../trade-store';
 import { formatPrice, getMinTradeValue, getTradeFee } from '../utils';
 
 export interface OfferTradeModalProps {
@@ -28,18 +30,19 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
   const history = useHistory();
   const userService = new UserService();
   const authService = new AuthService();
-  const [selectedTradeProduct, setSelectedTradeProduct] = useState<Product>();
+  const [cart, setCart] = useState<TradeState>(tradeStore.initialState);
   const [minTradeValue, setMinTradeValue] = useState<number>(0);
-  const [currTradeValue, setCurrTradeValue] = useState<number>(0);
-  const [tradeFee, setTradeFee] = useState<number>(0);
   const [tradeProducts, setTradeProducts] = useState<Product[]>([]);
 
   const modal = useRef<HTMLIonModalElement>(null);
 
   useEffect(() => {
-    setSelectedTradeProduct(undefined);
-    setCurrTradeValue(0);
-    setTradeFee(0);
+    const subscription = tradeStore.subscribe((cart: TradeState) => {
+      setCart(cart);
+    });
+
+    tradeStore.setProductWanted(product);
+
     setMinTradeValue(getMinTradeValue(product.price));
 
     userService.getProducts(authService.getUserId(), 'trade')
@@ -47,24 +50,27 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
         //console.log('products', products);
         setTradeProducts(products.docs);
       });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [product]);
 
   function validate() {
-    return currTradeValue >= minTradeValue;
+    return (cart.productOffered?.price || 0) >= minTradeValue;
   }
 
   function select(p: Product) {
     console.log('select', p);
-    setSelectedTradeProduct(p);
-    setCurrTradeValue(p.price);
-    setTradeFee(getTradeFee(p.price, product.price));
+    tradeStore.setProductOffered(p);
   }
 
   function submit(e: Event) {
     e.preventDefault();
     e.stopPropagation();
-    console.log('submit', product, selectedTradeProduct);
-    history.push(`/trade/${product._id}/${selectedTradeProduct?._id}/summary`);
+    console.log('submit', cart);
+    (ref as any)?.current?.dismiss();
+    history.push(`/trade/shipping`);
   }
 
   return (
@@ -85,7 +91,7 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
             </IonRow>
             <IonRow>
               <IonCol size="8" className={'fee-container ' + (validate() ? 'valid' : '')}>
-                NOBO Trade Feed: <span>{formatPrice(tradeFee)}</span>
+                NOBO Trade Feed: <span>{formatPrice(cart.tradeFee)}</span>
               </IonCol>
               <IonCol size="4" className="fee-modal-container" onClick={(e) => {
                 e.preventDefault();
@@ -100,7 +106,7 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
               </IonCol>
             </IonRow>
             <IonRow className={'slider-container ' + (validate() ? 'valid' : '')}>
-              <IonCol size="12" className={currTradeValue === 0 ? 'empty' : (currTradeValue < minTradeValue ? 'low' : 'high')}>
+              <IonCol size="12" className={!cart.productOffered ? 'empty' : ((cart.productOffered?.price || 0) < minTradeValue ? 'low' : 'high')}>
                 <div className="slider">
                   <img
                     src="assets/images/trade-checkmark.svg"
@@ -115,12 +121,12 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
                   <div>min value</div>
                 </div>
                 <div className="price-selected">
-                  {formatPrice(currTradeValue, false)}
+                  {formatPrice((cart.productOffered?.price || 0), false)}
                   <div>your product</div>
                 </div>
               </IonCol>
             </IonRow>
-            {currTradeValue === 0 && (
+            {!cart.productOffered && (
               <IonRow>
                 <IonCol className="description">
                   min price description here
@@ -138,7 +144,7 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
                 {tradeProducts.map(product => (
                   <IonCol size="6" key={product._id} className="product-card-container">
                     <ProductCard product={product} onClick={() => select(product)} priceLabel="Product Value:" />
-                    <img src={`assets/images/checkmark-${product._id === selectedTradeProduct?._id ? 'checked' : 'unchecked'}.svg`} alt="checkbox" />
+                    <img src={`assets/images/checkmark-${product._id === cart.productOffered?._id ? 'checked' : 'unchecked'}.svg`} alt="checkbox" />
                   </IonCol>
                 ))}
               </>
@@ -156,30 +162,7 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
         </IonGrid>
       </IonContent>
 
-      <IonModal
-        className="trade-fee-container"
-        ref={modal}
-        backdropDismiss={true}
-      >
-        <IonContent scrollY={false}>
-          <IonGrid>
-            <IonRow>
-              <IonCol size="12">
-                <img src="/assets/images/trade-fee-equation.svg" className="trade-fee-equation" alt="trade fee equation" />
-              </IonCol>
-            </IonRow>
-            <IonRow className="button">
-              <IonCol size="12" onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                modal.current?.dismiss();
-              }}>
-                Close
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </IonContent>
-      </IonModal>
+      <TradeFeeModal ref={modal} />
     </IonModal>
   );
 });

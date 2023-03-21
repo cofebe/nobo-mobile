@@ -19,6 +19,9 @@ import Roles from './pages/Roles';
 import Chat from './pages/Chat';
 import GetStarted from './pages/GetStarted';
 import ShoppingCart from './pages/ShoppingCart';
+import TradeOfferShipping from './pages/TradeOfferShipping';
+import TradeOfferPayment from './pages/TradeOfferPayment';
+import TradeOfferSummary from './pages/TradeOfferSummary';
 import CheckoutShipping from './pages/CheckoutShipping';
 import CheckoutPayment from './pages/CheckoutPayment';
 import CheckoutSummary from './pages/CheckoutSummary';
@@ -157,10 +160,16 @@ const App: React.FC = () => {
             <Route path="/offer-submitted/:id" exact={true}>
               <OfferComplete />
             </Route>
-            {/*<Route path="/trade/:productId/:tradeProductId/summary" exact={true}>
+            <Route path="/trade/shipping" exact={true}>
+              <TradeOfferShipping />
+            </Route>
+            <Route path="/trade/payment" exact={true}>
+              <TradeOfferPayment />
+            </Route>
+            <Route path="/trade/summary" exact={true}>
               <TradeOfferSummary />
-            </Route>*/}
-            {/*<Route path="/trade/:productId/:tradeProductId/complete" exact={true}>
+            </Route>
+            {/*<Route path="/trade/complete:id" exact={true}>
               <TradeOfferComplete />
             </Route>*/}
 

@@ -53,17 +53,19 @@ export function getMaxTradeValue(price: number): number {
   return price * 1.2;
 }
 
+export function getTradeFeePercentage(subtotal: number): number {
+  if (subtotal < 20000) {
+    return 0.12;
+  }
+  if (subtotal < 50000) {
+    return 0.08;
+  }
+  return 0.04;
+}
+
 export function getTradeFee(price1: number, price2: number): number {
   const sum = price1 + price2;
-  let feePercentage: number = 0;
-  if (feePercentage < 20000) {
-      feePercentage = 0.12;
-  } else if (feePercentage < 50000) {
-    feePercentage = 0.08;
-  } else {
-    feePercentage = 0.04;
-  }
-
+  const feePercentage = getTradeFeePercentage(sum);
   return sum / 2 * feePercentage;
 }
 

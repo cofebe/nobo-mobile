@@ -5,6 +5,7 @@ import {
   SuccessResponse,
   ShoppingCartResponse,
   TaxShippingResponse,
+  TradeResponse,
   Address,
   Order,
 } from '../models';
@@ -117,6 +118,17 @@ export class ProductService extends BaseService {
       price: price,
     });
     const json = await res.json();
+    return json;
+  }
+
+  async createTradeOffer(productWanted: Product, productOffered: Product, shippingAddress: Address, paymentMethodId: string): Promise<TradeResponse> {
+    const res = await super.fetch('POST', '/api/trades/create-offer', {
+      productWanted,
+      productOffered,
+      selectedShippingAddress: shippingAddress,
+      selectedPaymentMethod: paymentMethodId,
+    });
+    const json: TradeResponse = await res.json();
     return json;
   }
 }

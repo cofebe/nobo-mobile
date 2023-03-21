@@ -1,0 +1,212 @@
+.trade-summary-container {
+  background-color: #FEFCF7;
+
+  .page-header {
+
+    .titles {
+      height: 36px;
+      padding-top: 8px;
+    }
+  }
+
+  .trade-summary-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 20px;
+    --padding-top: 32px;
+    --background: #FEFCF7;
+
+    .trade-summary-header {
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #707070;
+      font-size: 12px;
+      font-weight: 700;
+
+      img {
+        padding-left: 1ch;
+      }
+    }
+
+    .items {
+      background: #FEFCF7;
+      border: 1px solid #FFFFFF;
+      box-shadow: -5px -5px 10px 1px #FFFFFF, 5px 5px 10px 2px #F2EFE7;
+      border-radius: 5px;
+      padding: 0;
+      padding-bottom: 20px;
+      margin-bottom: 14px;
+
+      .header {
+        margin-top: 23px;
+        margin-bottom: 18px;
+
+        ion-col {
+          text-align: center;
+          font-weight: 600;
+          font-size: 10px;
+          text-transform: uppercase;
+        }
+      }
+
+      .data {
+
+        .your-item,
+        .their-item {
+
+          .item-image {
+            height: 90px;
+            width: 90px;
+            margin-bottom: 10px;
+            background-color: #FFFFFF;
+            box-shadow: 0px 0px 10px #EDEAE3;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            border-radius: 5px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+
+          .text {
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+
+            .name {
+            }
+
+            .price {
+            }
+          }
+        }
+
+        .divider-container {
+          padding: 0;
+
+          .divider {
+            width: 50%;
+            position: relative;
+            border-right: 1px solid black;
+            height: 100px;
+
+            img {
+              position: absolute;
+              top: 50%;
+              right: 0;
+              transform: translate(50%, -50%);
+              display: block;
+            }
+          }
+        }
+      }
+
+      .summary-line {
+        border-top: 1px solid #707070;
+        border-bottom: 1px solid #707070;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        margin-top: 14px;
+        margin-bottom: 8px;
+
+        ion-col {
+          font-size: 10px;
+          text-align: center;
+          text-transform: uppercase;
+          font-size: 10px;
+          display: flex;
+          align-items: center;
+          color: #707070;
+
+          .price {
+            color: #D6980E;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+
+    .description {
+      font-size: 12px;
+      margin-bottom: 14px;
+
+      .italic {
+        font-style: italic;
+
+        span {
+          color: #D6980E;
+        }
+      }
+    }
+
+    .order-summary {
+      font-size: 12px;
+
+      .title {
+          text-transform: uppercase;
+          font-weight: 600;
+          color: #707070;
+          padding-bottom: 8px;
+          display: flex;
+          align-items: center;
+
+          ion-icon {
+            display: block;
+            margin-left: 16px;
+            height: 10px;
+            color: #D6980E;
+          }
+      }
+
+      .summary-info {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+
+        .label {
+          color: #ACACAC;
+          display: flex;
+          align-items: center;
+
+          img {
+            padding-left: 1ch;
+          }
+        }
+
+        .value {
+          text-align: right;
+        }
+
+        &.total {
+          font-weight: 700;
+          border-top: 1px solid black;
+          padding-top: 8px;
+
+          .label {
+            color: black;
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    margin-top: 30px;
+
+    .promo-code-container {
+
+      ion-input {
+      }
+    }
+
+    .button-container {
+      margin-top: 20px;
+    }
+  }
+}
