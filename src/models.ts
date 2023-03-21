@@ -383,9 +383,9 @@ export interface OrderResponse {
   order: FullOrder;
 }
 
-export interface TradeResponse {
+export interface Trade {
   salesTax: {
-    iniitiator: {
+    initiator: {
       order_total_amount: number;
       shipping: number;
       taxable_amount: number;
@@ -426,9 +426,14 @@ export interface TradeResponse {
   _id: string;
   recipient: string;
   products: {
-    offered: string;
-    requested: string;
+    offered: string|Product;
+    requested: string|Product;
   };
   createdAt: string;
   updatedAt: string;
+}
+
+export interface TradesResponse {
+  sent: Trade[];
+  received: Trade[];
 }

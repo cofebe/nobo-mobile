@@ -4,14 +4,15 @@ import { AuthService } from './AuthService';
 import {
   AddressRequest,
   CreateShippingAddressResponse,
-  LoginResponse,
-  PaymentMethodsResponse,
-  SuccessResponse,
-  User,
   FullOrder,
+  LoginResponse,
   OrderResponse,
   OrdersResponse,
+  PaymentMethodsResponse,
   ProductsResponse,
+  SuccessResponse,
+  TradesResponse,
+  User,
 } from '../models';
 
 const API_URL = environment.serverUrl + '/api';
@@ -137,6 +138,12 @@ export class UserService extends BaseService {
     const res = await super.fetch('GET', `/api/orders/my-purchases/${id}`);
     const json: OrderResponse = await res.json();
     return json.order;
+  }
+
+  async getMyTrades(): Promise<TradesResponse> {
+    const res = await super.fetch('GET', '/api/trades/my-trades/all');
+    const json: TradesResponse = await res.json();
+    return json;
   }
 
   // From URP /////////////////////////////////////////////////////////////////

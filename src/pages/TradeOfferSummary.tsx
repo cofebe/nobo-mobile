@@ -17,7 +17,6 @@ import Button from '../components/Button';
 import TradeFeeModal from '../components/TradeFeeModal';
 import TradeHelpModal from '../components/TradeHelpModal';
 import { ProductService } from '../services/ProductService';
-import { TaxShippingResponse } from '../models';
 import { formatPrice, getImageUrl } from '../utils';
 import { tradeStore, TradeState } from '../trade-store';
 
@@ -92,7 +91,7 @@ const TradeOfferSummary: React.FC = () => {
           <IonGrid className="items">
             <IonRow className="header">
               <IonCol size="4" offset="1">
-                Your Items
+                Your Item
               </IonCol>
               <IonCol size="4" offset="2">
                 Their Item
