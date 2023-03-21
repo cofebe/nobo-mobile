@@ -24,7 +24,6 @@ export interface User {
   memberSince: string;
   notifications: string[];
   profileBg: string;
-  rating: number;
   reviews: UserReview[];
   role: string;
   salesSchedule: string[];
@@ -168,7 +167,6 @@ export interface Product {
     __v: number;
     experiencePreferences: string;
     orders: number;
-    rating: number;
   };
   action: string;
   name: string;
@@ -190,86 +188,6 @@ export interface Product {
   };
   trade: { [key: string]: string[] };
 }
-
-//export interface Product {
-//  _id: string;
-//  action: string;
-//  active: boolean;
-//  attributes: ProductAttribute[];
-//  brand: string;
-//  category: ProductCategory;
-//  createdAt: string;
-//  description: string;
-//  giveaway: string;
-//  group: string;
-//  image: string;
-//  images: Image[];
-//  link: string;
-//  name: string;
-//  onSale: boolean;
-//  parentCategory: ProductCategory;
-//  potentialTradeItems: string[];
-//  price: number;
-//  receipt: string;
-//  receivedByNobo: boolean;
-//  rejected: boolean;
-//  retailPrice: number;
-//  returnBy: string;
-//  returnRequested: boolean;
-//  sold: boolean;
-//  tags: string[];
-//  tradeOffers: ProductTradeOffers;
-//  updatedAt: string;
-//  vendor: ProductVendor;
-//  shop?: ProductShop;
-//  trade?: ProductTrade;
-//}
-//export interface ProductShop {
-//  new: { [key: string]: any };
-//  used: { [key: string]: any };
-//}
-//
-//export interface ProductTrade {
-//  [key: string]: string[];
-//}
-//
-//export interface ProductTradeOffers {
-//  incoming: string[];
-//  outgoing: string[];
-//}
-//
-//export interface ProductAttribute {
-//  id: string;
-//  value: string | string[];
-//}
-//
-//export interface Image {
-//  url: string;
-//  originalName: string;
-//}
-//
-//export interface ProductVendor {
-//  _id: string;
-//  rating: number;
-//  profileBg: string;
-//  emailVerified: string;
-//  blocked: boolean;
-//  blurbText: string;
-//  reviews: string[];
-//  cache: ProductVendorCache;
-//  firstName: string;
-//  lastName: string;
-//  avatar: string;
-//  memberSince: string;
-//  displayName: string;
-//  experiencePreferences: string;
-//  orders: number;
-//}
-//
-//export interface ProductVendorCache {
-//  sellCloset: number;
-//  tradeCloset: number;
-//}
 
 export interface ProductCategory {
   parent: string;
