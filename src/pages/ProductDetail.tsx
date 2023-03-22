@@ -49,6 +49,7 @@ const ProductDetail: React.FC = () => {
   const [showPrevious, setShowPrevious] = useState<boolean>(false);
   const [showNext, setShowNext] = useState<boolean>(false);
   const [isSneaker, setIsSneaker] = useState<boolean>(false);
+  const [isMine, setIsMine] = useState<boolean>(false);
   const [cart, setCart] = useState<ShoppingCartState>(
     shoppingCartStore.initialState
   );
@@ -163,6 +164,8 @@ const ProductDetail: React.FC = () => {
         } else {
           setRating(0);
         }
+
+        setIsMine(authService.getUserId() === data.product.vendor._id);
       });
 
     productService.getCart().then((products: Product[]) => {
@@ -268,6 +271,14 @@ const ProductDetail: React.FC = () => {
 
   function message() {
     console.log('message');
+  }
+
+  function removeItem() {
+    console.log('remove item');
+  }
+
+  function editItem() {
+    console.log('edit item');
   }
 
   function offerTrade() {
@@ -570,7 +581,6 @@ const ProductDetail: React.FC = () => {
                 <IonCol size="6" className="button-container right">
                   <Button
                     label="Buy Used"
-                    type="secondary"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
@@ -582,50 +592,60 @@ const ProductDetail: React.FC = () => {
                 </IonCol>
               </IonRow>
             )}
-            {!isSneaker && !isTrade && (
-              <IonRow className="buttons">
-                <IonCol size="6" className="button-container left">
-                  <Button
-                    label="Offer"
-                    type="faded"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      offer();
-                    }}
-                  />
-                </IonCol>
-                <IonCol size="6" className="button-container right">
-                  {cart.products.find((p) => p._id === product._id) ? (
+            {!isSneaker && !isTrade && !isMine && (
+              <>
+                <IonRow className="buttons">
+                  <IonCol size="6" className="button-container left">
                     <Button
-                      label="View Cart"
-                      type="secondary"
+                      label="Offer"
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        showCart();
+                        offer();
                       }}
                     />
-                  ) : (
+                  </IonCol>
+                  <IonCol size="6" className="button-container right">
+                    {cart.products.find((p) => p._id === product._id) ? (
+                      <Button
+                        label="View Cart"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          showCart();
+                        }}
+                      />
+                    ) : (
+                      <Button
+                        label="Add to Cart"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          addToCart();
+                        }}
+                      />
+                    )}
+                  </IonCol>
+                </IonRow>
+                <IonRow className="">
+                  <IonCol size="12" className="button-container left right">
                     <Button
-                      label="Add to Cart"
-                      type="primary"
+                      label="Message"
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        addToCart();
+                        message();
                       }}
                     />
-                  )}
-                </IonCol>
-              </IonRow>
+                  </IonCol>
+                </IonRow>
+              </>
             )}
-            {!isSneaker && isTrade && (
+            {!isSneaker && isTrade && !isMine && (
               <IonRow className="buttons">
                 <IonCol size="6" className="button-container left">
                   <Button
                     label="Message"
-                    type="secondary"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
@@ -636,11 +656,34 @@ const ProductDetail: React.FC = () => {
                 <IonCol size="6" className="button-container right">
                   <Button
                     label="Offer Trade"
-                    type="primary"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
                       offerTrade();
+                    }}
+                  />
+                </IonCol>
+              </IonRow>
+            )}
+            {isMine && (
+              <IonRow className="buttons">
+                <IonCol size="6" className="button-container left">
+                  <Button
+                    label="Remove Item"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      removeItem();
+                    }}
+                  />
+                </IonCol>
+                <IonCol size="6" className="button-container right">
+                  <Button
+                    label="Edit Item"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      editItem();
                     }}
                   />
                 </IonCol>
@@ -747,7 +790,6 @@ const ProductDetail: React.FC = () => {
                         ) ? (
                           <Button
                             label="View Cart"
-                            type="secondary"
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
@@ -757,7 +799,6 @@ const ProductDetail: React.FC = () => {
                         ) : (
                           <Button
                             label="Add to Cart"
-                            type="primary"
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
@@ -802,7 +843,6 @@ const ProductDetail: React.FC = () => {
                         ) ? (
                           <Button
                             label="View Cart"
-                            type="secondary"
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
@@ -812,7 +852,6 @@ const ProductDetail: React.FC = () => {
                         ) : (
                           <Button
                             label="Add to Cart"
-                            type="primary"
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
@@ -835,14 +874,13 @@ const ProductDetail: React.FC = () => {
                 })}
               </div>
             )}
-            {isSneaker && sneakersSteps === 3 && selectedSneakerDetails && (
+            {isSneaker && sneakersSteps === 3 && selectedSneakerDetails && !isMine && (
               <IonRow className="buttons">
                 {isTrade ? (
                   <>
                     <IonCol size="6" className="button-container left">
                       <Button
                         label="Message"
-                        type="secondary"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -853,7 +891,6 @@ const ProductDetail: React.FC = () => {
                     <IonCol size="6" className="button-container right">
                       <Button
                         label="Offer Trade"
-                        type="primary"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -864,13 +901,22 @@ const ProductDetail: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <IonCol size="12" className="button-container right">
+                    <IonCol size="6" className="button-container left right">
+                      <Button
+                        label="Message"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          message();
+                        }}
+                      />
+                    </IonCol>
+                    <IonCol size="6" className="button-container right">
                       {cart.products.find(
                         (p) => p._id === selectedSneakerDetails._id
                       ) ? (
                         <Button
                           label="View Cart"
-                          type="secondary"
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
@@ -880,7 +926,6 @@ const ProductDetail: React.FC = () => {
                       ) : (
                         <Button
                           label="Add to Cart"
-                          type="primary"
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
@@ -891,36 +936,6 @@ const ProductDetail: React.FC = () => {
                     </IonCol>
                   </>
                 )}
-              </IonRow>
-            )}
-            {!isSneaker && !isTrade && (
-              <IonRow className="">
-                <IonCol size="12" className="button-container left right">
-                  <Button
-                    label="Message"
-                    type="secondary"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      message();
-                    }}
-                  />
-                </IonCol>
-              </IonRow>
-            )}
-            {isSneaker && sneakersSteps === 3 && !isTrade && (
-              <IonRow className="">
-                <IonCol size="12" className="button-container left right">
-                  <Button
-                    label="Message"
-                    type="secondary"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      message();
-                    }}
-                  />
-                </IonCol>
               </IonRow>
             )}
           </IonGrid>
