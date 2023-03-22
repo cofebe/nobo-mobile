@@ -1,5 +1,9 @@
 
 export function getImageUrl(url: string) {
+  if (!url) {
+    return '';
+  }
+
   if (!url.startsWith('http')) {
     url = 'https://thenobo.codepilot.com' + url;
   }

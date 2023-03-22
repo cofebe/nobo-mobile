@@ -1,4 +1,16 @@
 .nobo-home-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: white;
+  box-shadow: 0px 0px 10px #EDEAE3;
+
   .nobo-details-card {
     position: absolute;
     bottom: 20px;
@@ -17,6 +29,7 @@
     font-weight: 700;
     text-align: center;
   }
+
   .nobo-details-card-small {
     position: absolute;
     height: 33px;
@@ -33,5 +46,12 @@
     backdrop-filter: blur(7.5px);
     border-radius: 5px;
     padding: 0 10px;
+  }
+
+  .buy-trade-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 28px;
   }
 }

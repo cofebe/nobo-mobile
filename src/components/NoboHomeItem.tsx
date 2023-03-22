@@ -1,8 +1,9 @@
+import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import './NoboHomeItem.scss';
 import { environment } from '../environments/environment';
 import { calculateEstPrice } from '../helpers/tradeFees';
-import { useState, useEffect } from 'react';
+import { getImageUrl } from '../utils';
 
 interface NoboItemProps {
   children?: React.ReactNode;
@@ -40,11 +41,7 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
     <div
       className="nobo-home-item"
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100%',
-        width: '100%',
+        backgroundImage: getImageUrl(product?.image),
       }}
       onClick={(e) => {
         e.preventDefault();
@@ -99,12 +96,7 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
       )}
       {isSneaker && params.sectionName !== 'explore' && (
         <img
-          style={{
-            position: 'absolute',
-            top: '10px',
-            left: '10px',
-            height: '28px',
-          }}
+          className="buy-trade-icon"
           src={`assets/images/nobo-${
             isSneakerTrade ? 'trade-' : 'buy-'
           }icon.svg`}
@@ -113,28 +105,13 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
       )}
       {!isSneaker && (
         <img
-          style={{
-            position: 'absolute',
-            top: '10px',
-            left: '10px',
-            height: '28px',
-          }}
+          className="buy-trade-icon"
           src={`assets/images/nobo-${
             product?.action === 'sell' ? 'buy-' : 'trade-'
           }icon.svg`}
           alt="nobo-buy-icon"
         />
       )}
-
-      <img
-        style={{ height: '100%', width: '100%', borderRadius: 10 }}
-        alt="nobo-item"
-        src={
-          product?.image[0] === '/'
-            ? environment.serverUrl + product?.image
-            : product?.image
-        }
-      />
     </div>
   );
 };
