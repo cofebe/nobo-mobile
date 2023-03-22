@@ -126,13 +126,6 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
                 </div>
               </IonCol>
             </IonRow>
-            {!cart.productOffered && (
-              <IonRow>
-                <IonCol className="description">
-                  min price description here
-                </IonCol>
-              </IonRow>
-            )}
           </IonGrid>
         </IonToolbar>
       </IonHeader>
