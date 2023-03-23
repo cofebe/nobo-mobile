@@ -36,6 +36,11 @@ export class UserService extends BaseService {
     return await super.fetch('GET', `/api/users/${userId}/profile`);
   }
 
+  async getMyProducts(productType: string): Promise<ProductsResponse> {
+    const authService = new AuthService();
+    return this.getProducts(authService.getUserId(), productType);
+  }
+
   async getProducts(userId: any, productType: string): Promise<ProductsResponse> {
     const perPage = 100;
     const page = 1;

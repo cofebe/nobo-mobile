@@ -16,6 +16,7 @@ import './TradeOfferSummary.scss';
 import Button from '../components/Button';
 import TradeFeeModal from '../components/TradeFeeModal';
 import TradeHelpModal from '../components/TradeHelpModal';
+import Header from '../components/Header';
 import { ProductService } from '../services/ProductService';
 import { formatPrice, getImageUrl } from '../utils';
 import { tradeStore, TradeState } from '../trade-store';
@@ -59,21 +60,7 @@ const TradeOfferSummary: React.FC = () => {
 
   return (
     <IonPage className="trade-summary-container">
-      <IonHeader className="page-header">
-        <div className="titles">
-          <img
-            src="assets/images/arrow-left.svg"
-            className="back-arrow"
-            alt="back"
-            onClick={() => {
-              history.goBack();
-            }}
-          />
-          <div className="title">
-            Initiate Trade
-          </div>
-        </div>
-      </IonHeader>
+      <Header title="Initiate Trade" />
       <IonContent className="trade-summary-content">
         <div>
           <div className="trade-summary-header">

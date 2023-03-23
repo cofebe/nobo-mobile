@@ -20,6 +20,7 @@ import { ProductResponse, Product } from '../models';
 import Button from '../components/Button';
 import OfferTradeModal from '../components/OfferTradeModal';
 import TradeHelpModal from '../components/TradeHelpModal';
+import Header from '../components/Header';
 import {
   formatPrice,
   getImageUrl,
@@ -292,7 +293,10 @@ const ProductDetail: React.FC = () => {
 
   return (
     <IonPage className="product-detail-page">
-      <IonHeader className="page-header">
+      <Header
+        title={isTrade ? 'Trade Item' : 'Purchase Item'}
+        subtitle={`@${authService.getUserDisplayName()}`}
+      >
         <div className="cart">
           <img
             src="assets/images/shopping-cart.svg"
@@ -303,21 +307,7 @@ const ProductDetail: React.FC = () => {
           />
           {cart?.products.length ? <div className="dot"></div> : ''}
         </div>
-        <div className="titles">
-          <img
-            src="assets/images/arrow-left.svg"
-            className="back-arrow"
-            alt="back"
-            onClick={() => {
-              history.goBack();
-            }}
-          />
-          <div className="username">@{authService.getUserDisplayName()}</div>
-          <div className="title">
-            {isTrade ? 'Trade Item' : 'Purchase Item'}
-          </div>
-        </div>
-      </IonHeader>
+      </Header>
       {product ? (
         <IonContent className="product-detail-page" fullscreen>
           <IonGrid className="product-details-card">

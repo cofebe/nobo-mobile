@@ -11,13 +11,12 @@ import {
 } from '@ionic/react';
 import './OfferTradeModal.scss';
 import { UserService } from '../services/UserService';
-import { AuthService } from '../services/AuthService';
 import { Product } from '../models';
 import Button from './Button';
 import ProductCard from './ProductCard';
 import TradeFeeModal from './TradeFeeModal';
 import { tradeStore, TradeState } from '../trade-store';
-import { formatPrice, getMinTradeValue, getTradeFee } from '../utils';
+import { formatPrice, getMinTradeValue } from '../utils';
 
 export interface OfferTradeModalProps {
   product: Product;
@@ -29,7 +28,6 @@ export type Ref = HTMLIonModalElement;
 const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClose }, ref) => {
   const history = useHistory();
   const userService = new UserService();
-  const authService = new AuthService();
   const [cart, setCart] = useState<TradeState>(tradeStore.initialState);
   const [minTradeValue, setMinTradeValue] = useState<number>(0);
   const [tradeProducts, setTradeProducts] = useState<Product[]>([]);
@@ -45,7 +43,7 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
 
     setMinTradeValue(getMinTradeValue(product.price));
 
-    userService.getProducts(authService.getUserId(), 'trade')
+    userService.getMyProducts('trade')
       .then(products => {
         //console.log('products', products);
         setTradeProducts(products.docs);

@@ -1,0 +1,55 @@
+.my-closet-container {
+  background-color: #FEFCF7;
+
+  .page-header {
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+    }
+  }
+
+  .my-closet-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 100px;
+    --padding-top: 20px;
+    --background: #FEFCF7;
+
+    .no-products {
+      margin-top: 20px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #ACACAC;
+    }
+
+    ion-list {
+      background: transparent;
+      margin-top: 14px;
+
+      ion-item {
+        --background: transparent;
+        font-weight: 600;
+        position: relative;
+        text-transform: uppercase;
+        --padding-start: 10px;
+        --padding-bottom: 14px;
+
+        span {
+          font-weight: normal;
+          margin-left: 1ch;
+        }
+
+        img {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+}

@@ -26,6 +26,7 @@ import PostStats from './pages/PostStats';
 import Roles from './pages/Roles';
 import ProfilePage from './pages/Profile';
 import Explore from './pages/Explore';
+import MyCloset from './pages/MyCloset';
 import PostCreate from './pages/PostCreate';
 import Connections from './pages/Connections';
 import PendingConnections from './pages/PendingConnections';
@@ -192,6 +193,10 @@ const Home: React.FC = () => {
           <Route exact path="/home/explore/:sectionCategory/:sectionName">
             <Explore />
           </Route>
+          <Route exact path="/home/closet">
+            <MyCloset />
+          </Route>
+
           <Route exact path="/home/post-promote/:id">
             <PromotePost />
           </Route>
@@ -365,7 +370,7 @@ const Home: React.FC = () => {
           </IonTabButton>
           <IonTabButton
             tab="closet"
-            href="/home/my-profile"
+            href="/home/closet"
             selected={appMode === 'closet'}
             onClick={(e) => setActiveTab('closet', e)}
           >

@@ -1,8 +1,4 @@
 .page-header {
-  background-color: #fefcf7;
-  border-bottom: 1px solid black;
-  position: relative;
-
   .cart {
     position: absolute;
     right: 20px;
@@ -21,33 +17,6 @@
       height: 10px;
       width: 10px;
       border-radius: 5px;
-    }
-  }
-
-  .titles {
-    font-size: 12px;
-    margin: 40px 20px 14px;
-    position: relative;
-    text-align: center;
-    font-weight: 700;
-
-    .username {
-      color: #707070;
-    }
-
-    .title {
-      color: black;
-      margin-top: 4px;
-      text-transform: uppercase;
-    }
-
-    .back-arrow {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 23px;
-      width: 23px;
     }
   }
 }
