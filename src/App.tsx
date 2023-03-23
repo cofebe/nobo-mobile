@@ -36,6 +36,7 @@ import Settings from './pages/Settings';
 import ManageSubscription from './pages/ManageSubscription';
 import PrimarySport from './pages/PrimarySport';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
+import ListItem from './pages/ListItem';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -173,8 +174,12 @@ const App: React.FC = () => {
             <Route path="/trade/complete/:id" exact={true}>
               <TradeOfferComplete />
             </Route>
-
-
+            <Route exact path="/list-item/sell">
+              <ListItem />
+            </Route>
+            <Route exact path="/list-item/trade">
+              <ListItem />
+            </Route>
             <Route path="/signup" exact={true}>
               <SignUp />
             </Route>

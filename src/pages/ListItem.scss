@@ -1,0 +1,87 @@
+.list-item-page {
+  .list-item-header {
+    background-color: #fefcf7;
+    position: relative;
+    padding-bottom: 20px;
+
+    .progress-bar-container {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      margin: 0 !important;
+      background-color: #dfdfdf;
+      height: 6px;
+      .progress-bar {
+        background-color: #d6980e;
+        height: 6px;
+      }
+    }
+
+    .titles {
+      font-size: 12px;
+      margin: 40px 20px 14px;
+      position: relative;
+      text-align: center;
+      font-weight: 700;
+
+      .title {
+        color: black;
+        margin-top: 4px;
+        text-transform: uppercase;
+      }
+
+      .back-arrow {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 23px;
+        width: 23px;
+      }
+    }
+    .trade-steps {
+      color: #d6980e;
+      font-size: 12px;
+      font-weight: 700;
+      position: absolute;
+      right: 35px;
+      bottom: -22px;
+      letter-spacing: 0.5em;
+    }
+  }
+  .one-third-width {
+    width: 33.33333333333333%;
+  }
+  .two-thirds-width {
+    width: 66.66666666666666%;
+  }
+  .full-width {
+    width: 100%;
+  }
+  .list-item-content {
+    padding: 38px 22px;
+    .list-item-instruction {
+      font-size: 10px;
+      font-weight: 400;
+      margin-bottom: 20px;
+      color: #707070;
+      letter-spacing: 0.05em;
+    }
+  }
+  .margin-bottom-5 {
+    margin-bottom: 5px;
+  }
+  .input-height {
+    height: 37px;
+  }
+  .disabled-input {
+    border: 1px solid rgb(0, 0, 0, 0.1);
+  }
+  .footer {
+    position: fixed;
+    bottom: 0;
+    padding: 32px 40px;
+    width: 100%;
+    // background-image: linear-gradient(to top, lightgray, transparent);
+  }
+}
