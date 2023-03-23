@@ -27,6 +27,10 @@ import Roles from './pages/Roles';
 import ProfilePage from './pages/Profile';
 import Explore from './pages/Explore';
 import MyCloset from './pages/MyCloset';
+import TradeCloset from './pages/TradeCloset';
+import TradePendingCloset from './pages/TradePendingCloset';
+import SellCloset from './pages/SellCloset';
+import SellPendingCloset from './pages/SellPendingCloset';
 import PostCreate from './pages/PostCreate';
 import Connections from './pages/Connections';
 import PendingConnections from './pages/PendingConnections';
@@ -195,6 +199,18 @@ const Home: React.FC = () => {
           </Route>
           <Route exact path="/home/closet">
             <MyCloset />
+          </Route>
+          <Route exact path="/home/closet/trade">
+            <TradeCloset />
+          </Route>
+          <Route exact path="/home/closet/trade/pending">
+            <TradePendingCloset />
+          </Route>
+          <Route exact path="/home/closet/sell">
+            <SellCloset />
+          </Route>
+          <Route exact path="/home/closet/sell/pending">
+            <SellPendingCloset />
           </Route>
 
           <Route exact path="/home/post-promote/:id">
