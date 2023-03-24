@@ -344,8 +344,8 @@ export interface Trade {
   _id: string;
   recipient: string;
   products: {
-    offered: string|Product;
-    requested: string|Product;
+    offered: string | Product;
+    requested: string | Product;
   };
   createdAt: string;
   updatedAt: string;
@@ -354,4 +354,47 @@ export interface Trade {
 export interface TradesResponse {
   sent: Trade[];
   received: Trade[];
+}
+
+export interface CategoriesResponse {
+  docs: Category[];
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  limit: number;
+  nextPage: string;
+  page: number;
+  pagingCounter: number;
+  prevPage: string;
+  totalDocs: number;
+  totalPages: number;
+}
+
+export interface Category {
+  createdAt: string;
+  description: string;
+  name: string;
+  parent: CategoryParent | null;
+  updatedAt: string;
+  _id: string;
+}
+
+export interface CategoryParent {
+  createdAt: string;
+  description: string;
+  name: string;
+  parent: string | null;
+  updatedAt: string;
+  _id: string;
+  __v: number;
+}
+
+export interface BrandsResponse {
+  brands: Brand[];
+}
+
+export interface Brand {
+  _id: string;
+  name: string;
+  url: string;
+  __v: number;
 }

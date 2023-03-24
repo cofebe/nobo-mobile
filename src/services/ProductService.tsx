@@ -8,6 +8,7 @@ import {
   ShoppingCartResponse,
   TaxShippingResponse,
   Trade,
+  BrandsResponse,
 } from '../models';
 
 export class ProductService extends BaseService {
@@ -89,7 +90,11 @@ export class ProductService extends BaseService {
     return json.products;
   }
 
-  async getTaxAndShipping(address: Address, productOffered?: string, productWanted?: string): Promise<TaxShippingResponse> {
+  async getTaxAndShipping(
+    address: Address,
+    productOffered?: string,
+    productWanted?: string
+  ): Promise<TaxShippingResponse> {
     const res = await super.fetch(
       'POST',
       `/api/${productOffered ? 'trades' : 'orders'}/calculate-taxes-shipping`,
@@ -121,7 +126,12 @@ export class ProductService extends BaseService {
     return json;
   }
 
-  async createTradeOffer(productWanted: Product, productOffered: Product, shippingAddress: Address, paymentMethodId: string): Promise<Trade> {
+  async createTradeOffer(
+    productWanted: Product,
+    productOffered: Product,
+    shippingAddress: Address,
+    paymentMethodId: string
+  ): Promise<Trade> {
     const res = await super.fetch('POST', '/api/trades/create-offer', {
       productWanted,
       productOffered,
@@ -129,6 +139,11 @@ export class ProductService extends BaseService {
       selectedPaymentMethod: paymentMethodId,
     });
     const json: Trade = await res.json();
+    return json;
+  }
+  async getBrands(): Promise<BrandsResponse> {
+    const res = await super.fetch('GET', '/api/brands/all');
+    const json: BrandsResponse = await res.json();
     return json;
   }
 }
