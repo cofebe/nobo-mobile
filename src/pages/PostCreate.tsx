@@ -309,7 +309,7 @@ const PostCreate: React.FC = () => {
                 <IonItem lines="none">
                   <IonButton
                     buttonType=""
-                    color="#9BC9C1"
+                    color="#D6980E"
                     fill="clear"
                     className="cancel-btn"
                     size="large"
@@ -322,6 +322,7 @@ const PostCreate: React.FC = () => {
                     Cancel
                   </IonButton>
                   <IonButton
+                   style={{'--background': '#D6980E'}}
                     buttonType=""
                     className="post-btn"
                     size="large"
@@ -374,11 +375,29 @@ const PostCreate: React.FC = () => {
                     <div style={{ padding: '8px 0', fontSize: '12px' }}>
                       {selected}
                     </div>
-                    <div style={{ flexGrow: 1 }} className="post-input-count">
+                    <div className="post-input-count">
                       {data ? data.length : 0}/{350}
                     </div>
+                    <svg  style={{ alignSelf: 'right' }} width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g filter="url(#filter0_d_412_9992)">
+                      <circle cx="22" cy="22" r="18" fill="white"/>
+                      <path d="M27.8928 28.489L21.8178 19.3015C21.6936 19.1136 21.4797 19 21.25 19C21.0203 19 20.8064 19.1136 20.6822 19.3015L14.6072 28.489C14.5417 28.5881 14.5048 28.7026 14.5004 28.8204C14.4961 28.9381 14.5245 29.0549 14.5825 29.1583C14.6407 29.2618 14.7263 29.3481 14.8306 29.4082C14.9349 29.4683 15.0538 29.5 15.1751 29.5H27.3249C27.5719 29.5 27.7991 29.369 27.9175 29.1581C27.9755 29.0547 28.0039 28.938 27.9996 28.8203C27.9952 28.7025 27.9583 28.5881 27.8928 28.489ZM21.25 19.6562L23.4197 22.9375H21.1104L19.9 24.1142L18.9268 23.1699L21.25 19.6562ZM15.1751 28.8438L18.554 23.7334L19.9 25.042L21.3896 23.5938H23.8534L27.3249 28.8438H15.1751Z" fill="#D6980E"/>
+                      <rect x="13.25" y="14.75" width="16" height="14.5" rx="1.75" stroke="#D6980E" stroke-width="0.5"/>
+                      </g>
+                      <defs>
+                      <filter id="filter0_d_412_9992" x="0" y="0" width="44" height="44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                      <feOffset/>
+                      <feGaussianBlur stdDeviation="2"/>
+                      <feComposite in2="hardAlpha" operator="out"/>
+                      <feColorMatrix type="matrix" values="0 0 0 0 0.439216 0 0 0 0 0.439216 0 0 0 0 0.439216 0 0 0 0.15 0"/>
+                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_412_9992"/>
+                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_412_9992" result="shape"/>
+                      </filter>
+                      </defs>
+                    </svg>
                   </div>
-
                 </div>
                 <img
                   className="post-create-bubble"
@@ -393,123 +412,9 @@ const PostCreate: React.FC = () => {
                     onChange={(ev) => onPostImageFileChange(ev)}
                     accept="image/*"
                   ></input>
-                  <svg
-                    className="nobo-add-image"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="12"
-                      fill="#CCDBDC"
-                      fillOpacity="0.2"
-                    />
-                    <path
-                      d="M15.9285 16.326L11.8786 10.201C11.7957 10.0757 11.6531 10 11.5 10C11.3469 10 11.2043 10.0757 11.1214 10.201L7.07148 16.326C7.02778 16.3921 7.00318 16.4684 7.00029 16.5469C6.99739 16.6254 7.0163 16.7033 7.05503 16.7722C7.09377 16.8412 7.1509 16.8987 7.2204 16.9388C7.28991 16.9789 7.36923 17 7.45004 17H15.55C15.7146 17 15.8661 16.9126 15.945 16.7721C15.9837 16.7031 16.0026 16.6253 15.9997 16.5468C15.9968 16.4683 15.9722 16.392 15.9285 16.326ZM11.5 10.4375L12.9465 12.625H11.4069L10.6 13.4095L9.95117 12.7799L11.5 10.4375ZM7.45004 16.5625L9.70269 13.1556L10.6 14.028L11.5931 13.0625H13.2356L15.55 16.5625H7.45004Z"
-                      fill="#00816D"
-                    />
-                    <rect
-                      x="6.25"
-                      y="7.25"
-                      width="10.5"
-                      height="9.5"
-                      rx="1.75"
-                      stroke="#00816D"
-                      strokeWidth="0.5"
-                    />
-                  </svg>
-                  &nbsp; &nbsp;
-                  <svg
-                    className="nobo-add-video"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="12"
-                      fill="#CCDBDC"
-                      fillOpacity="0.2"
-                    />
-                    <path
-                      d="M18.2776 8.66667C18.1377 8.66667 17.9955 8.70417 17.8668 8.78542L15.3905 10.2417V8.99583C15.3905 8.44583 14.8668 8 14.2212 8H7.1693C6.5237 8 6 8.44583 6 8.99583V15.0042C6 15.5542 6.5237 16 7.1693 16H14.2212C14.8668 16 15.3905 15.5542 15.3905 15.0042V13.7583L17.8645 15.2146C17.9932 15.2979 18.1377 15.3333 18.2754 15.3333C18.6501 15.3333 19 15.0625 19 14.6771V9.32292C19.0022 8.9375 18.6524 8.66667 18.2776 8.66667ZM14.6682 15.0042C14.6682 15.1833 14.4627 15.3333 14.2212 15.3333H7.1693C6.92776 15.3333 6.72235 15.1833 6.72235 15.0042V8.99583C6.72235 8.81667 6.92776 8.66667 7.1693 8.66667H14.2212C14.4627 8.66667 14.6682 8.81667 14.6682 8.99583V15.0042ZM18.2799 14.6771L18.2528 14.65L15.3905 12.9667V11.0312L18.2799 9.33333V14.6771Z"
-                      fill="#00816D"
-                    />
-                  </svg>
-
                 </div>
-                <div
-                  onClick={() => {
-                    setShowVideoLink(!showVideoLink);
-                  }}
-                  className="nobo-post-tool-menu"
-                >
-                  <svg
-                    className="nobo-add-image"
-                    width="36"
-                    height="36"
-                    viewBox="0 0 36 36"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="18"
-                      cy="18"
-                      r="18"
-                      fill="#CCDBDC"
-                      fillOpacity="0.2"
-                    />
-                    <path
-                      d="M27.4165 13C27.2065 13 26.9932 13.0562 26.8002 13.1781L23.0858 15.3625V13.4938C23.0858 12.6688 22.3002 12 21.3318 12H10.7539C9.78555 12 9 12.6688 9 13.4938V22.5063C9 23.3313 9.78555 24 10.7539 24H21.3318C22.3002 24 23.0858 23.3313 23.0858 22.5063V20.6375L26.7968 22.8219C26.9898 22.9469 27.2065 23 27.4131 23C27.9752 23 28.5 22.5938 28.5 22.0156V13.9844C28.5034 13.4062 27.9785 13 27.4165 13ZM22.0022 22.5063C22.0022 22.775 21.6941 23 21.3318 23H10.7539C10.3916 23 10.0835 22.775 10.0835 22.5063V13.4938C10.0835 13.225 10.3916 13 10.7539 13H21.3318C21.6941 13 22.0022 13.225 22.0022 13.4938V22.5063ZM27.4198 22.0156L27.3792 21.975L23.0858 19.45V16.5469L27.4198 14V22.0156Z"
-                      fill="#00816D"
-                    />
-                  </svg>
-
-                </div>
-
-                {/* <div className="nobo-video-file-uploader-container">
-                  &nbsp; &nbsp;
-                  <svg
-                    className="nobo-upload-video"
-                    width="35"
-                    height="35"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="12"
-                      fill="#CCDBDC"
-                      fillOpacity="0.2"
-                    />
-                    <path
-                      d="M18.2776 8.66667C18.1377 8.66667 17.9955 8.70417 17.8668 8.78542L15.3905 10.2417V8.99583C15.3905 8.44583 14.8668 8 14.2212 8H7.1693C6.5237 8 6 8.44583 6 8.99583V15.0042C6 15.5542 6.5237 16 7.1693 16H14.2212C14.8668 16 15.3905 15.5542 15.3905 15.0042V13.7583L17.8645 15.2146C17.9932 15.2979 18.1377 15.3333 18.2754 15.3333C18.6501 15.3333 19 15.0625 19 14.6771V9.32292C19.0022 8.9375 18.6524 8.66667 18.2776 8.66667ZM14.6682 15.0042C14.6682 15.1833 14.4627 15.3333 14.2212 15.3333H7.1693C6.92776 15.3333 6.72235 15.1833 6.72235 15.0042V8.99583C6.72235 8.81667 6.92776 8.66667 7.1693 8.66667H14.2212C14.4627 8.66667 14.6682 8.81667 14.6682 8.99583V15.0042ZM18.2799 14.6771L18.2528 14.65L15.3905 12.9667V11.0312L18.2799 9.33333V14.6771Z"
-                      fill="#00816D"
-                    />
-                  </svg>
-
-                </div> */}
               </IonItem>
               <IonGrid id="open-modal" className="nobo-add-location-grid">
-          <IonRow>
-            <IonCol className="nobo-center" size="11">
-              <IonItem button detail={true}>
-                <IonLabel className="nobo-add-location-label">
-                  Add Location
-                </IonLabel>
-                <IonNote slot="end"></IonNote>
-              </IonItem>
-            </IonCol>
-          </IonRow>
         </IonGrid>
             </IonCol>
           </IonRow>
@@ -621,27 +526,28 @@ const PostCreate: React.FC = () => {
             </IonRow>
           )}
         </IonGrid>
-        <div className="nobo-post-image-gallery">
-          {postImages.trim() !== '' &&
-            postImages.split(',')?.map((pi) => {
-              if (pi !== '') {
-                return (
-                  <div className="">
-                    <img src={pi} alt="Post" />
-                    <div
-                      className="nobo-image-remove"
-                      onClick={() => {
-                        removePostImage(pi);
-                      }}
-                    >
-                      Remove
+        {postImages.trim() !== '' && (
+          <div className="nobo-post-image-gallery">
+            {postImages.split(',')?.map((pi) => {
+                if (pi !== '') {
+                  return (
+                    <div className="">
+                      <img src={pi} alt="Post" />
+                      <div
+                        className="nobo-image-remove"
+                        onClick={() => {
+                          removePostImage(pi);
+                        }}
+                      >
+                        Remove
+                      </div>
                     </div>
-                  </div>
-                );
-              }
-              return '';
-            })}
-        </div>
+                  );
+                }
+                return '';
+              })}
+          </div>
+        )}
         <IonModal
           ref={modal}
           trigger="open-modal"

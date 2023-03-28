@@ -258,7 +258,7 @@ const Feed: React.FC = () => {
                 {messages.map((m) => {
                   return (
                     <div key={m.post_id + (m.is_promoted ? 'p' : '')}>
-                      <FeedListItem
+{/*                      <FeedListItem
                         message={m}
                         trackImpressions={m.is_promoted}
                         zoomAction={(i: number) => {
@@ -275,7 +275,7 @@ const Feed: React.FC = () => {
                             }
                           } catch (exZoomPicNoExist) {}
                         }}
-                      />
+                      />*/}
                     </div>
                   );
                 })}

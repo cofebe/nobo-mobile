@@ -1,9 +1,25 @@
 import { IonGrid, IonRow, IonCol, IonAvatar } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { FeedItem, Comment } from '../data/athlete-feed';
+import { FeedItem } from '../data/athlete-feed';
 import './PostComment.scss';
 import { viewUser } from '../util';
+import { FeedService } from "../services/FeedService";
+
+interface Comment {
+  likes: any[];
+  _id: string;
+  user: {
+    _id: string;
+    displayName: string;
+    avatar: string;
+    tradeCloset: number;
+    sellCloset: number;
+  };
+  message: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface PostCommentProps {
   message: FeedItem;
@@ -13,66 +29,49 @@ interface PostCommentProps {
 const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
   const history = useHistory();
   // const [likeCount, setLikeCount] = useState<number>(message.like_count || 0);
-
+  const feedService = new FeedService();
   //const [msg, setMsg] = useState<FeedItem>(message);
   const [msgComment, setMsgComment] = useState<Comment>(comment);
 
   useEffect(() => {
-    //setMsg(message);
     setMsgComment(comment);
   }, [message, comment]);
 
-  //function likePost() {
-  //  console.log("likePost");
+  function likeComment() {
+    console.log(message)
+    console.log(comment)
+    let req = {
+      commentId: msgComment._id,
+      itemId: "640a7c7ede9b90d1f29f964c"
+    }
+    feedService
+      .likeComment(req)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Post Comment success: ", data)
+      })
+  }
 
-  //  let storage: any = window.localStorage.getItem("persistedState");
-  //  let user = JSON.parse(storage);
-  //  let req = {
-  //    post_id: msg.post_id,
-  //    user_id: user.user["user_id"],
-  //  };
-  //  console.log("likePost req: ", req);
+  function getTimeDifferenceString(date: Date) {
+    const now = new Date();
+    const difference = now.getTime() - date.getTime();
+    const minute = 60 * 1000;
+    const hour = 60 * minute;
+    const day = 24 * hour;
 
-  //  if (msg.like_count === undefined) {
-  //    msg.like_count = 0;
-  //  }
-
-  //  if (msg.liked_post) {
-  //    msg.like_count -= 1;
-  //    setLikeCount(likeCount - 1);
-  //    msg.liked_post = false;
-  //    feedService
-  //      .removeLikePost(req)
-  //      .then((res) => res.json())
-  //      .then((data) => {
-  //        console.log("removeLikePost: ", data);
-  //      })
-  //      .catch((err) => {
-  //        console.error("Error:", err);
-  //        // setTimeout(() => {
-  //        //   console.log("Trying like post again")
-  //        //   likePost()
-  //        // }, 1000)
-  //      });
-  //  } else {
-  //    msg.like_count += 1;
-  //    setLikeCount(likeCount + 1);
-  //    msg.liked_post = true;
-  //    feedService
-  //      .likePost(req)
-  //      .then((res) => res.json())
-  //      .then((data) => {
-  //        console.log("LikePost: ", data);
-  //      })
-  //      .catch((err) => {
-  //        console.error("Error:", err);
-  //        // setTimeout(() => {
-  //        //   console.log("Trying like post again")
-  //        //   likePost()
-  //        // }, 1000)
-  //      });
-  //  }
-  //}
+    if (difference < minute) {
+      return "just now";
+    } else if (difference < hour) {
+      const minutes = Math.floor(difference / minute);
+      return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+    } else if (difference < day) {
+      const hours = Math.floor(difference / hour);
+      return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+    } else {
+      const days = Math.floor(difference / day);
+      return `${days} day${days === 1 ? "" : "s"} ago`;
+    }
+  }
 
   return (
     <IonGrid className="feed-comment">
@@ -82,13 +81,13 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
             <img
               onClick={(e) => {
                 e.preventDefault();
-                viewUser(history, msgComment.user_id, msgComment.account_type);
+                // viewUser(history, msgComment.user_id, msgComment.account_type);
               }}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = '../../assets/images/nobo_logo_round.svg';
+                // currentTarget.src = '../../assets/images/nobo_logo_round.svg';
               }}
-              src={msgComment.profile_image}
+              src={msgComment.user.avatar}
               alt="avatar"
             />
           </IonAvatar>
@@ -98,16 +97,17 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
             className="feed-list-nobo-badge-line"
             onClick={(e) => {
               e.preventDefault();
-              viewUser(history, msgComment.user_id, msgComment.account_type);
+              // viewUser(history, msgComment.user_id, msgComment.account_type);
             }}
           >
-            <p className="feed-list-feed-name">{msgComment.from_name}</p>
+            <p className="feed-list-feed-name">{msgComment.user.displayName}</p>
           </h2>
-          <p className="feed-list-feed-message" style={{ paddingLeft: 0 }}>
-            {msgComment.message}
+          <p className="feed-list-feed-message" dangerouslySetInnerHTML={{__html: msgComment.message}} style={{ paddingLeft: 0 }}>
           </p>
           <div className="feed-list-bottom-icons">
-            <div className="feed-list-date">{msgComment.timestamp}</div>
+            <div className="feed-list-date">{getTimeDifferenceString(new Date(msgComment.createdAt))}
+              <img onClick={() => likeComment()} style={{marginLeft: "80px"}} src="/assets/images/like-comment.png" height="15px" width="15px"/>
+            </div>
             {false /*!msgComment.liked_post*/ && (
               <div>
                 <div>

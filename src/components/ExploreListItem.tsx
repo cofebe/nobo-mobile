@@ -48,10 +48,6 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
           <IonAvatar className="explore-feed-first-row">
             <img
               className="explore-list-feed-image"
-              onError={({ currentTarget }) => {
-                currentTarget.onerror = null; // prevents looping
-                currentTarget.src = '../../assets/images/nobo_logo_round.jpg';
-              }}
               src={profile.basic_user_profile.profile_image.String}
               alt="avatar"
             />

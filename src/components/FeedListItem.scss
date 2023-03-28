@@ -5,6 +5,41 @@ ion-item.feed-item-item {
   --inner-padding-end: 0;
   border-radius: 5px;
 
+  .feed-item-text {
+    min-height: 5vh;
+    padding-top: .5rem;
+    font-style: normal;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: left;
+    vertical-align: top;
+    letter-spacing: .3px;
+  }
+
+  .feed-item-text-large {
+    font-family: 'Baskerville', serif;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 52px;
+    text-align: left;
+    vertical-align: top;
+
+    a {
+      color: rgb(255, 255, 255);
+    }
+  }
+
+  .feed-item-date {
+    margin-top: 10px;
+    font-weight: normal;
+    font-size: 8px;
+    line-height: 12px;
+    text-align: left;
+    vertical-align: top;
+    letter-spacing: .3px;
+    color: #707070;
+  }
+
   &.promoted {
     //--background: aliceblue;
   }
@@ -25,12 +60,12 @@ ion-item.feed-item-item {
     gap: 5%;
 
     ion-icon {
-      height: 16px;
-      width: 16px;
+      height: 24px;
+      width: 24px;
       margin-top: auto;
       margin-bottom: auto;
       margin-left: auto;
-      color: #c4c4c4;
+      color: #707070;
     }
   }
 
@@ -38,8 +73,10 @@ ion-item.feed-item-item {
     margin-top: 0px;
     margin-left: 10px;
     margin-right: 10px;
-    width: 30px;
-    height: 30px;
+    width: 39px;
+    height: 39px;
+    border: 1px solid #000000;
+    border-style: inside;
   }
 
   .feed-list-promoted {
@@ -55,6 +92,7 @@ ion-item.feed-item-item {
   }
 
   .feed-content {
+    padding-top: 0px;
     padding-left: 18px;
   }
 
@@ -65,7 +103,7 @@ ion-item.feed-item-item {
   }
 
   .feed-content-footer {
-    padding-top: 10px;
+    padding-top: 30px;
     padding-bottom: 0;
   }
 
@@ -78,8 +116,11 @@ ion-item.feed-item-item {
   }
 
   .feed-list-feed-name {
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0.05em;
+    text-align: left;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -169,6 +210,7 @@ ion-item.feed-item-item {
 
   .feed-item-item-content {
     width: 100%;
+    background-color: rgb(254, 252, 247);
   }
 
   @media only screen and (min-width: 1000px) {
@@ -216,8 +258,7 @@ ion-item.feed-item-item {
 
   .feed-list-nobo-comments-count {
     font-size: 10px;
-    color: #00d6b6;
-    margin-left: 4px;
+    color: #000000;
     padding-bottom: 3px;
   }
 
@@ -246,9 +287,9 @@ ion-item.feed-item-item {
   }
 
   .feed-list-nobo-likes-count {
+    margin-bottom: 5px;
     font-size: 10px;
-    color: #00d6b6;
-    margin-left: 4px;
+    color: #000000;
     padding-bottom: 3px;
   }
 
@@ -290,6 +331,7 @@ ion-item.feed-item-item {
     height: 300px;
     border-radius: 1px;
     background-color: #ffffff;
+    border-radius: 5px;
   }
 
   .nobo-post-image {
@@ -302,6 +344,20 @@ ion-item.feed-item-item {
     width: 100%;
     background-repeat: no-repeat;
     background-position: top;
+  }
+
+  .nobo-image-options-container {
+    border: 0.5px solid #FFFFFF;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    opacity: 0.8;
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    padding: 10px;
+    width: 47px;
   }
 
   .nobo-zoom-image-icon {
@@ -377,7 +433,6 @@ ion-item.feed-item-item {
     text-align: center;
     width: 100%;
     z-index: 1;
-    background-color: #ffffff;
   }
 
   .carousel .control-next.control-arrow:before {

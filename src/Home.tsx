@@ -19,7 +19,6 @@ import { Amplify /*, Auth*/ } from 'aws-amplify';
 import './pages/URP.css';
 //import Feed from './pages/Feed';
 import StyleFeedPage from './pages/StyleFeed'
-import PostDetail from './pages/PostDetail';
 import PromotePost from './pages/PromotePost';
 import PostDetailLikes from './pages/PostDetailLikes';
 import PostStats from './pages/PostStats';
@@ -204,9 +203,6 @@ const Home: React.FC = () => {
           </Route>
           <Route exact path="/home/post-detail/:id/likes">
             <PostDetailLikes />
-          </Route>
-          <Route exact path="/home/post-detail/:id">
-            <PostDetail />
           </Route>
           <Route exact path="/home/post-stats/:id">
             <PostStats />
