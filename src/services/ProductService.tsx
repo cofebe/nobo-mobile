@@ -59,6 +59,12 @@ export class ProductService extends BaseService {
     return json;
   }
 
+  async deleteProduct(productId: string): Promise<SuccessResponse> {
+    const res = await super.fetch('POST', `/api/products/${productId}/delete`, {});
+    const json: SuccessResponse = await res.json();
+    return json;
+  }
+
   async getSneakerProduct(productId: string): Promise<ProductResponse> {
     const res = await super.fetch('GET', `/api/products/sneakers/${productId}`);
     const json: ProductResponse = await res.json();

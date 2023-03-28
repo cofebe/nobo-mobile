@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import {
   IonContent,
-  IonHeader,
   IonPage,
   IonGrid,
   IonRow,
@@ -10,6 +9,7 @@ import {
   IonIcon,
   useIonViewWillEnter,
   useIonViewWillLeave,
+  useIonActionSheet,
 } from '@ionic/react';
 import './ProductDetail.scss';
 import { caretUpOutline, caretDownOutline } from 'ionicons/icons';
@@ -59,6 +59,7 @@ const ProductDetail: React.FC = () => {
   const [selectedSneakers, setSelectedSneakers] = useState<Product[]>();
   const [selectedSneakerDetails, setSelectedSneakerDetails] =
     useState<Product>();
+  const [presentDeleteActionSheet] = useIonActionSheet();
 
   const tooltipModal = useRef<HTMLIonModalElement>(null);
   const offerTradeModal = useRef<HTMLIonModalElement>(null);
@@ -179,7 +180,9 @@ const ProductDetail: React.FC = () => {
   });
 
   useIonViewWillLeave(() => {
-    subscription.unsubscribe();
+    if (subscription) {
+      subscription.unsubscribe();
+    }
   });
 
   function updateImages(index: number) {
@@ -276,6 +279,40 @@ const ProductDetail: React.FC = () => {
 
   function removeItem() {
     console.log('remove item');
+    if (product) {
+      presentDeleteActionSheet({
+        cssClass: 'remove-action-sheet',
+        header: `Delete '${product.name}'?`,
+        buttons: [
+          {
+            text: 'Delete',
+            data: {
+              action: () => {
+                productService.deleteProduct(product._id).then(res => {
+                  if (res.success) {
+                    history.goBack();
+                  }
+                });
+              },
+            },
+          },
+          {
+            text: 'Cancel',
+            data: {
+              action: () => { /* noop */ },
+            },
+          },
+        ],
+        onDidDismiss: ({ detail }) => {
+          const action = detail.data?.action;
+          if (typeof action === 'function') {
+            action();
+          } else {
+            console.warn('Unknown action:', detail.data);
+          }
+        },
+      });
+    }
   }
 
   function editItem() {
