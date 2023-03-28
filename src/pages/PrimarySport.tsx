@@ -10,7 +10,7 @@ import {
   IonRow,
   IonCol,
 } from '@ionic/react';
-import './URP.css';
+import '../styles.scss';
 import './PrimarySport.css';
 
 const PrimarySport: React.FC = () => {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Redirect, Route, useHistory } from 'react-router-dom';
 import {
   IonContent,
@@ -16,15 +16,21 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { Amplify /*, Auth*/ } from 'aws-amplify';
-import './pages/URP.css';
+import './styles.scss';
 //import Feed from './pages/Feed';
-import StyleFeedPage from './pages/StyleFeed'
+import StyleFeedPage from './pages/StyleFeed';
+import PostDetail from './pages/PostDetail';
 import PromotePost from './pages/PromotePost';
 import PostDetailLikes from './pages/PostDetailLikes';
 import PostStats from './pages/PostStats';
 import Roles from './pages/Roles';
 import ProfilePage from './pages/Profile';
 import Explore from './pages/Explore';
+import MyCloset from './pages/MyCloset';
+import TradeCloset from './pages/TradeCloset';
+import TradePendingCloset from './pages/TradePendingCloset';
+import SellCloset from './pages/SellCloset';
+import SellPendingCloset from './pages/SellPendingCloset';
 import PostCreate from './pages/PostCreate';
 import Connections from './pages/Connections';
 import PendingConnections from './pages/PendingConnections';
@@ -38,6 +44,8 @@ import { UserService } from './services/UserService';
 import awsconfig from './aws-exports.js';
 import SignUpAthlete from './pages/SignUpAthlete';
 import { NotificationService } from './services/NotificationService';
+import { User } from './models';
+import ListItemModal from './components/ListItemModal';
 
 import { viewUser } from './util';
 
@@ -45,12 +53,14 @@ Amplify.configure(awsconfig);
 
 const Home: React.FC = () => {
   const history = useHistory();
+  const listItemModal = useRef<HTMLIonModalElement>(null);
   const authService = new AuthService();
   const userService = new UserService();
   const notificationService = new NotificationService();
   const [appMode, setAppMode] = useState('home');
   let [userType, setUserType] = useState<string>();
   let [profileURL, setProfileURL] = useState<string>();
+  const [experience, setExperience] = useState<string>('women');
 
   if (!isPlatform('desktop') && !isPlatform('mobileweb')) {
     PushNotifications.requestPermissions().then((result) => {
@@ -159,45 +169,50 @@ const Home: React.FC = () => {
           setProfileURL(profileURL);
         });
     }
-
-    console.log('ionViewWillEnter', history.location.pathname);
-    if (history.location.pathname.includes('explore')) {
-      setActiveTab('explore');
-    } else if (
-      history.location.pathname === '/home/messages' ||
-      history.location.pathname.startsWith('/home/chat/')
-    ) {
-      setActiveTab('messages');
-    } else if (
-      history.location.pathname === '/home/connections' ||
-      history.location.pathname === '/home/watchlist'
-    ) {
-      setActiveTab('connections');
-    } else if (
-      history.location.pathname.match('home/my-athlete-profile$') ||
-      history.location.pathname.match('home/my-coach-profile$') ||
-      history.location.pathname.match('home/my-trainer-profile$')
-    ) {
-      setActiveTab('my-profile');
-    } else {
-      setActiveTab('home');
-    }
+    userService
+      .getMe()
+      .then((user: User) => {
+        const userExperience = user.experiencePreferences;
+        setExperience(userExperience);
+      })
+      .catch((err) => {
+        console.log('Error getting user experience', err);
+      });
   });
 
   return (
     <IonContent scrollY={false}>
-      <IonTabs className="nobo-nav-bar-background">
+      <IonTabs className="nav-bar-background">
         <IonRouterOutlet>
           <Redirect exact path="/home" to="/home/nobo-home" />
           <Route exact path="/home/product/:id">
             <ProductDetail />
           </Route>
           <Route exact path="/home/product/sneakers/:id">
-            <ProductDetail isSneaker={true} />
+            <ProductDetail />
+          </Route>
+          <Route exact path="/home/product/sneakers/trade/:id">
+            <ProductDetail />
           </Route>
           <Route exact path="/home/explore/:sectionCategory/:sectionName">
             <Explore />
           </Route>
+          <Route exact path="/home/closet">
+            <MyCloset />
+          </Route>
+          <Route exact path="/home/closet/trade">
+            <TradeCloset />
+          </Route>
+          <Route exact path="/home/closet/trade/pending">
+            <TradePendingCloset />
+          </Route>
+          <Route exact path="/home/closet/sell">
+            <SellCloset />
+          </Route>
+          <Route exact path="/home/closet/sell/pending">
+            <SellPendingCloset />
+          </Route>
+
           <Route exact path="/home/post-promote/:id">
             <PromotePost />
           </Route>
@@ -250,15 +265,15 @@ const Home: React.FC = () => {
             <PostCreate />
           </Route>
         </IonRouterOutlet>
-        <IonTabBar className="nobo-nav-bar" slot="bottom">
+        <IonTabBar className="nav-bar" slot="bottom">
           <IonTabButton
             tab="home"
-            href="/home/explore/women/explore"
+            href={`/home/explore/${experience}/explore`}
             selected={appMode === 'home'}
             onClick={(e) => setActiveTab('home', e)}
           >
             <img
-              className="nobo-nav-btn"
+              className="nav-btn"
               src={`assets/images/nobo-home-icon${
                 appMode === 'home' ? '-focus' : ''
               }.svg`}
@@ -286,7 +301,7 @@ const Home: React.FC = () => {
             onClick={(e) => setActiveTab('stylefeed', e)}
           >
             <img
-              className="nobo-nav-btn"
+              className="nav-btn"
               src={`assets/images/nobo-style-feed-icon${
                 appMode === 'stylefeed' ? '-focus' : ''
               }.svg`}
@@ -311,7 +326,10 @@ const Home: React.FC = () => {
             tab="list"
             // href="/home/messages"
             selected={appMode === 'list'}
-            onClick={(e) => setActiveTab('list', e)}
+            onClick={(e) => {
+              listItemModal.current?.present();
+              setActiveTab('list', e);
+            }}
           >
             <div
               style={{
@@ -326,7 +344,7 @@ const Home: React.FC = () => {
               }}
             >
               <img
-                className="nobo-nav-btn"
+                className="nav-btn"
                 src={`assets/images/nobo-plus-icon${
                   appMode === 'list' ? '-focus' : ''
                 }.png`}
@@ -342,7 +360,7 @@ const Home: React.FC = () => {
             onClick={(e) => setActiveTab('notifications', e)}
           >
             <img
-              className="nobo-nav-btn"
+              className="nav-btn"
               src={`assets/images/nobo-notifications-icon${
                 appMode === 'notifications' ? '-focus' : ''
               }.svg`}
@@ -365,12 +383,12 @@ const Home: React.FC = () => {
           </IonTabButton>
           <IonTabButton
             tab="closet"
-            href="/home/my-profile"
+            href="/home/closet"
             selected={appMode === 'closet'}
             onClick={(e) => setActiveTab('closet', e)}
           >
             <img
-              className="nobo-nav-btn"
+              className="nav-btn"
               src={`assets/images/nobo-closet-icon${
                 appMode === 'closet' ? '-focus' : ''
               }.svg`}
@@ -393,6 +411,12 @@ const Home: React.FC = () => {
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
+      <ListItemModal
+        ref={listItemModal}
+        onClose={() => {
+          listItemModal.current?.dismiss();
+        }}
+      />
     </IonContent>
   );
 };

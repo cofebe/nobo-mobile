@@ -4,16 +4,28 @@ import { AuthService } from './AuthService';
 import {
   AddressRequest,
   CreateShippingAddressResponse,
-  LoginResponse,
-  PaymentMethodsResponse,
-  SuccessResponse,
-  User,
   FullOrder,
+  LoginResponse,
   OrderResponse,
   OrdersResponse,
+  PaymentMethodsResponse,
+  ProductsResponse,
+  SuccessResponse,
+  TradesResponse,
+  User,
 } from '../models';
 
 const API_URL = environment.serverUrl + '/api';
+
+export interface ProductSearchOptions {
+  //filter?: string;
+  page?: number;
+  perPage?: number;
+  active?: boolean;
+  sold?: boolean[];
+  sort?: string;
+  sortDirection?: number;
+}
 
 export class UserService extends BaseService {
   async getMe(): Promise<User> {
@@ -34,11 +46,64 @@ export class UserService extends BaseService {
     return await super.fetch('GET', `/api/users/${userId}/profile`);
   }
 
-  async getProducts(userId: any, productType: string) {
-    const perPage = 100;
-    const page = 1;
-    const filter = {"active": true, "sold": {"$in": [true, false]}, "retailPrice": {"$gt": 0}, "action": productType, "vendor": userId};
-    const sort = {"createdAt": -1};
+  async getMyProducts(productType: string, options?: ProductSearchOptions): Promise<ProductsResponse> {
+    const authService = new AuthService();
+    return this.getProducts(authService.getUserId(), productType, options);
+  }
+
+  async getMyPendingProducts(productType: string, options: ProductSearchOptions = {}): Promise<ProductsResponse> {
+    const authService = new AuthService();
+    options.active = false;
+    return this.getProducts(authService.getUserId(), productType, options);
+  }
+
+  async getProducts(userId: any, productType: string, options?: ProductSearchOptions): Promise<ProductsResponse> {
+    let perPage = 100;
+    let page = 1;
+    const filter: any = {
+      active: true,
+      sold: {
+        $in: [true, false],
+      },
+      retailPrice: {
+        $gt: 0,
+      },
+      action: productType,
+      vendor: userId,
+    };
+    const sort: any = {
+      createdAt: -1,
+    };
+
+    if (options) {
+      if (options.perPage !== undefined) {
+        perPage = options.perPage;
+      }
+      if (options.page !== undefined) {
+        page = options.page;
+      }
+      if (options.active !== undefined) {
+        if (options.active === null) {
+          delete filter.active;
+        } else {
+          filter.active = options.active;
+        }
+      }
+      if (options.sold !== undefined) {
+        if (options.sold === null) {
+          delete filter.sold;
+        } else {
+          filter.sold.$in = options.sold;
+        }
+      }
+      if (options.sort !== null) {
+        if (options.sort === null) {
+          delete sort.createdAt;
+        } else {
+          sort[options.sort!] = options.sortDirection || -1;
+        }
+      }
+    }
 
     const queryParams = new URLSearchParams({
       perPage: perPage.toString(),
@@ -47,7 +112,9 @@ export class UserService extends BaseService {
       sort: JSON.stringify(sort)
     }).toString();
 
-    return await super.fetch('GET', `api/products/all?${queryParams}`);
+    const res = await super.fetch('GET', `api/products/all?${queryParams}`);
+    const json: ProductsResponse = await res.json();
+    return json;
   }
 
   async login(email: string, password: string): Promise<User> {
@@ -122,6 +189,12 @@ export class UserService extends BaseService {
     const res = await super.fetch('GET', `/api/orders/my-purchases/${id}`);
     const json: OrderResponse = await res.json();
     return json.order;
+  }
+
+  async getMyTrades(): Promise<TradesResponse> {
+    const res = await super.fetch('GET', '/api/trades/my-trades/all');
+    const json: TradesResponse = await res.json();
+    return json;
   }
 
   // From URP /////////////////////////////////////////////////////////////////

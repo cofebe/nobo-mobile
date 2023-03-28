@@ -15,9 +15,18 @@ ion-button.app-button {
     --padding-bottom: 8px;
     text-transform: uppercase;
 
+    &.button-disabled {
+    }
+
     &.primary {
         --background: #D6980E;
         --color: white;
+
+        &.button-disabled {
+            opacity: 1;
+            --border-color: #E8DABB;
+            --background: #E8DABB;
+        }
     }
 
     &.secondary {

@@ -1,5 +1,5 @@
 import { IonPage, IonButton } from '@ionic/react';
-import './URP.css';
+import '../styles.scss';
 
 const Logo: React.FC = () => {
   const btnColor = '#00816D';

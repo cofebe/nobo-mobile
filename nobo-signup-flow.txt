@@ -10,39 +10,39 @@ curl 'https://thenobo.com/api/users/register' \
   -H 'content-type: application/json' \
   --data-raw '{"firstName":"James","lastName":"Bailey","email":"jbailey@cofebe.com","displayName":"JBaileyCOFEBE","password":"Testing123"}'
 {
-	"success":true,
-	"user":{
-		"profileBg":"/NOBO_defaultcoverimage.jpeg",
-		"emailVerified":true,
-		"blocked":false,
-		"saleSchedule":[],
-		"role":"basic",
-		"favorites":[],
-		"followers":[],
-		"following":[],
-		"favoriteBrands":[],
-		"notifications":[],
-		"blurbText":"Tell us who you are, what you do and a little about your style!",
-		"reviews":[],
-		"_id":"63f7f77648fcfbd1e66648ce",
-		"firstName":"James",
-		"lastName":"Bailey",
-		"email":"jbailey@cofebe.com",
-		"displayName":"JBaileyCOFEBE",
-		"avatar":"/account/default-avatar.png",
-		"shippingAddress":[],
-		"cart":{
-			"products":[],
-			"_id":"63f7f77648fcfbd1e66648cf"
-		},
-		"memberSince":"2023-02-23T23:32:06.066Z",
-		"unfinishedOnboardActivity":"preferences",
-		"createdAt":"2023-02-23T23:32:06.073Z",
-		"updatedAt":"2023-02-23T23:32:06.073Z",
-		"tradeCloset":0,
-		"sellCloset":0
-	},
-	"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y3Zjc3NjQ4ZmNmYmQxZTY2NjQ4Y2UiLCJlbWFpbCI6ImpiYWlsZXlAY29mZWJlLmNvbSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTY3Nzc5OTkyNiwicmVmcmVzaCI6MTY3NzE5NjAyNiwiaWF0IjoxNjc3MTk1MTI2fQ.5SEXS44C0iIX7xLXs__yI7OqoZ8hDvLJR6szLbsXwkc"
+  "success": true,
+  "user": {
+    "profileBg": "/NOBO_defaultcoverimage.jpeg",
+    "emailVerified": true,
+    "blocked": false,
+    "saleSchedule": [],
+    "role": "basic",
+    "favorites": [],
+    "followers": [],
+    "following": [],
+    "favoriteBrands": [],
+    "notifications": [],
+    "blurbText": "Tell us who you are, what you do and a little about your style!",
+    "reviews": [],
+    "_id": "63f7f77648fcfbd1e66648ce",
+    "firstName": "James",
+    "lastName": "Bailey",
+    "email": "jbailey@cofebe.com",
+    "displayName": "JBaileyCOFEBE",
+    "avatar": "/account/default-avatar.png",
+    "shippingAddress": [],
+    "cart": {
+      "products": [],
+      "_id": "63f7f77648fcfbd1e66648cf"
+    },
+    "memberSince": "2023-02-23T23:32:06.066Z",
+    "unfinishedOnboardActivity": "preferences",
+    "createdAt": "2023-02-23T23:32:06.073Z",
+    "updatedAt": "2023-02-23T23:32:06.073Z",
+    "tradeCloset": 0,
+    "sellCloset": 0
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y3Zjc3NjQ4ZmNmYmQxZTY2NjQ4Y2UiLCJlbWFpbCI6ImpiYWlsZXlAY29mZWJlLmNvbSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTY3Nzc5OTkyNiwicmVmcmVzaCI6MTY3NzE5NjAyNiwiaWF0IjoxNjc3MTk1MTI2fQ.5SEXS44C0iIX7xLXs__yI7OqoZ8hDvLJR6szLbsXwkc"
 }
 
 # Select experience ("women") ############################################################
@@ -51,39 +51,41 @@ curl 'https://thenobo.com/api/users/me' \
   -H 'content-type: application/json' \
   --data-raw '{"experiencePreferences":"women"}'
 {
-	"passwordError":false,
-	"currentUser":{
-		"profileBg":"/NOBO_defaultcoverimage.jpeg",
-		"emailVerified":true,
-		"blocked":false,
-		"saleSchedule":[],
-		"role":"basic",
-		"favorites":[],
-		"followers":[],
-		"following":[],
-		"favoriteBrands":[],
-		"notifications":["63f7f77648fcfbd1e66648d7"],
-		"blurbText":"Tell us who you are, what you do and a little about your style!",
-		"reviews":[],
-		"_id":"63f7f77648fcfbd1e66648ce",
-		"firstName":"James",
-		"lastName":"Bailey",
-		"email":"jbailey@cofebe.com",
-		"displayName":"JBaileyCOFEBE",
-		"avatar":"/account/default-avatar.png",
-		"shippingAddress":[],
-		"cart":{
-			"products":[],
-			"_id":"63f7f77648fcfbd1e66648cf"
-		},
-		"memberSince":"2023-02-23T23:32:06.066Z",
-		"unfinishedOnboardActivity":"preferences",
-		"createdAt":"2023-02-23T23:32:06.073Z",
-		"updatedAt":"2023-02-23T23:33:31.770Z",
-		"experiencePreferences":"women",
-		"tradeCloset":0,
-		"sellCloset":0
-	}
+  "passwordError": false,
+  "currentUser": {
+    "profileBg": "/NOBO_defaultcoverimage.jpeg",
+    "emailVerified": true,
+    "blocked": false,
+    "saleSchedule": [],
+    "role": "basic",
+    "favorites": [],
+    "followers": [],
+    "following": [],
+    "favoriteBrands": [],
+    "notifications": [
+      "63f7f77648fcfbd1e66648d7"
+    ],
+    "blurbText": "Tell us who you are, what you do and a little about your style!",
+    "reviews": [],
+    "_id": "63f7f77648fcfbd1e66648ce",
+    "firstName": "James",
+    "lastName": "Bailey",
+    "email": "jbailey@cofebe.com",
+    "displayName": "JBaileyCOFEBE",
+    "avatar": "/account/default-avatar.png",
+    "shippingAddress": [],
+    "cart": {
+      "products": [],
+      "_id": "63f7f77648fcfbd1e66648cf"
+    },
+    "memberSince": "2023-02-23T23:32:06.066Z",
+    "unfinishedOnboardActivity": "preferences",
+    "createdAt": "2023-02-23T23:32:06.073Z",
+    "updatedAt": "2023-02-23T23:33:31.770Z",
+    "experiencePreferences": "women",
+    "tradeCloset": 0,
+    "sellCloset": 0
+  }
 }
 
 curl 'https://thenobo.com/api/users/set-onboard-activity' \
@@ -118,415 +120,415 @@ curl 'https://thenobo.com/api/users/set-onboard-activity' \
 curl 'https://thenobo.com/api/users/q/term/a/' \
   -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y3Zjc3NjQ4ZmNmYmQxZTY2NjQ4Y2UiLCJlbWFpbCI6ImpiYWlsZXlAY29mZWJlLmNvbSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTY3Nzc5OTkyNiwicmVmcmVzaCI6MTY3NzE5NjAyNiwiaWF0IjoxNjc3MTk1MTI2fQ.5SEXS44C0iIX7xLXs__yI7OqoZ8hDvLJR6szLbsXwkc'
 {
-	"users": [
-		{
-			"_id": "63b4ae40eee7b7e1e5a906fb",
-			"profileBg": "/NOBO_defaultcoverimage.jpeg",
-			"emailVerified": true,
-			"blocked": false,
-			"saleSchedule": [],
-			"role": "basic",
-			"favorites": [],
-			"followers": [
-				"61e9e3cde9d5a06abb991653",
-				"61e85f527a3854221a968de4",
-				"63f6a9b5de9b90d1f29ef680"
-			],
-			"following": [
-				"61e85f527a3854221a968de4",
-				"61e9e3cde9d5a06abb991653",
-				"63b19b97eee7b7e1e5a8e235",
-				"62c2f1b550b7519ae65ca071",
-				"62d2cb8668ad8d57e50e0b8d",
-				"620c81e9a6c4067d2fc93d73",
-				"62da0433760ff40a32ab9115"
-			],
-			"favoriteBrands": [],
-			"notifications": [
-				"63f6aa4cde9b90d1f29ef6e7",
-				"63f346f512bc860b616d98dc",
-				"63e51a7cd9a3e4329a62b14c",
-				"63dd3c55d9a3e4329a628c84",
-				"63c05a3d6075ed074840dc58",
-				"63c059f76075ed074840cdbc",
-				"63c059d36075ed074840bf20",
-				"63c058616075ed074840b084",
-				"63c03f946075ed074840a1e8",
-				"63b89ccceee7b7e1e5a94f63",
-				"63b866f3d9f5e8df01d802dd",
-				"63b866d0d9f5e8df01d802a9",
-				"63b70ba2eee7b7e1e5a92f10",
-				"63b6f79ed9f5e8df01d80275",
-				"63b6f762d9f5e8df01d80241",
-				"63b6f744d9f5e8df01d8020d",
-				"63b5b4e0d9f5e8df01d801e7",
-				"63b5b490d9f5e8df01d801c3",
-				"63b5b472d9f5e8df01d8019f",
-				"63b4ae40eee7b7e1e5a90704"
-			],
-			"blurbText": "Tell us who you are, what you do and a little about your style!",
-			"reviews": [],
-			"firstName": "Carolyn",
-			"lastName": "Crane",
-			"email": "cescrane@gmail.com",
-			"passwordHash": "$2b$10$1QVGMXA.0ux3a.eYfxIosOmtp4m3sn8zUAzTgm47b4Y8PXTFy7USW",
-			"displayName": "cescrane",
-			"avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/u0jX2XOdcK2llKBfYApbV.jpeg",
-			"shippingAddress": [],
-			"cart": {
-				"products": [],
-				"_id": "63b4ae40eee7b7e1e5a906fc"
-			},
-			"memberSince": "2023-01-03T22:37:52.332Z",
-			"unfinishedOnboardActivity": "",
-			"createdAt": "2023-01-03T22:37:52.336Z",
-			"updatedAt": "2023-02-22T23:50:36.248Z",
-			"__v": 30,
-			"experiencePreferences": "women"
-		},
-		{
-			"_id": "61e9e3aee9d5a06abb990501",
-			"cache": {
-				"sellCloset": 0,
-				"tradeCloset": 0
-			},
-			"emailVerified": true,
-			"blocked": false,
-			"saleSchedule": [],
-			"role": "basic",
-			"favorites": [
-				"61e9d64d8201ec62deb75d36"
-			],
-			"followers": [
-				"61e85f527a3854221a968de4",
-				"61e9e3b2e9d5a06abb990751",
-				"62923d7325649edc9b2d6e45",
-				"62d385d668ad8d57e50e0e6b",
-				"62e0c7dbf7701060d65922d0",
-				"62edc2e6d2e2f9d1be43038d",
-				"634dc268087916301ac005ff",
-				"636000ff4820d29a64e0aff2",
-				"61e9e3cde9d5a06abb991653",
-				"636310066fbef59a70ce7298",
-				"6377c04b6133096d67a16d43",
-				"638fd0d09423596b9831d36a",
-				"639c8b065f76e15c51865f7b",
-				"63c854e416d5132a666cb8b9",
-				"63c9dc4616d5132a666cc9c0",
-				"63f3ee4f48fcfbd1e665f8d7"
-			],
-			"following": [],
-			"favoriteBrands": [
-				"61f2a8db7fe42a9755676c64",
-				"61f2a8db7fe42a9755676c1e",
-				"61f2a8db7fe42a9755676ba6"
-			],
-			"notifications": [
-				"63f3ee70de9b90d1f29ee549",
-				"63c9dcb216d5132a666cca4f",
-				"63c8552416d5132a666cb91c",
-				"639c8b40c030715c5dcdd578",
-				"638fd1239423596b9831d3d1",
-				"6377c0901b79176d5b326143",
-				"636310814820d29a64e0c1d9",
-				"636008086fbef59a70ce6321",
-				"636001646fbef59a70ce6160",
-				"634dc2e1087916301ac00729",
-				"62edc323d2e2f9d1be4303fd",
-				"62e0c813f7701060d659230d",
-				"62d3860c79937857f18696c0",
-				"62923d8225649edc9b2d6eab",
-				"621d3bd45410eb0289b587d4",
-				"62114ad1e94aeada8fb5abdf"
-			],
-			"blurbText": "The mom of the Founder of TheNOBO!",
-			"reviews": [],
-			"wpId": "93802",
-			"firstName": "Gladys",
-			"lastName": "Moore",
-			"email": "gmoore044@aol.com",
-			"memberSince": "2020-12-06T22:52:25.000Z",
-			"passwordHash": "$2b$10$kImkndhV00bJs6uoYEz/gOms59I.Xj5hU1A0EossjO/ZPku0fJonS",
-			"displayName": "Gladys_Moore",
-			"shippingAddress": [
-				{
-					"ep_deliverable": true,
-					"country": "US",
-					"_id": "61e9e3aee9d5a06abb990502",
-					"phone": "14407737681",
-					"firstName": "Gladys",
-					"lastName": "Moore",
-					"address1": "1136 NORMINISTER END",
-					"address2": null,
-					"postalCode": "48302-2345",
-					"city": "Bloomfield Hills",
-					"state": "Michigan",
-					"default": true,
-					"ep_addr_id": "adr_4dbcf1f2904311ec8f19ac1f6bc7b362"
-				}
-			],
-			"avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/OKHtFpdkrGFIhKrmubFgg.jpeg",
-			"cart": {
-				"products": [
-					"61e9d64d8201ec62deb75d36",
-					"620e7e27a7d6bfabe4a2c101",
-					"620d84caa7d6bfabe4a2a13a"
-				],
-				"_id": "61e9e3aee9d5a06abb990503",
-				"shippingFees": {
-					"61e85f527a3854221a968de4": 20
-				},
-				"taxes": {
-					"61e85f527a3854221a968de4": {
-						"tax": {
-							"amount_to_collect": 0,
-							"freight_taxable": true,
-							"has_nexus": false,
-							"order_total_amount": 1528,
-							"rate": 0,
-							"shipping": 20,
-							"tax_source": null,
-							"taxable_amount": 0
-						}
-					}
-				}
-			},
-			"createdAt": "2022-01-20T22:35:26.063Z",
-			"updatedAt": "2023-02-20T22:04:32.628Z",
-			"__v": 40,
-			"confirmationCode": "8prgo7tw",
-			"experiencePreferences": "women",
-			"profileBg": "https://thenobo.sfo3.digitaloceanspaces.com/production/wx0AHPaC8anbkc5YYDcCD.jpeg"
-		},
-		{
-			"_id": "6377c04b6133096d67a16d43",
-			"profileBg": "/NOBO_defaultcoverimage.jpeg",
-			"emailVerified": true,
-			"blocked": false,
-			"saleSchedule": [],
-			"role": "basic",
-			"favorites": [
-				"63882eb704e666ff30e8db2c"
-			],
-			"followers": [
-				"61e9e3cde9d5a06abb991653",
-				"61e9e3cde9d5a06abb991653",
-				"61e85f527a3854221a968de4",
-				"639c0d625f76e15c518659c1",
-				"63b6f8baeee7b7e1e5a928f4"
-			],
-			"following": [
-				"61e85f527a3854221a968de4",
-				"61e9e3cde9d5a06abb991653",
-				"61e9e3aee9d5a06abb990501",
-				"61e9e3a8e9d5a06abb99023e",
-				"629aadcd25649edc9b2d9a7d",
-				"620bf1fea6c4067d2fc917eb",
-				"6299243780cfc8dc8f1f176d"
-			],
-			"favoriteBrands": [
-				"61f2a8db7fe42a9755676c32",
-				"61f2a8db7fe42a9755676c36",
-				"61f2a8db7fe42a9755676c50",
-				"61f2a8db7fe42a9755676c34"
-			],
-			"notifications": [
-				"63f346f512bc860b616d9769",
-				"63e51a7bd9a3e4329a62afd9",
-				"63dd3c54d9a3e4329a628b11",
-				"63c05a3c6075ed074840dae5",
-				"63c059f66075ed074840cc49",
-				"63c059d36075ed074840bdad",
-				"63c058616075ed074840af11",
-				"63c03f946075ed074840a075",
-				"63b6f8f6eee7b7e1e5a92948",
-				"63a20d379888c05977246cb2",
-				"639c0ddf5f76e15c51865a2d",
-				"639bf7f79888c0597724486d",
-				"639bcea79888c059772436c7",
-				"6398abeb583d3adbfcb86da6",
-				"638fd2799ccbb668be2c8fd7",
-				"638a510dc86670c6b3c2ad1c",
-				"638a50f4c86670c6b3c2a090",
-				"638a50dcc86670c6b3c29404",
-				"638a46d6c86670c6b3c28778",
-				"638a4612c86670c6b3c27aec",
-				"638a45f5c86670c6b3c26e60",
-				"6388cafa6ebdbdfc4452b999",
-				"637f87bf6ebdbdfc4452979b",
-				"637825a31b79176d5b326322",
-				"6378259c6133096d67a16f39",
-				"637808ae6133096d67a16eba",
-				"6377c04b6133096d67a16d4c"
-			],
-			"blurbText": "Tell us who you are, what you do and a little about your style!",
-			"reviews": [],
-			"firstName": "Nika",
-			"lastName": "Seider",
-			"email": "nikaseider@gmail.com",
-			"passwordHash": "$2b$10$zYDBT54FUu7X15.eSnmlTOmbzMNhrFf5WN7rL.ccmFgmZPc9h/sDW",
-			"displayName": "nikaseider",
-			"avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/6wRcmrhqY7fB67Tjd15OE.png",
-			"shippingAddress": [
-				{
-					"ep_deliverable": false,
-					"country": "US",
-					"_id": "63f7c4b7de9b90d1f29efa1f",
-					"state": "Maryland",
-					"firstName": "Veronika",
-					"lastName": "Seider",
-					"address1": "10003 Sidney Rd",
-					"city": "Silver Spring",
-					"postalCode": "20901",
-					"phone": "3018024946",
-					"default": true
-				}
-			],
-			"cart": {
-				"products": [],
-				"_id": "6377c04b6133096d67a16d44"
-			},
-			"memberSince": "2022-11-18T17:26:35.588Z",
-			"unfinishedOnboardActivity": "",
-			"createdAt": "2022-11-18T17:26:35.595Z",
-			"updatedAt": "2023-02-23T19:55:35.235Z",
-			"__v": 45,
-			"experiencePreferences": "women"
-		},
-		{
-			"_id": "62d2ee3479937857f1869285",
-			"profileBg": "/NOBO_defaultcoverimage.jpeg",
-			"emailVerified": true,
-			"blocked": false,
-			"saleSchedule": [],
-			"role": "basic",
-			"favorites": [],
-			"followers": [
-				"62d5c22179937857f1869d32",
-				"62d973d08af8d40354cf8ba6",
-				"62d974648af8d40354cf8d82",
-				"61e85f527a3854221a968de4",
-				"61e9e3cde9d5a06abb991653",
-				"61e9e3c6e9d5a06abb99128b"
-			],
-			"following": [
-				"61e85f527a3854221a968de4",
-				"61e9e3cde9d5a06abb991653"
-			],
-			"favoriteBrands": [],
-			"notifications": [
-				"63f346f312bc860b616d938e",
-				"63e51a7ad9a3e4329a62abfe",
-				"63dd3c53d9a3e4329a628728",
-				"63c05a3b6075ed074840d6fc",
-				"63c059f56075ed074840c860",
-				"63c059d16075ed074840b9c4",
-				"63c0585f6075ed074840ab28",
-				"63c03f926075ed0748409c8c",
-				"63a20d359888c059772468c9",
-				"639bf7f59888c05977244484",
-				"639bcea69888c059772432ec",
-				"6398abed583d3adbfcb87416",
-				"6398abe9583d3adbfcb86782",
-				"638fd2779ccbb668be2c8bee",
-				"638a510bc86670c6b3c2a933",
-				"638a50f2c86670c6b3c29ca7",
-				"638a50dac86670c6b3c2901b",
-				"638a46d5c86670c6b3c2838f",
-				"638a4611c86670c6b3c27703",
-				"638a45f4c86670c6b3c26a77",
-				"6388caf96ebdbdfc4452b5b0",
-				"637f87bd6ebdbdfc445293b2",
-				"6372bee7203495f638a6b8fa",
-				"6372bee2203495f638a6a6e0",
-				"6372ba7c203495f638a699c7",
-				"6372ba77203495f638a68b03",
-				"6372ba72203495f638a67a7f",
-				"6372ba64203495f638a6681f",
-				"6372ba3b203495f638a65aab",
-				"6372ba36203495f638a64e64",
-				"6372ba31203495f638a6416e",
-				"6372ba2c203495f638a633fa",
-				"6372b9f5203495f638a6280e",
-				"6372a13a203495f638a61b81",
-				"6372a135203495f638a60f95",
-				"6372a109203495f638a603a9",
-				"634ec6ab1a19b42e9c3d6ee1",
-				"634c7b831a19b42e9c3d4e61",
-				"63449e321a19b42e9c3d4290",
-				"63291ec180862aeae13f2a19",
-				"62e7fe6a9ca2c25f5169b3f3",
-				"62deafe607f32c4d393efb77",
-				"62dead7892f4314d2d120509",
-				"62d974e76f8f0303489cdd27",
-				"62d973fe8af8d40354cf8cda",
-				"62d5c23d79937857f1869d98",
-				"62d2ee3479937857f186928e"
-			],
-			"blurbText": "Tell us who you are, what you do and a little about your style!",
-			"reviews": [],
-			"firstName": "Tonnie",
-			"lastName": "LaRue",
-			"email": "tonnielarue@gmail.com",
-			"passwordHash": "$2b$10$rIQdjXAsaYNoFdOdgBVKq.rlfpMgHZQq.2sDVEpRZJWPbmCQt0AtK",
-			"displayName": "TLaRue",
-			"avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/rrsqk1P6OejnM9nmFuk-N.jpeg",
-			"shippingAddress": [],
-			"cart": {
-				"products": [],
-				"_id": "62d2ee3479937857f1869286"
-			},
-			"memberSince": "2022-07-16T16:58:28.265Z",
-			"createdAt": "2022-07-16T16:58:28.270Z",
-			"updatedAt": "2023-02-20T10:09:55.354Z",
-			"__v": 55,
-			"experiencePreferences": "women"
-		},
-		{
-			"_id": "620c91c4a6c4067d2fc93f6e",
-			"emailVerified": true,
-			"blocked": false,
-			"saleSchedule": [],
-			"role": "basic",
-			"favorites": [],
-			"followers": [
-				"6387ebec536935ff3c0bca1a"
-			],
-			"following": [],
-			"favoriteBrands": [
-				"61f2a8db7fe42a9755676ba6",
-				"61f2a8db7fe42a9755676c00",
-				"61f2a8db7fe42a9755676bd0",
-				"61f2a8db7fe42a9755676b8c",
-				"61f2a8db7fe42a9755676c5a",
-				"61f2a8db7fe42a9755676c64"
-			],
-			"notifications": [
-				"6387ec5f536935ff3c0bcaa9",
-				"620c91c4a6c4067d2fc93f77"
-			],
-			"blurbText": "My name is TaNeisha, I work for health plan in Long Beach California I absolutely Love fashion. I like to mix new trends with vintage, that’s more of my style. ",
-			"reviews": [],
-			"firstName": "Taneisha",
-			"lastName": "Smith",
-			"email": "smithmiller2011@yahoo.com",
-			"passwordHash": "$2b$10$zsVqVy2MQeULHQ9TN0P8XuCbl9rKQ8rq6KKCoUV7vgtpq.LdSHYni",
-			"confirmationCode": "rcfcmctv",
-			"avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/ozARE0Vo2Md3N3ekp8JEt.jpeg",
-			"shippingAddress": [],
-			"cart": {
-				"products": [],
-				"_id": "620c91c4a6c4067d2fc93f6f"
-			},
-			"memberSince": "2022-02-16T05:55:16.861Z",
-			"createdAt": "2022-02-16T05:55:16.865Z",
-			"updatedAt": "2023-02-13T16:38:05.550Z",
-			"__v": 9,
-			"displayName": "Sweetpea_",
-			"experiencePreferences": "women",
-			"profileBg": "/NOBO_defaultcoverimage.jpeg"
-		}
-	]
+  "users": [
+    {
+      "_id": "63b4ae40eee7b7e1e5a906fb",
+      "profileBg": "/NOBO_defaultcoverimage.jpeg",
+      "emailVerified": true,
+      "blocked": false,
+      "saleSchedule": [],
+      "role": "basic",
+      "favorites": [],
+      "followers": [
+        "61e9e3cde9d5a06abb991653",
+        "61e85f527a3854221a968de4",
+        "63f6a9b5de9b90d1f29ef680"
+      ],
+      "following": [
+        "61e85f527a3854221a968de4",
+        "61e9e3cde9d5a06abb991653",
+        "63b19b97eee7b7e1e5a8e235",
+        "62c2f1b550b7519ae65ca071",
+        "62d2cb8668ad8d57e50e0b8d",
+        "620c81e9a6c4067d2fc93d73",
+        "62da0433760ff40a32ab9115"
+      ],
+      "favoriteBrands": [],
+      "notifications": [
+        "63f6aa4cde9b90d1f29ef6e7",
+        "63f346f512bc860b616d98dc",
+        "63e51a7cd9a3e4329a62b14c",
+        "63dd3c55d9a3e4329a628c84",
+        "63c05a3d6075ed074840dc58",
+        "63c059f76075ed074840cdbc",
+        "63c059d36075ed074840bf20",
+        "63c058616075ed074840b084",
+        "63c03f946075ed074840a1e8",
+        "63b89ccceee7b7e1e5a94f63",
+        "63b866f3d9f5e8df01d802dd",
+        "63b866d0d9f5e8df01d802a9",
+        "63b70ba2eee7b7e1e5a92f10",
+        "63b6f79ed9f5e8df01d80275",
+        "63b6f762d9f5e8df01d80241",
+        "63b6f744d9f5e8df01d8020d",
+        "63b5b4e0d9f5e8df01d801e7",
+        "63b5b490d9f5e8df01d801c3",
+        "63b5b472d9f5e8df01d8019f",
+        "63b4ae40eee7b7e1e5a90704"
+      ],
+      "blurbText": "Tell us who you are, what you do and a little about your style!",
+      "reviews": [],
+      "firstName": "Carolyn",
+      "lastName": "Crane",
+      "email": "cescrane@gmail.com",
+      "passwordHash": "$2b$10$1QVGMXA.0ux3a.eYfxIosOmtp4m3sn8zUAzTgm47b4Y8PXTFy7USW",
+      "displayName": "cescrane",
+      "avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/u0jX2XOdcK2llKBfYApbV.jpeg",
+      "shippingAddress": [],
+      "cart": {
+        "products": [],
+        "_id": "63b4ae40eee7b7e1e5a906fc"
+      },
+      "memberSince": "2023-01-03T22:37:52.332Z",
+      "unfinishedOnboardActivity": "",
+      "createdAt": "2023-01-03T22:37:52.336Z",
+      "updatedAt": "2023-02-22T23:50:36.248Z",
+      "__v": 30,
+      "experiencePreferences": "women"
+    },
+    {
+      "_id": "61e9e3aee9d5a06abb990501",
+      "cache": {
+        "sellCloset": 0,
+        "tradeCloset": 0
+      },
+      "emailVerified": true,
+      "blocked": false,
+      "saleSchedule": [],
+      "role": "basic",
+      "favorites": [
+        "61e9d64d8201ec62deb75d36"
+      ],
+      "followers": [
+        "61e85f527a3854221a968de4",
+        "61e9e3b2e9d5a06abb990751",
+        "62923d7325649edc9b2d6e45",
+        "62d385d668ad8d57e50e0e6b",
+        "62e0c7dbf7701060d65922d0",
+        "62edc2e6d2e2f9d1be43038d",
+        "634dc268087916301ac005ff",
+        "636000ff4820d29a64e0aff2",
+        "61e9e3cde9d5a06abb991653",
+        "636310066fbef59a70ce7298",
+        "6377c04b6133096d67a16d43",
+        "638fd0d09423596b9831d36a",
+        "639c8b065f76e15c51865f7b",
+        "63c854e416d5132a666cb8b9",
+        "63c9dc4616d5132a666cc9c0",
+        "63f3ee4f48fcfbd1e665f8d7"
+      ],
+      "following": [],
+      "favoriteBrands": [
+        "61f2a8db7fe42a9755676c64",
+        "61f2a8db7fe42a9755676c1e",
+        "61f2a8db7fe42a9755676ba6"
+      ],
+      "notifications": [
+        "63f3ee70de9b90d1f29ee549",
+        "63c9dcb216d5132a666cca4f",
+        "63c8552416d5132a666cb91c",
+        "639c8b40c030715c5dcdd578",
+        "638fd1239423596b9831d3d1",
+        "6377c0901b79176d5b326143",
+        "636310814820d29a64e0c1d9",
+        "636008086fbef59a70ce6321",
+        "636001646fbef59a70ce6160",
+        "634dc2e1087916301ac00729",
+        "62edc323d2e2f9d1be4303fd",
+        "62e0c813f7701060d659230d",
+        "62d3860c79937857f18696c0",
+        "62923d8225649edc9b2d6eab",
+        "621d3bd45410eb0289b587d4",
+        "62114ad1e94aeada8fb5abdf"
+      ],
+      "blurbText": "The mom of the Founder of TheNOBO!",
+      "reviews": [],
+      "wpId": "93802",
+      "firstName": "Gladys",
+      "lastName": "Moore",
+      "email": "gmoore044@aol.com",
+      "memberSince": "2020-12-06T22:52:25.000Z",
+      "passwordHash": "$2b$10$kImkndhV00bJs6uoYEz/gOms59I.Xj5hU1A0EossjO/ZPku0fJonS",
+      "displayName": "Gladys_Moore",
+      "shippingAddress": [
+        {
+          "ep_deliverable": true,
+          "country": "US",
+          "_id": "61e9e3aee9d5a06abb990502",
+          "phone": "14407737681",
+          "firstName": "Gladys",
+          "lastName": "Moore",
+          "address1": "1136 NORMINISTER END",
+          "address2": null,
+          "postalCode": "48302-2345",
+          "city": "Bloomfield Hills",
+          "state": "Michigan",
+          "default": true,
+          "ep_addr_id": "adr_4dbcf1f2904311ec8f19ac1f6bc7b362"
+        }
+      ],
+      "avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/OKHtFpdkrGFIhKrmubFgg.jpeg",
+      "cart": {
+        "products": [
+          "61e9d64d8201ec62deb75d36",
+          "620e7e27a7d6bfabe4a2c101",
+          "620d84caa7d6bfabe4a2a13a"
+        ],
+        "_id": "61e9e3aee9d5a06abb990503",
+        "shippingFees": {
+          "61e85f527a3854221a968de4": 20
+        },
+        "taxes": {
+          "61e85f527a3854221a968de4": {
+            "tax": {
+              "amount_to_collect": 0,
+              "freight_taxable": true,
+              "has_nexus": false,
+              "order_total_amount": 1528,
+              "rate": 0,
+              "shipping": 20,
+              "tax_source": null,
+              "taxable_amount": 0
+            }
+          }
+        }
+      },
+      "createdAt": "2022-01-20T22:35:26.063Z",
+      "updatedAt": "2023-02-20T22:04:32.628Z",
+      "__v": 40,
+      "confirmationCode": "8prgo7tw",
+      "experiencePreferences": "women",
+      "profileBg": "https://thenobo.sfo3.digitaloceanspaces.com/production/wx0AHPaC8anbkc5YYDcCD.jpeg"
+    },
+    {
+      "_id": "6377c04b6133096d67a16d43",
+      "profileBg": "/NOBO_defaultcoverimage.jpeg",
+      "emailVerified": true,
+      "blocked": false,
+      "saleSchedule": [],
+      "role": "basic",
+      "favorites": [
+        "63882eb704e666ff30e8db2c"
+      ],
+      "followers": [
+        "61e9e3cde9d5a06abb991653",
+        "61e9e3cde9d5a06abb991653",
+        "61e85f527a3854221a968de4",
+        "639c0d625f76e15c518659c1",
+        "63b6f8baeee7b7e1e5a928f4"
+      ],
+      "following": [
+        "61e85f527a3854221a968de4",
+        "61e9e3cde9d5a06abb991653",
+        "61e9e3aee9d5a06abb990501",
+        "61e9e3a8e9d5a06abb99023e",
+        "629aadcd25649edc9b2d9a7d",
+        "620bf1fea6c4067d2fc917eb",
+        "6299243780cfc8dc8f1f176d"
+      ],
+      "favoriteBrands": [
+        "61f2a8db7fe42a9755676c32",
+        "61f2a8db7fe42a9755676c36",
+        "61f2a8db7fe42a9755676c50",
+        "61f2a8db7fe42a9755676c34"
+      ],
+      "notifications": [
+        "63f346f512bc860b616d9769",
+        "63e51a7bd9a3e4329a62afd9",
+        "63dd3c54d9a3e4329a628b11",
+        "63c05a3c6075ed074840dae5",
+        "63c059f66075ed074840cc49",
+        "63c059d36075ed074840bdad",
+        "63c058616075ed074840af11",
+        "63c03f946075ed074840a075",
+        "63b6f8f6eee7b7e1e5a92948",
+        "63a20d379888c05977246cb2",
+        "639c0ddf5f76e15c51865a2d",
+        "639bf7f79888c0597724486d",
+        "639bcea79888c059772436c7",
+        "6398abeb583d3adbfcb86da6",
+        "638fd2799ccbb668be2c8fd7",
+        "638a510dc86670c6b3c2ad1c",
+        "638a50f4c86670c6b3c2a090",
+        "638a50dcc86670c6b3c29404",
+        "638a46d6c86670c6b3c28778",
+        "638a4612c86670c6b3c27aec",
+        "638a45f5c86670c6b3c26e60",
+        "6388cafa6ebdbdfc4452b999",
+        "637f87bf6ebdbdfc4452979b",
+        "637825a31b79176d5b326322",
+        "6378259c6133096d67a16f39",
+        "637808ae6133096d67a16eba",
+        "6377c04b6133096d67a16d4c"
+      ],
+      "blurbText": "Tell us who you are, what you do and a little about your style!",
+      "reviews": [],
+      "firstName": "Nika",
+      "lastName": "Seider",
+      "email": "nikaseider@gmail.com",
+      "passwordHash": "$2b$10$zYDBT54FUu7X15.eSnmlTOmbzMNhrFf5WN7rL.ccmFgmZPc9h/sDW",
+      "displayName": "nikaseider",
+      "avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/6wRcmrhqY7fB67Tjd15OE.png",
+      "shippingAddress": [
+        {
+          "ep_deliverable": false,
+          "country": "US",
+          "_id": "63f7c4b7de9b90d1f29efa1f",
+          "state": "Maryland",
+          "firstName": "Veronika",
+          "lastName": "Seider",
+          "address1": "10003 Sidney Rd",
+          "city": "Silver Spring",
+          "postalCode": "20901",
+          "phone": "3018024946",
+          "default": true
+        }
+      ],
+      "cart": {
+        "products": [],
+        "_id": "6377c04b6133096d67a16d44"
+      },
+      "memberSince": "2022-11-18T17:26:35.588Z",
+      "unfinishedOnboardActivity": "",
+      "createdAt": "2022-11-18T17:26:35.595Z",
+      "updatedAt": "2023-02-23T19:55:35.235Z",
+      "__v": 45,
+      "experiencePreferences": "women"
+    },
+    {
+      "_id": "62d2ee3479937857f1869285",
+      "profileBg": "/NOBO_defaultcoverimage.jpeg",
+      "emailVerified": true,
+      "blocked": false,
+      "saleSchedule": [],
+      "role": "basic",
+      "favorites": [],
+      "followers": [
+        "62d5c22179937857f1869d32",
+        "62d973d08af8d40354cf8ba6",
+        "62d974648af8d40354cf8d82",
+        "61e85f527a3854221a968de4",
+        "61e9e3cde9d5a06abb991653",
+        "61e9e3c6e9d5a06abb99128b"
+      ],
+      "following": [
+        "61e85f527a3854221a968de4",
+        "61e9e3cde9d5a06abb991653"
+      ],
+      "favoriteBrands": [],
+      "notifications": [
+        "63f346f312bc860b616d938e",
+        "63e51a7ad9a3e4329a62abfe",
+        "63dd3c53d9a3e4329a628728",
+        "63c05a3b6075ed074840d6fc",
+        "63c059f56075ed074840c860",
+        "63c059d16075ed074840b9c4",
+        "63c0585f6075ed074840ab28",
+        "63c03f926075ed0748409c8c",
+        "63a20d359888c059772468c9",
+        "639bf7f59888c05977244484",
+        "639bcea69888c059772432ec",
+        "6398abed583d3adbfcb87416",
+        "6398abe9583d3adbfcb86782",
+        "638fd2779ccbb668be2c8bee",
+        "638a510bc86670c6b3c2a933",
+        "638a50f2c86670c6b3c29ca7",
+        "638a50dac86670c6b3c2901b",
+        "638a46d5c86670c6b3c2838f",
+        "638a4611c86670c6b3c27703",
+        "638a45f4c86670c6b3c26a77",
+        "6388caf96ebdbdfc4452b5b0",
+        "637f87bd6ebdbdfc445293b2",
+        "6372bee7203495f638a6b8fa",
+        "6372bee2203495f638a6a6e0",
+        "6372ba7c203495f638a699c7",
+        "6372ba77203495f638a68b03",
+        "6372ba72203495f638a67a7f",
+        "6372ba64203495f638a6681f",
+        "6372ba3b203495f638a65aab",
+        "6372ba36203495f638a64e64",
+        "6372ba31203495f638a6416e",
+        "6372ba2c203495f638a633fa",
+        "6372b9f5203495f638a6280e",
+        "6372a13a203495f638a61b81",
+        "6372a135203495f638a60f95",
+        "6372a109203495f638a603a9",
+        "634ec6ab1a19b42e9c3d6ee1",
+        "634c7b831a19b42e9c3d4e61",
+        "63449e321a19b42e9c3d4290",
+        "63291ec180862aeae13f2a19",
+        "62e7fe6a9ca2c25f5169b3f3",
+        "62deafe607f32c4d393efb77",
+        "62dead7892f4314d2d120509",
+        "62d974e76f8f0303489cdd27",
+        "62d973fe8af8d40354cf8cda",
+        "62d5c23d79937857f1869d98",
+        "62d2ee3479937857f186928e"
+      ],
+      "blurbText": "Tell us who you are, what you do and a little about your style!",
+      "reviews": [],
+      "firstName": "Tonnie",
+      "lastName": "LaRue",
+      "email": "tonnielarue@gmail.com",
+      "passwordHash": "$2b$10$rIQdjXAsaYNoFdOdgBVKq.rlfpMgHZQq.2sDVEpRZJWPbmCQt0AtK",
+      "displayName": "TLaRue",
+      "avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/rrsqk1P6OejnM9nmFuk-N.jpeg",
+      "shippingAddress": [],
+      "cart": {
+        "products": [],
+        "_id": "62d2ee3479937857f1869286"
+      },
+      "memberSince": "2022-07-16T16:58:28.265Z",
+      "createdAt": "2022-07-16T16:58:28.270Z",
+      "updatedAt": "2023-02-20T10:09:55.354Z",
+      "__v": 55,
+      "experiencePreferences": "women"
+    },
+    {
+      "_id": "620c91c4a6c4067d2fc93f6e",
+      "emailVerified": true,
+      "blocked": false,
+      "saleSchedule": [],
+      "role": "basic",
+      "favorites": [],
+      "followers": [
+        "6387ebec536935ff3c0bca1a"
+      ],
+      "following": [],
+      "favoriteBrands": [
+        "61f2a8db7fe42a9755676ba6",
+        "61f2a8db7fe42a9755676c00",
+        "61f2a8db7fe42a9755676bd0",
+        "61f2a8db7fe42a9755676b8c",
+        "61f2a8db7fe42a9755676c5a",
+        "61f2a8db7fe42a9755676c64"
+      ],
+      "notifications": [
+        "6387ec5f536935ff3c0bcaa9",
+        "620c91c4a6c4067d2fc93f77"
+      ],
+      "blurbText": "My name is TaNeisha, I work for health plan in Long Beach California I absolutely Love fashion. I like to mix new trends with vintage, that’s more of my style. ",
+      "reviews": [],
+      "firstName": "Taneisha",
+      "lastName": "Smith",
+      "email": "smithmiller2011@yahoo.com",
+      "passwordHash": "$2b$10$zsVqVy2MQeULHQ9TN0P8XuCbl9rKQ8rq6KKCoUV7vgtpq.LdSHYni",
+      "confirmationCode": "rcfcmctv",
+      "avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/ozARE0Vo2Md3N3ekp8JEt.jpeg",
+      "shippingAddress": [],
+      "cart": {
+        "products": [],
+        "_id": "620c91c4a6c4067d2fc93f6f"
+      },
+      "memberSince": "2022-02-16T05:55:16.861Z",
+      "createdAt": "2022-02-16T05:55:16.865Z",
+      "updatedAt": "2023-02-13T16:38:05.550Z",
+      "__v": 9,
+      "displayName": "Sweetpea_",
+      "experiencePreferences": "women",
+      "profileBg": "/NOBO_defaultcoverimage.jpeg"
+    }
+  ]
 }
 
 curl 'https://thenobo.com/api/users/follow' \
@@ -534,36 +536,40 @@ curl 'https://thenobo.com/api/users/follow' \
   -H 'content-type: application/json' \
   --data-raw '{"userId":"61e85f527a3854221a968de4"}'
 {
-	"profileBg":"/NOBO_defaultcoverimage.jpeg",
-	"emailVerified":true,
-	"blocked":false,
-	"saleSchedule":[],
-	"role":"basic",
-	"favorites":[],
-	"followers":[],
-	"following":["61e85f527a3854221a968de4"],
-	"favoriteBrands":[],
-	"notifications":["63f7f77648fcfbd1e66648d7"],
-	"blurbText":"Tell us who you are, what you do and a little about your style!",
-	"reviews":[],
-	"_id":"63f7f77648fcfbd1e66648ce",
-	"firstName":"James",
-	"lastName":"Bailey",
-	"email":"jbailey@cofebe.com",
-	"displayName":"JBaileyCOFEBE",
-	"avatar":"https://thenobo.sfo3.digitaloceanspaces.com/production/sAozpOokhCFlDmcx2cj5C.png",
-	"shippingAddress":[],
-	"cart":{
-		"products":[],
-		"_id":"63f7f77648fcfbd1e66648cf"
-	},
-	"memberSince":"2023-02-23T23:32:06.066Z",
-	"unfinishedOnboardActivity":"profile-picture",
-	"createdAt":"2023-02-23T23:32:06.073Z",
-	"updatedAt":"2023-02-23T23:36:08.517Z",
-	"experiencePreferences":"women",
-	"tradeCloset":0,
-	"sellCloset":0
+  "profileBg": "/NOBO_defaultcoverimage.jpeg",
+  "emailVerified": true,
+  "blocked": false,
+  "saleSchedule": [],
+  "role": "basic",
+  "favorites": [],
+  "followers": [],
+  "following": [
+    "61e85f527a3854221a968de4"
+  ],
+  "favoriteBrands": [],
+  "notifications": [
+    "63f7f77648fcfbd1e66648d7"
+  ],
+  "blurbText": "Tell us who you are, what you do and a little about your style!",
+  "reviews": [],
+  "_id": "63f7f77648fcfbd1e66648ce",
+  "firstName": "James",
+  "lastName": "Bailey",
+  "email": "jbailey@cofebe.com",
+  "displayName": "JBaileyCOFEBE",
+  "avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/sAozpOokhCFlDmcx2cj5C.png",
+  "shippingAddress": [],
+  "cart": {
+    "products": [],
+    "_id": "63f7f77648fcfbd1e66648cf"
+  },
+  "memberSince": "2023-02-23T23:32:06.066Z",
+  "unfinishedOnboardActivity": "profile-picture",
+  "createdAt": "2023-02-23T23:32:06.073Z",
+  "updatedAt": "2023-02-23T23:36:08.517Z",
+  "experiencePreferences": "women",
+  "tradeCloset": 0,
+  "sellCloset": 0
 }
 
 curl 'https://thenobo.com/api/users/follow' \
@@ -571,36 +577,41 @@ curl 'https://thenobo.com/api/users/follow' \
   -H 'content-type: application/json' \
   --data-raw '{"userId":"61e9e3cde9d5a06abb991653"}'
 {
-	"profileBg":"/NOBO_defaultcoverimage.jpeg",
-	"emailVerified":true,
-	"blocked":false,
-	"saleSchedule":[],
-	"role":"basic",
-	"favorites":[],
-	"followers":[],
-	"following":["61e85f527a3854221a968de4","61e9e3cde9d5a06abb991653"],
-	"favoriteBrands":[],
-	"notifications":["63f7f77648fcfbd1e66648d7"],
-	"blurbText":"Tell us who you are, what you do and a little about your style!",
-	"reviews":[],
-	"_id":"63f7f77648fcfbd1e66648ce",
-	"firstName":"James",
-	"lastName":"Bailey",
-	"email":"jbailey@cofebe.com",
-	"displayName":"JBaileyCOFEBE",
-	"avatar":"https://thenobo.sfo3.digitaloceanspaces.com/production/sAozpOokhCFlDmcx2cj5C.png",
-	"shippingAddress":[],
-	"cart":{
-		"products":[],
-		"_id":"63f7f77648fcfbd1e66648cf"
-	},
-	"memberSince":"2023-02-23T23:32:06.066Z",
-	"unfinishedOnboardActivity":"connect-with-others",
-	"createdAt":"2023-02-23T23:32:06.073Z",
-	"updatedAt":"2023-02-23T23:36:08.718Z",
-	"experiencePreferences":"women",
-	"tradeCloset":0,
-	"sellCloset":0
+  "profileBg": "/NOBO_defaultcoverimage.jpeg",
+  "emailVerified": true,
+  "blocked": false,
+  "saleSchedule": [],
+  "role": "basic",
+  "favorites": [],
+  "followers": [],
+  "following": [
+    "61e85f527a3854221a968de4",
+    "61e9e3cde9d5a06abb991653"
+  ],
+  "favoriteBrands": [],
+  "notifications": [
+    "63f7f77648fcfbd1e66648d7"
+  ],
+  "blurbText": "Tell us who you are, what you do and a little about your style!",
+  "reviews": [],
+  "_id": "63f7f77648fcfbd1e66648ce",
+  "firstName": "James",
+  "lastName": "Bailey",
+  "email": "jbailey@cofebe.com",
+  "displayName": "JBaileyCOFEBE",
+  "avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/sAozpOokhCFlDmcx2cj5C.png",
+  "shippingAddress": [],
+  "cart": {
+    "products": [],
+    "_id": "63f7f77648fcfbd1e66648cf"
+  },
+  "memberSince": "2023-02-23T23:32:06.066Z",
+  "unfinishedOnboardActivity": "connect-with-others",
+  "createdAt": "2023-02-23T23:32:06.073Z",
+  "updatedAt": "2023-02-23T23:36:08.718Z",
+  "experiencePreferences": "women",
+  "tradeCloset": 0,
+  "sellCloset": 0
 }
 
 # Follow a person ########################################################################
@@ -609,33 +620,42 @@ curl 'https://thenobo.com/api/users/follow' \
   -H 'content-type: application/json' \
   --data-raw '{"userId":"63b4ae40eee7b7e1e5a906fb"}'
 {
-	"profileBg":"/NOBO_defaultcoverimage.jpeg",
-	"emailVerified":true,
-	"blocked":false,
-	"saleSchedule":[],
-	"role":"basic",
-	"favorites":[],
-	"followers":[],
-	"following":["61e85f527a3854221a968de4","61e9e3cde9d5a06abb991653","63b4ae40eee7b7e1e5a906fb"],
-	"favoriteBrands":[],
-	"notifications":["63f7f77648fcfbd1e66648d7"],
-	"blurbText":"Tell us who you are, what you do and a little about your style!",
-	"reviews":[],
-	"_id":"63f7f77648fcfbd1e66648ce",
-	"firstName":"James",
-	"lastName":"Bailey",
-	"email":"jbailey@cofebe.com",
-	"displayName":"JBaileyCOFEBE",
-	"avatar":"https://thenobo.sfo3.digitaloceanspaces.com/production/sAozpOokhCFlDmcx2cj5C.png",
-	"shippingAddress":[],
-	"cart":{"products":[],"_id":"63f7f77648fcfbd1e66648cf"},
-	"memberSince":"2023-02-23T23:32:06.066Z",
-	"unfinishedOnboardActivity":"connect-with-others",
-	"createdAt":"2023-02-23T23:32:06.073Z",
-	"updatedAt":"2023-02-23T23:52:49.685Z",
-	"experiencePreferences":"women",
-	"tradeCloset":0,
-	"sellCloset":0
+  "profileBg": "/NOBO_defaultcoverimage.jpeg",
+  "emailVerified": true,
+  "blocked": false,
+  "saleSchedule": [],
+  "role": "basic",
+  "favorites": [],
+  "followers": [],
+  "following": [
+    "61e85f527a3854221a968de4",
+    "61e9e3cde9d5a06abb991653",
+    "63b4ae40eee7b7e1e5a906fb"
+  ],
+  "favoriteBrands": [],
+  "notifications": [
+    "63f7f77648fcfbd1e66648d7"
+  ],
+  "blurbText": "Tell us who you are, what you do and a little about your style!",
+  "reviews": [],
+  "_id": "63f7f77648fcfbd1e66648ce",
+  "firstName": "James",
+  "lastName": "Bailey",
+  "email": "jbailey@cofebe.com",
+  "displayName": "JBaileyCOFEBE",
+  "avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/sAozpOokhCFlDmcx2cj5C.png",
+  "shippingAddress": [],
+  "cart": {
+    "products": [],
+    "_id": "63f7f77648fcfbd1e66648cf"
+  },
+  "memberSince": "2023-02-23T23:32:06.066Z",
+  "unfinishedOnboardActivity": "connect-with-others",
+  "createdAt": "2023-02-23T23:32:06.073Z",
+  "updatedAt": "2023-02-23T23:52:49.685Z",
+  "experiencePreferences": "women",
+  "tradeCloset": 0,
+  "sellCloset": 0
 }
 
 # Follow fifth person ####################################################################
@@ -644,33 +664,46 @@ curl 'https://thenobo.com/api/users/follow' \
   -H 'content-type: application/json' \
   --data-raw '{"userId":"620c91c4a6c4067d2fc93f6e"}'
 {
-	"profileBg":"/NOBO_defaultcoverimage.jpeg",
-	"emailVerified":true,
-	"blocked":false,
-	"saleSchedule":[],
-	"role":"basic",
-	"favorites":[],
-	"followers":[],
-	"following":["61e85f527a3854221a968de4","61e9e3cde9d5a06abb991653","63b4ae40eee7b7e1e5a906fb","61e9e3aee9d5a06abb990501","6377c04b6133096d67a16d43","62d2ee3479937857f1869285","620c91c4a6c4067d2fc93f6e"],
-	"favoriteBrands":[],
-	"notifications":["63f7f77648fcfbd1e66648d7"],
-	"blurbText":"Tell us who you are, what you do and a little about your style!",
-	"reviews":[],
-	"_id":"63f7f77648fcfbd1e66648ce",
-	"firstName":"James",
-	"lastName":"Bailey",
-	"email":"jbailey@cofebe.com",
-	"displayName":"JBaileyCOFEBE",
-	"avatar":"https://thenobo.sfo3.digitaloceanspaces.com/production/sAozpOokhCFlDmcx2cj5C.png",
-	"shippingAddress":[],
-	"cart":{"products":[],"_id":"63f7f77648fcfbd1e66648cf"},
-	"memberSince":"2023-02-23T23:32:06.066Z",
-	"unfinishedOnboardActivity":"connect-with-others",
-	"createdAt":"2023-02-23T23:32:06.073Z",
-	"updatedAt":"2023-02-23T23:53:44.874Z",
-	"experiencePreferences":"women",
-	"tradeCloset":0,
-	"sellCloset":0
+  "profileBg": "/NOBO_defaultcoverimage.jpeg",
+  "emailVerified": true,
+  "blocked": false,
+  "saleSchedule": [],
+  "role": "basic",
+  "favorites": [],
+  "followers": [],
+  "following": [
+    "61e85f527a3854221a968de4",
+    "61e9e3cde9d5a06abb991653",
+    "63b4ae40eee7b7e1e5a906fb",
+    "61e9e3aee9d5a06abb990501",
+    "6377c04b6133096d67a16d43",
+    "62d2ee3479937857f1869285",
+    "620c91c4a6c4067d2fc93f6e"
+  ],
+  "favoriteBrands": [],
+  "notifications": [
+    "63f7f77648fcfbd1e66648d7"
+  ],
+  "blurbText": "Tell us who you are, what you do and a little about your style!",
+  "reviews": [],
+  "_id": "63f7f77648fcfbd1e66648ce",
+  "firstName": "James",
+  "lastName": "Bailey",
+  "email": "jbailey@cofebe.com",
+  "displayName": "JBaileyCOFEBE",
+  "avatar": "https://thenobo.sfo3.digitaloceanspaces.com/production/sAozpOokhCFlDmcx2cj5C.png",
+  "shippingAddress": [],
+  "cart": {
+    "products": [],
+    "_id": "63f7f77648fcfbd1e66648cf"
+  },
+  "memberSince": "2023-02-23T23:32:06.066Z",
+  "unfinishedOnboardActivity": "connect-with-others",
+  "createdAt": "2023-02-23T23:32:06.073Z",
+  "updatedAt": "2023-02-23T23:53:44.874Z",
+  "experiencePreferences": "women",
+  "tradeCloset": 0,
+  "sellCloset": 0
 }
 
 # After following 5 people ###############################################################
@@ -683,44 +716,44 @@ curl 'https://thenobo.com/api/users/set-onboard-activity' \
 curl 'https://thenobo.com/api/brands/q/term/a' \
   -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y3Zjc3NjQ4ZmNmYmQxZTY2NjQ4Y2UiLCJlbWFpbCI6ImpiYWlsZXlAY29mZWJlLmNvbSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTY3Nzc5OTkyNiwicmVmcmVzaCI6MTY3NzE5NjAyNiwiaWF0IjoxNjc3MTk1MTI2fQ.5SEXS44C0iIX7xLXs__yI7OqoZ8hDvLJR6szLbsXwkc'
 {
-	"matched":[
-		{
-			"_id":"61f2a8db7fe42a9755676c2c",
-			"name":"Azzedine Alaia",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/alaia.png",
-			"__v":0
-		},
-		{
-			"_id":"61f2a8db7fe42a9755676c2e",
-			"name":"Audemars Piguet",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/Audemars-Piguet.png",
-			"__v":0
-		},
-		{
-			"_id":"61f2a8db7fe42a9755676c32",
-			"name":"Armani",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/armani.svg",
-			"__v":0
-		},
-		{
-			"_id":"61f2a8db7fe42a9755676c34",
-			"name":"Aquazzura",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/aquazzura.png",
-			"__v":0
-		},
-		{
-			"_id":"61f2a8db7fe42a9755676c36",
-			"name":"Apple",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/apple-11.svg",
-			"__v":0
-		},
-		{
-			"_id":"61f2a8db7fe42a9755676c50",
-			"name":"Amina Muaddi",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/Amina-Muaddi.jpg",
-			"__v":0
-		}
-	]
+  "matched": [
+    {
+      "_id": "61f2a8db7fe42a9755676c2c",
+      "name": "Azzedine Alaia",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/alaia.png",
+      "__v": 0
+    },
+    {
+      "_id": "61f2a8db7fe42a9755676c2e",
+      "name": "Audemars Piguet",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/Audemars-Piguet.png",
+      "__v": 0
+    },
+    {
+      "_id": "61f2a8db7fe42a9755676c32",
+      "name": "Armani",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/armani.svg",
+      "__v": 0
+    },
+    {
+      "_id": "61f2a8db7fe42a9755676c34",
+      "name": "Aquazzura",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/aquazzura.png",
+      "__v": 0
+    },
+    {
+      "_id": "61f2a8db7fe42a9755676c36",
+      "name": "Apple",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/apple-11.svg",
+      "__v": 0
+    },
+    {
+      "_id": "61f2a8db7fe42a9755676c50",
+      "name": "Amina Muaddi",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/Amina-Muaddi.jpg",
+      "__v": 0
+    }
+  ]
 }
 
 curl 'https://thenobo.com/api/brands/user/63f7f77648fcfbd1e66648ce' \
@@ -733,25 +766,25 @@ curl 'https://thenobo.com/api/brands/add-favorite' \
   -H 'content-type: application/json' \
   --data-raw '{"brandId":"61f2a8db7fe42a9755676c2e"}'
 {
-	"brand":{
-		"_id":"61f2a8db7fe42a9755676c2e",
-		"name":"Audemars Piguet",
-		"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/Audemars-Piguet.png",
-		"__v":0
-	}
+  "brand": {
+    "_id": "61f2a8db7fe42a9755676c2e",
+    "name": "Audemars Piguet",
+    "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/Audemars-Piguet.png",
+    "__v": 0
+  }
 }
 
 curl 'https://thenobo.com/api/brands/user/63f7f77648fcfbd1e66648ce' \
   -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y3Zjc3NjQ4ZmNmYmQxZTY2NjQ4Y2UiLCJlbWFpbCI6ImpiYWlsZXlAY29mZWJlLmNvbSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTY3Nzc5OTkyNiwicmVmcmVzaCI6MTY3NzE5NjAyNiwiaWF0IjoxNjc3MTk1MTI2fQ.5SEXS44C0iIX7xLXs__yI7OqoZ8hDvLJR6szLbsXwkc'
 {
-	"userBrands":[
-		{
-			"_id":"61f2a8db7fe42a9755676c2e",
-			"name":"Audemars Piguet",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/Audemars-Piguet.png",
-			"__v":0
-		}
-	]
+  "userBrands": [
+    {
+      "_id": "61f2a8db7fe42a9755676c2e",
+      "name": "Audemars Piguet",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/Audemars-Piguet.png",
+      "__v": 0
+    }
+  ]
 }
 
 # Selecting fourth Brand #################################################################
@@ -760,43 +793,43 @@ curl 'https://thenobo.com/api/brands/add-favorite' \
   -H 'content-type: application/json' \
   --data-raw '{"brandId":"61f2a8db7fe42a9755676c36"}'
 {
-	"brand":{
-		"_id":"61f2a8db7fe42a9755676c36",
-		"name":"Apple",
-		"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/apple-11.svg",
-		"__v":0
-	}
+  "brand": {
+    "_id": "61f2a8db7fe42a9755676c36",
+    "name": "Apple",
+    "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/apple-11.svg",
+    "__v": 0
+  }
 }
 
 curl 'https://thenobo.com/api/brands/user/63f7f77648fcfbd1e66648ce' \
   -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y3Zjc3NjQ4ZmNmYmQxZTY2NjQ4Y2UiLCJlbWFpbCI6ImpiYWlsZXlAY29mZWJlLmNvbSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTY3Nzc5OTkyNiwicmVmcmVzaCI6MTY3NzE5NjAyNiwiaWF0IjoxNjc3MTk1MTI2fQ.5SEXS44C0iIX7xLXs__yI7OqoZ8hDvLJR6szLbsXwkc'
 {
-	"userBrands":[
-		{
-			"_id":"61f2a8db7fe42a9755676c2e",
-			"name":"Audemars Piguet",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/Audemars-Piguet.png",
-			"__v":0
-		},
-		{
-			"_id":"61f2a8db7fe42a9755676c32",
-			"name":"Armani",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/armani.svg",
-			"__v":0
-		},
-		{
-			"_id":"61f2a8db7fe42a9755676c36",
-			"name":"Apple",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/apple-11.svg",
-			"__v":0
-		},
-		{
-			"_id":"61f2a8db7fe42a9755676c50",
-			"name":"Amina Muaddi",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/Amina-Muaddi.jpg",
-			"__v":0
-		}
-	]
+  "userBrands": [
+    {
+      "_id": "61f2a8db7fe42a9755676c2e",
+      "name": "Audemars Piguet",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/Audemars-Piguet.png",
+      "__v": 0
+    },
+    {
+      "_id": "61f2a8db7fe42a9755676c32",
+      "name": "Armani",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/armani.svg",
+      "__v": 0
+    },
+    {
+      "_id": "61f2a8db7fe42a9755676c36",
+      "name": "Apple",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/apple-11.svg",
+      "__v": 0
+    },
+    {
+      "_id": "61f2a8db7fe42a9755676c50",
+      "name": "Amina Muaddi",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/Amina-Muaddi.jpg",
+      "__v": 0
+    }
+  ]
 }
 
 curl 'https://thenobo.com/api/users/set-onboard-activity' \
@@ -811,25 +844,25 @@ curl 'https://thenobo.com/api/feed/create-item' \
   -H 'content-type: application/json' \
   --data-raw $'{"userMessage":"Excited to be on TheNOBO\u0021  Let me know what products you\'re looking to Trade, or Buy from me, and I\'ll check my closet\u0021","userImage":null}'
 {
-	"savedFeed":{
-		"feed":[
-			{
-				"likes":[],
-				"images":[],
-				"_id":"63f7fe9248fcfbd1e6664990",
-				"user":"63f7f77648fcfbd1e66648ce",
-				"template":"usercreated",
-				"feedText":"Excited to be on TheNOBO!  Let me know what products you're looking to Trade, or Buy from me, and I'll check my closet!",
-				"comments":[],
-				"createdAt":"2023-02-24T00:02:26.057Z",
-				"updatedAt":"2023-02-24T00:02:26.057Z",
-				"__v":0
-			}
-		],
-		"_id":"63f7f77648fcfbd1e66648d3",
-		"user":"63f7f77648fcfbd1e66648ce",
-		"__v":1
-	}
+  "savedFeed": {
+    "feed": [
+      {
+        "likes": [],
+        "images": [],
+        "_id": "63f7fe9248fcfbd1e6664990",
+        "user": "63f7f77648fcfbd1e66648ce",
+        "template": "usercreated",
+        "feedText": "Excited to be on TheNOBO!  Let me know what products you're looking to Trade, or Buy from me, and I'll check my closet!",
+        "comments": [],
+        "createdAt": "2023-02-24T00:02:26.057Z",
+        "updatedAt": "2023-02-24T00:02:26.057Z",
+        "__v": 0
+      }
+    ],
+    "_id": "63f7f77648fcfbd1e66648d3",
+    "user": "63f7f77648fcfbd1e66648ce",
+    "__v": 1
+  }
 }
 
 curl 'https://thenobo.com/api/users/set-onboard-activity' \
@@ -841,30 +874,30 @@ curl 'https://thenobo.com/api/users/set-onboard-activity' \
 curl 'https://thenobo.com/api/brands/user/63f7f77648fcfbd1e66648ce' \
   -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2Y3Zjc3NjQ4ZmNmYmQxZTY2NjQ4Y2UiLCJlbWFpbCI6ImpiYWlsZXlAY29mZWJlLmNvbSIsInJvbGUiOiJhZG1pbiIsImV4cCI6MTY3Nzc5OTkyNiwicmVmcmVzaCI6MTY3NzE5NjAyNiwiaWF0IjoxNjc3MTk1MTI2fQ.5SEXS44C0iIX7xLXs__yI7OqoZ8hDvLJR6szLbsXwkc'
 {
-	"userBrands":[
-		{
-			"_id":"61f2a8db7fe42a9755676c2e",
-			"name":"Audemars Piguet",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/Audemars-Piguet.png",
-			"__v":0
-		},
-		{
-			"_id":"61f2a8db7fe42a9755676c32",
-			"name":"Armani",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/armani.svg",
-			"__v":0
-		},
-		{
-			"_id":"61f2a8db7fe42a9755676c36",
-			"name":"Apple",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/apple-11.svg",
-			"__v":0
-		},
-		{
-			"_id":"61f2a8db7fe42a9755676c50",
-			"name":"Amina Muaddi",
-			"url":"https://thenobo.sfo3.digitaloceanspaces.com/brands/Amina-Muaddi.jpg",
-			"__v":0
-		}
-	]
+  "userBrands": [
+    {
+      "_id": "61f2a8db7fe42a9755676c2e",
+      "name": "Audemars Piguet",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/Audemars-Piguet.png",
+      "__v": 0
+    },
+    {
+      "_id": "61f2a8db7fe42a9755676c32",
+      "name": "Armani",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/armani.svg",
+      "__v": 0
+    },
+    {
+      "_id": "61f2a8db7fe42a9755676c36",
+      "name": "Apple",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/apple-11.svg",
+      "__v": 0
+    },
+    {
+      "_id": "61f2a8db7fe42a9755676c50",
+      "name": "Amina Muaddi",
+      "url": "https://thenobo.sfo3.digitaloceanspaces.com/brands/Amina-Muaddi.jpg",
+      "__v": 0
+    }
+  ]
 }

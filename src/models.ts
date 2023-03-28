@@ -24,8 +24,7 @@ export interface User {
   memberSince: string;
   notifications: string[];
   profileBg: string;
-  rating: number;
-  reviews: string[];
+  reviews: UserReview[];
   role: string;
   salesSchedule: string[];
   sellCloset: number;
@@ -33,6 +32,18 @@ export interface User {
   tradeCloset: number;
   unfinishedOnboardActivity: string;
   updatedAt: string;
+}
+
+export interface UserReview {
+  _id: string;
+  product: Product;
+  buyer: User;
+  createdAt: string;
+  ratingNum: number;
+  reviewText: string;
+  reviewType: string;
+  seller: string;
+  updatedat: string;
 }
 
 export interface Address {
@@ -85,74 +96,97 @@ export interface ProductResponse {
   tags: any;
 }
 
+export interface ProductsResponse {
+  docs: Product[];
+  totalDocs: number;
+  limit: number;
+  totalPages: number;
+  page: number;
+  pagingCounter: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+  prevPage: string;
+  nextPage: string;
+}
+
 export interface Product {
-  _id: string;
-  action: string;
-  active: boolean;
-  attributes: ProductAttribute[];
-  brand: string;
-  category: ProductCategory;
-  createdAt: string;
-  description: string;
-  giveaway: string;
-  group: string;
-  image: string;
-  images: Image[];
-  link: string;
-  name: string;
-  onSale: boolean;
-  parentCategory: ProductCategory;
-  postentialTradeItems: string[];
-  price: number;
-  receipt: string;
-  receivedByNobo: boolean;
-  rejected: boolean;
-  retailPrice: number;
-  returnBy: string;
-  returnRequested: boolean;
+  tradeOffers: {
+    incoming: any[];
+    outgoing: any[];
+  };
+  attributes: {
+    id: string;
+    value: string | string[];
+  }[];
+  images: {
+    url: string;
+    originalName: string;
+  }[];
+  tags: any[];
   sold: boolean;
-  tags: string[];
-  tradeOffers: ProductTradeOffers;
-  updatedAt: string;
-  vendor: ProductVendor;
-}
-
-export interface ProductTradeOffers {
-  incoming: string[];
-  outgoing: string[];
-}
-
-export interface ProductAttribute {
-  id: string;
-  value: string|string[];
-}
-
-export interface Image {
-  url: string;
-  originalName: string;
-}
-
-export interface ProductVendor {
+  active: boolean;
+  rejected: boolean;
+  receivedByNobo: boolean;
+  returnRequested: boolean;
+  returnBy: any;
+  giveaway: {
+    active: boolean;
+    ticket_allocation_limit: number;
+    distributed: string[];
+    concluded: boolean;
+    _id: string;
+    name: string;
+    product: string;
+    entry_steps: {
+      _id: string;
+      text: string;
+      id: number;
+    }[];
+    event: string;
+    __v: number;
+  };
   _id: string;
-  rating: number;
-  profileBg: string;
-  emailVerified: string;
-  blocked: boolean;
-  blurbText: string;
-  reviews: string[];
-  cache: ProductVendorCache;
-  firstName: string;
-  lastName: string;
-  avatar: string;
-  memberSince: string;
-  displayName: string;
-  experiencePreferences: string;
-  orders: number;
-}
-
-export interface ProductVendorCache {
-  sellCloset: number;
-  tradeCloset: number;
+  group: string;
+  vendor: {
+    profileBg: string;
+    emailVerified: boolean;
+    blocked: boolean;
+    blurbText: string;
+    reviews: any[];
+    _id: string;
+    cache: {
+      sellCloset: number;
+      tradeCloset: number;
+    };
+    wpId: string;
+    firstName: string;
+    lastName: string;
+    memberSince: string;
+    displayName: string;
+    avatar: string;
+    __v: number;
+    experiencePreferences: string;
+    orders: number;
+  };
+  action: string;
+  name: string;
+  brand: string;
+  description: string;
+  receipt: string;
+  price: number;
+  retailPrice: number;
+  category: ProductCategory;
+  parentCategory: ProductCategory;
+  potentialTradeItems: any[];
+  createdAt: string;
+  updatedAt: string;
+  image: string;
+  link: string;
+  shop: {
+    new: { [key: string]: any };
+    used: { [key: string]: any };
+  };
+  trade: { [key: string]: string[] };
 }
 
 export interface ProductCategory {
@@ -265,4 +299,102 @@ export interface OrdersResponse {
 
 export interface OrderResponse {
   order: FullOrder;
+}
+
+export interface Trade {
+  salesTax: {
+    initiator: {
+      order_total_amount: number;
+      shipping: number;
+      taxable_amount: number;
+      amount_to_collect: number;
+      rate: number;
+      has_nexus: boolean;
+      freight_taxable: boolean;
+      tax_source: string;
+      jurisdictions: {
+        country: string;
+        state: string;
+        county: string;
+      };
+    };
+    recipient: {
+      order_total_amount: number;
+      shipping: number;
+      taxable_amount: number;
+      amount_to_collect: number;
+      rate: number;
+      has_nexus: boolean;
+      freight_taxable: boolean;
+      tax_source: string;
+      jurisdictions: {
+        country: string;
+        state: string;
+        county: string;
+      };
+    };
+  };
+  shippingAddress: {
+    initiator: Address;
+  };
+  paymentMethod: {
+    initiator: string;
+  };
+  status: string;
+  _id: string;
+  recipient: string;
+  products: {
+    offered: string | Product;
+    requested: string | Product;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TradesResponse {
+  sent: Trade[];
+  received: Trade[];
+}
+
+export interface CategoriesResponse {
+  docs: Category[];
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+  limit: number;
+  nextPage: string;
+  page: number;
+  pagingCounter: number;
+  prevPage: string;
+  totalDocs: number;
+  totalPages: number;
+}
+
+export interface Category {
+  createdAt: string;
+  description: string;
+  name: string;
+  parent: CategoryParent | null;
+  updatedAt: string;
+  _id: string;
+}
+
+export interface CategoryParent {
+  createdAt: string;
+  description: string;
+  name: string;
+  parent: string | null;
+  updatedAt: string;
+  _id: string;
+  __v: number;
+}
+
+export interface BrandsResponse {
+  brands: Brand[];
+}
+
+export interface Brand {
+  _id: string;
+  name: string;
+  url: string;
+  __v: number;
 }

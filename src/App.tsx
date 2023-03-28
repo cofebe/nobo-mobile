@@ -19,6 +19,10 @@ import Roles from './pages/Roles';
 import Chat from './pages/Chat';
 import GetStarted from './pages/GetStarted';
 import ShoppingCart from './pages/ShoppingCart';
+import TradeOfferShipping from './pages/TradeOfferShipping';
+import TradeOfferPayment from './pages/TradeOfferPayment';
+import TradeOfferSummary from './pages/TradeOfferSummary';
+import TradeOfferComplete from './pages/TradeOfferComplete';
 import CheckoutShipping from './pages/CheckoutShipping';
 import CheckoutPayment from './pages/CheckoutPayment';
 import CheckoutSummary from './pages/CheckoutSummary';
@@ -33,6 +37,7 @@ import ManageSubscription from './pages/ManageSubscription';
 import PrimarySport from './pages/PrimarySport';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
 import PostDetail from './pages/PostDetail';
+import ListItem from './pages/ListItem';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -52,7 +57,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-
+import OfferComplete from './pages/OfferComplete';
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -158,6 +163,27 @@ const App: React.FC = () => {
             <Route exact path="/post-detail/:id">
               <PostDetail />
             </Route>
+            <Route path="/offer-submitted/:id" exact={true}>
+              <OfferComplete />
+            </Route>
+            <Route path="/trade/shipping" exact={true}>
+              <TradeOfferShipping />
+            </Route>
+            <Route path="/trade/payment" exact={true}>
+              <TradeOfferPayment />
+            </Route>
+            <Route path="/trade/summary" exact={true}>
+              <TradeOfferSummary />
+            </Route>
+            <Route path="/trade/complete/:id" exact={true}>
+              <TradeOfferComplete />
+            </Route>
+            <Route exact path="/list-item/sell">
+              <ListItem />
+            </Route>
+            <Route exact path="/list-item/trade">
+              <ListItem />
+            </Route>
             <Route path="/signup" exact={true}>
               <SignUp />
             </Route>
@@ -205,9 +231,7 @@ const App: React.FC = () => {
             </Route>
           </IonRouterOutlet>
         </IonReactRouter>
-        {showLoading ? (
-          <HorizontalLineSpinner />
-        ) : ''}
+        {showLoading ? <HorizontalLineSpinner /> : ''}
       </IonApp>
     </Elements>
   );
