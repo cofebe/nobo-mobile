@@ -52,23 +52,39 @@ a:active {
   color: #000000;
 }
 
-.nobo-nav-bar {
-  height: 4.25rem;
-  margin: 0 21px 10px;
-  border-radius: 10px;
-}
-
-.nobo-nav-bar-background {
-  background-image: linear-gradient(to top, #ccc, #fefcf7);
+.nav-bar-background {
+  background-image: linear-gradient(to top, #ccc, transparent);
   background-size: 100% 5rem;
   background-position: bottom;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   background-repeat: no-repeat;
-}
 
-.nobo-nav-btn {
-  width: 60px;
+  ion-tabs {
+    .nav-bar {
+      height: 4.25rem;
+      margin: 0 21px 10px;
+      border-radius: 10px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      .nav-btn {
+        width: 60px;
+      }
+    }
+
+    &::after {
+      content: '';
+      background-image: linear-gradient(to top, #ccc, transparent);
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 68px;
+    }
+  }
 }
 
 .nobo-arched-header {

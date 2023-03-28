@@ -1,40 +1,59 @@
-import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import './NoboHomeItem.scss';
 import { environment } from '../environments/environment';
 import { calculateEstPrice } from '../helpers/tradeFees';
+import { getImageUrl } from '../utils';
 
 interface NoboItemProps {
   children?: React.ReactNode;
   product: any;
   isBig?: boolean;
-  isSneaker?: boolean;
 }
 
 const NoboHomeItem: React.FC<NoboItemProps> = ({
   children,
   product,
   isBig,
-  isSneaker,
 }) => {
   const history = useHistory();
+  const params: any = useParams();
+  const [isSneaker, setIsSneaker] = useState(false);
+  const [isSneakerTrade, setIsSneakerTrade] = useState(false);
+
+  useEffect(() => {
+    if (params.sectionCategory === 'sneakers') {
+      setIsSneaker(true);
+    } else {
+      setIsSneaker(false);
+    }
+    if (
+      params.sectionName === 'trade' &&
+      params.sectionCategory === 'sneakers'
+    ) {
+      setIsSneakerTrade(true);
+    } else {
+      setIsSneakerTrade(false);
+    }
+  }, [params]);
 
   return (
     <div
       className="nobo-home-item"
       style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100%',
-        width: '100%',
+        backgroundImage: getImageUrl(product?.image),
       }}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
         console.log('product', product);
-        isSneaker
-          ? history.push(`/home/product/sneakers/${product._id}`)
-          : history.push(`/home/product/${product._id}`);
+        if (isSneakerTrade) {
+          history.push(`/home/product/sneakers/trade/${product._id}`);
+        } else {
+          isSneaker
+            ? history.push(`/home/product/sneakers/${product._id}`)
+            : history.push(`/home/product/${product._id}`);
+        }
       }}
     >
       {isBig ? (
@@ -43,9 +62,21 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
         <div className="nobo-details-card-small">
           <div>
             {product?.action === 'sell' ? (
+              isSneaker ? (
+                <>
+                  <div>{product?.brand}</div>
+                  <div>{product?.name}</div>
+                </>
+              ) : (
+                <>
+                  <div>{'$' + product?.price}</div>
+                  <div>COST</div>
+                </>
+              )
+            ) : isSneaker ? (
               <>
-                <div>{'$' + product?.price}</div>
-                <div>COST</div>
+                <div>{product?.brand}</div>
+                <div>{product?.name}</div>
               </>
             ) : (
               <>
@@ -63,27 +94,24 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({
           </div>
         </div>
       )}
-      <img
-        style={{
-          position: 'absolute',
-          top: '10px',
-          left: '10px',
-          height: '28px',
-        }}
-        src={`assets/images/nobo-${
-          product?.action === 'sell' ? 'buy-' : 'trade-'
-        }icon.svg`}
-        alt="nobo-buy-icon"
-      />
-      <img
-        style={{ height: '100%', width: '100%', borderRadius: 10 }}
-        alt="nobo-item"
-        src={
-          product?.image[0] === '/'
-            ? environment.serverUrl + product?.image
-            : product?.image
-        }
-      />
+      {isSneaker && params.sectionName !== 'explore' && (
+        <img
+          className="buy-trade-icon"
+          src={`assets/images/nobo-${
+            isSneakerTrade ? 'trade-' : 'buy-'
+          }icon.svg`}
+          alt="nobo-buy-icon"
+        />
+      )}
+      {!isSneaker && (
+        <img
+          className="buy-trade-icon"
+          src={`assets/images/nobo-${
+            product?.action === 'sell' ? 'buy-' : 'trade-'
+          }icon.svg`}
+          alt="nobo-buy-icon"
+        />
+      )}
     </div>
   );
 };

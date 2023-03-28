@@ -14,7 +14,7 @@ import {
   useIonToast,
   IonSpinner,
 } from '@ionic/react';
-import './URP.css';
+import '../styles.scss';
 import './SignUp.css';
 import { AuthService } from '../services/AuthService';
 //import { AppContext } from '../services/State';

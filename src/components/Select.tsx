@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from 'react';
 import {
   IonButton,
   IonModal,
@@ -6,17 +6,17 @@ import {
   IonList,
   IonLabel,
   IonIcon,
-} from "@ionic/react";
-import { checkmarkOutline, chevronDownOutline } from "ionicons/icons";
-import "./UrpSelect.css";
+} from '@ionic/react';
+import { checkmarkOutline } from 'ionicons/icons';
+import './Select.css';
 
-interface UrpSelectOption {
+interface SelectOption {
   value?: string;
   label: string;
 }
 
-interface UrpSelectProps {
-  options: UrpSelectOption[];
+interface SelectProps {
+  options: SelectOption[];
   className?: string;
   value?: string[] | string;
   placeholder?: string;
@@ -26,7 +26,7 @@ interface UrpSelectProps {
   onChange?: (val: string[]) => void;
 }
 
-const UrpSelect: React.FC<UrpSelectProps> = ({
+const Select: React.FC<SelectProps> = ({
   className,
   options,
   placeholder,
@@ -43,7 +43,7 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
       )
     : [];
   const [internalSelected, setInternalSelected] =
-    useState<UrpSelectOption[]>(initialValues);
+    useState<SelectOption[]>(initialValues);
   const [internalSelectedString, setInternalSelectedValue] = useState<string>(
     getSelectedStringValue(initialValues)
   );
@@ -63,8 +63,8 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
 
   function getSelectedOptions(
     values: string[],
-    options: UrpSelectOption[]
-  ): UrpSelectOption[] {
+    options: SelectOption[]
+  ): SelectOption[] {
     const ret = values
       .map((v) => options?.find((o) => (o.value || o.label) === v))
       .filter((v) => v)
@@ -72,17 +72,17 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
     return ret;
   }
 
-  function getSelectedStringValue(vals: UrpSelectOption[]) {
+  function getSelectedStringValue(vals: SelectOption[]) {
     if (!vals) {
-      return "";
+      return '';
     }
 
     const stringVals = vals.map((v) => v.label || v.value);
     stringVals.sort();
-    return stringVals.join(", ");
+    return stringVals.join(', ');
   }
 
-  function selectedIndex(option: UrpSelectOption) {
+  function selectedIndex(option: SelectOption) {
     for (let i = 0, max = internalSelected.length; i < max; i++) {
       const o = internalSelected[i];
       if ((o.value || o.label) === (option.value || option.label)) {
@@ -93,7 +93,7 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
     return -1;
   }
 
-  function isSelected(option: UrpSelectOption) {
+  function isSelected(option: SelectOption) {
     const ret = selectedIndex(option) !== -1;
     return ret;
   }
@@ -114,9 +114,9 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
     modal.current?.dismiss();
   }
 
-  function select(val: UrpSelectOption) {
+  function select(val: SelectOption) {
     // console.log('select', val);
-    let newSelected: UrpSelectOption[] = [];
+    let newSelected: SelectOption[] = [];
 
     if (!multiple) {
       newSelected.push(val);
@@ -149,25 +149,25 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
   return (
     <div
       className={
-        "nobo-select" +
-        (disabled ? " nobo-select-disabled" : "") +
-        (border ? " nobo-select-border" : "") +
-        (className ? " " + className : "")
+        'nobo-select' +
+        (disabled ? ' nobo-select-disabled' : '') +
+        (border ? ' nobo-select-border' : '') +
+        (className ? ' ' + className : '')
       }
     >
       <div className="nobo-select-container" onClick={(e) => open()}>
         <div
           className={
-            "nobo-select-label" +
-            (internalSelectedString ? "" : " nobo-select-label-empty")
+            'nobo-select-label' +
+            (internalSelectedString ? '' : ' nobo-select-label-empty')
           }
         >
           {internalSelectedString
             ? internalSelectedString
-            : placeholder || "Select Option"}
+            : placeholder || 'Select Option'}
         </div>
         <div className="nobo-select-chevron">
-          <IonIcon icon={chevronDownOutline}></IonIcon>
+          <img src="assets/images/arrow-down-filled.svg" alt="down" />
         </div>
       </div>
       <IonModal ref={modal} id="nobo-select-modal">
@@ -180,7 +180,7 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
                   button={true}
                   detail={false}
                   onClick={() => select(o)}
-                  className={isSelected(o) ? "nobo-select-selected" : ""}
+                  className={isSelected(o) ? 'nobo-select-selected' : ''}
                 >
                   <IonLabel>{o.label || o.value}</IonLabel>
                   <IonIcon icon={checkmarkOutline}></IonIcon>
@@ -198,7 +198,7 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
             </IonButton>
           </div>
         ) : (
-          ""
+          ''
         )}
         <div className="nobo-select-button-container">
           <IonButton
@@ -213,4 +213,4 @@ const UrpSelect: React.FC<UrpSelectProps> = ({
   );
 };
 
-export default UrpSelect;
+export default Select;

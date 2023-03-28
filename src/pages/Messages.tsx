@@ -16,7 +16,7 @@ import {
 } from '@ionic/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { searchOutline } from 'ionicons/icons';
-import './URP.css';
+import '../styles.scss';
 import './Messages.scss';
 import { Profile } from '../data/profile';
 // import UrpHeader from '../components/NoboHeader';

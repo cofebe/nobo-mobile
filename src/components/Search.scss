@@ -1,0 +1,31 @@
+.app-search-container {
+    position: relative;
+
+    ion-input {
+        font-size: 15px;
+        --background: #FEFCF7;
+        --padding-start: 40px;
+        --padding-end: 14px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        --placeholder-color: #ACACAC;
+        border-radius: 5px;
+        box-shadow: -5px -5px 10px 1px #FFFFFF, 5px 5px 10px 2px #F2EFE7;
+        border: 1px solid white;
+        width: 100%;
+
+        ::placeholder {
+            padding-left: 0;
+            padding-right: 0;
+            text-transform: uppercase;
+            color: #ACACAC;
+        }
+    }
+
+    img {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        z-index: 2;
+    }
+}

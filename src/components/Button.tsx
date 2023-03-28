@@ -3,7 +3,7 @@ import {
 } from '@ionic/react';
 import './Button.scss';
 
-interface ProfileFollowButtonProps {
+interface ButtonProps {
   label: string;
   type?: string;
   large?: boolean;
@@ -11,7 +11,7 @@ interface ProfileFollowButtonProps {
   onClick: (ev: any) => void;
 }
 
-const Button: React.FC<ProfileFollowButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   label,
   type = 'primary',
   large = false,

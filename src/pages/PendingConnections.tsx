@@ -14,7 +14,7 @@ import {
   useIonViewWillEnter,
 } from '@ionic/react';
 import { chevronBackOutline, searchOutline } from 'ionicons/icons';
-import './URP.css';
+import '../styles.scss';
 import './Connections.scss';
 import { ConnectionItem } from '../data/connection-list';
 import PendingConnectionListItem from '../components/PendingConnectionListItem';

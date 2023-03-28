@@ -1,12 +1,14 @@
 import { BaseService } from './BaseService';
 import {
+  Address,
+  Order,
   Product,
   ProductResponse,
   SuccessResponse,
   ShoppingCartResponse,
   TaxShippingResponse,
-  Address,
-  Order,
+  Trade,
+  BrandsResponse,
 } from '../models';
 
 export class ProductService extends BaseService {
@@ -63,6 +65,17 @@ export class ProductService extends BaseService {
     return json;
   }
 
+  async getFilteredProducts(ids: string[]) {
+    const params = new URLSearchParams({
+      filter: JSON.stringify({
+        _id: { $in: ids },
+      }),
+    });
+    const res = await super.fetch('GET', `/api/products/all?${params}`);
+    const json = await res.json();
+    return json;
+  }
+
   async addToCart(productId: string): Promise<boolean> {
     const res = await super.fetch('POST', '/api/orders/cart', {
       id: productId,
@@ -77,11 +90,19 @@ export class ProductService extends BaseService {
     return json.products;
   }
 
-  async getTaxAndShipping(address: Address): Promise<TaxShippingResponse> {
+  async getTaxAndShipping(
+    address: Address,
+    productOffered?: string,
+    productWanted?: string
+  ): Promise<TaxShippingResponse> {
     const res = await super.fetch(
       'POST',
-      '/api/orders/calculate-taxes-shipping',
-      { address }
+      `/api/${productOffered ? 'trades' : 'orders'}/calculate-taxes-shipping`,
+      {
+        address,
+        productOffered,
+        productWanted,
+      }
     );
     const json: TaxShippingResponse = await res.json();
     return json;
@@ -93,6 +114,36 @@ export class ProductService extends BaseService {
       source: paymentMethodId,
     });
     const json: Order = await res.json();
+    return json;
+  }
+
+  async createBuyOffer(productId: string, price: number): Promise<boolean> {
+    const res = await super.fetch('POST', '/api/offers/create-offer', {
+      productId: productId,
+      price: price,
+    });
+    const json = await res.json();
+    return json;
+  }
+
+  async createTradeOffer(
+    productWanted: Product,
+    productOffered: Product,
+    shippingAddress: Address,
+    paymentMethodId: string
+  ): Promise<Trade> {
+    const res = await super.fetch('POST', '/api/trades/create-offer', {
+      productWanted,
+      productOffered,
+      selectedShippingAddress: shippingAddress,
+      selectedPaymentMethod: paymentMethodId,
+    });
+    const json: Trade = await res.json();
+    return json;
+  }
+  async getBrands(): Promise<BrandsResponse> {
+    const res = await super.fetch('GET', '/api/brands/all');
+    const json: BrandsResponse = await res.json();
     return json;
   }
 }

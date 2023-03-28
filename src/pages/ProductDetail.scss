@@ -1,8 +1,4 @@
 .page-header {
-  background-color: #FEFCF7;
-  border-bottom: 1px solid black;
-  position: relative;
-
   .cart {
     position: absolute;
     right: 20px;
@@ -17,61 +13,85 @@
       position: absolute;
       top: -1px;
       right: -1px;
-      background-color: #D6980E;
+      background-color: #d6980e;
       height: 10px;
       width: 10px;
       border-radius: 5px;
     }
   }
-
-  .titles {
-    font-size: 12px;
-    margin: 40px 20px 14px;
-    position: relative;
-    text-align: center;
-    font-weight: 700;
-
-    .username {
-      color: #707070;
-    }
-
-    .title {
-      color: black;
-      margin-top: 4px;
-      text-transform: uppercase;
-    }
-
-    .back-arrow {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      height: 23px;
-      width: 23px;
-    }
-  }
 }
 
 .product-detail-page {
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   --padding-start: 20px;
   --padding-end: 20px;
   --padding-top: 10px;
 
+  .sneaker-cards-container {
+    padding-top: 10px;
+  }
+  .sneaker-size-card {
+    font-size: 8px;
+    background: rgb(217, 217, 217, 0.5);
+    height: 39px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    color: #c4c4c4;
+  }
+
+  .sneaker-card-active {
+    color: black;
+  }
+
+  .selected-sneakers-margin-top {
+    margin-top: 17px;
+  }
+
+  .selected-sneakers-container {
+    padding: 24px 0;
+    border-top: 1px solid black;
+  }
+
+  .selcted-sneakers-price {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .selected-sneakers-trade-price {
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .selected-sneakers-tags {
+    font-size: 9px;
+    font-weight: 400;
+  }
+
+  .selected-sneakers-view-details {
+    color: #d6980e;
+    text-decoration-line: underline;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: end;
+    letter-spacing: 0.1em;
+    padding-top: 3px;
+  }
+
   .product-details-card {
-    background: #FFFFFF;
-    box-shadow: 0px 0px 10px #EDEAE3;
+    background: #ffffff;
+    box-shadow: 0px 0px 10px #edeae3;
     border-radius: 5px;
     padding: 16px 11px 10px;
 
     .product-images-row {
-
       .product-images {
         .img {
           width: 66px;
           height: 75px;
           border-radius: 5px;
-          background-color: #D9D9D9;
+          //background-color: #d9d9d9;
           margin-left: auto;
           margin-right: auto;
           margin-top: 8px;
@@ -87,13 +107,13 @@
 
           &.disabled {
             ion-icon {
-              color: #EDEAE3;
+              color: #edeae3;
             }
           }
 
           &.enabled {
             ion-icon {
-              color: #D6980E;
+              color: #d6980e;
             }
           }
         }
@@ -104,7 +124,7 @@
           width: 175px;
           height: 200px;
           border-radius: 5px;
-          background-color: #D9D9D9;
+          //background-color: #d9d9d9;
           margin-left: auto;
           margin-right: auto;
           background-position: center;
@@ -143,7 +163,7 @@
 
       span {
         font-size: 9.5px;
-        color: #ACACAC;
+        color: #acacac;
         margin-right: 4px;
       }
     }
@@ -172,7 +192,7 @@
       display: flex;
       align-items: center;
       font-size: 10px;
-      color: #D6980E;
+      color: #d6980e;
       justify-content: flex-end;
       padding-right: 0;
 
@@ -201,7 +221,6 @@
     }
 
     .owner {
-
       .avatar {
         height: 20px;
         width: 20px;
@@ -235,80 +254,6 @@
     .value {
       font-size: 12px;
       text-align: right;
-    }
-  }
-}
-
-.trade-tooltip-container {
-
-  .trade-tooltip {
-    padding: 20px;
-
-    .header {
-      font-size: 20px;
-      font-family: Baskerville;
-      text-align: center;
-    }
-
-    .close {
-      ion-col {
-        text-align: center;
-        font-size: 10px;
-        color: #D6980E;
-        text-transform: uppercase;
-      }
-    }
-
-    .bullet {
-      margin-top: 20px;
-
-      .label {
-        font-size: 18px;
-        font-weight: 600;
-      }
-
-      .value {
-        font-size: 12px;
-
-        h1 {
-          margin: 0;
-          padding: 0;
-          margin-bottom: 8px;
-          font-size: 12px;
-          font-weight: 700;
-          text-transform: uppercase;
-        }
-
-        a {
-          color: black;
-          text-decoration: underline;
-        }
-      }
-    }
-
-    .table-container {
-
-      table {
-        font-size: 12px;
-        width: 100%;
-        margin-top: 10px;
-
-        td,
-        th {
-          text-align: center;
-          border: 1px solid black;
-          width: 50%;
-          padding: 10px;
-        }
-
-        th {
-          font-weight: 400;
-          text-transform: uppercase;
-        }
-
-        td {
-        }
-      }
     }
   }
 }
