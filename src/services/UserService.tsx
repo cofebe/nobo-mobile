@@ -64,6 +64,12 @@ export class UserService extends BaseService {
     return true;
   }
 
+  async deleteNotifications(noteIds: string[]) {
+    /*const res =*/ await super.fetch('POST', '/api/notifications/remove',
+      { noteIds });
+    return true;
+  }
+
   async getMyPendingProducts(productType: string, options: ProductSearchOptions = {}): Promise<ProductsResponse> {
     const authService = new AuthService();
     options.active = false;

@@ -2,16 +2,14 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonContent,
-  IonIcon,
+  IonPage,
+  IonList,
   IonItem,
   IonItemOption,
   IonItemOptions,
   IonItemSliding,
-  IonList,
-  IonPage,
   useIonViewWillEnter,
 } from '@ionic/react';
-import { trashOutline } from 'ionicons/icons';
 import './Notifications.scss';
 import Header from '../components/Header';
 import { UserService } from '../services/UserService';
@@ -26,13 +24,8 @@ const Notifications: React.FC = () => {
   useIonViewWillEnter(() => {
     userService.getNotifications().then(notifications => {
       console.log('notifications', notifications);
-      const unreadNotifications = notifications.filter(n => !n.readStatus);
-      setUnreadNotifications(unreadNotifications);
+      setUnreadNotifications(notifications.filter(n => !n.readStatus));
       setReadNotifications(notifications.filter(n => n.readStatus));
-
-      userService.markNotificationsAsRead(unreadNotifications.map(n => n._id)).then(() => {
-        console.log('marked as read:', unreadNotifications);
-      });
     });
   });
 
@@ -77,12 +70,14 @@ const Notifications: React.FC = () => {
 
   function remove(note: Notification) {
     console.log('remove', note);
-    if (note.readStatus) {
-      setReadNotifications(readNotifications.filter(n => n._id !== note._id));
-    } else {
-      setUnreadNotifications(unreadNotifications.filter(n => n._id !== note._id));
-    }
-    document.querySelector('ion-item-sliding')?.closeOpened();
+    userService.deleteNotifications([note._id]).then(() => {
+      if (note.readStatus) {
+        setReadNotifications(readNotifications.filter(n => n._id !== note._id));
+      } else {
+        setUnreadNotifications(unreadNotifications.filter(n => n._id !== note._id));
+      }
+      document.querySelector('ion-item-sliding')?.closeOpened();
+    });
   }
 
   return (
@@ -153,7 +148,7 @@ const Notifications: React.FC = () => {
                       e.stopPropagation();
                       remove(note);
                     }} className="remove-item">
-                      <IonIcon icon={trashOutline} />
+                      <img src="/assets/images/trashcan.png" alt="delete" />
                     </IonItemOption>
                   </IonItemOptions>
                 </IonItemSliding>
