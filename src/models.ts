@@ -143,7 +143,6 @@ export interface Product {
       id: number;
     }[];
     event: string;
-    __v: number;
   };
   _id: string;
   group: string;
@@ -164,7 +163,6 @@ export interface Product {
     memberSince: string;
     displayName: string;
     avatar: string;
-    __v: number;
     experiencePreferences: string;
     orders: number;
   };
@@ -385,7 +383,6 @@ export interface CategoryParent {
   parent: string | null;
   updatedAt: string;
   _id: string;
-  __v: number;
 }
 
 export interface BrandsResponse {
@@ -396,5 +393,18 @@ export interface Brand {
   _id: string;
   name: string;
   url: string;
-  __v: number;
+}
+
+export interface Notification {
+  createdAt: string;
+  image: string;
+  message: string;
+  nid: number;
+  readStatus: boolean;
+  updatedAt: string;
+  user: string;
+  other: {
+    userId: string;
+  };
+  _id: string;
 }

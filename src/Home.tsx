@@ -212,6 +212,9 @@ const Home: React.FC = () => {
           <Route exact path="/home/closet/sell/pending">
             <SellPendingCloset />
           </Route>
+          <Route exact path="/home/notifications">
+            <Notifications />
+          </Route>
 
           <Route exact path="/home/post-promote/:id">
             <PromotePost />
@@ -254,9 +257,6 @@ const Home: React.FC = () => {
           </Route>
           <Route exact path="/home/connections/pending">
             <PendingConnections />
-          </Route>
-          <Route exact path="/home/notifications">
-            <Notifications />
           </Route>
           <Route exact path="/home/watchlist">
             <Watchlist />

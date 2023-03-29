@@ -6,6 +6,7 @@ import {
   CreateShippingAddressResponse,
   FullOrder,
   LoginResponse,
+  Notification,
   OrderResponse,
   OrdersResponse,
   PaymentMethodsResponse,
@@ -49,6 +50,24 @@ export class UserService extends BaseService {
   async getMyProducts(productType: string, options?: ProductSearchOptions): Promise<ProductsResponse> {
     const authService = new AuthService();
     return this.getProducts(authService.getUserId(), productType, options);
+  }
+
+  async getNotifications(): Promise<Notification[]> {
+    const res = await super.fetch('GET', '/api/notifications/my');
+    const json: Notification[] = await res.json();
+    return json;
+  }
+
+  async markNotificationsAsRead(noteIds: string[]) {
+    /*const res =*/ await super.fetch('POST', '/api/notifications/update/status',
+      { noteIds });
+    return true;
+  }
+
+  async deleteNotifications(noteIds: string[]) {
+    /*const res =*/ await super.fetch('POST', '/api/notifications/remove',
+      { noteIds });
+    return true;
   }
 
   async getMyPendingProducts(productType: string, options: ProductSearchOptions = {}): Promise<ProductsResponse> {

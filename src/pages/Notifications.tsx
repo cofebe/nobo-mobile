@@ -1,49 +1,162 @@
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   IonContent,
   IonPage,
-  useIonViewWillEnter,
   IonList,
-  IonRow,
-  IonCol,
+  IonItem,
+  IonItemOption,
+  IonItemOptions,
+  IonItemSliding,
+  useIonViewWillEnter,
 } from '@ionic/react';
-import { useState } from 'react';
-// import "./Notifications.css";
-// import UrpHeader from '../components/NoboHeader';
-import { NotificationService } from '../services/NotificationService';
-import NotificationItem from '../components/NotificationItem';
-import { Notification } from '../data/notifications';
+import './Notifications.scss';
+import Header from '../components/Header';
+import { UserService } from '../services/UserService';
+import { Notification } from '../models';
 
 const Notifications: React.FC = () => {
-  const notificationService = new NotificationService();
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-
-  notificationService.resetNotifcationCount();
+  const history = useHistory();
+  const userService = new UserService();
+  const [unreadNotifications, setUnreadNotifications] = useState<Notification[]>([]);
+  const [readNotifications, setReadNotifications] = useState<Notification[]>([]);
 
   useIonViewWillEnter(() => {
-    // some initialization code
-    loadNotifications(0);
+    userService.getNotifications().then(notifications => {
+      console.log('notifications', notifications);
+      setUnreadNotifications(notifications.filter(n => !n.readStatus));
+      setReadNotifications(notifications.filter(n => n.readStatus));
+    });
   });
 
-  function loadNotifications(pg: number) {
-    let storage: any = window.localStorage.getItem('persistedState');
-    let user = JSON.parse(storage);
+  function getImage(note: Notification) {
+    return `url(${note.nid === 13 ? '/assets/images/smiley.svg' : note.image})`;
+  }
 
-    notificationService
-      .getNotifications(user.user['user_id'])
-      .then((res) => res.json())
-      .then((data) => {
-        setNotifications(data);
-      });
+  function getText(note: Notification) {
+    return note.message
+      .replace(/href="\/profile\/([^/]+)\/feed/, 'href="/home/profile/$1');
+  }
+
+  function getDate(note: Notification) {
+    const dt = new Date(note.createdAt);
+    const now = new Date();
+    const diff = now.getTime() - dt.getTime();
+    const seconds = Math.round(diff / 1000);
+    if (seconds < 60) {
+      return `${seconds}s`;
+    }
+
+    const minutes = Math.round(seconds / 60);
+    if (minutes < 60) {
+      return `${minutes}m`;
+    }
+
+    const hours = Math.round(minutes / 60);
+    if (hours < 24) {
+      return `${hours}h`;
+    }
+
+    const days = Math.round(hours / 24);
+    return `${days}d`;
+  }
+
+  function select(note: Notification) {
+    if (note.nid === 1) {
+      history.push('/home/messages');
+      return;
+    }
+  }
+
+  function remove(note: Notification) {
+    console.log('remove', note);
+    userService.deleteNotifications([note._id]).then(() => {
+      if (note.readStatus) {
+        setReadNotifications(readNotifications.filter(n => n._id !== note._id));
+      } else {
+        setUnreadNotifications(unreadNotifications.filter(n => n._id !== note._id));
+      }
+      document.querySelector('ion-item-sliding')?.closeOpened();
+    });
   }
 
   return (
-    <IonPage>
-      {/* <UrpHeader></UrpHeader> */}
-      <IonContent className="home-notifications-bg" scrollY={true}>
-        <IonList style={{ marginTop: '40px' }}>
-          {notifications.map((m) => {
-            return <NotificationItem notification={m}></NotificationItem>;
-          })}
+    <IonPage className="notifications-container">
+      <Header title="Notifications" showBackButton={false}>
+        <img src="assets/images/nobo_logo.png" className="logo" alt="logo" />
+      </Header>
+      <IonContent className="notifications-content">
+        <IonList>
+          <IonItem lines="none" className="header">
+            <div className="header">
+              Unread
+            </div>
+          </IonItem>
+          {unreadNotifications.length ? (
+            <>
+              {unreadNotifications.map((note, index) => (
+                <IonItemSliding className="notification-container" key={index}>
+                  <IonItem lines="none" onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    select(note);
+                  }}>
+                    <div className="notification">
+                      <div className="image" style={{ backgroundImage: getImage(note) }}></div>
+                      <div className="text" dangerouslySetInnerHTML={{ __html: getText(note) }}></div>
+                      <div className="date">{getDate(note)}</div>
+                    </div>
+                  </IonItem>
+                  <IonItemOptions>
+                    <IonItemOption expandable onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      remove(note);
+                    }} className="remove-item">
+                      <img src="/assets/images/trashcan.png" alt="delete" />
+                    </IonItemOption>
+                  </IonItemOptions>
+                </IonItemSliding>
+              ))}
+            </>
+          ) : (
+            <div className="no-items">Nothing to see here...</div>
+          )}
+          <IonItem lines="none" className="header">
+            <div className="header">
+              Read
+            </div>
+          </IonItem>
+          {readNotifications.length ? (
+            <>
+              {readNotifications.map((note, index) => (
+                <IonItemSliding className="notification-container" key={index}>
+                  <IonItem lines="none" onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    select(note);
+                  }}>
+                    <div className="notification">
+                      <div className="image" style={{ backgroundImage: getImage(note) }}></div>
+                      <div className="text" dangerouslySetInnerHTML={{ __html: getText(note) }}></div>
+                      <div className="date">{getDate(note)}</div>
+                    </div>
+                  </IonItem>
+                  <IonItemOptions>
+                    <IonItemOption expandable onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      remove(note);
+                    }} className="remove-item">
+                      <img src="/assets/images/trashcan.png" alt="delete" />
+                    </IonItemOption>
+                  </IonItemOptions>
+                </IonItemSliding>
+              ))}
+            </>
+          ) : (
+            <div className="no-items">Nothing to see here...</div>
+          )}
         </IonList>
       </IonContent>
     </IonPage>
