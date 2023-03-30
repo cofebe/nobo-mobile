@@ -14,6 +14,7 @@ import './Notifications.scss';
 import Header from '../components/Header';
 import { UserService } from '../services/UserService';
 import { Notification } from '../models';
+import { formatAge } from '../utils';
 
 const Notifications: React.FC = () => {
   const history = useHistory();
@@ -40,25 +41,7 @@ const Notifications: React.FC = () => {
 
   function getDate(note: Notification) {
     const dt = new Date(note.createdAt);
-    const now = new Date();
-    const diff = now.getTime() - dt.getTime();
-    const seconds = Math.round(diff / 1000);
-    if (seconds < 60) {
-      return `${seconds}s`;
-    }
-
-    const minutes = Math.round(seconds / 60);
-    if (minutes < 60) {
-      return `${minutes}m`;
-    }
-
-    const hours = Math.round(minutes / 60);
-    if (hours < 24) {
-      return `${hours}h`;
-    }
-
-    const days = Math.round(hours / 24);
-    return `${days}d`;
+    return formatAge(dt);
   }
 
   function select(note: Notification) {

@@ -35,7 +35,7 @@ import PostCreate from './pages/PostCreate';
 import Connections from './pages/Connections';
 import PendingConnections from './pages/PendingConnections';
 import Notifications from './pages/Notifications';
-import Messages from './pages/Messages';
+import Conversations from './pages/Conversations';
 import Watchlist from './pages/Watchlist';
 import ProfileInsights from './pages/ProfileInsights';
 import ProductDetail from './pages/ProductDetail';
@@ -215,6 +215,9 @@ const Home: React.FC = () => {
           <Route exact path="/home/notifications">
             <Notifications />
           </Route>
+          <Route exact path="/home/messages">
+            <Conversations />
+          </Route>
 
           <Route exact path="/home/post-promote/:id">
             <PromotePost />
@@ -248,9 +251,6 @@ const Home: React.FC = () => {
           </Route>
           <Route path="/home/roles">
             <Roles />
-          </Route>
-          <Route exact path="/home/messages">
-            <Messages />
           </Route>
           <Route exact path="/home/connections">
             <Connections />

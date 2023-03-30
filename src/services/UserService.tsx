@@ -3,6 +3,7 @@ import { environment } from '../environments/environment';
 import { AuthService } from './AuthService';
 import {
   AddressRequest,
+  Conversation,
   CreateShippingAddressResponse,
   FullOrder,
   LoginResponse,
@@ -68,6 +69,27 @@ export class UserService extends BaseService {
     /*const res =*/ await super.fetch('POST', '/api/notifications/remove',
       { noteIds });
     return true;
+  }
+
+  async getMyConversations(): Promise<Conversation[]> {
+    const res = await super.fetch('GET', '/api/messages/my-convos');
+    const json: Conversation[] = await res.json();
+    return json;
+  }
+
+  async getConversation(conversationId: string): Promise<Conversation|undefined> {
+    const res = await super.fetch('GET', '/api/messages/my-convos');
+    const json: Conversation[] = await res.json();
+    return json.find(c => c._id === conversationId);
+  }
+
+  async sendReply(convoId: string, message: string): Promise<Conversation> {
+    const res = await super.fetch('POST', '/api/messages/reply', {
+      convoId,
+      message,
+    });
+    const json: Conversation = await res.json();
+    return json;
   }
 
   async getMyPendingProducts(productType: string, options: ProductSearchOptions = {}): Promise<ProductsResponse> {

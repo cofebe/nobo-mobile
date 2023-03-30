@@ -434,3 +434,41 @@ export interface ItemShowIf {
   key: string;
   value: string;
 }
+
+export interface MessageUser {
+  avatar: string;
+  displayName: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  sellCloset: number;
+  tradeCloset: number;
+  _id: string;
+};
+
+export interface Message {
+  createdAt: string;
+  from: MessageUser;
+  message: string;
+  receiverDidRead: boolean;
+  updatedAt: string;
+  _id: string;
+
+  // these are extra for the code
+  previousUserId: string|undefined;
+  previousCreatedAt: Date|undefined;
+  newSection: boolean;
+  date: Date;
+}
+
+export interface Conversation {
+  createdAt: string;
+  inReferenceTo: string;
+  initiator: MessageUser;
+  messages: Message[];
+  order: any;
+  product: Product;
+  recipient: MessageUser;
+  updatedAt: string;
+  _id: string;
+}

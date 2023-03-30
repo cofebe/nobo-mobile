@@ -5,7 +5,7 @@ export function getImageUrl(url: string) {
   }
 
   if (!url.startsWith('http')) {
-    url = 'https://thenobo.codepilot.com' + url;
+    url = 'https://staging.thenobo.com' + url;
   }
 
   return `url(${url})`;
@@ -79,4 +79,30 @@ export function getMinTradeFee(price: number): number {
 
 export function getMaxTradeFee(price: number): number {
   return getTradeFee(price, getMaxTradeValue(price));
+}
+
+export function formatAge(dt: Date) {
+  if (!dt) {
+    return 'n/a';
+  }
+
+  const now = new Date();
+  const diff = now.getTime() - dt.getTime();
+  const seconds = Math.round(diff / 1000);
+  if (seconds < 60) {
+    return `${seconds}s`;
+  }
+
+  const minutes = Math.round(seconds / 60);
+  if (minutes < 60) {
+    return `${minutes}m`;
+  }
+
+  const hours = Math.round(minutes / 60);
+  if (hours < 24) {
+    return `${hours}h`;
+  }
+
+  const days = Math.round(hours / 24);
+  return `${days}d`;
 }
