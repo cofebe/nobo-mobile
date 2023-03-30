@@ -268,7 +268,13 @@ const Chat: React.FC = () => {
   return (
     <IonPage className="chat-page">
       <Header border={false} title="">
-        <div className="titles">
+        <div className="titles" onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (them) {
+            history.push(`/home/profile/${them._id}`);
+          }
+        }}>
           <IonAvatar>
             <img src={them?.avatar} alt="avatar" />
           </IonAvatar>
