@@ -139,7 +139,7 @@ const ListItem: React.FC = () => {
     switch (itemCategory) {
       case 'men':
         return menItems;
-      case 'woman':
+      case 'women':
         return womenItems;
       default:
         return [];
@@ -363,8 +363,8 @@ const ListItem: React.FC = () => {
                         value: 'men',
                       },
                       {
-                        label: 'Woman',
-                        value: 'woman',
+                        label: 'Women',
+                        value: 'women',
                       },
                       {
                         label: 'Sneakers',
