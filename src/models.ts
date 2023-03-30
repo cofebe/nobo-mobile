@@ -196,6 +196,11 @@ export interface ProductCategory {
   updatedAt: string;
 }
 
+export interface FileUploadResponse {
+  originalName: string;
+  url: string;
+}
+
 export interface ShoppingCartResponse {
   coupon: boolean;
   products: Product[];
@@ -407,4 +412,25 @@ export interface Notification {
     userId: string;
   };
   _id: string;
+}
+
+export interface ItemAttributes {
+  id: string;
+  type: string;
+  name: string;
+  hint?: string;
+  options?: (string | number)[];
+  required?: boolean;
+  visible: string[] | string;
+  hideIf?: ItemHideIf;
+  showIf?: ItemShowIf;
+}
+
+export interface ItemHideIf {
+  category: string[];
+}
+
+export interface ItemShowIf {
+  key: string;
+  value: string;
 }
