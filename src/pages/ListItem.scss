@@ -125,6 +125,28 @@
     opacity: 1;
   }
 
+  .trade-option-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .luxury-options-title {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+
+  .cancel-exit {
+    text-align: center;
+    color: #707070;
+    text-decoration: underline;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+    font-weight: 600;
+  }
+
   .footer {
     position: fixed;
     bottom: 0;
