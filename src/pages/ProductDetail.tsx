@@ -20,6 +20,7 @@ import { ProductResponse, Product } from '../models';
 import Button from '../components/Button';
 import OfferTradeModal from '../components/OfferTradeModal';
 import TradeHelpModal from '../components/TradeHelpModal';
+import SendMessageModal from '../components/SendMessageModal';
 import Header from '../components/Header';
 import {
   formatPrice,
@@ -64,6 +65,7 @@ const ProductDetail: React.FC = () => {
   const tooltipModal = useRef<HTMLIonModalElement>(null);
   const offerTradeModal = useRef<HTMLIonModalElement>(null);
   const offerModal = useRef<HTMLIonModalElement>(null);
+  const sendMessageModal = useRef<HTMLIonModalElement>(null);
 
   interface sneaekerSizeChart {
     size: string;
@@ -275,6 +277,7 @@ const ProductDetail: React.FC = () => {
 
   function message() {
     console.log('message');
+    sendMessageModal.current?.present();
   }
 
   function removeItem() {
@@ -1402,6 +1405,13 @@ const ProductDetail: React.FC = () => {
         ref={offerModal}
         onClose={() => {
           offerModal.current?.dismiss();
+        }}
+      />
+      <SendMessageModal
+        ref={sendMessageModal}
+        productId={params.id}
+        onClose={() => {
+          sendMessageModal.current?.dismiss();
         }}
       />
     </IonPage>

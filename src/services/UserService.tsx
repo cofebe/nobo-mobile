@@ -92,6 +92,17 @@ export class UserService extends BaseService {
     return json;
   }
 
+  async newConversation(orderId: string|null, productId: string|null, message: string): Promise<Conversation> {
+    const res = await super.fetch('POST', '/api/messages/new-conv', {
+      message,
+      orderId,
+      productId,
+      ref: (orderId ? 'order' : 'product'),
+    });
+    const json: Conversation = await res.json();
+    return json;
+  }
+
   async getMyPendingProducts(productType: string, options: ProductSearchOptions = {}): Promise<ProductsResponse> {
     const authService = new AuthService();
     options.active = false;
