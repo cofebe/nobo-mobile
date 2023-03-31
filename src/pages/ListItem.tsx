@@ -64,12 +64,35 @@ const ListItem: React.FC = () => {
   const [additionalConditionDetails, setAdditionalConditionDetails] = useState<
     string[]
   >([]);
+  const [tradeOptions, setTradeOptions] = useState<TradeOption[]>([
+    {
+      brand: '',
+      title: '',
+      description: '',
+    },
+    {
+      brand: '',
+      title: '',
+      description: '',
+    },
+    {
+      brand: '',
+      title: '',
+      description: '',
+    },
+  ]);
 
   const fileVals = useRef<InternalValues>({
     file: false,
   });
 
   const imageRef = useRef<HTMLInputElement>(null);
+
+  interface TradeOption {
+    brand: string;
+    title: string;
+    description: string;
+  }
 
   interface Option {
     label: string;
@@ -340,6 +363,13 @@ const ListItem: React.FC = () => {
                   </>
                 )}
                 {tradeSteps === 2 && <>Input your product details</>}
+                {tradeSteps === 3 && (
+                  <>
+                    Select potential trade items so we know what you’re looking
+                    for. These items must be within a 20% bandwidth of your
+                    product
+                  </>
+                )}
               </div>
             </IonCol>
           </IonRow>
@@ -577,6 +607,91 @@ const ListItem: React.FC = () => {
               </IonRow>
             </div>
           )}
+          {tradeSteps === 3 && (
+            <div className="padding-bottom-container">
+              {[...Array(3)].map((_, i) => (
+                <>
+                  <IonRow key={i} className="margin-bottom-5">
+                    {i === 0 ? (
+                      <>
+                        <IonCol className="trade-option-title" size="6">
+                          Trade Option {i + 1}
+                        </IonCol>
+                        <IonCol
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'flex-end',
+                          }}
+                          size="6"
+                        >
+                          <input type="checkbox" />
+                          <div
+                            style={{ marginLeft: 4 }}
+                            className="luxury-options-title"
+                          >
+                            Open to all luxury options
+                          </div>
+                        </IonCol>
+                      </>
+                    ) : (
+                      <IonCol className="trade-option-title">
+                        Trade Option {i + 1}
+                      </IonCol>
+                    )}
+                  </IonRow>
+                  <IonRow>
+                    <IonCol>
+                      <Select
+                        value={tradeOptions[i].brand}
+                        options={brands.map((b: Brand) => ({
+                          label: b.name,
+                          value: b.name,
+                        }))}
+                        placeholder="DESIGNER/BRAND"
+                        onChange={(e) => {
+                          setTradeOptions((prev) => {
+                            prev[i].brand = e?.length ? e[0] : '';
+                            return [...prev];
+                          });
+                        }}
+                      />
+                    </IonCol>
+                  </IonRow>
+                  <IonRow>
+                    <IonCol>
+                      <Input
+                        className="input-height"
+                        value={tradeOptions[i].title}
+                        placeholder="PRODUCT TITLE"
+                        onChange={(val) => {
+                          setTradeOptions((prev) => {
+                            prev[i].title = val;
+                            return [...prev];
+                          });
+                        }}
+                      />
+                    </IonCol>
+                  </IonRow>
+                  <IonRow>
+                    <IonCol>
+                      <Input
+                        className="input-height"
+                        value={tradeOptions[i].description}
+                        placeholder="DESCRIPTION"
+                        onChange={(val) => {
+                          setTradeOptions((prev) => {
+                            prev[i].description = val;
+                            return [...prev];
+                          });
+                        }}
+                      />
+                    </IonCol>
+                  </IonRow>
+                </>
+              ))}
+            </div>
+          )}
         </IonGrid>
       </IonContent>
       {tradeSteps === 1 && (
@@ -605,6 +720,19 @@ const ListItem: React.FC = () => {
               setTradeSteps(tradeSteps + 1);
             }}
           />
+        </div>
+      )}
+      {tradeSteps === 3 && (
+        <div className="footer footer-gradient">
+          <Button
+            label="Submit"
+            large={true}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+          />
+          <div className="cancel-exit">Cancel and Exit</div>
         </div>
       )}
     </IonPage>
