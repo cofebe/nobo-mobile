@@ -1,5 +1,5 @@
 .send-message-container {
-  --height: 275px;
+  --height: 250px;
   --backdrop-opacity: 0.1;
   --background: #FEFCF7;
   align-items: end;
@@ -9,61 +9,37 @@
     border-top-left-radius: 20px;
   }
 
-  ion-toolbar.send-message-header-toolbar {
-    padding: 0;
-
-    ion-item {
-      --background: #FEFCF7;
-
-      .send-message-btn,
-      .cancel-btn {
-        text-transform: uppercase;
-        font-size: 12px;
-      }
-
-      .send-message-btn {
-        opacity: 1;
-        --color: #D6980E;
-        --background-activated: none;
-        font-weight: 600;
-
-        &[disabled=""] {
-          --color: #ACACAC;
-        }
-      }
-
-      .cancel-btn {
-        color: #707070 !important;
-        --background: none;
-        --color: #707070;
-        --background-activated: none;
-      }
-    }
-  }
-
   .send-message-content {
     --background: #FEFCF7;
+    --padding-top: 20px;
 
-    .post-input-area {
+    .post-input-text {
+      width: 100%;
+      padding: 0 20px;
+
+      .send-message-text {
+        --padding-start: 10px;
+        --padding-end: 10px;
+        --padding-top: 10px;
+        --padding-bottom: 10px;
+        font-size: 15px;
+        --placeholder-color: #ACACAC;
+
+      }
+    }
+
+    .buttons {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       margin: 0 20px;
-      --padding-start: 0;
-      --padding-end: 0;
-      --inner-padding-start: 0;
-      --inner-padding-end: 0;
 
-      .post-input-text {
-        width: 100%;
+      .left {
+        text-align: left;
+      }
 
-        .send-message-text {
-          --padding-start: 10px;
-          --padding-end: 10px;
-          --padding-top: 10px;
-          --padding-bottom: 10px;
-
-          &::placeholder {
-            color: #ACACAC;
-          }
-        }
+      .right {
+        text-align: right;
       }
     }
   }

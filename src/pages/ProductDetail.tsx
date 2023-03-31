@@ -1410,6 +1410,9 @@ const ProductDetail: React.FC = () => {
       <SendMessageModal
         ref={sendMessageModal}
         productId={params.id}
+        onCancel={() => {
+          sendMessageModal.current?.dismiss();
+        }}
         onClose={() => {
           sendMessageModal.current?.dismiss();
         }}

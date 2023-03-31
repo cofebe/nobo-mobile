@@ -1,18 +1,14 @@
 import { useState, forwardRef } from 'react';
 import {
   IonContent,
-  IonHeader,
-  IonGrid,
-  IonRow,
-  IonCol,
   IonItem,
   IonButton,
   IonTextarea,
-  IonToolbar,
   IonModal,
 } from '@ionic/react';
 import './SendMessageModal.scss';
-import { UserService } from "../services/UserService";
+import { UserService } from '../services/UserService';
+import Button from './Button';
 
 export interface SendMessageModalProps {
   orderId?: string;
@@ -47,63 +43,44 @@ const SendMessageModal = forwardRef<Ref, SendMessageModalProps>(({ orderId, prod
 
   return (
     <IonModal className="send-message-container" ref={ref} backdropDismiss={true} swipeToClose={true}>
-      <IonHeader className="send-message-header">
-        <IonToolbar className="send-message-header-toolbar">
-          <IonGrid style={{ backgroundColor: "white" }}>
-            <IonRow>
-              <IonCol size="12">
-                <IonItem lines="none">
-                  <IonButton
-                    buttonType=""
-                    color="#9BC9C1"
-                    fill="clear"
-                    className="cancel-btn"
-                    size="large"
-                    slot="start"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      if (onCancel) {
-                        onCancel();
-                      }
-                    }}
-                  >
-                    Cancel
-                  </IonButton>
-                  <IonButton
-                    buttonType=""
-                    className="send-message-btn"
-                    size="large"
-                    disabled={!validate()}
-                    slot="end"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      send();
-                    }}
-                  >
-                    Send
-                  </IonButton>
-                </IonItem>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </IonToolbar>
-      </IonHeader>
       <IonContent className="send-message-content" scrollY={false}>
-        <IonItem className="post-input-area">
-          <div className="post-input-text">
-            <IonTextarea
-              className="send-message-text"
-              value={data}
-              autocapitalize="on sentence"
-              spellcheck={true}
-              onIonChange={(e) => setData(e.detail.value!)}
-              placeholder="Write a message..."
-              maxlength={350}
-              autoGrow={true}
-              rows={5}
-            ></IonTextarea>
+        <div className="post-input-text">
+          <IonTextarea
+            className="send-message-text"
+            value={data}
+            autocapitalize="on sentence"
+            spellcheck={true}
+            onIonChange={(e) => setData(e.detail.value!)}
+            placeholder="WRITE A MESSAGE..."
+            maxlength={350}
+            autoGrow={true}
+            rows={5}
+          ></IonTextarea>
+        </div>
+        <div className="buttons">
+          <div className="left">
+            <Button
+              label="Cancel"
+              type="transparent"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onCancel) {
+                  onCancel();
+                }
+              }}
+            />
           </div>
-        </IonItem>
+          <div className="right">
+            <Button
+              label="Send"
+              disabled={!validate()}
+              onClick={(e) => {
+                e.preventDefault();
+                send();
+              }}
+            />
+          </div>
+        </div>
       </IonContent>
     </IonModal>
   );
