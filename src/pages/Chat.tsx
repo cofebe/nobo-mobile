@@ -292,7 +292,11 @@ const Chat: React.FC = () => {
               </div>
             )}
             {index === 0 && product && (
-              <IonGrid className="product-details-card">
+              <IonGrid className="product-details-card" onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                history.push(`/home/product/${product._id}`);
+              }}>
                 <IonRow className="product-images-row">
                   <IonCol size="3" className="product-images">
                     <div
