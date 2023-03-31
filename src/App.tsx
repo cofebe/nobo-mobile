@@ -189,6 +189,9 @@ const App: React.FC = () => {
             <Route path="/chat/:id" exact={true}>
               <Chat />
             </Route>
+            <Route path="/settings" exact={true}>
+              <Settings />
+            </Route>
 
             {/* URP */}
             <Route path="/signup" exact={true}>
@@ -214,9 +217,6 @@ const App: React.FC = () => {
             </Route>
             <Route path="/terms-and-conditions" exact={true}>
               <TermsAndConditions />
-            </Route>
-            <Route path="/settings" exact={true}>
-              <Settings />
             </Route>
             <Route path="/manage-subscription" exact={true}>
               <ManageSubscription />

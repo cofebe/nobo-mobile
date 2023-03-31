@@ -102,7 +102,11 @@ const NoboExploreHeader: React.FC = () => {
         <IonGrid>
           <IonRow class="ion-align-items-center">
             <IonCol size="3">
-              <div>
+              <div onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                history.push('/settings');
+              }}>
                 <img
                   // className="splash-logo"
                   height={24}
