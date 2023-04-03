@@ -45,4 +45,11 @@ ion-button.app-button {
         --padding-top: 14px;
         --padding-bottom: 14px;
     }
+
+    &.transparent {
+        --background: transparent;
+        --box-shadow: none;
+        --border-width: 0;
+        --color: #707070;
+    }
 }

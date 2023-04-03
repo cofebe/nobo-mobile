@@ -4,6 +4,7 @@ import {
 import './Button.scss';
 
 interface ButtonProps {
+  className?: string;
   label: string;
   type?: string;
   large?: boolean;
@@ -12,6 +13,7 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({
+  className,
   label,
   type = 'primary',
   large = false,
@@ -19,10 +21,24 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
 }) => {
 
+  function getClassName() {
+    const classNames = ['app-button'];
+    if (type) {
+      classNames.push(type);
+    }
+    if (large) {
+      classNames.push('large');
+    }
+    if (className) {
+      classNames.push(className);
+    }
+    return classNames.join(' ');
+  }
+
   return (
     <IonButton
       onClick={(e) => onClick(e)}
-      className={'app-button ' + type + ' ' + (large ? 'large' : '')}
+      className={getClassName()}
       disabled={disabled}
     >
       {label}

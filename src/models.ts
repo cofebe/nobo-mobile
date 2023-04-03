@@ -196,6 +196,11 @@ export interface ProductCategory {
   updatedAt: string;
 }
 
+export interface FileUploadResponse {
+  originalName: string;
+  url: string;
+}
+
 export interface ShoppingCartResponse {
   coupon: boolean;
   products: Product[];
@@ -406,5 +411,64 @@ export interface Notification {
   other: {
     userId: string;
   };
+  _id: string;
+}
+
+export interface ItemAttributes {
+  id: string;
+  type: string;
+  name: string;
+  hint?: string;
+  options?: (string | number)[];
+  required?: boolean;
+  visible: string[] | string;
+  hideIf?: ItemHideIf;
+  showIf?: ItemShowIf;
+}
+
+export interface ItemHideIf {
+  category: string[];
+}
+
+export interface ItemShowIf {
+  key: string;
+  value: string;
+}
+
+export interface MessageUser {
+  avatar: string;
+  displayName: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  sellCloset: number;
+  tradeCloset: number;
+  _id: string;
+};
+
+export interface Message {
+  createdAt: string;
+  from: MessageUser;
+  message: string;
+  receiverDidRead: boolean;
+  updatedAt: string;
+  _id: string;
+
+  // these are extra for the code
+  previousUserId: string|undefined;
+  previousCreatedAt: Date|undefined;
+  newSection: boolean;
+  date: Date;
+}
+
+export interface Conversation {
+  createdAt: string;
+  inReferenceTo: string;
+  initiator: MessageUser;
+  messages: Message[];
+  order: any;
+  product: Product;
+  recipient: MessageUser;
+  updatedAt: string;
   _id: string;
 }

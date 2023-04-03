@@ -138,6 +138,12 @@ const App: React.FC = () => {
       <IonApp>
         <IonReactRouter>
           <IonRouterOutlet>
+            <Route path="/home/" exact={false}>
+              <Home />
+            </Route>
+            <Route path="/" exact={true}>
+              <Splash />
+            </Route>
             <Route path="/get-started" exact={true}>
               <GetStarted />
             </Route>
@@ -180,6 +186,14 @@ const App: React.FC = () => {
             <Route exact path="/list-item/trade">
               <ListItem />
             </Route>
+            <Route path="/chat/:id" exact={true}>
+              <Chat />
+            </Route>
+            <Route path="/settings" exact={true}>
+              <Settings />
+            </Route>
+
+            {/* URP */}
             <Route path="/signup" exact={true}>
               <SignUp />
             </Route>
@@ -204,26 +218,14 @@ const App: React.FC = () => {
             <Route path="/terms-and-conditions" exact={true}>
               <TermsAndConditions />
             </Route>
-            <Route path="/settings" exact={true}>
-              <Settings />
-            </Route>
             <Route path="/manage-subscription" exact={true}>
               <ManageSubscription />
             </Route>
             <Route path="/filter-search" exact={true}>
               <FilterSearch />
             </Route>
-            <Route path="/chat/:id" exact={true}>
-              <Chat />
-            </Route>
-            <Route path="/home/" exact={false}>
-              <Home />
-            </Route>
             <Route path="/primary-sport" exact={true}>
               <PrimarySport />
-            </Route>
-            <Route path="/" exact={true}>
-              <Splash />
             </Route>
           </IonRouterOutlet>
         </IonReactRouter>

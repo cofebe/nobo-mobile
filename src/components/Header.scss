@@ -4,6 +4,10 @@
   position: relative;
   height: 94px;
 
+  &.no-border {
+    border-bottom-color: transparent;
+  }
+
   //.cart {
   //  position: absolute;
   //  right: 20px;

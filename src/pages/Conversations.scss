@@ -1,0 +1,94 @@
+.messaging-page {
+
+  .messaging-content {
+    --background: #fefcf7;
+
+    .messaging-item {
+      --padding-start: 0;
+      --inner-padding-start: 20px;
+      --inner-padding-end: 20px;
+      --background: #fefcf7;
+      font-size: 10px;
+
+      ion-row {
+        width: 100%;
+        margin-top: 14px;
+
+        ion-col {
+          position: relative;
+          display: flex;
+          align-items: center;
+          //padding-top: 8px;
+          //padding-bottom: 8px;
+
+          ion-avatar {
+            height: 32px;
+            width: 32px;
+          }
+
+          .name-text-date-unread {
+            flex: 1;
+            margin-left: 16px;
+
+            .name-unread {
+              display: flex;
+              align-items: center;
+              margin-bottom: 1px;
+              max-width: calc(100vw - 20px - 32px - 16px - 20px - 12px);
+
+              .name {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                flex: 1;
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+              }
+
+              .unread {
+                margin-left: 16px;
+
+                .unread-dot {
+                  background-color: #D6980E;
+                  height: 8px;
+                  width: 8px;
+                  border-radius: 4px;
+                }
+              }
+            }
+
+            .text-date {
+              display: flex;
+              align-items: center;
+              max-width: calc(100vw - 20px - 32px - 16px - 20px - 12px);
+
+              .text {
+                font-size: 10px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                flex: 1;
+
+                &.unread {
+                  font-weight: 700;
+                }
+              }
+
+              .date {
+                color: #D6D6D6;
+                font-size: 10px;
+                margin-left: 8px;
+
+                &:before {
+                  content: '\2022';
+                  margin-right: 4px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

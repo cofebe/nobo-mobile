@@ -8,18 +8,20 @@ interface HeaderProps {
   showBackButton?: boolean;
   title: string;
   subtitle?: string;
+  border?: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({
   showBackButton = true,
   title,
   subtitle,
+  border = true,
   children,
 }) => {
   const history = useHistory();
 
   return (
-    <IonHeader className="page-header">
+    <IonHeader className={'page-header ' + (border ? '' : 'no-border')}>
       {showBackButton && (
         <img
           src="assets/images/arrow-left.svg"
