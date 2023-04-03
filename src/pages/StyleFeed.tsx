@@ -108,7 +108,7 @@ const StyleFeed: React.FC = () => {
       return;
     }
     let myUserId = authService.getUserId();
-    myUserId = "61e9e3cde9d5a06abb991653"
+    // myUserId = "61e9e3cde9d5a06abb991653"
 
     page = pg;
     setPage(page);
@@ -156,60 +156,6 @@ const StyleFeed: React.FC = () => {
         isLoading = false;
         setIsLoading(isLoading);
         dismissLoading();
-      });
-
-    userService
-      .getProfile(myUserId || "")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('Profile: ', data);
-        state = data.basic_user_profile.state
-          ? data.basic_user_profile.state.String.replace(/"/g, '')
-          : '';
-        sport = data.athlete_user_profile.primary_sport
-          ? data.athlete_user_profile.primary_sport.String
-          : '';
-
-        let userType = user.user['user_type'];
-        userType = userType?.charAt(0).toUpperCase() + userType?.slice(1);
-        let req = {
-          user_id: user.user['user_id'],
-          account_type: userType ? [userType] : ['Athlete'],
-          search: '',
-          state: [state],
-          school: [''],
-          country: [''],
-          sport: [sport],
-          position: [''],
-          class: [''],
-          rank: [''],
-          awards: [''],
-        };
-
-        exploreService
-          .search(req, 1)
-          .then((res) => {
-            if (res) {
-              return res.json();
-            } else {
-              // showError(1)
-            }
-          })
-          .then((data) => {
-            console.log('here', data);
-
-            data.users = data.users?.slice(0, 5);
-
-            profileMessages = profileMessages.concat(data.users || []);
-
-            setProfileMessages(profileMessages);
-          })
-          .catch((err) => {
-            console.error('Error:', err);
-          });
-      })
-      .catch((err) => {
-        console.error('Error:', err);
       });
   }
 

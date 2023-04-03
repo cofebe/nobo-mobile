@@ -52,16 +52,8 @@ export class FeedService extends BaseService {
         return response;
     }
 
-    async post(data = {}, userID: any) {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-        return response;
+    async post(data = {}) {
+        return await super.fetch('POST', `api/feed/create-item`, data)
     }
 
     async removePost(postID: any) {
@@ -74,7 +66,7 @@ export class FeedService extends BaseService {
     }
 
     async likeComment(data: any) {
-        return await super.fetch('POST', `api/like/comment`, data);
+        return await super.fetch('POST', `api/feed/like/comment`, data);
     }
 
     async likePost(data: any) {
@@ -97,6 +89,13 @@ export class FeedService extends BaseService {
             body: JSON.stringify({})
         });
         return response;
+    }
+
+    async uploadImage(data: any) {
+        return await super.fetch(
+            'POST',
+            API_URL + 'api/files/upload',
+            data)
     }
 
     async comment(data = {}) {

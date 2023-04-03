@@ -61,10 +61,11 @@ interface Comment {
 }
 
 const PostDetail: React.FC = () => {
+  console.log("PostDetail");
   const authService = new AuthService();
   const feedService = new FeedService();
   const history = useHistory();
-  let [postId, setPostId] = useState<string>(getPostId());
+  const [postId, setPostId] = useState<string>(getPostId());
   const [message, setMessage] = useState<FeedItem>();
   const [comments, setComments] = useState<Comment[]>([]);
   const [imageZoom, setImageZoom] = useState("");
@@ -85,16 +86,16 @@ const PostDetail: React.FC = () => {
 
     let userID = authService.getUserId();
 
-    postId = getPostId();
-    setPostId(postId);
+    // postId = getPostId();
+    // setPostId(postId);
     setImageZoom('');
 
-    console.log("feedService.getPost(): ", userID, postId)
+    console.log("feedService.getPost(): ", userID, getPostId())
     feedService
       .getProfileFeed(userID || "")
       .then(res => res.json())
       .then(data => {
-        const filteredFeed = data.feed.feed.filter((item: FeedItem, index: number) => item._id === postId);
+        const filteredFeed = data.feed.feed.filter((item: FeedItem, index: number) => item._id === getPostId());
         if (filteredFeed && filteredFeed.length !== 0) {
           setMessage(filteredFeed[0]);
         }
@@ -112,6 +113,7 @@ const PostDetail: React.FC = () => {
   }
 
   function getPostId() {
+    console.log("getPostId: ", history.location.pathname.substring(history.location.pathname.lastIndexOf('/') + 1))
     let postid = history.location.pathname.substring(history.location.pathname.lastIndexOf('/') + 1)
     return postid
   }
@@ -199,7 +201,7 @@ const PostDetail: React.FC = () => {
             }} />
           </IonList>
           {message.comments.map(c => (
-            <PostComment message={c} comment={c} key={c.comment_id} />
+            <PostComment message={message} comment={c} key={c.comment_id} />
           ))}
         </IonContent>
       ) : ''}

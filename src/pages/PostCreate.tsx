@@ -22,6 +22,7 @@ import {
   IonSearchbar,
 } from '@ionic/react';
 import './PostCreate.css';
+import { AuthService } from '../services/AuthService';
 import { FeedService } from '../services/FeedService';
 import { UserService } from '../services/UserService';
 import { OverlayEventDetail } from '@ionic/core/components';
@@ -35,7 +36,6 @@ interface InternalValues {
 }
 
 const publicKey = environment?.videoLibraryPublicKey || 'public_pqTTDCXhzT8ZmQ4RFQUCQYkKY0s=';
-const authenticationEndpoint = environment?.videoAuthenticationEndpoint || 'https://api.noboplus.com/auth/video';
 const urlEndpoint = environment?.videoUrlEndpoint || 'https://ik.imagekit.io/nobovideo/';
 
 const PostCreate: React.FC = () => {
@@ -45,10 +45,12 @@ const PostCreate: React.FC = () => {
   const [highlightLinkValid, setHighlightLinkValid] = useState<boolean>(true);
   const validUrlRegex =
     /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+  const authService = new AuthService();
   const feedService = new FeedService();
   const userService = new UserService();
   const history = useHistory();
   const [postImages, setPostImages] = useState('');
+  const [postImageName, setPostImageName] = useState('');
   const postImgeFileUploadRef = useRef(null);
   let [isLoading, setIsLoading] = useState<boolean>(false);
   const [presentLoading, dismissLoading] = useIonLoading();
@@ -130,14 +132,16 @@ const PostCreate: React.FC = () => {
     let user = JSON.parse(storage);
 
     setUserId(user.user['user_id']);
+    console.log(user)
+
 
     userService
-      .getProfile(user.user['user_id'])
+      .getProfile(authService.getUserId())
       .then((res) => res.json())
       .then((data) => {
+        console.log("Getprofile: ", data['user']['avatar'])
         setProfilePic(
-          data.basic_user_profile.profile_image?.String ||
-          `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/pictures/${userId}/profile.jpeg?fail`
+          data['user']['avatar']
         );
       });
   });
@@ -170,7 +174,6 @@ const PostCreate: React.FC = () => {
   }
 
   function post() {
-    console.log('Posting!!!');
     let storage: any = window.localStorage.getItem('persistedState');
     let user = JSON.parse(storage);
 
@@ -184,23 +187,31 @@ const PostCreate: React.FC = () => {
     } catch (exPhotoUrlStringSetting) {
       console.log('error building photo array');
     }
+
+    let userImage = null;
+
+    if (postImages !== "") {
+      userImage = {
+        originalName: postImageName,
+        url: postImages
+      }
+    }
+
     let req = {
-      user_id: user.user['user_id'],
-      Data: data,
-      photo_url: photoUrlString,
-      video_url: highlightLink ? embedLink(highlightLink) : '',
-      location: selected,
-    };
+      "userMessage": data,
+      "userImage": userImage
+    }
+
     console.log('Post: ', req);
     presentLoading(loadingOptions);
     isLoading = true;
     setIsLoading(isLoading);
     feedService
-      .post(req, user.user['user_id'])
+      .post(req)
       .then((res) => res.json())
       .then((data) => {
         console.log('Feed: ', data);
-        history.push('/home');
+        history.push('/home/style-feed');
         setData('');
         isLoading = false;
         setIsLoading(isLoading);
@@ -215,22 +226,19 @@ const PostCreate: React.FC = () => {
 
   const formData = new FormData();
   const onPostImageFileChange = async (fileChangeEvent: any) => {
-    // let storage: any = window.localStorage.getItem("persistedState");
-    // let user = JSON.parse(storage);
+    let file = fileChangeEvent.target.files;
+
+    let obj = new FormData();
+    obj.append("file", file[0]);
 
     postImgeFileUploadVals.current.file = fileChangeEvent.target.files[0];
-    formData.append(
-      'file',
-      postImgeFileUploadVals?.current.file,
-      postImgeFileUploadVals?.current.file.name
-    );
-
-    const response = await fetch(`${environment.serverUrl}/upload/${userId}/post`, {
-      method: 'POST',
-      body: formData,
-    });
+    const response = await feedService.uploadImage(obj)
 
     const returnValues = await response.json();
+
+    setPostImages(returnValues['url']);
+    setPostImageName(postImgeFileUploadVals?.current.file.name);
+
     try {
       let curPostImages = postImages.split(',').map((cpi) => {
         return cpi.trim();
@@ -303,10 +311,10 @@ const PostCreate: React.FC = () => {
     <IonPage className="post-create">
       <IonHeader className="post-header">
         <IonToolbar className="post-header-toolbar">
-          <IonGrid style={{ backgroundColor: 'white' }}>
+          <IonGrid>
             <IonRow>
               <IonCol size="12">
-                <IonItem lines="none">
+                <IonItem className="post-header-item" lines="none">
                   <IonButton
                     buttonType=""
                     color="#D6980E"
@@ -322,7 +330,6 @@ const PostCreate: React.FC = () => {
                     Cancel
                   </IonButton>
                   <IonButton
-                   style={{'--background': '#D6980E'}}
                     buttonType=""
                     className="post-btn"
                     size="large"
@@ -344,8 +351,8 @@ const PostCreate: React.FC = () => {
       <IonContent className="post-content" fullscreen>
         <IonGrid className="post-grid">
           <IonRow>
-            <IonCol size="12">
-              <IonItem className="nobo-post-input-area">
+            <IonCol size="12" className="nobo-post-container">
+              <IonItem className="nobo-post-input-area" lines="none">
                 <div className="nobo-post-input-text">
                   <IonTextarea
                     className="post-text"
@@ -353,7 +360,7 @@ const PostCreate: React.FC = () => {
                     autocapitalize="on sentence"
                     spellcheck={true}
                     onIonChange={(e) => setData(e.detail.value!)}
-                    placeholder="Write a post..."
+                    placeholder="Share a post..."
                     maxlength={350}
                     autoGrow={true}
                     rows={5}
@@ -371,40 +378,42 @@ const PostCreate: React.FC = () => {
                       </div>
                     </span>
                   )}
-                  <div style={{ display: 'flex' }}>
-                    <div style={{ padding: '8px 0', fontSize: '12px' }}>
-                      {selected}
-                    </div>
-                    <div className="post-input-count">
-                      {data ? data.length : 0}/{350}
-                    </div>
-                    <svg  style={{ alignSelf: 'right' }} width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g filter="url(#filter0_d_412_9992)">
-                      <circle cx="22" cy="22" r="18" fill="white"/>
-                      <path d="M27.8928 28.489L21.8178 19.3015C21.6936 19.1136 21.4797 19 21.25 19C21.0203 19 20.8064 19.1136 20.6822 19.3015L14.6072 28.489C14.5417 28.5881 14.5048 28.7026 14.5004 28.8204C14.4961 28.9381 14.5245 29.0549 14.5825 29.1583C14.6407 29.2618 14.7263 29.3481 14.8306 29.4082C14.9349 29.4683 15.0538 29.5 15.1751 29.5H27.3249C27.5719 29.5 27.7991 29.369 27.9175 29.1581C27.9755 29.0547 28.0039 28.938 27.9996 28.8203C27.9952 28.7025 27.9583 28.5881 27.8928 28.489ZM21.25 19.6562L23.4197 22.9375H21.1104L19.9 24.1142L18.9268 23.1699L21.25 19.6562ZM15.1751 28.8438L18.554 23.7334L19.9 25.042L21.3896 23.5938H23.8534L27.3249 28.8438H15.1751Z" fill="#D6980E"/>
-                      <rect x="13.25" y="14.75" width="16" height="14.5" rx="1.75" stroke="#D6980E" stroke-width="0.5"/>
-                      </g>
-                      <defs>
-                      <filter id="filter0_d_412_9992" x="0" y="0" width="44" height="44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                      <feOffset/>
-                      <feGaussianBlur stdDeviation="2"/>
-                      <feComposite in2="hardAlpha" operator="out"/>
-                      <feColorMatrix type="matrix" values="0 0 0 0 0.439216 0 0 0 0 0.439216 0 0 0 0 0.439216 0 0 0 0.15 0"/>
-                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_412_9992"/>
-                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_412_9992" result="shape"/>
-                      </filter>
-                      </defs>
-                    </svg>
-                  </div>
                 </div>
                 <img
                   className="post-create-bubble"
                   src={profilePic}
                   alt="avatar"
                 ></img>
-                <div className="nobo-post-tool-menu" style={{ right: '30px' }}>
+              </IonItem>
+            </IonCol>
+            <IonCol size="12">
+              <div style={{ display: 'flex' }}>
+                <div style={{ padding: '8px 0', fontSize: '12px' }}>
+                  {selected}
+                </div>
+                <div className="post-input-count">
+                  {data ? data.length : 0}/{350}
+                </div>
+                <div className="nobo-post-tool-menu" style={{ paddingTop: '10px', right: '40px' }}>
+                  <svg  className="nobo-post-tool-menu" style={{ alignSelf: 'right' }} width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_d_412_9992)">
+                    <circle cx="22" cy="22" r="18" fill="white"/>
+                    <path d="M27.8928 28.489L21.8178 19.3015C21.6936 19.1136 21.4797 19 21.25 19C21.0203 19 20.8064 19.1136 20.6822 19.3015L14.6072 28.489C14.5417 28.5881 14.5048 28.7026 14.5004 28.8204C14.4961 28.9381 14.5245 29.0549 14.5825 29.1583C14.6407 29.2618 14.7263 29.3481 14.8306 29.4082C14.9349 29.4683 15.0538 29.5 15.1751 29.5H27.3249C27.5719 29.5 27.7991 29.369 27.9175 29.1581C27.9755 29.0547 28.0039 28.938 27.9996 28.8203C27.9952 28.7025 27.9583 28.5881 27.8928 28.489ZM21.25 19.6562L23.4197 22.9375H21.1104L19.9 24.1142L18.9268 23.1699L21.25 19.6562ZM15.1751 28.8438L18.554 23.7334L19.9 25.042L21.3896 23.5938H23.8534L27.3249 28.8438H15.1751Z" fill="#D6980E"/>
+                    <rect x="13.25" y="14.75" width="16" height="14.5" rx="1.75" stroke="#D6980E" stroke-width="0.5"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_412_9992" x="0" y="0" width="44" height="44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset/>
+                    <feGaussianBlur stdDeviation="2"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.439216 0 0 0 0 0.439216 0 0 0 0 0.439216 0 0 0 0.15 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_412_9992"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_412_9992" result="shape"/>
+                    </filter>
+                    </defs>
+                  </svg>
                   <input
                     type="file"
                     ref={postImgeFileUploadRef}
@@ -413,76 +422,13 @@ const PostCreate: React.FC = () => {
                     accept="image/*"
                   ></input>
                 </div>
-              </IonItem>
-              <IonGrid id="open-modal" className="nobo-add-location-grid">
-        </IonGrid>
+              </div>
             </IonCol>
           </IonRow>
           {showVideoLink && (
             <IonRow>
               <IonCol>
                 <>
-
-                  {/* <span
-                    className="nobo-optional"
-                    style={{
-                      color: '#d6d6d6',
-                      paddingLeft: '0.5rem',
-                    }}
-                  >
-                    <p>
-                      Highlight link should be a Youtube or Hudl URL, or you can upload using the "Upload" button below. Please
-                      verify your video displays correctly in the preview window
-                      which should appear below after you provide a link.
-                    </p>
-                  </span> */}
-{/*                  {!uploadVideoMode &&
-                    <div className='nobo-video-upload-button'>
-                      Upload Video
-                      <IKContext
-                        publicKey={publicKey}
-                        urlEndpoint={urlEndpoint}
-                        authenticationEndpoint={authenticationEndpoint}
-                      ></IKContext>
-                      <IKUpload
-                        className="nobo-video-file-uploader-control"
-                        publicKey={publicKey}
-                        authenticationEndpoint={authenticationEndpoint}
-                        urlEndpoint={urlEndpoint}
-                        // fileName="test-upload-2."
-                        // tags={["sample-tag1", "sample-tag2"]}
-                        // customCoordinates={"10,10,10,10"}
-                        // isPrivateFile={false}
-                        // useUniqueFileName={true}
-                        // responseFields={["tags"]}
-                        validateFile={(file:any) => {
-                          let fileMax = environment?.maxVideoFileSize || 1048; // 5760 ; // approx 10MB
-                          if(file.size < fileMax){
-                            return true;
-                          } else {
-                            alert('Video file is too large, must be less than 10MB');
-                            return false;
-                          }}}
-                        // folder={"/sample-folder"}
-                        // extensions={[{
-                        //   "name": "remove-bg",
-                        //   "options": {
-                        //     "add_shadow": true,
-                        //   },
-                        // }]}
-                        // webhookUrl="https://www.example.com/imagekit-webhook" // replace with your webhookUrl
-                        // overwriteFile={true}
-                        // overwriteAITags={true}
-                        // overwriteTags={true}
-                        // overwriteCustomMetadata={true}
-                        onError={onError}
-                        onSuccess={onSuccess}
-                        onUploadProgress={onUploadProgress}
-                        onUploadStart={onUploadStart}
-                      />
-                    </div>
-                  }*/}
-
                   {progressActive &&
                     <div className="video-upload-file-progress" onClick={() => {
                       // alert('uploading from computer');
@@ -531,7 +477,7 @@ const PostCreate: React.FC = () => {
             {postImages.split(',')?.map((pi) => {
                 if (pi !== '') {
                   return (
-                    <div className="">
+                    <div>
                       <img src={pi} alt="Post" />
                       <div
                         className="nobo-image-remove"
