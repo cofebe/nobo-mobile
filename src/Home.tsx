@@ -225,9 +225,6 @@ const Home: React.FC = () => {
           <Route exact path="/home/post-detail/:id/likes">
             <PostDetailLikes />
           </Route>
-          <Route exact path="/home/post-detail/:id">
-            <PostDetail />
-          </Route>
           <Route exact path="/home/post-stats/:id">
             <PostStats />
           </Route>

@@ -26,11 +26,7 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
     name = profile?.organization_profile?.organization_name || '';
   }
 
-  //console.log("ExploreListItem: ", profile)
-  // const [profileMode, setProfileMode] = useState(false);
-
   return (
-    // <IonItem lines="none"  className="watchlist-item" routerLink={`/home/post-detail/${message.id}`} detail={false}>
     <IonItem lines="none" className="explore-list-item" detail={false}>
       <IonRow
         className="explore-list-item-content ion-text-wrap"
@@ -48,10 +44,6 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
           <IonAvatar className="explore-feed-first-row">
             <img
               className="explore-list-feed-image"
-              onError={({ currentTarget }) => {
-                currentTarget.onerror = null; // prevents looping
-                currentTarget.src = '../../assets/images/nobo_logo_round.jpg';
-              }}
               src={profile.basic_user_profile.profile_image.String}
               alt="avatar"
             />

@@ -1,7 +1,6 @@
 import FeedListItem from '../components/FeedListItem';
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
-import { FeedItem, getMessages } from '../data/athlete-feed';
 import {
   IonCol,
   IonContent,
@@ -18,29 +17,48 @@ import {
 } from '@ionic/react';
 import './Feed.scss';
 import './StyleFeed.scss';
-//import SortWidget from '../components/SortWidget';
 import ExploreListItem from '../components/ExploreListItem';
 
+import { AuthService } from '../services/AuthService';
 import { FeedService } from '../services/FeedService';
 import { ExploreService } from '../services/ExploreService';
 import { UserService } from '../services/UserService';
-import { SubscriptionService } from '../services/SubscriptionService';
 import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
-// import UrpHeader from '../components/NoboHeader';
 import { loadingOptions } from '../util';
 import { isPlatform } from '@ionic/react';
 
 import ImageZoom from '../components/ImageZoom';
 import { Profile } from '../data/profile';
 
+interface FeedItem {
+  likes: any[];
+  images: { url: string, originalName: string }[];
+  _id: string;
+  user: {
+    _id: string;
+    avatar: string;
+    displayName: string;
+    tradeCloset: number;
+    sellCloset: number;
+  };
+  template: string;
+  feedText: string;
+  comments: any[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
 const StyleFeed: React.FC = () => {
   let [profileMessages, setProfileMessages] = useState<Profile[]>([]);
   const exploreService = new ExploreService();
+  const authService = new AuthService();
   const userService = new UserService();
   const feedService = new FeedService();
   const history = useHistory();
+  const [feed, setFeed] = useState<FeedItem[]>([]);
 
-  const [messages, setMessages] = useState<FeedItem[]>(getMessages());
+  const [messages, setMessages] = useState<FeedItem[]>([]);
   //const [filter, setFilter] = useState<string>();
   const [imageZoom, setImageZoom] = useState('');
   let [isLoading, setIsLoading] = useState<boolean>(false);
@@ -53,14 +71,8 @@ const StyleFeed: React.FC = () => {
     setProfileMessages(profileMessages);
     page = 0;
     setPage(0);
-    if (isPlatform('ios')) {
-      const subscriptionService = new SubscriptionService(new InAppPurchase2());
-      subscriptionService.register();
-    }
     let storage: any = window.localStorage.getItem('persistedState');
     let user = JSON.parse(storage);
-    console.log('HomeAthlete User: ', user);
-    console.log('HomeAthlete UserId: ', user.user['user_id']);
 
     if (!atBottomOfFeedListElem) {
       atBottomOfFeedListElem = document.querySelector('#atBottomOfFeedList');
@@ -95,6 +107,8 @@ const StyleFeed: React.FC = () => {
       console.warn('Skipping loading page; already loading!');
       return;
     }
+    let myUserId = authService.getUserId();
+    // myUserId = "61e9e3cde9d5a06abb991653"
 
     page = pg;
     setPage(page);
@@ -111,11 +125,14 @@ const StyleFeed: React.FC = () => {
     presentLoading(loadingOptions);
     isLoading = true;
     setIsLoading(isLoading);
+    console.log("FeedService.getProfileFeed userId: ", myUserId)
     feedService
-      .getFeed(user.user['user_id'], page /*, filter*/)
+      .getProfileFeed(myUserId || "")
       .then((res) => res.json())
       .then((data) => {
         console.log('Feed: ', data);
+        setFeed(data.feed.feed)
+        setMessages(data.feed.feed)
         if (page > 0) {
           // setMessages((messages || []).concat(data.FeedItems));
         } else {
@@ -139,60 +156,6 @@ const StyleFeed: React.FC = () => {
         isLoading = false;
         setIsLoading(isLoading);
         dismissLoading();
-      });
-
-    userService
-      .getProfile(user.user['user_id'])
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('Profile: ', data);
-        state = data.basic_user_profile.state
-          ? data.basic_user_profile.state.String.replace(/"/g, '')
-          : '';
-        sport = data.athlete_user_profile.primary_sport
-          ? data.athlete_user_profile.primary_sport.String
-          : '';
-
-        let userType = user.user['user_type'];
-        userType = userType?.charAt(0).toUpperCase() + userType?.slice(1);
-        let req = {
-          user_id: user.user['user_id'],
-          account_type: userType ? [userType] : ['Athlete'],
-          search: '',
-          state: [state],
-          school: [''],
-          country: [''],
-          sport: [sport],
-          position: [''],
-          class: [''],
-          rank: [''],
-          awards: [''],
-        };
-
-        exploreService
-          .search(req, 1)
-          .then((res) => {
-            if (res) {
-              return res.json();
-            } else {
-              // showError(1)
-            }
-          })
-          .then((data) => {
-            console.log('here', data);
-
-            data.users = data.users?.slice(0, 5);
-
-            profileMessages = profileMessages.concat(data.users || []);
-
-            setProfileMessages(profileMessages);
-          })
-          .catch((err) => {
-            console.error('Error:', err);
-          });
-      })
-      .catch((err) => {
-        console.error('Error:', err);
       });
   }
 
@@ -237,11 +200,10 @@ const StyleFeed: React.FC = () => {
         imageUrl={imageZoom}
         onClose={() => setImageZoom('')}
       ></ImageZoom>
-      {/* <UrpHeader></UrpHeader> */}
       <IonContent
         className="home-content"
         style={{backgroundColor: '#FEFCF7'}}
-        scrollY={true}
+        scrollY={false}
         scrollEvents={true}
         onIonScrollEnd={(e) => scroll(e)}
         fullscreen
@@ -252,34 +214,61 @@ const StyleFeed: React.FC = () => {
         <div
           className="profile-banner-container"
           style={{ backgroundColor: '#FEFCF7' }}
-        ></div>
+        >
+        <img className="style-feed-nobo-logo" src="/assets/images/style-feed-nobo-logo.png"/>
+        </div>
         <div
           onClick={(e) => {
             e.preventDefault();
-            history.push(`/home/style-feed`);
+            history.push(`/home/my-profile`);
           }}
           className="profile-header-container"
           style={{ backgroundImage: `url('assets/images/style-feed-header.svg')` }}
-        ></div>
-        <IonRow>
+        >
+        </div>
+        <div className="profile-create-post"
+            onClick={(e) => {
+              e.preventDefault();
+              history.push('/home/post-create');
+            }}>
+          <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d_1150_5872)">
+            <path d="M30.5 36C30.5 32.9624 32.9624 30.5 36 30.5H42.157H45H47.843H54C57.0376 30.5 59.5 32.9624 59.5 36V54C59.5 57.0376 57.0376 59.5 54 59.5H45H36C32.9624 59.5 30.5 57.0376 30.5 54V36Z" stroke="black" shape-rendering="crispEdges"/>
+            </g>
+            <path d="M52.0625 45.0312C52.0625 45.5835 51.6148 46.0357 51.0625 46.0357H46.0357V51.0625C46.0357 51.6148 45.5835 52.0625 45.0312 52.0625C44.479 52.0625 44.0268 51.6148 44.0268 51.0625V46.0357H39C38.4477 46.0357 38 45.5835 38 45.0312C38 44.479 38.4477 44.0268 39 44.0268H44.0268V39C44.0268 38.4477 44.479 38 45.0312 38C45.5835 38 46.0357 38.4477 46.0357 39V44.0268H51.0625C51.6148 44.0268 52.0625 44.479 52.0625 45.0312Z" fill="black"/>
+            <defs>
+            <filter id="filter0_d_1150_5872" x="0" y="0" width="90" height="90" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset/>
+            <feGaussianBlur stdDeviation="15"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0.87451 0 0 0 0 0.87451 0 0 0 0 0.87451 0 0 0 1 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1150_5872"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1150_5872" result="shape"/>
+            </filter>
+            </defs>
+          </svg>
+        </div>
+
+        <IonRow className="style-feed-list-container">
           <IonCol style={{ padding: '0' }}>
             {messages?.length ? (
               <IonList
                 lines="none"
                 className="nobo-list-background"
-                style={{ paddingBottom: '2em' }}
+                style={{ paddingBottom: '2em', paddingLeft: '64px', paddingRight: '64px' }}
               >
                 {messages.map((m) => {
                   return (
-                    <div key={m.post_id + (m.is_promoted ? 'p' : '')}>
                       <FeedListItem
+                        refreshFeed={() => loadPosts(0)}
                         message={m}
-                        trackImpressions={m.is_promoted}
                         zoomAction={(i: number) => {
                           try {
-                            if (m && m.photo_url && m.photo_url.length > 0) {
+                            if (m && m.images && m.images.length > 0) {
                               let targetIndex = i;
-                              let zoomImageUrl = (m.photo_url || '')
+                              let zoomImageUrl = (m.images[0].url || '')
                                 .replace('[', '')
                                 .replace(']', '')
                                 .split("'")
@@ -290,10 +279,9 @@ const StyleFeed: React.FC = () => {
                           } catch (exZoomPicNoExist) {}
                         }}
                       />
-                    </div>
                   );
                 })}
-                <IonItem id="atBottomOfFeedList" key="bottom" lines="none">
+                <IonItem id="atBottomOfFeedList" style={{'--background': 'rgb(254, 252, 247)'}} key="bottom" lines="none">
                   <IonRow>
                     <IonCol>Loading...</IonCol>
                   </IonRow>
@@ -320,22 +308,6 @@ const StyleFeed: React.FC = () => {
                   }}
                   key="none"
                 >
-{/*                  <div className="no-feed-items">
-                    <h2>No feed items found.</h2>
-                    <img
-                      height={60}
-                      src="assets/images/navigation/nav-explore.svg"
-                      alt="Explore"
-                    />
-                    <div style={{ marginBottom: '8px' }} className="explore">
-                      Here are some suggestions for users to follow in your area
-                    </div>
-                  </div>*/}
-                  {/* <div> */}
-                  {/* <IonList> */}
-
-                  {/* </IonList> */}
-                  {/* </div> */}
                 </div>
                 {profileMessages.map((m) => (
                   <ExploreListItem key={m.user_id} profile={m} />
@@ -343,28 +315,7 @@ const StyleFeed: React.FC = () => {
               </>
             )}
           </IonCol>
-          <IonCol className="nobo-desktop">
-            <IonList lines="none" className="nobo-list-background">
-              <div className="nobo-desktop-messages" key="messages">
-                <h3>Messages</h3>
-              </div>
-              <div className="nobo-desktop-notifications" key="notifications">
-                <h3>Notifications</h3>
-              </div>
-            </IonList>
-          </IonCol>
         </IonRow>
-
-{/*        <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonIcon
-            onClick={(e) => {
-              e.preventDefault();
-              history.push('/home/post-create');
-            }}
-            className="floating-button"
-            src="assets/images/create-post.svg"
-          ></IonIcon>
-        </IonFab>*/}
       </IonContent>
     </IonPage>
   );

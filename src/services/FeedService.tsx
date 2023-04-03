@@ -1,6 +1,6 @@
 import { BaseService } from './BaseService';
 import { environment } from '../environments/environment'
-const API_URL = environment.serverUrl + '/feed';
+const API_URL = environment.serverUrl;
 
 export class FeedService extends BaseService {
 
@@ -52,44 +52,30 @@ export class FeedService extends BaseService {
         return response;
     }
 
-    async post(data = {}, userID: any) {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-        return response;
+    async post(data = {}) {
+        return await super.fetch('POST', `api/feed/create-item`, data)
     }
 
-    async removePost(postID: number) {
-        const response = await super.fetch('DELETE', `/feed/${postID}`)
+    async removePost(postID: any) {
+        const response = await super.fetch('POST', `api/feed/remove/${postID}`)
         return response;
     }
 
     async postComment(data: any) {
-        const response = await fetch(API_URL + `/comment`, {
-            method: 'POST',
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-        return response;
+        return await super.fetch('POST', `api/feed/comment`, data);
     }
 
-    async likePost(userID: number, postID: number) {
-        const response = await fetch(API_URL + `/${userID}/post/${postID}/like`, {
-            method: 'POST',
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({})
-        });
+    async likeComment(data: any) {
+        return await super.fetch('POST', `api/feed/like/comment`, data);
+    }
+
+    async likePost(data: any) {
+        const response = await super.fetch(
+                'POST',
+                "/api/feed/like/feed-item",
+                data,
+                { 'Content-Type': 'application/json' },
+        );
         return response;
     }
 
@@ -103,6 +89,13 @@ export class FeedService extends BaseService {
             body: JSON.stringify({})
         });
         return response;
+    }
+
+    async uploadImage(data: any) {
+        return await super.fetch(
+            'POST',
+            API_URL + 'api/files/upload',
+            data)
     }
 
     async comment(data = {}) {

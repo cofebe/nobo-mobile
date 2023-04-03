@@ -6,10 +6,10 @@ import {
   IonIcon,
   useIonActionSheet,
 } from '@ionic/react';
-import { ellipsisVertical, statsChartOutline } from 'ionicons/icons';
+import { ellipsisHorizontal, statsChartOutline } from 'ionicons/icons';
 import { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { FeedItem } from '../data/athlete-feed';
+import { AuthService } from '../services/AuthService';
 import { FeedService } from '../services/FeedService';
 import { ReportService } from '../services/ReportService';
 import CreateCommentModal from '../components/CreateCommentModal';
@@ -24,6 +24,26 @@ interface FeedListItemProps {
   trackImpressions?: boolean;
   disableProfileLink?: boolean;
   zoomAction?: Function;
+  refreshFeed?: Function;
+}
+
+interface FeedItem {
+  likes: any[];
+  images: { url: string, originalName: string }[];
+  _id: string;
+  user: {
+    _id: string;
+    avatar: string;
+    displayName: string;
+    tradeCloset: number;
+    sellCloset: number;
+  };
+  template: string;
+  feedText: string;
+  comments: any[];
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 const FeedListItem: React.FC<FeedListItemProps> = ({
@@ -31,15 +51,18 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
   trackImpressions = false,
   disableProfileLink = false,
   zoomAction,
+  refreshFeed,
 }) => {
   const history = useHistory();
+  const authService = new AuthService();
   const feedService = new FeedService();
   const reportService = new ReportService();
-  const [commentCount, setCommentCount] = useState<number>(
-    message.comment_count || 0
-  );
-  const [likeCount, setLikeCount] = useState<number>(message.like_count || 0);
-  const [msgPhotos, setMsgPhotos] = useState(getMessagePhotos(message));
+  console.log("Post Detail: ", message)
+  // const [commentCount, setCommentCount] = useState<number>(
+  //   message.comment_count || 0
+  // );
+  // const [likeCount, setLikeCount] = useState<number>(message.like_count || 0);
+  // const [msgPhotos, setMsgPhotos] = useState(getMessagePhotos(message));
 
   const [presentActionSheet] = useIonActionSheet();
   const [presentReportingActionSheet] = useIonActionSheet();
@@ -48,6 +71,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
   const user = (storage ? JSON.parse(storage) : undefined);
   const [isDeleted, setIsDeleted] = useState<any>(false);
 
+  let myUserId = authService.getUserId();
   let userId = 0;
   if (user) {
     userId = user.user['user_id'];
@@ -55,38 +79,38 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
 
   const commentModal = useRef<HTMLIonModalElement>(null);
 
-  const elementId =
-    'feedItem' + message.post_id + (message.is_promoted ? 'p' : '');
+  // const elementId =
+  //   'feedItem' + message.post_id + (message.is_promoted ? 'p' : '');
 
   useEffect(() => {
-    if (message.sport) {
-      if (message.sport[0] === 'w' || message.sport[0] === 'm') {
-        message.sport = message.sport.slice(1);
-      }
-    }
+    // if (message.sport) {
+    //   if (message.sport[0] === 'w' || message.sport[0] === 'm') {
+    //     message.sport = message.sport.slice(1);
+    //   }
+    // }
 
-    setMsgPhotos(getMessagePhotos(message));
+    // setMsgPhotos(getMessagePhotos(message));
 
-    if (trackImpressions) {
-      const container = document.querySelector('.home-content');
-      const elem = document.querySelector('#' + elementId);
-      if (container && elem) {
-        const options = {
-          root: container,
-          rootMargin: '0px',
-          threshold: 1.0,
-        };
-        const observer = new IntersectionObserver((entries) => {
-          //console.log('*1', entries, entries[0]);
-          if (entries.length && entries[0].isIntersecting) {
-            console.log(`Tracking impression for post ID ${message.post_id}`);
-            feedService.trackImpression(message.post_id);
-            observer.unobserve(elem);
-          }
-        }, options);
-        observer.observe(elem);
-      }
-    }
+    // if (trackImpressions) {
+    //   const container = document.querySelector('.home-content');
+    //   const elem = document.querySelector('#' + elementId);
+    //   if (container && elem) {
+    //     const options = {
+    //       root: container,
+    //       rootMargin: '0px',
+    //       threshold: 1.0,
+    //     };
+    //     const observer = new IntersectionObserver((entries) => {
+    //       //console.log('*1', entries, entries[0]);
+    //       if (entries.length && entries[0].isIntersecting) {
+    //         console.log(`Tracking impression for post ID ${message.post_id}`);
+    //         feedService.trackImpression(message.post_id);
+    //         observer.unobserve(elem);
+    //       }
+    //     }, options);
+    //     observer.observe(elem);
+    //   }
+    // }
   }, [message, trackImpressions]);
 
   function showPostComment() {
@@ -95,14 +119,14 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
 
   function viewUser_(history: any, userId: number, userType: string) {
     if (!disableProfileLink) {
-      viewUser(history, userId, userType, message.post_id);
+      // viewUser(history, userId, userType, message.post_id);
     }
   }
 
-  const [postURL, setPostURL] = useState(`https://www.noboplus.com/home/post-detail/${message.post_id}`);
+  const [postURL, setPostURL] = useState(`https://www.noboplus.com/home/post-detail/${message._id}`);
 
   var options = {
-    message: `${message.from_name}`,
+    message: `Share Post`,
     subject: 'Share Post',
     files: ['', ''],
     url: postURL,
@@ -134,49 +158,23 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
       },
     },
     {
-      text: 'View Likes',
-      who: 'all',
-      data: {
-        action: () => {
-          console.log('viewLikes');
-          history.push(`/home/post-detail/${message.post_id}/likes`);
-        },
-      },
-    },
-    //{
-    //  text: 'View Interests',
-    //  who: 'me',
-    //  data: {
-    //    action: () => {
-    //      console.log('viewInterests');
-    //      history.push(`/home/post-detail/${message.post_id}/interests`);
-    //    },
-    //  },
-    //},
-    {
-      text: 'Promote',
-      who: 'me',
-      data: {
-        action: () => {
-          console.log('promotePost');
-          history.push(`/home/post-promote/${message.post_id}`);
-        },
-      },
-    },
-    {
       text: 'Delete Post',
       who: 'me',
       role: 'destructive',
       data: {
         action: () => {
           feedService
-            .removePost(message.post_id)
+            .removePost(message._id)
             .then((res) => res.json())
-            .then((data) => {})
+            .then((data) => {
+              setIsDeleted(true);
+              if (refreshFeed !== undefined) {
+                refreshFeed();
+              }
+            })
             .catch((err) => {
               console.error('Error:', err);
             });
-            setIsDeleted(true);
         },
       },
     },
@@ -188,28 +186,18 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
       },
     },
   ].filter((b) => {
-    if (message.is_promoted && b.text === 'Promote') {
-      // don't allow promoting a post already being promoted
-      return false;
-    }
-
     return (
       b.who === 'all' ||
       !b.who ||
-      (b.who === 'me' && message.user_id === userId) ||
-      (b.who === 'notme' && message.user_id !== userId)
+      (b.who === 'me' && message.user._id === myUserId) ||
+      (b.who === 'notme' && message.user._id !== myUserId)
     );
   });
 
   async function reportPost(reportType: string) {
     console.log('reportPost', reportType);
-    let req = {
-      user_id: userId,
-      user_id_reported: message.user_id,
-      post_id_reported: message.post_id,
-      category: reportType,
-    };
-    await reportService.reportPost(req);
+
+    window.location.href = `mailto:support@thenobo.com?subject=${reportType}&body=${message.user._id}`;
   }
 
   function showReportingActionSheet() {
@@ -298,7 +286,6 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
         },
       ],
       onDidDismiss: ({ detail }) => {
-        // console.log('showActionSheet:detail', detail);
         const action = detail.data?.action;
         if (typeof action === 'function') {
           action();
@@ -310,14 +297,10 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
   }
 
   function showActionSheet() {
-    console.log('showActionSheet');
     presentActionSheet({
-      header: 'Post actions',
       cssClass: 'nobo-action-sheet',
-      //subHeader: 'Subheader',
       buttons: actionSheetButtons,
       onDidDismiss: ({ detail }) => {
-        // console.log('showActionSheet:detail', detail);
         const action = detail.data?.action;
         if (typeof action === 'function') {
           action();
@@ -328,47 +311,45 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
     });
   }
 
-  function likePost() {
+  function likePost(messageId: string) {
     console.log('likePost');
 
-    if (message.like_count === undefined) {
-      message.like_count = 0;
+    let req = {
+      itemId: messageId
     }
 
-    if (message.liked_post) {
-      message.like_count -= 1;
-      setLikeCount(likeCount - 1);
-      message.liked_post = false;
-      feedService
-        .removeLikePost(userId, message.post_id)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log('removeLikePost: ', data);
-        })
-        .catch((err) => {
-          console.error('Error:', err);
-          // setTimeout(() => {
-          //   console.log("Trying like post again")
-          //   likePost()
-          // }, 1000)
-        });
+    feedService
+      .likePost(req)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('LikePost: ', data);
+        if (refreshFeed !== undefined) {
+          refreshFeed();
+        }
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+      });
+  }
+
+  function getTimeDifferenceString(date: Date) {
+    const now = new Date();
+    const difference = now.getTime() - date.getTime();
+    const minute = 60 * 1000;
+    const hour = 60 * minute;
+    const day = 24 * hour;
+    
+    if (difference < minute) {
+      return "just now";
+    } else if (difference < hour) {
+      const minutes = Math.floor(difference / minute);
+      return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+    } else if (difference < day) {
+      const hours = Math.floor(difference / hour);
+      return `${hours} hour${hours === 1 ? "" : "s"} ago`;
     } else {
-      message.like_count += 1;
-      setLikeCount(likeCount + 1);
-      message.liked_post = true;
-      feedService
-        .likePost(userId, message.post_id)
-        .then((res) => res.json())
-        .then((data) => {
-          console.log('LikePost: ', data);
-        })
-        .catch((err) => {
-          console.error('Error:', err);
-          // setTimeout(() => {
-          //   console.log("Trying like post again")
-          //   likePost()
-          // }, 1000)
-        });
+      const days = Math.floor(difference / day);
+      return `${days} day${days === 1 ? "" : "s"} ago`;
     }
   }
 
@@ -378,88 +359,53 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
       )) || (!isDeleted && (
     <IonItem
       lines="none"
-      id={elementId}
-      className={'feed-item-item ' + (message.is_promoted ? 'promoted' : '')}
+      // id={elementId}
+      className={'feed-item-item'}
       detail={false}
-      data-id={message.post_id}
+      // data-id={message.post_id}
     >
       <IonRow className="feed-item-item-content ion-text-wrap">
-        <IonCol size="1">
+        <IonCol size="2">
           <IonAvatar
             className="feed-list-feed-image"
             onClick={(e) => {
-              // profile pic clicked
               e.preventDefault();
-              viewUser_(history, message.user_id, message.account_type);
+              history.push(`/home/profile/${message.user._id}`)
             }}
           >
             <img
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
-                currentTarget.src = '../../assets/images/nobo_logo_round.svg';
+                // currentTarget.src = '../../assets/images/nobo_logo_round.svg';
               }}
-              src={message.profile_image}
+              src={message?.user.avatar || ""}
               alt="avatar"
             />
           </IonAvatar>
         </IonCol>
         <IonCol
           className="feed-content feed-content-center"
-          size="7"
+          size="8"
           onClick={(e) => {
-            // profile pic clicked
             e.preventDefault();
-            viewUser_(history, message.user_id, message.account_type);
+            history.push(`/post-detail/${message._id}`)
           }}
         >
-          <div className="feed-list-feed-name">{message.from_name}</div>
+          <div className="feed-list-feed-name">{message.user.displayName}</div>
         </IonCol>
         <IonCol
           className="feed-content-center feed-content-right"
-          size="4"
+          size="2"
           onClick={(e) => {
             e.preventDefault();
-            viewUser_(history, message.user_id, message.account_type);
           }}
         >
           <div style={{ width: '100%' }}>
             <h2 className="feed-list-nobo-badge-line">
-              <span>
-                {message.sport ? (
-                  <img
-                    className="feed-list-logo-image"
-                    src={`assets/images/nobo-badge-${message.sport}.svg`}
-                    alt={message.sport}
-                  />
-                ) : (
-                  ''
-                )}
-              </span>
-              <span className="feed-list-feed-primary-sport">
-                {(message?.position || '').replace(/"/g, '')}
-              </span>
-              {message?.rating > 0 && (
-                <span className="feed-list-feed-ranking">
-                  <p className="feed-list-feed-ranking-text">
-                    {message?.rating}
-                    <svg
-                      width="20"
-                      height="12"
-                      viewBox="0 -2 12 12"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M5.52447 1.46353C5.67415 1.00287 6.32585 1.00287 6.47553 1.46353L7.23483 3.80041C7.30176 4.00642 7.49374 4.1459 7.71036 4.1459H10.1675C10.6519 4.1459 10.8532 4.76571 10.4614 5.05041L8.47352 6.49468C8.29828 6.622 8.22495 6.84768 8.29188 7.0537L9.05118 9.39058C9.20086 9.85123 8.67362 10.2343 8.28176 9.94959L6.29389 8.50532C6.11865 8.378 5.88135 8.378 5.70611 8.50532L3.71824 9.94959C3.32638 10.2343 2.79914 9.85123 2.94882 9.39058L3.70812 7.0537C3.77505 6.84768 3.70172 6.622 3.52648 6.49468L1.53861 5.05041C1.14675 4.76571 1.34814 4.1459 1.8325 4.1459H4.28964C4.50626 4.1459 4.69824 4.00642 4.76517 3.80041L5.52447 1.46353Z"
-                        fill="#00D6B6"
-                      />
-                    </svg>
-                  </p>
-                </span>
-              )}
               {actionSheetButtons.length > 1 && (
                 <IonIcon
-                  icon={ellipsisVertical}
+                  size="1px"
+                  icon={ellipsisHorizontal}
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -484,11 +430,10 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
               return false;
             }
 
-            history.push(`/home/post-detail/${message.post_id}`);
+            // history.push(`/home/post-detail/${message.post_id}`);
           }}
         >
           <div className="feed-list-feed-message" style={{ paddingLeft: 0 }}>
-            {message.data}
             <div></div>
             <Carousel
               showArrows={false}
@@ -519,31 +464,8 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
               //   );
               // }}
             >
-              {msgPhotos.map((mp, i: number) => (
+              {message.images.length > 0 && message.images.map((mp, i: number) => (
                 <div className="nobo-image-frame" key={i}>
-                  <div
-                    className="nobo-zoom-image"
-                    onClick={(e) => {
-                      console.log('zoom');
-                      if (zoomAction) {
-                        zoomAction(i);
-                      }
-                      e.preventDefault();
-                      return false;
-                    }}
-                  >
-                    <svg
-                      className="nobo-zoom-image-icon"
-                      xmlns="http://www.w3.org/2000/svg"
-                      id="Layer_1"
-                      data-name="Layer 1"
-                      viewBox="0 0 24 24"
-                      width="24"
-                      height="24"
-                    >
-                      <path d="M9.707,14.293c.391,.391,.391,1.023,0,1.414l-6.293,6.293h4.586c.553,0,1,.448,1,1s-.447,1-1,1H3c-1.654,0-3-1.346-3-3v-5c0-.552,.447-1,1-1s1,.448,1,1v4.586l6.293-6.293c.391-.391,1.023-.391,1.414,0ZM21,0h-5c-.553,0-1,.448-1,1s.447,1,1,1h4.586l-6.293,6.293c-.391,.391-.391,1.023,0,1.414,.195,.195,.451,.293,.707,.293s.512-.098,.707-.293l6.293-6.293v4.586c0,.552,.447,1,1,1s1-.448,1-1V3c0-1.654-1.346-3-3-3Z" />
-                    </svg>
-                  </div>
                   {/* <img
                     className='nobo-post-image'
                     style={{ paddingTop: '0px', height: 300, sizeMo }}
@@ -553,15 +475,125 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
                   <div
                     className="nobo-post-image"
                     style={{
-                      backgroundImage: `url(${mp
+                      backgroundImage: `url(${mp.url
                         .replace("'", '')
                         .replace("'", '')})`,
                     }}
-                  ></div>
+                  >
+                    <div className="nobo-image-options-container">
+                      <div onClick={() => likePost(message._id)}>
+                        <div>
+                          <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.01982 0C7.50392 0.00830248 6.99927 0.157306 6.55684 0.431963C6.11441 0.706621 5.74986 1.09721 5.5 1.56428C5.25014 1.09721 4.88559 0.706621 4.44316 0.431963C4.00073 0.157306 3.49608 0.00830248 2.98018 0C2.15778 0.0369694 1.38294 0.409202 0.824953 1.03538C0.266963 1.66155 -0.0288219 2.49077 0.00221794 3.34186C0.00221794 5.49724 2.19492 7.85124 4.03392 9.44728C4.44453 9.80428 4.96367 10 5.5 10C6.03633 10 6.55547 9.80428 6.96607 9.44728C8.80508 7.85124 10.9978 5.49724 10.9978 3.34186C11.0288 2.49077 10.733 1.66155 10.175 1.03538C9.61706 0.409202 8.84222 0.0369694 8.01982 0ZM6.37735 8.72202C6.13178 8.93598 5.82105 9.05332 5.5 9.05332C5.17895 9.05332 4.86822 8.93598 4.62265 8.72202C2.26868 6.67851 0.918515 4.71795 0.918515 3.34186C0.887196 2.74209 1.08637 2.15383 1.47258 1.70539C1.8588 1.25695 2.40073 0.984712 2.98018 0.948046C3.55963 0.984712 4.10157 1.25695 4.48778 1.70539C4.874 2.15383 5.07317 2.74209 5.04185 3.34186C5.04185 3.46758 5.09012 3.58815 5.17604 3.67705C5.26196 3.76594 5.37849 3.81588 5.5 3.81588C5.62151 3.81588 5.73804 3.76594 5.82396 3.67705C5.90988 3.58815 5.95815 3.46758 5.95815 3.34186C5.92683 2.74209 6.126 2.15383 6.51222 1.70539C6.89843 1.25695 7.44037 0.984712 8.01982 0.948046C8.59927 0.984712 9.1412 1.25695 9.52742 1.70539C9.91363 2.15383 10.1128 2.74209 10.0815 3.34186C10.0815 4.71795 8.73132 6.67851 6.37735 8.72013V8.72202Z" fill="black"/>
+                          </svg>
+                        </div>
+                        <div className="feed-list-nobo-likes-count">
+                          {message.likes.length}
+                        </div>
+                      </div>
+                      <div onClick={() => showPostComment()}>
+                        <div>
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_98_3490)">
+                            <path d="M4.99983 0.625C2.23811 0.625 -0.00016859 2.44336 -0.00016859 4.6875C-0.00016859 5.61719 0.388503 6.46875 1.03303 7.1543C0.742019 7.92383 0.13655 8.57617 0.126785 8.58398C-0.00212171 8.7207 -0.037278 8.91992 0.0369408 9.0918C0.11116 9.26367 0.281081 9.375 0.468581 9.375C1.66975 9.375 2.61702 8.87305 3.18538 8.4707C3.74983 8.64844 4.35921 8.75 4.99983 8.75C7.76155 8.75 9.99983 6.93164 9.99983 4.6875C9.99983 2.44336 7.76155 0.625 4.99983 0.625ZM4.99983 7.8125C4.47835 7.8125 3.96272 7.73242 3.46858 7.57617L3.02522 7.43555L2.64436 7.70508C2.36507 7.90234 1.98225 8.12305 1.52132 8.27148C1.66389 8.03516 1.80257 7.76953 1.90999 7.48633L2.11702 6.9375L1.71468 6.51172C1.36116 6.13477 0.937331 5.51172 0.937331 4.6875C0.937331 2.96484 2.7596 1.5625 4.99983 1.5625C7.24007 1.5625 9.06233 2.96484 9.06233 4.6875C9.06233 6.41016 7.24007 7.8125 4.99983 7.8125Z" fill="black"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_98_3490">
+                            <rect width="10" height="10" fill="white"/>
+                            </clipPath>
+                            </defs>
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="feed-list-nobo-comments-count">
+                            {message.comments.length}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </Carousel>
-
+              {message.images.length > 0 && (
+                <div className="feed-item-text" dangerouslySetInnerHTML={{__html: message.feedText}}></div>
+              )}
+              {message.feedText && !(message.images && message.images[0]) && (
+                <div
+                  className="image-grid-container image-grid-container-text"
+                  style={{minWidth: '168px', minHeight: '168px', height: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', boxShadow: 'none', padding: '2rem', position: 'relative'}}
+                  >
+                  <div className="feed-item-text feed-item-text-large" dangerouslySetInnerHTML={{__html: message.feedText}}></div>
+                  <div className="nobo-image-options-container">
+                    <div onClick={() => likePost(message._id)}>
+                      <div>
+                        <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M8.01982 0C7.50392 0.00830248 6.99927 0.157306 6.55684 0.431963C6.11441 0.706621 5.74986 1.09721 5.5 1.56428C5.25014 1.09721 4.88559 0.706621 4.44316 0.431963C4.00073 0.157306 3.49608 0.00830248 2.98018 0C2.15778 0.0369694 1.38294 0.409202 0.824953 1.03538C0.266963 1.66155 -0.0288219 2.49077 0.00221794 3.34186C0.00221794 5.49724 2.19492 7.85124 4.03392 9.44728C4.44453 9.80428 4.96367 10 5.5 10C6.03633 10 6.55547 9.80428 6.96607 9.44728C8.80508 7.85124 10.9978 5.49724 10.9978 3.34186C11.0288 2.49077 10.733 1.66155 10.175 1.03538C9.61706 0.409202 8.84222 0.0369694 8.01982 0ZM6.37735 8.72202C6.13178 8.93598 5.82105 9.05332 5.5 9.05332C5.17895 9.05332 4.86822 8.93598 4.62265 8.72202C2.26868 6.67851 0.918515 4.71795 0.918515 3.34186C0.887196 2.74209 1.08637 2.15383 1.47258 1.70539C1.8588 1.25695 2.40073 0.984712 2.98018 0.948046C3.55963 0.984712 4.10157 1.25695 4.48778 1.70539C4.874 2.15383 5.07317 2.74209 5.04185 3.34186C5.04185 3.46758 5.09012 3.58815 5.17604 3.67705C5.26196 3.76594 5.37849 3.81588 5.5 3.81588C5.62151 3.81588 5.73804 3.76594 5.82396 3.67705C5.90988 3.58815 5.95815 3.46758 5.95815 3.34186C5.92683 2.74209 6.126 2.15383 6.51222 1.70539C6.89843 1.25695 7.44037 0.984712 8.01982 0.948046C8.59927 0.984712 9.1412 1.25695 9.52742 1.70539C9.91363 2.15383 10.1128 2.74209 10.0815 3.34186C10.0815 4.71795 8.73132 6.67851 6.37735 8.72013V8.72202Z" fill="black"/>
+                        </svg>
+                      </div>
+                      <div className="feed-list-nobo-likes-count">
+                        {message.likes.length}
+                      </div>
+                    </div>
+                    <div onClick={() => showPostComment()}>
+                      <div>
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_98_3490)">
+                          <path d="M4.99983 0.625C2.23811 0.625 -0.00016859 2.44336 -0.00016859 4.6875C-0.00016859 5.61719 0.388503 6.46875 1.03303 7.1543C0.742019 7.92383 0.13655 8.57617 0.126785 8.58398C-0.00212171 8.7207 -0.037278 8.91992 0.0369408 9.0918C0.11116 9.26367 0.281081 9.375 0.468581 9.375C1.66975 9.375 2.61702 8.87305 3.18538 8.4707C3.74983 8.64844 4.35921 8.75 4.99983 8.75C7.76155 8.75 9.99983 6.93164 9.99983 4.6875C9.99983 2.44336 7.76155 0.625 4.99983 0.625ZM4.99983 7.8125C4.47835 7.8125 3.96272 7.73242 3.46858 7.57617L3.02522 7.43555L2.64436 7.70508C2.36507 7.90234 1.98225 8.12305 1.52132 8.27148C1.66389 8.03516 1.80257 7.76953 1.90999 7.48633L2.11702 6.9375L1.71468 6.51172C1.36116 6.13477 0.937331 5.51172 0.937331 4.6875C0.937331 2.96484 2.7596 1.5625 4.99983 1.5625C7.24007 1.5625 9.06233 2.96484 9.06233 4.6875C9.06233 6.41016 7.24007 7.8125 4.99983 7.8125Z" fill="black"/>
+                          </g>
+                          <defs>
+                          <clipPath id="clip0_98_3490">
+                          <rect width="10" height="10" fill="white"/>
+                          </clipPath>
+                          </defs>
+                        </svg>
+                      </div>
+                      <div>
+                        <div className="feed-list-nobo-comments-count">
+                          {message.comments.length}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div className="feed-item-date">{getTimeDifferenceString(new Date(message.createdAt))}</div>
+{/*              { message.images.length === 0 && (
+                <div className="nobo-image-options-container">
+                  <div onClick={() => likePost(message._id)}>
+                    <div>
+                      <svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.01982 0C7.50392 0.00830248 6.99927 0.157306 6.55684 0.431963C6.11441 0.706621 5.74986 1.09721 5.5 1.56428C5.25014 1.09721 4.88559 0.706621 4.44316 0.431963C4.00073 0.157306 3.49608 0.00830248 2.98018 0C2.15778 0.0369694 1.38294 0.409202 0.824953 1.03538C0.266963 1.66155 -0.0288219 2.49077 0.00221794 3.34186C0.00221794 5.49724 2.19492 7.85124 4.03392 9.44728C4.44453 9.80428 4.96367 10 5.5 10C6.03633 10 6.55547 9.80428 6.96607 9.44728C8.80508 7.85124 10.9978 5.49724 10.9978 3.34186C11.0288 2.49077 10.733 1.66155 10.175 1.03538C9.61706 0.409202 8.84222 0.0369694 8.01982 0ZM6.37735 8.72202C6.13178 8.93598 5.82105 9.05332 5.5 9.05332C5.17895 9.05332 4.86822 8.93598 4.62265 8.72202C2.26868 6.67851 0.918515 4.71795 0.918515 3.34186C0.887196 2.74209 1.08637 2.15383 1.47258 1.70539C1.8588 1.25695 2.40073 0.984712 2.98018 0.948046C3.55963 0.984712 4.10157 1.25695 4.48778 1.70539C4.874 2.15383 5.07317 2.74209 5.04185 3.34186C5.04185 3.46758 5.09012 3.58815 5.17604 3.67705C5.26196 3.76594 5.37849 3.81588 5.5 3.81588C5.62151 3.81588 5.73804 3.76594 5.82396 3.67705C5.90988 3.58815 5.95815 3.46758 5.95815 3.34186C5.92683 2.74209 6.126 2.15383 6.51222 1.70539C6.89843 1.25695 7.44037 0.984712 8.01982 0.948046C8.59927 0.984712 9.1412 1.25695 9.52742 1.70539C9.91363 2.15383 10.1128 2.74209 10.0815 3.34186C10.0815 4.71795 8.73132 6.67851 6.37735 8.72013V8.72202Z" fill="black"/>
+                      </svg>
+                    </div>
+                    <div className="feed-list-nobo-likes-count">
+                      {message.likes.length}
+                    </div>
+                  </div>
+                  <div onClick={() => showPostComment()}>
+                    <div>
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_98_3490)">
+                        <path d="M4.99983 0.625C2.23811 0.625 -0.00016859 2.44336 -0.00016859 4.6875C-0.00016859 5.61719 0.388503 6.46875 1.03303 7.1543C0.742019 7.92383 0.13655 8.57617 0.126785 8.58398C-0.00212171 8.7207 -0.037278 8.91992 0.0369408 9.0918C0.11116 9.26367 0.281081 9.375 0.468581 9.375C1.66975 9.375 2.61702 8.87305 3.18538 8.4707C3.74983 8.64844 4.35921 8.75 4.99983 8.75C7.76155 8.75 9.99983 6.93164 9.99983 4.6875C9.99983 2.44336 7.76155 0.625 4.99983 0.625ZM4.99983 7.8125C4.47835 7.8125 3.96272 7.73242 3.46858 7.57617L3.02522 7.43555L2.64436 7.70508C2.36507 7.90234 1.98225 8.12305 1.52132 8.27148C1.66389 8.03516 1.80257 7.76953 1.90999 7.48633L2.11702 6.9375L1.71468 6.51172C1.36116 6.13477 0.937331 5.51172 0.937331 4.6875C0.937331 2.96484 2.7596 1.5625 4.99983 1.5625C7.24007 1.5625 9.06233 2.96484 9.06233 4.6875C9.06233 6.41016 7.24007 7.8125 4.99983 7.8125Z" fill="black"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_98_3490">
+                        <rect width="10" height="10" fill="white"/>
+                        </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="feed-list-nobo-comments-count">
+                        {message.comments.length}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}*/}
+{/*              { message.images.length > 0 && (
+                message.feedText
+              )}*/}
             {/* <Swiper
               spaceBetween={10}
               slidesPerView={1}
@@ -587,23 +619,9 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
                 </div>
               ))}
             </Swiper> */}
-            {msgPhotos.length === 1 && (
-              <div
-                style={{
-                  bottom: 4,
-                  zIndex: 10000,
-                  left: 17,
-                  right: 4,
-                  height: 20,
-                  borderTopColor: '#e9e8e2',
-                  backgroundColor: 'white',
-                  position: 'absolute',
-                }}
-              ></div>
-            )}
           </div>
         </IonCol>
-        {message?.video_url && (
+{/*        {message?.video_url && (
           <IonCol className="feed-content" size="12">
             <span>
               <div className="video-container">
@@ -615,9 +633,9 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
               </div>
             </span>
           </IonCol>
-        )}
+        )}*/}
 
-        {message.is_promoted && (
+{/*        {message.is_promoted && (
           <IonCol className="feed-content feed-content-image" size="12">
             <span className="feed-list-promoted">Promoted</span>
             {message.user_id === userId && (
@@ -631,97 +649,15 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
               />
             )}
           </IonCol>
-        )}
+        )}*/}
         <IonCol
           size="12"
-          className={`feed-content feed-content-footer ${
-            message?.location && 'feed-content-location'
-          }`}
+          className={`feed-content feed-content-footer`}
         >
-          <div className="feed-list-bottom-icons">
-            <span className="feed-list-date">
-              {message?.location && (
-                <div className="feed-content-location-font">
-                  {message?.location}
-                </div>
-              )}
-              <span
-                className={`${
-                  message?.location && 'feed-content-location-font'
-                }`}
-              >
-                {message.date}
-              </span>
-            </span>
-            <div onClick={() => showPostComment()}>
-              <div>
-                <svg
-                  width="20"
-                  height="17"
-                  viewBox="0 0 13 11"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3.14449 4.51786C2.81792 4.51786 2.5552 4.78058 2.5552 5.10714C2.5552 5.43371 2.81792 5.69643 3.14449 5.69643C3.47105 5.69643 3.73377 5.43371 3.73377 5.10714C3.73377 4.78058 3.47105 4.51786 3.14449 4.51786ZM6.28734 4.51786C5.96078 4.51786 5.69806 4.78058 5.69806 5.10714C5.69806 5.43371 5.96078 5.69643 6.28734 5.69643C6.61391 5.69643 6.87663 5.43371 6.87663 5.10714C6.87663 4.78058 6.61391 4.51786 6.28734 4.51786ZM9.4302 4.51786C9.10364 4.51786 8.84092 4.78058 8.84092 5.10714C8.84092 5.43371 9.10364 5.69643 9.4302 5.69643C9.75676 5.69643 10.0195 5.43371 10.0195 5.10714C10.0195 4.78058 9.75676 4.51786 9.4302 4.51786ZM6.28734 0C2.81547 0 0.00162958 2.28594 0.00162958 5.10714C0.00162958 6.27589 0.490246 7.34643 1.30051 8.20826C0.934665 9.17567 0.173505 9.99576 0.161228 10.0056C-0.000825781 10.1775 -0.0450222 10.4279 0.0482814 10.644C0.141585 10.86 0.355201 11 0.590915 11C2.10096 11 3.29181 10.369 4.00632 9.86317C4.71592 10.0866 5.48199 10.2143 6.28734 10.2143C9.75922 10.2143 12.5731 7.92835 12.5731 5.10714C12.5731 2.28594 9.75922 0 6.28734 0ZM6.28734 9.42857C5.59248 9.42857 4.90498 9.32299 4.24449 9.11429L3.87127 8.99643L3.55208 9.22232C2.98734 9.62254 2.11569 10.0891 1.03288 10.1946C1.32752 9.82388 1.76458 9.20268 2.03467 8.48571L2.209 8.02656L1.87261 7.66808C1.16301 6.91674 0.787344 6.03036 0.787344 5.10714C0.787344 2.72545 3.25498 0.785714 6.28734 0.785714C9.31971 0.785714 11.7873 2.72545 11.7873 5.10714C11.7873 7.48884 9.31971 9.42857 6.28734 9.42857Z"
-                    fill="#00D6B6"
-                  />
-                </svg>
-              </div>
-              <div>
-                <div className="feed-list-nobo-comments-count">
-                  {message.comment_count}
-                </div>
-              </div>
-            </div>
-
-            {!message.liked_post && (
-              <div onClick={() => likePost()}>
-                <div>
-                  <svg
-                    width="20"
-                    height="17"
-                    viewBox="0 0 13 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11.7385 0.753744C10.3547 -0.385547 8.28535 -0.196484 7.00057 1.08522L6.50037 1.58611L6.00017 1.08767C4.96423 0.0515088 2.87456 -0.572155 1.26224 0.753744C-0.332309 2.06982 -0.416099 4.43189 1.01087 5.856L5.924 10.7618C6.08142 10.919 6.28963 11 6.49783 11C6.70604 11 6.91424 10.9214 7.07167 10.7618L11.9848 5.856C13.4168 4.43189 13.3331 2.06982 11.7385 0.753744ZM11.4059 5.31091L6.51053 10.2167L1.59486 5.31091C0.619848 4.33858 0.416722 2.48478 1.79037 1.35285C3.18179 0.203742 4.81696 1.03611 5.41618 1.63522L6.50037 2.71804L7.58456 1.63522C8.17363 1.04593 9.82404 0.211108 11.2104 1.35285C12.5815 2.48232 12.3809 4.33613 11.4059 5.31091Z"
-                      fill="#00D6B6"
-                    />
-                  </svg>
-                </div>
-                <div className="feed-list-nobo-likes-count">
-                  {message.like_count}
-                </div>
-              </div>
-            )}
-            {message.liked_post && (
-              <div onClick={() => likePost()}>
-                <div>
-                  <svg
-                    width="20"
-                    height="17"
-                    viewBox="0 0 13 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.23148 0C7.70197 0.00830248 7.184 0.157306 6.72989 0.431963C6.27578 0.706621 5.90161 1.09721 5.64516 1.56428C5.38871 1.09721 5.01454 0.706621 4.56043 0.431963C4.10632 0.157306 3.58835 0.00830248 3.05884 0C2.21473 0.0369694 1.41944 0.409202 0.846726 1.03538C0.274009 1.66155 -0.0295826 2.49077 0.00227648 3.34186C0.00227648 5.49724 2.25285 7.85124 4.14039 9.44728C4.56183 9.80428 5.09468 10 5.64516 10C6.19565 10 6.72849 9.80428 7.14993 9.44728C9.03747 7.85124 11.288 5.49724 11.288 3.34186C11.3199 2.49077 11.0163 1.66155 10.4436 1.03538C9.87088 0.409202 9.07559 0.0369694 8.23148 0Z"
-                      fill="#00D6B6"
-                    />
-                  </svg>
-                </div>
-                <div className="feed-list-nobo-likes-count">
-                  {message.like_count}
-                </div>
-              </div>
-            )}
-          </div>
         </IonCol>
       </IonRow>
 
-      <CreateCommentModal
+{/*      <CreateCommentModal
         ref={commentModal}
         postId={message?.post_id}
         onCancel={() => {
@@ -732,7 +668,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
           setCommentCount(commentCount + 1);
           commentModal.current?.dismiss();
         }}
-      />
+      />*/}
     </IonItem>)))
   );
 };

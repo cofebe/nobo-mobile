@@ -6,9 +6,10 @@
   max-width: 100%;
   position: relative;
   overflow: hidden;
-  height: 138px;
+  height: 118px;
   background-position: top left;
   background-size: cover;
+  border-bottom: 1px solid black;
 
   @media (min-width: 562px) {
     height: 290px;
@@ -24,4 +25,24 @@
   margin-right: auto;
   left: 0;
   right: 0;
+}
+
+.profile-create-post {
+  position: absolute;
+  top: 25px;
+  right: 0;
+}
+
+.style-feed-nobo-logo {
+  width: 66px;
+  position: absolute;
+  top: 25px;
+  left: 40%;
+}
+
+.style-feed-list-container {
+  height: 80vh;
+  overflow-y: auto;
+  padding-top: 10px;
+  padding-bottom: 5vh;
 }

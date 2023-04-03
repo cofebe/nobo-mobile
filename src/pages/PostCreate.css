@@ -1,11 +1,20 @@
 .post-content {
 	background: white;
+	--background: #fefcf6;
 }
 
 .post-btn {
+	font-family: 'Nunito Sans';
+	font-size: .8rem;
+	font-weight: 700;
+	letter-spacing: .2px;
+	/*padding: 9px 25px;*/
 	height: 2rem !important;
+	height: 32px;
+	width: 80px;
 	opacity: 1;
-	--background: #047f6f;
+	--background: #D6980E;
+	--border-radius: 5px;
 	--color: #FFFFFF;
 	--background-activated: #94fff3;
 }
@@ -23,7 +32,11 @@
 }
 
 ion-toolbar.post-header-toolbar {
-	--background: #FFFFFF;
+	--background: #fefcf6;
+}
+
+.post-header-item {
+	--background: #fefcf6;
 }
 
 .post-btn, .cancel-btn {
@@ -31,8 +44,10 @@ ion-toolbar.post-header-toolbar {
 }
 
 .cancel-btn {
+	position: absolute;
+	left: 0px;
 	background: none !important;
-	color: #9BC9C1 !important;
+	color: #ACACAC !important;
 	height: 2rem !important;
 }
 
@@ -47,8 +62,13 @@ ion-button.cancel-btn {
 }
 
 .post-text {
+	--background: #fefcf6;
 	/* color: #9BC9C1; */
 	/* height: 100px; */
+}
+
+.nobo-post-container {
+	border-bottom: solid #ACACAC 1px;
 }
 
 .post-text::placeholder {
@@ -64,6 +84,7 @@ ion-button.cancel-btn {
 	background-position: center;
 	background-size: 100px;
 	z-index: 10000;
+	border: solid 1px #000000;
 }
 
 .nobo-add-video {
@@ -86,8 +107,10 @@ ion-button.cancel-btn {
 .post-create .post-input-count {
 	text-align: right;
 	font-size: 10px;
-	color: #9BC9C1;
-	padding: 8px 0;
+	color: #ACACAC;
+	padding-left: 15px;
+	padding-right: 10px;
+	padding-top: 20px;
 }
 
 .post-create .post-text textarea {
@@ -106,7 +129,7 @@ ion-button.cancel-btn {
 	/* height: 200px; */
 	/* margin-left: 20px;*/
     /* margin-right: 20px;*/
-	margin: 20px;
+	margin: 10px;
 	margin-bottom: 0;
 	--padding-start: 0;
 	--padding-end: 0;
@@ -116,10 +139,7 @@ ion-button.cancel-btn {
 
 .nobo-post-tool-menu {
 	position: absolute;
-	top: 0;
-	right: 0;
-
-	z-index: 1000000;
+	right: -20px;
 }
 
 .nobo-post-tool-menu svg {
@@ -159,6 +179,7 @@ ion-button.cancel-btn {
     border-radius: 50%;
     height: 36px;
     opacity: 0;
+    z-index: 10000;
 }
 .nobo-post-image-gallery {
     position: absolute;
@@ -175,7 +196,7 @@ ion-button.cancel-btn {
 .nobo-post-image-gallery img {
     width: 200px;
     border-radius: 1px;
-    border: 5px dashed #93c0b759;
+    border: 5px dashed #D6980E;
     margin: 11px;
 }
 
@@ -183,7 +204,7 @@ ion-button.cancel-btn {
     right: 10px;
     bottom: 10px;
     height: 20px;
-    color: #00816D;
+    color: #ACACAC;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-size: 0.8em;
 	text-decoration: underline;

@@ -1,15 +1,52 @@
 .post-detail-page {
-  background-color: white;
+  --background: rgb(254, 252, 247);
+
+  .post-detail-create-comment {
+    color: #000000;
+    border-top: solid #707070 1px;
+    height: 80px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 10px;
+
+    .avatar-image {
+      margin-top: 0px;
+      margin-left: 10px;
+      margin-right: 10px;
+      width: 39px;
+      height: 39px;
+      border: 1px solid #000000;
+      border-style: inside;
+    }
+  }
+
+  .create-comment {
+    margin-top: 4px;
+    border: solid black 1px;
+    border-radius: 25px;
+    height: 32px;
+
+    ::placeholder {
+      color: #707070;
+      font-size: 10px;
+      font-weight: 400;
+    }
+    --padding-start: 6px;
+  }
 
   ion-list {
-    background-color: white;
+    background-color: rgb(254, 252, 247);
   }
 
   .nobo-post-detail-background {
-    margin: 20px;
+    padding-left: 64px;
+    padding-right: 64px;
     margin-bottom: 0;
     padding-bottom: 8px;
-    border-bottom: 1px solid #1A3A35;
   }
 
   .feed-header {
