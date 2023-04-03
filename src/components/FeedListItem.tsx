@@ -297,9 +297,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
   }
 
   function showActionSheet() {
-    console.log('showActionSheet');
     presentActionSheet({
-      header: 'Post actions',
       cssClass: 'nobo-action-sheet',
       buttons: actionSheetButtons,
       onDidDismiss: ({ detail }) => {
