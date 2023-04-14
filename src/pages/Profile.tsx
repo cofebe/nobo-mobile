@@ -238,13 +238,11 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
     let userIdStr: any = addressBarPathName.substring(
       addressBarPathName.lastIndexOf('/') + 1
     );
-    console.log('loadProfile: ', userIdStr)
+
     if (isNaN(userIdStr) && userIdStr.length > 10) {
       userIdStr = userIdStr.substring(userIdStr.lastIndexOf('-') + 1);
-      console.log('loadProfile after: ', userIdStr)
     } else {
       const myUserId = authService.getUserId();
-      console.log('myProfile : ', myUserId);
       userId = myUserId || '';
     }
 
@@ -252,31 +250,23 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
       userId = userIdStr;
     }
 
-    console.log('View User Profile: ', userId);
-    console.log('myProfile value: ', profile.myProfile);
-
     setUserId(userId);
     getProfile(userId);
     return userId;
   }
 
   function getProfile(id: any = '') {
-    console.log('GetProfile: ', id);
-
     presentLoading(loadingOptions);
     userService
       .getProfile(id)
       .then((res) => res.json())
       .then((data) => {
-        console.log('Profile: ', data);
         if (data === null) {
-          console.log('Done');
           setNoboProfile(emptyProfile);
         } else {
           if (!data['user'].profileBg || data['user'].profileBg === "/NOBO_defaultcoverimage.jpeg" ) {
-            data['user'].profileBg = "https://thenobo.codepilot.com/NOBO_defaultcoverimage.jpeg";
+            data['user'].profileBg = "https://thenobo.com/NOBO_defaultcoverimage.jpeg";
           }
-          console.log("Set NOBO Profile: ", data['user'])
           setNoboProfile(data['user'])
         }
         dismissLoading();
