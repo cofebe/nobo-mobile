@@ -49,7 +49,6 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
       userService
         .getProducts(userId, type)
         .then((data) => {
-          console.log('ProductList: ', data)
           setProducts(data)
         })
     } else {
@@ -57,7 +56,6 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
         .getProfileFeed(userId)
         .then((res) => res.json())
         .then((data) => {
-          console.log('FeedList: ', data.feed.feed)
           setFeed(data.feed.feed)
         })
     }
@@ -78,7 +76,7 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
 
   useEffect(() => {
     load()
-  }, [type])
+  }, [type, userId])
 
   if (type === 'trade' && products !== undefined) {
     if (Array.isArray(products.docs) && products.docs.length > 0) {
@@ -170,7 +168,13 @@ const ProductList: React.FC<ProductListProps> = ({type, userId}) => {
       return (
         <div className="image-grid">
           {feed.map((feedItem: any, index: any) => (
-            <div className="image-grid-container" key={index} style={{boxShadow: 'none'}}>
+            <div className="image-grid-container"
+              onClick={(e) => {
+                e.preventDefault();
+                history.push(`/post-detail/${feedItem._id}`)
+              }}
+              key={index}
+              style={{boxShadow: 'none'}}>
               {feedItem.images && feedItem.images[0] && (
                 <div className="image-grid-container" style={{ backgroundImage: `url(${feedItem.images[0].url.includes("https://") ? feedItem.images[0].url : `https://thenobo.com${feedItem.images[0].url}`})`, backgroundSize: 'cover',  backgroundPosition: 'center', minHeight: '168px', boxShadow: 'none' }} onClick={() => history.push(`assets/images/test/${index}`)}></div>
               )}
