@@ -29,6 +29,7 @@ import ProductList from '../components/ProductList';
 import ReviewList from '../components/ReviewList';
 import { chevronBackOutline } from 'ionicons/icons';
 import { loadingOptions } from '../util';
+import Button from '../components/Button';
 
 interface ProfileProps {
   myProfile: boolean;
@@ -49,6 +50,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
   const [userSubscribed, setUserSubscribed] = useState(false);
   const [targetSection, setTargetSection] = useState('Feed');
   const [reviewData, setReviewData] = useState<any[]>([]);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   useIonViewDidEnter(() => {
     reset();
@@ -90,13 +92,10 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
   };
 
   async function reportUser(reportType: string) {
-    console.log('reportPost', reportType);
-
     window.location.href = `mailto:support@thenobo.com?subject=${reportType}&body=${userId}`;
   }
 
   function shareProfile(result: any) {
-    console.log('shareProfile', result);
     if (result === 'qrCode') {
       profileModal.current?.present();
     } else if (result === 'share') {
@@ -252,6 +251,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
 
     setUserId(userId);
     getProfile(userId);
+    checkIfFollowing();
     return userId;
   }
 
@@ -274,6 +274,33 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
       .catch(() => {
         dismissLoading();
       });
+  }
+
+  function checkIfFollowing() {
+    userService.getFollowers(userId)
+      .then((res) => res.json())
+      .then((data) => {
+        const followerIds = data.followers.map( (follower: any) => follower._id);
+
+        const myUserId = authService.getUserId()
+        const isMatching = followerIds.includes(myUserId);
+        setIsFollowing(isMatching)
+      })
+  }
+
+  function followUser() {
+    userService.followUser(userId)
+
+    setTimeout( () => {
+      checkIfFollowing()
+    }, 250)
+  }
+
+  function unFollowUser() {
+    userService.removeFollowUser(userId)
+    setTimeout( () => {
+      checkIfFollowing()
+    }, 250)
   }
 
   return (
@@ -344,14 +371,11 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
             Edit
           </IonButton>
         )}
-        {!profile.myProfile && (
-          <IonButton
-            fill="clear"
-            color="#1A3A35"
-            className="nobo-follow-profile-button"
-          >
-            FOLLOW
-          </IonButton>
+        {!profile.myProfile && !isFollowing && (
+          <Button label="FOLLOW" className="nobo-follow-profile-button" onClick={() => {followUser()}}></Button>
+        )}
+        {!profile.myProfile && isFollowing && (
+          <Button label="FOLLOWING" className="nobo-follow-profile-button" onClick={() => {unFollowUser()}}></Button>
         )}
         <div className="profile-bubble-container">
           <img

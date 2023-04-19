@@ -309,12 +309,16 @@ export class UserService extends BaseService {
     return await super.fetch('POST', `/user/${userId}/watchlist`, data);
   }
 
-  async followUser(userId: number) {
-    return await super.fetch('POST', `/user/${userId}/follow`, {});
+  async followUser(userId: string) {
+    return await super.fetch('POST', `/api/users/follow`, {userId});
   }
 
-  async removeFollowUser(userId: number) {
-    return await super.fetch('DELETE', `/user/${userId}/follow`, {});
+  async getFollowers(userId: string) {
+    return await super.fetch('POST', `/api/users/get-follows`, {userId});
+  }
+
+  async removeFollowUser(userId: string) {
+    return await super.fetch('POST', `/api/users/unfollow`, {userId});
   }
 
   async getUserPraise(userId: number) {
