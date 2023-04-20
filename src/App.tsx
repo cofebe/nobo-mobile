@@ -12,7 +12,7 @@ import { loadingStore, LoadingState } from './loading-store';
 import Home from './Home';
 import Splash from './pages/Splash';
 import Login from './pages/Login';
-import SignUp from './pages/SignUp';
+// import SignUp from './pages/SignUpOld';
 import Forgot from './pages/Forgot';
 import ForgotReset from './pages/ForgotReset';
 import Roles from './pages/Roles';
@@ -38,6 +38,8 @@ import PrimarySport from './pages/PrimarySport';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
 import PostDetail from './pages/PostDetail';
 import ListItem from './pages/ListItem';
+import SignUp1 from './pages/SignUp1';
+import SignUp2 from './pages/SignUp2';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -58,6 +60,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import OfferComplete from './pages/OfferComplete';
+
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -198,8 +201,12 @@ const App: React.FC = () => {
             </Route>
 
             {/* URP */}
-            <Route path="/signup" exact={true}>
-              <SignUp />
+           
+            <Route path="/signup1" exact={true}>
+              <SignUp1 />
+            </Route>
+            <Route path="/signup2" exact={true}>
+              <SignUp2 />
             </Route>
             <Route path="/forgot" exact={true}>
               <Forgot />
