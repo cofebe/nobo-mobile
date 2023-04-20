@@ -172,32 +172,32 @@ const ProfileFollowButton: React.FC<ProfileFollowButtonProps> = ({
 
   function follow() {
     console.log('follow');
-    userService
-      .followUser(userId)
-      .then(() => {
-        socialData.is_followed = true;
-        setSocialData(socialData);
-        updateButton(socialData);
-        showMessage(`Followed ${socialData?.name || 'user'}.`);
-      })
-      .catch((err) => {
-        console.error('Error: ', err);
-      });
+    // userService
+    //   .followUser(userId)
+    //   .then(() => {
+    //     socialData.is_followed = true;
+    //     setSocialData(socialData);
+    //     updateButton(socialData);
+    //     showMessage(`Followed ${socialData?.name || 'user'}.`);
+    //   })
+    //   .catch((err) => {
+    //     console.error('Error: ', err);
+    //   });
   }
 
   function unfollow() {
     console.log('unfollow');
-    userService
-      .removeFollowUser(userId)
-      .then(() => {
-        socialData.is_followed = false;
-        setSocialData(socialData);
-        updateButton(socialData);
-        showMessage(`Unfollowed ${socialData?.name || 'user'}.`);
-      })
-      .catch((err) => {
-        console.error('Error: ', err);
-      });
+    // userService
+    //   .removeFollowUser(userId)
+    //   .then(() => {
+    //     socialData.is_followed = false;
+    //     setSocialData(socialData);
+    //     updateButton(socialData);
+    //     showMessage(`Unfollowed ${socialData?.name || 'user'}.`);
+    //   })
+    //   .catch((err) => {
+    //     console.error('Error: ', err);
+    //   });
   }
 
   function connect() {
