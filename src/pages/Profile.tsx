@@ -423,7 +423,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
           <ProductList type="sell" userId={userId}></ProductList>
         )}
         {targetSection === 'Reviews' && (
-          <ReviewList reviewData={reviewData}></ReviewList>
+          <ReviewList reviewData={noboProfile.reviews}></ReviewList>
         )}
         <div style={{height: '5vh'}}></div>
       </IonContent>
