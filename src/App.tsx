@@ -12,7 +12,6 @@ import { loadingStore, LoadingState } from './loading-store';
 import Home from './Home';
 import Splash from './pages/Splash';
 import Login from './pages/Login';
-// import SignUp from './pages/SignUpOld';
 import Forgot from './pages/Forgot';
 import ForgotReset from './pages/ForgotReset';
 import Roles from './pages/Roles';
@@ -38,8 +37,7 @@ import PrimarySport from './pages/PrimarySport';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
 import PostDetail from './pages/PostDetail';
 import ListItem from './pages/ListItem';
-import SignUp1 from './pages/SignUp1';
-import SignUp2 from './pages/SignUp2';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -60,6 +58,10 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import OfferComplete from './pages/OfferComplete';
+import Experience from './pages/Experience';
+import SelectSize from './pages/SelectSize';
+import SignUpDetails from './pages/SignUpDetails';
+import SignUp from './pages/SignUp';
 
 
 setupIonicReact({
@@ -202,11 +204,17 @@ const App: React.FC = () => {
 
             {/* URP */}
            
-            <Route path="/signup1" exact={true}>
-              <SignUp1 />
+            <Route path="/signup-details" exact={true}>
+              <SignUpDetails />
             </Route>
-            <Route path="/signup2" exact={true}>
-              <SignUp2 />
+            <Route path="/signup-details/signup" exact={true}>
+              <SignUp />
+            </Route>
+            <Route path="/experience" exact={true}>
+              <Experience />
+            </Route>
+            <Route path="/experience/select-size" exact={true}>
+              <SelectSize />
             </Route>
             <Route path="/forgot" exact={true}>
               <Forgot />

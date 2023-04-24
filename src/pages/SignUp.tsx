@@ -6,19 +6,21 @@ import {
   IonGrid,
   useIonViewWillEnter,
   IonLabel,
+  IonContent,
 } from '@ionic/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { UserService } from '../services/UserService';
-import { SignUpType, User } from '../models';
+import { SignUpResponse, SignUpType, User } from '../models';
 import { loadingStore } from '../loading-store';
 import Input from '../components/Input';
-import './SignUp2.scss';
+import './SignUp.scss';
 import Button from '../components/Button';
 
 
 
-const SignUp2 = () => {
+
+const SignUp = () => {
   const history = useHistory();
   const userService = new UserService();
   const [error, setError] = useState<boolean>(false);
@@ -44,12 +46,14 @@ const SignUp2 = () => {
 
     userService
       .signup(person)
-      .then((user) => {
-        console.log("loging the user ", user)
+      .then((data:SignUpResponse) => {
+        console.log("loging the user ", data.success)
         loadingStore.decrement('SignUp:timeout');
-        if (user?.success) {
-          history.replace(`/profile`);
-        } else if (user?.displayName === "exists") {
+        if (data.success){
+          console.log(data.user._id)
+          window.localStorage.setItem("userToken", JSON.stringify(data.token))
+          history.replace({pathname:`/experience`, state:data.token});
+        } else if (data.user.displayName === "exists") {
           setError(true);
         }
       })
@@ -73,41 +77,39 @@ const SignUp2 = () => {
     }
   };
 
-
+console.log(history.location.state)
 
   return (
     <IonPage className="main-container">
-      <div className="background-image">
-        <IonRow className='icon-container'>
-          <IonCol style={{ flex: 1, marginLeft: '20px' }} size="2">
-            <div
-              onClick={() => {
-                history.goBack();
-              }}
-            >
-              <img
-                height={40}
-                src="assets/images/nobo-back-icon.png"
-                alt="logo"
-              />
-            </div>
-          </IonCol>
-          <IonCol className='nobo-logo-container'  >
-            <img
-              height={70}
-              src="assets/images/nobo-logo-white.png"
-              alt="logo"
-            />
-          </IonCol>
-          <IonRow className="get-registered-container">
-            <IonCol className='get-registered' >GET REGISTERED</IonCol>
-          </IonRow>
-        </IonRow>
-        <IonGrid className='form-grid'>
+      <IonContent className='signup-ion-content' >
 
-          <IonRow>
-            <IonCol >
+        <div className='signup-header'  >
+
+          <img
+            onClick={() => { history.push("/signup-details") }}
+            className='nobo-signup-back-btn'
+            style={{ color: "#fff" }}
+            height={40}
+            src="assets/images/nobo-back-icon.png"
+            alt="logo"
+          />
+
+          <img
+        
+            className='nobo-signup-logo'
+            src="assets/images/nobo-logo-white.png"
+            alt="logo"
+          />
+        </div>
+        <IonRow className="get-registered-container">
+          <IonCol className='get-registered' >GET REGISTERED</IonCol>
+        </IonRow>
+        <IonGrid className='form-grid' style={{marginTop:"150px"}} >
+
+          <IonRow style={{width:"85%", margin:"auto"}} >
+            <IonCol  >
               <Input
+             
                 invalid={error}
                 value={person.userName}
                 className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
@@ -115,17 +117,17 @@ const SignUp2 = () => {
                 onChange={(val) => { setPerson({ ...person, userName: val }) }}
               />
             </IonCol>
-          </IonRow>
-          <IonRow>
+          </IonRow >
+          <IonRow style={{width:"85%", margin:"auto"}}>
             <IonCol>
-              <IonLabel className='info' >
+              <IonLabel className='signup-info' >
                 For privacy concerns, your username cannot be your email, it will
                 be displayed in your style feed, account selection, and reviews
               </IonLabel>
             </IonCol>
           </IonRow>
 
-          <IonRow>
+          <IonRow style={{width:"85%", margin:"auto"}}>
             <IonCol >
               <Input
                 invalid={error}
@@ -137,7 +139,7 @@ const SignUp2 = () => {
               />
             </IonCol>
           </IonRow>
-          <IonRow>
+          <IonRow style={{width:"85%", margin:"auto"}}>
             <IonCol >
 
               <Input
@@ -153,8 +155,8 @@ const SignUp2 = () => {
 
         </IonGrid>
 
-        <IonRow  >
-          <IonCol style={{ marginTop: 180 }}>
+        <IonRow style={{width:"85%", margin:"auto"}} >
+          <IonCol style={{ marginTop: 170 }}>
             {/* <IonButton
 
               style={{
@@ -175,12 +177,11 @@ const SignUp2 = () => {
             </IonButton> */}
 
             <Button
-              onClick={() => { signup() }}
+              onClick={() => { signup()}}
               label='REGISTER'
               type='primary'
               large={true}
-              className=''
-              disabled={validate()}
+               disabled={validate()}
             />
 
           </IonCol>
@@ -188,9 +189,10 @@ const SignUp2 = () => {
 
 
 
-      </div>
+
+      </IonContent>
     </IonPage>
   );
 };
 
-export default SignUp2;
+export default SignUp;

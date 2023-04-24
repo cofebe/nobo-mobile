@@ -357,7 +357,6 @@ export class UserService extends BaseService {
 
   // signing up a user
   async signup(person: SignUpType) {
-    console.log("the code  reaches service ", person)
     const res = await fetch("https://thenobo.com/api/users/register",
 
       {
@@ -375,14 +374,40 @@ export class UserService extends BaseService {
         }),
       });
 
-
     if (res.status === 404) {
       console.log('404', res.json);
     }
 
     return res.json();
+
   }
 
+
+
+  // experience
+async experience(experienceOption:string, token:string){
+  const config ={
+    method:"POST",
+    headers:{
+     "Content-Type":"application/json",
+     Authorization:`Bearer ${token}`,
+    },
+     body:JSON.stringify({"experiencePreferences":experienceOption})
+  }
+  const res = await fetch(`https://thenobo.com/api/users/me`,config)
+
+  if (res.status === 500) {
+    console.log('500 ', res.json());
+  }
+ return res.json()
+
+  
+}
+
+
+
+
+ 
 
 
 

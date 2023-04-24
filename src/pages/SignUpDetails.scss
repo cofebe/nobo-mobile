@@ -5,11 +5,17 @@
       background-image: url(../../public/assets/images/nobo-splash-3.png);
       background-size: cover;
       background-position: center;
-      padding: 50px 15px 15px 15px;
+      // padding: 50px 15px 15px 15px;
     }
     .logo-margin-top {
      
       margin-top: 8vh;
+    }
+
+    .signup-details-goback{
+      position: absolute;
+      top: 20px;
+      left: 20px;
     }
 
     .signup-box-container{
@@ -17,7 +23,11 @@
         height: 53vh;
         margin-top: 16vh;
         width: 87vw;
-        margin-left: 10px;
+        margin: auto;
+        margin-top: 160px;
+    }
+    .signup-details--header{
+background-color: teal;
     }
 
     .signup-box {

@@ -4,7 +4,9 @@ export interface LoginResponse {
   error: string;
 }
 export interface SignUpResponse {
-  success: boolean;
+  success: string;
+  user: User;
+  token: string;
  
 }
 
@@ -482,8 +484,8 @@ export interface Conversation {
   _id: string;
 }
 
+// signup type
 export interface SignUpType{
-
   firstName:string
   lastName:string
   email:string
@@ -491,4 +493,34 @@ export interface SignUpType{
   password:string
   comfirmPassword:string
  
+}
+// response type from experiencePrefrences
+interface CurrentUser {
+  "blurbText": string
+  "reviews": []
+  "_id": string
+  "firstName": string
+  "lastName": string
+  "email": string
+  "displayName": string
+  "avatar": string
+  "shippingAddress": [],
+  "profileBg": string
+  "emailVerified": boolean
+  "blocked": boolean
+  "saleSchedule": []
+  "role": string
+  "favorites": []
+  "followers": []
+  "following": []
+  "favoriteBrands": []
+  "notifications": []
+  "unfinishedOnboardActivity": string
+  experiencePreferences:string
+}
+
+// response type from experiencePrefrences
+export interface ResData {
+  currentUser: CurrentUser
+  passwordError?: string
 }

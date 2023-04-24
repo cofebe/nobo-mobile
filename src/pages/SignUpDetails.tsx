@@ -5,18 +5,19 @@ import {
   IonCol,
   IonGrid,
   useIonViewWillEnter,
+  IonContent,
 } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserService } from '../services/UserService';
 import { loadingStore } from '../loading-store';
 import Input from '../components/Input';
-import './SignUp1.scss';
+import './SignUpDetails.scss';
 import Button from '../components/Button';
 
 
 
-const SignUp1: React.FC = () => {
+const SignUpDetails: React.FC = () => {
   // email check...
   const emailCheck = (email: string) => {
     return /\S+@\S+\.\S+/.test(email)
@@ -49,7 +50,7 @@ const SignUp1: React.FC = () => {
           loadingStore.decrement('SignUp:timeout');
         } else {
          
-          history.push({ pathname: '/signup2', state: { firstName, lastName, email } })
+          history.push({ pathname: '/signup-details/signup', state: { firstName, lastName, email } })
           loadingStore.decrement('SignUp:timeout');
          }
 
@@ -76,22 +77,24 @@ const SignUp1: React.FC = () => {
 
   return (
     <IonPage className="nobo-signup-page">
+      <IonContent scrollY={false}>
       <div className="background-image">
-        <IonRow >
-          <IonCol size="2">
-            <div
-              onClick={() => {
-                history.push('/get-started');
-              }}
-            >
+        <div >
+         
+           
               <img
+              style={{ marginLeft:"5%", marginTop:"5%"}}
+             onClick={() => {
+              history.push('/get-started');
+            }}
+              // className='signup-details-goback'
                 height={40}
                 src="assets/images/nobo-back-icon.png"
                 alt="logo"
               />
-            </div>
-          </IonCol>
-        </IonRow>
+          
+        
+        </div>
         <IonRow className="logo-margin-top">
           <IonCol
             class="ion-justify-content-center"
@@ -227,7 +230,7 @@ const SignUp1: React.FC = () => {
                 already have an account?
               </IonCol>
               <IonCol
-                onClick={() => history.push("/signin")}
+                onClick={() => history.push("/login")}
                 size="4"
                 style={{
                   textDecorationLine: 'underline',
@@ -243,8 +246,9 @@ const SignUp1: React.FC = () => {
           </IonGrid>
         </IonRow>
       </div>
+      </IonContent>
     </IonPage>
   );
 };
 
-export default SignUp1;
+export default SignUpDetails;

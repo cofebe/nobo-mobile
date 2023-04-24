@@ -181,7 +181,7 @@ const Login: React.FC = () => {
                   fontSize: '15px',
                 }}
                 onClick={()=>{
-                  history.push("/signup1")
+                  history.push("/signup-details")
                 }}
               >
                 Sign Up
