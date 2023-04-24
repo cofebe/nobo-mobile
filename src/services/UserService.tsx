@@ -12,6 +12,8 @@ import {
   OrdersResponse,
   PaymentMethodsResponse,
   ProductsResponse,
+  SignUpResponse,
+  SignUpType,
   SuccessResponse,
   TradesResponse,
   User,
@@ -61,13 +63,13 @@ export class UserService extends BaseService {
 
   async markNotificationsAsRead(noteIds: string[]) {
     /*const res =*/ await super.fetch('POST', '/api/notifications/update/status',
-      { noteIds });
+    { noteIds });
     return true;
   }
 
   async deleteNotifications(noteIds: string[]) {
     /*const res =*/ await super.fetch('POST', '/api/notifications/remove',
-      { noteIds });
+    { noteIds });
     return true;
   }
 
@@ -77,7 +79,7 @@ export class UserService extends BaseService {
     return json;
   }
 
-  async getConversation(conversationId: string): Promise<Conversation|undefined> {
+  async getConversation(conversationId: string): Promise<Conversation | undefined> {
     const res = await super.fetch('GET', '/api/messages/my-convos');
     const json: Conversation[] = await res.json();
     return json.find(c => c._id === conversationId);
@@ -92,7 +94,7 @@ export class UserService extends BaseService {
     return json;
   }
 
-  async newConversation(orderId: string|null, productId: string|null, message: string): Promise<Conversation> {
+  async newConversation(orderId: string | null, productId: string | null, message: string): Promise<Conversation> {
     const res = await super.fetch('POST', '/api/messages/new-conv', {
       message,
       orderId,
@@ -289,7 +291,7 @@ export class UserService extends BaseService {
     return response;
   }
 
-  async deleteAccount(userID: string|number, data = {}) {
+  async deleteAccount(userID: string | number, data = {}) {
     const response = await fetch(API_URL + `/delete/${userID}`, {
       method: 'POST',
       cache: 'no-cache',
@@ -332,4 +334,58 @@ export class UserService extends BaseService {
   async getProfileInsights(userId: number, age: number) {
     return await super.fetch('GET', `/user/${userId}/insights?age=${age}`);
   }
+
+
+  // checking if email already exist
+  async checkExistingEmail(email: string) {
+    const res = await fetch(` https://thenobo.com/api/users/exists/${email}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+
+    });
+
+    if (res.status === 404) {
+      console.log('404', res.json);
+    }
+
+    return res.json();
+  }
+
+
+
+  // signing up a user
+  async signup(person: SignUpType) {
+    console.log("the code  reaches service ", person)
+    const res = await fetch("https://thenobo.com/api/users/register",
+
+      {
+        method: 'POST',
+        cache: 'no-cache',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: person.firstName,
+          lastName: person.lastName,
+          email: person.email,
+          displayName: person.userName,
+          password: person.password
+        }),
+      });
+
+
+    if (res.status === 404) {
+      console.log('404', res.json);
+    }
+
+    return res.json();
+  }
+
+
+
+
+
+
 }

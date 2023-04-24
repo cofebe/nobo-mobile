@@ -4,58 +4,80 @@ import {
   IonRow,
   IonCol,
   IonGrid,
-  IonInput,
   useIonViewWillEnter,
 } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserService } from '../services/UserService';
-import { User } from '../models';
 import { loadingStore } from '../loading-store';
-
 import Input from '../components/Input';
+import './SignUp1.scss';
+import Button from '../components/Button';
 
-import './Login.scss';
 
-const Login: React.FC = () => {
+
+const SignUp1: React.FC = () => {
+  // email check...
+  const emailCheck = (email: string) => {
+    return /\S+@\S+\.\S+/.test(email)
+  }
+
   const history = useHistory();
   const userService = new UserService();
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [emailError, setEmailError] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
   useIonViewWillEnter(() => {
     setError(false);
   });
 
-  const login = () => {
+
+
+  const checkUserExist = () => {
+
     loadingStore.increment('Login:timeout');
-    userService
-      .login(email, password)
-      .then((user: User) => {
-        setTimeout(() => {
-          loadingStore.decrement('Login:timeout');
-          history.push(`/home/explore/${user.experiencePreferences}/explore`);
-        }, 3000);
+    userService.checkExistingEmail(email)
+      .then((user) => {
+        loadingStore.decrement('Login:timeout');
+        // console.log(user)
+        if (user.exists) {
+        console.log(email, " already exist ")
+          setError(true);
+          loadingStore.decrement('SignUp:timeout');
+        } else {
+         
+          history.push({ pathname: '/signup2', state: { firstName, lastName, email } })
+          loadingStore.decrement('SignUp:timeout');
+         }
+
       })
       .catch((err: any) => {
-        console.log('login error', err);
-        setError(true);
+        console.log('signup error', err);
+        loadingStore.decrement('SignUp:timeout');
+
       });
+
+ 
   };
 
+
+  //    input validation to avoid empty string or two characters input
   const validate = () => {
-    if (email && password) {
-      return true;
-    } else {
+    if (emailError || firstName.length < 3 || lastName.length < 3 || email.length < 3) {
       return false;
+    } else {
+      return true;
     }
   };
 
+
   return (
-    <IonPage className="nobo-login-page">
+    <IonPage className="nobo-signup-page">
       <div className="background-image">
-        <IonRow>
+        <IonRow >
           <IonCol size="2">
             <div
               onClick={() => {
@@ -76,14 +98,14 @@ const Login: React.FC = () => {
             style={{ display: 'flex' }}
           >
             <img
-              height={65}
+              height={60}
               src="assets/images/nobo-logo-white.png"
               alt="logo"
             />
           </IonCol>
         </IonRow>
-        <IonRow>
-          <IonGrid className="login-box">
+        <IonRow className='signup-box-container'>
+          <IonGrid className="signup-box">
             <IonRow
               style={{ paddingTop: 20 }}
               class="ion-justify-content-center"
@@ -96,20 +118,21 @@ const Login: React.FC = () => {
                   fontWeight: 400,
                   fontFamily: 'Baskerville',
                   letterSpacing: '.05rem',
+                  marginBottom: 30
                 }}
               >
-                LOGIN
+                SIGNUP
               </IonCol>
             </IonRow>
-            <IonRow>
-              <IonCol>
+            <IonRow >
+              <IonCol >
                 <Input
                   invalid={error}
-                  value={email}
+                  value={firstName}
                   className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
-                  placeholder="USERNAME"
+                  placeholder="FIRST NAME"
                   onChange={(val) => {
-                    setEmail(val);
+                    setFirstName(val);
                   }}
                 />
               </IonCol>
@@ -117,25 +140,57 @@ const Login: React.FC = () => {
             <IonRow>
               <IonCol>
                 <Input
+
                   invalid={error}
-                  // style={{
-                  //   border: error ? '1px solid red' : '',
-                  //   color: error ? 'red' : '',
-                  // }}
-                  value={password}
+                  value={lastName}
                   className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
-                  placeholder="PASSWORD"
-                  type="password"
-                  errorMessage={error ? 'Invalid username or password' : ''}
+                  placeholder="LASTNAME"
+                  type="text"
+                  // errorMessage={error ? 'Invalid username or password' : ''}
                   onChange={(val) => {
-                    setPassword(val);
+                    setLastName(val);
                   }}
                 ></Input>
               </IonCol>
             </IonRow>
             <IonRow>
-              <IonCol style={{ paddingBottom: 0 }}>
-                <IonButton
+              <IonCol>
+                <Input
+                  invalid={error}
+
+                  value={email}
+                  className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
+                  placeholder="EMAIL ADDRESS"
+                  type="email"
+                  errorMessage={error ? 'Email already in use' : ''}
+                  onChange={(val) => {
+                    setEmail(val);
+                    if (!emailCheck(val)) {
+                      setEmailError(true)
+                    } else {
+                      setEmailError(false)
+                    }
+                  }}
+                ></Input>
+              </IonCol>
+            </IonRow>
+            <IonRow >
+              <IonCol>By selecting agree and continue below, I agree to the
+                <IonCol style={{ color: 'goldenrod' }}> Terms of Service and Privacy</IonCol>
+              </IonCol>
+
+            </IonRow>
+            <IonRow>
+              <IonCol >
+              <Button
+              onClick={() => { checkUserExist() }}
+              label='REGISTER'
+              type='primary'
+              large={true}
+              className=''
+              disabled={!validate()}
+            />
+                {/* <IonButton
                   style={{
                     height: '51px',
                     fontFamily: 'Nunito Sans',
@@ -143,19 +198,19 @@ const Login: React.FC = () => {
                     fontWeight: '700',
                     lineHeight: '15px',
                   }}
-                  // id="open-subscription-modal"
+
                   onClick={() => {
-                    login();
+                    signup();
                   }}
-                  //   color={btnColor}
-                  // disabled={!isActive || isSubscribed}
+
+
                   disabled={!validate()}
                   type="submit"
                   expand="block"
                   className="nobo-button"
                 >
-                  CONTINUE
-                </IonButton>
+                  AGREE & CONTINUE
+                </IonButton> */}
               </IonCol>
             </IonRow>
             <IonRow style={{ paddingBottom: 12 }}>
@@ -169,9 +224,10 @@ const Login: React.FC = () => {
                   color: '#FFFFFF',
                 }}
               >
-                Don't have an account?
+                already have an account?
               </IonCol>
               <IonCol
+                onClick={() => history.push("/signin")}
                 size="4"
                 style={{
                   textDecorationLine: 'underline',
@@ -180,11 +236,8 @@ const Login: React.FC = () => {
                   color: '#D6980E',
                   fontSize: '15px',
                 }}
-                onClick={()=>{
-                  history.push("/signup1")
-                }}
               >
-                Sign Up
+                Sign In
               </IonCol>
             </IonRow>
           </IonGrid>
@@ -194,4 +247,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default SignUp1;
