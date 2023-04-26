@@ -1,11 +1,10 @@
 import {
-  IonButton,
   IonPage,
   IonRow,
   IonCol,
   IonGrid,
   useIonViewWillEnter,
-  IonContent,
+  // IonContent,
 } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -77,7 +76,7 @@ const SignUpDetails: React.FC = () => {
 
   return (
     <IonPage className="signup-details-container">
-      <IonContent scrollY={false}>
+      {/* <IonContent scrollY={false} translate='no'> */}
       <div className="signup-details-background-image">
         <div >
               <img
@@ -85,7 +84,7 @@ const SignUpDetails: React.FC = () => {
              onClick={() => {
               history.goBack();
             }}
-              // className='signup-details-goback'
+             
                 height={40}
                 src="assets/images/nobo-back-icon.png"
                 alt="logo"
@@ -127,6 +126,7 @@ const SignUpDetails: React.FC = () => {
             <IonRow >
               <IonCol >
                 <Input
+                type='text'
                   value={firstName}
                   className={`nobo-input`}
                   placeholder="FIRST NAME"
@@ -218,7 +218,7 @@ const SignUpDetails: React.FC = () => {
           </IonGrid>
         </IonRow>
       </div>
-      </IonContent>
+      {/* </IonContent> */}
     </IonPage>
   );
 };

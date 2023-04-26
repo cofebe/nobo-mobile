@@ -4,7 +4,6 @@ import {
   IonRow,
   IonCol,
   IonGrid,
-  IonInput,
   useIonViewWillEnter,
 } from '@ionic/react';
 import { useState } from 'react';
