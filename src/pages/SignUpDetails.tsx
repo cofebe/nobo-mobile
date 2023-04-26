@@ -76,16 +76,14 @@ const SignUpDetails: React.FC = () => {
 
 
   return (
-    <IonPage className="nobo-signup-page">
+    <IonPage className="signup-details-container">
       <IonContent scrollY={false}>
-      <div className="background-image">
+      <div className="signup-details-background-image">
         <div >
-         
-           
               <img
-              style={{ marginLeft:"5%", marginTop:"5%"}}
+              style={{ marginLeft:"5%", marginTop:"13%"}}
              onClick={() => {
-              history.push('/get-started');
+              history.goBack();
             }}
               // className='signup-details-goback'
                 height={40}
@@ -93,9 +91,8 @@ const SignUpDetails: React.FC = () => {
                 alt="logo"
               />
           
-        
         </div>
-        <IonRow className="logo-margin-top">
+        <IonRow className="signup-details-nobo-logo">
           <IonCol
             class="ion-justify-content-center"
             style={{ display: 'flex' }}
@@ -107,8 +104,8 @@ const SignUpDetails: React.FC = () => {
             />
           </IonCol>
         </IonRow>
-        <IonRow className='signup-box-container'>
-          <IonGrid className="signup-box">
+        <IonRow className='signup-details-box-container'>
+          <IonGrid className="signup-details-box">
             <IonRow
               style={{ paddingTop: 20 }}
               class="ion-justify-content-center"
@@ -130,9 +127,8 @@ const SignUpDetails: React.FC = () => {
             <IonRow >
               <IonCol >
                 <Input
-                  invalid={error}
                   value={firstName}
-                  className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
+                  className={`nobo-input`}
                   placeholder="FIRST NAME"
                   onChange={(val) => {
                     setFirstName(val);
@@ -144,12 +140,10 @@ const SignUpDetails: React.FC = () => {
               <IonCol>
                 <Input
 
-                  invalid={error}
                   value={lastName}
-                  className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
+                  className={`nobo-input `}
                   placeholder="LASTNAME"
                   type="text"
-                  // errorMessage={error ? 'Invalid username or password' : ''}
                   onChange={(val) => {
                     setLastName(val);
                   }}
@@ -160,7 +154,6 @@ const SignUpDetails: React.FC = () => {
               <IonCol>
                 <Input
                   invalid={error}
-
                   value={email}
                   className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
                   placeholder="EMAIL ADDRESS"
@@ -188,32 +181,11 @@ const SignUpDetails: React.FC = () => {
               <Button
               onClick={() => { checkUserExist() }}
               label='REGISTER'
-              type='primary'
               large={true}
               className=''
               disabled={!validate()}
             />
-                {/* <IonButton
-                  style={{
-                    height: '51px',
-                    fontFamily: 'Nunito Sans',
-                    fontSize: '15px',
-                    fontWeight: '700',
-                    lineHeight: '15px',
-                  }}
-
-                  onClick={() => {
-                    signup();
-                  }}
-
-
-                  disabled={!validate()}
-                  type="submit"
-                  expand="block"
-                  className="nobo-button"
-                >
-                  AGREE & CONTINUE
-                </IonButton> */}
+            
               </IonCol>
             </IonRow>
             <IonRow style={{ paddingBottom: 12 }}>

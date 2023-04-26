@@ -37,6 +37,10 @@ import PrimarySport from './pages/PrimarySport';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
 import PostDetail from './pages/PostDetail';
 import ListItem from './pages/ListItem';
+import Experience from './pages/Experience';
+import SignUpDetails from './pages/SignUpDetails';
+import SignUp from './pages/SignUp';
+import ProfilePicture from './pages/ProfilePicture';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -58,10 +62,8 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import OfferComplete from './pages/OfferComplete';
-import Experience from './pages/Experience';
-import SelectSize from './pages/SelectSize';
-import SignUpDetails from './pages/SignUpDetails';
-import SignUp from './pages/SignUp';
+
+
 
 
 setupIonicReact({
@@ -213,8 +215,8 @@ const App: React.FC = () => {
             <Route path="/experience" exact={true}>
               <Experience />
             </Route>
-            <Route path="/experience/select-size" exact={true}>
-              <SelectSize />
+            <Route path="/experience/profile-picture" exact={true}>
+              <ProfilePicture />
             </Route>
             <Route path="/forgot" exact={true}>
               <Forgot />
@@ -225,6 +227,7 @@ const App: React.FC = () => {
             <Route path="/signup-roles" exact={true}>
               <Roles />
             </Route>
+           
             <Route path="/signup-athlete" exact={true}>
               <SignUpAthlete />
             </Route>

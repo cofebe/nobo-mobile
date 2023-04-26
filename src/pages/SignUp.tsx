@@ -77,17 +77,16 @@ const SignUp = () => {
     }
   };
 
-console.log(history.location.state)
 
   return (
-    <IonPage className="main-container">
+    <IonPage className="signup-container">
       <IonContent className='signup-ion-content' >
 
         <div className='signup-header'  >
 
           <img
             onClick={() => { history.push("/signup-details") }}
-            className='nobo-signup-back-btn'
+            className='signup-back-btn'
             style={{ color: "#fff" }}
             height={40}
             src="assets/images/nobo-back-icon.png"
@@ -96,20 +95,20 @@ console.log(history.location.state)
 
           <img
         
-            className='nobo-signup-logo'
+            className='signup-logo'
             src="assets/images/nobo-logo-white.png"
             alt="logo"
           />
         </div>
-        <IonRow className="get-registered-container">
-          <IonCol className='get-registered' >GET REGISTERED</IonCol>
+        <IonRow >
+          <IonCol className='signup-title' >GET REGISTERED</IonCol>
         </IonRow>
         <IonGrid className='form-grid' style={{marginTop:"150px"}} >
 
           <IonRow style={{width:"85%", margin:"auto"}} >
             <IonCol  >
               <Input
-             
+             errorMessage={error ? 'Username already in use' : ''}
                 invalid={error}
                 value={person.userName}
                 className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
@@ -120,7 +119,7 @@ console.log(history.location.state)
           </IonRow >
           <IonRow style={{width:"85%", margin:"auto"}}>
             <IonCol>
-              <IonLabel className='signup-info' >
+              <IonLabel className='signup-privacy-info' >
                 For privacy concerns, your username cannot be your email, it will
                 be displayed in your style feed, account selection, and reviews
               </IonLabel>
@@ -130,7 +129,6 @@ console.log(history.location.state)
           <IonRow style={{width:"85%", margin:"auto"}}>
             <IonCol >
               <Input
-                invalid={error}
                 value={person.password}
                 className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
                 placeholder="PASSWORD"
@@ -143,11 +141,9 @@ console.log(history.location.state)
             <IonCol >
 
               <Input
-                invalid={error}
                 value={person.comfirmPassword}
                 className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
                 placeholder="COMFIRM PASSWORD"
-                errorMessage={error ? 'Username already in use' : ''}
                 onChange={(val) => { setPerson({ ...person, comfirmPassword: val }) }}
               ></Input>
             </IonCol>
@@ -181,15 +177,11 @@ console.log(history.location.state)
               label='REGISTER'
               type='primary'
               large={true}
-               disabled={validate()}
+                disabled={validate()}
             />
 
           </IonCol>
         </IonRow>
-
-
-
-
       </IonContent>
     </IonPage>
   );

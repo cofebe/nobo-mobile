@@ -496,26 +496,26 @@ export interface SignUpType{
 }
 // response type from experiencePrefrences
 interface CurrentUser {
-  "blurbText": string
-  "reviews": []
-  "_id": string
-  "firstName": string
-  "lastName": string
-  "email": string
-  "displayName": string
-  "avatar": string
-  "shippingAddress": [],
-  "profileBg": string
-  "emailVerified": boolean
-  "blocked": boolean
-  "saleSchedule": []
-  "role": string
-  "favorites": []
-  "followers": []
-  "following": []
-  "favoriteBrands": []
-  "notifications": []
-  "unfinishedOnboardActivity": string
+  blurbText: string
+  reviews: []
+id: string
+  firstName: string
+  lastName: string
+  email: string
+  displayName: string
+  avatar: string
+  shippingAddress: [],
+  profileBg: string
+  emailVerified: boolean
+  blocked: boolean
+  saleSchedule: []
+  role: string
+  favorites: []
+  followers: []
+  following: []
+  favoriteBrands: []
+  notifications: []
+  unfinishedOnboardActivity: string
   experiencePreferences:string
 }
 
