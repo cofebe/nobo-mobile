@@ -33,6 +33,8 @@ import ContactUs from './pages/ContactUs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
 import Settings from './pages/Settings';
+import SettingsShipping from './pages/SettingsShipping';
+import SettingsPayment from './pages/SettingsPayment';
 import ManageSubscription from './pages/ManageSubscription';
 import PrimarySport from './pages/PrimarySport';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
@@ -199,9 +201,15 @@ const App: React.FC = () => {
             <Route path="/settings" exact={true}>
               <Settings />
             </Route>
+            <Route path="/settings/shipping" exact={true}>
+              <SettingsShipping />
+            </Route>
+            <Route path="/settings/payment" exact={true}>
+              <SettingsPayment />
+            </Route>
 
             {/* URP */}
-           
+
             <Route path="/signup1" exact={true}>
               <SignUp1 />
             </Route>

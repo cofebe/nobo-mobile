@@ -2,6 +2,7 @@ import { BaseService } from './BaseService';
 import { environment } from '../environments/environment';
 import { AuthService } from './AuthService';
 import {
+  Address,
   AddressRequest,
   Conversation,
   CreateShippingAddressResponse,
@@ -202,9 +203,30 @@ export class UserService extends BaseService {
     return json.currentUser;
   }
 
+  async updateShippingAddress(data: Address, index: number): Promise<User> {
+    const body = {
+      action: 'update',
+      address: data,
+      index,
+    };
+    const res = await super.fetch('POST', '/api/users/shipping-address', body);
+    const json: CreateShippingAddressResponse = await res.json();
+    return json.currentUser;
+  }
+
   async setDefaultShippingAddress(index: number): Promise<User> {
     const body = {
       action: 'default',
+      index,
+    };
+    const res = await super.fetch('POST', '/api/users/shipping-address', body);
+    const json: CreateShippingAddressResponse = await res.json();
+    return json.currentUser;
+  }
+
+  async removeShippingAddress(index: number): Promise<User> {
+    const body = {
+      action: 'remove',
       index,
     };
     const res = await super.fetch('POST', '/api/users/shipping-address', body);
@@ -229,6 +251,15 @@ export class UserService extends BaseService {
       cardID: id,
     };
     const res = await super.fetch('POST', '/api/orders/default-payment-method', body);
+    const json: SuccessResponse = await res.json();
+    return json.success;
+  }
+
+  async removePaymentMethod(id: string): Promise<boolean> {
+    const body = {
+      cardID: id,
+    };
+    const res = await super.fetch('POST', '/api/orders/remove-payment-method', body);
     const json: SuccessResponse = await res.json();
     return json.success;
   }

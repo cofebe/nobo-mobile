@@ -17,12 +17,14 @@ import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
 
 export interface CreateShippingAddressModalProps {
+  address?: Address;
+  index?: number;
   onClose: (addresses: Address[]) => void;
 };
 
 export type Ref = HTMLIonModalElement;
 
-const CreateShippingAddressModal = forwardRef<Ref, CreateShippingAddressModalProps>(({ onClose }, ref) => {
+const CreateShippingAddressModal = forwardRef<Ref, CreateShippingAddressModalProps>(({ address, index, onClose }, ref) => {
   const userService = new UserService();
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
@@ -34,10 +36,28 @@ const CreateShippingAddressModal = forwardRef<Ref, CreateShippingAddressModalPro
   const [phone, setPhone] = useState<string>('');
   const [notes, setNotes] = useState<string>('');
   const [isDefault, setIsDefault] = useState<boolean>(false);
+  const [showDefault, setShowDefault] = useState<boolean>(true);
+  const [label, setLabel] = useState<string>('New Shipping Address');
 
   useEffect(() => {
     reset();
   }, []);
+
+  useEffect(() => {
+    setFirstName(address?.firstName || '');
+    setLastName(address?.lastName || '');
+    setAddress1(address?.address1 || '');
+    setAddress2(address?.address2 || '');
+    setCity(address?.city || '');
+    setState(address?.state || '');
+    setPostalCode(address?.postalCode || '');
+    setPhone(address?.phone || '');
+    setNotes(address?.notes || '');
+    setIsDefault(address?.default || false);
+
+    setShowDefault(!address);
+    setLabel((address ? 'Edit' : 'New') + ' Shipping Address');
+  }, [address]);
 
   function validate() {
     return !!firstName && !!lastName && !!address1 && !!city && !!state && !!state && !!postalCode && !!phone;
@@ -46,31 +66,49 @@ const CreateShippingAddressModal = forwardRef<Ref, CreateShippingAddressModalPro
   function submit(e: Event) {
     e.preventDefault();
     e.stopPropagation();
-    const addr: AddressRequest = {
-      firstName,
-      lastName,
-      address1,
-      address2,
-      city,
-      state,
-      postalCode,
-      phone,
-      notes,
-    };
-    console.log('Creating address', addr);
-    userService.addShippingAddress(addr)
-      .then((user: User) => {
-        if (isDefault) {
-          userService.setDefaultShippingAddress(user.shippingAddress.length - 1)
-            .then((user: User) => {
-              reset();
-              onClose(user.shippingAddress);
-            });
-        } else {
+    if (address) {
+      address.firstName = firstName;
+      address.lastName = lastName;
+      address.address1 = address1;
+      address.address2 = address2;
+      address.city = city;
+      address.state = state;
+      address.postalCode = postalCode;
+      address.phone = phone;
+      address.notes = notes;
+      console.log('Editing address', address);
+      userService.updateShippingAddress(address, index!)
+        .then((user: User) => {
           reset();
           onClose(user.shippingAddress);
-        }
-      });
+        });
+    } else {
+      const addr: AddressRequest = {
+        firstName,
+        lastName,
+        address1,
+        address2,
+        city,
+        state,
+        postalCode,
+        phone,
+        notes,
+      };
+      console.log('Creating address', addr);
+      userService.addShippingAddress(addr)
+        .then((user: User) => {
+          if (isDefault) {
+            userService.setDefaultShippingAddress(user.shippingAddress.length - 1)
+              .then((user: User) => {
+                reset();
+                onClose(user.shippingAddress);
+              });
+          } else {
+            reset();
+            onClose(user.shippingAddress);
+          }
+        });
+    }
   }
 
   function reset() {
@@ -93,7 +131,7 @@ const CreateShippingAddressModal = forwardRef<Ref, CreateShippingAddressModalPro
           <IonGrid>
             <IonRow>
               <IonCol size="12">
-                New Shipping Address
+                {label}
               </IonCol>
             </IonRow>
           </IonGrid>
@@ -188,15 +226,17 @@ const CreateShippingAddressModal = forwardRef<Ref, CreateShippingAddressModalPro
               />
             </IonCol>
           </IonRow>
-          <IonRow className="checkbox">
-            <IonCol>
-              <Checkbox
-                value={isDefault}
-                label="Set as defult shipping address"
-                onChange={(val) => setIsDefault(val)}
-              />
-            </IonCol>
-          </IonRow>
+          {showDefault && (
+            <IonRow className="checkbox">
+              <IonCol>
+                <Checkbox
+                  value={isDefault}
+                  label="Set as defult shipping address"
+                  onChange={(val) => setIsDefault(val)}
+                />
+              </IonCol>
+            </IonRow>
+          )}
           <IonRow className="buttons">
             <IonCol>
               <Button label="Save" large={true} disabled={!validate()} onClick={(e) => submit(e)} />

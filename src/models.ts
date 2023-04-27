@@ -5,7 +5,7 @@ export interface LoginResponse {
 }
 export interface SignUpResponse {
   success: boolean;
- 
+
 }
 
 export interface User {
@@ -39,8 +39,8 @@ export interface User {
 }
 export interface SignUpUser {
   exist: number;
- 
- 
+
+
 }
 
 export interface UserReview {
@@ -67,6 +67,7 @@ export interface Address {
   phone: string;
   postalCode: string;
   state: string;
+  notes: string;
   _id: string;
 }
 
@@ -482,13 +483,11 @@ export interface Conversation {
   _id: string;
 }
 
-export interface SignUpType{
-
+export interface SignUpType {
   firstName:string
   lastName:string
   email:string
   userName:string
   password:string
   comfirmPassword:string
- 
 }
