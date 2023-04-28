@@ -46,7 +46,7 @@
     width: 80%;
     line-height: 18px;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 14px;
     color: gray;
 
     text-align: center;
@@ -54,7 +54,7 @@
 
   .photo-button-container {
     margin-top: 30px;
-    position: relative;
+    //  position: absolute;
     height: 160px;
     width: 160px;
   }
@@ -68,8 +68,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 42vh;
+    margin-top: 62%;
     margin-bottom: -10px;
+    // background-color: aqua;
+  }
+  .profile-picture-skip-container2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 58%;
+    margin-bottom: -10px;
+    // background-color: aqua;
   }
 
   .profile-picture-skip-text {
@@ -83,5 +92,59 @@
     width: 350px;
 
     margin-top: 20px;
+  }
+
+  .profile-picture-preview-image {
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+    // right: 0;
+    // bottom: 0;
+    // background-size: contain !important;
+    border-radius: 50%;
+    left: 14%;
+    top: 15%;
+    height: 220px;
+    width: 220px;
+    position: absolute;
+  }
+
+  .profile-picture-parent {
+    margin-top: 30px;
+    position: relative;
+    height: 150px;
+    width: 150px;
+    background-color: gray;
+  }
+
+  .profile-picture-circle {
+    position: absolute;
+  }
+
+  .profile-picture-preview-container {
+    position: absolute;
+    top: 0.5%;
+    border-radius: 50%;
+    // height: 200px;
+    // width: 200px;
+
+    // left: 0;
+    // right: 0;
+    // bottom: 0;
+    // background-size: contain !important;
+  }
+  .profile-picture-image-cropper {
+    // margin-left: 50px;
+    position: absolute;
+    top: 30%;
+    left: 37.4%;
+  }
+  .profile-picture-cropper {
+  }
+
+  .profile-picture-cropper-info {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 10px;
   }
 }

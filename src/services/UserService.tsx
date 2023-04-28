@@ -401,8 +401,29 @@ async experience(experienceOption:string, token:string){
   }
  return res.json()
 
-  
+   
 }
+
+
+ //upload profile photo
+
+ async uploadProfileImg(token:string,  fileName:string){
+  console.log({info:"the userService section",token, fileName })
+//   const formData = new FormData()
+//   formData.append("name", name)
+//   formData.append("fileName", fileName)
+//   const config ={
+//     method:"POST",
+//     headers:{
+//       "Content-Type":`multipart/form-data; boundary=----WebKitFormBoundarywxC4ByZU7Qwb7FHL`, 
+//       "Content-Disposition": attachment; filename="cool.html"
+//      Authorization:`Bearer ${token}`,
+//     },
+//     body:formData
+//   }
+// const response  = await fetch("https://thenobo.com/api/files/upload", config)
+
+ }
 
 
 
