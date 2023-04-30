@@ -75,7 +75,7 @@ const Login: React.FC = () => {
             style={{ display: 'flex' }}
           >
             <img
-              height={65}
+              height={60}
               src="assets/images/nobo-logo-white.png"
               alt="logo"
             />

@@ -312,15 +312,15 @@ export class UserService extends BaseService {
   }
 
   async followUser(userId: string) {
-    return await super.fetch('POST', `/api/users/follow`, {userId});
+    return await super.fetch('POST', `/api/users/follow`, { userId });
   }
 
   async getFollowers(userId: string) {
-    return await super.fetch('POST', `/api/users/get-follows`, {userId});
+    return await super.fetch('POST', `/api/users/get-follows`, { userId });
   }
 
   async removeFollowUser(userId: string) {
-    return await super.fetch('POST', `/api/users/unfollow`, {userId});
+    return await super.fetch('POST', `/api/users/unfollow`, { userId });
   }
 
   async getUserPraise(userId: number) {
@@ -385,50 +385,57 @@ export class UserService extends BaseService {
 
 
   // experience
-async experience(experienceOption:string, token:string){
-  const config ={
-    method:"POST",
-    headers:{
-     "Content-Type":"application/json",
-     Authorization:`Bearer ${token}`,
-    },
-     body:JSON.stringify({"experiencePreferences":experienceOption})
+  async experience(experienceOption: string, token: string) {
+    const config = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ "experiencePreferences": experienceOption })
+    }
+    const res = await fetch(`https://thenobo.com/api/users/me`, config)
+
+    if (res.status === 500) {
+      console.log('500 ', res.json());
+    }
+    return res.json()
+
+
   }
-  const res = await fetch(`https://thenobo.com/api/users/me`,config)
 
-  if (res.status === 500) {
-    console.log('500 ', res.json());
+
+  //upload profile photo
+
+
+
+
+  async uploadProfileImg(token: string, data: any) {
+
+    const url = 'https://thenobo.com/api/users/update-avatar'
+    try {
+      console.log({ info: "the userService section" })
+      const config = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+       body: JSON.stringify({ "imgUrl": data })
+
+      }
+      const response = await fetch(url, config)
+      return response.json()
+    } catch (error) {
+      console.log("err from userService response", error)
+    }
+
   }
- return res.json()
-
-   
-}
-
-
- //upload profile photo
-
- async uploadProfileImg(token:string,  fileName:string){
-  console.log({info:"the userService section",token, fileName })
-//   const formData = new FormData()
-//   formData.append("name", name)
-//   formData.append("fileName", fileName)
-//   const config ={
-//     method:"POST",
-//     headers:{
-//       "Content-Type":`multipart/form-data; boundary=----WebKitFormBoundarywxC4ByZU7Qwb7FHL`, 
-//       "Content-Disposition": attachment; filename="cool.html"
-//      Authorization:`Bearer ${token}`,
-//     },
-//     body:formData
-//   }
-// const response  = await fetch("https://thenobo.com/api/files/upload", config)
-
- }
 
 
 
 
- 
+
 
 
 

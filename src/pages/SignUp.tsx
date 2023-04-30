@@ -37,6 +37,7 @@ const SignUp = () => {
   });
 
   const signup = () => {
+    if(person.password !== person.comfirmPassword) return
     loadingStore.increment("Signup:timeout");
 
     userService
@@ -63,8 +64,7 @@ const SignUp = () => {
     if (
       person.userName.length < 3 ||
       person.password.length < 6 ||
-      person.comfirmPassword.length < 6 ||
-      person.password !== person.comfirmPassword
+      person.comfirmPassword.length < 6
     ) {
       return true;
     } else {
@@ -143,9 +143,10 @@ const SignUp = () => {
           <IonRow style={{ width: "85%", margin: "auto" }}>
             <IonCol>
               <Input
+                errorMessage={person.password !== person.comfirmPassword  ? "password mismatch" : ""}
                 type="password"
                 value={person.comfirmPassword}
-                className={`nobo-input ${error ? "invalid-text-color" : ""}`}
+                className={`nobo-input ${person.password !== person.comfirmPassword ? "invalid-text-color" : ""}`}
                 placeholder="COMFIRM PASSWORD"
                 onChange={(val) => {
                   setPerson({ ...person, comfirmPassword: val });
