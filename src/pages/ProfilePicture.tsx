@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import {
   IonContent,
@@ -16,23 +16,15 @@ import Button from "../components/Button";
 import "cropperjs/dist/cropper.css";
 import { loadingStore } from "../loading-store";
 import { UserService } from "../services/UserService";
-
-
-interface UserPhoto {
-  filepath: string;
-  webviewPath?: string;
-
-}
+import { Cropper } from "react-cropper";
 
 
 const ProfilePicture: React.FC = () => {
   const userService = new UserService()
   const history = useHistory();
-
-  const [cameraPhoto, setCameraPhoto] = useState<UserPhoto[]>([])
-
-
-
+  const [profilePicData, setProfilePicData] = useState(Object);
+  const [profilePicPreview, setProfilePicPreview] = useState('');
+  const [toggleCropper, setToggleCropper] = useState(false);
 
   const takePhoto = async () => {
     const photo = await Camera.getPhoto({
@@ -40,53 +32,117 @@ const ProfilePicture: React.FC = () => {
       source: CameraSource.Camera,
       quality: 100,
     });
+    setToggleCropper(true)
+    setProfilePicData(photo)
+    // const fileName = new Date().getTime() + '.jpeg';
+    // const newPhotos = [
+    //   {
+    //     filepath: fileName,
+    //     webviewPath: photo.base64String,
+    //   },
 
-    const fileName = new Date().getTime() + '.jpeg';
-    const newPhotos = [
-      {
-        filepath: fileName,
-        webviewPath: photo.base64String,
-      },
-
-    ];
-    setCameraPhoto(newPhotos);
+    // ];
+    // setCameraPhoto(newPhotos);
 
   };
+
+  const handleSubmit = async () => {
+    history.push("/experience/profile-picture/follow-people")
+
+    // const imgData = profilePicPreview.split(",")[1]
+    // console.log(" check the string data", imgData)
+    // const userToken = localStorage.getItem("userToken");
+    // if (userToken) {
+    //   const token = JSON.parse(userToken);
+    //   loadingStore.increment("Experience:timeout");
+    //   userService.uploadProfileImg(token, imgData)
+    //     .then((res) => res)
+    //     .then((res) => {
+    //       if (res?.url) {
+    //         console.log("response is ok 200")
+    //         loadingStore.decrement("SignUp:timeout");
+    //         history.push("//experience/profile-picture/follow-people")
+    //       }
+
+
+    //     })
+    //     .catch((err: any) => {
+    //       loadingStore.decrement("SignUp:timeout");
+    //       console.log(" ProfilePicture error", err);
+    //     });
+    // } else {
+    //   return console.log("no token found");
+    // }
+  };
+
+
 
 
   // clear the photo to take another
   const clearCameraPhoto = () => {
-    setCameraPhoto([]);
+    setProfilePicPreview('');
   }
 
-  const handleSubmit = async () => {
-    //  console.log(cameraPhoto[0]?.webviewPath)
-    let filename: any = cameraPhoto[0]?.webviewPath
-    const name: any = cameraPhoto[0]?.filepath
-    const formData = new FormData()
-    formData.append("name", filename)
-    formData.append("filename", name)
 
-    const userToken = localStorage.getItem("userToken");
-    if (userToken) {
-      const token = JSON.parse(userToken);
-      loadingStore.increment("Experience:timeout");
-      userService.uploadProfileImg(token, filename)
-        .then((res) => res)
-        .then((res) => {
-          if( res?.url){
-            console.log("response is ok 200")
-            loadingStore.decrement("SignUp:timeout");
-          }
-        
 
-        })
-        .catch((err: any) => {
-          loadingStore.decrement("SignUp:timeout");
-          console.log(" ProfilePicture error", err);
-        });
-    } else {
-      return console.log("no token found");
+
+  async function executeProfilePicCrop() {
+    const imageElement: any = cropperRef?.current;
+    const cropper: any = imageElement?.cropper;
+    if (cropper) {
+      let canvas = cropper.getCroppedCanvas({ maxWidth: 800, maxHeight: 800 });
+      canvas.toBlob(function (blob: any) {
+        let reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = function () {
+          // attempt to shrink image
+          let tempImage: any = new Image();
+          tempImage.src = reader.result;
+          setTimeout(() => {
+            let maxWidth = 400;
+            let maxHeight = 300;
+            let height = tempImage.height;
+            let width = tempImage.width;
+            if (height > maxHeight) {
+              width = width / (height / maxHeight);
+              height = maxHeight;
+            }
+            if (width > maxHeight) {
+              height = height / (width / maxWidth);
+              width = maxWidth;
+            }
+            let c = document.createElement('canvas');
+            c.width = width;
+            c.height = height;
+            let ctx = c.getContext('2d');
+            ctx?.drawImage(tempImage, 0, 0, width, height);
+
+            let b64str = c.toDataURL('image/jpeg');
+            let base64data = b64str; //(reader.result || "").toString();
+
+            setProfilePicData({
+              ...profilePicData,
+              format: 'png',
+              base64String: base64data.split(',')[1],
+            });
+            setProfilePicPreview(base64data);
+          }, 500);
+        };
+      });
+    }
+    setToggleCropper(false);
+  }
+
+
+  const cropperRef = useRef<HTMLImageElement>(null);
+  const onPhotoCrop = async () => {
+    const imageElement: any = cropperRef?.current;
+    const cropper: any = imageElement?.cropper;
+    if (cropper) {
+      /*let canvas =*/ cropper.getCroppedCanvas({
+      maxWidth: 800,
+      maxHeight: 800,
+    });
     }
   };
 
@@ -94,7 +150,7 @@ const ProfilePicture: React.FC = () => {
 
 
   return (
-    <IonPage className="profile-picture-main-container">
+    <IonPage id="profile-picture-page" className="profile-picture-main-container">
       <IonContent className="profile-picture-ion-content">
         <div className="profile-picture-header">
           <img
@@ -134,44 +190,46 @@ const ProfilePicture: React.FC = () => {
         >
 
 
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "transparent", height: "300px", width: "300px", position: "relative" }}>
+          <div className="profile-picture-image-container" >
 
-            <div style={{ position: "absolute", top: "16%", left: "16%" }}>
-              <img
-                className=""
-                src="assets/images/nobo-profile-upload-circle.png"
-                alt=""
-              />
+            {toggleCropper || profilePicPreview.length > 3 ? "" : (<div style={{ position: "relative", }}>
+              <IonRow >
+                <IonCol>
+                  <img
+                    className=""
+                    src="assets/images/nobo-profile-upload-circle.png"
+                    alt=""
+                  />
+                </IonCol>
 
-            </div>
+                {toggleCropper || profilePicPreview.length > 3 ? "" : (<IonCol style={{ position: "absolute", top: "35%", left: "35%" }} >
+                  <img
+                    onClick={(e) => {
+                      e.preventDefault();
+                      // uploadProfilePic();
+                      takePhoto()
+                      console.log("starting... camera")
+                    }}
+                    src="assets/images/nobo-profile-upload-plus.png"
+                    alt=""
+                  />
+                </IonCol>)}
 
-
-            <div style={{ position: "absolute", top: "40%", left: "40%" }} >
-              <img
-                onClick={(e) => {
-                  e.preventDefault();
-                  // uploadProfilePic();
-                  takePhoto()
-                  console.log("starting camera")
-                }}
-                src="assets/images/nobo-profile-upload-plus.png"
-                alt=""
-              />
-            </div>
-
-
-            {/* PROFILE PICTURE DISPLAY */}
-            {cameraPhoto[0] && (<div className="profile-picture-preview-image"  >
-
-
-              <img src={`data:image/png;base64,${cameraPhoto[0]?.webviewPath}`} alt=""
-                className='img'
-
-              />
+              </IonRow>
 
 
             </div>)}
-            {cameraPhoto[0] && (<div style={{ height: '40px ', width: "40px", position: "absolute", left: "70%", top: "20%" }}
+
+
+
+            {/* PROFILE PICTURE DISPLAY */}
+            {profilePicPreview !== '' && (
+              <div className="profile-picture-preview-image">
+                <img className='profile-photo-img' src={`${profilePicPreview}`} alt="" />
+              </div>
+            )}
+
+            {profilePicPreview !== '' && (<div style={{ height: '40px ', width: "40px", position: "absolute", left: "70%", top: "20%" }}
               onClick={(e) => {
                 e.preventDefault();
                 clearCameraPhoto()
@@ -180,32 +238,49 @@ const ProfilePicture: React.FC = () => {
               <img src="assets/images/close-black.svg" alt="close" />
             </div>)}
 
-            {/* CROPPER */}
 
-            {/* {cameraPhoto[0] && (<div style={{ borderRadius: '50%', backgroundColor: "papayawhip", height: 250, width: 250, position: "relative", display: "flex", alignItems: "center", justifyContent: "center", }}>
-              <Cropper
-              
-                image={`data:image/png;base64,${cameraPhoto[0].webviewPath}`}
-                // image={`assets/images/nobo-profile-upload-plus.png`}
-                crop={crop2}
-                zoom={zoom2}
-                aspect={1}
-                onCropChange={setCrop2}
-                onCropComplete={onCropComplete}
-                onZoomChange={setZoom2}
-                objectFit="horizontal-cover"
-                cropShape="round"
-              />
-            </div>)} */}
+            {toggleCropper && (
+              <div
+                className="profile-picture-image-cropper" >
+                <Cropper
+                  className="profile-picture-cropper"
+                  src={`data:image/png;base64,${profilePicData?.base64String}`}
+                  // CropperJS options
+                  style={{ height: '200px', borderRadius: "50%", }}
+                  initialAspectRatio={75 / 75}
+                  guides={false}
+                  crop={onPhotoCrop}
+                  // autoCropArea={1}
+                  dragMode="move"
+                  ref={cropperRef}
+                  cropBoxMovable={false}
+                  cropBoxResizable={false}
+                  toggleDragModeOnDblclick={false}
+                  highlight={false}
+                />
+              </div>
+            )}
+
+
           </div>
 
+          {toggleCropper && (<IonRow className="profile-picture-crop-done" >
+            <IonCol style={{ textAlign: "center" }}>Drag photo to crop </IonCol>
+            <IonButton onClick={(e) => {
+              e.preventDefault();
+              executeProfilePicCrop();
+            }} style={{ color: "black" }} shape="round" size="large" color="medium">DONE</IonButton>
+          </IonRow>)}
         </IonRow >
         <IonGrid>
         </IonGrid>
 
+        <IonRow className={toggleCropper ? "profile-picture-skip-container" : "profile-picture-skip-container2"}>
+          <IonCol className="profile-picture-skip-text"
+            onClick={() => {
 
-        <IonRow className="profile-picture-skip-container">
-          <IonCol className="profile-picture-skip-text">SKIP FOR NOW</IonCol>
+            }}
+          >SKIP FOR NOW</IonCol>
         </IonRow>
 
         <div className="profile-picture-btn-container">
@@ -214,7 +289,7 @@ const ProfilePicture: React.FC = () => {
             label="NEXT"
             large
             onClick={handleSubmit}
-          // disabled=
+            disabled={profilePicPreview === ""}
           />
         </div>
       </IonContent>

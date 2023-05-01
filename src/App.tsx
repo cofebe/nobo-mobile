@@ -41,6 +41,8 @@ import Experience from './pages/Experience';
 import SignUpDetails from './pages/SignUpDetails';
 import SignUp from './pages/SignUp';
 import ProfilePicture from './pages/ProfilePicture';
+import FollowPeople from './pages/FollowPeople';
+
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -217,6 +219,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/experience/profile-picture" exact={true}>
               <ProfilePicture />
+            </Route>
+            <Route path="/experience/profile-picture/follow-people" exact={true}>
+              <FollowPeople />
             </Route>
             <Route path="/forgot" exact={true}>
               <Forgot />

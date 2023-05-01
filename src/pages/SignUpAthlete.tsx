@@ -660,11 +660,11 @@ const SignUpAthlete: React.FC<Props> = (props) => {
         let pathUserId = getUserId();
         setProfilePicPreview(
           data.basic_user_profile.profile_image?.String ||
-            `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/pictures/${pathUserId}/profile.jpeg?fail`
+          `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/pictures/${pathUserId}/profile.jpeg?fail`
         );
         setBannerPicPreview(
           data.basic_user_profile.banner_image?.String ||
-            `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/pictures/${pathUserId}/banner.jpeg?fail`
+          `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/pictures/${pathUserId}/banner.jpeg?fail`
         );
         setCity(basicInfo?.basic_user_profile?.city?.String);
         setClassYear(basicInfo?.basic_user_profile?.class_year?.String);
@@ -983,9 +983,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
     const cropper: any = imageElement?.cropper;
     if (cropper) {
       /*let canvas =*/ cropper.getCroppedCanvas({
-        maxWidth: 800,
-        maxHeight: 800,
-      });
+      maxWidth: 800,
+      maxHeight: 800,
+    });
     }
   };
 
@@ -995,9 +995,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
     const cropperBanner: any = imageElement?.cropper;
     if (cropperBanner) {
       /*let canvas =*/ cropperBanner.getCroppedCanvas({
-        maxWidth: 800,
-        maxHeight: 800,
-      });
+      maxWidth: 800,
+      maxHeight: 800,
+    });
     }
   };
 
@@ -1236,14 +1236,14 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       city: city ? city : profile.basic_user_profile?.city.String,
       social_links: allSocialLinksValid
         ? [
-            socialLinkInstagram,
-            socialLinkTwitter,
-            socialLinkTikTok,
-            socialLinkHudl,
-            socialLink247Sports,
-            socialLinkRivals,
-            socialLinkMaxPreps,
-          ]
+          socialLinkInstagram,
+          socialLinkTwitter,
+          socialLinkTikTok,
+          socialLinkHudl,
+          socialLink247Sports,
+          socialLinkRivals,
+          socialLinkMaxPreps,
+        ]
         : [],
       bio: bio ? bio : profile.basic_user_profile?.bio.String,
       rating:
@@ -1263,16 +1263,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       //   : awardsArray,
       athlete_experiences:
         JSON.stringify(previousTeams) ===
-        JSON.stringify([
-          {
-            startYear: '',
-            endYear: '',
-            position: '',
-            school: '',
-            city: '',
-            state: '',
-          },
-        ])
+          JSON.stringify([
+            {
+              startYear: '',
+              endYear: '',
+              position: '',
+              school: '',
+              city: '',
+              state: '',
+            },
+          ])
           ? []
           : previousTeams,
       highlights: [
@@ -1361,8 +1361,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       // alert("To continue, please correct the following:\r\n" + correctionSummary);
       showError(
         '<div>To continue, please correct the following: <br/><br/>' +
-          correctionSummary +
-          '<div>'
+        correctionSummary +
+        '<div>'
       );
     }
   }
@@ -1396,14 +1396,14 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       city: city,
       social_links: allSocialLinksValid
         ? [
-            socialLinkInstagram,
-            socialLinkTwitter,
-            socialLinkTikTok,
-            socialLinkHudl,
-            socialLink247Sports,
-            socialLinkRivals,
-            socialLinkMaxPreps,
-          ]
+          socialLinkInstagram,
+          socialLinkTwitter,
+          socialLinkTikTok,
+          socialLinkHudl,
+          socialLink247Sports,
+          socialLinkRivals,
+          socialLinkMaxPreps,
+        ]
         : [],
       bio: bio,
       rating: yourRating,
@@ -1415,16 +1415,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       athlete_awards: awardsString,
       athlete_experiences:
         JSON.stringify(previousTeams) ===
-        JSON.stringify([
-          {
-            startYear: '',
-            endYear: '',
-            position: '',
-            school: '',
-            city: '',
-            state: '',
-          },
-        ])
+          JSON.stringify([
+            {
+              startYear: '',
+              endYear: '',
+              position: '',
+              school: '',
+              city: '',
+              state: '',
+            },
+          ])
           ? []
           : previousTeams,
       highlights: [
@@ -1513,8 +1513,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       // alert("To continue, please correct the following:\r\n" + correctionSummary);
       showError(
         '<div>To continue, please correct the following: <br/><br/>' +
-          correctionSummary +
-          '<div>'
+        correctionSummary +
+        '<div>'
       );
     }
   }
@@ -3355,189 +3355,189 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           )}
                           {(isSectionActive('msoccer') ||
                             isSectionActive('wsoccer')) && (
-                            <UrpSelect
-                              value={awards[index].award}
-                              placeholder="Select Award"
-                              border={true}
-                              onChange={(e) => {
-                                const newAwards = [...awards];
-                                const event = e?.length ? e[0] : '';
-                                if (
-                                  event !== '' &&
-                                  newAwards[index].description === ''
-                                ) {
-                                  setInvalidAwardIds([
-                                    ...invalidAwardIds,
-                                    index,
-                                  ]);
-                                } else {
-                                  setInvalidAwardIds(
-                                    invalidAwardIds.filter((id) => id !== index)
-                                  );
-                                }
-                                newAwards[index] = {
-                                  ...newAwards[index],
-                                  award: e?.length ? e[0] : '',
-                                };
-                                setAwards(newAwards);
-                              }}
-                              options={[
-                                {
-                                  value: 'Golden Boot',
-                                  label: 'Golden Boot',
-                                },
-                                {
-                                  value: 'Golden Ball',
-                                  label: 'Golden Ball',
-                                },
-                                {
-                                  value: 'Golden Glove',
-                                  label: 'Golden Glove',
-                                },
-                                { value: 'Other', label: 'Other' },
-                              ]}
-                            />
-                          )}
+                              <UrpSelect
+                                value={awards[index].award}
+                                placeholder="Select Award"
+                                border={true}
+                                onChange={(e) => {
+                                  const newAwards = [...awards];
+                                  const event = e?.length ? e[0] : '';
+                                  if (
+                                    event !== '' &&
+                                    newAwards[index].description === ''
+                                  ) {
+                                    setInvalidAwardIds([
+                                      ...invalidAwardIds,
+                                      index,
+                                    ]);
+                                  } else {
+                                    setInvalidAwardIds(
+                                      invalidAwardIds.filter((id) => id !== index)
+                                    );
+                                  }
+                                  newAwards[index] = {
+                                    ...newAwards[index],
+                                    award: e?.length ? e[0] : '',
+                                  };
+                                  setAwards(newAwards);
+                                }}
+                                options={[
+                                  {
+                                    value: 'Golden Boot',
+                                    label: 'Golden Boot',
+                                  },
+                                  {
+                                    value: 'Golden Ball',
+                                    label: 'Golden Ball',
+                                  },
+                                  {
+                                    value: 'Golden Glove',
+                                    label: 'Golden Glove',
+                                  },
+                                  { value: 'Other', label: 'Other' },
+                                ]}
+                              />
+                            )}
                           {(isSectionActive('mbasketball') ||
                             isSectionActive('wbasketball')) && (
-                            <UrpSelect
-                              value={awards[index].award}
-                              placeholder="Select Award"
-                              border={true}
-                              onChange={(e) => {
-                                const newAwards = [...awards];
-                                const event = e?.length ? e[0] : '';
-                                if (
-                                  event !== '' &&
-                                  newAwards[index].description === ''
-                                ) {
-                                  setInvalidAwardIds([
-                                    ...invalidAwardIds,
-                                    index,
-                                  ]);
-                                } else {
-                                  setInvalidAwardIds(
-                                    invalidAwardIds.filter((id) => id !== index)
-                                  );
-                                }
-                                newAwards[index] = {
-                                  ...newAwards[index],
-                                  award: e?.length ? e[0] : '',
-                                };
-                                setAwards(newAwards);
-                              }}
-                              options={[
-                                {
-                                  value: 'All-star Game MVP',
-                                  label: 'All-star Game MVP',
-                                },
-                                {
-                                  value: 'Defensive Player of the Year',
-                                  label: 'Defensive Player of the Year',
-                                },
-                                {
-                                  value: 'Most Improved Player',
-                                  label: 'Most Improved Player',
-                                },
-                                { value: 'MVP', label: 'MVP' },
-                                {
-                                  value: 'Rookie of the Year',
-                                  label: 'Rookie of the Year',
-                                },
-                                { value: 'Other', label: 'Other' },
-                              ]}
-                            />
-                          )}
+                              <UrpSelect
+                                value={awards[index].award}
+                                placeholder="Select Award"
+                                border={true}
+                                onChange={(e) => {
+                                  const newAwards = [...awards];
+                                  const event = e?.length ? e[0] : '';
+                                  if (
+                                    event !== '' &&
+                                    newAwards[index].description === ''
+                                  ) {
+                                    setInvalidAwardIds([
+                                      ...invalidAwardIds,
+                                      index,
+                                    ]);
+                                  } else {
+                                    setInvalidAwardIds(
+                                      invalidAwardIds.filter((id) => id !== index)
+                                    );
+                                  }
+                                  newAwards[index] = {
+                                    ...newAwards[index],
+                                    award: e?.length ? e[0] : '',
+                                  };
+                                  setAwards(newAwards);
+                                }}
+                                options={[
+                                  {
+                                    value: 'All-star Game MVP',
+                                    label: 'All-star Game MVP',
+                                  },
+                                  {
+                                    value: 'Defensive Player of the Year',
+                                    label: 'Defensive Player of the Year',
+                                  },
+                                  {
+                                    value: 'Most Improved Player',
+                                    label: 'Most Improved Player',
+                                  },
+                                  { value: 'MVP', label: 'MVP' },
+                                  {
+                                    value: 'Rookie of the Year',
+                                    label: 'Rookie of the Year',
+                                  },
+                                  { value: 'Other', label: 'Other' },
+                                ]}
+                              />
+                            )}
                           {(isSectionActive('mvolleyball') ||
                             isSectionActive('wvolleyball')) && (
-                            <UrpSelect
-                              value={awards[index].award}
-                              placeholder="Select Award"
-                              border={true}
-                              onChange={(e) => {
-                                const newAwards = [...awards];
-                                const event = e?.length ? e[0] : '';
-                                if (
-                                  event !== '' &&
-                                  newAwards[index].description === ''
-                                ) {
-                                  setInvalidAwardIds([
-                                    ...invalidAwardIds,
-                                    index,
-                                  ]);
-                                } else {
-                                  setInvalidAwardIds(
-                                    invalidAwardIds.filter((id) => id !== index)
-                                  );
-                                }
-                                newAwards[index] = {
-                                  ...newAwards[index],
-                                  award: e?.length ? e[0] : '',
-                                };
-                                setAwards(newAwards);
-                              }}
-                              options={[
-                                {
-                                  value: 'Player of the Year',
-                                  label: 'Player of the Year',
-                                },
-                                {
-                                  value: 'Freshman of the Year',
-                                  label: 'Freshman of the Year',
-                                },
-                                {
-                                  value: 'Libero of the Year',
-                                  label: 'Libero of the Year',
-                                },
-                                {
-                                  value: 'Setter of the Year',
-                                  label: 'Setter of the Year',
-                                },
-                                { value: 'Other', label: 'Other' },
-                              ]}
-                            />
-                          )}
+                              <UrpSelect
+                                value={awards[index].award}
+                                placeholder="Select Award"
+                                border={true}
+                                onChange={(e) => {
+                                  const newAwards = [...awards];
+                                  const event = e?.length ? e[0] : '';
+                                  if (
+                                    event !== '' &&
+                                    newAwards[index].description === ''
+                                  ) {
+                                    setInvalidAwardIds([
+                                      ...invalidAwardIds,
+                                      index,
+                                    ]);
+                                  } else {
+                                    setInvalidAwardIds(
+                                      invalidAwardIds.filter((id) => id !== index)
+                                    );
+                                  }
+                                  newAwards[index] = {
+                                    ...newAwards[index],
+                                    award: e?.length ? e[0] : '',
+                                  };
+                                  setAwards(newAwards);
+                                }}
+                                options={[
+                                  {
+                                    value: 'Player of the Year',
+                                    label: 'Player of the Year',
+                                  },
+                                  {
+                                    value: 'Freshman of the Year',
+                                    label: 'Freshman of the Year',
+                                  },
+                                  {
+                                    value: 'Libero of the Year',
+                                    label: 'Libero of the Year',
+                                  },
+                                  {
+                                    value: 'Setter of the Year',
+                                    label: 'Setter of the Year',
+                                  },
+                                  { value: 'Other', label: 'Other' },
+                                ]}
+                              />
+                            )}
                           {(isSectionActive('mlacrosse') ||
                             isSectionActive('wlacrosse')) && (
-                            <UrpSelect
-                              value={awards[index].award}
-                              placeholder="Select Award"
-                              border={true}
-                              onChange={(e) => {
-                                const newAwards = [...awards];
-                                const event = e?.length ? e[0] : '';
-                                if (
-                                  event !== '' &&
-                                  newAwards[index].description === ''
-                                ) {
-                                  setInvalidAwardIds([
-                                    ...invalidAwardIds,
-                                    index,
-                                  ]);
-                                } else {
-                                  setInvalidAwardIds(
-                                    invalidAwardIds.filter((id) => id !== index)
-                                  );
-                                }
-                                newAwards[index] = {
-                                  ...newAwards[index],
-                                  award: e?.length ? e[0] : '',
-                                };
-                                setAwards(newAwards);
-                              }}
-                              options={[
-                                {
-                                  value: 'The Tewaaraton Award',
-                                  label: 'The Tewaaraton Award',
-                                },
-                                {
-                                  value: 'F. Morris Touchstone Award',
-                                  label: 'F. Morris Touchstone Award',
-                                },
-                                { value: 'Other', label: 'Other' },
-                              ]}
-                            />
-                          )}
+                              <UrpSelect
+                                value={awards[index].award}
+                                placeholder="Select Award"
+                                border={true}
+                                onChange={(e) => {
+                                  const newAwards = [...awards];
+                                  const event = e?.length ? e[0] : '';
+                                  if (
+                                    event !== '' &&
+                                    newAwards[index].description === ''
+                                  ) {
+                                    setInvalidAwardIds([
+                                      ...invalidAwardIds,
+                                      index,
+                                    ]);
+                                  } else {
+                                    setInvalidAwardIds(
+                                      invalidAwardIds.filter((id) => id !== index)
+                                    );
+                                  }
+                                  newAwards[index] = {
+                                    ...newAwards[index],
+                                    award: e?.length ? e[0] : '',
+                                  };
+                                  setAwards(newAwards);
+                                }}
+                                options={[
+                                  {
+                                    value: 'The Tewaaraton Award',
+                                    label: 'The Tewaaraton Award',
+                                  },
+                                  {
+                                    value: 'F. Morris Touchstone Award',
+                                    label: 'F. Morris Touchstone Award',
+                                  },
+                                  { value: 'Other', label: 'Other' },
+                                ]}
+                              />
+                            )}
                         </IonItem>
                         <IonItem
                           className={
@@ -3665,7 +3665,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               //   team: e.detail.value,
                               // });
                             }}
-                            // required
+                          // required
                           ></IonInput>
                         </IonItem>
                         <IonItem className="nobo-input" lines="none">
@@ -3715,9 +3715,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                           ]);
                                         } else if (
                                           value >
-                                            previousTeams[index].endYear &&
+                                          previousTeams[index].endYear &&
                                           previousTeams[index].endYear !==
-                                            undefined &&
+                                          undefined &&
                                           previousTeams[index].endYear !== '' &&
                                           previousTeams[index].endYear !== null
                                         ) {
@@ -3754,7 +3754,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                       //   startYear: e.detail.value,
                                       // });
                                     }}
-                                    // required
+                                  // required
                                   ></IonInput>
                                 </IonItem>
                               </IonCol>
@@ -3826,7 +3826,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                       };
                                       setPreviousTeams(newPreviousTeams);
                                     }}
-                                    // required
+                                  // required
                                   ></IonInput>
                                 </IonItem>
                               </IonCol>
@@ -3857,9 +3857,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                       .filter((p) => {
                                         return (
                                           p.sport ===
-                                            normalizeSportGender(
-                                              location.state
-                                            ) || p.sport === primarySport
+                                          normalizeSportGender(
+                                            location.state
+                                          ) || p.sport === primarySport
                                         );
                                       })
                                       .map((p) => {
@@ -4460,123 +4460,123 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 {/* basketball */}
                 {(isSectionActive('wbasketball') ||
                   isSectionActive('mbasketball')) && (
-                  <IonList className="nobo-list-input" slot="content">
-                    <IonItem lines="full" className="nobo-blank">
-                      <IonLabel
-                        className="nobo-signup-label"
-                        position="stacked"
-                      >
-                        BLANK AREA
-                      </IonLabel>
-                    </IonItem>
-                    <IonItem lines="none">
-                      <IonGrid>
-                        <IonRow>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                Standing vertical
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.vertical}
-                                placeholder="Vertical"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    vertical: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                options={verticalList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                3/4 Sprint
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.threeForthsCourtSprint}
-                                placeholder="Seconds"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    threeForthsCourtSprint: e?.length
-                                      ? e[0]
-                                      : '',
-                                  });
-                                }}
-                                options={threeForthsCourtSprintList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                        </IonRow>
-                      </IonGrid>
-                    </IonItem>
-                    <IonItem lines="none">
-                      <IonGrid>
-                        <IonRow>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                Lane agility drill
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.laneAgilityDrill}
-                                placeholder="Seconds"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    laneAgilityDrill: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                options={laneAgilityDrillList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                Shuttle Run
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.shuttleRun}
-                                placeholder="Seconds"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    shuttleRun: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                options={shuttleList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                        </IonRow>
-                      </IonGrid>
-                    </IonItem>
-                  </IonList>
-                )}
+                    <IonList className="nobo-list-input" slot="content">
+                      <IonItem lines="full" className="nobo-blank">
+                        <IonLabel
+                          className="nobo-signup-label"
+                          position="stacked"
+                        >
+                          BLANK AREA
+                        </IonLabel>
+                      </IonItem>
+                      <IonItem lines="none">
+                        <IonGrid>
+                          <IonRow>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  Standing vertical
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.vertical}
+                                  placeholder="Vertical"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      vertical: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  options={verticalList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  3/4 Sprint
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.threeForthsCourtSprint}
+                                  placeholder="Seconds"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      threeForthsCourtSprint: e?.length
+                                        ? e[0]
+                                        : '',
+                                    });
+                                  }}
+                                  options={threeForthsCourtSprintList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                          </IonRow>
+                        </IonGrid>
+                      </IonItem>
+                      <IonItem lines="none">
+                        <IonGrid>
+                          <IonRow>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  Lane agility drill
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.laneAgilityDrill}
+                                  placeholder="Seconds"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      laneAgilityDrill: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  options={laneAgilityDrillList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  Shuttle Run
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.shuttleRun}
+                                  placeholder="Seconds"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      shuttleRun: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  options={shuttleList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                          </IonRow>
+                        </IonGrid>
+                      </IonItem>
+                    </IonList>
+                  )}
 
                 {/* baseball */}
                 {isSectionActive('baseball') && (
@@ -4817,294 +4817,294 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 {/* Volleyball */}
                 {(isSectionActive('wvolleyball') ||
                   isSectionActive('mvolleyball')) && (
-                  <IonList className="nobo-list-input" slot="content">
-                    <IonItem lines="full" className="nobo-blank">
-                      <IonLabel
-                        className="nobo-signup-label"
-                        position="stacked"
-                      >
-                        BLANK AREA
-                      </IonLabel>
-                    </IonItem>
-                    <IonItem lines="none">
-                      <IonGrid>
-                        <IonRow>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                Standing Reach
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.standingReach}
-                                placeholder="Reach"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    standingReach: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                // disabled={true}
-                                options={standingReachList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                Block Jump
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.blockJump}
-                                placeholder="Vertical"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    blockJump: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                // disabled={true}
-                                options={blockJumpList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                        </IonRow>
-                      </IonGrid>
-                    </IonItem>
-                    <IonItem lines="none">
-                      <IonGrid>
-                        <IonRow>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                Vertical Jump
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.vertical}
-                                placeholder="Vertical"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    vertical: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                // disabled={true}
-                                options={verticalList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                Attack Jump
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.attackJump}
-                                placeholder="Vertical"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    attackJump: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                options={attackJumpList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                        </IonRow>
-                      </IonGrid>
-                    </IonItem>
-                  </IonList>
-                )}
+                    <IonList className="nobo-list-input" slot="content">
+                      <IonItem lines="full" className="nobo-blank">
+                        <IonLabel
+                          className="nobo-signup-label"
+                          position="stacked"
+                        >
+                          BLANK AREA
+                        </IonLabel>
+                      </IonItem>
+                      <IonItem lines="none">
+                        <IonGrid>
+                          <IonRow>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  Standing Reach
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.standingReach}
+                                  placeholder="Reach"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      standingReach: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  // disabled={true}
+                                  options={standingReachList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  Block Jump
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.blockJump}
+                                  placeholder="Vertical"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      blockJump: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  // disabled={true}
+                                  options={blockJumpList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                          </IonRow>
+                        </IonGrid>
+                      </IonItem>
+                      <IonItem lines="none">
+                        <IonGrid>
+                          <IonRow>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  Vertical Jump
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.vertical}
+                                  placeholder="Vertical"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      vertical: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  // disabled={true}
+                                  options={verticalList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  Attack Jump
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.attackJump}
+                                  placeholder="Vertical"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      attackJump: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  options={attackJumpList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                          </IonRow>
+                        </IonGrid>
+                      </IonItem>
+                    </IonList>
+                  )}
                 {/* Lacrosse */}
                 {(isSectionActive('wlacrosse') ||
                   isSectionActive('mlacrosse')) && (
-                  <IonList className="nobo-list-input" slot="content">
-                    <IonItem lines="full" className="nobo-blank">
-                      <IonLabel
-                        className="nobo-signup-label"
-                        position="stacked"
-                      >
-                        BLANK AREA
-                      </IonLabel>
-                    </IonItem>
-                    <IonItem lines="none">
-                      <IonGrid>
-                        <IonRow>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                Power Ball Toss
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.powerballToss}
-                                placeholder="Feet"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    powerballToss: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                options={powerballTossList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                Vertical
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.vertical}
-                                placeholder="Vertical"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    vertical: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                options={verticalList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                        </IonRow>
-                      </IonGrid>
-                    </IonItem>
-                    <IonItem lines="none">
-                      <IonGrid>
-                        <IonRow>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                Shot Speed
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.shotSpeed}
-                                placeholder="Mph"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    shotSpeed: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                options={shotSpeedList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                Shuttle Time
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.shuttleTime}
-                                placeholder="Seconds"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    shuttleTime: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                options={shuttleList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                        </IonRow>
-                      </IonGrid>
-                    </IonItem>
-                    <IonItem lines="none">
-                      <IonGrid>
-                        <IonRow>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                40 yd Dash
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.fortyYardDash}
-                                placeholder="Seconds"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    fortyYardDash: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                options={fortyYardDashList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                          <IonCol>
-                            <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                10 yd Split
-                              </IonLabel>
-                              <UrpSelect
-                                value={measurables?.tenYardSplit}
-                                placeholder="Seconds"
-                                className="nobo-select-half"
-                                border={true}
-                                onChange={(e) => {
-                                  setMeasurables({
-                                    ...measurables,
-                                    tenYardSplit: e?.length ? e[0] : '',
-                                  });
-                                }}
-                                options={tenYardSplitList}
-                              />
-                            </IonItem>
-                          </IonCol>
-                        </IonRow>
-                      </IonGrid>
-                    </IonItem>
-                  </IonList>
-                )}
+                    <IonList className="nobo-list-input" slot="content">
+                      <IonItem lines="full" className="nobo-blank">
+                        <IonLabel
+                          className="nobo-signup-label"
+                          position="stacked"
+                        >
+                          BLANK AREA
+                        </IonLabel>
+                      </IonItem>
+                      <IonItem lines="none">
+                        <IonGrid>
+                          <IonRow>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  Power Ball Toss
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.powerballToss}
+                                  placeholder="Feet"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      powerballToss: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  options={powerballTossList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  Vertical
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.vertical}
+                                  placeholder="Vertical"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      vertical: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  options={verticalList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                          </IonRow>
+                        </IonGrid>
+                      </IonItem>
+                      <IonItem lines="none">
+                        <IonGrid>
+                          <IonRow>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  Shot Speed
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.shotSpeed}
+                                  placeholder="Mph"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      shotSpeed: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  options={shotSpeedList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  Shuttle Time
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.shuttleTime}
+                                  placeholder="Seconds"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      shuttleTime: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  options={shuttleList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                          </IonRow>
+                        </IonGrid>
+                      </IonItem>
+                      <IonItem lines="none">
+                        <IonGrid>
+                          <IonRow>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  40 yd Dash
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.fortyYardDash}
+                                  placeholder="Seconds"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      fortyYardDash: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  options={fortyYardDashList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                            <IonCol>
+                              <IonItem lines="none">
+                                <IonLabel
+                                  className="nobo-signup-label"
+                                  position="stacked"
+                                >
+                                  10 yd Split
+                                </IonLabel>
+                                <UrpSelect
+                                  value={measurables?.tenYardSplit}
+                                  placeholder="Seconds"
+                                  className="nobo-select-half"
+                                  border={true}
+                                  onChange={(e) => {
+                                    setMeasurables({
+                                      ...measurables,
+                                      tenYardSplit: e?.length ? e[0] : '',
+                                    });
+                                  }}
+                                  options={tenYardSplitList}
+                                />
+                              </IonItem>
+                            </IonCol>
+                          </IonRow>
+                        </IonGrid>
+                      </IonItem>
+                    </IonList>
+                  )}
 
                 {/* Soccer */}
                 {(isSectionActive('wsoccer') || isSectionActive('msoccer')) && (
