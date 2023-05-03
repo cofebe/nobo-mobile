@@ -42,14 +42,15 @@ const SignUp = () => {
 
     userService
       .signup(person)
-      .then((data: SignUpResponse) => {
-        console.log("loging the user ", data.success);
+      .then((user: SignUpResponse) => {
+        console.log("loging the user ", user.success);
         loadingStore.decrement("SignUp:timeout");
-        if (data.success) {
-          console.log(data.user._id);
-          window.localStorage.setItem("userToken", JSON.stringify(data.token));
-          history.replace({ pathname: `/experience`, state: data.token });
-        } else if (data.user.displayName === "exists") {
+        if (user.success) {
+          console.log(user.user._id);
+          window.localStorage.setItem("userToken", JSON.stringify(user.token));
+          window.localStorage.setItem("userId", JSON.stringify(user.user._id));
+          history.replace({ pathname: `/experience`, state: user.token });
+        } else if (user.user.displayName === "exists") {
           setError(true);
         }
       })

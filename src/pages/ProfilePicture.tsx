@@ -47,32 +47,32 @@ const ProfilePicture: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    history.push("/experience/profile-picture/follow-people")
+    // history.push("/experience/profile-picture/follow-people")
 
-    // const imgData = profilePicPreview.split(",")[1]
+    const imgData = profilePicPreview.split(",")[1]
     // console.log(" check the string data", imgData)
-    // const userToken = localStorage.getItem("userToken");
-    // if (userToken) {
-    //   const token = JSON.parse(userToken);
-    //   loadingStore.increment("Experience:timeout");
-    //   userService.uploadProfileImg(token, imgData)
-    //     .then((res) => res)
-    //     .then((res) => {
-    //       if (res?.url) {
-    //         console.log("response is ok 200")
-    //         loadingStore.decrement("SignUp:timeout");
-    //         history.push("//experience/profile-picture/follow-people")
-    //       }
+    const userToken = localStorage.getItem("userToken");
+    if (userToken) {
+      const token = JSON.parse(userToken);
+      loadingStore.increment("Experience:timeout");
+      userService.uploadProfileImg(token, imgData)
+        .then((res) => res)
+        .then((res) => {
+          if (res?.url) {
+            console.log("response is ok 200")
+            loadingStore.decrement("Profile-picture:timeout");
+          history.push("/experience/profile-picture/follow-people")
 
+          }
 
-    //     })
-    //     .catch((err: any) => {
-    //       loadingStore.decrement("SignUp:timeout");
-    //       console.log(" ProfilePicture error", err);
-    //     });
-    // } else {
-    //   return console.log("no token found");
-    // }
+        })
+        .catch((err: any) => {
+          loadingStore.decrement("SignUp:timeout");
+          console.log(" ProfilePicture error", err);
+        });
+    } else {
+      return console.log("no token found");
+    }
   };
 
 

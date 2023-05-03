@@ -44,14 +44,14 @@ const SignUpDetails: React.FC = () => {
         loadingStore.decrement('Login:timeout');
         // console.log(user)
         if (user.exists) {
-        console.log(email, " already exist ")
+          console.log(email, " already exist ")
           setError(true);
           loadingStore.decrement('SignUp:timeout');
         } else {
-         
+
           history.push({ pathname: '/signup-details/signup', state: { firstName, lastName, email } })
           loadingStore.decrement('SignUp:timeout');
-         }
+        }
 
       })
       .catch((err: any) => {
@@ -60,7 +60,7 @@ const SignUpDetails: React.FC = () => {
 
       });
 
- 
+
   };
 
 
@@ -79,17 +79,17 @@ const SignUpDetails: React.FC = () => {
       {/* <IonContent scrollY={false} translate='no'> */}
       <div className="signup-details-background-image">
         <div >
-              <img
-              style={{ marginLeft:"5%", marginTop:"13%"}}
-             onClick={() => {
+          <img
+            style={{ marginLeft: "5%", marginTop: "13%" }}
+            onClick={() => {
               history.goBack();
             }}
-             
-                height={40}
-                src="assets/images/nobo-back-icon.png"
-                alt="logo"
-              />
-          
+
+            height={40}
+            src="assets/images/nobo-back-icon.png"
+            alt="logo"
+          />
+
         </div>
         <IonRow className="signup-details-nobo-logo">
           <IonCol
@@ -126,7 +126,7 @@ const SignUpDetails: React.FC = () => {
             <IonRow >
               <IonCol >
                 <Input
-                type='text'
+                  type='text'
                   value={firstName}
                   className={`nobo-input`}
                   placeholder="FIRST NAME"
@@ -178,14 +178,14 @@ const SignUpDetails: React.FC = () => {
             </IonRow>
             <IonRow>
               <IonCol >
-              <Button
-              onClick={() => { checkUserExist() }}
-              label='REGISTER'
-              large={true}
-              className=''
-              disabled={!validate()}
-            />
-            
+                <Button
+                  onClick={() => { checkUserExist() }}
+                  label='REGISTER'
+                  large={true}
+                  className=''
+                  disabled={!validate()}
+                />
+
               </IonCol>
             </IonRow>
             <IonRow style={{ paddingBottom: 12 }}>

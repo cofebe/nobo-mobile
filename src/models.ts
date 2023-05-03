@@ -498,7 +498,7 @@ export interface SignUpType{
 interface CurrentUser {
   blurbText: string
   reviews: []
-id: string
+_id: string
   firstName: string
   lastName: string
   email: string

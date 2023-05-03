@@ -406,10 +406,6 @@ export class UserService extends BaseService {
 
 
   //upload profile photo
-
-
-
-
   async uploadProfileImg(token: string, data: any) {
 
     const url = 'https://thenobo.com/api/users/update-avatar'
@@ -421,7 +417,7 @@ export class UserService extends BaseService {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-       body: JSON.stringify({ "imgUrl": data })
+        body: JSON.stringify({ "imgUrl": data })
 
       }
       const response = await fetch(url, config)
@@ -433,6 +429,49 @@ export class UserService extends BaseService {
   }
 
 
+  // get users
+  async getUsers() {
+    try {
+      const response = await fetch("https://thenobo.com/api/users/q/term/a")
+      return response.json()
+    } catch (error) {
+      console.log("err from userService response", error)
+    }
+
+  }
+
+
+
+
+  // FOLLOW A USER 
+  async followUserS(token: string, userToFollowId: string) {
+
+    const url = 'https://thenobo.com/api/users/follow'
+    try {
+      console.log({ info: "the userService section" })
+      const config = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ "userId": userToFollowId })
+
+      }
+      const response = await fetch(url, config)
+      return response.json()
+    } catch (error) {
+      console.log("err from userService response", error)
+    }
+
+  }
+
+  async getUser(userId: string) {
+    const response = await fetch(`https://thenobo.com/api/users/${userId}/profile`)
+    console.log(response)
+    return response.json()
+
+  }
 
 
 

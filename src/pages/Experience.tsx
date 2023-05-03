@@ -81,12 +81,12 @@ const Experience: React.FC = () => {
           );
         })
         .then(() => {
-          loadingStore.decrement("SignUp:timeout");
+          loadingStore.decrement("Experience:timeout");
           history.push("/experience/profile-picture");
         })
 
         .catch((err: any) => {
-          loadingStore.decrement("SignUp:timeout");
+          loadingStore.decrement("Experience:timeout");
           console.log("signup error", err);
         });
     } else {
