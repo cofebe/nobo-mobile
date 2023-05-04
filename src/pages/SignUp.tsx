@@ -47,8 +47,9 @@ const SignUp = () => {
         loadingStore.decrement("SignUp:timeout");
         if (user.success) {
           console.log(user.user._id);
-          window.localStorage.setItem("userToken", JSON.stringify(user.token));
-          window.localStorage.setItem("userId", JSON.stringify(user.user._id));
+          window.localStorage.setItem("appUserToken", JSON.stringify(user.token));
+          window.localStorage.setItem("appUserId", JSON.stringify(user.user._id)); 
+          window.localStorage.setItem("appUsername", JSON.stringify(user.user.displayName)); 
           history.replace({ pathname: `/experience`, state: user.token });
         } else if (user.user.displayName === "exists") {
           setError(true);

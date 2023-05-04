@@ -67,7 +67,7 @@ const Experience: React.FC = () => {
   };
 
   const handleSubmit = async (experienceOption: string) => {
-    const userToken = localStorage.getItem("userToken");
+    const userToken = localStorage.getItem("appUserToken");
     if (userToken) {
       const token = JSON.parse(userToken);
       loadingStore.increment("Experience:timeout");
@@ -82,7 +82,7 @@ const Experience: React.FC = () => {
         })
         .then(() => {
           loadingStore.decrement("Experience:timeout");
-          history.push("/experience/profile-picture");
+          history.push("/profile-picture");
         })
 
         .catch((err: any) => {

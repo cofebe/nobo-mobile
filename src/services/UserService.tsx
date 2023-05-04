@@ -466,12 +466,105 @@ export class UserService extends BaseService {
 
   }
 
+
+  // Get  a user profile
   async getUser(userId: string) {
     const response = await fetch(`https://thenobo.com/api/users/${userId}/profile`)
-    console.log(response)
+    // console.log(response)
     return response.json()
 
   }
+
+  // Get brands
+  async getBrands() {
+    const response = await fetch("https://thenobo.com/api/brands/q/term/a")
+    // console.log(response)
+    return response.json()
+
+  }
+
+
+  // SELECT BRAND
+  async selectBrand(token: string, brandId: string) {
+
+    const url = 'https://thenobo.com/api/brands/add-favorite'
+    try {
+      console.log({ info: "the userService section", brandId })
+      const config = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ "brandId": brandId })
+
+      }
+      const response = await fetch(url, config)
+      return response.json()
+    } catch (error) {
+      console.log("err from userService response", error)
+    }
+
+  }
+
+
+//Creating  post request
+  async createPost(token: string, postMessage: string) {
+    const url = 'https://thenobo.com/api/users/set-onboard-activity'
+    try {
+      console.log({ info: "the userService section", postMessage })
+      const config = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ "activity": postMessage })
+
+      }
+      const response = await fetch(url, config)
+      return response.json()
+    } catch (error) {
+      console.log("err from userService response", error)
+    }
+
+  }
+
+
+  //Creating  post request
+  async skipPost(token: string) {
+   const  defaultPost = " Excited to be on TheNOBO\u0021" 
+    const url = 'https://thenobo.com/api/users/set-onboard-activity'
+    try {
+      console.log({ info: "the userService section", token })
+      const config = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ "userMessage": defaultPost })
+
+      }
+      const response = await fetch(url, config)
+      return response.json()
+    } catch (error) {
+      console.log("err from userService response", error)
+    }
+
+  }
+    
+
+
+
+
+
+
+
+
+
+
+
 
 
 

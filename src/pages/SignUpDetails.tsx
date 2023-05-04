@@ -49,7 +49,7 @@ const SignUpDetails: React.FC = () => {
           loadingStore.decrement('SignUp:timeout');
         } else {
 
-          history.push({ pathname: '/signup-details/signup', state: { firstName, lastName, email } })
+          history.push({ pathname: '/signup', state: { firstName, lastName, email } })
           loadingStore.decrement('SignUp:timeout');
         }
 

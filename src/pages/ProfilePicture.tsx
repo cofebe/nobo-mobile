@@ -51,7 +51,7 @@ const ProfilePicture: React.FC = () => {
 
     const imgData = profilePicPreview.split(",")[1]
     // console.log(" check the string data", imgData)
-    const userToken = localStorage.getItem("userToken");
+    const userToken = localStorage.getItem("appUserToken");
     if (userToken) {
       const token = JSON.parse(userToken);
       loadingStore.increment("Experience:timeout");
@@ -61,7 +61,7 @@ const ProfilePicture: React.FC = () => {
           if (res?.url) {
             console.log("response is ok 200")
             loadingStore.decrement("Profile-picture:timeout");
-          history.push("/experience/profile-picture/follow-people")
+          history.push("/follow-people")
 
           }
 
@@ -276,16 +276,15 @@ const ProfilePicture: React.FC = () => {
         </IonGrid>
 
         <IonRow className={toggleCropper ? "profile-picture-skip-container" : "profile-picture-skip-container2"}>
-          <IonCol className="profile-picture-skip-text"
+          <IonButton fill='clear' className="profile-picture-skip-text"
             onClick={() => {
-
+              history.push("/follow-people")
             }}
-          >SKIP FOR NOW</IonCol>
+          >SKIP FOR NOW</IonButton>
         </IonRow>
 
         <div className="profile-picture-btn-container">
           <Button
-            // className='profile-picture-btn'
             label="NEXT"
             large
             onClick={handleSubmit}

@@ -9,6 +9,7 @@ import {
   useIonViewWillEnter,
   IonButton,
 
+
 } from "@ionic/react";
 import "cropperjs/dist/cropper.css";
 import "./FollowPeople.scss";
@@ -28,7 +29,6 @@ const FollowPeople: React.FC = () => {
   const userService = new UserService()
   const history = useHistory();
   const [users, setUsers] = useState<User[]>([])
-  const [array, setArray] = useState<User[]>([])
   const [token, setToken] = useState("")
   const [currentUserId, setCurrentUserId] = useState("")
   const [followNumbers, setFollowNumbers] = useState(false)
@@ -55,18 +55,20 @@ const FollowPeople: React.FC = () => {
 
   // Getting user token from localStorage
   useIonViewWillEnter(() => {
-    const userToken = localStorage.getItem("userToken")
+    const userToken = localStorage.getItem("appUserToken") 
     if (userToken) {
       const token = JSON.parse(userToken);
       setToken(token)
+      console.log("your token is ready :", token)
+
     } else {
       console.log("no token found")
     }
   })
 
-  // Getting currenUserId from localStorage
+  // Getting current UserId from localStorage
   useIonViewWillEnter(() => {
-    const data = localStorage.getItem("userId")
+    const data = localStorage.getItem("appUserId")
     if (data) {
       const userId = JSON.parse(data);
       setCurrentUserId(userId)
@@ -151,7 +153,7 @@ const FollowPeople: React.FC = () => {
                 <img className="follow-people-users-img" src={user.avatar} alt="" />
               </div>
               <div className="follow-people-user-names-container">
-                <IonLabel> {user.displayName} </IonLabel>
+                <IonLabel>@{user.displayName}</IonLabel>
               </div>
 
               <div className="follow-people-button-container" >
@@ -173,23 +175,23 @@ const FollowPeople: React.FC = () => {
           ))}
         </div>
 
-        <IonRow className={"follow-people-skip-container"}>
-          <IonCol className="follow-people-skip-text"
+        {!followNumbers &&(<IonRow className={"follow-people-skip-container"}>
+          <IonButton fill='clear'  className="follow-people-skip-text"
             onClick={() => {
-              history.push("/experience/profile-picture/follow-people/select-brands")
+              history.push("/onboarding-post")
             }}
-          >SKIP FOR NOW</IonCol>
-        </IonRow>
+          >SKIP FOR NOW</IonButton>
+        </IonRow>)}
 
 
 
-        <div className="follow-people-submit-btn-container">
+        <div className={!followNumbers?  "follow-people-submit-btn-container2":"follow-people-submit-btn-container"}>
           <Button
             label="NEXT"
             large={true}
             onClick={(e) => {
               e.preventDefault()
-              history.push("/experience/profile-picture/follow-people/select-brands")
+              history.push("/select-brands")
             }
             }
             disabled={!followNumbers}

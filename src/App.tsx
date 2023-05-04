@@ -43,6 +43,8 @@ import SignUp from './pages/SignUp';
 import ProfilePicture from './pages/ProfilePicture';
 import FollowPeople from './pages/FollowPeople';
 import SelectBrands from './pages/SelectBrands';
+import CreateFirstPost from './pages/CreateFirstPost';
+
 
 
 
@@ -213,20 +215,24 @@ const App: React.FC = () => {
             <Route path="/signup-details" exact={true}>
               <SignUpDetails />
             </Route>
-            <Route path="/signup-details/signup" exact={true}>
+            <Route path="/signup" exact={true}>
               <SignUp />
             </Route>
             <Route path="/experience" exact={true}>
               <Experience />
             </Route>
-            <Route path="/experience/profile-picture" exact={true}>
+            <Route path="/profile-picture" exact={true}>
               <ProfilePicture />
             </Route>
-            <Route path="/experience/profile-picture/follow-people" exact={true}>
+            <Route path="/follow-people" exact={true}>
               <FollowPeople />
             </Route>
-            <Route path="/experience/profile-picture/follow-people/select-brands" exact={true}>
+            <Route path="/select-brands" exact={true}>
               <SelectBrands />
+            </Route>
+            
+            <Route path="/onboarding-post" exact={true}>
+              <CreateFirstPost />
             </Route>
             <Route path="/forgot" exact={true}>
               <Forgot />
