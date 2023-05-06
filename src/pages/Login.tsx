@@ -4,6 +4,7 @@ import {
   IonRow,
   IonCol,
   IonGrid,
+  IonInput,
   useIonViewWillEnter,
 } from '@ionic/react';
 import { useState } from 'react';
@@ -75,7 +76,7 @@ const Login: React.FC = () => {
             style={{ display: 'flex' }}
           >
             <img
-              height={60}
+              height={65}
               src="assets/images/nobo-logo-white.png"
               alt="logo"
             />

@@ -495,32 +495,46 @@ export interface SignUpType{
  
 }
 // response type from experiencePrefrences
-interface CurrentUser {
-  blurbText: string
-  reviews: []
-_id: string
-  firstName: string
-  lastName: string
-  email: string
-  displayName: string
-  avatar: string
-  shippingAddress: [],
-  profileBg: string
-  emailVerified: boolean
-  blocked: boolean
-  saleSchedule: []
-  role: string
-  favorites: []
-  followers: []
-  following: []
-  favoriteBrands: []
-  notifications: []
-  unfinishedOnboardActivity: string
-  experiencePreferences:string
-}
+// interface CurrentUser {
+//   blurbText: string
+//   reviews: []
+// _id: string
+//   firstName: string
+//   lastName: string
+//   email: string
+//   displayName: string
+//   avatar: string
+//   shippingAddress: [],
+//   profileBg: string
+//   emailVerified: boolean
+//   blocked: boolean
+//   saleSchedule: []
+//   role: string
+//   favorites: []
+//   followers: []
+//   following: []
+//   favoriteBrands: []
+//   notifications: []
+//   unfinishedOnboardActivity: string
+//   experiencePreferences:string
+// }
 
 // response type from experiencePrefrences
-export interface ResData {
-  currentUser: CurrentUser
+export interface ExperienceResponse {
+  currentUser: User
   passwordError?: string
+}
+export interface ProfilPicResponse {
+  url: string
+}
+interface MatchedType {
+  _id: string
+  name: string
+  url: string
+
+
+}
+
+export interface BrandsResponse {
+  matched: []
 }

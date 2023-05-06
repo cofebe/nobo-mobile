@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { UserService } from "../services/UserService";
-import { SignUpResponse, SignUpType } from "../models";
+import { SignUpResponse, SignUpType, User } from "../models";
 import { loadingStore } from "../loading-store";
 import Input from "../components/Input";
 import "./SignUp.scss";
@@ -26,7 +26,7 @@ const SignUp = () => {
   });
 
   const state2: any = history.location.state;
-
+  console.log(state2)
   const [person, setPerson] = useState<SignUpType>({
     firstName: state2?.firstName,
     lastName: state2?.lastName,
@@ -36,31 +36,28 @@ const SignUp = () => {
     comfirmPassword: "",
   });
 
-  const signup = () => {
-    if(person.password !== person.comfirmPassword) return
-    loadingStore.increment("Signup:timeout");
 
+
+  const signup = () => {
+    if (person.password !== person.comfirmPassword) return
+
+    loadingStore.increment('SignUp:timeout');
     userService
       .signup(person)
-      .then((user: SignUpResponse) => {
-        console.log("loging the user ", user.success);
+      .then((user: User) => {
         loadingStore.decrement("SignUp:timeout");
-        if (user.success) {
-          console.log(user.user._id);
-          window.localStorage.setItem("appUserToken", JSON.stringify(user.token));
-          window.localStorage.setItem("appUserId", JSON.stringify(user.user._id)); 
-          window.localStorage.setItem("appUsername", JSON.stringify(user.user.displayName)); 
-          history.replace({ pathname: `/experience`, state: user.token });
-        } else if (user.user.displayName === "exists") {
-          setError(true);
-        }
+        console.log(user.displayName);
+        window.localStorage.setItem("appUserId", JSON.stringify(user._id));
+        window.localStorage.setItem("appUsername", JSON.stringify(user.displayName));
+        history.replace("/experience");
       })
       .catch((err: any) => {
         loadingStore.decrement("SignUp:timeout");
-        console.log("signup error", err);
+        console.log('login error', err);
         setError(true);
       });
   };
+
 
   const validate = () => {
     if (
@@ -145,7 +142,7 @@ const SignUp = () => {
           <IonRow style={{ width: "85%", margin: "auto" }}>
             <IonCol>
               <Input
-                errorMessage={person.password !== person.comfirmPassword  ? "password mismatch" : ""}
+                errorMessage={person.password !== person.comfirmPassword ? "password mismatch" : ""}
                 type="password"
                 value={person.comfirmPassword}
                 className={`nobo-input ${person.password !== person.comfirmPassword ? "invalid-text-color" : ""}`}

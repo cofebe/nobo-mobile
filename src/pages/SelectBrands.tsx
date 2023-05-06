@@ -18,30 +18,26 @@ import { UserService } from "../services/UserService";
 import Search from "../components/Search";
 import Checkbox from "../components/Checkbox";
 import { loadingStore } from "../loading-store";
+// import { BrandsResponse } from "../models";
 
 
-
-
-
-interface Data {
+interface MatchedType {
   _id: string
   name: string
   url: string
-}
-
-interface Brands {
-  matched: any
-  map: any
 
 
 }
+
+
+
 
 
 const SelectBrands: React.FC = () => {
   const userService = new UserService()
   const history = useHistory();
   const [brandSelected, setBrandSelected] = useState("")
-  const [brandsItems, setBrandItems] = useState<Brands[]>([])
+  const [brandsItems, setBrandItems] = useState<MatchedType[]>([])
   const [brandName, setBrandName] = useState("")
   const [brandId, setBrandId] = useState("")
 
@@ -50,9 +46,8 @@ const SelectBrands: React.FC = () => {
 
   useIonViewWillEnter(() => {
     userService.getBrands()
-      .then((brands: Brands) => {
-        localStorage.setItem("brands", JSON.stringify(brands))
-        setBrandItems([brands.matched])
+      .then((brands) => {
+         setBrandItems(brands)
       })
 
       .catch((error) => { console.log("err, ", error) })
@@ -61,7 +56,6 @@ const SelectBrands: React.FC = () => {
   const handleTicker = (arg: string, brandId: string) => {
     setBrandId(brandId)
     setBrandSelected(arg);
-    // console.log(experienceOption);
     const alaia = () => {
       setBrandName("Azzedine Alaia");
 
@@ -124,19 +118,15 @@ const SelectBrands: React.FC = () => {
   }
 
   const handleSubmit = async () => {
-    
-// console.log(typeof(brandOption), brandOption)
-  console.log("sending brandId and token..... ",brandId)
 
-    const userToken = localStorage.getItem("appUserToken");
+    const userToken = localStorage.getItem("appToken");
     if (userToken) {
       const token = JSON.parse(userToken);
       loadingStore.increment("SelectBrand:timeout");
       userService
         .selectBrand(token, brandId)
-        .then(res => res)
-        .then((brand: Data) => { 
-          // console.log(brand) 
+        .then((brand: MatchedType) => { 
+           console.log(brand) 
           history.push("/onboarding-post")
           loadingStore.decrement("SelectBrand:timeout");
 
@@ -152,7 +142,7 @@ const SelectBrands: React.FC = () => {
 
 
 
-  // console.log( brandId)
+  //  console.log( brandsItems)
 
 
   return (
@@ -194,19 +184,15 @@ const SelectBrands: React.FC = () => {
         <div className="select-brands-body-container" >
 
           <IonRow className="select-brand-img-container" >
-            {brandsItems[0]?.map((brands: Data) => (
+            {brandsItems?.map((brands) => (
               <IonCol className="select-brand-img-col" key={brands._id} size="5" >
                 <img
-                  onClick={() => {
-
-                    handleTicker(brands.name, brands._id)
-                  }}
+                  onClick={() => { handleTicker(brands?.name, brands._id) }}
                   src={brands.url}
                   alt="Alaia"
                 />
-
                 <div className="select-brand-checkbox">
-                  <Checkbox value={brandName === brands.name} onChange={() => { }} />
+                  <Checkbox value={brandName === brands?.name} onChange={() => { }} />
                 </div>
               </IonCol>
             ))}
@@ -215,9 +201,9 @@ const SelectBrands: React.FC = () => {
 
 
         {brandSelected === "" && (<IonRow className={"select-brands-skip-container"}>
-          <IonButton fill='outline' className="select-brands-skip-text"
+          <IonButton fill='clear' className="select-brands-skip-text"
             onClick={() => {
-
+              history.push("/onboarding-post")
             }}
           >SKIP FOR NOW</IonButton>
         </IonRow>)}

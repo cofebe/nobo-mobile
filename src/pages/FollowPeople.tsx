@@ -18,9 +18,7 @@ import "cropperjs/dist/cropper.css";
 import { UserService } from "../services/UserService";
 import { User } from "../models";
 
-interface Data {
-  user: User
-}
+
 
 
 
@@ -41,21 +39,19 @@ const FollowPeople: React.FC = () => {
       .then(res => res)
       .then(users => {
         setUsers(users?.users)
-        localStorage.setItem("existingUsers", JSON.stringify(users?.users))
+        // localStorage.setItem("existingUsers", JSON.stringify(users?.users))
       })
       .catch((error) => {
         console.log("follow users error", error)
       })
   });
 
-  useIonViewWillEnter(() => {
 
-  })
 
 
   // Getting user token from localStorage
   useIonViewWillEnter(() => {
-    const userToken = localStorage.getItem("appUserToken") 
+    const userToken = localStorage.getItem("appToken")
     if (userToken) {
       const token = JSON.parse(userToken);
       setToken(token)
@@ -80,41 +76,63 @@ const FollowPeople: React.FC = () => {
 
 
 
-  const followUser = (userToFollowId: string,) => {
+  const followUser = (userToFollowId: string) => {
+    setFollow([...follow, userToFollowId])
+    // if (follow.length < 4) {
+    //   setFollowNumbers(true)
+    // }else{
+    //   setFollowNumbers(false)
+
+    // }
+    // console.log(follow)
+    // loadingStore.increment("Follow:Timeout")
+    console.log(token, follow)
     userService.followUserS(token, userToFollowId)
-      .then((res) => res)
-      .then((res: User) => {
-        if (res) {
-          console.log(res)
-          console.log("You just followed", userToFollowId)
+      .then((user: User) => {
+        if (user) {
+          console.log( "people you follow", user.following)
+          // loadingStore.decrement("Follow:Timeout")
+          
+          // history.push("/select-brands")
         }
       })
       .catch((err: any) => {
+        // loadingStore.decrement("Follow:Timeout")
         console.log(" FollowUser", err);
       });
   }
 
   //getting current user info
-  const followUserCheck = (userToFollowId: string) => {
-    followUser(userToFollowId)
-    // console.log(userToFollowId)
-    setFollow([...follow, userToFollowId])
-    userService.getUser(currentUserId)
-      .then(res => res)
-      .then((user: Data) => {
-        console.log(user.user.following)
-        if (user.user.following.length > 4) {
-          setFollowNumbers(true)
+  // const followUserCheck = (userToFollowId: string) => {
+  //   followUser(userToFollowId)
+  //   // console.log(userToFollowId)
+  //   setFollow([...follow, userToFollowId])
+  //   userService.getUser(currentUserId)
+  //     .then(res => res)
+  //     .then((user: Data) => {
+  //       // console.log(user.user.following)
+  //       if (user.user.following.length > 4) {
+  //         setFollowNumbers(true)
 
-        }
-        console.log(" user following numbers ", user.user.following.length)
-      })
-      .catch(err => console.log("getting a user", err))
+  //       }
+  //       console.log(" user following numbers ", user.user.following.length)
+  //     })
+  //     .catch(err => console.log("getting a user", err))
 
-  }
+  // }
+  // const followUserCheck = (userToFollowId: string) => {
+  //   // followUser(userToFollowId)
+  //   // console.log(userToFollowId)
+  //   setFollow([...follow, userToFollowId])
+  //   if (follow.length === 4) {
+  //     setFollowNumbers(true)
+  //   }
+
+  // }
 
 
-
+// console.log(follow)
+  // console.log(follow.length)
   return (
     <IonPage className="follow-people-main-container">
       <IonContent className="follow-people-ion-content">
@@ -150,7 +168,12 @@ const FollowPeople: React.FC = () => {
           {users?.map((user) => (
             <div key={user._id} className="follow-people-users-row" >
               <div className="follow-people-users-img-container">
-                <img className="follow-people-users-img" src={user.avatar} alt="" />
+                <img
+                 className="follow-people-users-img"
+                  src={user.avatar}
+                  alt={user.displayName} 
+                  
+                  />
               </div>
               <div className="follow-people-user-names-container">
                 <IonLabel>@{user.displayName}</IonLabel>
@@ -164,8 +187,7 @@ const FollowPeople: React.FC = () => {
                   large={true}
                   onClick={(e) => {
                     e.preventDefault()
-                    followUserCheck(user._id)
-
+                    followUser(user._id)
                   }
                   }
                 />
@@ -175,26 +197,28 @@ const FollowPeople: React.FC = () => {
           ))}
         </div>
 
-        {!followNumbers &&(<IonRow className={"follow-people-skip-container"}>
-          <IonButton fill='clear'  className="follow-people-skip-text"
+        {!followNumbers && (<IonRow className={"follow-people-skip-container"}>
+          <IonButton fill='clear' className="follow-people-skip-text"
+          disabled={follow.length >0}
             onClick={() => {
-              history.push("/onboarding-post")
+              history.push("/select-brands")
             }}
           >SKIP FOR NOW</IonButton>
         </IonRow>)}
 
 
 
-        <div className={!followNumbers?  "follow-people-submit-btn-container2":"follow-people-submit-btn-container"}>
+        <div className={!followNumbers ? "follow-people-submit-btn-container2" : "follow-people-submit-btn-container"}>
           <Button
             label="NEXT"
             large={true}
             onClick={(e) => {
               e.preventDefault()
               history.push("/select-brands")
+
             }
             }
-            disabled={!followNumbers}
+            disabled={follow.length < 5  }
           />
         </div>
       </IonContent>

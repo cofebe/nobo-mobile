@@ -46,24 +46,24 @@ const ProfilePicture: React.FC = () => {
 
   };
 
-  const handleSubmit = async () => {
-    // history.push("/experience/profile-picture/follow-people")
+  // console.log("the preview", profilePicPreview)
+  // console.log("the data", profilePicData)
 
-    const imgData = profilePicPreview.split(",")[1]
-    // console.log(" check the string data", imgData)
-    const userToken = localStorage.getItem("appUserToken");
+  const handleSubmit = async (imgData: any) => {
+
+    const imgFile = imgData.split(",")[1]
+    const userToken = localStorage.getItem("appToken");
     if (userToken) {
       const token = JSON.parse(userToken);
-      loadingStore.increment("Experience:timeout");
-      userService.uploadProfileImg(token, imgData)
-        .then((res) => res)
-        .then((res) => {
-          if (res?.url) {
-            console.log("response is ok 200")
-            loadingStore.decrement("Profile-picture:timeout");
-          history.push("/follow-people")
+      console.log(" check the string data", imgFile)
 
-          }
+      loadingStore.increment("Experience:timeout");
+      userService.uploadProfileImg(token, imgFile)
+        .then((res) => {
+          console.log("response is ok 200")
+          console.log("the url or res data :", res)
+          loadingStore.decrement("Profile-picture:timeout");
+          history.push("/follow-people")
 
         })
         .catch((err: any) => {
@@ -80,7 +80,7 @@ const ProfilePicture: React.FC = () => {
 
   // clear the photo to take another
   const clearCameraPhoto = () => {
-    setProfilePicPreview('');
+    setToggleCropper(false);
   }
 
 
@@ -126,6 +126,7 @@ const ProfilePicture: React.FC = () => {
               base64String: base64data.split(',')[1],
             });
             setProfilePicPreview(base64data);
+            handleSubmit(base64data)
           }, 500);
         };
       });
@@ -192,7 +193,7 @@ const ProfilePicture: React.FC = () => {
 
           <div className="profile-picture-image-container" >
 
-            {toggleCropper || profilePicPreview.length > 3 ? "" : (<div style={{ position: "relative", }}>
+            {toggleCropper ? "" : (<div style={{ position: "relative", }}>
               <IonRow >
                 <IonCol>
                   <img
@@ -202,7 +203,7 @@ const ProfilePicture: React.FC = () => {
                   />
                 </IonCol>
 
-                {toggleCropper || profilePicPreview.length > 3 ? "" : (<IonCol style={{ position: "absolute", top: "35%", left: "35%" }} >
+                {toggleCropper ? "" : (<IonCol style={{ position: "absolute", top: "35%", left: "35%" }} >
                   <img
                     onClick={(e) => {
                       e.preventDefault();
@@ -223,13 +224,13 @@ const ProfilePicture: React.FC = () => {
 
 
             {/* PROFILE PICTURE DISPLAY */}
-            {profilePicPreview !== '' && (
+            {/* {profilePicPreview !== '' && (
               <div className="profile-picture-preview-image">
                 <img className='profile-photo-img' src={`${profilePicPreview}`} alt="" />
               </div>
-            )}
+            )} */}
 
-            {profilePicPreview !== '' && (<div style={{ height: '40px ', width: "40px", position: "absolute", left: "70%", top: "20%" }}
+            {toggleCropper && (<div style={{ height: '35px ', width: "35px", position: "absolute", left: "65%", top: "56%", zIndex: 500 }}
               onClick={(e) => {
                 e.preventDefault();
                 clearCameraPhoto()
@@ -263,14 +264,14 @@ const ProfilePicture: React.FC = () => {
 
 
           </div>
-
+          {/* 
           {toggleCropper && (<IonRow className="profile-picture-crop-done" >
             <IonCol style={{ textAlign: "center" }}>Drag photo to crop </IonCol>
             <IonButton onClick={(e) => {
               e.preventDefault();
               executeProfilePicCrop();
             }} style={{ color: "black" }} shape="round" size="large" color="medium">DONE</IonButton>
-          </IonRow>)}
+          </IonRow>)} */}
         </IonRow >
         <IonGrid>
         </IonGrid>
@@ -287,8 +288,12 @@ const ProfilePicture: React.FC = () => {
           <Button
             label="NEXT"
             large
-            onClick={handleSubmit}
-            disabled={profilePicPreview === ""}
+            onClick={(e) => {
+              e.preventDefault()
+              executeProfilePicCrop()
+
+            }}
+            disabled={!toggleCropper}
           />
         </div>
       </IonContent>

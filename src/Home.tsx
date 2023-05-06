@@ -172,6 +172,7 @@ const Home: React.FC = () => {
     userService
       .getMe()
       .then((user: User) => {
+        console.log("testing the user experience Pref : ", user.experiencePreferences)
         const userExperience = user.experiencePreferences;
         setExperience(userExperience);
       })

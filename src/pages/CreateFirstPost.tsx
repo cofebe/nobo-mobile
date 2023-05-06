@@ -17,13 +17,17 @@ import Button from "../components/Button";
 import "cropperjs/dist/cropper.css";
 import { UserService } from "../services/UserService";
 import { loadingStore } from "../loading-store";
+import { AuthService } from "../services/AuthService";
 
+interface PostResponse {
+  success: boolean
+}
 
 const CreateFirstPost: React.FC = () => {
   const userService = new UserService()
   const history = useHistory();
   const [token, setToken] = useState("")
-  const [currentUserData, setCurrentUserData] = useState<any>([])
+  const [user, setCurrentUserData] = useState<any>([])
   const [textValue, setTextValue] = useState<any>("")
 
 
@@ -42,7 +46,7 @@ const CreateFirstPost: React.FC = () => {
         .then((res) => res)
         .then((user) => {
           setCurrentUserData(user?.user)
-          console.log("test", user)
+          console.log("test", user?.user)
           loadingStore.decrement("SelectBrand:timeout");
 
         })
@@ -63,7 +67,7 @@ const CreateFirstPost: React.FC = () => {
 
   // Getting user token from localStorage
   useIonViewWillEnter(() => {
-    const userToken = localStorage.getItem("appUserToken")
+    const userToken = localStorage.getItem("appToken")
     if (userToken) {
       const token = JSON.parse(userToken);
       setToken(token)
@@ -74,35 +78,39 @@ const CreateFirstPost: React.FC = () => {
 
   // creating a post
   const createPost = () => {
+    console.log(" is there token", token)
     loadingStore.increment("CreatePost:timeout");
     userService.createPost(token, textValue)
-      .then((res) => res)
-      .then((success) => {
+      .then((success: PostResponse) => {
         if (success) {
-          console.log(" first post created succesfully", success)
-        }
-        loadingStore.decrement("SelectBrand:timeout");
+          const authService = new AuthService();
+          authService.setUserToken(token);
+          authService.setUserId(user._id);
+          authService.setUserDisplayName(user.displayName);
+          setTimeout(() => {
+            history.push(`/home/explore/${user.experiencePreferences}/explore`);
+            loadingStore.decrement("CreatePost:timeout");
+          }, 3000);
+        } 
       })
       .catch(err => console.log("getting a user", err))
     loadingStore.decrement("CreatePost:timeout");
 
   }
   // skip a post
-  // const skipPost = () => {
-  //   loadingStore.increment("CreatePost:timeout");
-  //   userService.skipPost(token)
-  //     .then((res) => res)
-  //     .then((response) => {
-  //       console.log(" default created succesfully", response)
-  //       loadingStore.decrement("SelectBrand:timeout");
-  //     })
-  //     .catch(err => console.log("getting a user", err))
-  //   loadingStore.decrement("CreatePost:timeout");
+  const skipPost = () => {
+    loadingStore.increment("CreatePost:timeout");
+    const authService = new AuthService();
+    authService.setUserToken(token);
+    authService.setUserId(user._id);
+    authService.setUserDisplayName(user.displayName);
+    setTimeout(() => {
+      history.push(`/home/explore/${user.experiencePreferences}/explore`);
+      loadingStore.decrement("CreatePost:timeout");
 
-  // }
+    }, 3000);
+  }
 
-  console.log("the state data ", currentUserData?._id)
-  console.log(textValue)
   return (
     <IonPage className="create-post-main-container">
       <IonContent className="create-post-ion-content">
@@ -139,15 +147,15 @@ const CreateFirstPost: React.FC = () => {
             <IonCol className="create-post-img-container">
               <img
                 className="create-post-user-img"
-                src={`data:image/png;base64,${currentUserData?.avatar}`}
+                src={`data:image/png;base64,${user?.avatar}`}
 
                 alt="logo"
               />
             </IonCol>
           </IonRow>
           <IonRow className="create-post-username-container">
-            {currentUserData?.displayName && (<h3 className="create-post-username-text">
-              @{currentUserData?.displayName.toUpperCase()}
+            {user?.displayName && (<h3 className="create-post-username-text">
+              @{user?.displayName.toUpperCase()}
             </h3>)}
           </IonRow>
 
@@ -170,7 +178,7 @@ const CreateFirstPost: React.FC = () => {
 
         {(<IonRow className={"create-post-skip-container"}>
           <IonButton fill='clear' className="create-post-skip-text"
-             onClick={()=>{ history.push("/home/my-profile")}}
+            onClick={skipPost}
           >SKIP</IonButton>
         </IonRow>)}
 

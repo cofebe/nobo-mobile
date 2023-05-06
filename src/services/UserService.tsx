@@ -3,8 +3,10 @@ import { environment } from '../environments/environment';
 import { AuthService } from './AuthService';
 import {
   AddressRequest,
+  BrandsResponse,
   Conversation,
   CreateShippingAddressResponse,
+  ExperienceResponse,
   FullOrder,
   LoginResponse,
   Notification,
@@ -12,6 +14,7 @@ import {
   OrdersResponse,
   PaymentMethodsResponse,
   ProductsResponse,
+  ProfilPicResponse,
   SignUpResponse,
   SignUpType,
   SuccessResponse,
@@ -173,9 +176,9 @@ export class UserService extends BaseService {
 
   async login(email: string, password: string): Promise<User> {
     const res = await super.fetch('POST', '/api/users/login', { email, password });
-    //console.log('res', res);
+    console.log('res', res);
     const json: LoginResponse = await res.json();
-    //console.log('json', json);
+    console.log('json', json);
 
     if (res.status === 404) {
       console.log('404', json.error);
@@ -356,9 +359,32 @@ export class UserService extends BaseService {
 
 
   // signing up a user
-  async signup(person: SignUpType) {
-    const res = await fetch("https://thenobo.com/api/users/register",
+  // async signup2(person: SignUpType) {
+  //   const res = await fetch("https://thenobo.com/api/users/register",
 
+  //     {
+  //       method: 'POST',
+  //       cache: 'no-cache',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         firstName: person.firstName,
+  //         lastName: person.lastName,
+  //         email: person.email,
+  //         displayName: person.userName,
+  //         password: person.password
+  //       }),
+  //     });
+
+  //   if (res.status === 404) {
+  //     console.log('404', res.json);
+  //   }
+  //   return res.json();
+  // }
+
+  async signup(person: SignUpType): Promise<User> {
+    const res = await fetch("https://thenobo.com/api/users/register",
       {
         method: 'POST',
         cache: 'no-cache',
@@ -372,14 +398,16 @@ export class UserService extends BaseService {
           displayName: person.userName,
           password: person.password
         }),
-      });
+      })
+    console.log('res', res);
+    const json: SignUpResponse = await res.json();
+    console.log('json', json);
 
-    if (res.status === 404) {
-      console.log('404', res.json);
+    if (json.token) {
+      window.localStorage.setItem("appToken", JSON.stringify(json.token));
     }
 
-    return res.json();
-
+    return json.user;
   }
 
 
@@ -399,7 +427,9 @@ export class UserService extends BaseService {
     if (res.status === 500) {
       console.log('500 ', res.json());
     }
-    return res.json()
+
+    const json: ExperienceResponse = await res.json()
+    return json.currentUser
 
 
   }
@@ -407,24 +437,23 @@ export class UserService extends BaseService {
 
   //upload profile photo
   async uploadProfileImg(token: string, data: any) {
-
     const url = 'https://thenobo.com/api/users/update-avatar'
-    try {
-      console.log({ info: "the userService section" })
-      const config = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ "imgUrl": data })
 
-      }
-      const response = await fetch(url, config)
-      return response.json()
-    } catch (error) {
-      console.log("err from userService response", error)
+    console.log({ info: "the userService section", data })
+    const config = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ "imgUrl": data })
+
     }
+    const res = await fetch(url, config)
+    const json: ProfilPicResponse = await res.json()
+
+    return json.url
+
 
   }
 
@@ -444,18 +473,18 @@ export class UserService extends BaseService {
 
 
   // FOLLOW A USER 
-  async followUserS(token: string, userToFollowId: string) {
+  async followUserS(token: string, usersToFollow: any) {
 
     const url = 'https://thenobo.com/api/users/follow'
     try {
-      console.log({ info: "the userService section" })
+      console.log({ info: "the userService section", usersToFollow })
       const config = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ "userId": userToFollowId })
+        body: JSON.stringify({ "userId": usersToFollow })
 
       }
       const response = await fetch(url, config)
@@ -479,7 +508,8 @@ export class UserService extends BaseService {
   async getBrands() {
     const response = await fetch("https://thenobo.com/api/brands/q/term/a")
     // console.log(response)
-    return response.json()
+    const json:BrandsResponse = await response.json()
+    return json.matched
 
   }
 
@@ -508,11 +538,11 @@ export class UserService extends BaseService {
   }
 
 
-//Creating  post request
+  //Creating  post request
   async createPost(token: string, postMessage: string) {
     const url = 'https://thenobo.com/api/users/set-onboard-activity'
     try {
-      console.log({ info: "the userService section", postMessage })
+      console.log({ info: "the userService section",token,  postMessage })
       const config = {
         method: "POST",
         headers: {
@@ -533,7 +563,7 @@ export class UserService extends BaseService {
 
   //Creating  post request
   async skipPost(token: string) {
-   const  defaultPost = " Excited to be on TheNOBO\u0021" 
+    const defaultPost = " Excited to be on TheNOBO\u0021"
     const url = 'https://thenobo.com/api/users/set-onboard-activity'
     try {
       console.log({ info: "the userService section", token })
@@ -553,7 +583,7 @@ export class UserService extends BaseService {
     }
 
   }
-    
+
 
 
 

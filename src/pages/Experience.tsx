@@ -10,7 +10,7 @@ import {
 import "./Experience.scss";
 import { loadingStore } from "../loading-store";
 import { UserService } from "../services/UserService";
-import { ResData } from "../models";
+import { User } from "../models";
 import Checkbox from "../components/Checkbox";
 import Button from "../components/Button";
 
@@ -67,24 +67,17 @@ const Experience: React.FC = () => {
   };
 
   const handleSubmit = async (experienceOption: string) => {
-    const userToken = localStorage.getItem("appUserToken");
+    const userToken = localStorage.getItem("appToken");
     if (userToken) {
       const token = JSON.parse(userToken);
       loadingStore.increment("Experience:timeout");
       userService
         .experience(experienceOption, token)
-        .then((user: ResData) => {
-          console.log(user.currentUser);
-          window.localStorage.setItem(
-            "userExperienceData",
-            JSON.stringify(user.currentUser)
-          );
-        })
-        .then(() => {
-          loadingStore.decrement("Experience:timeout");
+        .then((user: User) => {
+          console.log(user);
           history.push("/profile-picture");
+          loadingStore.decrement("Experience:timeout");
         })
-
         .catch((err: any) => {
           loadingStore.decrement("Experience:timeout");
           console.log("signup error", err);
@@ -94,28 +87,6 @@ const Experience: React.FC = () => {
     }
   };
 
-  // push a fuction base on user prefrence
-  // function checkCase() {
-  //   switch (experienceOption) {
-  //     case "women":
-  //       handleNext(experienceOption);
-
-  //       break;
-
-  //     case "men":
-  //       handleNext(experienceOption);
-
-  //       break;
-
-  //     case "sneakers":
-  //       handleNext(experienceOption);
-
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  // }
 
   return (
     <IonPage className="experience-main-container">
@@ -123,7 +94,7 @@ const Experience: React.FC = () => {
         <div className="experience-header">
           <img
             onClick={() => {
-              history.goBack();
+              history.push("/get-started");
             }}
             className="experience-back-btn"
             style={{ color: "black" }}
@@ -175,7 +146,7 @@ const Experience: React.FC = () => {
               WOMEN
             </h3>
             <div className="experience-checkbox">
-              <Checkbox value={womenCheckbox} onChange={() => {}} />
+              <Checkbox value={womenCheckbox} onChange={() => { }} />
             </div>
           </div>
 
@@ -202,7 +173,7 @@ const Experience: React.FC = () => {
               MEN
             </h3>
             <div className="experience-checkbox">
-              <Checkbox value={menCheckbox} onChange={(e) => {}} />
+              <Checkbox value={menCheckbox} onChange={(e) => { }} />
             </div>
           </div>
 
@@ -230,7 +201,7 @@ const Experience: React.FC = () => {
               SNEAKERS
             </h3>
             <div className="experience-checkbox">
-              <Checkbox value={sneakersCheckbox} onChange={(e) => {}} />
+              <Checkbox value={sneakersCheckbox} onChange={(e) => { }} />
             </div>
           </div>
         </form>

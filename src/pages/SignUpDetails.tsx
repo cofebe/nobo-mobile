@@ -4,7 +4,7 @@ import {
   IonCol,
   IonGrid,
   useIonViewWillEnter,
-  // IonContent,
+  IonContent,
 } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -103,7 +103,7 @@ const SignUpDetails: React.FC = () => {
             />
           </IonCol>
         </IonRow>
-        <IonRow className='signup-details-box-container'>
+        
           <IonGrid className="signup-details-box">
             <IonRow
               style={{ paddingTop: 20 }}
@@ -216,7 +216,7 @@ const SignUpDetails: React.FC = () => {
               </IonCol>
             </IonRow>
           </IonGrid>
-        </IonRow>
+      
       </div>
       {/* </IonContent> */}
     </IonPage>
