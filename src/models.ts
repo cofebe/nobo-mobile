@@ -527,14 +527,18 @@ export interface ExperienceResponse {
 export interface ProfilPicResponse {
   url: string
 }
-interface MatchedType {
-  _id: string
-  name: string
-  url: string
+// interface MatchedType {
+//   _id: string
+//   name: string
+//   url: string
 
 
-}
+// }
 
 export interface BrandsResponse {
   matched: []
+}
+
+export interface ProfileResponse {
+  user: User
 }

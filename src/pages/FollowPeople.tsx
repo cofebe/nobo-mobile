@@ -9,14 +9,13 @@ import {
   useIonViewWillEnter,
   IonButton,
 
-
 } from "@ionic/react";
 import "cropperjs/dist/cropper.css";
 import "./FollowPeople.scss";
 import Button from "../components/Button";
 import "cropperjs/dist/cropper.css";
 import { UserService } from "../services/UserService";
-import { User } from "../models";
+import { ProfileResponse, User } from "../models";
 
 
 
@@ -29,8 +28,8 @@ const FollowPeople: React.FC = () => {
   const [users, setUsers] = useState<User[]>([])
   const [token, setToken] = useState("")
   const [currentUserId, setCurrentUserId] = useState("")
-  const [followNumbers, setFollowNumbers] = useState(false)
   const [follow, setFollow] = useState<string[]>([])
+  const [peopleIfollow, setPeopleIfollow] = useState<string[]>([])
 
 
   //  fetching exixting users to follow
@@ -39,15 +38,11 @@ const FollowPeople: React.FC = () => {
       .then(res => res)
       .then(users => {
         setUsers(users?.users)
-        // localStorage.setItem("existingUsers", JSON.stringify(users?.users))
       })
       .catch((error) => {
         console.log("follow users error", error)
       })
   });
-
-
-
 
   // Getting user token from localStorage
   useIonViewWillEnter(() => {
@@ -56,7 +51,6 @@ const FollowPeople: React.FC = () => {
       const token = JSON.parse(userToken);
       setToken(token)
       console.log("your token is ready :", token)
-
     } else {
       console.log("no token found")
     }
@@ -67,72 +61,51 @@ const FollowPeople: React.FC = () => {
     const data = localStorage.getItem("appUserId")
     if (data) {
       const userId = JSON.parse(data);
-      setCurrentUserId(userId)
+       setCurrentUserId(userId)
       console.log("your userId is ready :", userId)
+      userService.getUserProfile(currentUserId)
+        .then((user: ProfileResponse) => {
+          setPeopleIfollow(user.user.following)
+        })
+        .catch((error) => { console.log("error msg while fetching user profile", error) })
+
     } else {
       console.log("no user data found")
     }
   })
 
 
-
+// Folloing  a user
   const followUser = (userToFollowId: string) => {
     setFollow([...follow, userToFollowId])
-    // if (follow.length < 4) {
-    //   setFollowNumbers(true)
-    // }else{
-    //   setFollowNumbers(false)
 
-    // }
-    // console.log(follow)
-    // loadingStore.increment("Follow:Timeout")
-    console.log(token, follow)
-    userService.followUserS(token, userToFollowId)
-      .then((user: User) => {
-        if (user) {
-          console.log( "people you follow", user.following)
-          // loadingStore.decrement("Follow:Timeout")
-          
-          // history.push("/select-brands")
-        }
-      })
-      .catch((err: any) => {
-        // loadingStore.decrement("Follow:Timeout")
-        console.log(" FollowUser", err);
-      });
+    // console.log(token, follow)
+
+    // Checking if already following the user
+    console.log("the people you already following ", peopleIfollow)
+    const result = peopleIfollow.includes(userToFollowId, 0)
+    console.log("am i already following this user? ", result)
+
+    if (!result) {
+      userService.followUserS(token, userToFollowId)
+        .then((user: User) => {
+          console.log(" Ypur updated following list ", user.following)
+        })
+        .catch((err: any) => {
+          console.log(" FollowUser", err);
+        });
+    } else {
+      console.log(`You already followed this user ${userToFollowId}`)
+    }
+
+
   }
 
-  //getting current user info
-  // const followUserCheck = (userToFollowId: string) => {
-  //   followUser(userToFollowId)
-  //   // console.log(userToFollowId)
-  //   setFollow([...follow, userToFollowId])
-  //   userService.getUser(currentUserId)
-  //     .then(res => res)
-  //     .then((user: Data) => {
-  //       // console.log(user.user.following)
-  //       if (user.user.following.length > 4) {
-  //         setFollowNumbers(true)
-
-  //       }
-  //       console.log(" user following numbers ", user.user.following.length)
-  //     })
-  //     .catch(err => console.log("getting a user", err))
-
-  // }
-  // const followUserCheck = (userToFollowId: string) => {
-  //   // followUser(userToFollowId)
-  //   // console.log(userToFollowId)
-  //   setFollow([...follow, userToFollowId])
-  //   if (follow.length === 4) {
-  //     setFollowNumbers(true)
-  //   }
-
-  // }
 
 
-// console.log(follow)
-  // console.log(follow.length)
+
+  console.log(follow, )
+  console.log(follow.length)
   return (
     <IonPage className="follow-people-main-container">
       <IonContent className="follow-people-ion-content">
@@ -169,11 +142,11 @@ const FollowPeople: React.FC = () => {
             <div key={user._id} className="follow-people-users-row" >
               <div className="follow-people-users-img-container">
                 <img
-                 className="follow-people-users-img"
+                  className="follow-people-users-img"
                   src={user.avatar}
-                  alt={user.displayName} 
-                  
-                  />
+                  alt={user.displayName}
+
+                />
               </div>
               <div className="follow-people-user-names-container">
                 <IonLabel>@{user.displayName}</IonLabel>
@@ -197,28 +170,26 @@ const FollowPeople: React.FC = () => {
           ))}
         </div>
 
-        {!followNumbers && (<IonRow className={"follow-people-skip-container"}>
+         {follow.length > 0 ? "" : <IonRow className={"follow-people-skip-container"}>
           <IonButton fill='clear' className="follow-people-skip-text"
-          disabled={follow.length >0}
+            disabled={follow.length > 0}
             onClick={() => {
               history.push("/select-brands")
             }}
           >SKIP FOR NOW</IonButton>
-        </IonRow>)}
+        </IonRow>}
 
 
 
-        <div className={!followNumbers ? "follow-people-submit-btn-container2" : "follow-people-submit-btn-container"}>
+        <div className={follow.length < 1 ?  "follow-people-submit-btn-container2" : "follow-people-submit-btn-container"}>
           <Button
             label="NEXT"
             large={true}
             onClick={(e) => {
               e.preventDefault()
               history.push("/select-brands")
-
-            }
-            }
-            disabled={follow.length < 5  }
+            }}
+            disabled={follow.length < 5}
           />
         </div>
       </IonContent>

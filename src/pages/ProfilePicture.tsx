@@ -22,9 +22,9 @@ import { Cropper } from "react-cropper";
 const ProfilePicture: React.FC = () => {
   const userService = new UserService()
   const history = useHistory();
-  const [profilePicData, setProfilePicData] = useState(Object);
-  const [profilePicPreview, setProfilePicPreview] = useState('');
-  const [toggleCropper, setToggleCropper] = useState(false);
+  const [photoData, setPhotoData] = useState(Object);
+  const [previewImgFile, setPreviewImgFile] = useState('');
+  const [cropperToggler, setCropperToggler] = useState(false);
 
   const takePhoto = async () => {
     const photo = await Camera.getPhoto({
@@ -32,21 +32,12 @@ const ProfilePicture: React.FC = () => {
       source: CameraSource.Camera,
       quality: 100,
     });
-    setToggleCropper(true)
-    setProfilePicData(photo)
-    // const fileName = new Date().getTime() + '.jpeg';
-    // const newPhotos = [
-    //   {
-    //     filepath: fileName,
-    //     webviewPath: photo.base64String,
-    //   },
-
-    // ];
-    // setCameraPhoto(newPhotos);
-
+    setCropperToggler(true)
+    setPhotoData(photo)
+  
   };
 
-  // console.log("the preview", profilePicPreview)
+  // console.log("the preview", previewImgFile)
   // console.log("the data", profilePicData)
 
   const handleSubmit = async (imgData: any) => {
@@ -57,17 +48,17 @@ const ProfilePicture: React.FC = () => {
       const token = JSON.parse(userToken);
       console.log(" check the string data", imgFile)
 
-      loadingStore.increment("Experience:timeout");
+      loadingStore.increment("Profile-Picture:timeout");
       userService.uploadProfileImg(token, imgFile)
         .then((res) => {
           console.log("response is ok 200")
           console.log("the url or res data :", res)
-          loadingStore.decrement("Profile-picture:timeout");
+          loadingStore.decrement("Profile-Picture:timeout");
           history.push("/follow-people")
 
         })
         .catch((err: any) => {
-          loadingStore.decrement("SignUp:timeout");
+          loadingStore.decrement("Profile-Picture:timeout");
           console.log(" ProfilePicture error", err);
         });
     } else {
@@ -80,7 +71,7 @@ const ProfilePicture: React.FC = () => {
 
   // clear the photo to take another
   const clearCameraPhoto = () => {
-    setToggleCropper(false);
+    setCropperToggler(false);
   }
 
 
@@ -120,18 +111,18 @@ const ProfilePicture: React.FC = () => {
             let b64str = c.toDataURL('image/jpeg');
             let base64data = b64str; //(reader.result || "").toString();
 
-            setProfilePicData({
-              ...profilePicData,
+            setPhotoData({
+              ...photoData,
               format: 'png',
               base64String: base64data.split(',')[1],
             });
-            setProfilePicPreview(base64data);
+            setPreviewImgFile(base64data);
             handleSubmit(base64data)
           }, 500);
         };
       });
     }
-    setToggleCropper(false);
+    // setToggleCropper(false);
   }
 
 
@@ -149,7 +140,8 @@ const ProfilePicture: React.FC = () => {
 
 
 
-
+  // console.log("profilePicData before crop ", photoData)
+  // console.log("profilePreview after crop ", previewImgFile)
   return (
     <IonPage id="profile-picture-page" className="profile-picture-main-container">
       <IonContent className="profile-picture-ion-content">
@@ -189,11 +181,8 @@ const ProfilePicture: React.FC = () => {
             position: "relative"
           }}
         >
-
-
           <div className="profile-picture-image-container" >
-
-            {toggleCropper ? "" : (<div style={{ position: "relative", }}>
+            {!cropperToggler && (<div style={{ position: "relative", }}>
               <IonRow >
                 <IonCol>
                   <img
@@ -203,7 +192,7 @@ const ProfilePicture: React.FC = () => {
                   />
                 </IonCol>
 
-                {toggleCropper ? "" : (<IonCol style={{ position: "absolute", top: "35%", left: "35%" }} >
+                <IonCol style={{ position: "absolute", top: "35%", left: "35%" }} >
                   <img
                     onClick={(e) => {
                       e.preventDefault();
@@ -214,23 +203,13 @@ const ProfilePicture: React.FC = () => {
                     src="assets/images/nobo-profile-upload-plus.png"
                     alt=""
                   />
-                </IonCol>)}
-
+                </IonCol>
               </IonRow>
-
-
             </div>)}
 
 
-
-            {/* PROFILE PICTURE DISPLAY */}
-            {/* {profilePicPreview !== '' && (
-              <div className="profile-picture-preview-image">
-                <img className='profile-photo-img' src={`${profilePicPreview}`} alt="" />
-              </div>
-            )} */}
-
-            {toggleCropper && (<div style={{ height: '35px ', width: "35px", position: "absolute", left: "65%", top: "56%", zIndex: 500 }}
+            {/* CLEAR PHOTO */}
+            {cropperToggler && (<div style={{ height: '35px ', width: "35px", position: "absolute", left: "65%", top: "56%", zIndex: 500 }}
               onClick={(e) => {
                 e.preventDefault();
                 clearCameraPhoto()
@@ -239,13 +218,12 @@ const ProfilePicture: React.FC = () => {
               <img src="assets/images/close-black.svg" alt="close" />
             </div>)}
 
-
-            {toggleCropper && (
+            {cropperToggler && (
               <div
                 className="profile-picture-image-cropper" >
                 <Cropper
                   className="profile-picture-cropper"
-                  src={`data:image/png;base64,${profilePicData?.base64String}`}
+                  src={`data:image/png;base64,${photoData?.base64String}`}
                   // CropperJS options
                   style={{ height: '200px', borderRadius: "50%", }}
                   initialAspectRatio={75 / 75}
@@ -261,22 +239,13 @@ const ProfilePicture: React.FC = () => {
                 />
               </div>
             )}
-
-
           </div>
-          {/* 
-          {toggleCropper && (<IonRow className="profile-picture-crop-done" >
-            <IonCol style={{ textAlign: "center" }}>Drag photo to crop </IonCol>
-            <IonButton onClick={(e) => {
-              e.preventDefault();
-              executeProfilePicCrop();
-            }} style={{ color: "black" }} shape="round" size="large" color="medium">DONE</IonButton>
-          </IonRow>)} */}
+
         </IonRow >
         <IonGrid>
         </IonGrid>
 
-        <IonRow className={toggleCropper ? "profile-picture-skip-container" : "profile-picture-skip-container2"}>
+        <IonRow className={cropperToggler ? "profile-picture-skip-container" : "profile-picture-skip-container2"}>
           <IonButton fill='clear' className="profile-picture-skip-text"
             onClick={() => {
               history.push("/follow-people")
@@ -293,7 +262,7 @@ const ProfilePicture: React.FC = () => {
               executeProfilePicCrop()
 
             }}
-            disabled={!toggleCropper}
+            disabled={!cropperToggler}
           />
         </div>
       </IonContent>

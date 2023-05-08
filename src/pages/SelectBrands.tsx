@@ -40,6 +40,7 @@ const SelectBrands: React.FC = () => {
   const [brandsItems, setBrandItems] = useState<MatchedType[]>([])
   const [brandName, setBrandName] = useState("")
   const [brandId, setBrandId] = useState("")
+  const [brandText, setBrandText] = useState("")
 
 
 
@@ -142,9 +143,7 @@ const SelectBrands: React.FC = () => {
 
 
 
-  //  console.log( brandsItems)
-
-
+   const mapFilter = brandsItems?.filter((brand)=>brand.name.toLowerCase().includes(brandText.toLowerCase(), 0))
   return (
     <IonPage className="select-brands-main-container">
       <IonContent className="select-brands-ion-content">
@@ -178,13 +177,16 @@ const SelectBrands: React.FC = () => {
         <div className="select-brands-search-container" >
           <Search
             className="select-brands-search"
-            onChange={(e) => (console.log(e))}
+            value={brandText}
+            onChange={
+              (e) => setBrandText(e)
+            }
           />
         </div>
-        <div className="select-brands-body-container" >
 
+        <div className="select-brands-body-container" >
           <IonRow className="select-brand-img-container" >
-            {brandsItems?.map((brands) => (
+            {mapFilter.map((brands) => (
               <IonCol className="select-brand-img-col" key={brands._id} size="5" >
                 <img
                   onClick={() => { handleTicker(brands?.name, brands._id) }}

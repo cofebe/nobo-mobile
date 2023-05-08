@@ -68,6 +68,7 @@ const Experience: React.FC = () => {
 
   const handleSubmit = async (experienceOption: string) => {
     const userToken = localStorage.getItem("appToken");
+    console.log(userToken)
     if (userToken) {
       const token = JSON.parse(userToken);
       loadingStore.increment("Experience:timeout");
@@ -120,9 +121,9 @@ const Experience: React.FC = () => {
           </IonCol>
         </IonRow>
 
-        <form>
-          {/* WOMEN */}
+        <div className='experience-form-container'>
 
+          {/* WOMEN */}
           <div
             className="experience-img-container"
             onClick={() => {
@@ -131,7 +132,7 @@ const Experience: React.FC = () => {
           >
             <img
               className={
-                womenCheckbox ? "experience-img-container-selected" : ""
+                womenCheckbox ? "experience-img-container-selected2" : "experience-img-container-selected"
               }
               src="assets/images/experience-women.png"
               alt="women"
@@ -159,7 +160,7 @@ const Experience: React.FC = () => {
             }}
           >
             <img
-              className={menCheckbox ? "experience-img-container-selected" : ""}
+              className={menCheckbox ? "experience-img-container-selected2" : "experience-img-container-selected"}
               src="assets/images/experience-men.png"
               alt="sneakers"
             />
@@ -186,7 +187,7 @@ const Experience: React.FC = () => {
           >
             <img
               className={
-                sneakersCheckbox ? "experience-img-container-selected" : ""
+                sneakersCheckbox ? "experience-img-container-selected2" : "experience-img-container-selected"
               }
               src="assets/images/experience-sneaker.png"
               alt="sneakers"
@@ -204,14 +205,15 @@ const Experience: React.FC = () => {
               <Checkbox value={sneakersCheckbox} onChange={(e) => { }} />
             </div>
           </div>
-        </form>
+        </div>
 
         <div className="experience-btn-container">
           <Button
             className="experience-btn"
             label="NEXT"
             large
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               handleSubmit(experienceOption);
             }}
             disabled={experienceOption === ""}

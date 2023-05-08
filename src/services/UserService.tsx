@@ -497,7 +497,7 @@ export class UserService extends BaseService {
 
 
   // Get  a user profile
-  async getUser(userId: string) {
+  async getUserProfile(userId: string) {
     const response = await fetch(`https://thenobo.com/api/users/${userId}/profile`)
     // console.log(response)
     return response.json()
@@ -539,31 +539,31 @@ export class UserService extends BaseService {
 
 
   //Creating  post request
-  async createPost(token: string, postMessage: string) {
-    const url = 'https://thenobo.com/api/users/set-onboard-activity'
-    try {
-      console.log({ info: "the userService section",token,  postMessage })
-      const config = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ "activity": postMessage })
+  // async createPost(token: string, postMessage: string) {
+  //   const url = 'https://thenobo.com/api/users/set-onboard-activity'
+  //   try {
+  //     console.log({ info: "the userService section",token,  postMessage })
+  //     const config = {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       body: JSON.stringify({ "activity": postMessage })
 
-      }
-      const response = await fetch(url, config)
-      return response.json()
-    } catch (error) {
-      console.log("err from userService response", error)
-    }
+  //     }
+  //     const response = await fetch(url, config)
+  //     return response.json()
+  //   } catch (error) {
+  //     console.log("err from userService response", error)
+  //   }
 
-  }
+  // }
 
 
   //Creating  post request
-  async skipPost(token: string) {
-    const defaultPost = " Excited to be on TheNOBO\u0021"
+  async createPost(token: string, post:string) {
+    // const defaultPost = " Excited to be on TheNOBO\u0021"
     const url = 'https://thenobo.com/api/users/set-onboard-activity'
     try {
       console.log({ info: "the userService section", token })
@@ -573,7 +573,7 @@ export class UserService extends BaseService {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ "userMessage": defaultPost })
+        body: JSON.stringify({ "userMessage": post })
 
       }
       const response = await fetch(url, config)
