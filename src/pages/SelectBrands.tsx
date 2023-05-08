@@ -120,7 +120,7 @@ const SelectBrands: React.FC = () => {
 
   const handleSubmit = async () => {
 
-    const userToken = localStorage.getItem("appToken");
+    const userToken = localStorage.getItem("appUserToken");
     if (userToken) {
       const token = JSON.parse(userToken);
       loadingStore.increment("SelectBrand:timeout");

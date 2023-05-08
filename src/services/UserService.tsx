@@ -358,30 +358,6 @@ export class UserService extends BaseService {
 
 
 
-  // signing up a user
-  // async signup2(person: SignUpType) {
-  //   const res = await fetch("https://thenobo.com/api/users/register",
-
-  //     {
-  //       method: 'POST',
-  //       cache: 'no-cache',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         firstName: person.firstName,
-  //         lastName: person.lastName,
-  //         email: person.email,
-  //         displayName: person.userName,
-  //         password: person.password
-  //       }),
-  //     });
-
-  //   if (res.status === 404) {
-  //     console.log('404', res.json);
-  //   }
-  //   return res.json();
-  // }
 
   async signup(person: SignUpType): Promise<User> {
     const res = await fetch("https://thenobo.com/api/users/register",
@@ -404,7 +380,7 @@ export class UserService extends BaseService {
     console.log('json', json);
 
     if (json.token) {
-      window.localStorage.setItem("appToken", JSON.stringify(json.token));
+      window.localStorage.setItem("appUserToken", JSON.stringify(json.token));
     }
 
     return json.user;
@@ -538,33 +514,11 @@ export class UserService extends BaseService {
   }
 
 
-  //Creating  post request
-  // async createPost(token: string, postMessage: string) {
-  //   const url = 'https://thenobo.com/api/users/set-onboard-activity'
-  //   try {
-  //     console.log({ info: "the userService section",token,  postMessage })
-  //     const config = {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //       body: JSON.stringify({ "activity": postMessage })
-
-  //     }
-  //     const response = await fetch(url, config)
-  //     return response.json()
-  //   } catch (error) {
-  //     console.log("err from userService response", error)
-  //   }
-
-  // }
-
+ 
 
   //Creating  post request
   async createPost(token: string, post:string) {
-    // const defaultPost = " Excited to be on TheNOBO\u0021"
-    const url = 'https://thenobo.com/api/users/set-onboard-activity'
+    const url = 'https://thenobo.com/api/feed/create-item'
     try {
       console.log({ info: "the userService section", token })
       const config = {

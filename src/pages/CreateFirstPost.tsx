@@ -54,12 +54,12 @@ const CreateFirstPost: React.FC = () => {
 
   // Getting currenUserId from localStorage
   useIonViewWillEnter(() => {
-    loadUserProfile();
+  loadUserProfile();
   });
 
   // Getting user token from localStorage
   useIonViewWillEnter(() => {
-    const userToken = localStorage.getItem("appToken");
+    const userToken = localStorage.getItem("appUserToken");
     if (userToken) {
       const token = JSON.parse(userToken);
       setToken(token);
@@ -70,8 +70,6 @@ const CreateFirstPost: React.FC = () => {
 
   // creating a post
   const createPost = () => {
-    // console.log(" is there token", token)
-    // console.log(currentUser.displayName)
     loadingStore.increment("CreatePost:timeout");
     userService
       .createPost(token, textValue)
@@ -86,7 +84,7 @@ const CreateFirstPost: React.FC = () => {
               `/home/explore/${currentUser.experiencePreferences}/explore`
             );
             loadingStore.decrement("CreatePost:timeout");
-          }, 3000);
+          }, 2000);
         }
       })
       .catch((err) => console.log("getting a user", err));
@@ -104,7 +102,7 @@ const CreateFirstPost: React.FC = () => {
         `/home/explore/${currentUser.experiencePreferences}/explore`
       );
       loadingStore.decrement("SkipPost:timeout");
-    }, 3000);
+    }, 2000);
   };
 
   return (
@@ -143,7 +141,7 @@ const CreateFirstPost: React.FC = () => {
             <IonCol className="create-post-img-container">
               <img
                 className="create-post-user-img"
-                src={`data:image/png;base64,${currentUser?.avatar}`}
+                src={currentUser?.avatar}
                 alt="logo"
               />
             </IonCol>

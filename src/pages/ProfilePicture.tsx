@@ -34,28 +34,23 @@ const ProfilePicture: React.FC = () => {
     });
     setCropperToggler(true)
     setPhotoData(photo)
-  
+
   };
 
-  // console.log("the preview", previewImgFile)
-  // console.log("the data", profilePicData)
+
 
   const handleSubmit = async (imgData: any) => {
 
-    const imgFile = imgData.split(",")[1]
-    const userToken = localStorage.getItem("appToken");
+    const userToken = localStorage.getItem("appUserToken");
     if (userToken) {
       const token = JSON.parse(userToken);
-      console.log(" check the string data", imgFile)
-
       loadingStore.increment("Profile-Picture:timeout");
-      userService.uploadProfileImg(token, imgFile)
+      userService.uploadProfileImg(token, imgData)
         .then((res) => {
           console.log("response is ok 200")
           console.log("the url or res data :", res)
           loadingStore.decrement("Profile-Picture:timeout");
           history.push("/follow-people")
-
         })
         .catch((err: any) => {
           loadingStore.decrement("Profile-Picture:timeout");
@@ -73,8 +68,6 @@ const ProfilePicture: React.FC = () => {
   const clearCameraPhoto = () => {
     setCropperToggler(false);
   }
-
-
 
 
   async function executeProfilePicCrop() {

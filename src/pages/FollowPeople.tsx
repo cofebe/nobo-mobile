@@ -46,7 +46,7 @@ const FollowPeople: React.FC = () => {
 
   // Getting user token from localStorage
   useIonViewWillEnter(() => {
-    const userToken = localStorage.getItem("appToken")
+    const userToken = localStorage.getItem("appUserToken")
     if (userToken) {
       const token = JSON.parse(userToken);
       setToken(token)

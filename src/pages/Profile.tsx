@@ -302,7 +302,6 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
       checkIfFollowing()
     }, 250)
   }
-
   return (
     <IonPage className="home-page-athlete-profile" style={{ backgroundColor: '#F9FBFB' }}>
     <IonContent className="athlete-profile-content" scrollY={false}>
