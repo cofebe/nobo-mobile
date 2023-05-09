@@ -3,12 +3,10 @@ import { useHistory } from "react-router-dom";
 import {
   IonContent,
   IonPage,
-  useIonViewWillEnter,
   IonRow,
   IonCol,
 } from "@ionic/react";
 import "./Experience.scss";
-import { loadingStore } from "../loading-store";
 import { UserService } from "../services/UserService";
 import { User } from "../models";
 import Checkbox from "../components/Checkbox";
@@ -17,75 +15,31 @@ import Button from "../components/Button";
 const Experience: React.FC = () => {
   const userService = new UserService();
   const history = useHistory();
-  const [experienceOption, setExperienceOption] = useState("");
-  const [menCheckbox, setmenCheckbox] = useState(false);
-  const [womenCheckbox, setWomenCheckbox] = useState(false);
-  const [sneakersCheckbox, setSneakersCheckbox] = useState(false);
+  const [selectedExperienceArray, setBrandSelectArray] = useState<string[]>([])
+  const [expOptionSelected, setExpOptionSelected] = useState("")
 
-  useIonViewWillEnter(() => {
-    // some code here
-  });
 
-  const handleTicker = (arg: string) => {
-    setExperienceOption(arg);
-    // console.log(experienceOption);
-    const handleSneakers = () => {
-      setSneakersCheckbox(true);
-      setWomenCheckbox(false);
-      setmenCheckbox(false);
-    };
-    const handleW = () => {
-      setSneakersCheckbox(false);
-      setWomenCheckbox(true);
-      setmenCheckbox(false);
-    };
-    const handleM = () => {
-      setSneakersCheckbox(false);
-      setWomenCheckbox(false);
-      setmenCheckbox(true);
-    };
+  // Handling the ticker
+  const handleTicker = (experienceOption: string) => {
+    if (!selectedExperienceArray.includes(experienceOption, 0)) {
+      selectedExperienceArray.push(experienceOption)
 
-    switch (arg) {
-      case "women":
-        handleW();
-
-        break;
-
-      case "men":
-        handleM();
-
-        break;
-
-      case "sneakers":
-        handleSneakers();
-
-        break;
-
-      default:
-        break;
-    }
-  };
-
-  const handleSubmit = async (experienceOption: string) => {
-    const userToken = localStorage.getItem("appUserToken");
-    console.log(userToken)
-    if (userToken) {
-      const token = JSON.parse(userToken);
-      loadingStore.increment("Experience:timeout");
-      userService
-        .experience(experienceOption, token)
-        .then((user: User) => {
-          console.log(user);
-          history.push("/profile-picture");
-          loadingStore.decrement("Experience:timeout");
-        })
-        .catch((err: any) => {
-          loadingStore.decrement("Experience:timeout");
-          console.log("signup error", err);
-        });
     } else {
-      return console.log("no token found");
+      const experienceItem = selectedExperienceArray.filter((brand) => brand === experienceOption)
+      setExpOptionSelected(experienceItem[0])
     }
+  }
+
+  const handleSubmit = async () => {
+    userService
+      .experience(expOptionSelected)
+      .then((user: User) => {
+        history.push("/profile-picture");
+      })
+      .catch((err: any) => {
+        console.log("signup error", err);
+      });
+
   };
 
 
@@ -132,7 +86,7 @@ const Experience: React.FC = () => {
           >
             <img
               className={
-                womenCheckbox ? "experience-img-container-selected2" : "experience-img-container-selected"
+                expOptionSelected === "women" ? "experience-img-container-selected2" : "experience-img-container-selected"
               }
               src="assets/images/experience-women.png"
               alt="women"
@@ -147,7 +101,7 @@ const Experience: React.FC = () => {
               WOMEN
             </h3>
             <div className="experience-checkbox">
-              <Checkbox value={womenCheckbox} onChange={() => { }} />
+              <Checkbox value={expOptionSelected === "women"} onChange={() => { }} />
             </div>
           </div>
 
@@ -160,7 +114,7 @@ const Experience: React.FC = () => {
             }}
           >
             <img
-              className={menCheckbox ? "experience-img-container-selected2" : "experience-img-container-selected"}
+              className={expOptionSelected === "men" ? "experience-img-container-selected2" : "experience-img-container-selected"}
               src="assets/images/experience-men.png"
               alt="sneakers"
             />
@@ -174,7 +128,7 @@ const Experience: React.FC = () => {
               MEN
             </h3>
             <div className="experience-checkbox">
-              <Checkbox value={menCheckbox} onChange={(e) => { }} />
+              <Checkbox value={expOptionSelected === "men"} onChange={(e) => { }} />
             </div>
           </div>
 
@@ -187,7 +141,7 @@ const Experience: React.FC = () => {
           >
             <img
               className={
-                sneakersCheckbox ? "experience-img-container-selected2" : "experience-img-container-selected"
+                expOptionSelected === "sneakers" ? "experience-img-container-selected2" : "experience-img-container-selected"
               }
               src="assets/images/experience-sneaker.png"
               alt="sneakers"
@@ -202,7 +156,7 @@ const Experience: React.FC = () => {
               SNEAKERS
             </h3>
             <div className="experience-checkbox">
-              <Checkbox value={sneakersCheckbox} onChange={(e) => { }} />
+              <Checkbox value={expOptionSelected === "sneakers"} onChange={(e) => { }} />
             </div>
           </div>
         </div>
@@ -214,9 +168,9 @@ const Experience: React.FC = () => {
             large
             onClick={(e) => {
               e.preventDefault()
-              handleSubmit(experienceOption);
+              handleSubmit();
             }}
-            disabled={experienceOption === ""}
+            disabled={expOptionSelected === ""}
           />
         </div>
       </IonContent>

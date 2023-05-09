@@ -10,8 +10,7 @@ import {
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { UserService } from "../services/UserService";
-import { SignUpResponse, SignUpType, User } from "../models";
-import { loadingStore } from "../loading-store";
+import { SignUpType, User } from "../models";
 import Input from "../components/Input";
 import "./SignUp.scss";
 import Button from "../components/Button";
@@ -41,19 +40,13 @@ const SignUp = () => {
   const signup = () => {
     if (person.password !== person.comfirmPassword) return
 
-    loadingStore.increment('SignUp:timeout');
     userService
       .signup(person)
       .then((user: User) => {
-        loadingStore.decrement("SignUp:timeout");
-        console.log(user.displayName);
-        window.localStorage.setItem("appUserId", JSON.stringify(user._id));
-        window.localStorage.setItem("appUsername", JSON.stringify(user.displayName));
         history.replace("/experience");
       })
       .catch((err: any) => {
-        loadingStore.decrement("SignUp:timeout");
-        console.log('login error', err);
+        console.log('SignUp error', err);
         setError(true);
       });
   };
@@ -157,25 +150,6 @@ const SignUp = () => {
 
         <IonRow style={{ width: "85%", margin: "auto" }}>
           <IonCol style={{ marginTop: 110 }}>
-            {/* <IonButton
-
-              style={{
-                height: '51px',
-                fontFamily: 'Nunito Sans',
-                fontSize: '20px',
-                fontWeight: '700',
-                lineHeight: '15px',
-                marginTop: 180,
-                letterSpacing: 3
-              }}
-              disabled={validate()}
-              type="submit"
-              expand="block"
-              onClick={() => { signup() }}
-            >
-              REGISTER
-            </IonButton> */}
-
             <Button
               onClick={() => {
                 signup();

@@ -17,17 +17,8 @@ import "cropperjs/dist/cropper.css";
 import { UserService } from "../services/UserService";
 import Search from "../components/Search";
 import Checkbox from "../components/Checkbox";
-import { loadingStore } from "../loading-store";
-// import { BrandsResponse } from "../models";
+import { Brand } from "../models";
 
-
-interface MatchedType {
-  _id: string
-  name: string
-  url: string
-
-
-}
 
 
 
@@ -36,114 +27,60 @@ interface MatchedType {
 const SelectBrands: React.FC = () => {
   const userService = new UserService()
   const history = useHistory();
-  const [brandSelected, setBrandSelected] = useState("")
-  const [brandsItems, setBrandItems] = useState<MatchedType[]>([])
-  const [brandName, setBrandName] = useState("")
-  const [brandId, setBrandId] = useState("")
-  const [brandText, setBrandText] = useState("")
+  const [brandsItems, setBrandItems] = useState<Brand[]>([])
+  const [brandsSelectArr, setBrandSelectArray] = useState<string[]>([])
+  const [tickedBrand, setTickedBrand] = useState("")
+  const [searchQuery, setSearchQuery] = useState("")
 
 
 
-
+  // fetching all brands
   useIonViewWillEnter(() => {
     userService.getBrands()
       .then((brands) => {
-         setBrandItems(brands)
+        setBrandItems(brands)
       })
-
       .catch((error) => { console.log("err, ", error) })
   })
 
-  const handleTicker = (arg: string, brandId: string) => {
-    setBrandId(brandId)
-    setBrandSelected(arg);
-    const alaia = () => {
-      setBrandName("Azzedine Alaia");
+  // Handling the ticker
+  const handleTicker = (brandId: string) => {
+    if (!brandsSelectArr.includes(brandId, 0)) {
+      brandsSelectArr.push(brandId)
 
-    };
-    const aquazzura = () => {
-      setBrandName("Aquazzura");
-
-    };
-    const amina = () => {
-      setBrandName("Amina Muaddi");
-
-    };
-
-    const armani = () => {
-      setBrandName("Armani");
-
-    };
-    const apple = () => {
-      setBrandName("Apple");
-
-    };
-    const ap = () => {
-      setBrandName("Audemars Piguet");
-
-    };
-
-    switch (arg) {
-      case "Azzedine Alaia":
-        alaia();
-
-        break;
-
-      case "Aquazzura":
-        aquazzura();
-
-        break;
-
-      case "Amina Muaddi":
-        amina();
-
-        break;
-      case "Apple":
-        apple();
-
-        break;
-      case "Armani":
-        armani();
-
-        break;
-      case "Audemars Piguet":
-        ap();
-
-        break;
-
-      default:
-        break;
+    } else {
+      const brandItem = brandsSelectArr.filter((brand) => brand === brandId)
+      setTickedBrand(brandItem[0])
     }
-
-
   }
 
+
+
   const handleSubmit = async () => {
-
-    const userToken = localStorage.getItem("appUserToken");
-    if (userToken) {
-      const token = JSON.parse(userToken);
-      loadingStore.increment("SelectBrand:timeout");
-      userService
-        .selectBrand(token, brandId)
-        .then((brand: MatchedType) => { 
-           console.log(brand) 
-          history.push("/onboarding-post")
-          loadingStore.decrement("SelectBrand:timeout");
-
-        })
-        .catch((err: any) => {
-          loadingStore.decrement("SelectBrand:timeout");
-          console.log("SelectBrand error", err);
-        });
-    } else {
-      return console.log("no token found");
-    }
+    userService
+      .selectBrand(tickedBrand)
+      .then((res) => {
+        history.push("/onboarding-post")
+      })
+      .catch((err: any) => {
+        console.log("SelectBrand error", err);
+      });
   };
 
 
+  const mapFilter = brandsItems?.filter((brand) => brand.name.toLowerCase().includes(searchQuery.toLowerCase(), 0))
 
-   const mapFilter = brandsItems?.filter((brand)=>brand.name.toLowerCase().includes(brandText.toLowerCase(), 0))
+  // Sorting the array alphabetically
+  mapFilter.sort(function (a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  });
+
   return (
     <IonPage className="select-brands-main-container">
       <IonContent className="select-brands-ion-content">
@@ -177,24 +114,28 @@ const SelectBrands: React.FC = () => {
         <div className="select-brands-search-container" >
           <Search
             className="select-brands-search"
-            value={brandText}
+            value={searchQuery}
             onChange={
-              (e) => setBrandText(e)
+              (e) => setSearchQuery(e)
             }
           />
         </div>
 
         <div className="select-brands-body-container" >
           <IonRow className="select-brand-img-container" >
-            {mapFilter.map((brands) => (
-              <IonCol className="select-brand-img-col" key={brands._id} size="5" >
+            {mapFilter.sort().map((brand) => (
+              <IonCol className="select-brand-img-col" key={brand._id} size="5" >
                 <img
-                  onClick={() => { handleTicker(brands?.name, brands._id) }}
-                  src={brands.url}
+                  onClick={() => { handleTicker(brand._id) }}
+                  src={brand.url}
                   alt="Alaia"
                 />
                 <div className="select-brand-checkbox">
-                  <Checkbox value={brandName === brands?.name} onChange={() => { }} />
+                  <Checkbox
+                    value={tickedBrand === brand._id}
+                    onChange={
+                      (e) => { }}
+                  />
                 </div>
               </IonCol>
             ))}
@@ -202,7 +143,7 @@ const SelectBrands: React.FC = () => {
         </div>
 
 
-        {brandSelected === "" && (<IonRow className={"select-brands-skip-container"}>
+        {tickedBrand === "" && (<IonRow className={"select-brands-skip-container"}>
           <IonButton fill='clear' className="select-brands-skip-text"
             onClick={() => {
               history.push("/onboarding-post")
@@ -210,13 +151,13 @@ const SelectBrands: React.FC = () => {
           >SKIP FOR NOW</IonButton>
         </IonRow>)}
 
-        <div className={brandSelected === ""?  "select-brands-btn-container":"select-brands-btn-container2"}>
+        <div
+          className={tickedBrand === "" ? "select-brands-btn-container" : "select-brands-btn-container2"}>
           <Button
-            // className='profile-picture-btn'
             label="NEXT"
             large
             onClick={handleSubmit}
-            disabled={brandSelected === ""}
+            disabled={tickedBrand === ""}
           />
         </div>
       </IonContent>

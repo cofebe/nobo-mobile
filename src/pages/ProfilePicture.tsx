@@ -19,11 +19,12 @@ import { UserService } from "../services/UserService";
 import { Cropper } from "react-cropper";
 
 
+
+
 const ProfilePicture: React.FC = () => {
   const userService = new UserService()
   const history = useHistory();
   const [photoData, setPhotoData] = useState(Object);
-  const [previewImgFile, setPreviewImgFile] = useState('');
   const [cropperToggler, setCropperToggler] = useState(false);
 
   const takePhoto = async () => {
@@ -40,35 +41,21 @@ const ProfilePicture: React.FC = () => {
 
 
   const handleSubmit = async (imgData: any) => {
-
-    const userToken = localStorage.getItem("appUserToken");
-    if (userToken) {
-      const token = JSON.parse(userToken);
-      loadingStore.increment("Profile-Picture:timeout");
-      userService.uploadProfileImg(token, imgData)
+      userService.uploadProfileImg( imgData)
         .then((res) => {
-          console.log("response is ok 200")
-          console.log("the url or res data :", res)
-          loadingStore.decrement("Profile-Picture:timeout");
           history.push("/follow-people")
         })
         .catch((err: any) => {
-          loadingStore.decrement("Profile-Picture:timeout");
           console.log(" ProfilePicture error", err);
         });
-    } else {
-      return console.log("no token found");
-    }
+  
   };
-
-
 
 
   // clear the photo to take another
   const clearCameraPhoto = () => {
     setCropperToggler(false);
   }
-
 
   async function executeProfilePicCrop() {
     const imageElement: any = cropperRef?.current;
@@ -101,15 +88,15 @@ const ProfilePicture: React.FC = () => {
             let ctx = c.getContext('2d');
             ctx?.drawImage(tempImage, 0, 0, width, height);
 
-            let b64str = c.toDataURL('image/jpeg');
-            let base64data = b64str; //(reader.result || "").toString();
+            let base64data = c.toDataURL('image/jpeg');
+            // let base64data = b64str; //(reader.result || "").toString();
 
             setPhotoData({
               ...photoData,
               format: 'png',
               base64String: base64data.split(',')[1],
             });
-            setPreviewImgFile(base64data);
+            // setPreviewImgFile(base64data);
             handleSubmit(base64data)
           }, 500);
         };
@@ -133,8 +120,7 @@ const ProfilePicture: React.FC = () => {
 
 
 
-  // console.log("profilePicData before crop ", photoData)
-  // console.log("profilePreview after crop ", previewImgFile)
+  
   return (
     <IonPage id="profile-picture-page" className="profile-picture-main-container">
       <IonContent className="profile-picture-ion-content">
@@ -202,7 +188,7 @@ const ProfilePicture: React.FC = () => {
 
 
             {/* CLEAR PHOTO */}
-            {cropperToggler && (<div style={{ height: '35px ', width: "35px", position: "absolute", left: "65%", top: "56%", zIndex: 500 }}
+            {cropperToggler && (<div className='profile-picture-clear-photo' 
               onClick={(e) => {
                 e.preventDefault();
                 clearCameraPhoto()

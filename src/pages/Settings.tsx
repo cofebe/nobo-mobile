@@ -24,7 +24,7 @@ const Settings: React.FC = () => {
       setUser(user);
     });
   });
-
+console.log("checking the settings avater :",user?.avatar )
   return (
     <IonPage className="settings-container">
       <IonHeader className="settings-header">
@@ -36,7 +36,19 @@ const Settings: React.FC = () => {
           <img src="/assets/images/close-black.svg" alt="close" />
         </div>
         <div className="content">
-          <div className="avatar" style={{ backgroundImage: getImageUrl(user?.avatar || '') }}></div>
+
+
+        {/* This is the div i inserted to fetch user-image that works */}
+        <div className="avatar">
+          <img
+            className={``}
+            src={user?.avatar}
+            alt="avatar"
+          />
+        </div>
+
+        {/* This div below was not fetching the user image so i try replacing with this one above and it worked */}
+          {/* <div className="avatar" style={{ backgroundImage: getImageUrl(user?.avatar || '') }}></div> */}
           <div className="name">{user?.firstName} {user?.lastName}</div>
         </div>
       </IonHeader>

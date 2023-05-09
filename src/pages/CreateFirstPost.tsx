@@ -14,94 +14,48 @@ import "./CreateFirstPost.scss";
 import Button from "../components/Button";
 import "cropperjs/dist/cropper.css";
 import { UserService } from "../services/UserService";
-import { loadingStore } from "../loading-store";
-import { AuthService } from "../services/AuthService";
-import { ProfileResponse } from "../models";
+import { PostResponse, User } from "../models";
 
-interface PostResponse {
-  success: boolean;
-}
+
 
 const CreateFirstPost: React.FC = () => {
   const userService = new UserService();
   const history = useHistory();
-  const [token, setToken] = useState("");
   const [currentUser, setCurrentUserData] = useState<any>([]);
   const [textValue, setTextValue] = useState<any>("");
 
-  const loadUserProfile = () => {
-    //getting current user id
-    const data = localStorage.getItem("appUserId");
-    if (data) {
-      const userId = JSON.parse(data);
-      console.log("--------- your userId is ready :", userId, "--------");
 
-      //getting user profile
-      loadingStore.increment("Create-Post:timeout");
-      userService
-        .getUserProfile(userId)
-        .then((user: ProfileResponse) => {
-          setCurrentUserData(user.user);
-          console.log("test", user.user.displayName);
-          loadingStore.decrement("Create-Post:timeout");
-        })
-        .catch((err) => console.log("getting a user", err));
-      loadingStore.decrement("Create-Post:timeout");
-    } else {
-      console.log("no userId found in local storage");
-    }
+
+  const loadUserProfile = () => {
+    userService
+      .getMe()
+      .then((user: User) => {
+        setCurrentUserData(user);
+      })
+      .catch((err) => console.log("getting a user", err));
   };
 
-  // Getting currenUserId from localStorage
   useIonViewWillEnter(() => {
-  loadUserProfile();
+    loadUserProfile();
   });
 
-  // Getting user token from localStorage
-  useIonViewWillEnter(() => {
-    const userToken = localStorage.getItem("appUserToken");
-    if (userToken) {
-      const token = JSON.parse(userToken);
-      setToken(token);
-    } else {
-      console.log("no token found");
-    }
-  });
+ 
 
   // creating a post
   const createPost = () => {
-    loadingStore.increment("CreatePost:timeout");
     userService
-      .createPost(token, textValue)
+      .createPost(textValue)
       .then((success: PostResponse) => {
-        if (success) {
-          const authService = new AuthService();
-          authService.setUserToken(token);
-          authService.setUserId(currentUser._id);
-          authService.setUserDisplayName(currentUser.displayName);
-          setTimeout(() => {
-            history.push(
-              `/home/explore/${currentUser.experiencePreferences}/explore`
-            );
-            loadingStore.decrement("CreatePost:timeout");
-          }, 2000);
-        }
+        setTimeout(() => {
+          history.push(`/home/my-profile`)
+        }, 2000);
       })
       .catch((err) => console.log("getting a user", err));
-    loadingStore.decrement("CreatePost:timeout");
   };
   // skip post
   const skipPost = () => {
-    loadingStore.increment("SkipPost:timeout");
-    const authService = new AuthService();
-    authService.setUserToken(token);
-    authService.setUserId(currentUser._id);
-    authService.setUserDisplayName(currentUser.displayName);
     setTimeout(() => {
-      history.push(
-        `/home/explore/${currentUser.experiencePreferences}/explore`
-      );
-      loadingStore.decrement("SkipPost:timeout");
+      history.push(`/home/my-profile`)
     }, 2000);
   };
 

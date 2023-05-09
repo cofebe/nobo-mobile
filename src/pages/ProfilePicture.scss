@@ -186,7 +186,15 @@
     overflow: hidden;
   }
 
+.profile-picture-clear-photo{
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left:65%;
+  top: 56%;
+  z-index: 500;
 
+}
 
   .profile-picture-cropper-container{
     position: absolute;

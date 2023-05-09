@@ -15,24 +15,18 @@ import "./FollowPeople.scss";
 import Button from "../components/Button";
 import "cropperjs/dist/cropper.css";
 import { UserService } from "../services/UserService";
-import { ProfileResponse, User } from "../models";
-
-
-
+import { User } from "../models";
 
 
 const FollowPeople: React.FC = () => {
-
   const userService = new UserService()
   const history = useHistory();
   const [users, setUsers] = useState<User[]>([])
-  const [token, setToken] = useState("")
-  const [currentUserId, setCurrentUserId] = useState("")
   const [follow, setFollow] = useState<string[]>([])
   const [peopleIfollow, setPeopleIfollow] = useState<string[]>([])
 
 
-  //  fetching exixting users to follow
+  //  fetching exiting users to follow
   useIonViewWillEnter(() => {
     userService.getUsers()
       .then(res => res)
@@ -44,52 +38,26 @@ const FollowPeople: React.FC = () => {
       })
   });
 
-  // Getting user token from localStorage
-  useIonViewWillEnter(() => {
-    const userToken = localStorage.getItem("appUserToken")
-    if (userToken) {
-      const token = JSON.parse(userToken);
-      setToken(token)
-      console.log("your token is ready :", token)
-    } else {
-      console.log("no token found")
-    }
-  })
+ 
 
-  // Getting current UserId from localStorage
+  // Getting current User
   useIonViewWillEnter(() => {
-    const data = localStorage.getItem("appUserId")
-    if (data) {
-      const userId = JSON.parse(data);
-       setCurrentUserId(userId)
-      console.log("your userId is ready :", userId)
-      userService.getUserProfile(currentUserId)
-        .then((user: ProfileResponse) => {
-          setPeopleIfollow(user.user.following)
+      userService.getMe()
+        .then((user:User) => {
+          setPeopleIfollow(user.following)
         })
         .catch((error) => { console.log("error msg while fetching user profile", error) })
-
-    } else {
-      console.log("no user data found")
-    }
   })
 
 
-// Folloing  a user
+// Following  a user
   const followUser = (userToFollowId: string) => {
     setFollow([...follow, userToFollowId])
-
-    // console.log(token, follow)
-
-    // Checking if already following the user
-    console.log("the people you already following ", peopleIfollow)
     const result = peopleIfollow.includes(userToFollowId, 0)
-    console.log("am i already following this user? ", result)
-
     if (!result) {
-      userService.followUserS(token, userToFollowId)
+      userService.followUserS(userToFollowId)
         .then((user: User) => {
-          console.log(" Ypur updated following list ", user.following)
+          console.log(" Your updated following list ", user.following)
         })
         .catch((err: any) => {
           console.log(" FollowUser", err);
@@ -102,10 +70,6 @@ const FollowPeople: React.FC = () => {
   }
 
 
-
-
-  console.log(follow, )
-  console.log(follow.length)
   return (
     <IonPage className="follow-people-main-container">
       <IonContent className="follow-people-ion-content">
