@@ -35,7 +35,7 @@ interface ProfileProps {
   myProfile: boolean;
 }
 
-const ProfilePage: React.FC<ProfileProps> = (profile) => {
+const ProfilePage: React.FC<ProfileProps> = profile => {
   const history = useHistory();
   const authService = new AuthService();
   const userService = new UserService();
@@ -58,15 +58,10 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
     const onPageLoad = () => {
       loadProfile();
 
-      if (
-        isPlatform('ios') &&
-        profile.myProfile
-      ) {
+      if (isPlatform('ios') && profile.myProfile) {
         subscriptionService = new SubscriptionService(new InAppPurchase2());
         subscriptionService.register();
-        setUserSubscribed(
-          subscriptionService.isSubscribed('com.nobo.athlete.1month')
-        );
+        setUserSubscribed(subscriptionService.isSubscribed('com.nobo.athlete.1month'));
       }
     };
 
@@ -111,10 +106,10 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
       header: 'Report User',
       buttons: [
         {
-          text: 'It\'s spam',
+          text: "It's spam",
           data: {
             action: () => {
-              reportUser('It\'s spam');
+              reportUser("It's spam");
             }, // noop
           },
         },
@@ -143,10 +138,10 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
           },
         },
         {
-          text: 'I just don\'t like it',
+          text: "I just don't like it",
           data: {
             action: () => {
-              reportUser('I just don\'t like it');
+              reportUser("I just don't like it");
             },
           },
         },
@@ -204,7 +199,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
             action: 'cancel',
           },
         },
-      ].filter((b) => {
+      ].filter(b => {
         return (
           b.who === 'all' ||
           !b.who ||
@@ -234,9 +229,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
 
   function loadProfile() {
     const addressBarPathName = history.location.pathname;
-    let userIdStr: any = addressBarPathName.substring(
-      addressBarPathName.lastIndexOf('/') + 1
-    );
+    let userIdStr: any = addressBarPathName.substring(addressBarPathName.lastIndexOf('/') + 1);
 
     if (isNaN(userIdStr) && userIdStr.length > 10) {
       userIdStr = userIdStr.substring(userIdStr.lastIndexOf('-') + 1);
@@ -259,15 +252,18 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
     presentLoading(loadingOptions);
     userService
       .getProfile(id)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         if (data === null) {
           setNoboProfile(emptyProfile);
         } else {
-          if (!data['user'].profileBg || data['user'].profileBg === "/NOBO_defaultcoverimage.jpeg" ) {
-            data['user'].profileBg = "https://thenobo.com/NOBO_defaultcoverimage.jpeg";
+          if (
+            !data['user'].profileBg ||
+            data['user'].profileBg === '/NOBO_defaultcoverimage.jpeg'
+          ) {
+            data['user'].profileBg = 'https://thenobo.com/NOBO_defaultcoverimage.jpeg';
           }
-          setNoboProfile(data['user'])
+          setNoboProfile(data['user']);
         }
         dismissLoading();
       })
@@ -277,53 +273,54 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
   }
 
   function checkIfFollowing() {
-    userService.getFollowers(userId)
-      .then((res) => res.json())
-      .then((data) => {
-        const followerIds = data.followers.map( (follower: any) => follower._id);
+    userService
+      .getFollowers(userId)
+      .then(res => res.json())
+      .then(data => {
+        const followerIds = data.followers.map((follower: any) => follower._id);
 
-        const myUserId = authService.getUserId()
+        const myUserId = authService.getUserId();
         const isMatching = followerIds.includes(myUserId);
-        setIsFollowing(isMatching)
-      })
+        setIsFollowing(isMatching);
+      });
   }
 
   function followUser() {
-    userService.followUser(userId)
+    userService.followUser(userId);
 
-    setTimeout( () => {
-      checkIfFollowing()
-    }, 250)
+    setTimeout(() => {
+      checkIfFollowing();
+    }, 250);
   }
 
   function unFollowUser() {
-    userService.removeFollowUser(userId)
-    setTimeout( () => {
-      checkIfFollowing()
-    }, 250)
+    userService.removeFollowUser(userId);
+    setTimeout(() => {
+      checkIfFollowing();
+    }, 250);
   }
 
   return (
     <IonPage className="home-page-athlete-profile" style={{ backgroundColor: '#F9FBFB' }}>
-    <IonContent className="athlete-profile-content" scrollY={false}>
-      {!profile.myProfile && (
-        <IonButtons
-          style={{
-            position: "absolute",
-            left: "1.5rem",
-            top: "3rem",
-            color: "white",
-            zIndex: 101,
-          }}
-        >
-          <IonIcon
-            onClick={() => {
-              history.goBack();
+      <IonContent className="athlete-profile-content" scrollY={false}>
+        {!profile.myProfile && (
+          <IonButtons
+            style={{
+              position: 'absolute',
+              left: '1.5rem',
+              top: '3rem',
+              color: 'white',
+              zIndex: 101,
             }}
-            size="large"
-            slot="icon-only"
-            icon={chevronBackOutline}
-          />
+          >
+            <IonIcon
+              onClick={() => {
+                history.goBack();
+              }}
+              size="large"
+              slot="icon-only"
+              icon={chevronBackOutline}
+            />
           </IonButtons>
         )}
 
@@ -350,7 +347,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
         ></div>
         {profile.myProfile && (
           <div
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               history.push(`/home/style-feed`);
             }}
@@ -360,7 +357,7 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
         )}
         {profile.myProfile && (
           <IonButton
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               history.push(`edit-athlete/${userId}`);
             }}
@@ -372,60 +369,91 @@ const ProfilePage: React.FC<ProfileProps> = (profile) => {
           </IonButton>
         )}
         {!profile.myProfile && !isFollowing && (
-          <Button label="FOLLOW" className="nobo-follow-profile-button" onClick={() => {followUser()}}></Button>
+          <Button
+            label="FOLLOW"
+            className="nobo-follow-profile-button"
+            onClick={() => {
+              followUser();
+            }}
+          ></Button>
         )}
         {!profile.myProfile && isFollowing && (
-          <Button label="FOLLOWING" className="nobo-follow-profile-button" onClick={() => {unFollowUser()}}></Button>
+          <Button
+            label="FOLLOWING"
+            className="nobo-follow-profile-button"
+            onClick={() => {
+              unFollowUser();
+            }}
+          ></Button>
         )}
         <div className="profile-bubble-container">
           <img
-            className={`profile-bubble ${
-              userSubscribed && 'profile-bubble-premium-border'
-            }`}
+            className={`profile-bubble ${userSubscribed && 'profile-bubble-premium-border'}`}
             src={noboProfile.avatar}
             alt="avatar"
           />
         </div>
-        <ProfileSummary
-          profile={noboProfile}
-          openSocialShare={openShare}
-        ></ProfileSummary>
+        <ProfileSummary profile={noboProfile} openSocialShare={openShare}></ProfileSummary>
 
         <IonRow className="nobo-menu-container">
-          <div className="nobo-menu-circle" onClick={ () => setTargetSection('Feed')}>
+          <div className="nobo-menu-circle" onClick={() => setTargetSection('Feed')}>
             <div className="circle-background">
-              <img className={targetSection === 'Feed' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-items.svg" alt="feed" />
+              <img
+                className={
+                  targetSection === 'Feed'
+                    ? 'nobo-profile-menu-selected'
+                    : 'nobo-profile-menu-not-selected'
+                }
+                src="assets/images/navigation/nav-profile-items.svg"
+                alt="feed"
+              />
             </div>
           </div>
-          <div className="nobo-menu-circle" onClick={ () => setTargetSection('Trades')}>
+          <div className="nobo-menu-circle" onClick={() => setTargetSection('Trades')}>
             <div className="circle-background">
-              <img className={targetSection === 'Trades' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-trade.svg" alt="trades" />
+              <img
+                className={
+                  targetSection === 'Trades'
+                    ? 'nobo-profile-menu-selected'
+                    : 'nobo-profile-menu-not-selected'
+                }
+                src="assets/images/navigation/nav-trade.svg"
+                alt="trades"
+              />
             </div>
           </div>
-          <div className="nobo-menu-circle" onClick={ () => setTargetSection('Purchase')}>
+          <div className="nobo-menu-circle" onClick={() => setTargetSection('Purchase')}>
             <div className="circle-background">
-              <img className={targetSection === 'Purchase' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-purchased.svg" alt="purchase" />
+              <img
+                className={
+                  targetSection === 'Purchase'
+                    ? 'nobo-profile-menu-selected'
+                    : 'nobo-profile-menu-not-selected'
+                }
+                src="assets/images/navigation/nav-profile-purchased.svg"
+                alt="purchase"
+              />
             </div>
           </div>
-          <div className="nobo-menu-circle" onClick={ () => setTargetSection('Reviews')}>
+          <div className="nobo-menu-circle" onClick={() => setTargetSection('Reviews')}>
             <div className="circle-background">
-              <img className={targetSection === 'Reviews' ? 'nobo-profile-menu-selected' : 'nobo-profile-menu-not-selected'} src="assets/images/navigation/nav-profile-reviews.svg" alt="reviews" />
+              <img
+                className={
+                  targetSection === 'Reviews'
+                    ? 'nobo-profile-menu-selected'
+                    : 'nobo-profile-menu-not-selected'
+                }
+                src="assets/images/navigation/nav-profile-reviews.svg"
+                alt="reviews"
+              />
             </div>
           </div>
         </IonRow>
-        {targetSection === 'Feed' && (
-          <ProductList type="" userId={userId}></ProductList>
-        )}
-        {targetSection === 'Trades' && (
-          <ProductList type="trade" userId={userId}></ProductList>
-        )}
-        {targetSection === 'Purchase' && (
-          <ProductList type="sell" userId={userId}></ProductList>
-        )}
-        {targetSection === 'Reviews' && (
-          <ReviewList reviewData={noboProfile.reviews}></ReviewList>
-        )}
-        <div style={{height: '5vh'}}></div>
+        {targetSection === 'Feed' && <ProductList type="" userId={userId}></ProductList>}
+        {targetSection === 'Trades' && <ProductList type="trade" userId={userId}></ProductList>}
+        {targetSection === 'Purchase' && <ProductList type="sell" userId={userId}></ProductList>}
+        {targetSection === 'Reviews' && <ReviewList reviewData={noboProfile.reviews}></ReviewList>}
+        <div style={{ height: '5vh' }}></div>
       </IonContent>
     </IonPage>
   );

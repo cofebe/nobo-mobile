@@ -10,11 +10,7 @@ export const loadingOptions: LoadingOptions = {
 export function getMessagePhotos(msg: FeedItem) {
   if (msg?.photo_url) {
     try {
-      let photosStr = msg.photo_url
-        .replace('[', '')
-        .replace(']', '')
-        .split("'")
-        .join('');
+      let photosStr = msg.photo_url.replace('[', '').replace(']', '').split("'").join('');
       let photos = photosStr.split(',');
       if (photosStr && photos.length > 0) {
         return photos;
@@ -28,9 +24,9 @@ export function getMessagePhotos(msg: FeedItem) {
 
 export function viewUser(history: any, userId: number, accountType: string, postId?: number) {
   const storage: any = window.localStorage.getItem('persistedState');
-  const user = (storage ? JSON.parse(storage) : undefined);
+  const user = storage ? JSON.parse(storage) : undefined;
 
-    console.log(`viewUser(${userId}, ${accountType})`);
+  console.log(`viewUser(${userId}, ${accountType})`);
 
   if (user) {
     console.log(`viewUser(${userId}, ${accountType})`, user.user['user_id']);

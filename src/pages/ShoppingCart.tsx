@@ -15,12 +15,7 @@ import {
 import { caretUpOutline, caretDownOutline } from 'ionicons/icons';
 import './ShoppingCart.scss';
 import Button from '../components/Button';
-import {
-  Address,
-  Product,
-  User,
-  TaxShippingResponse,
-} from '../models';
+import { Address, Product, User, TaxShippingResponse } from '../models';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import { ProductService } from '../services/ProductService';
 import { UserService } from '../services/UserService';
@@ -42,30 +37,24 @@ const ShoppingCartPage: React.FC = () => {
       setCart(cart);
     });
 
-    productService
-      .getCart()
-      .then((products: Product[]) => {
-        //console.log('getCart', products);
-        shoppingCartStore.setProducts(products);
-      });
+    productService.getCart().then((products: Product[]) => {
+      //console.log('getCart', products);
+      shoppingCartStore.setProducts(products);
+    });
 
-    userService
-      .getMe()
-      .then((user: User) => {
-        const addr = user.shippingAddress.find(a => a.default);
-        setShippingAddress(addr);
-        if (addr) {
-          productService
-            .getTaxAndShipping(addr)
-            .then((res: TaxShippingResponse) => {
-              shoppingCartStore.beginUpdate();
-              shoppingCartStore.setShippingAddress(addr);
-              shoppingCartStore.setTax(res.salesTax);
-              shoppingCartStore.setShipping(res.shipping);
-              shoppingCartStore.endUpdate();
-            });
-        }
-      });
+    userService.getMe().then((user: User) => {
+      const addr = user.shippingAddress.find(a => a.default);
+      setShippingAddress(addr);
+      if (addr) {
+        productService.getTaxAndShipping(addr).then((res: TaxShippingResponse) => {
+          shoppingCartStore.beginUpdate();
+          shoppingCartStore.setShippingAddress(addr);
+          shoppingCartStore.setTax(res.salesTax);
+          shoppingCartStore.setShipping(res.shipping);
+          shoppingCartStore.endUpdate();
+        });
+      }
+    });
   });
 
   useIonViewWillLeave(() => {
@@ -73,25 +62,22 @@ const ShoppingCartPage: React.FC = () => {
   });
 
   function remove(product: Product) {
-    productService.addToCart(product._id)
-      .then((success: boolean) => {
-        if (success) {
-          shoppingCartStore.removeProduct(product._id);
+    productService.addToCart(product._id).then((success: boolean) => {
+      if (success) {
+        shoppingCartStore.removeProduct(product._id);
 
-          if (shippingAddress) {
-            productService
-              .getTaxAndShipping(shippingAddress)
-              .then((res: TaxShippingResponse) => {
-                shoppingCartStore.beginUpdate();
-                shoppingCartStore.setTax(res.salesTax);
-                shoppingCartStore.setShipping(res.shipping);
-                shoppingCartStore.endUpdate();
-              });
-          }
-        } else {
-          window.alert('Unable to remove item from cart!');
+        if (shippingAddress) {
+          productService.getTaxAndShipping(shippingAddress).then((res: TaxShippingResponse) => {
+            shoppingCartStore.beginUpdate();
+            shoppingCartStore.setTax(res.salesTax);
+            shoppingCartStore.setShipping(res.shipping);
+            shoppingCartStore.endUpdate();
+          });
         }
-      });
+      } else {
+        window.alert('Unable to remove item from cart!');
+      }
+    });
   }
 
   function checkout() {
@@ -105,16 +91,17 @@ const ShoppingCartPage: React.FC = () => {
           <IonGrid>
             <IonRow>
               <IonCol size="12">
-                <div className="close-button" onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  history.goBack();
-                }}>
+                <div
+                  className="close-button"
+                  onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    history.goBack();
+                  }}
+                >
                   <img src="assets/images/cart-close.svg" alt="close" />
                 </div>
-                <div className="title">
-                  My Cart
-                </div>
+                <div className="title">My Cart</div>
               </IonCol>
             </IonRow>
           </IonGrid>
@@ -126,14 +113,22 @@ const ShoppingCartPage: React.FC = () => {
             {cart.products.map(product => (
               <div className="cart-item" key={product._id}>
                 <div className="product-image-container">
-                  <div className="product-image" style={{ backgroundImage: getImageUrl(product.images[0].url) }}></div>
+                  <div
+                    className="product-image"
+                    style={{ backgroundImage: getImageUrl(product.images[0].url) }}
+                  ></div>
                 </div>
                 <div className="product-info-container">
-                  <div className="remove" onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    remove(product);
-                  }}>Remove</div>
+                  <div
+                    className="remove"
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      remove(product);
+                    }}
+                  >
+                    Remove
+                  </div>
                   <div className="brand">{product.brand}</div>
                   <div className="name">{product.name}</div>
                   {/*<div className="username">
@@ -146,9 +141,14 @@ const ShoppingCartPage: React.FC = () => {
             <div className="order-summary">
               <div className="title">
                 <div>Order Summary</div>
-                <div><IonIcon icon={showDetails ? caretUpOutline : caretDownOutline} onClick={(e) => {
-                  setShowDetails(!showDetails);
-                }} /></div>
+                <div>
+                  <IonIcon
+                    icon={showDetails ? caretUpOutline : caretDownOutline}
+                    onClick={e => {
+                      setShowDetails(!showDetails);
+                    }}
+                  />
+                </div>
               </div>
               {showDetails ? (
                 <div>
@@ -165,7 +165,9 @@ const ShoppingCartPage: React.FC = () => {
                     <div className="value">{formatPrice(cart.tax)}</div>
                   </div>
                 </div>
-              ) : ''}
+              ) : (
+                ''
+              )}
               <div className="summary-info total">
                 <div className="label">Your Total</div>
                 <div className="value">{formatPrice(cart.total)}</div>
@@ -176,22 +178,25 @@ const ShoppingCartPage: React.FC = () => {
                 <Input
                   value={promoCode}
                   small={true}
-                  onChange={(val) => setPromoCode(val)}
-                  placeholder="Enter promo code" />
+                  onChange={val => setPromoCode(val)}
+                  placeholder="Enter promo code"
+                />
               </div>
               <div className="button-container">
-                <Button label="Checkout" large={true} onClick={(e: any) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  checkout();
-                }} />
+                <Button
+                  label="Checkout"
+                  large={true}
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    checkout();
+                  }}
+                />
               </div>
             </div>
           </div>
         ) : (
-          <div className="empty-cart">
-            Your cart is empty!
-          </div>
+          <div className="empty-cart">Your cart is empty!</div>
         )}
       </IonContent>
     </IonPage>

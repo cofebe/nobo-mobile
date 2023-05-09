@@ -63,7 +63,6 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import OfferComplete from './pages/OfferComplete';
 
-
 setupIonicReact({
   swipeBackEnabled: false,
 });

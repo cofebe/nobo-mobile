@@ -12,10 +12,7 @@ import {
 } from '@ionic/react';
 import './SettingsShipping.scss';
 import Button from '../components/Button';
-import {
-  Address,
-  User,
-} from '../models';
+import { Address, User } from '../models';
 import { UserService } from '../services/UserService';
 import CreateShippingAddressModal from '../components/CreateShippingAddressModal';
 
@@ -33,11 +30,9 @@ const SettingsShipping: React.FC = () => {
   });
 
   function load() {
-    userService
-      .getMe()
-      .then((user: User) => {
-        setShippingAddresses(user.shippingAddress);
-      });
+    userService.getMe().then((user: User) => {
+      setShippingAddresses(user.shippingAddress);
+    });
   }
 
   function addNew() {
@@ -56,20 +51,16 @@ const SettingsShipping: React.FC = () => {
 
   function setDefault(addr: Address, index: number) {
     console.log('remove', addr, index);
-    userService
-      .setDefaultShippingAddress(index)
-      .then(user => {
-        setShippingAddresses(user.shippingAddress);
-      });
+    userService.setDefaultShippingAddress(index).then(user => {
+      setShippingAddresses(user.shippingAddress);
+    });
   }
 
   function remove(addr: Address, index: number) {
     console.log('remove', addr, index);
-    userService
-      .removeShippingAddress(index)
-      .then(user => {
-        setShippingAddresses(user.shippingAddress);
-      });
+    userService.removeShippingAddress(index).then(user => {
+      setShippingAddresses(user.shippingAddress);
+    });
   }
 
   return (
@@ -80,14 +71,16 @@ const SettingsShipping: React.FC = () => {
             <IonRow>
               <IonCol size="12">
                 <div className="title">
-                  <div className="back-button" onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    history.goBack();
-                  }}>
+                  <div
+                    className="back-button"
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      history.goBack();
+                    }}
+                  >
                     <img src="assets/images/arrow-left.svg" alt="back" />
                   </div>
-
                   Shipping Address
                 </div>
               </IonCol>
@@ -96,54 +89,65 @@ const SettingsShipping: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="settings-shipping-content" scrollY={false}>
-        <div className="add-container" onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          addNew();
-        }}>
+        <div
+          className="add-container"
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            addNew();
+          }}
+        >
           <div>
             <img src="assets/images/add-square.svg" alt="add shipping address" />
           </div>
-          <div>
-            New Address
-          </div>
+          <div>New Address</div>
         </div>
         {shippingAddresses.length ? (
           <div>
             {shippingAddresses.map((addr, index) => (
-              <div className={'settings-shipping-item ' + (addr.default ? 'selected' : '')} key={addr._id}>
-                {addr.default && (
-                  <div className="is-default">Default</div>
-                )}
-                <div className="name">{addr.firstName} {addr.lastName}</div>
+              <div
+                className={'settings-shipping-item ' + (addr.default ? 'selected' : '')}
+                key={addr._id}
+              >
+                {addr.default && <div className="is-default">Default</div>}
+                <div className="name">
+                  {addr.firstName} {addr.lastName}
+                </div>
                 <div className="address1">{addr.address1}</div>
-                {addr.address2 ? (
-                  <div className="address2">{addr.address2}</div>
-                ) : ''}
+                {addr.address2 ? <div className="address2">{addr.address2}</div> : ''}
                 <div className="city">{addr.city}</div>
                 <div className="state">{addr.state}</div>
                 <div className="zip">{addr.postalCode}</div>
                 <div className="phone">{addr.phone}</div>
                 <div className="action-container">
-                  <div className="action" onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setDefault(addr, index);
-                  }}>
+                  <div
+                    className="action"
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setDefault(addr, index);
+                    }}
+                  >
                     Set as Default
                   </div>
-                  <div className="action" onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    edit(addr, index);
-                  }}>
+                  <div
+                    className="action"
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      edit(addr, index);
+                    }}
+                  >
                     Edit
                   </div>
-                  <div className="action" onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    remove(addr, index);
-                  }}>
+                  <div
+                    className="action"
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      remove(addr, index);
+                    }}
+                  >
                     Remove
                   </div>
                 </div>
@@ -151,19 +155,22 @@ const SettingsShipping: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="empty-cart">
-            No shipping addresses defined!
-          </div>
+          <div className="empty-cart">No shipping addresses defined!</div>
         )}
       </IonContent>
 
-      <CreateShippingAddressModal ref={modal} address={editAddress} index={editAddressIndex} onClose={(addresses: Address[]) => {
-        console.log('add/edit address', addresses);
-        setShippingAddresses(addresses);
-        //load();
+      <CreateShippingAddressModal
+        ref={modal}
+        address={editAddress}
+        index={editAddressIndex}
+        onClose={(addresses: Address[]) => {
+          console.log('add/edit address', addresses);
+          setShippingAddresses(addresses);
+          //load();
 
-        modal.current?.dismiss();
-      }} />
+          modal.current?.dismiss();
+        }}
+      />
     </IonPage>
   );
 };

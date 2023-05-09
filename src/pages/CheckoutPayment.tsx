@@ -13,11 +13,7 @@ import {
 } from '@ionic/react';
 import './CheckoutPayment.scss';
 import Button from '../components/Button';
-import {
-  User,
-  PaymentMethod,
-  PaymentMethodsResponse,
-} from '../models';
+import { User, PaymentMethod, PaymentMethodsResponse } from '../models';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import { UserService } from '../services/UserService';
 import CreatePaymentMethodModal from '../components/CreatePaymentMethodModal';
@@ -49,24 +45,20 @@ const CheckoutPayment: React.FC = () => {
       }
     });
 
-    userService
-      .getPaymentMethods()
-      .then((res: PaymentMethodsResponse) => {
-        setPaymentMethods(res.cards);
+    userService.getPaymentMethods().then((res: PaymentMethodsResponse) => {
+      setPaymentMethods(res.cards);
 
-        if (!cart.paymentMethod) {
-          const pm = res.cards.find(c => c.id === res.customer.default_source);
-          if (pm) {
-            shoppingCartStore.setPaymentMethod(pm);
-          }
+      if (!cart.paymentMethod) {
+        const pm = res.cards.find(c => c.id === res.customer.default_source);
+        if (pm) {
+          shoppingCartStore.setPaymentMethod(pm);
         }
-      });
+      }
+    });
 
-    userService
-      .getMe()
-      .then((user: User) => {
-        setExperience(user.experiencePreferences);
-      });
+    userService.getMe().then((user: User) => {
+      setExperience(user.experiencePreferences);
+    });
   });
 
   useIonViewWillLeave(() => {
@@ -93,14 +85,16 @@ const CheckoutPayment: React.FC = () => {
             <IonRow>
               <IonCol size="12">
                 <div className="title">
-                  <div className="back-button" onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    history.goBack();
-                  }}>
+                  <div
+                    className="back-button"
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      history.goBack();
+                    }}
+                  >
                     <img src="assets/images/arrow-left.svg" alt="back" />
                   </div>
-
                   Payment
                 </div>
               </IonCol>
@@ -109,28 +103,35 @@ const CheckoutPayment: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="checkout-payment-content" scrollY={false}>
-        <div className="add-container" onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          addNew();
-        }}>
+        <div
+          className="add-container"
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            addNew();
+          }}
+        >
           <div>
             <img src="assets/images/add-square.svg" alt="add shipping address" />
           </div>
-          <div>
-            New Card
-          </div>
+          <div>New Card</div>
         </div>
         {paymentMethods.length ? (
           <div>
             {paymentMethods.map(pm => (
-              <div className={'checkout-payment-item ' + (cart.paymentMethod?.id === pm.id ? 'selected' : '')} key={pm.id} onClick={(e) => {
+              <div
+                className={
+                  'checkout-payment-item ' + (cart.paymentMethod?.id === pm.id ? 'selected' : '')
+                }
+                key={pm.id}
+                onClick={e => {
                   e.preventDefault();
                   e.stopPropagation();
                   if (cart.paymentMethod?.id !== pm.id) {
                     select(pm);
                   }
-                }}>
+                }}
+              >
                 <div className="left">
                   <div className="logo-container">
                     <img src={getCardImage(pm.brand)} alt="card brand" />
@@ -138,36 +139,50 @@ const CheckoutPayment: React.FC = () => {
                 </div>
                 <div className="right">
                   <div className="select">
-                    <img src={cart.paymentMethod?.id === pm.id ? '/assets/images/checkmark-checked.svg' : '/assets/images/checkmark-unchecked.svg'} alt="select" />
+                    <img
+                      src={
+                        cart.paymentMethod?.id === pm.id
+                          ? '/assets/images/checkmark-checked.svg'
+                          : '/assets/images/checkmark-unchecked.svg'
+                      }
+                      alt="select"
+                    />
                   </div>
                   <div className="name">{pm.name}</div>
-                  <div className="last4">* &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; {pm.last4}</div>
-                  <div className="expiration">Exp. {pm.exp_month}/{pm.exp_year}</div>
+                  <div className="last4">
+                    * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; {pm.last4}
+                  </div>
+                  <div className="expiration">
+                    Exp. {pm.exp_month}/{pm.exp_year}
+                  </div>
                 </div>
               </div>
             ))}
             <div className="footer">
               <div className="button-container">
-                <Button label="Next" large={true} disabled={!cart.paymentMethod} onClick={(e: any) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  next();
-                }} />
+                <Button
+                  label="Next"
+                  large={true}
+                  disabled={!cart.paymentMethod}
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    next();
+                  }}
+                />
               </div>
             </div>
           </div>
         ) : (
-          <div className="empty-cart">
-            No payment methods defined!
-          </div>
+          <div className="empty-cart">No payment methods defined!</div>
         )}
       </IonContent>
 
-      <CreatePaymentMethodModal ref={modal} onClose={() => {
-        console.log('add payment method');
-        userService
-          .getPaymentMethods()
-          .then((res: PaymentMethodsResponse) => {
+      <CreatePaymentMethodModal
+        ref={modal}
+        onClose={() => {
+          console.log('add payment method');
+          userService.getPaymentMethods().then((res: PaymentMethodsResponse) => {
             setPaymentMethods(res.cards);
 
             if (!cart.paymentMethod) {
@@ -178,7 +193,8 @@ const CheckoutPayment: React.FC = () => {
             }
             modal.current?.dismiss();
           });
-      }} />
+        }}
+      />
     </IonPage>
   );
 };

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import {
   IonButtons,
   IonContent,
@@ -19,8 +19,8 @@ import {
   useIonActionSheet,
 } from '@ionic/react';
 import './ProfileInsights.scss';
-import { chevronBackOutline, chevronDownOutline, chevronUpOutline } from "ionicons/icons";
-import { UserService } from "../services/UserService";
+import { chevronBackOutline, chevronDownOutline, chevronUpOutline } from 'ionicons/icons';
+import { UserService } from '../services/UserService';
 import { viewUser } from '../util';
 
 interface UserProfileInsights_User {
@@ -47,9 +47,11 @@ const ProfileInsights: React.FC = () => {
   //console.log("ProfileInsights: ", userId);
 
   function getUserId() {
-    let userid = history.location.pathname.substring(history.location.pathname.lastIndexOf('/') + 1)
+    let userid = history.location.pathname.substring(
+      history.location.pathname.lastIndexOf('/') + 1
+    );
     //console.log("getUserId: ", userid)
-    return parseInt(userid)
+    return parseInt(userid);
   }
 
   useIonViewWillEnter(() => {
@@ -59,14 +61,14 @@ const ProfileInsights: React.FC = () => {
   function loadStats() {
     userService
       .getProfileInsights(userId, age)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Stats: ", data);
+      .then(res => res.json())
+      .then(data => {
+        console.log('Stats: ', data);
         setVisitors(data.visitors);
         setWatchlists(data.watchlists);
       })
-      .catch((err) => {
-        console.error("Error: ", err);
+      .catch(err => {
+        console.error('Error: ', err);
       });
   }
 
@@ -120,17 +122,16 @@ const ProfileInsights: React.FC = () => {
       <IonHeader>
         <IonToolbar
           style={{
-            padding: "40px 10px 10px 10px",
+            padding: '40px 10px 10px 10px',
           }}
         >
-          <IonButtons slot="start"
-              onClick={() => {
-                history.goBack()
-              }}>
-            <IonIcon
-              slot="icon-only"
-              icon={chevronBackOutline}
-            />
+          <IonButtons
+            slot="start"
+            onClick={() => {
+              history.goBack();
+            }}
+          >
+            <IonIcon slot="icon-only" icon={chevronBackOutline} />
             <IonText>Profile</IonText>
           </IonButtons>
         </IonToolbar>
@@ -142,65 +143,94 @@ const ProfileInsights: React.FC = () => {
         <IonList>
           <IonItem className="insights-header-row">
             <div>
-              <div className="insights-header-select" onClick={(e) => {
-                showActionSheet();
-              }}>
+              <div
+                className="insights-header-select"
+                onClick={e => {
+                  showActionSheet();
+                }}
+              >
                 {age > 0 ? `Last ${age} Day${age > 1 ? 's' : ''}` : 'All Time'}
                 <IonIcon icon={chevronDownOutline} />
               </div>
             </div>
             <div>
-              <div className="insights-header-dates">
-                {/*May 10 - May 23*/}
-              </div>
+              <div className="insights-header-dates">{/*May 10 - May 23*/}</div>
             </div>
           </IonItem>
 
-          <IonItem className="insights-item" onClick={(e) => {
-            e.preventDefault();
-            setShowVisitors(!showVisitors);
-          }} lines={showVisitors ? 'none' : 'inset'}>
+          <IonItem
+            className="insights-item"
+            onClick={e => {
+              e.preventDefault();
+              setShowVisitors(!showVisitors);
+            }}
+            lines={showVisitors ? 'none' : 'inset'}
+          >
             <IonLabel className="insights-label">Profile Views</IonLabel>
             <IonNote className="insights-value">{visitors.length}</IonNote>
-            <IonIcon className="insights-toggle" icon={showVisitors ? chevronUpOutline : chevronDownOutline} />
+            <IonIcon
+              className="insights-toggle"
+              icon={showVisitors ? chevronUpOutline : chevronDownOutline}
+            />
           </IonItem>
-          {showVisitors ?
-            visitors.map((v, i) => (
-              <IonItem key={v.user_id} className={'insights-item user ' + (i < visitors.length - 1 ? '' : 'last')} onClick={(e) => {
-                e.preventDefault();
-                viewUser(history, v.user_id, v.account_type);
-              }} lines={i < visitors.length - 1 ? 'none' : 'inset'}>
-                <IonAvatar>
-                  <img src={v.profile_image} alt="avatar" />
-                </IonAvatar>
-                <IonLabel className="insights-label">{v.from_name}</IonLabel>
-                <IonNote className="insights-value">{v.position} {v.school}</IonNote>
-              </IonItem>
-            ))
-          : ''}
+          {showVisitors
+            ? visitors.map((v, i) => (
+                <IonItem
+                  key={v.user_id}
+                  className={'insights-item user ' + (i < visitors.length - 1 ? '' : 'last')}
+                  onClick={e => {
+                    e.preventDefault();
+                    viewUser(history, v.user_id, v.account_type);
+                  }}
+                  lines={i < visitors.length - 1 ? 'none' : 'inset'}
+                >
+                  <IonAvatar>
+                    <img src={v.profile_image} alt="avatar" />
+                  </IonAvatar>
+                  <IonLabel className="insights-label">{v.from_name}</IonLabel>
+                  <IonNote className="insights-value">
+                    {v.position} {v.school}
+                  </IonNote>
+                </IonItem>
+              ))
+            : ''}
 
-          <IonItem className="insights-item" onClick={(e) => {
-            e.preventDefault();
-            setShowWatchlists(!showWatchlists);
-          }} lines={showWatchlists ? 'none' : 'inset'}>
+          <IonItem
+            className="insights-item"
+            onClick={e => {
+              e.preventDefault();
+              setShowWatchlists(!showWatchlists);
+            }}
+            lines={showWatchlists ? 'none' : 'inset'}
+          >
             <IonLabel className="insights-label">Watchlist Adds</IonLabel>
             <IonNote className="insights-value">{watchlists.length}</IonNote>
-            <IonIcon className="insights-toggle" icon={showWatchlists ? chevronUpOutline : chevronDownOutline} />
+            <IonIcon
+              className="insights-toggle"
+              icon={showWatchlists ? chevronUpOutline : chevronDownOutline}
+            />
           </IonItem>
-          {showWatchlists ?
-            watchlists.map((w, i) => (
-              <IonItem key={w.user_id} className={'insights-item user ' + (i < watchlists.length - 1 ? '' : 'last')} onClick={(e) => {
-                e.preventDefault();
-                viewUser(history, w.user_id, w.account_type);
-              }} lines={i < watchlists.length - 1 ? 'none' : 'inset'}>
-                <IonAvatar>
-                  <img src={w.profile_image} alt="avatar" />
-                </IonAvatar>
-                <IonLabel className="insights-label">{w.from_name}</IonLabel>
-                <IonNote className="insights-value">{w.position} {w.school}</IonNote>
-              </IonItem>
-            ))
-          : ''}
+          {showWatchlists
+            ? watchlists.map((w, i) => (
+                <IonItem
+                  key={w.user_id}
+                  className={'insights-item user ' + (i < watchlists.length - 1 ? '' : 'last')}
+                  onClick={e => {
+                    e.preventDefault();
+                    viewUser(history, w.user_id, w.account_type);
+                  }}
+                  lines={i < watchlists.length - 1 ? 'none' : 'inset'}
+                >
+                  <IonAvatar>
+                    <img src={w.profile_image} alt="avatar" />
+                  </IonAvatar>
+                  <IonLabel className="insights-label">{w.from_name}</IonLabel>
+                  <IonNote className="insights-value">
+                    {w.position} {w.school}
+                  </IonNote>
+                </IonItem>
+              ))
+            : ''}
         </IonList>
       </IonContent>
     </IonPage>

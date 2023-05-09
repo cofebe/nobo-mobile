@@ -20,24 +20,27 @@ const Checkbox: React.FC<InputProps> = ({
   readonly = false,
   errorMessage,
 }) => {
-
   function toggle() {
     onChange(!value);
   }
 
   return (
     <div className={'app-checkbox-container ' + (errorMessage ? 'invalid' : '')}>
-      <div className="checkbox" onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        toggle();
-      }}>
+      <div
+        className="checkbox"
+        onClick={e => {
+          e.preventDefault();
+          e.stopPropagation();
+          toggle();
+        }}
+      >
         <div className="image">
-          <img src={`assets/images/checkmark-${value ? 'checked' : 'unchecked'}.svg`} alt="checkbox" />
+          <img
+            src={`assets/images/checkmark-${value ? 'checked' : 'unchecked'}.svg`}
+            alt="checkbox"
+          />
         </div>
-        {label ? (
-          <div className="label">{label}</div>
-        ) : ''}
+        {label ? <div className="label">{label}</div> : ''}
       </div>
       <div className="error-message">{errorMessage}</div>
     </div>

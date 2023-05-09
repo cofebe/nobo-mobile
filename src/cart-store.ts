@@ -4,8 +4,8 @@ import { Product, PaymentMethod, Address } from './models';
 export interface ShoppingCartState {
   //id: string;
   products: Product[];
-  shippingAddress: Address|null|undefined;
-  paymentMethod: PaymentMethod|null|undefined;
+  shippingAddress: Address | null | undefined;
+  paymentMethod: PaymentMethod | null | undefined;
   shipping: number;
   tax: number;
   subtotal: number;
@@ -36,7 +36,7 @@ function recalculateState(state: ShoppingCartState): ShoppingCartState {
   return state;
 }
 
-export const shoppingCartStore  = {
+export const shoppingCartStore = {
   // get the initial/empty state
   initialState: shoppingCartInitialState,
   reset: () => {
@@ -98,7 +98,7 @@ export const shoppingCartStore  = {
       }
     }
   },
-  setShippingAddress: (addr: Address|null|undefined) => {
+  setShippingAddress: (addr: Address | null | undefined) => {
     // return if no changes
     if (!addr && !shoppingCartState.shippingAddress) {
       return;
@@ -118,7 +118,7 @@ export const shoppingCartStore  = {
       shoppingCartSubject.next(shoppingCartState);
     }
   },
-  setPaymentMethod: (pm: PaymentMethod|null|undefined, shoppingCartStateUpdating = false) => {
+  setPaymentMethod: (pm: PaymentMethod | null | undefined, shoppingCartStateUpdating = false) => {
     // return if no changes
     if (!pm && !shoppingCartState.paymentMethod) {
       return;
@@ -145,10 +145,7 @@ export const shoppingCartStore  = {
       if (!shoppingCartState.products.find(p => p._id === product._id)) {
         shoppingCartState = recalculateState({
           ...shoppingCartState,
-          products: [
-            ...shoppingCartState.products,
-            product,
-          ],
+          products: [...shoppingCartState.products, product],
           isInitial: false,
         });
         if (!shoppingCartStateUpdating) {
@@ -172,4 +169,3 @@ export const shoppingCartStore  = {
     }
   },
 };
-

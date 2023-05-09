@@ -16,8 +16,6 @@ import Input from '../components/Input';
 import './SignUp2.scss';
 import Button from '../components/Button';
 
-
-
 const SignUp2 = () => {
   const history = useHistory();
   const userService = new UserService();
@@ -27,29 +25,28 @@ const SignUp2 = () => {
     setError(false);
   });
 
-  const state2: any = history.location.state
+  const state2: any = history.location.state;
 
   const [person, setPerson] = useState<SignUpType>({
     firstName: state2?.firstName,
     lastName: state2?.lastName,
-    userName: "",
+    userName: '',
     email: state2?.email,
-    password: "",
-    comfirmPassword: "",
-  })
-
+    password: '',
+    comfirmPassword: '',
+  });
 
   const signup = () => {
     loadingStore.increment('Signup:timeout');
 
     userService
       .signup(person)
-      .then((user) => {
-        console.log("loging the user ", user)
+      .then(user => {
+        console.log('loging the user ', user);
         loadingStore.decrement('SignUp:timeout');
         if (user?.success) {
           history.replace(`/profile`);
-        } else if (user?.displayName === "exists") {
+        } else if (user?.displayName === 'exists') {
           setError(true);
         }
       })
@@ -60,12 +57,12 @@ const SignUp2 = () => {
       });
   };
 
-
-
-
   const validate = () => {
     if (
-      person.userName.length < 3 || person.password.length < 6 || person.comfirmPassword.length < 6 || person.password !== person.comfirmPassword
+      person.userName.length < 3 ||
+      person.password.length < 6 ||
+      person.comfirmPassword.length < 6 ||
+      person.password !== person.comfirmPassword
     ) {
       return true;
     } else {
@@ -73,87 +70,79 @@ const SignUp2 = () => {
     }
   };
 
-
-
   return (
     <IonPage className="main-container">
       <div className="background-image">
-        <IonRow className='icon-container'>
+        <IonRow className="icon-container">
           <IonCol style={{ flex: 1, marginLeft: '20px' }} size="2">
             <div
               onClick={() => {
                 history.goBack();
               }}
             >
-              <img
-                height={40}
-                src="assets/images/nobo-back-icon.png"
-                alt="logo"
-              />
+              <img height={40} src="assets/images/nobo-back-icon.png" alt="logo" />
             </div>
           </IonCol>
-          <IonCol className='nobo-logo-container'  >
-            <img
-              height={70}
-              src="assets/images/nobo-logo-white.png"
-              alt="logo"
-            />
+          <IonCol className="nobo-logo-container">
+            <img height={70} src="assets/images/nobo-logo-white.png" alt="logo" />
           </IonCol>
           <IonRow className="get-registered-container">
-            <IonCol className='get-registered' >GET REGISTERED</IonCol>
+            <IonCol className="get-registered">GET REGISTERED</IonCol>
           </IonRow>
         </IonRow>
-        <IonGrid className='form-grid'>
-
+        <IonGrid className="form-grid">
           <IonRow>
-            <IonCol >
+            <IonCol>
               <Input
                 invalid={error}
                 value={person.userName}
                 className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
                 placeholder="USERNAME"
-                onChange={(val) => { setPerson({ ...person, userName: val }) }}
+                onChange={val => {
+                  setPerson({ ...person, userName: val });
+                }}
               />
             </IonCol>
           </IonRow>
           <IonRow>
             <IonCol>
-              <IonLabel className='info' >
-                For privacy concerns, your username cannot be your email, it will
-                be displayed in your style feed, account selection, and reviews
+              <IonLabel className="info">
+                For privacy concerns, your username cannot be your email, it will be displayed in
+                your style feed, account selection, and reviews
               </IonLabel>
             </IonCol>
           </IonRow>
 
           <IonRow>
-            <IonCol >
+            <IonCol>
               <Input
                 invalid={error}
                 value={person.password}
                 className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
                 placeholder="PASSWORD"
-                onChange={(val) => { setPerson({ ...person, password: val }) }}
-
+                onChange={val => {
+                  setPerson({ ...person, password: val });
+                }}
               />
             </IonCol>
           </IonRow>
           <IonRow>
-            <IonCol >
-
+            <IonCol>
               <Input
                 invalid={error}
                 value={person.comfirmPassword}
                 className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
                 placeholder="COMFIRM PASSWORD"
                 errorMessage={error ? 'Username already in use' : ''}
-                onChange={(val) => { setPerson({ ...person, comfirmPassword: val }) }}
+                onChange={val => {
+                  setPerson({ ...person, comfirmPassword: val });
+                }}
               ></Input>
             </IonCol>
           </IonRow>
-
         </IonGrid>
 
-        <IonRow  >
+        <IonRow>
           <IonCol style={{ marginTop: 180 }}>
             {/* <IonButton
 
@@ -175,19 +164,17 @@ const SignUp2 = () => {
             </IonButton> */}
 
             <Button
-              onClick={() => { signup() }}
-              label='REGISTER'
-              type='primary'
+              onClick={() => {
+                signup();
+              }}
+              label="REGISTER"
+              type="primary"
               large={true}
-              className=''
+              className=""
               disabled={validate()}
             />
-
           </IonCol>
         </IonRow>
-
-
-
       </div>
     </IonPage>
   );

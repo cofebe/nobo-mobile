@@ -5,7 +5,6 @@ export interface LoginResponse {
 }
 export interface SignUpResponse {
   success: boolean;
-
 }
 
 export interface User {
@@ -39,8 +38,6 @@ export interface User {
 }
 export interface SignUpUser {
   exist: number;
-
-
 }
 
 export interface UserReview {
@@ -454,7 +451,7 @@ export interface MessageUser {
   sellCloset: number;
   tradeCloset: number;
   _id: string;
-};
+}
 
 export interface Message {
   createdAt: string;
@@ -465,8 +462,8 @@ export interface Message {
   _id: string;
 
   // these are extra for the code
-  previousUserId: string|undefined;
-  previousCreatedAt: Date|undefined;
+  previousUserId: string | undefined;
+  previousCreatedAt: Date | undefined;
   newSection: boolean;
   date: Date;
 }
@@ -484,10 +481,10 @@ export interface Conversation {
 }
 
 export interface SignUpType {
-  firstName:string
-  lastName:string
-  email:string
-  userName:string
-  password:string
-  comfirmPassword:string
+  firstName: string;
+  lastName: string;
+  email: string;
+  userName: string;
+  password: string;
+  comfirmPassword: string;
 }

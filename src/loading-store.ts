@@ -12,7 +12,7 @@ let loadingState = loadingInitialState;
 
 const loadingSubject = new BehaviorSubject<LoadingState>(loadingInitialState);
 
-export const loadingStore  = {
+export const loadingStore = {
   // get the initial/empty state
   initialState: loadingInitialState,
   reset: () => {
@@ -40,4 +40,3 @@ export const loadingStore  = {
     loadingSubject.next(loadingState);
   },
 };
-

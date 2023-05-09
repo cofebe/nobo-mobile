@@ -12,11 +12,7 @@ import {
 } from '@ionic/react';
 import './SettingsPayment.scss';
 import Button from '../components/Button';
-import {
-  User,
-  PaymentMethod,
-  PaymentMethodsResponse,
-} from '../models';
+import { User, PaymentMethod, PaymentMethodsResponse } from '../models';
 import { UserService } from '../services/UserService';
 import CreatePaymentMethodModal from '../components/CreatePaymentMethodModal';
 import { getCardImage } from '../utils';
@@ -34,12 +30,10 @@ const SettingsPayment: React.FC = () => {
   });
 
   function load() {
-    userService
-      .getPaymentMethods()
-      .then((res: PaymentMethodsResponse) => {
-        setPaymentMethods(res.cards);
-        setDefaultPaymentMethodId(res.customer.default_source);
-      });
+    userService.getPaymentMethods().then((res: PaymentMethodsResponse) => {
+      setPaymentMethods(res.cards);
+      setDefaultPaymentMethodId(res.customer.default_source);
+    });
   }
 
   function addNew() {
@@ -47,19 +41,15 @@ const SettingsPayment: React.FC = () => {
   }
 
   function setDefault(pm: PaymentMethod) {
-    userService
-      .setDefaultPaymentMethod(pm.id)
-      .then(() => {
-        load();
-      });
+    userService.setDefaultPaymentMethod(pm.id).then(() => {
+      load();
+    });
   }
 
   function remove(pm: PaymentMethod) {
-    userService
-      .removePaymentMethod(pm.id)
-      .then(() => {
-        load();
-      });
+    userService.removePaymentMethod(pm.id).then(() => {
+      load();
+    });
   }
 
   return (
@@ -70,14 +60,16 @@ const SettingsPayment: React.FC = () => {
             <IonRow>
               <IonCol size="12">
                 <div className="title">
-                  <div className="back-button" onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    history.goBack();
-                  }}>
+                  <div
+                    className="back-button"
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      history.goBack();
+                    }}
+                  >
                     <img src="assets/images/arrow-left.svg" alt="back" />
                   </div>
-
                   Payment Methods
                 </div>
               </IonCol>
@@ -86,25 +78,29 @@ const SettingsPayment: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="settings-payment-content" scrollY={false}>
-        <div className="add-container" onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          addNew();
-        }}>
+        <div
+          className="add-container"
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            addNew();
+          }}
+        >
           <div>
             <img src="assets/images/add-square.svg" alt="add shipping address" />
           </div>
-          <div>
-            New Card
-          </div>
+          <div>New Card</div>
         </div>
         {paymentMethods.length ? (
           <div>
             {paymentMethods.map(pm => (
-              <div className={'settings-payment-item ' + (defaultPaymentMethodId === pm.id ? 'selected' : '')} key={pm.id}>
-                {defaultPaymentMethodId === pm.id && (
-                  <div className="is-default">Default</div>
-                )}
+              <div
+                className={
+                  'settings-payment-item ' + (defaultPaymentMethodId === pm.id ? 'selected' : '')
+                }
+                key={pm.id}
+              >
+                {defaultPaymentMethodId === pm.id && <div className="is-default">Default</div>}
                 <div className="left-right">
                   <div className="left">
                     <div className="logo-container">
@@ -113,23 +109,33 @@ const SettingsPayment: React.FC = () => {
                   </div>
                   <div className="right">
                     <div className="name">{pm.name}</div>
-                    <div className="last4">* &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; {pm.last4}</div>
-                    <div className="expiration">Exp. {pm.exp_month}/{pm.exp_year}</div>
+                    <div className="last4">
+                      * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; {pm.last4}
+                    </div>
+                    <div className="expiration">
+                      Exp. {pm.exp_month}/{pm.exp_year}
+                    </div>
                   </div>
                 </div>
                 <div className="action-container">
-                  <div className="action" onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setDefault(pm);
-                  }}>
+                  <div
+                    className="action"
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setDefault(pm);
+                    }}
+                  >
                     Set as Default
                   </div>
-                  <div className="action" onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    remove(pm);
-                  }}>
+                  <div
+                    className="action"
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      remove(pm);
+                    }}
+                  >
                     Remove
                   </div>
                 </div>
@@ -137,21 +143,20 @@ const SettingsPayment: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="empty-cart">
-            No payment methods defined!
-          </div>
+          <div className="empty-cart">No payment methods defined!</div>
         )}
       </IonContent>
 
-      <CreatePaymentMethodModal ref={modal} onClose={() => {
-        console.log('add payment method');
-        userService
-          .getPaymentMethods()
-          .then((res: PaymentMethodsResponse) => {
+      <CreatePaymentMethodModal
+        ref={modal}
+        onClose={() => {
+          console.log('add payment method');
+          userService.getPaymentMethods().then((res: PaymentMethodsResponse) => {
             setPaymentMethods(res.cards);
             modal.current?.dismiss();
           });
-      }} />
+        }}
+      />
     </IonPage>
   );
 };

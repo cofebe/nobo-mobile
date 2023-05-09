@@ -50,9 +50,7 @@ const TradeOfferComplete: React.FC = () => {
           <IonGrid>
             <IonRow>
               <IonCol size="12">
-                <div className="title">
-                  Trade Offer Sent!
-                </div>
+                <div className="title">Trade Offer Sent!</div>
               </IonCol>
             </IonRow>
           </IonGrid>
@@ -69,13 +67,12 @@ const TradeOfferComplete: React.FC = () => {
             </div>
             <div className="text">
               <p>
-                Once the other party accepts the trade, you will be charged and this
-                ‘new for you’ product will be shipped.
+                Once the other party accepts the trade, you will be charged and this ‘new for you’
+                product will be shipped.
               </p>
               <p>
-                An email notification, with your trade transactions order details, has been
-                sent to your inbox. You can always check the status of the trade in your
-                account dashboard.
+                An email notification, with your trade transactions order details, has been sent to
+                your inbox. You can always check the status of the trade in your account dashboard.
               </p>
             </div>
           </div>
@@ -90,9 +87,14 @@ const TradeOfferComplete: React.FC = () => {
             </IonRow>
             <IonRow className="data">
               <IonCol className="your-item" size="4" offset="1">
-                <div className="item-image" style={{
-                  backgroundImage: productOffered?.images?.length ? getImageUrl(productOffered.images[0]?.url) : ''
-                }}></div>
+                <div
+                  className="item-image"
+                  style={{
+                    backgroundImage: productOffered?.images?.length
+                      ? getImageUrl(productOffered.images[0]?.url)
+                      : '',
+                  }}
+                ></div>
                 <div className="text">
                   <div className="name">{productOffered?.name}</div>
                   <div className="price">{formatPrice(productOffered?.price || 0)}</div>
@@ -104,9 +106,14 @@ const TradeOfferComplete: React.FC = () => {
                 </div>
               </IonCol>
               <IonCol className="their-item" size="4">
-                <div className="item-image" style={{
-                  backgroundImage: productWanted?.images?.length ? getImageUrl(productWanted.images[0]?.url) : ''
-                }}></div>
+                <div
+                  className="item-image"
+                  style={{
+                    backgroundImage: productWanted?.images?.length
+                      ? getImageUrl(productWanted.images[0]?.url)
+                      : '',
+                  }}
+                ></div>
                 <div className="text">
                   <div className="name">{productWanted?.name}</div>
                   <div className="price">{formatPrice(productWanted?.price || 0)}</div>
@@ -123,20 +130,27 @@ const TradeOfferComplete: React.FC = () => {
             </IonRow>
           </IonGrid>
           <div className="buttons">
-            <Button label="View My Trades" large={true} onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              console.log('go to my trades');
-            }} />
-            <Button label="Back to Home Feed" large={true} type="secondary" onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              history.push(`/home/explore/${experience}/explore`);
-            }} />
+            <Button
+              label="View My Trades"
+              large={true}
+              onClick={e => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('go to my trades');
+              }}
+            />
+            <Button
+              label="Back to Home Feed"
+              large={true}
+              type="secondary"
+              onClick={e => {
+                e.preventDefault();
+                e.stopPropagation();
+                history.push(`/home/explore/${experience}/explore`);
+              }}
+            />
           </div>
-          <div className="thanks">
-            Thanks for trading with us!
-          </div>
+          <div className="thanks">Thanks for trading with us!</div>
         </div>
       </IonContent>
     </IonPage>
