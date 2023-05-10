@@ -18,7 +18,7 @@ const GetStarted: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((currentImageIndex) => (currentImageIndex + 1) % 3);
+      setCurrentImageIndex(currentImageIndex => (currentImageIndex + 1) % 3);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -29,9 +29,7 @@ const GetStarted: React.FC = () => {
         className="background-image"
         style={{
           backgroundImage: `url(${
-            [backgroundImage1, backgroundImage2, backgroundImage3][
-              currentImageIndex
-            ]
+            [backgroundImage1, backgroundImage2, backgroundImage3][currentImageIndex]
           })`,
         }}
       >

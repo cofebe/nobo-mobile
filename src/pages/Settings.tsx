@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {
-  IonHeader,
-  IonContent,
-  IonPage,
-  useIonViewWillEnter,
-} from '@ionic/react';
+import { IonHeader, IonContent, IonPage, useIonViewWillEnter } from '@ionic/react';
 import './Settings.scss';
 import { UserService } from '../services/UserService';
 import { AuthService } from '../services/AuthService';
@@ -28,14 +23,18 @@ console.log("checking the settings avater :",user?.avatar )
   return (
     <IonPage className="settings-container">
       <IonHeader className="settings-header">
-        <div className="close-btn" onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          history.goBack();
-        }}>
+        <div
+          className="close-btn"
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.goBack();
+          }}
+        >
           <img src="/assets/images/close-black.svg" alt="close" />
         </div>
         <div className="content">
+{/* <<<<<<< HEAD */}
 
 
         {/* This is the div i inserted to fetch user-image that works */}
@@ -50,95 +49,130 @@ console.log("checking the settings avater :",user?.avatar )
         {/* This div below was not fetching the user image so i try replacing with this one above and it worked */}
           {/* <div className="avatar" style={{ backgroundImage: getImageUrl(user?.avatar || '') }}></div> */}
           <div className="name">{user?.firstName} {user?.lastName}</div>
+{/* ======= */}
+          {/* <div
+            className="avatar"
+            style={{ backgroundImage: getImageUrl(user?.avatar || '') }}
+          ></div>
+          <div className="name">
+            {user?.firstName} {user?.lastName}
+          </div> */}
+{/* >>>>>>> 04990fa4d6b12b251bc4006b8c857ef0b2b3ef26 */}
         </div>
       </IonHeader>
       <IonContent className="settings-content">
-        <div onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          history.push('/settings/account');
-        }}>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/account');
+          }}
+        >
           Account Settings
         </div>
-        <div onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          history.push('/settings/shipping');
-        }}>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/shipping');
+          }}
+        >
           Shipping
         </div>
-        <div onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          history.push('/settings/payment');
-        }}>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/payment');
+          }}
+        >
           My Payment Methods
         </div>
         <div className="sep"></div>
-        <div onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          history.push('/settings/trades');
-        }}>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/trades');
+          }}
+        >
           My Trades
         </div>
-        <div onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          history.push('/settings/purchases');
-        }}>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/purchases');
+          }}
+        >
           My Purchases
         </div>
-        <div onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          history.push('/settings/sales');
-        }}>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/sales');
+          }}
+        >
           My Sales
         </div>
-        <div onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          history.push('/settings/offers');
-        }}>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/offers');
+          }}
+        >
           My Offers
         </div>
         <div className="sep"></div>
-        <div onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          history.push('/settings/returns');
-        }}>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/returns');
+          }}
+        >
           My Returns
         </div>
-        <div onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          history.push('/settings/withdraw');
-        }}>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/withdraw');
+          }}
+        >
           Withdrawal Requests
         </div>
-        <div onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          history.push('/settings/savings');
-        }}>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/savings');
+          }}
+        >
           Savings &amp; Sustainability
         </div>
-        <div className="logout" onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          authService.logout();
-          history.push('/');
-        }}>
+        <div
+          className="logout"
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            authService.logout();
+            history.push('/');
+          }}
+        >
           <div>Logout</div>
           <img src="/assets/images/logout.svg" alt="logout" />
         </div>
-        <div className="delete-account" onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          console.log('delete account');
-        }}>
+        <div
+          className="delete-account"
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('delete account');
+          }}
+        >
           Delete Account
         </div>
       </IonContent>

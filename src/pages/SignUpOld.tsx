@@ -1,4 +1,4 @@
-import { useState/*, useContext*/ } from 'react';
+import { useState /*, useContext*/ } from 'react';
 import {
   IonButton,
   IonContent,
@@ -99,8 +99,8 @@ const Register: React.FC = () => {
 
       authService
         .signUp({ email: email, password: password })
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           window.localStorage['persistedState'] = JSON.stringify({
             user: data,
           });
@@ -113,7 +113,7 @@ const Register: React.FC = () => {
             showError(1);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           showError(0, err);
           console.log('Error Email: ', email);
           console.log('Error URP Backend: ', err);
@@ -147,8 +147,7 @@ const Register: React.FC = () => {
     if (error !== undefined) {
       console.log('errorMessage1: ', error);
       if (error.status === 409 || error.code === 'UsernameExistsException') {
-        errMessage =
-          "Account already exists with that email. Please click 'Sign In'";
+        errMessage = "Account already exists with that email. Please click 'Sign In'";
       } else if (error.code === 'NetworkError') {
         errMessage = 'Network error. Please try again';
       }
@@ -209,7 +208,7 @@ const Register: React.FC = () => {
                 <IonInput
                   value={email}
                   type="email"
-                  onIonChange={(e) => setEmail(e.detail.value!)}
+                  onIonChange={e => setEmail(e.detail.value!)}
                   required
                 ></IonInput>
               </IonItem>
@@ -222,7 +221,7 @@ const Register: React.FC = () => {
                 <IonInput
                   value={password}
                   type="password"
-                  onIonChange={(e) => setPassword(e.detail.value!)}
+                  onIonChange={e => setPassword(e.detail.value!)}
                   required
                 ></IonInput>
               </IonItem>
@@ -235,7 +234,7 @@ const Register: React.FC = () => {
                 <IonInput
                   value={confirmPassword}
                   type="password"
-                  onIonChange={(e) => setConfirmPassword(e.detail.value!)}
+                  onIonChange={e => setConfirmPassword(e.detail.value!)}
                   required
                 ></IonInput>
               </IonItem>
@@ -247,7 +246,7 @@ const Register: React.FC = () => {
           <IonRow>
             <IonCol className="nobo-center" size="11">
               <IonButton
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   signUp();
                 }}
@@ -301,15 +300,13 @@ const Register: React.FC = () => {
             <IonText class="nobo-confirm-text">
               Thank you for signing up! We sent a confirmation email to
             </IonText>
-            <IonText class="nobo-confirm-text nobo-confirm-email">
-              {email}
-            </IonText>
+            <IonText class="nobo-confirm-text nobo-confirm-email">{email}</IonText>
             <IonText class="nobo-confirm-text">
               Check your email and click on the confirmation link to continue
             </IonText>
             <IonCol className="nobo-center" size="12">
               <IonButton
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   window.location.href = '/login';
                 }}
@@ -327,7 +324,7 @@ const Register: React.FC = () => {
               <a
                 href="#"
                 className="login-sign-up"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   resendEmail();
                 }}

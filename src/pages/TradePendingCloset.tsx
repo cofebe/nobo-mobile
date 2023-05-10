@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  IonContent,
-  IonPage,
-  IonGrid,
-  IonRow,
-  IonCol,
-  useIonViewWillEnter,
-} from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonRow, IonCol, useIonViewWillEnter } from '@ionic/react';
 import './TradePendingCloset.scss';
 import Header from '../components/Header';
 import { UserService } from '../services/UserService';
@@ -25,7 +18,20 @@ const TradePendingCloset: React.FC = () => {
 
   function getDateString(dtStr: string) {
     const dt = new Date(dtStr);
-    const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const MONTHS = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ];
     return `Submitted ${MONTHS[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`;
   }
 
@@ -46,11 +52,11 @@ const TradePendingCloset: React.FC = () => {
                       <span>Cost:</span>
                       {formatPrice(p.price)}
                     </div>
-                    {p.attributes.filter(attr => attr.id === 'size').map(attr => (
-                      <div className="size">
-                        Size {attr.value}
-                      </div>
-                    ))}
+                    {p.attributes
+                      .filter(attr => attr.id === 'size')
+                      .map(attr => (
+                        <div className="size">Size {attr.value}</div>
+                      ))}
                   </div>
                 </IonCol>
               ))}

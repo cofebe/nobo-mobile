@@ -62,32 +62,18 @@ const Login: React.FC = () => {
                 history.push('/get-started');
               }}
             >
-              <img
-                height={40}
-                src="assets/images/nobo-back-icon.png"
-                alt="logo"
-              />
+              <img height={40} src="assets/images/nobo-back-icon.png" alt="logo" />
             </div>
           </IonCol>
         </IonRow>
         <IonRow className="logo-margin-top">
-          <IonCol
-            class="ion-justify-content-center"
-            style={{ display: 'flex' }}
-          >
-            <img
-              height={65}
-              src="assets/images/nobo-logo-white.png"
-              alt="logo"
-            />
+          <IonCol class="ion-justify-content-center" style={{ display: 'flex' }}>
+            <img height={65} src="assets/images/nobo-logo-white.png" alt="logo" />
           </IonCol>
         </IonRow>
         <IonRow>
           <IonGrid className="login-box">
-            <IonRow
-              style={{ paddingTop: 20 }}
-              class="ion-justify-content-center"
-            >
+            <IonRow style={{ paddingTop: 20 }} class="ion-justify-content-center">
               <IonCol
                 size="5"
                 style={{
@@ -108,7 +94,7 @@ const Login: React.FC = () => {
                   value={email}
                   className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
                   placeholder="USERNAME"
-                  onChange={(val) => {
+                  onChange={val => {
                     setEmail(val);
                   }}
                 />
@@ -127,7 +113,7 @@ const Login: React.FC = () => {
                   placeholder="PASSWORD"
                   type="password"
                   errorMessage={error ? 'Invalid username or password' : ''}
-                  onChange={(val) => {
+                  onChange={val => {
                     setPassword(val);
                   }}
                 ></Input>
@@ -180,7 +166,8 @@ const Login: React.FC = () => {
                   color: '#D6980E',
                   fontSize: '15px',
                 }}
-                onClick={()=>{
+
+                onClick={() => {
                   history.push("/signup-details")
                 }}
               >

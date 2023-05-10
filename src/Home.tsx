@@ -63,7 +63,7 @@ const Home: React.FC = () => {
   const [experience, setExperience] = useState<string>('women');
 
   if (!isPlatform('desktop') && !isPlatform('mobileweb')) {
-    PushNotifications.requestPermissions().then((result) => {
+    PushNotifications.requestPermissions().then(result => {
       if (result.receive === 'granted') {
         console.log('Push Granted');
         PushNotifications.register();
@@ -80,8 +80,8 @@ const Home: React.FC = () => {
       try {
         userService
           .setUserDeviceToken(user.user.user_id, req)
-          .then((res) => res.json())
-          .then((data) => {
+          .then(res => res.json())
+          .then(data => {
             console.log('Success setUserDeviceToken');
           });
       } catch (err) {
@@ -154,8 +154,8 @@ const Home: React.FC = () => {
       // we have to load the user to get the type
       userService
         .getProfile(userId)
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           const userData = {
             user_id: data.user_id,
             user_type: data.user_type.String,
@@ -175,7 +175,7 @@ const Home: React.FC = () => {
         const userExperience = user.experiencePreferences;
         setExperience(userExperience);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('Error getting user experience', err);
       });
   });
@@ -270,13 +270,11 @@ const Home: React.FC = () => {
             tab="home"
             href={`/home/explore/${experience}/explore`}
             selected={appMode === 'home'}
-            onClick={(e) => setActiveTab('home', e)}
+            onClick={e => setActiveTab('home', e)}
           >
             <img
               className="nav-btn"
-              src={`assets/images/nobo-home-icon${
-                appMode === 'home' ? '-focus' : ''
-              }.svg`}
+              src={`assets/images/nobo-home-icon${appMode === 'home' ? '-focus' : ''}.svg`}
               style={{ width: '1.62rem' }}
               alt="home"
             />
@@ -298,7 +296,7 @@ const Home: React.FC = () => {
             tab="stylefeed"
             href="/home/style-feed"
             selected={appMode === 'stylefeed'}
-            onClick={(e) => setActiveTab('stylefeed', e)}
+            onClick={e => setActiveTab('stylefeed', e)}
           >
             <img
               className="nav-btn"
@@ -326,7 +324,7 @@ const Home: React.FC = () => {
             tab="list"
             // href="/home/messages"
             selected={appMode === 'list'}
-            onClick={(e) => {
+            onClick={e => {
               listItemModal.current?.present();
               setActiveTab('list', e);
             }}
@@ -345,9 +343,7 @@ const Home: React.FC = () => {
             >
               <img
                 className="nav-btn"
-                src={`assets/images/nobo-plus-icon${
-                  appMode === 'list' ? '-focus' : ''
-                }.png`}
+                src={`assets/images/nobo-plus-icon${appMode === 'list' ? '-focus' : ''}.png`}
                 style={{ width: '1.68rem' }}
                 alt="list"
               />
@@ -357,7 +353,7 @@ const Home: React.FC = () => {
             tab="notifications"
             href="/home/notifications"
             selected={appMode === 'notifications'}
-            onClick={(e) => setActiveTab('notifications', e)}
+            onClick={e => setActiveTab('notifications', e)}
           >
             <img
               className="nav-btn"
@@ -385,13 +381,11 @@ const Home: React.FC = () => {
             tab="closet"
             href="/home/closet"
             selected={appMode === 'closet'}
-            onClick={(e) => setActiveTab('closet', e)}
+            onClick={e => setActiveTab('closet', e)}
           >
             <img
               className="nav-btn"
-              src={`assets/images/nobo-closet-icon${
-                appMode === 'closet' ? '-focus' : ''
-              }.svg`}
+              src={`assets/images/nobo-closet-icon${appMode === 'closet' ? '-focus' : ''}.svg`}
               style={{ width: '1.18rem' }}
               alt="profile"
             />

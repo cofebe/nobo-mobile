@@ -4,10 +4,14 @@ export interface LoginResponse {
   error: string;
 }
 export interface SignUpResponse {
+<<<<<<< HEAD
   success: string;
   user: User;
   token: string;
  
+=======
+  success: boolean;
+>>>>>>> 04990fa4d6b12b251bc4006b8c857ef0b2b3ef26
 }
 
 export interface User {
@@ -41,8 +45,6 @@ export interface User {
 }
 export interface SignUpUser {
   exist: number;
- 
- 
 }
 
 export interface UserReview {
@@ -69,6 +71,7 @@ export interface Address {
   phone: string;
   postalCode: string;
   state: string;
+  notes: string;
   _id: string;
 }
 
@@ -455,7 +458,7 @@ export interface MessageUser {
   sellCloset: number;
   tradeCloset: number;
   _id: string;
-};
+}
 
 export interface Message {
   createdAt: string;
@@ -466,8 +469,8 @@ export interface Message {
   _id: string;
 
   // these are extra for the code
-  previousUserId: string|undefined;
-  previousCreatedAt: Date|undefined;
+  previousUserId: string | undefined;
+  previousCreatedAt: Date | undefined;
   newSection: boolean;
   date: Date;
 }
@@ -484,6 +487,7 @@ export interface Conversation {
   _id: string;
 }
 
+<<<<<<< HEAD
 // signup type
 export interface SignUpType{
   firstName:string
@@ -493,6 +497,15 @@ export interface SignUpType{
   password:string
   comfirmPassword:string
  
+=======
+export interface SignUpType {
+  firstName: string;
+  lastName: string;
+  email: string;
+  userName: string;
+  password: string;
+  comfirmPassword: string;
+>>>>>>> 04990fa4d6b12b251bc4006b8c857ef0b2b3ef26
 }
 
 

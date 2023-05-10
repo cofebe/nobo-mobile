@@ -19,18 +19,13 @@ const NoboExploreHeader: React.FC = () => {
 
   const [activeButton, setActiveButton] = useState(params.sectionName);
   const [activeCategory, setActiveCategory] = useState(params.sectionCategory);
-  const [activeCategoryTitle, setActiveCategoryTitle] =
-    useState<string>('WOMAN');
-  const [cart, setCart] = useState<ShoppingCartState>(
-    shoppingCartStore.initialState
-  );
+  const [activeCategoryTitle, setActiveCategoryTitle] = useState<string>('WOMAN');
+  const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
 
   useEffect(() => {
-    const subscription = shoppingCartStore.subscribe(
-      (cart: ShoppingCartState) => {
-        setCart(cart);
-      }
-    );
+    const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
+      setCart(cart);
+    });
     if (activeCategory === 'men') {
       setActiveCategoryTitle('MEN');
     } else if (activeCategory === 'women') {
@@ -102,11 +97,13 @@ const NoboExploreHeader: React.FC = () => {
         <IonGrid>
           <IonRow class="ion-align-items-center">
             <IonCol size="3">
-              <div onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                history.push('/settings');
-              }}>
+              <div
+                onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  history.push('/settings');
+                }}
+              >
                 <img
                   // className="splash-logo"
                   height={24}
@@ -132,25 +129,18 @@ const NoboExploreHeader: React.FC = () => {
                   alignItems: 'center',
                   justifyContent: 'flex-end',
                 }}
-                onClick={(e) => {
+                onClick={e => {
                   history.push('/cart');
                 }}
               >
                 <div className="cart-container">
-                  <img
-                    height={24}
-                    src="assets/images/shopping-cart.svg"
-                    alt="logo"
-                  />
+                  <img height={24} src="assets/images/shopping-cart.svg" alt="logo" />
                   {cart.products.length ? <div className="dot"></div> : ''}
                 </div>
               </div>
             </IonCol>
           </IonRow>
-          <IonRow
-            style={{ paddingLeft: 45 }}
-            className="ion-justify-content-center"
-          >
+          <IonRow style={{ paddingLeft: 45 }} className="ion-justify-content-center">
             <IonCol>
               <div
                 onClick={() => {
@@ -175,11 +165,7 @@ const NoboExploreHeader: React.FC = () => {
               }}
             >
               <div>
-                <img
-                  height={15}
-                  src="assets/images/nobo-square-down.png"
-                  alt="down"
-                />
+                <img height={15} src="assets/images/nobo-square-down.png" alt="down" />
               </div>
             </IonCol>
           </IonRow>
@@ -194,11 +180,8 @@ const NoboExploreHeader: React.FC = () => {
                 color={activeButton === 'explore' ? 'primary' : 'secondary'}
                 style={{
                   '--box-shadow':
-                    activeButton === 'explore'
-                      ? '0px 0px 10px rgba(214, 152, 14, 0.4)'
-                      : 'none',
-                  '--border-color':
-                    activeButton === 'explore' ? '#d6980e' : 'black',
+                    activeButton === 'explore' ? '0px 0px 10px rgba(214, 152, 14, 0.4)' : 'none',
+                  '--border-color': activeButton === 'explore' ? '#d6980e' : 'black',
                 }}
                 expand="block"
                 className="header-section-button"
@@ -216,11 +199,8 @@ const NoboExploreHeader: React.FC = () => {
                 color={activeButton === 'trade' ? 'primary' : 'secondary'}
                 style={{
                   '--box-shadow':
-                    activeButton === 'trade'
-                      ? '0px 0px 10px rgba(214, 152, 14, 0.4)'
-                      : 'none',
-                  '--border-color':
-                    activeButton === 'trade' ? '#d6980e' : 'black',
+                    activeButton === 'trade' ? '0px 0px 10px rgba(214, 152, 14, 0.4)' : 'none',
+                  '--border-color': activeButton === 'trade' ? '#d6980e' : 'black',
                 }}
                 expand="block"
                 className="header-section-button"
@@ -238,11 +218,8 @@ const NoboExploreHeader: React.FC = () => {
                 color={activeButton === 'shop' ? 'primary' : 'secondary'}
                 style={{
                   '--box-shadow':
-                    activeButton === 'shop'
-                      ? '0px 0px 10px rgba(214, 152, 14, 0.4)'
-                      : 'none',
-                  '--border-color':
-                    activeButton === 'shop' ? '#d6980e' : 'black',
+                    activeButton === 'shop' ? '0px 0px 10px rgba(214, 152, 14, 0.4)' : 'none',
+                  '--border-color': activeButton === 'shop' ? '#d6980e' : 'black',
                 }}
                 expand="block"
                 className="header-section-button"
@@ -260,11 +237,8 @@ const NoboExploreHeader: React.FC = () => {
                 color={activeButton === 'sale' ? 'primary' : 'secondary'}
                 style={{
                   '--box-shadow':
-                    activeButton === 'sale'
-                      ? '0px 0px 10px rgba(214, 152, 14, 0.4)'
-                      : 'none',
-                  '--border-color':
-                    activeButton === 'sale' ? '#d6980e' : 'black',
+                    activeButton === 'sale' ? '0px 0px 10px rgba(214, 152, 14, 0.4)' : 'none',
+                  '--border-color': activeButton === 'sale' ? '#d6980e' : 'black',
                 }}
                 expand="block"
                 className="header-section-button"

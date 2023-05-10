@@ -158,7 +158,7 @@ const ForgotReset: React.FC = () => {
                 <IonInput
                   value={email}
                   type="email"
-                  onIonChange={(e) => setEmail(e.detail.value!)}
+                  onIonChange={e => setEmail(e.detail.value!)}
                   required
                 ></IonInput>
               </IonItem>
@@ -172,7 +172,7 @@ const ForgotReset: React.FC = () => {
                   value={code}
                   type="text"
                   inputmode="numeric"
-                  onIonChange={(e) => setCode(e.detail.value!)}
+                  onIonChange={e => setCode(e.detail.value!)}
                   required
                 ></IonInput>
               </IonItem>
@@ -185,7 +185,7 @@ const ForgotReset: React.FC = () => {
                 <IonInput
                   value={password}
                   type="password"
-                  onIonChange={(e) => setPassword(e.detail.value!)}
+                  onIonChange={e => setPassword(e.detail.value!)}
                   required
                 ></IonInput>
               </IonItem>
@@ -198,7 +198,7 @@ const ForgotReset: React.FC = () => {
                 <IonInput
                   value={confirmPassword}
                   type="password"
-                  onIonChange={(e) => setConfirmPassword(e.detail.value!)}
+                  onIonChange={e => setConfirmPassword(e.detail.value!)}
                   required
                 ></IonInput>
               </IonItem>
@@ -207,7 +207,7 @@ const ForgotReset: React.FC = () => {
           <IonRow>
             <IonCol className="nobo-center" size="11">
               <IonButton
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   resetPassword();
                 }}

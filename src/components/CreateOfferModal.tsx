@@ -22,97 +22,95 @@ export interface CreateOfferModalProps {
 
 export type Ref = HTMLIonModalElement;
 
-const CreateOfferModal = forwardRef<Ref, CreateOfferModalProps>(
-  ({ onClose, productId }, ref) => {
-    const offerService = new ProductService();
-    const [offer, setOffer] = useState<any>('');
-    const history = useHistory();
+const CreateOfferModal = forwardRef<Ref, CreateOfferModalProps>(({ onClose, productId }, ref) => {
+  const offerService = new ProductService();
+  const [offer, setOffer] = useState<any>('');
+  const history = useHistory();
 
-    useIonViewDidEnter(() => {
-      reset();
-    });
+  useIonViewDidEnter(() => {
+    reset();
+  });
 
-    useEffect(() => {
-      reset();
-    }, []);
+  useEffect(() => {
+    reset();
+  }, []);
 
-    const submitOffer = () => {
-      offerService
-        .createBuyOffer(productId, offer)
-        .then((res) => {
-          if (res) {
-            console.log('res', res);
-            onClose();
-            history.push(`/offer-submitted/${productId}`, {
-              offer: offer,
-            });
-          }
-        })
-        .catch((err) => {
-          console.log('err', err);
-        });
-    };
+  const submitOffer = () => {
+    offerService
+      .createBuyOffer(productId, offer)
+      .then(res => {
+        if (res) {
+          console.log('res', res);
+          onClose();
+          history.push(`/offer-submitted/${productId}`, {
+            offer: offer,
+          });
+        }
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
+  };
 
-    function reset() {
-      setOffer('');
-    }
+  function reset() {
+    setOffer('');
+  }
 
-    return (
-      <IonModal
-        className="create-offer-container"
-        ref={ref}
-        backdropDismiss={true}
-        swipeToClose={true}
-      >
-        <IonHeader className="offer-header">
-          <IonToolbar className="offer-header-toolbar">
-            <IonGrid>
-              <IonRow>
-                <IonCol className="send-offer-title" size="12">
-                  SEND AN OFFER
-                </IonCol>
-              </IonRow>
-              <IonRow class="ion-justify-content-center">
-                <IonCol className="competitive-offer-prompt" size="10">
-                  <div>Make sure you send a competitive offer.</div>
-                </IonCol>
-              </IonRow>
-              <IonRow class="ion-justify-content-center">
-                <IonCol className="offer-input-left-padding" size="7">
-                  <Input
-                    className="offer-input"
-                    value={offer}
-                    placeholder="__.00"
-                    onChange={(val) => setOffer(val)}
-                  />
-                </IonCol>
-              </IonRow>
-              <IonRow class="ion-justify-content-center">
-                <IonCol className="card-charged-warning" size="10">
-                  <div>IF YOUR OFFER IS ACCEPTED YOUR CARD WILL BE CHARGED</div>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent className="offer-content" scrollY={false}>
+  return (
+    <IonModal
+      className="create-offer-container"
+      ref={ref}
+      backdropDismiss={true}
+      swipeToClose={true}
+    >
+      <IonHeader className="offer-header">
+        <IonToolbar className="offer-header-toolbar">
           <IonGrid>
-            <IonRow className="buttons">
-              <IonCol>
-                <Button
-                  label="SUBMIT"
-                  large={true}
-                  onClick={() => {
-                    submitOffer();
-                  }}
+            <IonRow>
+              <IonCol className="send-offer-title" size="12">
+                SEND AN OFFER
+              </IonCol>
+            </IonRow>
+            <IonRow class="ion-justify-content-center">
+              <IonCol className="competitive-offer-prompt" size="10">
+                <div>Make sure you send a competitive offer.</div>
+              </IonCol>
+            </IonRow>
+            <IonRow class="ion-justify-content-center">
+              <IonCol className="offer-input-left-padding" size="7">
+                <Input
+                  className="offer-input"
+                  value={offer}
+                  placeholder="__.00"
+                  onChange={val => setOffer(val)}
                 />
               </IonCol>
             </IonRow>
+            <IonRow class="ion-justify-content-center">
+              <IonCol className="card-charged-warning" size="10">
+                <div>IF YOUR OFFER IS ACCEPTED YOUR CARD WILL BE CHARGED</div>
+              </IonCol>
+            </IonRow>
           </IonGrid>
-        </IonContent>
-      </IonModal>
-    );
-  }
-);
+        </IonToolbar>
+      </IonHeader>
+      <IonContent className="offer-content" scrollY={false}>
+        <IonGrid>
+          <IonRow className="buttons">
+            <IonCol>
+              <Button
+                label="SUBMIT"
+                large={true}
+                onClick={() => {
+                  submitOffer();
+                }}
+              />
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </IonContent>
+    </IonModal>
+  );
+});
 
 export default CreateOfferModal;

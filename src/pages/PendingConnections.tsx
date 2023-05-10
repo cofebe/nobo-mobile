@@ -34,7 +34,8 @@ const PendingConnections: React.FC = () => {
   });
 
   function loadPendingConnections() {
-    connectionService.getPendingConnections()
+    connectionService
+      .getPendingConnections()
       .then((res: any) => res.json())
       .then((data: any) => {
         data = sortConnections(data);
@@ -45,24 +46,22 @@ const PendingConnections: React.FC = () => {
   function rejectConnection(conn: ConnectionItem) {
     console.log('rejectConnection', conn);
 
-    connectionService.rejectConnection(conn.id)
-      .then(() => {
-        loadPendingConnections();
-      });
+    connectionService.rejectConnection(conn.id).then(() => {
+      loadPendingConnections();
+    });
   }
 
   function acceptConnection(conn: ConnectionItem) {
     console.log('acceptConnection', conn);
 
-    connectionService.acceptConnection(conn.id)
-      .then(() => {
-        loadPendingConnections();
-      });
+    connectionService.acceptConnection(conn.id).then(() => {
+      loadPendingConnections();
+    });
   }
 
   function sortConnections(connections: ConnectionItem[], val?: string) {
     function getSortValue(obj: ConnectionItem) {
-      switch(val) {
+      switch (val) {
         case 'Name':
           return `${obj.first_name} ${obj.last_name}`;
         case 'School':
@@ -79,11 +78,11 @@ const PendingConnections: React.FC = () => {
     let lead = 1;
     if (val) {
       if (connectionsSort[0] === val) {
-        lead = (connectionsSort[1] === 'asc' ? -1 : 1);
+        lead = connectionsSort[1] === 'asc' ? -1 : 1;
       }
     } else {
       val = connectionsSort[0];
-      lead = (connectionsSort[1] === 'asc' ? 1 : -1);
+      lead = connectionsSort[1] === 'asc' ? 1 : -1;
     }
 
     const conns = [...connections];
@@ -98,27 +97,25 @@ const PendingConnections: React.FC = () => {
         return 0;
       }
     });
-    setConnectionsSort([val, (lead === 1 ? 'asc' : 'desc')]);
+    setConnectionsSort([val, lead === 1 ? 'asc' : 'desc']);
     return conns;
   }
-
 
   return (
     <IonPage className="nobo-page">
       <IonHeader>
         <IonToolbar
           style={{
-            padding: "40px 10px 10px 10px",
+            padding: '40px 10px 10px 10px',
           }}
         >
-          <IonButtons slot="start"
-              onClick={() => {
-                history.goBack()
-              }}>
-            <IonIcon
-              slot="icon-only"
-              icon={chevronBackOutline}
-            />
+          <IonButtons
+            slot="start"
+            onClick={() => {
+              history.goBack();
+            }}
+          >
+            <IonIcon slot="icon-only" icon={chevronBackOutline} />
             <IonText>Connections</IonText>
           </IonButtons>
         </IonToolbar>
@@ -127,20 +124,40 @@ const PendingConnections: React.FC = () => {
         <IonRow className="connections-search-container">
           <IonCol size="12" className="connections-search-col">
             <IonIcon icon={searchOutline} />
-            <IonInput className="connections-search" placeholder="Search" value={filter} onIonChange={(e: any) => setFilter(e.target.value?.toLowerCase())} />
+            <IonInput
+              className="connections-search"
+              placeholder="Search"
+              value={filter}
+              onIonChange={(e: any) => setFilter(e.target.value?.toLowerCase())}
+            />
           </IonCol>
           <IonCol size="2" className="connections-sort" style={{ display: 'none' }}>
-            <SortWidget types={["Name", "School"]} asc={true} onSort={(val) => {
-              setPendingConnections(sortConnections(pendingConnections, val));
-            }}/>
+            <SortWidget
+              types={['Name', 'School']}
+              asc={true}
+              onSort={val => {
+                setPendingConnections(sortConnections(pendingConnections, val));
+              }}
+            />
           </IonCol>
         </IonRow>
         <IonRow className="connections-container">
           <IonCol>
             {pendingConnections
-              .filter(c => !filter || (c.first_name + ' ' + c.last_name).toLowerCase().includes(filter) || c.school.toLowerCase().includes(filter))
-              .map(c => <PendingConnectionListItem key={c.user_id + 1} connection={c} onDelete={(conn) => rejectConnection(conn)} onAccept={(conn) => acceptConnection(conn)} />)
-            }
+              .filter(
+                c =>
+                  !filter ||
+                  (c.first_name + ' ' + c.last_name).toLowerCase().includes(filter) ||
+                  c.school.toLowerCase().includes(filter)
+              )
+              .map(c => (
+                <PendingConnectionListItem
+                  key={c.user_id + 1}
+                  connection={c}
+                  onDelete={conn => rejectConnection(conn)}
+                  onAccept={conn => acceptConnection(conn)}
+                />
+              ))}
           </IonCol>
         </IonRow>
       </IonContent>

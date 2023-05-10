@@ -11,16 +11,12 @@ const Logo: React.FC = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        overflowY: "auto",
-        paddingBottom: "3rem"
+        overflowY: 'auto',
+        paddingBottom: '3rem',
       }}
     >
       <a href="mailto:info@noboplus.com">
-        <img
-          src="/assets/images/nobo_logo_large.png"
-          alt="URP+"
-          style={{ width: '300px' }}
-        />
+        <img src="/assets/images/nobo_logo_large.png" alt="URP+" style={{ width: '300px' }} />
       </a>
       <div
         style={{
@@ -31,14 +27,12 @@ const Logo: React.FC = () => {
           textDecoration: 'none',
         }}
       >
-        <p style={{marginTop: 0}}>
-          URP+, Ultimate Recruiting Profile is your sports-centered professional
-          social network. Athletes of all ages can create an all encompassing
-          recruiting focused profile to network and connect amongst coaches and
-          trainers who are also able to create profiles! Sign up, promote
-          yourself and join us to Discover Who's Next! Download our app today,
-          sign up and create a profile, and start building up the future of
-          sports networking!
+        <p style={{ marginTop: 0 }}>
+          URP+, Ultimate Recruiting Profile is your sports-centered professional social network.
+          Athletes of all ages can create an all encompassing recruiting focused profile to network
+          and connect amongst coaches and trainers who are also able to create profiles! Sign up,
+          promote yourself and join us to Discover Who's Next! Download our app today, sign up and
+          create a profile, and start building up the future of sports networking!
         </p>
       </div>
       <div

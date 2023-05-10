@@ -1,17 +1,17 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer } from 'react';
 
 let context: any = {};
 let AppContext = createContext(context);
 
 const initialState = {
-  count: 1
-}
+  count: 1,
+};
 
 let reducer = (state: any, action: any) => {
-	console.log("Updating")
-  switch(action.type) {
-    case "setCount": {
-      return { ...state, count: action.user }
+  console.log('Updating');
+  switch (action.type) {
+    case 'setCount': {
+      return { ...state, count: action.user };
     }
   }
   return state;
@@ -20,15 +20,12 @@ let reducer = (state: any, action: any) => {
 function AppContextProvider(props: any) {
   const fullInitialState = {
     ...initialState,
-  }
+  };
 
   let [state, dispatch] = useReducer(reducer, fullInitialState);
   let value = { state, dispatch };
 
-
-  return (
-    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
-  );
+  return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>;
 }
 
 let AppContextConsumer = AppContext.Consumer;

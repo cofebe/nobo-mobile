@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from 'react-router-dom';
 import {
   IonContent,
   IonPage,
@@ -15,14 +15,9 @@ import {
 } from '@ionic/react';
 import { caretUpOutline, caretDownOutline } from 'ionicons/icons';
 import './Chat.scss';
-import { UserService } from "../services/UserService";
-import { AuthService } from "../services/AuthService";
-import {
-  Message,
-  MessageUser,
-  Conversation,
-  Product,
-} from '../models';
+import { UserService } from '../services/UserService';
+import { AuthService } from '../services/AuthService';
+import { Message, MessageUser, Conversation, Product } from '../models';
 import { getImageUrl, formatPrice, getMinTradeFee, getMaxTradeFee } from '../utils';
 import format from 'date-fns/format';
 import formatDistance from 'date-fns/formatDistance';
@@ -75,9 +70,7 @@ const Chat: React.FC = () => {
           setShowNext(convo.product.images.length > 2);
           setImageIndex(0);
           setImage1(convo.product.images[0].url);
-          setImage2(
-            convo.product.images.length > 1 ? convo.product.images[1].url : ''
-         );
+          setImage2(convo.product.images.length > 1 ? convo.product.images[1].url : '');
         }
       }
       scrollToBottom();
@@ -114,7 +107,7 @@ const Chat: React.FC = () => {
 
       if (msg.previousCreatedAt) {
         const diff = Math.abs(msg.date.getTime() - msg.previousCreatedAt.getTime());
-        msg.newSection = (diff > NEW_SECTION_PIVOT_SECONDS * 1000);
+        msg.newSection = diff > NEW_SECTION_PIVOT_SECONDS * 1000;
       } else {
         msg.newSection = true;
       }
@@ -175,7 +168,7 @@ const Chat: React.FC = () => {
 
   function fixMessages(msgs: Message[]) {
     for (const msg of msgs) {
-      if (typeof(msg.from) === 'string') {
+      if (typeof msg.from === 'string') {
         const from: MessageUser = (msg.from === me?._id ? me : them)!;
         msg.from = from;
       }
@@ -206,7 +199,8 @@ const Chat: React.FC = () => {
 
     let dt = null;
     if (typeof val === 'number') {
-      if (val > 2082715199) { // 12/31/2035; just a way to determine if it's milliseconds or seconds
+      if (val > 2082715199) {
+        // 12/31/2035; just a way to determine if it's milliseconds or seconds
         dt = new Date(val);
       } else {
         dt = new Date(val * 1000);
@@ -261,26 +255,27 @@ const Chat: React.FC = () => {
     return classNames.join(' ');
   }
 
-  function getName(user: MessageUser|undefined) {
+  function getName(user: MessageUser | undefined) {
     return `${user?.firstName} ${user?.lastName}`;
   }
 
   return (
     <IonPage className="chat-page">
       <Header border={false} title="">
-        <div className="titles" onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          if (them) {
-            history.push(`/home/profile/${them._id}`);
-          }
-        }}>
+        <div
+          className="titles"
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (them) {
+              history.push(`/home/profile/${them._id}`);
+            }
+          }}
+        >
           <IonAvatar>
             <img src={them?.avatar} alt="avatar" />
           </IonAvatar>
-          <div className="title">
-            {getName(them)}
-          </div>
+          <div className="title">{getName(them)}</div>
         </div>
       </Header>
       <IonContent className="chat-page-content" scrollY={true}>
@@ -292,22 +287,23 @@ const Chat: React.FC = () => {
               </div>
             )}
             {index === 0 && product && (
-              <IonGrid className="product-details-card" onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                history.push(`/home/product/${product._id}`);
-              }}>
+              <IonGrid
+                className="product-details-card"
+                onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  history.push(`/home/product/${product._id}`);
+                }}
+              >
                 <IonRow className="product-images-row">
                   <IonCol size="3" className="product-images">
                     <div
-                      onClick={(e) => {
+                      onClick={e => {
                         e.preventDefault();
                         e.stopPropagation();
                         previousImage();
                       }}
-                      className={
-                        'scroller ' + (showPrevious ? 'enabled' : 'disabled')
-                      }
+                      className={'scroller ' + (showPrevious ? 'enabled' : 'disabled')}
                     >
                       <IonIcon icon={caretUpOutline} />
                     </div>
@@ -316,7 +312,7 @@ const Chat: React.FC = () => {
                       <div
                         style={{ backgroundImage: getImageUrl(image1) }}
                         className="img"
-                        onClick={(e) => {
+                        onClick={e => {
                           setImageSource(image1);
                         }}
                       ></div>
@@ -327,7 +323,7 @@ const Chat: React.FC = () => {
                       <div
                         style={{ backgroundImage: getImageUrl(image2) }}
                         className="img"
-                        onClick={(e) => {
+                        onClick={e => {
                           setImageSource(image2);
                         }}
                       ></div>
@@ -336,7 +332,7 @@ const Chat: React.FC = () => {
                     )}
 
                     <div
-                      onClick={(e) => {
+                      onClick={e => {
                         e.preventDefault();
                         e.stopPropagation();
                         nextImage();
@@ -362,8 +358,7 @@ const Chat: React.FC = () => {
                 <IonRow>
                   {product.action === 'trade' ? (
                     <IonCol className="product-price">
-                      <span>Est. Price</span>{' '}
-                      {formatPrice(getMinTradeFee(product.price))} -{' '}
+                      <span>Est. Price</span> {formatPrice(getMinTradeFee(product.price))} -{' '}
                       {formatPrice(getMaxTradeFee(product.price))}
                     </IonCol>
                   ) : (
@@ -379,7 +374,10 @@ const Chat: React.FC = () => {
                 <img src={msg.from.avatar} alt="avatar" />
               </IonAvatar>
               <div className="message-content">
-                <div className="text" dangerouslySetInnerHTML={{ __html: (msg.message || '').replace(/\n/g, '<br/>') }}></div>
+                <div
+                  className="text"
+                  dangerouslySetInnerHTML={{ __html: (msg.message || '').replace(/\n/g, '<br/>') }}
+                ></div>
                 {/*<div className="date">{formatDate(msg.createdAt, msg.userId === msg.previousUserId ? msg.previousCreatedAt : null)}</div>*/}
               </div>
             </div>
@@ -398,17 +396,19 @@ const Chat: React.FC = () => {
               rows={1}
               debounce={50}
               value={text}
-              onIonChange={(e) => {
+              onIonChange={e => {
                 const val = e.detail.value || '';
                 setText(val);
-                setIsEmpty(val.trim().length === 0)
-              }}>
+                setIsEmpty(val.trim().length === 0);
+              }}
+            >
               <IonButton
                 disabled={isEmpty}
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   send();
-                }}>
+                }}
+              >
                 Send
               </IonButton>
             </IonTextarea>

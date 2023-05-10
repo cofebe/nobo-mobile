@@ -79,9 +79,7 @@ const Feed: React.FC = () => {
     if (atBottomOfFeedListElem) {
       const elemBounds = atBottomOfFeedListElem.getBoundingClientRect();
       const parentBounds = e.target.getBoundingClientRect();
-      const isVisible =
-        elemBounds.top >= parentBounds.top &&
-        elemBounds.top < parentBounds.bottom;
+      const isVisible = elemBounds.top >= parentBounds.top && elemBounds.top < parentBounds.bottom;
       if (isVisible) {
         console.log('loading next page');
         loadPosts(page + 1);
@@ -112,8 +110,8 @@ const Feed: React.FC = () => {
     setIsLoading(isLoading);
     feedService
       .getFeed(user.user['user_id'], page /*, filter*/)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         console.log('Feed: ', data);
         if (page > 0) {
           setMessages((messages || []).concat(data.FeedItems));
@@ -123,10 +121,7 @@ const Feed: React.FC = () => {
 
         atBottomOfFeedListElem = document.querySelector('#atBottomOfFeedList');
 
-        if (
-          (data.FeedItems || []).length < data.page_size &&
-          atBottomOfFeedListElem
-        ) {
+        if ((data.FeedItems || []).length < data.page_size && atBottomOfFeedListElem) {
           atBottomOfFeedListElem.style.display = 'none';
         }
 
@@ -142,8 +137,8 @@ const Feed: React.FC = () => {
 
     userService
       .getProfile(user.user['user_id'])
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         console.log('Profile: ', data);
         state = data.basic_user_profile.state
           ? data.basic_user_profile.state.String.replace(/"/g, '')
@@ -170,14 +165,14 @@ const Feed: React.FC = () => {
 
         exploreService
           .search(req, 1)
-          .then((res) => {
+          .then(res => {
             if (res) {
               return res.json();
             } else {
               // showError(1)
             }
           })
-          .then((data) => {
+          .then(data => {
             console.log('here', data);
 
             data.users = data.users?.slice(0, 5);
@@ -186,11 +181,11 @@ const Feed: React.FC = () => {
 
             setProfileMessages(profileMessages);
           })
-          .catch((err) => {
+          .catch(err => {
             console.error('Error:', err);
           });
       })
-      .catch((err) => {
+      .catch(err => {
         console.error('Error:', err);
       });
   }
@@ -241,7 +236,7 @@ const Feed: React.FC = () => {
         className="home-content"
         scrollY={true}
         scrollEvents={true}
-        onIonScrollEnd={(e) => scroll(e)}
+        onIonScrollEnd={e => scroll(e)}
         fullscreen
       >
         <IonRefresher slot="fixed" onIonRefresh={refresh}>
@@ -255,10 +250,10 @@ const Feed: React.FC = () => {
                 className="nobo-list-background"
                 style={{ paddingBottom: '2em' }}
               >
-                {messages.map((m) => {
+                {messages.map(m => {
                   return (
                     <div key={m.post_id + (m.is_promoted ? 'p' : '')}>
-{/*                      <FeedListItem
+                      {/*                      <FeedListItem
                         message={m}
                         trackImpressions={m.is_promoted}
                         zoomAction={(i: number) => {
@@ -300,7 +295,7 @@ const Feed: React.FC = () => {
               <>
                 <div
                   className="no-feed-items-container"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     document.location = '/home/explore';
                   }}
@@ -308,11 +303,7 @@ const Feed: React.FC = () => {
                 >
                   <div className="no-feed-items">
                     <h2>No feed items found.</h2>
-                    <img
-                      height={60}
-                      src="assets/images/navigation/nav-explore.svg"
-                      alt="Explore"
-                    />
+                    <img height={60} src="assets/images/navigation/nav-explore.svg" alt="Explore" />
                     <div style={{ marginBottom: '8px' }} className="explore">
                       Here are some suggestions for users to follow in your area
                     </div>
@@ -323,7 +314,7 @@ const Feed: React.FC = () => {
                   {/* </IonList> */}
                   {/* </div> */}
                 </div>
-                {profileMessages.map((m) => (
+                {profileMessages.map(m => (
                   <ExploreListItem key={m.user_id} profile={m} />
                 ))}
               </>
@@ -343,7 +334,7 @@ const Feed: React.FC = () => {
 
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonIcon
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               history.push('/home/post-create');
             }}

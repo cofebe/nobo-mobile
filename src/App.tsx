@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
@@ -32,6 +33,8 @@ import ContactUs from './pages/ContactUs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
 import Settings from './pages/Settings';
+import SettingsShipping from './pages/SettingsShipping';
+import SettingsPayment from './pages/SettingsPayment';
 import ManageSubscription from './pages/ManageSubscription';
 import PrimarySport from './pages/PrimarySport';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
@@ -68,8 +71,6 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import OfferComplete from './pages/OfferComplete';
-
-
 
 
 setupIonicReact({
@@ -209,27 +210,16 @@ const App: React.FC = () => {
             <Route path="/settings" exact={true}>
               <Settings />
             </Route>
+            <Route path="/settings/shipping" exact={true}>
+              <SettingsShipping />
+            </Route>
+            <Route path="/settings/payment" exact={true}>
+              <SettingsPayment />
+            </Route>
 
             {/* URP */}
            
-            <Route path="/signup-details" exact={true}>
-              <SignUpDetails />
-            </Route>
-            <Route path="/signup" exact={true}>
-              <SignUp />
-            </Route>
-            <Route path="/experience" exact={true}>
-              <Experience />
-            </Route>
-            <Route path="/profile-picture" exact={true}>
-              <ProfilePicture />
-            </Route>
-            <Route path="/follow-people" exact={true}>
-              <FollowPeople />
-            </Route>
-            <Route path="/select-brands" exact={true}>
-              <SelectBrands />
-            </Route>
+            
             
             <Route path="/onboarding-post" exact={true}>
               <CreateFirstPost />

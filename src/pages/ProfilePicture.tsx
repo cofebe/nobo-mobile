@@ -14,14 +14,13 @@ import "./ProfilePicture.scss";
 import { Camera, CameraResultType, CameraSource, } from '@capacitor/camera';
 import Button from "../components/Button";
 import "cropperjs/dist/cropper.css";
-import { loadingStore } from "../loading-store";
 import { UserService } from "../services/UserService";
 import { Cropper } from "react-cropper";
 
 
 
 
-const ProfilePicture: React.FC = () => {
+const ProfilePicture:React.FC = () => {
   const userService = new UserService()
   const history = useHistory();
   const [photoData, setPhotoData] = useState(Object);
@@ -247,6 +246,6 @@ const ProfilePicture: React.FC = () => {
       </IonContent>
     </IonPage>
   );
-};
+}
 
 export default ProfilePicture;

@@ -32,7 +32,7 @@ const Conversations: React.FC = () => {
   });
 
   function getOtherUser(c: Conversation) {
-    return (c.recipient._id === authService.getUserId() ? c.initiator : c.recipient);
+    return c.recipient._id === authService.getUserId() ? c.initiator : c.recipient;
   }
 
   function getName(c: Conversation) {
@@ -70,12 +70,12 @@ const Conversations: React.FC = () => {
       {conversations.length > 0 ? (
         <IonContent scrollY={true} className="messaging-content">
           <IonList>
-            {conversations.map((c) => (
+            {conversations.map(c => (
               <IonItem
                 key={c._id}
                 className="messaging-item"
                 lines="none"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   history.push(`/chat/${c._id}`);
                 }}
@@ -89,20 +89,12 @@ const Conversations: React.FC = () => {
                       <div className="name-unread">
                         <div className="name">{getName(c)}</div>
                         <div className="unread">
-                          {isUnread(c) && (
-                            <div className="unread-dot"></div>
-                          )}
+                          {isUnread(c) && <div className="unread-dot"></div>}
                         </div>
                       </div>
                       <div className="text-date">
-                        <div
-                          className={'text ' + (isUnread(c) ? 'unread' : '')}
-                        >
-                          {getText(c)}
-                        </div>
-                        <div className="date">
-                          {formatDate(c)}
-                        </div>
+                        <div className={'text ' + (isUnread(c) ? 'unread' : '')}>{getText(c)}</div>
+                        <div className="date">{formatDate(c)}</div>
                       </div>
                     </div>
                   </IonCol>

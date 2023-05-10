@@ -22,12 +22,7 @@ import OfferTradeModal from '../components/OfferTradeModal';
 import TradeHelpModal from '../components/TradeHelpModal';
 import SendMessageModal from '../components/SendMessageModal';
 import Header from '../components/Header';
-import {
-  formatPrice,
-  getImageUrl,
-  getMinTradeFee,
-  getMaxTradeFee,
-} from '../utils';
+import { formatPrice, getImageUrl, getMinTradeFee, getMaxTradeFee } from '../utils';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import CreateOfferModal from '../components/CreateOfferModal';
 import { calculateEstPrice } from '../helpers/tradeFees';
@@ -52,14 +47,11 @@ const ProductDetail: React.FC = () => {
   const [showNext, setShowNext] = useState<boolean>(false);
   const [isSneaker, setIsSneaker] = useState<boolean>(false);
   const [isMine, setIsMine] = useState<boolean>(false);
-  const [cart, setCart] = useState<ShoppingCartState>(
-    shoppingCartStore.initialState
-  );
+  const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
   const [sneakersSteps, setSneakersSteps] = useState<number>(0);
   const [sneakersIsNew, setSneakersIsNew] = useState<boolean>(true);
   const [selectedSneakers, setSelectedSneakers] = useState<Product[]>();
-  const [selectedSneakerDetails, setSelectedSneakerDetails] =
-    useState<Product>();
+  const [selectedSneakerDetails, setSelectedSneakerDetails] = useState<Product>();
   const [presentDeleteActionSheet] = useIonActionSheet();
 
   const tooltipModal = useRef<HTMLIonModalElement>(null);
@@ -85,7 +77,7 @@ const ProductDetail: React.FC = () => {
     useState<sneaekerSizeChart[]>(mensSneakerSizesList);
 
   const activeTradeSneakerSizes = (product: Product) => {
-    mensSneakerSizesList.forEach((size) => {
+    mensSneakerSizesList.forEach(size => {
       if (product.trade && Object.keys(product.trade).includes(size.size)) {
         size.active = true;
         size.sneakerIds = product.trade[size.size];
@@ -96,20 +88,14 @@ const ProductDetail: React.FC = () => {
 
   const activeSneakerSizes = (product: Product, isNew: boolean) => {
     isNew
-      ? mensSneakerSizesList.forEach((size) => {
-          if (
-            product.shop &&
-            Object.keys(product.shop?.new).includes(size.size)
-          ) {
+      ? mensSneakerSizesList.forEach(size => {
+          if (product.shop && Object.keys(product.shop?.new).includes(size.size)) {
             size.active = true;
             size.sneakerIds = product.shop?.new[size.size];
           }
         })
-      : mensSneakerSizesList.forEach((size) => {
-          if (
-            product.shop &&
-            Object.keys(product.shop?.used).includes(size.size)
-          ) {
+      : mensSneakerSizesList.forEach(size => {
+          if (product.shop && Object.keys(product.shop?.used).includes(size.size)) {
             size.active = true;
             size.sneakerIds = product.shop?.used[size.size];
           }
@@ -121,12 +107,12 @@ const ProductDetail: React.FC = () => {
     console.log('showSelectedSneakerSizes', sneakerIds);
     productService
       .getFilteredProducts(sneakerIds)
-      .then((products) => {
+      .then(products => {
         console.log('getFilteredProducts', products);
         setSneakersSteps(2);
         setSelectedSneakers(products.docs);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log('Error: ', error);
       });
   };
@@ -141,36 +127,32 @@ const ProductDetail: React.FC = () => {
     productId = params.id;
     setProductId(productId);
 
-    productService
-      .getProduct(productId, isSneakerUrl)
-      .then((data: ProductResponse) => {
-        console.log('getProduct:', data.product);
-        setProduct(data.product);
-        activeTradeSneakerSizes(data.product);
-        setIsTrade(data.product.action === 'trade' || isTradeUrl);
-        setImageSource(data.product.images[0].url);
-        !isSneakerUrl && setPrice(data.product.price);
+    productService.getProduct(productId, isSneakerUrl).then((data: ProductResponse) => {
+      console.log('getProduct:', data.product);
+      setProduct(data.product);
+      activeTradeSneakerSizes(data.product);
+      setIsTrade(data.product.action === 'trade' || isTradeUrl);
+      setImageSource(data.product.images[0].url);
+      !isSneakerUrl && setPrice(data.product.price);
 
-        setShowPrevious(false);
-        setShowNext(data.product.images.length > 2);
-        setImageIndex(0);
-        setImage1(data.product.images[0].url);
-        setImage2(
-          data.product.images.length > 1 ? data.product.images[1].url : ''
-        );
+      setShowPrevious(false);
+      setShowNext(data.product.images.length > 2);
+      setImageIndex(0);
+      setImage1(data.product.images[0].url);
+      setImage2(data.product.images.length > 1 ? data.product.images[1].url : '');
 
-        if (data.product?.vendor?.reviews) {
-          let vendorRating = 0;
-          for (const review of data.product.vendor.reviews) {
-            vendorRating += review.ratingNum;
-          }
-          setRating(vendorRating / data.product.vendor.reviews.length);
-        } else {
-          setRating(0);
+      if (data.product?.vendor?.reviews) {
+        let vendorRating = 0;
+        for (const review of data.product.vendor.reviews) {
+          vendorRating += review.ratingNum;
         }
+        setRating(vendorRating / data.product.vendor.reviews.length);
+      } else {
+        setRating(0);
+      }
 
-        setIsMine(authService.getUserId() === data.product.vendor._id);
-      });
+      setIsMine(authService.getUserId() === data.product.vendor._id);
+    });
 
     productService.getCart().then((products: Product[]) => {
       shoppingCartStore.setProducts(products);
@@ -216,31 +198,25 @@ const ProductDetail: React.FC = () => {
       return defaultValue;
     }
 
-    const attr = product.attributes.find((a) => a.id === key);
+    const attr = product.attributes.find(a => a.id === key);
     return attr ? (attr.value as string) : defaultValue;
   }
 
-  function getSneakerAttributeValue(
-    key: string,
-    defaultValue: string = ''
-  ): string {
+  function getSneakerAttributeValue(key: string, defaultValue: string = ''): string {
     if (!selectedSneakerDetails) {
       return defaultValue;
     }
 
-    const attr = selectedSneakerDetails.attributes.find((a) => a.id === key);
+    const attr = selectedSneakerDetails.attributes.find(a => a.id === key);
     return attr ? (attr.value as string) : defaultValue;
   }
 
-  function getAttributeValues(
-    key: string,
-    defaultValue: string[] = []
-  ): string[] {
+  function getAttributeValues(key: string, defaultValue: string[] = []): string[] {
     if (!product) {
       return defaultValue;
     }
 
-    const attr = product.attributes.find((a) => a.id === key);
+    const attr = product.attributes.find(a => a.id === key);
     return attr ? (attr.value as string[]) : defaultValue;
   }
 
@@ -302,7 +278,9 @@ const ProductDetail: React.FC = () => {
           {
             text: 'Cancel',
             data: {
-              action: () => { /* noop */ },
+              action: () => {
+                /* noop */
+              },
             },
           },
         ],
@@ -383,14 +361,12 @@ const ProductDetail: React.FC = () => {
             <IonRow className="product-images-row">
               <IonCol size="3" className="product-images">
                 <div
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     e.stopPropagation();
                     previousImage();
                   }}
-                  className={
-                    'scroller ' + (showPrevious ? 'enabled' : 'disabled')
-                  }
+                  className={'scroller ' + (showPrevious ? 'enabled' : 'disabled')}
                 >
                   <IonIcon icon={caretUpOutline} />
                 </div>
@@ -399,7 +375,7 @@ const ProductDetail: React.FC = () => {
                   <div
                     style={{ backgroundImage: getImageUrl(image1) }}
                     className="img"
-                    onClick={(e) => {
+                    onClick={e => {
                       setImageSource(image1);
                     }}
                   ></div>
@@ -410,7 +386,7 @@ const ProductDetail: React.FC = () => {
                   <div
                     style={{ backgroundImage: getImageUrl(image2) }}
                     className="img"
-                    onClick={(e) => {
+                    onClick={e => {
                       setImageSource(image2);
                     }}
                   ></div>
@@ -419,7 +395,7 @@ const ProductDetail: React.FC = () => {
                 )}
 
                 <div
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     e.stopPropagation();
                     nextImage();
@@ -430,10 +406,7 @@ const ProductDetail: React.FC = () => {
                 </div>
               </IonCol>
               <IonCol size="6" className="product-large">
-                <div
-                  style={{ backgroundImage: getImageUrl(imageSource) }}
-                  className="img"
-                ></div>
+                <div style={{ backgroundImage: getImageUrl(imageSource) }} className="img"></div>
               </IonCol>
             </IonRow>
             <IonRow>
@@ -468,8 +441,8 @@ const ProductDetail: React.FC = () => {
               <>
                 <IonRow>
                   <IonCol size="10" offset="1" className="product-price">
-                    <span>Est. Price</span> {formatPrice(getMinTradeFee(price))}{' '}
-                    - {formatPrice(getMaxTradeFee(price))}
+                    <span>Est. Price</span> {formatPrice(getMinTradeFee(price))} -{' '}
+                    {formatPrice(getMaxTradeFee(price))}
                   </IonCol>
                 </IonRow>
 
@@ -503,30 +476,26 @@ const ProductDetail: React.FC = () => {
             ) : (
               ''
             )}
-            {getAttributeValue('material') &&
-              isSneaker &&
-              sneakersSteps === 0 && (
-                <IonRow className="product-info">
-                  <IonCol size="4" className="label">
-                    Material
-                  </IonCol>
-                  <IonCol size="8" className="value">
-                    {getAttributeValue('material')}
-                  </IonCol>
-                </IonRow>
-              )}
-            {getAttributeValue('colorway') &&
-              isSneaker &&
-              sneakersSteps === 0 && (
-                <IonRow className="product-info">
-                  <IonCol size="4" className="label">
-                    Colorway
-                  </IonCol>
-                  <IonCol size="8" className="value">
-                    {getAttributeValue('colorway')}
-                  </IonCol>
-                </IonRow>
-              )}
+            {getAttributeValue('material') && isSneaker && sneakersSteps === 0 && (
+              <IonRow className="product-info">
+                <IonCol size="4" className="label">
+                  Material
+                </IonCol>
+                <IonCol size="8" className="value">
+                  {getAttributeValue('material')}
+                </IonCol>
+              </IonRow>
+            )}
+            {getAttributeValue('colorway') && isSneaker && sneakersSteps === 0 && (
+              <IonRow className="product-info">
+                <IonCol size="4" className="label">
+                  Colorway
+                </IonCol>
+                <IonCol size="8" className="value">
+                  {getAttributeValue('colorway')}
+                </IonCol>
+              </IonRow>
+            )}
             {getAttributeValue('size') ? (
               <IonRow className="product-info">
                 <IonCol size="4" className="label">
@@ -548,42 +517,36 @@ const ProductDetail: React.FC = () => {
               </IonRow>
             )}
 
-            {getSneakerAttributeValue('condition') &&
-              isSneaker &&
-              sneakersSteps === 3 && (
-                <IonRow className="product-info">
-                  <IonCol size="4" className="label">
-                    Condition
-                  </IonCol>
-                  <IonCol size="8" className="value">
-                    {getSneakerAttributeValue('condition')}
-                  </IonCol>
-                </IonRow>
-              )}
-            {getAttributeValue('material') &&
-              isSneaker &&
-              sneakersSteps === 3 && (
-                <IonRow className="product-info">
-                  <IonCol size="4" className="label">
-                    Material
-                  </IonCol>
-                  <IonCol size="8" className="value">
-                    {getAttributeValue('material')}
-                  </IonCol>
-                </IonRow>
-              )}
-            {getSneakerAttributeValue('color') &&
-              isSneaker &&
-              sneakersSteps === 3 && (
-                <IonRow className="product-info">
-                  <IonCol size="4" className="label">
-                    Colorway
-                  </IonCol>
-                  <IonCol size="8" className="value">
-                    {getSneakerAttributeValue('color')}
-                  </IonCol>
-                </IonRow>
-              )}
+            {getSneakerAttributeValue('condition') && isSneaker && sneakersSteps === 3 && (
+              <IonRow className="product-info">
+                <IonCol size="4" className="label">
+                  Condition
+                </IonCol>
+                <IonCol size="8" className="value">
+                  {getSneakerAttributeValue('condition')}
+                </IonCol>
+              </IonRow>
+            )}
+            {getAttributeValue('material') && isSneaker && sneakersSteps === 3 && (
+              <IonRow className="product-info">
+                <IonCol size="4" className="label">
+                  Material
+                </IonCol>
+                <IonCol size="8" className="value">
+                  {getAttributeValue('material')}
+                </IonCol>
+              </IonRow>
+            )}
+            {getSneakerAttributeValue('color') && isSneaker && sneakersSteps === 3 && (
+              <IonRow className="product-info">
+                <IonCol size="4" className="label">
+                  Colorway
+                </IonCol>
+                <IonCol size="8" className="value">
+                  {getSneakerAttributeValue('color')}
+                </IonCol>
+              </IonRow>
+            )}
             {!isSneaker && sneakersSteps === 0 && (
               <IonRow className="product-info">
                 <IonCol size="4" className="label">
@@ -599,7 +562,7 @@ const ProductDetail: React.FC = () => {
                 <IonCol size="6" className="button-container left">
                   <Button
                     label="Buy New"
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       e.stopPropagation();
                       setSneakersSteps(1);
@@ -611,7 +574,7 @@ const ProductDetail: React.FC = () => {
                 <IonCol size="6" className="button-container right">
                   <Button
                     label="Buy Used"
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       e.stopPropagation();
                       setSneakersSteps(1);
@@ -628,7 +591,7 @@ const ProductDetail: React.FC = () => {
                   <IonCol size="6" className="button-container left">
                     <Button
                       label="Offer"
-                      onClick={(e) => {
+                      onClick={e => {
                         e.preventDefault();
                         e.stopPropagation();
                         offer();
@@ -636,10 +599,10 @@ const ProductDetail: React.FC = () => {
                     />
                   </IonCol>
                   <IonCol size="6" className="button-container right">
-                    {cart.products.find((p) => p._id === product._id) ? (
+                    {cart.products.find(p => p._id === product._id) ? (
                       <Button
                         label="View Cart"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           e.stopPropagation();
                           showCart();
@@ -648,7 +611,7 @@ const ProductDetail: React.FC = () => {
                     ) : (
                       <Button
                         label="Add to Cart"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           e.stopPropagation();
                           addToCart();
@@ -661,7 +624,7 @@ const ProductDetail: React.FC = () => {
                   <IonCol size="12" className="button-container left right">
                     <Button
                       label="Message"
-                      onClick={(e) => {
+                      onClick={e => {
                         e.preventDefault();
                         e.stopPropagation();
                         message();
@@ -676,7 +639,7 @@ const ProductDetail: React.FC = () => {
                 <IonCol size="6" className="button-container left">
                   <Button
                     label="Message"
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       e.stopPropagation();
                       message();
@@ -686,7 +649,7 @@ const ProductDetail: React.FC = () => {
                 <IonCol size="6" className="button-container right">
                   <Button
                     label="Offer Trade"
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       e.stopPropagation();
                       offerTrade();
@@ -700,7 +663,7 @@ const ProductDetail: React.FC = () => {
                 <IonCol size="6" className="button-container left">
                   <Button
                     label="Remove Item"
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       e.stopPropagation();
                       removeItem();
@@ -710,7 +673,7 @@ const ProductDetail: React.FC = () => {
                 <IonCol size="6" className="button-container right">
                   <Button
                     label="Edit Item"
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       e.stopPropagation();
                       editItem();
@@ -724,17 +687,14 @@ const ProductDetail: React.FC = () => {
                 {isSneaker &&
                   sneakersSteps === 1 &&
                   !sneakersIsNew &&
-                  mensSneakerSizes.map((sneaker) => {
+                  mensSneakerSizes.map(sneaker => {
                     return (
                       <IonCol key={sneaker.size} size="2">
                         <div
-                          className={`sneaker-size-card ${
-                            sneaker.active && 'sneaker-card-active'
-                          }`}
+                          className={`sneaker-size-card ${sneaker.active && 'sneaker-card-active'}`}
                           onClick={
                             sneaker.active
-                              ? () =>
-                                  showSelectedSneakerSizes(sneaker.sneakerIds)
+                              ? () => showSelectedSneakerSizes(sneaker.sneakerIds)
                               : () => {}
                           }
                         >
@@ -750,17 +710,14 @@ const ProductDetail: React.FC = () => {
                 {isSneaker &&
                   sneakersSteps === 1 &&
                   sneakersIsNew &&
-                  mensSneakerSizes.map((sneaker) => {
+                  mensSneakerSizes.map(sneaker => {
                     return (
                       <IonCol key={sneaker.size} size="2">
                         <div
-                          className={`sneaker-size-card ${
-                            sneaker.active && 'sneaker-card-active'
-                          }`}
+                          className={`sneaker-size-card ${sneaker.active && 'sneaker-card-active'}`}
                           onClick={
                             sneaker.active
-                              ? () =>
-                                  showSelectedSneakerSizes(sneaker.sneakerIds)
+                              ? () => showSelectedSneakerSizes(sneaker.sneakerIds)
                               : () => {}
                           }
                         >
@@ -804,23 +761,17 @@ const ProductDetail: React.FC = () => {
                   return (
                     <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
                       <IonCol size="4">
-                        <div className="selected-sneakers-price">
-                          {formatPrice(sneaker.price)}
-                        </div>
-                        <div className="selected-sneakers-tags">
-                          {sneaker.attributes[6].value}
-                        </div>
+                        <div className="selected-sneakers-price">{formatPrice(sneaker.price)}</div>
+                        <div className="selected-sneakers-tags">{sneaker.attributes[6].value}</div>
                       </IonCol>
                       <IonCol size="4">
                         <div>@{sneaker.vendor.displayName}</div>
                       </IonCol>
                       <IonCol size="4">
-                        {cart.products.find(
-                          (p) => p._id === selectedSneakers[index]._id
-                        ) ? (
+                        {cart.products.find(p => p._id === selectedSneakers[index]._id) ? (
                           <Button
                             label="View Cart"
-                            onClick={(e) => {
+                            onClick={e => {
                               e.preventDefault();
                               e.stopPropagation();
                               showCart();
@@ -829,7 +780,7 @@ const ProductDetail: React.FC = () => {
                         ) : (
                           <Button
                             label="Add to Cart"
-                            onClick={(e) => {
+                            onClick={e => {
                               e.preventDefault();
                               e.stopPropagation();
                               addSneakerToCart(selectedSneakers[index]);
@@ -857,23 +808,17 @@ const ProductDetail: React.FC = () => {
                   return (
                     <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
                       <IonCol size="4">
-                        <div className="selected-sneakers-price">
-                          {formatPrice(sneaker.price)}
-                        </div>
-                        <div className="selected-sneakers-tags">
-                          {sneaker.attributes[6].value}
-                        </div>
+                        <div className="selected-sneakers-price">{formatPrice(sneaker.price)}</div>
+                        <div className="selected-sneakers-tags">{sneaker.attributes[6].value}</div>
                       </IonCol>
                       <IonCol size="4">
                         <div>@{sneaker.vendor.displayName}</div>
                       </IonCol>
                       <IonCol size="4">
-                        {cart.products.find(
-                          (p) => p._id === selectedSneakers[index]._id
-                        ) ? (
+                        {cart.products.find(p => p._id === selectedSneakers[index]._id) ? (
                           <Button
                             label="View Cart"
-                            onClick={(e) => {
+                            onClick={e => {
                               e.preventDefault();
                               e.stopPropagation();
                               showCart();
@@ -882,7 +827,7 @@ const ProductDetail: React.FC = () => {
                         ) : (
                           <Button
                             label="Add to Cart"
-                            onClick={(e) => {
+                            onClick={e => {
                               e.preventDefault();
                               e.stopPropagation();
                               addSneakerToCart(selectedSneakers[index]);
@@ -911,7 +856,7 @@ const ProductDetail: React.FC = () => {
                     <IonCol size="6" className="button-container left">
                       <Button
                         label="Message"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           e.stopPropagation();
                           message();
@@ -921,7 +866,7 @@ const ProductDetail: React.FC = () => {
                     <IonCol size="6" className="button-container right">
                       <Button
                         label="Offer Trade"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           e.stopPropagation();
                           offerTrade();
@@ -934,7 +879,7 @@ const ProductDetail: React.FC = () => {
                     <IonCol size="6" className="button-container left right">
                       <Button
                         label="Message"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           e.stopPropagation();
                           message();
@@ -942,12 +887,10 @@ const ProductDetail: React.FC = () => {
                       />
                     </IonCol>
                     <IonCol size="6" className="button-container right">
-                      {cart.products.find(
-                        (p) => p._id === selectedSneakerDetails._id
-                      ) ? (
+                      {cart.products.find(p => p._id === selectedSneakerDetails._id) ? (
                         <Button
                           label="View Cart"
-                          onClick={(e) => {
+                          onClick={e => {
                             e.preventDefault();
                             e.stopPropagation();
                             showCart();
@@ -956,7 +899,7 @@ const ProductDetail: React.FC = () => {
                       ) : (
                         <Button
                           label="Add to Cart"
-                          onClick={(e) => {
+                          onClick={e => {
                             e.preventDefault();
                             e.stopPropagation();
                             addSneakerToCart(selectedSneakerDetails);
@@ -972,7 +915,7 @@ const ProductDetail: React.FC = () => {
           {isTrade && (
             <IonGrid
               className="trade-tooltip"
-              onClick={(e) => {
+              onClick={e => {
                 e.preventDefault();
                 e.stopPropagation();
                 tooltipModal.current?.present();
@@ -980,10 +923,7 @@ const ProductDetail: React.FC = () => {
             >
               <IonRow>
                 <IonCol>
-                  <img
-                    src="assets/images/question-mark-tooltip.svg"
-                    alt="how do trades work?"
-                  />
+                  <img src="assets/images/question-mark-tooltip.svg" alt="how do trades work?" />
                   <div>How do trades work?</div>
                 </IonCol>
               </IonRow>
@@ -1007,7 +947,7 @@ const ProductDetail: React.FC = () => {
                 </IonRow>
                 <IonRow
                   className="owner"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     e.stopPropagation();
                     console.log('go to profile', product.vendor._id);
@@ -1023,9 +963,7 @@ const ProductDetail: React.FC = () => {
                     ></div>
                   </IonCol>
                   <IonCol size="11">
-                    <div className="username">
-                      @{product.vendor.displayName}
-                    </div>
+                    <div className="username">@{product.vendor.displayName}</div>
                     <div className="rating">
                       <svg
                         width="91"
@@ -1037,41 +975,31 @@ const ProductDetail: React.FC = () => {
                         <g>
                           <path
                             d="M5.85224 0.382694L4.37846 3.22723L1.08106 3.68484C0.489741 3.76648 0.252761 4.46043 0.681581 4.85789L3.06717 7.07078L2.50294 10.1968C2.40137 10.7618 3.02655 11.185 3.55016 10.9208L6.49998 9.4448L9.44981 10.9208C9.97342 11.1829 10.5986 10.7618 10.497 10.1968L9.9328 7.07078L12.3184 4.85789C12.7472 4.46043 12.5102 3.76648 11.9189 3.68484L8.62151 3.22723L7.14773 0.382694C6.88367 -0.124337 6.11856 -0.130782 5.85224 0.382694Z"
-                            fill={
-                              rating > 0 ? '#000' : '#ACACAC66'
-                            }
+                            fill={rating > 0 ? '#000' : '#ACACAC66'}
                           />
                         </g>
                         <g>
                           <path
                             d="M24.8522 0.382694L23.3785 3.22723L20.0811 3.68484C19.4897 3.76648 19.2528 4.46043 19.6816 4.85789L22.0672 7.07078L21.5029 10.1968C21.4014 10.7618 22.0265 11.185 22.5502 10.9208L25.5 9.4448L28.4498 10.9208C28.9734 11.1829 29.5986 10.7618 29.497 10.1968L28.9328 7.07078L31.3184 4.85789C31.7472 4.46043 31.5102 3.76648 30.9189 3.68484L27.6215 3.22723L26.1477 0.382694C25.8837 -0.124337 25.1186 -0.130782 24.8522 0.382694Z"
-                            fill={
-                              rating > 1 ? '#000' : '#ACACAC66'
-                            }
+                            fill={rating > 1 ? '#000' : '#ACACAC66'}
                           />
                         </g>
                         <g>
                           <path
                             d="M43.8522 0.382694L42.3785 3.22723L39.0811 3.68484C38.4897 3.76648 38.2528 4.46043 38.6816 4.85789L41.0672 7.07078L40.5029 10.1968C40.4014 10.7618 41.0265 11.185 41.5502 10.9208L44.5 9.4448L47.4498 10.9208C47.9734 11.1829 48.5986 10.7618 48.497 10.1968L47.9328 7.07078L50.3184 4.85789C50.7472 4.46043 50.5102 3.76648 49.9189 3.68484L46.6215 3.22723L45.1477 0.382694C44.8837 -0.124337 44.1186 -0.130782 43.8522 0.382694Z"
-                            fill={
-                              rating > 2 ? '#000' : '#ACACAC66'
-                            }
+                            fill={rating > 2 ? '#000' : '#ACACAC66'}
                           />
                         </g>
                         <g>
                           <path
                             d="M62.8522 0.382694L61.3785 3.22723L58.0811 3.68484C57.4897 3.76648 57.2528 4.46043 57.6816 4.85789L60.0672 7.07078L59.5029 10.1968C59.4014 10.7618 60.0265 11.185 60.5502 10.9208L63.5 9.4448L66.4498 10.9208C66.9734 11.1829 67.5986 10.7618 67.497 10.1968L66.9328 7.07078L69.3184 4.85789C69.7472 4.46043 69.5102 3.76648 68.9189 3.68484L65.6215 3.22723L64.1477 0.382694C63.8837 -0.124337 63.1186 -0.130782 62.8522 0.382694Z"
-                            fill={
-                              rating > 3 ? '#000' : '#ACACAC66'
-                            }
+                            fill={rating > 3 ? '#000' : '#ACACAC66'}
                           />
                         </g>
                         <g>
                           <path
                             d="M83.8522 0.382694L82.3785 3.22723L79.0811 3.68484C78.4897 3.76648 78.2528 4.46043 78.6816 4.85789L81.0672 7.07078L80.5029 10.1968C80.4014 10.7618 81.0265 11.185 81.5502 10.9208L84.5 9.4448L87.4498 10.9208C87.9734 11.1829 88.5986 10.7618 88.497 10.1968L87.9328 7.07078L90.3184 4.85789C90.7472 4.46043 90.5102 3.76648 89.9189 3.68484L86.6215 3.22723L85.1477 0.382694C84.8837 -0.124337 84.1186 -0.130782 83.8522 0.382694Z"
-                            fill={
-                              rating > 4 ? '#000' : '#ACACAC66'
-                            }
+                            fill={rating > 4 ? '#000' : '#ACACAC66'}
                           />
                         </g>
                       </svg>
@@ -1087,32 +1015,23 @@ const ProductDetail: React.FC = () => {
                 </IonRow>
                 <IonRow
                   className="owner"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log(
-                      'go to profile',
-                      selectedSneakerDetails.vendor._id
-                    );
-                    history.push(
-                      `/home/profile/${selectedSneakerDetails.vendor._id}`
-                    );
+                    console.log('go to profile', selectedSneakerDetails.vendor._id);
+                    history.push(`/home/profile/${selectedSneakerDetails.vendor._id}`);
                   }}
                 >
                   <IonCol size="1">
                     <div
                       className="avatar"
                       style={{
-                        backgroundImage: getImageUrl(
-                          selectedSneakerDetails.vendor.avatar
-                        ),
+                        backgroundImage: getImageUrl(selectedSneakerDetails.vendor.avatar),
                       }}
                     ></div>
                   </IonCol>
                   <IonCol size="11">
-                    <div className="username">
-                      @{selectedSneakerDetails.vendor.displayName}
-                    </div>
+                    <div className="username">@{selectedSneakerDetails.vendor.displayName}</div>
                     <div className="rating">
                       <svg
                         width="91"
@@ -1124,51 +1043,31 @@ const ProductDetail: React.FC = () => {
                         <g>
                           <path
                             d="M5.85224 0.382694L4.37846 3.22723L1.08106 3.68484C0.489741 3.76648 0.252761 4.46043 0.681581 4.85789L3.06717 7.07078L2.50294 10.1968C2.40137 10.7618 3.02655 11.185 3.55016 10.9208L6.49998 9.4448L9.44981 10.9208C9.97342 11.1829 10.5986 10.7618 10.497 10.1968L9.9328 7.07078L12.3184 4.85789C12.7472 4.46043 12.5102 3.76648 11.9189 3.68484L8.62151 3.22723L7.14773 0.382694C6.88367 -0.124337 6.11856 -0.130782 5.85224 0.382694Z"
-                            fill={
-                              rating > 0
-                                ? '#000'
-                                : '#ACACAC66'
-                            }
+                            fill={rating > 0 ? '#000' : '#ACACAC66'}
                           />
                         </g>
                         <g>
                           <path
                             d="M24.8522 0.382694L23.3785 3.22723L20.0811 3.68484C19.4897 3.76648 19.2528 4.46043 19.6816 4.85789L22.0672 7.07078L21.5029 10.1968C21.4014 10.7618 22.0265 11.185 22.5502 10.9208L25.5 9.4448L28.4498 10.9208C28.9734 11.1829 29.5986 10.7618 29.497 10.1968L28.9328 7.07078L31.3184 4.85789C31.7472 4.46043 31.5102 3.76648 30.9189 3.68484L27.6215 3.22723L26.1477 0.382694C25.8837 -0.124337 25.1186 -0.130782 24.8522 0.382694Z"
-                            fill={
-                              rating > 1
-                                ? '#000'
-                                : '#ACACAC66'
-                            }
+                            fill={rating > 1 ? '#000' : '#ACACAC66'}
                           />
                         </g>
                         <g>
                           <path
                             d="M43.8522 0.382694L42.3785 3.22723L39.0811 3.68484C38.4897 3.76648 38.2528 4.46043 38.6816 4.85789L41.0672 7.07078L40.5029 10.1968C40.4014 10.7618 41.0265 11.185 41.5502 10.9208L44.5 9.4448L47.4498 10.9208C47.9734 11.1829 48.5986 10.7618 48.497 10.1968L47.9328 7.07078L50.3184 4.85789C50.7472 4.46043 50.5102 3.76648 49.9189 3.68484L46.6215 3.22723L45.1477 0.382694C44.8837 -0.124337 44.1186 -0.130782 43.8522 0.382694Z"
-                            fill={
-                              rating > 2
-                                ? '#000'
-                                : '#ACACAC66'
-                            }
+                            fill={rating > 2 ? '#000' : '#ACACAC66'}
                           />
                         </g>
                         <g>
                           <path
                             d="M62.8522 0.382694L61.3785 3.22723L58.0811 3.68484C57.4897 3.76648 57.2528 4.46043 57.6816 4.85789L60.0672 7.07078L59.5029 10.1968C59.4014 10.7618 60.0265 11.185 60.5502 10.9208L63.5 9.4448L66.4498 10.9208C66.9734 11.1829 67.5986 10.7618 67.497 10.1968L66.9328 7.07078L69.3184 4.85789C69.7472 4.46043 69.5102 3.76648 68.9189 3.68484L65.6215 3.22723L64.1477 0.382694C63.8837 -0.124337 63.1186 -0.130782 62.8522 0.382694Z"
-                            fill={
-                              rating > 3
-                                ? '#000'
-                                : '#ACACAC66'
-                            }
+                            fill={rating > 3 ? '#000' : '#ACACAC66'}
                           />
                         </g>
                         <g>
                           <path
                             d="M83.8522 0.382694L82.3785 3.22723L79.0811 3.68484C78.4897 3.76648 78.2528 4.46043 78.6816 4.85789L81.0672 7.07078L80.5029 10.1968C80.4014 10.7618 81.0265 11.185 81.5502 10.9208L84.5 9.4448L87.4498 10.9208C87.9734 11.1829 88.5986 10.7618 88.497 10.1968L87.9328 7.07078L90.3184 4.85789C90.7472 4.46043 90.5102 3.76648 89.9189 3.68484L86.6215 3.22723L85.1477 0.382694C84.8837 -0.124337 84.1186 -0.130782 83.8522 0.382694Z"
-                            fill={
-                              rating > 4
-                                ? '#000'
-                                : '#ACACAC66'
-                            }
+                            fill={rating > 4 ? '#000' : '#ACACAC66'}
                           />
                         </g>
                       </svg>
@@ -1334,7 +1233,7 @@ const ProductDetail: React.FC = () => {
                   Condition Details
                 </IonCol>
                 <IonCol size="8" className="value">
-                  {getAttributeValues('condition-details').map((c) => (
+                  {getAttributeValues('condition-details').map(c => (
                     <div key={c}>{c}</div>
                   ))}
                 </IonCol>

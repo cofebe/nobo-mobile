@@ -76,33 +76,22 @@ const PrimarySport: React.FC = () => {
       <IonContent scrollY>
         <IonRow>
           <IonCol class="ion-text-center">
-            <div className="primary-sport-sub-header">
-              Select your primary sport
-            </div>
+            <div className="primary-sport-sub-header">Select your primary sport</div>
             <IonLabel class="primary-sport-sub-label">
               Don't worry. You can add additional sports to your profile later.
             </IonLabel>
           </IonCol>
         </IonRow>
-        <form
-          style={{ paddingLeft: '10px', paddingRight: '10px' }}
-          className="nobo-form"
-        >
+        <form style={{ paddingLeft: '10px', paddingRight: '10px' }} className="nobo-form">
           <IonRow>
             <IonCol className="nobo-center" size="11">
               <IonItem
                 button
                 detail={false}
                 onClick={() => handleClick(0)}
-                className={
-                  'primary-sport-input ' +
-                  (isActiveSport('football') ? 'selected' : '')
-                }
+                className={'primary-sport-input ' + (isActiveSport('football') ? 'selected' : '')}
               >
-                <IonLabel
-                  className="primary-sport-label"
-                  style={{ color: '#00816D' }}
-                >
+                <IonLabel className="primary-sport-label" style={{ color: '#00816D' }}>
                   Football
                 </IonLabel>
               </IonItem>
@@ -116,14 +105,10 @@ const PrimarySport: React.FC = () => {
                 detail={false}
                 onClick={() => handleClick(1)}
                 className={
-                  'primary-sport-input ' +
-                  (isActiveSport('wbasketball') ? 'selected' : '')
+                  'primary-sport-input ' + (isActiveSport('wbasketball') ? 'selected' : '')
                 }
               >
-                <IonLabel
-                  className="primary-sport-label"
-                  style={{ color: '#00816D' }}
-                >
+                <IonLabel className="primary-sport-label" style={{ color: '#00816D' }}>
                   Women's Basketball
                 </IonLabel>
               </IonItem>
@@ -137,14 +122,10 @@ const PrimarySport: React.FC = () => {
                 detail={false}
                 onClick={() => handleClick(2)}
                 className={
-                  'primary-sport-input ' +
-                  (isActiveSport('mbasketball') ? 'selected' : '')
+                  'primary-sport-input ' + (isActiveSport('mbasketball') ? 'selected' : '')
                 }
               >
-                <IonLabel
-                  className="primary-sport-label"
-                  style={{ color: '#00816D' }}
-                >
+                <IonLabel className="primary-sport-label" style={{ color: '#00816D' }}>
                   Men's Basketball
                 </IonLabel>
               </IonItem>
@@ -158,14 +139,10 @@ const PrimarySport: React.FC = () => {
                 detail={false}
                 onClick={() => handleClick(8)}
                 className={
-                  'primary-sport-input ' +
-                  (isActiveSport('wvolleyball') ? 'selected' : '')
+                  'primary-sport-input ' + (isActiveSport('wvolleyball') ? 'selected' : '')
                 }
               >
-                <IonLabel
-                  className="primary-sport-label"
-                  style={{ color: '#00816D' }}
-                >
+                <IonLabel className="primary-sport-label" style={{ color: '#00816D' }}>
                   Women's Volleyball
                 </IonLabel>
               </IonItem>
@@ -179,14 +156,10 @@ const PrimarySport: React.FC = () => {
                 detail={false}
                 onClick={() => handleClick(9)}
                 className={
-                  'primary-sport-input ' +
-                  (isActiveSport('mvolleyball') ? 'selected' : '')
+                  'primary-sport-input ' + (isActiveSport('mvolleyball') ? 'selected' : '')
                 }
               >
-                <IonLabel
-                  className="primary-sport-label"
-                  style={{ color: '#00816D' }}
-                >
+                <IonLabel className="primary-sport-label" style={{ color: '#00816D' }}>
                   Men's Volleyball
                 </IonLabel>
               </IonItem>
@@ -199,15 +172,9 @@ const PrimarySport: React.FC = () => {
                 // disabled={true}
                 detail={false}
                 onClick={() => handleClick(3)}
-                className={
-                  'primary-sport-input ' +
-                  (isActiveSport('baseball') ? 'selected' : '')
-                }
+                className={'primary-sport-input ' + (isActiveSport('baseball') ? 'selected' : '')}
               >
-                <IonLabel
-                  className="primary-sport-label"
-                  style={{ color: '#00816D' }}
-                >
+                <IonLabel className="primary-sport-label" style={{ color: '#00816D' }}>
                   Baseball
                 </IonLabel>
               </IonItem>
@@ -219,15 +186,9 @@ const PrimarySport: React.FC = () => {
                 button
                 detail={false}
                 onClick={() => handleClick(4)}
-                className={
-                  'primary-sport-input ' +
-                  (isActiveSport('softball') ? 'selected' : '')
-                }
+                className={'primary-sport-input ' + (isActiveSport('softball') ? 'selected' : '')}
               >
-                <IonLabel
-                  className="primary-sport-label"
-                  style={{ color: '#00816D' }}
-                >
+                <IonLabel className="primary-sport-label" style={{ color: '#00816D' }}>
                   Softball
                 </IonLabel>
               </IonItem>
@@ -239,15 +200,9 @@ const PrimarySport: React.FC = () => {
                 button
                 detail={false}
                 onClick={() => handleClick(5)}
-                className={
-                  'primary-sport-input ' +
-                  (isActiveSport('wlacrosse') ? 'selected' : '')
-                }
+                className={'primary-sport-input ' + (isActiveSport('wlacrosse') ? 'selected' : '')}
               >
-                <IonLabel
-                  className="primary-sport-label"
-                  style={{ color: '#00816D' }}
-                >
+                <IonLabel className="primary-sport-label" style={{ color: '#00816D' }}>
                   Woman's Lacrosse
                 </IonLabel>
               </IonItem>
@@ -259,15 +214,9 @@ const PrimarySport: React.FC = () => {
                 button
                 detail={false}
                 onClick={() => handleClick(10)}
-                className={
-                  'primary-sport-input ' +
-                  (isActiveSport('mlacrosse') ? 'selected' : '')
-                }
+                className={'primary-sport-input ' + (isActiveSport('mlacrosse') ? 'selected' : '')}
               >
-                <IonLabel
-                  className="primary-sport-label"
-                  style={{ color: '#00816D' }}
-                >
+                <IonLabel className="primary-sport-label" style={{ color: '#00816D' }}>
                   Men's Lacrosse
                 </IonLabel>
               </IonItem>
@@ -279,15 +228,9 @@ const PrimarySport: React.FC = () => {
                 button
                 detail={false}
                 onClick={() => handleClick(6)}
-                className={
-                  'primary-sport-input ' +
-                  (isActiveSport('wsoccer') ? 'selected' : '')
-                }
+                className={'primary-sport-input ' + (isActiveSport('wsoccer') ? 'selected' : '')}
               >
-                <IonLabel
-                  className="primary-sport-label"
-                  style={{ color: '#00816D' }}
-                >
+                <IonLabel className="primary-sport-label" style={{ color: '#00816D' }}>
                   Women's Soccer
                 </IonLabel>
               </IonItem>
@@ -299,15 +242,9 @@ const PrimarySport: React.FC = () => {
                 button
                 detail={false}
                 onClick={() => handleClick(7)}
-                className={
-                  'primary-sport-input ' +
-                  (isActiveSport('msoccer') ? 'selected' : '')
-                }
+                className={'primary-sport-input ' + (isActiveSport('msoccer') ? 'selected' : '')}
               >
-                <IonLabel
-                  className="primary-sport-label"
-                  style={{ color: '#00816D' }}
-                >
+                <IonLabel className="primary-sport-label" style={{ color: '#00816D' }}>
                   Men's Soccer
                 </IonLabel>
               </IonItem>
@@ -317,17 +254,13 @@ const PrimarySport: React.FC = () => {
           <IonRow>
             <IonCol className="nobo-center" size="11">
               {selectedSport === '' && (
-                <IonButton
-                  disabled={true}
-                  expand="block"
-                  className="sport-button"
-                >
+                <IonButton disabled={true} expand="block" className="sport-button">
                   Get Started
                 </IonButton>
               )}
               {selectedSport !== '' && (
                 <IonButton
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     signup();
                   }}

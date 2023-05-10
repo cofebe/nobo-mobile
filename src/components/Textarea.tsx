@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import {
-  IonTextarea,
-} from '@ionic/react';
+import { IonTextarea } from '@ionic/react';
 import './Textarea.scss';
 
 interface InputProps {
@@ -46,13 +44,18 @@ const Textarea: React.FC<InputProps> = ({
   }
 
   return (
-    <div className={'app-textarea-container ' + (invalid || errorMessage || (required && isDirty && !internalValue) ? 'invalid' : '')}>
+    <div
+      className={
+        'app-textarea-container ' +
+        (invalid || errorMessage || (required && isDirty && !internalValue) ? 'invalid' : '')
+      }
+    >
       <IonTextarea
         className={className}
         placeholder={placeholder}
         value={value}
         rows={rows}
-        onIonChange={(e) => change(e)}
+        onIonChange={e => change(e)}
         disabled={disabled}
         readonly={readonly}
         required={required}
@@ -60,9 +63,7 @@ const Textarea: React.FC<InputProps> = ({
         spellcheck={spellcheck}
         autoGrow={autoGrow}
       />
-      {errorMessage ? (
-        <div className="error-message">{errorMessage}</div>
-      ) : ''}
+      {errorMessage ? <div className="error-message">{errorMessage}</div> : ''}
     </div>
   );
 };

@@ -26,7 +26,7 @@ const Search: React.FC<InputProps> = ({
         className={className}
         placeholder={placeholder}
         value={value}
-        onIonChange={(e) => change(e)}
+        onIonChange={e => change(e)}
       />
       <img src="assets/images/search-icon.svg" alt="search" />
     </div>
