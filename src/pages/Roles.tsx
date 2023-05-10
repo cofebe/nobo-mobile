@@ -8,7 +8,7 @@ import {
   IonCol,
   IonGrid,
 } from '@ionic/react';
-import './URP.css';
+import '../styles.scss';
 import './Roles.css';
 
 const Roles: React.FC = () => {
@@ -38,7 +38,7 @@ const Roles: React.FC = () => {
               <IonCol className="nobo-center" size="11">
                 <IonButton
                   className="nobo-basic-btn"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     history.push({
                       pathname: '/primary-sport',
@@ -56,7 +56,7 @@ const Roles: React.FC = () => {
               <IonCol className="nobo-center" size="11">
                 <IonButton
                   className="nobo-basic-btn"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     history.push({
                       pathname: '/primary-sport',
@@ -74,7 +74,7 @@ const Roles: React.FC = () => {
               <IonCol className="nobo-center" size="11">
                 <IonButton
                   className="nobo-basic-btn"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     history.push({
                       pathname: '/primary-sport',

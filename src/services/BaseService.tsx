@@ -1,26 +1,31 @@
 import { environment } from '../environments/environment';
-import { Auth } from 'aws-amplify';
+import { AuthService } from './AuthService';
+import { loadingStore } from '../loading-store';
 
 export class BaseService {
-  getHeaders(others: { [key: string]: string } | null | undefined): { [key: string]: string } {
-    const storage: any = window.localStorage.getItem('persistedState');
-    const user = (storage ? JSON.parse(storage) : undefined);
+  authService: AuthService = new AuthService();
 
-    const headers: { [key: string]: string } = {
-    };
-    if (user) {
-      headers['X-URP-UserId'] = user.user['user_id'];
-    } else {
-      headers['X-URP-UserId'] = '1';
+  getHeaders(others: { [key: string]: string } | null | undefined): { [key: string]: string } {
+    const headers: { [key: string]: string } = {};
+
+    const token = this.authService.getUserToken();
+    if (token) {
+      headers.Authorization = `Bearer ${token}`;
     }
+
     return Object.assign(headers, others || {});
   }
 
-  async fetch(method: string, path: string, data?: any, headers?: { [key: string]: string } | null | undefined) {
+  async fetch(
+    method: string,
+    path: string,
+    data?: any,
+    headers?: { [key: string]: string } | null | undefined
+  ) {
     const url = `${environment.serverUrl}${path.startsWith('/') ? '' : '/'}${path}`;
     headers = headers || {};
     let body: any = undefined;
-    if (data !== undefined  && data !== null) {
+    if (data !== undefined && data !== null) {
       if (data instanceof FormData) {
         body = data;
       } else {
@@ -29,19 +34,16 @@ export class BaseService {
       }
     }
 
-    const storage: any = window.localStorage.getItem('persistedState');
-    const user = (storage ? JSON.parse(storage) : undefined);
-    if (user) {
-      const session = await Auth.currentSession();
-      const accessToken = session.getAccessToken().getJwtToken();
-      headers['Authorization'] =  accessToken;
+    loadingStore.increment(url);
+    try {
+      return await fetch(url, {
+        method,
+        cache: 'no-cache',
+        headers: this.getHeaders(headers),
+        body,
+      });
+    } finally {
+      loadingStore.decrement(url);
     }
-
-    return await fetch(url, {
-      method,
-      cache: 'no-cache',
-      headers: this.getHeaders(headers),
-      body,
-    });
   }
 }

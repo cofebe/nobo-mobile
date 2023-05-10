@@ -61,13 +61,9 @@ const ProfileFollowButton: React.FC<ProfileFollowButtonProps> = ({
     setSocialData(data || {});
 
     if (data.my_user_type === 'coach') {
-      setUserSubscribed(
-        subscriptionService.isSubscribed('com.nobo.coachrecruiter.1month')
-      );
+      setUserSubscribed(subscriptionService.isSubscribed('com.nobo.coachrecruiter.1month'));
     } else if (data.my_user_type === 'trainer') {
-      setUserSubscribed(
-        subscriptionService.isSubscribed('com.nobo.trainer.1month')
-      );
+      setUserSubscribed(subscriptionService.isSubscribed('com.nobo.trainer.1month'));
     }
 
     updateButton(data);
@@ -172,32 +168,32 @@ const ProfileFollowButton: React.FC<ProfileFollowButtonProps> = ({
 
   function follow() {
     console.log('follow');
-    userService
-      .followUser(userId)
-      .then(() => {
-        socialData.is_followed = true;
-        setSocialData(socialData);
-        updateButton(socialData);
-        showMessage(`Followed ${socialData?.name || 'user'}.`);
-      })
-      .catch((err) => {
-        console.error('Error: ', err);
-      });
+    // userService
+    //   .followUser(userId)
+    //   .then(() => {
+    //     socialData.is_followed = true;
+    //     setSocialData(socialData);
+    //     updateButton(socialData);
+    //     showMessage(`Followed ${socialData?.name || 'user'}.`);
+    //   })
+    //   .catch((err) => {
+    //     console.error('Error: ', err);
+    //   });
   }
 
   function unfollow() {
     console.log('unfollow');
-    userService
-      .removeFollowUser(userId)
-      .then(() => {
-        socialData.is_followed = false;
-        setSocialData(socialData);
-        updateButton(socialData);
-        showMessage(`Unfollowed ${socialData?.name || 'user'}.`);
-      })
-      .catch((err) => {
-        console.error('Error: ', err);
-      });
+    // userService
+    //   .removeFollowUser(userId)
+    //   .then(() => {
+    //     socialData.is_followed = false;
+    //     setSocialData(socialData);
+    //     updateButton(socialData);
+    //     showMessage(`Unfollowed ${socialData?.name || 'user'}.`);
+    //   })
+    //   .catch((err) => {
+    //     console.error('Error: ', err);
+    //   });
   }
 
   function connect() {
@@ -205,15 +201,13 @@ const ProfileFollowButton: React.FC<ProfileFollowButtonProps> = ({
     console.log('connect');
     connectionService
       .createConnection(userId)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         socialData.connection_status = 'pending';
         socialData.connection_id = data.id;
         setSocialData(socialData);
         updateButton(socialData);
-        showMessage(
-          `Connection request sent to ${socialData?.name || 'user'}.`
-        );
+        showMessage(`Connection request sent to ${socialData?.name || 'user'}.`);
       });
   }
 
@@ -263,7 +257,7 @@ const ProfileFollowButton: React.FC<ProfileFollowButtonProps> = ({
   return (
     <div className={`follow-button ${menuOpen ? ' open' : ''}`}>
       <IonButton
-        onClick={(e) => button(e)}
+        onClick={e => button(e)}
         className={'follow-button-white' + (menuOpen ? ' open' : '')}
       >
         <div>{buttonText}</div>
@@ -272,10 +266,10 @@ const ProfileFollowButton: React.FC<ProfileFollowButtonProps> = ({
         </div>
       </IonButton>
       <div className={`follow-menu ${menuOpen ? ' open' : ''}`}>
-        {menuItems.map((item) => (
+        {menuItems.map(item => (
           <div
             className={'follow-menu-item ' + (item.disabled ? 'disabled' : '')}
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               item.action();
             }}
@@ -302,13 +296,13 @@ const ProfileFollowButton: React.FC<ProfileFollowButtonProps> = ({
                   spellCheck={true}
                   style={{ paddingLeft: '8px' }}
                   type="text"
-                  onIonChange={(e) => setWatchlistNotes(e.detail.value!)}
+                  onIonChange={e => setWatchlistNotes(e.detail.value!)}
                 ></IonInput>
               </IonItem>
               <div className="nobo-watchlist-add-button">
                 <a
                   href="#"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     addToWatchlist();
                     setShowBottomMenu(false);

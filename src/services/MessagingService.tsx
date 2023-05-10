@@ -7,11 +7,7 @@ import {
 } from '../API';
 import { GraphQLSubscription } from '@aws-amplify/api';
 import { Auth, API, graphqlOperation } from 'aws-amplify';
-import {
-  createConversation,
-  createUserConversation,
-  createMessage,
-} from '../graphql/mutations';
+import { createConversation, createUserConversation, createMessage } from '../graphql/mutations';
 import { AUTH_TYPE, AuthOptions } from 'aws-appsync-auth-link';
 import AppSyncConfig from '../aws-exports';
 import AWSAppSyncClient from 'aws-appsync';
@@ -22,10 +18,9 @@ const client = new AWSAppSyncClient({
   auth: {
     type: AppSyncConfig.aws_appsync_authenticationType as AUTH_TYPE,
     credentials: () => Auth.currentCredentials(),
-    jwtToken: async () =>
-      (await Auth.currentSession()).getAccessToken().getJwtToken()
+    jwtToken: async () => (await Auth.currentSession()).getAccessToken().getJwtToken(),
   } as AuthOptions,
-  complexObjectsCredentials: () => Auth.currentCredentials()
+  complexObjectsCredentials: () => Auth.currentCredentials(),
 });
 
 export class MessagingService extends BaseService {
@@ -60,7 +55,7 @@ export class MessagingService extends BaseService {
   }
 
   async getUserConversation(convoId: string) {
-    const userId = this.authService.getUserID();
+    const userId = this.authService.getUserId();
     const gql = `
       query ListUserConversations($filter: ModelUserConversationFilterInput) {
         listUserConversations(filter: $filter) {
@@ -89,16 +84,18 @@ export class MessagingService extends BaseService {
   }
 
   async getOrCreateConversation(userIds: number | number[]) {
-    const myUserId = this.authService.getUserID().toString();
+    const myUserId = this.authService.getUserId() || '';
     const theirUserIds = (Array.isArray(userIds) ? userIds : [userIds]).map(id => id.toString());
     const allUserIds = theirUserIds.concat([myUserId]);
     //console.log('myUserId', myUserId, 'theirUserIds', theirUserIds, 'allUserIds', allUserIds);
 
-    const gql = `
+    const gql =
+      `
       query  {
         listConversations(filter: {
           and: [` +
-      allUserIds.map(id => `{ userIds: { contains: "${id}" } }`).join(',') + `],
+      allUserIds.map(id => `{ userIds: { contains: "${id}" } }`).join(',') +
+      `],
         }) {
           startedAt
           nextToken
@@ -121,7 +118,7 @@ export class MessagingService extends BaseService {
     let convo: any = null;
     if (list.length) {
       convo = list.find((c: any) => {
-        const userIds = (Array.isArray(c.userIds) ? c.userIds : JSON.parse(c.userIds));
+        const userIds = Array.isArray(c.userIds) ? c.userIds : JSON.parse(c.userIds);
         return userIds.length === allUserIds.length;
       });
       if (convo) {
@@ -137,7 +134,9 @@ export class MessagingService extends BaseService {
     };
 
     //console.log('getOrCreateConversationWithUser:createConversationInput', createConversationInput);
-    res = await API.graphql(graphqlOperation(createConversation, { input: createConversationInput }));
+    res = await API.graphql(
+      graphqlOperation(createConversation, { input: createConversationInput })
+    );
     //console.log('getOrCreateConversationWithUser:res', res);
     convo = res?.data?.createConversation;
 
@@ -147,7 +146,9 @@ export class MessagingService extends BaseService {
           userId: id,
           userConversationConversationId: convo.id,
         };
-        return API.graphql(graphqlOperation(createUserConversation, { input: createUserConversationInput }));
+        return API.graphql(
+          graphqlOperation(createUserConversation, { input: createUserConversationInput })
+        );
       }),
     ]);
     //console.log('getOrCreateConversationWithUser:res', res);
@@ -184,7 +185,11 @@ export class MessagingService extends BaseService {
     userConvo.lastReadAt = createdAt;
     //console.log('updateUserConversationGQL', updateUserConversationGQL, userConvo/*, 'updateUserConversationInput', updateUserConversationInput*/);
 
-    const res: any = await API.graphql(graphqlOperation(updateUserConversationGQL, { input: userConvo /*updateUserConversationInput*/ }));
+    const res: any = await API.graphql(
+      graphqlOperation(updateUserConversationGQL, {
+        input: userConvo /*updateUserConversationInput*/,
+      })
+    );
     //console.log('markConversationRead:res', res);
     return res?.data?.updateUserConversation;
   }
@@ -193,7 +198,7 @@ export class MessagingService extends BaseService {
     console.log('MessagingService.createMessage', convoId, text, fileUrl, fileMimeType);
 
     const createdAt = Math.floor(new Date().getTime() / 1000);
-    const userId = this.authService.getUserID();
+    const userId = this.authService.getUserId();
 
     const createMessageInput = {
       id: new Date().getTime().toString(),
@@ -236,7 +241,7 @@ export class MessagingService extends BaseService {
       lastMessageText: text.trim(),
       lastMessageFileUrl: fileUrl,
       lastMessageFileMimeType: fileMimeType,
-      lastMessageUserId: userId.toString(),
+      lastMessageUserId: userId || '',
     };
     //console.log('updateConversationGQL', updateConversationGQL, 'updateConversationInput', updateConversationInput);
 
@@ -294,7 +299,9 @@ export class MessagingService extends BaseService {
       }
     `;
     //console.log('getNewMessages:gql', gql);
-    const res = API.graphql<GraphQLSubscription<OnCreateMessageSubscription>>(graphqlOperation(gql));
+    const res = API.graphql<GraphQLSubscription<OnCreateMessageSubscription>>(
+      graphqlOperation(gql)
+    );
     return res.map(data => {
       //console.log('getNewMessages:map(data)', data);
       return data?.value?.data?.onCreateMessage;
@@ -302,7 +309,7 @@ export class MessagingService extends BaseService {
   }
 
   async getConversations() {
-    const userId = this.authService.getUserID();
+    const userId = this.authService.getUserId();
     const gql = `
       query ListUserConversations($filter: ModelUserConversationFilterInput) {
         listUserConversations(filter: $filter) {
@@ -351,7 +358,9 @@ export class MessagingService extends BaseService {
       }
     `;
     //console.log('getConversationUpdates:gql', gql);
-    const res = API.graphql<GraphQLSubscription<OnUpdateConversationSubscription>>(graphqlOperation(gql));
+    const res = API.graphql<GraphQLSubscription<OnUpdateConversationSubscription>>(
+      graphqlOperation(gql)
+    );
     return res.map(data => {
       //console.log('getConversationUpdates:map(data)', data);
       return data?.value?.data?.onUpdateConversation;
@@ -359,7 +368,7 @@ export class MessagingService extends BaseService {
   }
 
   getConversationCreates() {
-    const userId = this.authService.getUserID();
+    const userId = this.authService.getUserId();
     const gql = `
       subscription {
         onCreateConversation(filter: { userIds: { contains: "${userId}" } }) {
@@ -374,7 +383,9 @@ export class MessagingService extends BaseService {
       }
     `;
     //console.log('getConversationCreates:gql', gql);
-    const res = API.graphql<GraphQLSubscription<OnCreateConversationSubscription>>(graphqlOperation(gql));
+    const res = API.graphql<GraphQLSubscription<OnCreateConversationSubscription>>(
+      graphqlOperation(gql)
+    );
     return res.map(data => {
       //console.log('getConversationCreates:map(data)', data);
       return data?.value?.data?.onCreateConversation;
@@ -390,4 +401,3 @@ export class MessagingService extends BaseService {
     return await super.fetch('POST', `/upload/${convoId}/chat`, formData);
   }
 }
-

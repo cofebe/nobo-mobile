@@ -14,7 +14,7 @@ import { Profile, AthleteUserProfile } from '../data/profile';
 import WatchListItem from '../components/WatchlistItem';
 import { UserService } from '../services/UserService';
 import SortWidget from '../components/SortWidget';
-import UrpHeader from '../components/UrpHeader';
+// import UrpHeader from '../components/NoboHeader';
 
 const Watchlist: React.FC = () => {
   const [messages, setMessages] = useState<Profile[]>([]);
@@ -28,8 +28,8 @@ const Watchlist: React.FC = () => {
     let watchListItems: any = [];
     userService
       .getWatchlist(user.user['user_id'])
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         let notesCopy = [...notes];
         for (let i = 0, il = data.length; i < il; i++) {
           watchListItems.push(data[i].profile);
@@ -57,12 +57,8 @@ const Watchlist: React.FC = () => {
       let aVal = null;
       let bVal = null;
       if (valFilter === 'Height') {
-        aVal = convertHeightStringtoInches(
-          a.profile.athlete_user_profile.height.String
-        );
-        bVal = convertHeightStringtoInches(
-          b.profile.athlete_user_profile.height.String
-        );
+        aVal = convertHeightStringtoInches(a.profile.athlete_user_profile.height.String);
+        bVal = convertHeightStringtoInches(b.profile.athlete_user_profile.height.String);
       } else if (valFilter === 'Weight') {
         aVal = parseInt(a.profile.athlete_user_profile.weight.String);
         bVal = parseInt(b.profile.athlete_user_profile.weight.String);
@@ -111,7 +107,7 @@ const Watchlist: React.FC = () => {
 
   return (
     <IonPage className="home-page">
-      <UrpHeader></UrpHeader>
+      {/* <UrpHeader></UrpHeader> */}
       <IonContent style={{ '--background': '#f9fbfb' }} fullscreen>
         <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>
@@ -127,7 +123,7 @@ const Watchlist: React.FC = () => {
                 'Weight (ASC)',
                 'Weight (DESC)',
               ]}
-              onSort={(val) => {
+              onSort={val => {
                 sortMessages(profiles, val);
               }}
               asc={true}

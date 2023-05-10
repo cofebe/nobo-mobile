@@ -1,0 +1,161 @@
+.nobo-label {
+  /* color: #9bc9c1 !important; */
+  padding-left: 10px;
+}
+
+.logo-image-margin {
+  margin-top: 3rem;
+}
+
+.nobo-grad-button {
+  /* background: rgb(0, 129, 109); */
+  /* background: linear-gradient(
+    90deg,
+    rgba(0, 129, 109, 1) 17%,
+    rgba(255, 255, 255, 0.7338644930628502) 53%,
+    rgba(0, 132, 113, 1) 96%
+  ); */
+}
+
+.nobo-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+.header-line {
+  /* border-bottom: 5px solid rgb(0, 129, 109); */
+}
+
+.nobo-sub-header {
+  font-style: normal;
+  font-weight: 300;
+  font-size: 30px;
+  line-height: 36px;
+  margin-top: 4rem;
+  margin-bottom: 1.5rem;
+  color: #000000;
+}
+
+.nav-bar-background {
+  background-image: linear-gradient(to top, #ccc, transparent);
+  background-size: 100% 5rem;
+  background-position: bottom;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background-repeat: no-repeat;
+
+  ion-tabs {
+    .nav-bar {
+      height: 4.25rem;
+      margin: 0 21px 10px;
+      border-radius: 10px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      .nav-btn {
+        width: 60px;
+      }
+    }
+
+    &::after {
+      content: '';
+      background-image: linear-gradient(to top, #ccc, transparent);
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 68px;
+    }
+  }
+}
+
+.nobo-arched-header {
+  width: 50px;
+  height: 50px;
+  background-color: #1a3a35;
+  z-index: 1000000000;
+  position: fixed;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.nobo-arched-header .nobo-arch {
+  background-color: white;
+  width: 100px;
+  height: 23px;
+  width: 100%;
+  position: absolute;
+  top: 32px;
+  border-radius: 20px 20px 0 0;
+  margin-right: 5px;
+}
+
+.nobo-indicators {
+  height: 23px;
+  width: 30%;
+  position: absolute;
+  top: -13px;
+  right: 5px;
+  margin-right: 5px;
+  z-index: 100;
+  text-align: right;
+}
+
+.alert-icon {
+  position: absolute;
+  top: 60px;
+  right: 100px;
+}
+
+.settings-icon {
+  position: absolute;
+  top: 61px;
+  right: 20px;
+}
+
+.nobo-time {
+  position: absolute;
+  top: 14px;
+}
+
+/* Desktop Styling */
+.tab-bar-logo {
+  /*display: none;*/
+}
+
+@media (min-width: 562px) {
+  .nobo-nav-bar.desktop .tab-bar-logo {
+    /*display: block;*/
+  }
+}
+
+.loading-indicator {
+  --spinner-color: #a4fefc;
+  --background: transparent;
+}
+
+.loading-indicator ion-spinner {
+  /* --color: #a4fefc; */
+  transform: scale(3);
+  margin-right: auto;
+  margin-left: auto;
+}

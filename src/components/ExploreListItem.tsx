@@ -1,7 +1,7 @@
 import { IonItem, IonRow, IonCol, IonAvatar } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { Profile } from '../data/profile';
-import { OrganizationProfile } from '../data/organization'
+import { OrganizationProfile } from '../data/organization';
 import './ExploreListItem.css';
 import { viewUser } from '../util';
 
@@ -20,27 +20,27 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
     rating = profile.athlete_user_profile.rating.Int16;
   }
 
-  let name = profile.basic_user_profile.first_name.String + ' ' + profile.basic_user_profile.last_name.String;
+  let name =
+    profile.basic_user_profile.first_name.String +
+    ' ' +
+    profile.basic_user_profile.last_name.String;
 
-  if (profile.user_type.String === "organization") {
+  if (profile.user_type.String === 'organization') {
     name = profile?.organization_profile?.organization_name || '';
   }
 
-  //console.log("ExploreListItem: ", profile)
-  // const [profileMode, setProfileMode] = useState(false);
-
   return (
-    // <IonItem lines="none"  className="watchlist-item" routerLink={`/home/post-detail/${message.id}`} detail={false}>
     <IonItem lines="none" className="explore-list-item" detail={false}>
       <IonRow
         className="explore-list-item-content ion-text-wrap"
-        onClick={(e) => {
+        onClick={e => {
           e.preventDefault();
-          if (
-            profile.user_type !== undefined &&
-            profile.user_type.String !== undefined
-          ) {
-            viewUser(history, (profile.user_id || profile?.organization_profile?.organization_id || 0), profile.user_type?.String);
+          if (profile.user_type !== undefined && profile.user_type.String !== undefined) {
+            viewUser(
+              history,
+              profile.user_id || profile?.organization_profile?.organization_id || 0,
+              profile.user_type?.String
+            );
           }
         }}
       >
@@ -48,10 +48,6 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
           <IonAvatar className="explore-feed-first-row">
             <img
               className="explore-list-feed-image"
-              onError={({ currentTarget }) => {
-                currentTarget.onerror = null; // prevents looping
-                currentTarget.src = '../../assets/images/nobo_logo_round.jpg';
-              }}
               src={profile.basic_user_profile.profile_image.String}
               alt="avatar"
             />
@@ -70,9 +66,7 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
             }}
           >
             <h2 className="feed-list-nobo-badge-line">
-              <p className="feed-list-feed-name">
-                {name}
-              </p>
+              <p className="feed-list-feed-name">{name}</p>
             </h2>
           </div>
         </IonCol>
@@ -95,9 +89,7 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
                 )}
               </span>
               <span className="feed-list-feed-primary-sport">
-                {(
-                  profile.athlete_user_profile.primary_position.String || ''
-                ).replace(/"/g, '')}
+                {(profile.athlete_user_profile.primary_position.String || '').replace(/"/g, '')}
               </span>
               {rating > 0 && (
                 <span className="feed-list-feed-ranking">
@@ -121,11 +113,7 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
             </h2>
           </div>
         </IonCol>
-        <IonCol
-          className="explore-feed-content feed-content-stats"
-          size="11"
-          offset="2"
-        >
+        <IonCol className="explore-feed-content feed-content-stats" size="11" offset="2">
           <div>
             {profile.user_type?.String === 'athlete' ? (
               <h3 className="feed-l2">
@@ -133,9 +121,7 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
                 {/* <span className="feed-border">|</span> */}
                 <span>{profile.athlete_user_profile.height.String}</span>
                 <span className="feed-border">|</span>
-                <span>
-                  {profile.athlete_user_profile.weight.String + 'lbs'}
-                </span>
+                <span>{profile.athlete_user_profile.weight.String + 'lbs'}</span>
                 <span className="feed-border">|</span>
                 <span>
                   <span>{profile.basic_user_profile.class_year.String}</span>
@@ -143,9 +129,15 @@ const ExplorelistItem: React.FC<ExplorelistItemProps> = ({ profile }) => {
               </h3>
             ) : (
               <h3 className="feed-l2">
-                <div>{profile.basic_user_profile.school.String || profile.basic_user_profile.country.String}</div>
+                <div>
+                  {profile.basic_user_profile.school.String ||
+                    profile.basic_user_profile.country.String}
+                </div>
                 {/* <span className="feed-border">|</span> */}
-                <span>{profile.coach_user_profile?.position.String || profile.basic_user_profile.state.String}</span>
+                <span>
+                  {profile.coach_user_profile?.position.String ||
+                    profile.basic_user_profile.state.String}
+                </span>
               </h3>
             )}
           </div>

@@ -1,13 +1,38 @@
 import { IonButton, IonPage } from '@ionic/react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import backgroundImage1 from '../assets/nobo-splash-1.png';
+import backgroundImage2 from '../assets/nobo-splash-2.png';
+import backgroundImage3 from '../assets/nobo-splash-3.png';
 
 import './GetStarted.scss';
 
 const GetStarted: React.FC = () => {
   const history = useHistory();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const sentences = [
+    'TRADE \n BUY, & SELL LUXURY',
+    'RECEIVE \n BETTER \n DEALS',
+    'DISCOVER NEW \n ELEGANCE',
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(currentImageIndex => (currentImageIndex + 1) % 3);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <IonPage className="get-started-page">
-      <div className="background-image">
+      <div
+        className="background-image"
+        style={{
+          backgroundImage: `url(${
+            [backgroundImage1, backgroundImage2, backgroundImage3][currentImageIndex]
+          })`,
+        }}
+      >
         <div
           style={{
             fontFamily: 'Baskerville',
@@ -20,8 +45,7 @@ const GetStarted: React.FC = () => {
             marginLeft: '40px',
           }}
         >
-          TRADE,
-          <br /> BUY, & SELL LUXURY
+          {sentences[currentImageIndex]}
         </div>
         <div
           style={{
@@ -72,7 +96,7 @@ const GetStarted: React.FC = () => {
               marginLeft: '24px',
             }}
             onClick={() => {
-              history.push('/nobo-login');
+              history.push('/login');
             }}
           >
             Login

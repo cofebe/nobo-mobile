@@ -43,12 +43,9 @@ const WatchlistItem: React.FC<WatchlistItemProps> = ({ profile, notes }) => {
         <IonRow style={{ width: '100%' }}>
           <IonCol
             size="2"
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
-              if (
-                profile.user_type !== undefined &&
-                profile.user_type.String !== undefined
-              ) {
+              if (profile.user_type !== undefined && profile.user_type.String !== undefined) {
                 viewUser(history, profile.user_id, profile.user_type?.String);
               }
             }}
@@ -102,9 +99,7 @@ const WatchlistItem: React.FC<WatchlistItemProps> = ({ profile, notes }) => {
                     paddingTop: '2px',
                   }}
                 >
-                  {(
-                    profile.athlete_user_profile.primary_position.String || ''
-                  ).replace(/"/g, '')}
+                  {(profile.athlete_user_profile.primary_position.String || '').replace(/"/g, '')}
                 </div>
               </IonCol>
               <IonCol style={{ display: 'flex' }} size="2">
@@ -133,9 +128,7 @@ const WatchlistItem: React.FC<WatchlistItemProps> = ({ profile, notes }) => {
                 <span className="feed-border">|</span>
                 <span>{profile.athlete_user_profile.height.String}</span>
                 <span className="feed-border">|</span>
-                <span>
-                  {profile.athlete_user_profile.weight.String + 'lbs'}
-                </span>
+                <span>{profile.athlete_user_profile.weight.String + 'lbs'}</span>
                 <span className="feed-border">|</span>
                 <span>
                   <span>{profile.basic_user_profile.class_year.String}</span>
@@ -161,15 +154,9 @@ const WatchlistItem: React.FC<WatchlistItemProps> = ({ profile, notes }) => {
                       }}
                     >
                       {openDetails ? (
-                        <IonIcon
-                          color="primary"
-                          icon={chevronUpOutline}
-                        ></IonIcon>
+                        <IonIcon color="primary" icon={chevronUpOutline}></IonIcon>
                       ) : (
-                        <IonIcon
-                          color="primary"
-                          icon={chevronDownOutline}
-                        ></IonIcon>
+                        <IonIcon color="primary" icon={chevronDownOutline}></IonIcon>
                       )}
                     </div>
                   </div>
@@ -178,9 +165,7 @@ const WatchlistItem: React.FC<WatchlistItemProps> = ({ profile, notes }) => {
             </IonRow>
             <IonRow>
               <IonCol>
-                {openDetails && notes && (
-                  <div style={{ fontSize: '12px' }}>- {notes}</div>
-                )}
+                {openDetails && notes && <div style={{ fontSize: '12px' }}>- {notes}</div>}
               </IonCol>
             </IonRow>
           </IonCol>

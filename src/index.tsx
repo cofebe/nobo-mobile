@@ -7,7 +7,7 @@ import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App />,
   </React.StrictMode>,
   document.getElementById('root')
 );

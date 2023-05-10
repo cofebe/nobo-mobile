@@ -1,0 +1,47 @@
+.review-row {
+  background-color: #fefcf6;
+  width: 100%;
+  padding-left: 21px;
+  padding-right: 21px;
+}
+
+
+.review-buyer-display-name {
+	font-size: 12px;
+	font-weight: 600;
+	margin-top: 0px;
+}
+
+.review-buyer-text {
+	font-size: 10px;
+	font-weight: 400;
+}
+
+.review-date {
+	color: #ACACAC;
+	font-size: 10px;
+}
+
+.review-nobo-badge-line {
+  display: flex;
+  align-items: flex-end;
+  gap: 5%;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 0 !important;
+}
+
+.review-rating {
+	width: 80%;
+}
+
+.review-none-container {
+	background-color: #fefcf6;
+	height: 10vh;
+	width: 100%;
+	text-align: center;
+	.review-none-text {
+		background-color: #fefcf6;
+		color: #ACACAC;
+	}
+}

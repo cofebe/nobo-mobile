@@ -1,0 +1,1908 @@
+# Confirm trade ##########################################################################
+curl 'https://thenobo.codepilot.com/api/trades/calculate-taxes-shipping' \
+  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkMTEzMTNiN2M3ZGJhMWY2ODVkMzYiLCJlbWFpbCI6ImpiYWlsZXkrbm9ib0Bjb2ZlYmUuY29tIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjc5NjgxOTY0LCJyZWZyZXNoIjoxNjc5MDc4MDY0LCJpYXQiOjE2NzkwNzcxNjR9.yIQtFHEsu91PnpucEo6cDrzuPlSMzYNMblXhdx4pJN8' \
+  -H 'content-type: application/json' \
+  --data-raw '{
+    "address": {
+      "ep_deliverable": false,
+      "country": "US",
+      "_id": "640103f13b7c7dba1f687a70",
+      "state": "California",
+      "firstName": "James",
+      "lastName": "Bailey",
+      "address1": "123 Oak",
+      "city": "Corona",
+      "postalCode": "92345",
+      "phone": "123-123-1234",
+      "default": true
+    },
+    "productOffered": "640f74c89f59c5152629aa70",
+    "productWanted": "63500f0f60f0259ebc06dd91"
+  }'
+{"salesTax":4.02,"shipping":20}
+
+curl 'https://thenobo.codepilot.com/api/products/640f74c89f59c5152629aa70' \
+  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkMTEzMTNiN2M3ZGJhMWY2ODVkMzYiLCJlbWFpbCI6ImpiYWlsZXkrbm9ib0Bjb2ZlYmUuY29tIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjc5NjgxOTY0LCJyZWZyZXNoIjoxNjc5MDc4MDY0LCJpYXQiOjE2NzkwNzcxNjR9.yIQtFHEsu91PnpucEo6cDrzuPlSMzYNMblXhdx4pJN8'
+(response not included)
+
+curl 'https://thenobo.codepilot.com/api/products/63500f0f60f0259ebc06dd91' \
+  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkMTEzMTNiN2M3ZGJhMWY2ODVkMzYiLCJlbWFpbCI6ImpiYWlsZXkrbm9ib0Bjb2ZlYmUuY29tIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjc5NjgxOTY0LCJyZWZyZXNoIjoxNjc5MDc4MDY0LCJpYXQiOjE2NzkwNzcxNjR9.yIQtFHEsu91PnpucEo6cDrzuPlSMzYNMblXhdx4pJN8'
+(response not included)
+
+curl 'https://thenobo.codepilot.com/api/orders/payment-methods' \
+  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkMTEzMTNiN2M3ZGJhMWY2ODVkMzYiLCJlbWFpbCI6ImpiYWlsZXkrbm9ib0Bjb2ZlYmUuY29tIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjc5NjgxOTY0LCJyZWZyZXNoIjoxNjc5MDc4MDY0LCJpYXQiOjE2NzkwNzcxNjR9.yIQtFHEsu91PnpucEo6cDrzuPlSMzYNMblXhdx4pJN8'
+(response not included)
+
+# Submit trade ###########################################################################
+curl 'https://thenobo.codepilot.com/api/trades/create-offer' \
+  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkMTEzMTNiN2M3ZGJhMWY2ODVkMzYiLCJlbWFpbCI6ImpiYWlsZXkrbm9ib0Bjb2ZlYmUuY29tIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjc5NjgxOTY0LCJyZWZyZXNoIjoxNjc5MDc4MDY0LCJpYXQiOjE2NzkwNzcxNjR9.yIQtFHEsu91PnpucEo6cDrzuPlSMzYNMblXhdx4pJN8' \
+  -H 'content-type: application/json' \
+  --data-raw $'{
+    "productWanted": {
+      "tradeOffers": {
+        "incoming": [],
+        "outgoing": []
+      },
+      "attributes": [
+        {
+          "id": "yearPurchased",
+          "value": "2020"
+        },
+        {
+          "id": "smokingHome",
+          "value": "No"
+        },
+        {
+          "id": "petHome",
+          "value": "No"
+        },
+        {
+          "id": "color",
+          "value": "Black"
+        },
+        {
+          "id": "box",
+          "value": "No Box"
+        },
+        {
+          "id": "size",
+           "value": "5M"
+        },
+        {
+          "id": "condition",
+          "value": "New With Tags"
+        }
+      ],
+      "images": [
+        {
+          "url": "/tmp/product-4.png"
+        },
+        {
+          "url": "/tmp/product-3.png"
+        },
+        {
+          "url": "/tmp/product-6.png"
+        },
+        {
+          "url": "/tmp/product-2.png"
+        },
+        {
+          "url": "/tmp/product-7.png"
+        },
+        {
+          "url": "/tmp/product-6.png"
+        }
+      ],
+      "tags": [],
+      "sold": false,
+      "active": true,
+      "rejected": false,
+      "receivedByNobo": false,
+      "returnRequested": false,
+      "returnBy": null,
+      "giveaway": null,
+      "_id": "63500f0f60f0259ebc06dd91",
+      "name": "Awesome Ball",
+      "brand": "Aquazzura",
+      "price": 364,
+      "retailPrice": 372,
+      "action": "trade",
+      "vendor": {
+        "profileBg": "/NOBO_defaultcoverimage.jpeg",
+        "emailVerified": true,
+        "blocked": false,
+        "blurbText": "Tell us who you are, what you do and a little about your style!",
+        "reviews": [
+          {
+            "_id": "63b5ee57ced1ae9b83e017a6",
+            "product": "63500f0f60f0259ebc06ddd5",
+            "reviewType": "sell",
+            "seller": "63500f0e60f0259ebc06dc3d",
+            "buyer": "63500f0c60f0259ebc06d876",
+            "reviewText": "Loved it! ",
+            "ratingNum": 5,
+            "createdAt": "2023-01-04T21:23:35.211Z",
+            "updatedAt": "2023-01-04T21:23:35.211Z",
+            "__v": 0
+          }
+        ],
+        "_id": "63500f0e60f0259ebc06dc3d",
+        "firstName": "Lavinia",
+        "lastName": "Crist",
+        "displayName": "test4",
+        "orders": 0,
+        "experiencePreferences": "men",
+        "avatar": "https://i.pravatar.cc/150?img=58",
+        "memberSince": "2022-10-19T14:51:58.706Z",
+        "__v": 20,
+        "styleFeed": "63500f0e60f0259ebc06dc45"
+      },
+      "group": "men",
+      "description": "Saint Laurent’s SL/10H high-top sneakers are crafted of metallic gold smooth leather. 1”/25mm midsole (approximately). Rounded toe. Perforated vamp. Debossed “SL/10H” at quarter panels. Debossed logo at padded tongue and collar. Tonal midsole. Brown waxed flat laces. Tonal hardware. Lace-up style. Lined with leather. Rubber sole. Available in Gold. Made in Italy. | Saint Laurent Men’s SL/10H Leather Sneakers - Gold Size 7 M | A great designer gift for the holidays.",
+      "category": {
+        "parent": "63500f0860f0259ebc06cd28",
+        "_id": "63500f0860f0259ebc06cd3a",
+        "name": "Oxfords & Loafers",
+        "description": "neque accusantium delectus doloremque enim",
+        "createdAt": "2022-10-19T14:51:52.054Z",
+        "updatedAt": "2022-10-19T14:51:52.054Z",
+        "__v": 0
+      },
+      "parentCategory": {
+        "parent": null,
+        "_id": "63500f0860f0259ebc06cd28",
+        "name": "Shoes",
+        "description": "all kinds of amazing things",
+        "createdAt": "2022-10-19T14:51:52.028Z",
+        "updatedAt": "2022-10-19T14:51:52.028Z",
+        "__v": 0
+      },
+      "potentialTradeItems": [],
+      "createdAt": "2022-10-19T14:51:59.402Z",
+      "updatedAt": "2022-10-19T14:51:59.402Z",
+      "image": "/tmp/product-4.png",
+      "link": "/men/63500f0f60f0259ebc06dd91"
+    },
+    "productOffered": {
+      "tradeOffers": {
+        "incoming": [],
+        "outgoing": []
+      },
+      "attributes": [
+        {
+          "id": "color",
+          "value": "Black"
+        },
+        {
+          "id": "brandColor",
+          "value": "Black"
+        },
+        {
+          "id": "yearPurchased",
+          "value": "2010"
+        },
+        {
+          "id": "condition",
+          "value": "New Without Tags"
+        },
+        {
+          "id": "box",
+          "value": "No Box"
+        },
+        {
+          "id": "lengthIn",
+          "value": "60"
+        },
+        {
+          "id": "widthIn",
+          "value": "18"
+        },
+        {
+          "id": "heightIn",
+          "value": "18"
+        },
+        {
+          "id": "smokingHome",
+          "value": "No"
+        },
+        {
+          "id": "petHome",
+          "value": "No"
+        }
+      ],
+      "images": [
+        {
+          "url": "https://thenobo.sfo3.cdn.digitaloceanspaces.com/dev/0p_DZfN6rrDKsXcb678Yx.webp",
+          "originalName": "peter-kaiser-indigo-ladies-high-heel-shoes-in-black-leather-p7493-188390_zoom.webp"
+        }
+      ],
+      "tags": [],
+      "sold": false,
+      "active": true,
+      "rejected": false,
+      "receivedByNobo": true,
+      "returnRequested": false,
+      "returnBy": null,
+      "giveaway": null,
+      "_id": "640f74c89f59c5152629aa70",
+      "group": "men",
+      "vendor": {
+        "profileBg": "/NOBO_defaultcoverimage.jpeg",
+        "emailVerified": true,
+        "blocked": false,
+        "blurbText": "Tell us who you are, what you do and a little about your style!",
+        "reviews": [],
+        "_id": "63fd11313b7c7dba1f685d36",
+        "firstName": "James",
+        "lastName": "Bailey",
+        "displayName": "JBaileyCOFEBE",
+        "avatar": "https://thenobo.sfo3.digitaloceanspaces.com/dev/Hh7J5Tu9BcIyYmuhxhnBl.png",
+        "memberSince": "2023-02-27T20:23:13.494Z",
+        "unfinishedOnboardActivity": "",
+        "__v": 109,
+        "experiencePreferences": "men",
+        "orders": 9
+      },
+      "action": "trade",
+      "name": "Product 5",
+      "brand": "3.1 Phillip Lim",
+      "receipt": "false",
+      "price": 500,
+      "retailPrice": 750,
+      "category": {
+        "parent": "63500f0860f0259ebc06cd6a",
+        "_id": "63500f0860f0259ebc06cd73",
+        "name": "Scarves",
+        "description": "sunt ipsa sit voluptatibus veritatis",
+        "createdAt": "2022-10-19T14:51:52.149Z",
+        "updatedAt": "2022-10-19T14:51:52.149Z",
+        "__v": 0
+      },
+      "parentCategory": {
+        "parent": null,
+        "_id": "63500f0860f0259ebc06cd6a",
+        "name": "Accessories",
+        "description": "all kinds of amazing things",
+        "createdAt": "2022-10-19T14:51:52.123Z",
+        "updatedAt": "2022-10-19T14:51:52.123Z",
+        "__v": 0
+      },
+      "potentialTradeItems": [
+        {
+          "_id": "640f74c89f59c5152629aa71"
+        },
+        {
+          "_id": "640f74c89f59c5152629aa72"
+        },
+        {
+          "_id": "640f74c89f59c5152629aa73"
+        }
+      ],
+      "openToAllLuxuryOptions": true,
+      "createdAt": "2023-03-13T19:08:56.567Z",
+      "updatedAt": "2023-03-16T18:27:04.614Z",
+      "image": "https://thenobo.sfo3.cdn.digitaloceanspaces.com/dev/0p_DZfN6rrDKsXcb678Yx.webp",
+      "link": "/men/640f74c89f59c5152629aa70"
+    },
+    "selectedShippingAddress": {
+      "ep_deliverable": false,
+      "country": "US",
+      "_id": "640103f13b7c7dba1f687a70",
+      "state": "California",
+      "firstName": "James",
+      "lastName": "Bailey",
+      "address1": "123 Oak",
+      "city": "Corona",
+      "postalCode": "92345",
+      "phone": "123-123-1234",
+      "default": true
+    },
+    "selectedPaymentMethod": "card_1Mj8ppGy5Yw2ikdlcMaLe2jP"
+  }'
+{
+  "salesTax": {
+    "initiator": {
+      "order_total_amount": 71.84,
+      "shipping": 20,
+      "taxable_amount": 51.84,
+      "amount_to_collect": 4.02,
+      "rate": 0.0775,
+      "has_nexus": true,
+      "freight_taxable": false,
+      "tax_source": "destination",
+      "jurisdictions": {
+        "country": "US",
+        "state": "CA",
+        "county": "SAN BERNARDINO"
+      }
+    },
+    "recipient": {
+      "order_total_amount": 71.84,
+      "shipping": 20,
+      "taxable_amount": 51.84,
+      "amount_to_collect": 4.02,
+      "rate": 0.0775,
+      "has_nexus": true,
+      "freight_taxable": false,
+      "tax_source": "destination",
+      "jurisdictions": {
+        "country": "US",
+        "state": "CA",
+        "county": "SAN BERNARDINO"
+      }
+    }
+  },
+  "shippingAddress": {
+    "initiator": {
+      "ep_deliverable": false,
+      "country": "US",
+      "_id": "640103f13b7c7dba1f687a70",
+      "state": "California",
+      "firstName": "James",
+      "lastName": "Bailey",
+      "address1": "123 Oak",
+      "city": "Corona",
+      "postalCode": "92345",
+      "phone": "123-123-1234",
+      "default": true
+    }
+  },
+  "paymentMethod": {
+    "initiator": "card_1Mj8ppGy5Yw2ikdlcMaLe2jP"
+  },
+  "status": "pending",
+  "_id": "6414afd97022042fc9352f85",
+  "initiator": "63fd11313b7c7dba1f685d36",
+  "recipient": "63500f0e60f0259ebc06dc3d",
+  "products": {
+    "offered": "640f74c89f59c5152629aa70",
+    "requested": "63500f0f60f0259ebc06dd91"
+  },
+  "createdAt": "2023-03-17T18:22:17.738Z",
+  "updatedAt": "2023-03-17T18:22:17.738Z"
+}
+
+# Get my trades ##########################################################################
+curl 'https://thenobo.codepilot.com/api/trades/my-trades/all' \
+  -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkMTEzMTNiN2M3ZGJhMWY2ODVkMzYiLCJlbWFpbCI6ImpiYWlsZXkrbm9ib0Bjb2ZlYmUuY29tIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjc5OTQ5MTQwLCJyZWZyZXNoIjoxNjc5MzQ1MjQwLCJpYXQiOjE2NzkzNDQzNDB9.CToFe-GX3sm6D0zJvjHRG2brO2Ubh6xxnIWakborSEI'
+{
+  "sent": [
+    {
+      "salesTax": {
+        "initiator": {
+          "order_total_amount": 71.84,
+          "shipping": 20,
+          "taxable_amount": 51.84,
+          "amount_to_collect": 4.02,
+          "rate": 0.0775,
+          "has_nexus": true,
+          "freight_taxable": false,
+          "tax_source": "destination",
+          "jurisdictions": {
+            "country": "US",
+            "state": "CA",
+            "county": "SAN BERNARDINO"
+          }
+        },
+        "recipient": {
+          "order_total_amount": 71.84,
+          "shipping": 20,
+          "taxable_amount": 51.84,
+          "amount_to_collect": 4.02,
+          "rate": 0.0775,
+          "has_nexus": true,
+          "freight_taxable": false,
+          "tax_source": "destination",
+          "jurisdictions": {
+            "country": "US",
+            "state": "CA",
+            "county": "SAN BERNARDINO"
+          }
+        }
+      },
+      "shippingAddress": {
+        "initiator": {
+          "ep_deliverable": false,
+          "country": "US",
+          "_id": "640103f13b7c7dba1f687a70",
+          "state": "California",
+          "firstName": "James",
+          "lastName": "Bailey",
+          "address1": "123 Oak",
+          "city": "Corona",
+          "postalCode": "92345",
+          "phone": "123-123-1234",
+          "default": true
+        }
+      },
+      "paymentMethod": {
+        "initiator": "card_1Mj8ppGy5Yw2ikdlcMaLe2jP"
+      },
+      "products": {
+        "offered": {
+          "tradeOffers": {
+            "incoming": [],
+            "outgoing": [
+              "641a0a0b0d227ded8b198814"
+            ]
+          },
+          "attributes": [
+            {
+              "id": "color",
+              "value": "Denim"
+            },
+            {
+              "id": "sizeClothingMen",
+              "value": "L"
+            },
+            {
+              "id": "petiteItem",
+              "value": "No"
+            },
+            {
+              "id": "yearPurchased",
+              "value": "2010"
+            },
+            {
+              "id": "retailTags",
+              "value": "No"
+            },
+            {
+              "id": "condition",
+              "value": "New Without Tags"
+            },
+            {
+              "id": "condition-details",
+              "value": [
+                "There are stains in the item's fabric"
+              ]
+            },
+            {
+              "id": "smokingHome",
+              "value": "No"
+            },
+            {
+              "id": "petHome",
+              "value": "No"
+            }
+          ],
+          "images": [
+            {
+              "url": "https://thenobo.sfo3.digitaloceanspaces.com/dev/yZ-tgWJaqPbL5-bdez8H-.webp",
+              "originalName": "peter-kaiser-indigo-ladies-high-heel-shoes-in-black-leather-p7493-188390_zoom.webp"
+            }
+          ],
+          "tags": [],
+          "sold": false,
+          "active": true,
+          "rejected": false,
+          "receivedByNobo": true,
+          "returnRequested": false,
+          "returnBy": null,
+          "giveaway": null,
+          "_id": "640f75219f59c5152629aade",
+          "group": "men",
+          "vendor": "63fd11313b7c7dba1f685d36",
+          "shipmentInfo": {
+            "_validationErrors": null,
+            "to_address": {
+              "id": "adr_b528b6fdc1d211eda4dcac1f6b0a0d1e",
+              "object": "Address",
+              "created_at": "2023-03-13T19:10:24+00:00",
+              "updated_at": "2023-03-13T19:10:24+00:00",
+              "name": "NOELLE BONNER",
+              "company": "THE NOBO",
+              "street1": "90 NEW MONTGOMERY ST STE 400",
+              "street2": null,
+              "city": "SAN FRANCISCO",
+              "state": "CA",
+              "zip": "94105-4502",
+              "country": "US",
+              "phone": null,
+              "email": null,
+              "mode": "test",
+              "carrier_facility": null,
+              "residential": false,
+              "federal_tax_id": null,
+              "state_tax_id": null,
+              "verifications": {
+                "delivery": {
+                  "success": true,
+                  "errors": [],
+                  "details": {
+                    "latitude": 37.78761,
+                    "longitude": -122.4007,
+                    "time_zone": "America/Los_Angeles"
+                  }
+                }
+              }
+            },
+            "from_address": {
+              "id": "adr_b5326f3fc1d211edb6ccac1f6bc72124",
+              "object": "Address",
+              "created_at": "2023-03-13T19:10:24+00:00",
+              "updated_at": "2023-03-13T19:10:24+00:00",
+              "name": "James Bailey",
+              "company": null,
+              "street1": "123 Oak",
+              "street2": null,
+              "city": "Corona",
+              "state": "CA",
+              "zip": "92345",
+              "country": "US",
+              "phone": null,
+              "email": "jbailey+nobo@cofebe.com",
+              "mode": "test",
+              "carrier_facility": null,
+              "residential": null,
+              "federal_tax_id": null,
+              "state_tax_id": null,
+              "verifications": {
+                "delivery": {
+                  "success": false,
+                  "errors": [
+                    {
+                      "code": "E.ADDRESS.NOT_FOUND",
+                      "field": "address",
+                      "message": "Address not found",
+                      "suggestion": null
+                    }
+                  ]
+                }
+              }
+            },
+            "parcel": {
+              "id": "prcl_e6566e48c25447dea22a953a437a1ccd",
+              "object": "Parcel",
+              "created_at": "2023-03-13T19:10:24Z",
+              "updated_at": "2023-03-13T19:10:24Z",
+              "length": null,
+              "width": null,
+              "height": null,
+              "predefined_package": "LargeFlatRateBox",
+              "weight": 30,
+              "mode": "test"
+            },
+            "created_at": "2023-03-13T19:10:24Z",
+            "is_return": false,
+            "messages": [],
+            "mode": "test",
+            "options": {
+              "currency": "USD",
+              "payment": {
+                "type": "SENDER"
+              },
+              "date_advance": 0
+            },
+            "reference": null,
+            "status": "delivered",
+            "tracking_code": "9405500104262188848490",
+            "updated_at": "2023-03-13T19:10:25Z",
+            "batch_id": null,
+            "batch_status": null,
+            "batch_message": null,
+            "customs_info": null,
+            "insurance": null,
+            "order_id": null,
+            "postage_label": {
+              "object": "PostageLabel",
+              "id": "pl_3dea848847c2428db77b4c976e2a80d1",
+              "created_at": "2023-03-13T19:10:25Z",
+              "updated_at": "2023-03-13T19:10:25Z",
+              "date_advance": 0,
+              "integrated_form": "none",
+              "label_date": "2023-03-13T19:10:25Z",
+              "label_resolution": 300,
+              "label_size": "4x6",
+              "label_type": "default",
+              "label_file_type": "image/png",
+              "label_url": "https://easypost-files.s3.us-west-2.amazonaws.com/files/postage_label/20230313/c9b1a779da3f4bb99a369687972591a9.png",
+              "label_pdf_url": null,
+              "label_zpl_url": null,
+              "label_epl2_url": null,
+              "label_file": null
+            },
+            "rates": [
+              {
+                "id": "rate_8f5b3771bc3d4460800bb0f5da7aedc8",
+                "object": "Rate",
+                "created_at": "2023-03-13T19:10:24Z",
+                "updated_at": "2023-03-13T19:10:24Z",
+                "mode": "test",
+                "service": "Priority",
+                "carrier": "USPS",
+                "rate": "18.95",
+                "currency": "USD",
+                "retail_rate": "22.80",
+                "retail_currency": "USD",
+                "list_rate": "19.90",
+                "list_currency": "USD",
+                "billing_type": "easypost",
+                "delivery_days": 2,
+                "delivery_date": null,
+                "delivery_date_guaranteed": false,
+                "est_delivery_days": 2,
+                "shipment_id": "shp_b2337fe89fef45d6802dba76830bce86",
+                "carrier_account_id": "ca_6e5c674bac26448cb8b2def32000b65a"
+              }
+            ],
+            "refund_status": null,
+            "scan_form": null,
+            "selected_rate": {
+              "id": "rate_8f5b3771bc3d4460800bb0f5da7aedc8",
+              "object": "Rate",
+              "created_at": "2023-03-13T19:10:25Z",
+              "updated_at": "2023-03-13T19:10:25Z",
+              "mode": "test",
+              "service": "Priority",
+              "carrier": "USPS",
+              "rate": "18.95",
+              "currency": "USD",
+              "retail_rate": "22.80",
+              "retail_currency": "USD",
+              "list_rate": "19.90",
+              "list_currency": "USD",
+              "billing_type": "easypost",
+              "delivery_days": 2,
+              "delivery_date": null,
+              "delivery_date_guaranteed": false,
+              "est_delivery_days": 2,
+              "shipment_id": "shp_b2337fe89fef45d6802dba76830bce86",
+              "carrier_account_id": "ca_6e5c674bac26448cb8b2def32000b65a"
+            },
+            "tracker": {
+              "id": "trk_b942872841c54352be7fea3b7968503d",
+              "object": "Tracker",
+              "mode": "test",
+              "tracking_code": "9405500104262188848490",
+              "status": "delivered",
+              "status_detail": "arrived_at_destination",
+              "created_at": "2023-03-13T19:10:25Z",
+              "updated_at": "2023-03-13T19:13:26Z",
+              "signed_by": "John Tester",
+              "weight": null,
+              "est_delivery_date": "2023-03-13T19:13:25Z",
+              "shipment_id": "shp_b2337fe89fef45d6802dba76830bce86",
+              "carrier": "USPS",
+              "tracking_details": [
+                {
+                  "object": "TrackingDetail",
+                  "message": "Pre-Shipment Info Sent to USPS",
+                  "description": null,
+                  "status": "pre_transit",
+                  "status_detail": "status_update",
+                  "datetime": "2023-02-13T19:13:25Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "zip": null
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Shipping Label Created",
+                  "description": null,
+                  "status": "pre_transit",
+                  "status_detail": "status_update",
+                  "datetime": "2023-02-14T07:50:25Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "HOUSTON",
+                    "state": "TX",
+                    "country": null,
+                    "zip": "77063"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Arrived at USPS Origin Facility",
+                  "description": null,
+                  "status": "in_transit",
+                  "status_detail": "arrived_at_facility",
+                  "datetime": "2023-02-14T17:55:25Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "NORTH HOUSTON",
+                    "state": "TX",
+                    "country": null,
+                    "zip": "77315"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Arrived at USPS Facility",
+                  "description": null,
+                  "status": "in_transit",
+                  "status_detail": "arrived_at_facility",
+                  "datetime": "2023-02-15T19:31:25Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "COLUMBIA",
+                    "state": "SC",
+                    "country": null,
+                    "zip": "29201"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Arrived at Post Office",
+                  "description": null,
+                  "status": "in_transit",
+                  "status_detail": "arrived_at_facility",
+                  "datetime": "2023-02-15T22:22:25Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "CHARLESTON",
+                    "state": "SC",
+                    "country": null,
+                    "zip": "29407"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Sorting Complete",
+                  "description": null,
+                  "status": "in_transit",
+                  "status_detail": "status_update",
+                  "datetime": "2023-02-16T04:02:25Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "CHARLESTON",
+                    "state": "SC",
+                    "country": null,
+                    "zip": "29407"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Out for Delivery",
+                  "description": null,
+                  "status": "out_for_delivery",
+                  "status_detail": "out_for_delivery",
+                  "datetime": "2023-02-16T04:12:25Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "CHARLESTON",
+                    "state": "SC",
+                    "country": null,
+                    "zip": "29407"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Delivered",
+                  "description": null,
+                  "status": "delivered",
+                  "status_detail": "arrived_at_destination",
+                  "datetime": "2023-02-16T09:04:25Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "CHARLESTON",
+                    "state": "SC",
+                    "country": null,
+                    "zip": "29407"
+                  }
+                }
+              ],
+              "carrier_detail": {
+                "object": "CarrierDetail",
+                "service": "First-Class Package Service",
+                "container_type": null,
+                "est_delivery_date_local": null,
+                "est_delivery_time_local": null,
+                "origin_location": "HOUSTON TX, 77001",
+                "origin_tracking_location": {
+                  "object": "TrackingLocation",
+                  "city": "NORTH HOUSTON",
+                  "state": "TX",
+                  "country": null,
+                  "zip": "77315"
+                },
+                "destination_location": "CHARLESTON SC, 29401",
+                "destination_tracking_location": {
+                  "object": "TrackingLocation",
+                  "city": "CHARLESTON",
+                  "state": "SC",
+                  "country": null,
+                  "zip": "29407"
+                },
+                "guaranteed_delivery_date": null,
+                "alternate_identifier": null,
+                "initial_delivery_attempt": "2023-02-16T09:04:25Z"
+              },
+              "finalized": true,
+              "is_return": false,
+              "public_url": "https://track.easypost.com/djE6dHJrX2I5NDI4NzI4NDFjNTQzNTJiZTdmZWEzYjc5Njg1MDNk"
+            },
+            "usps_zone": 4,
+            "return_address": {
+              "id": "adr_b5326f3fc1d211edb6ccac1f6bc72124",
+              "object": "Address",
+              "created_at": "2023-03-13T19:10:24+00:00",
+              "updated_at": "2023-03-13T19:10:24+00:00",
+              "name": "James Bailey",
+              "company": null,
+              "street1": "123 Oak",
+              "street2": null,
+              "city": "Corona",
+              "state": "CA",
+              "zip": "92345",
+              "country": "US",
+              "phone": null,
+              "email": "jbailey+nobo@cofebe.com",
+              "mode": "test",
+              "carrier_facility": null,
+              "residential": null,
+              "federal_tax_id": null,
+              "state_tax_id": null,
+              "verifications": {
+                "delivery": {
+                  "success": false,
+                  "errors": [
+                    {
+                      "code": "E.ADDRESS.NOT_FOUND",
+                      "field": "address",
+                      "message": "Address not found",
+                      "suggestion": null
+                    }
+                  ]
+                }
+              }
+            },
+            "buyer_address": {
+              "id": "adr_b528b6fdc1d211eda4dcac1f6b0a0d1e",
+              "object": "Address",
+              "created_at": "2023-03-13T19:10:24+00:00",
+              "updated_at": "2023-03-13T19:10:24+00:00",
+              "name": "NOELLE BONNER",
+              "company": "THE NOBO",
+              "street1": "90 NEW MONTGOMERY ST STE 400",
+              "street2": null,
+              "city": "SAN FRANCISCO",
+              "state": "CA",
+              "zip": "94105-4502",
+              "country": "US",
+              "phone": null,
+              "email": null,
+              "mode": "test",
+              "carrier_facility": null,
+              "residential": false,
+              "federal_tax_id": null,
+              "state_tax_id": null,
+              "verifications": {
+                "delivery": {
+                  "success": true,
+                  "errors": [],
+                  "details": {
+                    "latitude": 37.78761,
+                    "longitude": -122.4007,
+                    "time_zone": "America/Los_Angeles"
+                  }
+                }
+              }
+            },
+            "forms": [],
+            "fees": [
+              {
+                "object": "Fee",
+                "type": "LabelFee",
+                "amount": "0.00000",
+                "charged": true,
+                "refunded": false
+              },
+              {
+                "object": "Fee",
+                "type": "PostageFee",
+                "amount": "18.95000",
+                "charged": true,
+                "refunded": false
+              }
+            ],
+            "id": "shp_b2337fe89fef45d6802dba76830bce86",
+            "object": "Shipment"
+          },
+          "action": "trade",
+          "name": "Product 7",
+          "brand": "A--Company",
+          "receipt": "false",
+          "price": 500,
+          "retailPrice": 750,
+          "category": "63500f0860f0259ebc06ce4e",
+          "parentCategory": "63500f0860f0259ebc06ce48",
+          "potentialTradeItems": [
+            {
+              "_id": "640f75219f59c5152629aadf"
+            },
+            {
+              "_id": "640f75219f59c5152629aae0"
+            },
+            {
+              "_id": "640f75219f59c5152629aae1"
+            }
+          ],
+          "openToAllLuxuryOptions": true,
+          "createdAt": "2023-03-13T19:10:25.712Z",
+          "updatedAt": "2023-03-21T19:48:28.467Z",
+          "__v": 1
+        },
+        "requested": {
+          "tradeOffers": {
+            "incoming": [
+              "641a0a0b0d227ded8b198814"
+            ],
+            "outgoing": []
+          },
+          "attributes": [
+            {
+              "id": "yearPurchased",
+              "value": "2020"
+            },
+            {
+              "id": "smokingHome",
+              "value": "No"
+            },
+            {
+              "id": "petHome",
+              "value": "No"
+            },
+            {
+              "id": "color",
+              "value": "Black"
+            },
+            {
+              "id": "box",
+              "value": "No Box"
+            },
+            {
+              "id": "size",
+              "value": "5M"
+            },
+            {
+              "id": "condition",
+              "value": "New With Tags"
+            }
+          ],
+          "images": [
+            {
+              "url": "/tmp/product-4.png"
+            },
+            {
+              "url": "/tmp/product-3.png"
+            },
+            {
+              "url": "/tmp/product-6.png"
+            },
+            {
+              "url": "/tmp/product-2.png"
+            },
+            {
+              "url": "/tmp/product-7.png"
+            },
+            {
+              "url": "/tmp/product-6.png"
+            }
+          ],
+          "tags": [],
+          "sold": false,
+          "active": true,
+          "rejected": false,
+          "receivedByNobo": false,
+          "returnRequested": false,
+          "returnBy": null,
+          "giveaway": null,
+          "_id": "63500f0f60f0259ebc06dd91",
+          "name": "Awesome Ball",
+          "brand": "Aquazzura",
+          "price": 364,
+          "retailPrice": 372,
+          "action": "trade",
+          "vendor": "63500f0e60f0259ebc06dc3d",
+          "group": "men",
+          "description": "Saint Laurent’s SL/10H high-top sneakers are crafted of metallic gold smooth leather. 1”/25mm midsole (approximately). Rounded toe. Perforated vamp. Debossed “SL/10H” at quarter panels. Debossed logo at padded tongue and collar. Tonal midsole. Brown waxed flat laces. Tonal hardware. Lace-up style. Lined with leather. Rubber sole. Available in Gold. Made in Italy. | Saint Laurent Men’s SL/10H Leather Sneakers - Gold Size 7 M | A great designer gift for the holidays.",
+          "category": "63500f0860f0259ebc06cd3a",
+          "parentCategory": "63500f0860f0259ebc06cd28",
+          "potentialTradeItems": [],
+          "createdAt": "2022-10-19T14:51:59.402Z",
+          "updatedAt": "2023-03-21T19:48:28.483Z",
+          "__v": 0
+        }
+      },
+      "status": "pending",
+      "_id": "641a0a0b0d227ded8b198814",
+      "initiator": "63fd11313b7c7dba1f685d36",
+      "recipient": {
+        "profileBg": "/NOBO_defaultcoverimage.jpeg",
+        "emailVerified": true,
+        "blocked": false,
+        "saleSchedule": [],
+        "role": "basic",
+        "favorites": [],
+        "followers": [
+          "63500f0c60f0259ebc06d876"
+        ],
+        "following": [],
+        "favoriteBrands": [],
+        "notifications": [
+          "641a0a0c0d227ded8b19881e",
+          "6414afd97022042fc9352f8f",
+          "6410e2db9f59c5152629ce78",
+          "63bd5edab75021315d55dda6",
+          "63bd5edab75021315d55dd8c",
+          "63b5f00fced1ae9b83e0198d",
+          "63b5ee1aced1ae9b83e016e6",
+          "63b5ededced1ae9b83e0163e",
+          "63b5edc6ced1ae9b83e015ab",
+          "63b5ed8bced1ae9b83e01497",
+          "63a4e593ced1ae9b83e011a2",
+          "63a4e47cced1ae9b83e010ec",
+          "6399ef71f4cde7f6b0b4b896",
+          "6399eec8f4cde7f6b0b4b72c",
+          "6399e719d87e97ee7dcc67d4",
+          "6399e719d87e97ee7dcc67c7",
+          "6399e718d87e97ee7dcc67ba",
+          "6399e718d87e97ee7dcc67ad",
+          "63989f05adf9d3d148c693fe",
+          "637e9195c262cae2e550890f"
+        ],
+        "blurbText": "Tell us who you are, what you do and a little about your style!",
+        "reviews": [
+          "63b5ee57ced1ae9b83e017a6"
+        ],
+        "_id": "63500f0e60f0259ebc06dc3d",
+        "firstName": "Lavinia",
+        "lastName": "Crist",
+        "displayName": "test4",
+        "email": "test4@thenobo.com",
+        "orders": 0,
+        "totalSpend": 0,
+        "passwordHash": "$2b$10$ogjCZVA.vPw7BHh.YkXuh.fCboW82SAAwdbQOTsm.nOCAgLr20ju.",
+        "experiencePreferences": "men",
+        "stripeCustomer": "cus_KgwuH6FuhHrHFm",
+        "shippingAddress": [
+          {
+            "ep_deliverable": false,
+            "country": "US",
+            "_id": "63500f0e60f0259ebc06dc3e",
+            "firstName": "Olga",
+            "lastName": "Herzog",
+            "address1": "160 Broadway",
+            "address2": "",
+            "city": "New York",
+            "state": "New York",
+            "postalCode": "10038",
+            "phone": "462-910-3075",
+            "default": true
+          },
+          {
+            "ep_deliverable": false,
+            "country": "US",
+            "_id": "63500f0e60f0259ebc06dc3f",
+            "firstName": "Dayne",
+            "lastName": "Hartmann",
+            "address1": "111 W Jackson",
+            "address2": "",
+            "city": "Chicago",
+            "state": "Illinois",
+            "postalCode": "60604",
+            "phone": "226-767-6756",
+            "default": false
+          },
+          {
+            "ep_deliverable": false,
+            "country": "US",
+            "_id": "63500f0e60f0259ebc06dc40",
+            "firstName": "Mohamed",
+            "lastName": "Witting",
+            "address1": "690 Alameda St",
+            "address2": "",
+            "city": "Los Angeles",
+            "state": "California",
+            "postalCode": "90021",
+            "phone": "927-248-0928",
+            "default": false
+          }
+        ],
+        "avatar": "https://i.pravatar.cc/150?img=58",
+        "cart": {
+          "products": [],
+          "_id": "63500f0e60f0259ebc06dc41"
+        },
+        "memberSince": "2022-10-19T14:51:58.706Z",
+        "createdAt": "2022-10-19T14:51:58.713Z",
+        "updatedAt": "2023-03-21T19:48:28.523Z",
+        "__v": 22,
+        "styleFeed": "63500f0e60f0259ebc06dc45"
+      },
+      "createdAt": "2023-03-21T19:48:28.489Z",
+      "updatedAt": "2023-03-21T19:48:28.489Z"
+    },
+    {
+      "salesTax": {
+        "initiator": {
+          "order_total_amount": 71.84,
+          "shipping": 20,
+          "taxable_amount": 51.84,
+          "amount_to_collect": 4.02,
+          "rate": 0.0775,
+          "has_nexus": true,
+          "freight_taxable": false,
+          "tax_source": "destination",
+          "jurisdictions": {
+            "country": "US",
+            "state": "CA",
+            "county": "SAN BERNARDINO"
+          }
+        },
+        "recipient": {
+          "order_total_amount": 71.84,
+          "shipping": 20,
+          "taxable_amount": 51.84,
+          "amount_to_collect": 4.02,
+          "rate": 0.0775,
+          "has_nexus": true,
+          "freight_taxable": false,
+          "tax_source": "destination",
+          "jurisdictions": {
+            "country": "US",
+            "state": "CA",
+            "county": "SAN BERNARDINO"
+          }
+        }
+      },
+      "shippingAddress": {
+        "initiator": {
+          "ep_deliverable": false,
+          "country": "US",
+          "_id": "640103f13b7c7dba1f687a70",
+          "state": "California",
+          "firstName": "James",
+          "lastName": "Bailey",
+          "address1": "123 Oak",
+          "city": "Corona",
+          "postalCode": "92345",
+          "phone": "123-123-1234",
+          "default": true
+        }
+      },
+      "paymentMethod": {
+        "initiator": "card_1Mj8ppGy5Yw2ikdlcMaLe2jP"
+      },
+      "products": {
+        "offered": {
+          "tradeOffers": {
+            "incoming": [],
+            "outgoing": [
+              "6414afd97022042fc9352f85"
+            ]
+          },
+          "attributes": [
+            {
+              "id": "color",
+              "value": "Black"
+            },
+            {
+              "id": "brandColor",
+              "value": "Black"
+            },
+            {
+              "id": "yearPurchased",
+              "value": "2010"
+            },
+            {
+              "id": "condition",
+              "value": "New Without Tags"
+            },
+            {
+              "id": "box",
+              "value": "No Box"
+            },
+            {
+              "id": "lengthIn",
+              "value": "60"
+            },
+            {
+              "id": "widthIn",
+              "value": "18"
+            },
+            {
+              "id": "heightIn",
+              "value": "18"
+            },
+            {
+              "id": "smokingHome",
+              "value": "No"
+            },
+            {
+              "id": "petHome",
+              "value": "No"
+            }
+          ],
+          "images": [
+            {
+              "url": "https://thenobo.sfo3.digitaloceanspaces.com/dev/0p_DZfN6rrDKsXcb678Yx.webp",
+              "originalName": "peter-kaiser-indigo-ladies-high-heel-shoes-in-black-leather-p7493-188390_zoom.webp"
+            }
+          ],
+          "tags": [],
+          "sold": false,
+          "active": true,
+          "rejected": false,
+          "receivedByNobo": true,
+          "returnRequested": false,
+          "returnBy": null,
+          "giveaway": null,
+          "_id": "640f74c89f59c5152629aa70",
+          "group": "men",
+          "vendor": "63fd11313b7c7dba1f685d36",
+          "shipmentInfo": {
+            "_validationErrors": null,
+            "to_address": {
+              "id": "adr_800ffdffc1d211ed9da0ac1f6bc72124",
+              "object": "Address",
+              "created_at": "2023-03-13T19:08:55+00:00",
+              "updated_at": "2023-03-13T19:08:55+00:00",
+              "name": "NOELLE BONNER",
+              "company": "THE NOBO",
+              "street1": "90 NEW MONTGOMERY ST STE 400",
+              "street2": null,
+              "city": "SAN FRANCISCO",
+              "state": "CA",
+              "zip": "94105-4502",
+              "country": "US",
+              "phone": null,
+              "email": null,
+              "mode": "test",
+              "carrier_facility": null,
+              "residential": false,
+              "federal_tax_id": null,
+              "state_tax_id": null,
+              "verifications": {
+                "delivery": {
+                  "success": true,
+                  "errors": [],
+                  "details": {
+                    "latitude": 37.78761,
+                    "longitude": -122.4007,
+                    "time_zone": "America/Los_Angeles"
+                  }
+                }
+              }
+            },
+            "from_address": {
+              "id": "adr_8019abdfc1d211eda1c5ac1f6bc7bdc6",
+              "object": "Address",
+              "created_at": "2023-03-13T19:08:55+00:00",
+              "updated_at": "2023-03-13T19:08:55+00:00",
+              "name": "James Bailey",
+              "company": null,
+              "street1": "123 Oak",
+              "street2": null,
+              "city": "Corona",
+              "state": "CA",
+              "zip": "92345",
+              "country": "US",
+              "phone": null,
+              "email": "jbailey+nobo@cofebe.com",
+              "mode": "test",
+              "carrier_facility": null,
+              "residential": null,
+              "federal_tax_id": null,
+              "state_tax_id": null,
+              "verifications": {
+                "delivery": {
+                  "success": false,
+                  "errors": [
+                    {
+                      "code": "E.ADDRESS.NOT_FOUND",
+                      "field": "address",
+                      "message": "Address not found",
+                      "suggestion": null
+                    }
+                  ]
+                }
+              }
+            },
+            "parcel": {
+              "id": "prcl_6a8a31871ac1468488f6055bc1b8e05f",
+              "object": "Parcel",
+              "created_at": "2023-03-13T19:08:55Z",
+              "updated_at": "2023-03-13T19:08:55Z",
+              "length": null,
+              "width": null,
+              "height": null,
+              "predefined_package": "LargeFlatRateBox",
+              "weight": 30,
+              "mode": "test"
+            },
+            "created_at": "2023-03-13T19:08:55Z",
+            "is_return": false,
+            "messages": [],
+            "mode": "test",
+            "options": {
+              "currency": "USD",
+              "payment": {
+                "type": "SENDER"
+              },
+              "date_advance": 0
+            },
+            "reference": null,
+            "status": "delivered",
+            "tracking_code": "9405500104262188848131",
+            "updated_at": "2023-03-13T19:08:56Z",
+            "batch_id": null,
+            "batch_status": null,
+            "batch_message": null,
+            "customs_info": null,
+            "insurance": null,
+            "order_id": null,
+            "postage_label": {
+              "object": "PostageLabel",
+              "id": "pl_2a93ee3d08944260a268f76cb06796e7",
+              "created_at": "2023-03-13T19:08:56Z",
+              "updated_at": "2023-03-13T19:08:56Z",
+              "date_advance": 0,
+              "integrated_form": "none",
+              "label_date": "2023-03-13T19:08:56Z",
+              "label_resolution": 300,
+              "label_size": "4x6",
+              "label_type": "default",
+              "label_file_type": "image/png",
+              "label_url": "https://easypost-files.s3.us-west-2.amazonaws.com/files/postage_label/20230313/9499e89aae7f49b3b5aa9a4891abd78e.png",
+              "label_pdf_url": null,
+              "label_zpl_url": null,
+              "label_epl2_url": null,
+              "label_file": null
+            },
+            "rates": [
+              {
+                "id": "rate_6e1908ebe17d4cd79dd440d319c16d52",
+                "object": "Rate",
+                "created_at": "2023-03-13T19:08:55Z",
+                "updated_at": "2023-03-13T19:08:55Z",
+                "mode": "test",
+                "service": "Priority",
+                "carrier": "USPS",
+                "rate": "18.95",
+                "currency": "USD",
+                "retail_rate": "22.80",
+                "retail_currency": "USD",
+                "list_rate": "19.90",
+                "list_currency": "USD",
+                "billing_type": "easypost",
+                "delivery_days": 2,
+                "delivery_date": null,
+                "delivery_date_guaranteed": false,
+                "est_delivery_days": 2,
+                "shipment_id": "shp_07f3e2894f734ec7b7ff37cc9eebbb9d",
+                "carrier_account_id": "ca_6e5c674bac26448cb8b2def32000b65a"
+              }
+            ],
+            "refund_status": null,
+            "scan_form": null,
+            "selected_rate": {
+              "id": "rate_6e1908ebe17d4cd79dd440d319c16d52",
+              "object": "Rate",
+              "created_at": "2023-03-13T19:08:56Z",
+              "updated_at": "2023-03-13T19:08:56Z",
+              "mode": "test",
+              "service": "Priority",
+              "carrier": "USPS",
+              "rate": "18.95",
+              "currency": "USD",
+              "retail_rate": "22.80",
+              "retail_currency": "USD",
+              "list_rate": "19.90",
+              "list_currency": "USD",
+              "billing_type": "easypost",
+              "delivery_days": 2,
+              "delivery_date": null,
+              "delivery_date_guaranteed": false,
+              "est_delivery_days": 2,
+              "shipment_id": "shp_07f3e2894f734ec7b7ff37cc9eebbb9d",
+              "carrier_account_id": "ca_6e5c674bac26448cb8b2def32000b65a"
+            },
+            "tracker": {
+              "id": "trk_7426562fa0ff4f168d905eecf1de0b0d",
+              "object": "Tracker",
+              "mode": "test",
+              "tracking_code": "9405500104262188848131",
+              "status": "delivered",
+              "status_detail": "arrived_at_destination",
+              "created_at": "2023-03-13T19:08:56Z",
+              "updated_at": "2023-03-13T19:11:56Z",
+              "signed_by": "John Tester",
+              "weight": null,
+              "est_delivery_date": "2023-03-13T19:11:56Z",
+              "shipment_id": "shp_07f3e2894f734ec7b7ff37cc9eebbb9d",
+              "carrier": "USPS",
+              "tracking_details": [
+                {
+                  "object": "TrackingDetail",
+                  "message": "Pre-Shipment Info Sent to USPS",
+                  "description": null,
+                  "status": "pre_transit",
+                  "status_detail": "status_update",
+                  "datetime": "2023-02-13T19:11:56Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": null,
+                    "state": null,
+                    "country": null,
+                    "zip": null
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Shipping Label Created",
+                  "description": null,
+                  "status": "pre_transit",
+                  "status_detail": "status_update",
+                  "datetime": "2023-02-14T07:48:56Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "HOUSTON",
+                    "state": "TX",
+                    "country": null,
+                    "zip": "77063"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Arrived at USPS Origin Facility",
+                  "description": null,
+                  "status": "in_transit",
+                  "status_detail": "arrived_at_facility",
+                  "datetime": "2023-02-14T17:53:56Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "NORTH HOUSTON",
+                    "state": "TX",
+                    "country": null,
+                    "zip": "77315"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Arrived at USPS Facility",
+                  "description": null,
+                  "status": "in_transit",
+                  "status_detail": "arrived_at_facility",
+                  "datetime": "2023-02-15T19:29:56Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "COLUMBIA",
+                    "state": "SC",
+                    "country": null,
+                    "zip": "29201"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Arrived at Post Office",
+                  "description": null,
+                  "status": "in_transit",
+                  "status_detail": "arrived_at_facility",
+                  "datetime": "2023-02-15T22:20:56Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "CHARLESTON",
+                    "state": "SC",
+                    "country": null,
+                    "zip": "29407"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Sorting Complete",
+                  "description": null,
+                  "status": "in_transit",
+                  "status_detail": "status_update",
+                  "datetime": "2023-02-16T04:00:56Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "CHARLESTON",
+                    "state": "SC",
+                    "country": null,
+                    "zip": "29407"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Out for Delivery",
+                  "description": null,
+                  "status": "out_for_delivery",
+                  "status_detail": "out_for_delivery",
+                  "datetime": "2023-02-16T04:10:56Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "CHARLESTON",
+                    "state": "SC",
+                    "country": null,
+                    "zip": "29407"
+                  }
+                },
+                {
+                  "object": "TrackingDetail",
+                  "message": "Delivered",
+                  "description": null,
+                  "status": "delivered",
+                  "status_detail": "arrived_at_destination",
+                  "datetime": "2023-02-16T09:02:56Z",
+                  "source": "USPS",
+                  "carrier_code": null,
+                  "tracking_location": {
+                    "object": "TrackingLocation",
+                    "city": "CHARLESTON",
+                    "state": "SC",
+                    "country": null,
+                    "zip": "29407"
+                  }
+                }
+              ],
+              "carrier_detail": {
+                "object": "CarrierDetail",
+                "service": "First-Class Package Service",
+                "container_type": null,
+                "est_delivery_date_local": null,
+                "est_delivery_time_local": null,
+                "origin_location": "HOUSTON TX, 77001",
+                "origin_tracking_location": {
+                  "object": "TrackingLocation",
+                  "city": "NORTH HOUSTON",
+                  "state": "TX",
+                  "country": null,
+                  "zip": "77315"
+                },
+                "destination_location": "CHARLESTON SC, 29401",
+                "destination_tracking_location": {
+                  "object": "TrackingLocation",
+                  "city": "CHARLESTON",
+                  "state": "SC",
+                  "country": null,
+                  "zip": "29407"
+                },
+                "guaranteed_delivery_date": null,
+                "alternate_identifier": null,
+                "initial_delivery_attempt": "2023-02-16T09:02:56Z"
+              },
+              "finalized": true,
+              "is_return": false,
+              "public_url": "https://track.easypost.com/djE6dHJrXzc0MjY1NjJmYTBmZjRmMTY4ZDkwNWVlY2YxZGUwYjBk"
+            },
+            "usps_zone": 4,
+            "return_address": {
+              "id": "adr_8019abdfc1d211eda1c5ac1f6bc7bdc6",
+              "object": "Address",
+              "created_at": "2023-03-13T19:08:55+00:00",
+              "updated_at": "2023-03-13T19:08:55+00:00",
+              "name": "James Bailey",
+              "company": null,
+              "street1": "123 Oak",
+              "street2": null,
+              "city": "Corona",
+              "state": "CA",
+              "zip": "92345",
+              "country": "US",
+              "phone": null,
+              "email": "jbailey+nobo@cofebe.com",
+              "mode": "test",
+              "carrier_facility": null,
+              "residential": null,
+              "federal_tax_id": null,
+              "state_tax_id": null,
+              "verifications": {
+                "delivery": {
+                  "success": false,
+                  "errors": [
+                    {
+                      "code": "E.ADDRESS.NOT_FOUND",
+                      "field": "address",
+                      "message": "Address not found",
+                      "suggestion": null
+                    }
+                  ]
+                }
+              }
+            },
+            "buyer_address": {
+              "id": "adr_800ffdffc1d211ed9da0ac1f6bc72124",
+              "object": "Address",
+              "created_at": "2023-03-13T19:08:55+00:00",
+              "updated_at": "2023-03-13T19:08:55+00:00",
+              "name": "NOELLE BONNER",
+              "company": "THE NOBO",
+              "street1": "90 NEW MONTGOMERY ST STE 400",
+              "street2": null,
+              "city": "SAN FRANCISCO",
+              "state": "CA",
+              "zip": "94105-4502",
+              "country": "US",
+              "phone": null,
+              "email": null,
+              "mode": "test",
+              "carrier_facility": null,
+              "residential": false,
+              "federal_tax_id": null,
+              "state_tax_id": null,
+              "verifications": {
+                "delivery": {
+                  "success": true,
+                  "errors": [],
+                  "details": {
+                    "latitude": 37.78761,
+                    "longitude": -122.4007,
+                    "time_zone": "America/Los_Angeles"
+                  }
+                }
+              }
+            },
+            "forms": [],
+            "fees": [
+              {
+                "object": "Fee",
+                "type": "LabelFee",
+                "amount": "0.00000",
+                "charged": true,
+                "refunded": false
+              },
+              {
+                "object": "Fee",
+                "type": "PostageFee",
+                "amount": "18.95000",
+                "charged": true,
+                "refunded": false
+              }
+            ],
+            "id": "shp_07f3e2894f734ec7b7ff37cc9eebbb9d",
+            "object": "Shipment"
+          },
+          "action": "trade",
+          "name": "Product 5",
+          "brand": "3.1 Phillip Lim",
+          "receipt": "false",
+          "price": 500,
+          "retailPrice": 750,
+          "category": "63500f0860f0259ebc06cd73",
+          "parentCategory": "63500f0860f0259ebc06cd6a",
+          "potentialTradeItems": [
+            {
+              "_id": "640f74c89f59c5152629aa71"
+            },
+            {
+              "_id": "640f74c89f59c5152629aa72"
+            },
+            {
+              "_id": "640f74c89f59c5152629aa73"
+            }
+          ],
+          "openToAllLuxuryOptions": true,
+          "createdAt": "2023-03-13T19:08:56.567Z",
+          "updatedAt": "2023-03-17T18:22:17.717Z",
+          "__v": 1
+        },
+        "requested": {
+          "tradeOffers": {
+            "incoming": [
+              "641a0a0b0d227ded8b198814"
+            ],
+            "outgoing": []
+          },
+          "attributes": [
+            {
+              "id": "yearPurchased",
+              "value": "2020"
+            },
+            {
+              "id": "smokingHome",
+              "value": "No"
+            },
+            {
+              "id": "petHome",
+              "value": "No"
+            },
+            {
+              "id": "color",
+              "value": "Black"
+            },
+            {
+              "id": "box",
+              "value": "No Box"
+            },
+            {
+              "id": "size",
+              "value": "5M"
+            },
+            {
+              "id": "condition",
+              "value": "New With Tags"
+            }
+          ],
+          "images": [
+            {
+              "url": "/tmp/product-4.png"
+            },
+            {
+              "url": "/tmp/product-3.png"
+            },
+            {
+              "url": "/tmp/product-6.png"
+            },
+            {
+              "url": "/tmp/product-2.png"
+            },
+            {
+              "url": "/tmp/product-7.png"
+            },
+            {
+              "url": "/tmp/product-6.png"
+            }
+          ],
+          "tags": [],
+          "sold": false,
+          "active": true,
+          "rejected": false,
+          "receivedByNobo": false,
+          "returnRequested": false,
+          "returnBy": null,
+          "giveaway": null,
+          "_id": "63500f0f60f0259ebc06dd91",
+          "name": "Awesome Ball",
+          "brand": "Aquazzura",
+          "price": 364,
+          "retailPrice": 372,
+          "action": "trade",
+          "vendor": "63500f0e60f0259ebc06dc3d",
+          "group": "men",
+          "description": "Saint Laurent’s SL/10H high-top sneakers are crafted of metallic gold smooth leather. 1”/25mm midsole (approximately). Rounded toe. Perforated vamp. Debossed “SL/10H” at quarter panels. Debossed logo at padded tongue and collar. Tonal midsole. Brown waxed flat laces. Tonal hardware. Lace-up style. Lined with leather. Rubber sole. Available in Gold. Made in Italy. | Saint Laurent Men’s SL/10H Leather Sneakers - Gold Size 7 M | A great designer gift for the holidays.",
+          "category": "63500f0860f0259ebc06cd3a",
+          "parentCategory": "63500f0860f0259ebc06cd28",
+          "potentialTradeItems": [],
+          "createdAt": "2022-10-19T14:51:59.402Z",
+          "updatedAt": "2023-03-21T19:48:28.483Z",
+          "__v": 0
+        }
+      },
+      "status": "pending",
+      "_id": "6414afd97022042fc9352f85",
+      "initiator": "63fd11313b7c7dba1f685d36",
+      "recipient": {
+        "profileBg": "/NOBO_defaultcoverimage.jpeg",
+        "emailVerified": true,
+        "blocked": false,
+        "saleSchedule": [],
+        "role": "basic",
+        "favorites": [],
+        "followers": [
+          "63500f0c60f0259ebc06d876"
+        ],
+        "following": [],
+        "favoriteBrands": [],
+        "notifications": [
+          "641a0a0c0d227ded8b19881e",
+          "6414afd97022042fc9352f8f",
+          "6410e2db9f59c5152629ce78",
+          "63bd5edab75021315d55dda6",
+          "63bd5edab75021315d55dd8c",
+          "63b5f00fced1ae9b83e0198d",
+          "63b5ee1aced1ae9b83e016e6",
+          "63b5ededced1ae9b83e0163e",
+          "63b5edc6ced1ae9b83e015ab",
+          "63b5ed8bced1ae9b83e01497",
+          "63a4e593ced1ae9b83e011a2",
+          "63a4e47cced1ae9b83e010ec",
+          "6399ef71f4cde7f6b0b4b896",
+          "6399eec8f4cde7f6b0b4b72c",
+          "6399e719d87e97ee7dcc67d4",
+          "6399e719d87e97ee7dcc67c7",
+          "6399e718d87e97ee7dcc67ba",
+          "6399e718d87e97ee7dcc67ad",
+          "63989f05adf9d3d148c693fe",
+          "637e9195c262cae2e550890f"
+        ],
+        "blurbText": "Tell us who you are, what you do and a little about your style!",
+        "reviews": [
+          "63b5ee57ced1ae9b83e017a6"
+        ],
+        "_id": "63500f0e60f0259ebc06dc3d",
+        "firstName": "Lavinia",
+        "lastName": "Crist",
+        "displayName": "test4",
+        "email": "test4@thenobo.com",
+        "orders": 0,
+        "totalSpend": 0,
+        "passwordHash": "$2b$10$ogjCZVA.vPw7BHh.YkXuh.fCboW82SAAwdbQOTsm.nOCAgLr20ju.",
+        "experiencePreferences": "men",
+        "stripeCustomer": "cus_KgwuH6FuhHrHFm",
+        "shippingAddress": [
+          {
+            "ep_deliverable": false,
+            "country": "US",
+            "_id": "63500f0e60f0259ebc06dc3e",
+            "firstName": "Olga",
+            "lastName": "Herzog",
+            "address1": "160 Broadway",
+            "address2": "",
+            "city": "New York",
+            "state": "New York",
+            "postalCode": "10038",
+            "phone": "462-910-3075",
+            "default": true
+          },
+          {
+            "ep_deliverable": false,
+            "country": "US",
+            "_id": "63500f0e60f0259ebc06dc3f",
+            "firstName": "Dayne",
+            "lastName": "Hartmann",
+            "address1": "111 W Jackson",
+            "address2": "",
+            "city": "Chicago",
+            "state": "Illinois",
+            "postalCode": "60604",
+            "phone": "226-767-6756",
+            "default": false
+          },
+          {
+            "ep_deliverable": false,
+            "country": "US",
+            "_id": "63500f0e60f0259ebc06dc40",
+            "firstName": "Mohamed",
+            "lastName": "Witting",
+            "address1": "690 Alameda St",
+            "address2": "",
+            "city": "Los Angeles",
+            "state": "California",
+            "postalCode": "90021",
+            "phone": "927-248-0928",
+            "default": false
+          }
+        ],
+        "avatar": "https://i.pravatar.cc/150?img=58",
+        "cart": {
+          "products": [],
+          "_id": "63500f0e60f0259ebc06dc41"
+        },
+        "memberSince": "2022-10-19T14:51:58.706Z",
+        "createdAt": "2022-10-19T14:51:58.713Z",
+        "updatedAt": "2023-03-21T19:48:28.523Z",
+        "__v": 22,
+        "styleFeed": "63500f0e60f0259ebc06dc45"
+      },
+      "createdAt": "2023-03-17T18:22:17.738Z",
+      "updatedAt": "2023-03-17T18:22:17.738Z"
+    }
+  ],
+  "received": []
+}

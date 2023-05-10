@@ -1,0 +1,48 @@
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: #fefcf6;
+  overflow: auto;
+  max-height: 400px;
+  height: auto;
+  padding-bottom: 15vh;
+}
+
+.image-grid img {
+  height: 168px;
+  width: 168px;
+  cursor: pointer;
+}
+
+.image-grid-container-card {
+  position: relative;
+}
+
+.image-grid-container {
+  position: relative;
+}
+
+.image-grid-container-text {
+  font-size: 12px;
+  line-height: 15px;
+  line-height: 100%;
+  vertical-align: top;
+  color: #FFFFFF;
+  text-align: center;
+  background-color: #D6980E;
+  max-width: '168px';
+  min-height: '168px';
+  display: 'flex';
+  justify-content: 'center';
+  align-items: 'center';
+  flex-direction: column;
+  padding: 6px;
+}
+
+.image-grid-container-text > a {
+  padding-right: 1ch;
+  color: #FFFFFF;
+}

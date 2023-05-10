@@ -27,7 +27,7 @@ import {
   useIonToast,
   IonPopover,
 } from '@ionic/react';
-import './URP.css';
+import '../styles.scss';
 import './SignUpAthlete.scss';
 import './cropper.css';
 import SignupAddStatsCategoryModal from '../components/SignupAddStatsCategoryModal';
@@ -36,7 +36,7 @@ import { getCountries } from '../data/countries';
 import { getStates } from '../data/states';
 import { takePicture } from '../components/UrpCam';
 import Cropper from 'react-cropper';
-import UrpSelect from '../components/UrpSelect';
+import UrpSelect from '../components/Select';
 import { getPositions } from '../data/sport-positions';
 import { getSchools } from '../data/schools';
 import { getUniversities } from '../data/university-full';
@@ -553,7 +553,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
   let storage: any = window.localStorage.getItem('persistedState');
   let user = JSON.parse(storage);
   let pdfURL = `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/transcript/11/db65caea-44d5-4e66-928b-d414e4e89f83/transcript.pdf`;
-  console.log(pdfURL)
+  console.log(pdfURL);
 
   // EDIT MODE ADDITION //
   function getUserId() {
@@ -2495,7 +2495,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'nobo-input' + (socialLinkInstagramValid ? '' : ' invalid')
+                      'nobo-input' +
+                      (socialLinkInstagramValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
@@ -2587,7 +2588,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   </IonItem>
                   <IonItem
                     className={
-                      'nobo-input' + (socialLink247SportsValid ? '' : ' invalid')
+                      'nobo-input' +
+                      (socialLink247SportsValid ? '' : ' invalid')
                     }
                     lines="full"
                   >
@@ -4078,9 +4080,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           link.
                         </p>
 
-                        <p>
-                          Maximum size for video upload is 260MB.
-                        </p>
+                        <p>Maximum size for video upload is 260MB.</p>
                       </span>
                       {!uploadVideoMode && (
                         <div className="nobo-video-upload-button">
@@ -4241,7 +4241,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 {isSectionActive('football') && (
                   <IonList className="nobo-list-input" slot="content">
                     <IonItem lines="full" className="nobo-blank">
-                      <IonLabel className="nobo-signup-label" position="stacked">
+                      <IonLabel
+                        className="nobo-signup-label"
+                        position="stacked"
+                      >
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4459,7 +4462,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   isSectionActive('mbasketball')) && (
                   <IonList className="nobo-list-input" slot="content">
                     <IonItem lines="full" className="nobo-blank">
-                      <IonLabel className="nobo-signup-label" position="stacked">
+                      <IonLabel
+                        className="nobo-signup-label"
+                        position="stacked"
+                      >
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4576,7 +4582,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 {isSectionActive('baseball') && (
                   <IonList className="nobo-list-input" slot="content">
                     <IonItem lines="full" className="nobo-blank">
-                      <IonLabel className="nobo-signup-label" position="stacked">
+                      <IonLabel
+                        className="nobo-signup-label"
+                        position="stacked"
+                      >
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4691,7 +4700,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 {isSectionActive('softball') && (
                   <IonList className="nobo-list-input" slot="content">
                     <IonItem lines="full" className="nobo-blank">
-                      <IonLabel className="nobo-signup-label" position="stacked">
+                      <IonLabel
+                        className="nobo-signup-label"
+                        position="stacked"
+                      >
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4807,7 +4819,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   isSectionActive('mvolleyball')) && (
                   <IonList className="nobo-list-input" slot="content">
                     <IonItem lines="full" className="nobo-blank">
-                      <IonLabel className="nobo-signup-label" position="stacked">
+                      <IonLabel
+                        className="nobo-signup-label"
+                        position="stacked"
+                      >
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4925,7 +4940,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   isSectionActive('mlacrosse')) && (
                   <IonList className="nobo-list-input" slot="content">
                     <IonItem lines="full" className="nobo-blank">
-                      <IonLabel className="nobo-signup-label" position="stacked">
+                      <IonLabel
+                        className="nobo-signup-label"
+                        position="stacked"
+                      >
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -5092,7 +5110,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 {(isSectionActive('wsoccer') || isSectionActive('msoccer')) && (
                   <IonList className="nobo-list-input" slot="content">
                     <IonItem lines="full" className="nobo-blank">
-                      <IonLabel className="nobo-signup-label" position="stacked">
+                      <IonLabel
+                        className="nobo-signup-label"
+                        position="stacked"
+                      >
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -5386,10 +5407,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </div>
                   </IonItem>
                   {showPDF && (
-                      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.3.122/build/pdf.worker.min.js">
-                        <Viewer fileUrl={pdfURL} />;
-                      </Worker>
-                    )}
+                    <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.3.122/build/pdf.worker.min.js">
+                      <Viewer fileUrl={pdfURL} />;
+                    </Worker>
+                  )}
                 </IonList>
               </IonAccordion>
             </div>

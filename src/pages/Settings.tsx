@@ -1,452 +1,163 @@
-import {
-  IonButton,
-  IonContent,
-  IonHeader,
-  IonItem,
-  IonLabel,
-  IonPage,
-  IonToolbar,
-  IonRow,
-  IonCol,
-  IonTitle,
-  IonButtons,
-  IonIcon,
-  useIonActionSheet,
-  useIonViewWillEnter,
-} from '@ionic/react';
 import { useState } from 'react';
-import { AuthService } from '../services/AuthService';
-import { UserService } from '../services/UserService';
-import { chevronForwardOutline, chevronBackOutline } from 'ionicons/icons';
-
 import { useHistory } from 'react-router-dom';
+import { IonHeader, IonContent, IonPage, useIonViewWillEnter } from '@ionic/react';
+import './Settings.scss';
+import { UserService } from '../services/UserService';
+import { AuthService } from '../services/AuthService';
+import { User } from '../models';
+import { getImageUrl } from '../utils';
 
 const Settings: React.FC = () => {
   const history = useHistory();
   const userService = new UserService();
-  const btnColor = '#00816D';
-  const [userSubscribed, setUserSubscribed] = useState(false);
-
   const authService = new AuthService();
-  const [present] = useIonActionSheet();
-
-  const userId = authService.getUserID();
-
-  function emailSupport(subject: string) {
-    window.location.href = `mailto:support@noboplus.com?subject=${subject}`;
-  }
-
-  async function logout() {
-    if (await authService.logout()) {
-      history.push('/login');
-    }
-  }
+  const [user, setUser] = useState<User>();
 
   useIonViewWillEnter(() => {
-    userService
-      .getProfile(userId)
-      .then((res) => res.json())
-      .then((data) => {
-        setUserSubscribed(data.is_premium?.String === 'true');
-      });
+    userService.getMe().then(user => {
+      console.log('user', user);
+      setUser(user);
+    });
   });
 
-  function openContactUs() {
-    present({
-      cssClass: 'nobo-action-sheet',
-      buttons: [
-        {
-          text: 'Send Support Email',
-          data: {
-            action: 'supportEmail',
-          },
-        },
-        {
-          text: 'Delete Account',
-          data: {
-            action: 'deleteAccount',
-          },
-          role: 'destructive',
-        },
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          data: {
-            action: 'cancel',
-          },
-        },
-      ],
-      onDidDismiss: ({ detail }) => {
-        if (detail.data.action !== undefined) {
-          console.log(detail);
-        }
-
-        if (detail.data.action == 'deleteAccount') {
-          // emailSupport('Delete Account Request');
-          userService
-            .deleteAccount(userId, { user_id: userId })
-            .then((res) => {
-              res.json();
-              console.log(res);
-            })
-            .then((data) => {
-              logout();
-            });
-        }
-
-        if (detail.data.action == 'supportEmail') {
-          emailSupport('Support Email');
-        }
-      },
-    });
-  }
-
   return (
-    <IonPage>
-      <IonHeader className="home-header">
-        <IonToolbar className="home-header-toolbar">
-          <IonButtons slot="start">
-            <IonButtons slot="start">
-              <IonIcon
-                style={{ paddingLeft: '1rem' }}
-                onClick={() => {
-                  history.push('/home');
-                }}
-                slot="icon-only"
-                icon={chevronBackOutline}
-              />
-            </IonButtons>
-          </IonButtons>
-          <IonTitle>Settings</IonTitle>
-        </IonToolbar>
+    <IonPage className="settings-container">
+      <IonHeader className="settings-header">
+        <div
+          className="close-btn"
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.goBack();
+          }}
+        >
+          <img src="/assets/images/close-black.svg" alt="close" />
+        </div>
+        <div className="content">
+          <div
+            className="avatar"
+            style={{ backgroundImage: getImageUrl(user?.avatar || '') }}
+          ></div>
+          <div className="name">
+            {user?.firstName} {user?.lastName}
+          </div>
+        </div>
       </IonHeader>
-      <IonContent>
-        <IonItem
-          style={{ paddingTop: '1rem' }}
-          onClick={() => {
-            history.push('/manage-subscription');
-          }}
-          // disabled
-        >
-          <IonRow
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <IonCol size="1">
-              <div>
-                <IonIcon name="card"></IonIcon>
-              </div>
-            </IonCol>
-            <IonCol offset=".25" size="9">
-              <IonLabel
-                style={{
-                  color: '#00816D',
-                }}
-              >
-                <h2>Manage Subscription</h2>
-              </IonLabel>
-            </IonCol>
-            <IonCol size="1">
-              <IonLabel
-                style={{
-                  color: '#00816D',
-                }}
-              >
-                <IonIcon
-                  onClick={() => {
-                    history.push('/settings');
-                  }}
-                  slot="icon-only"
-                  icon={chevronForwardOutline}
-                />
-              </IonLabel>
-            </IonCol>
-          </IonRow>
-        </IonItem>
-        <IonItem
-          onClick={() => {
-            history.push('/home/all-organizations');
+      <IonContent className="settings-content">
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/account');
           }}
         >
-          <IonRow
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <IonCol size="1">
-              <div>
-                <IonIcon name="card"></IonIcon>
-              </div>
-            </IonCol>
-            <IonCol offset=".25" size="9">
-              <IonLabel
-                style={{
-                  color: '#00816D',
-                }}
-              >
-                <h2>Organizations</h2>
-              </IonLabel>
-            </IonCol>
-            <IonCol size="1">
-              <IonLabel
-                style={{
-                  color: '#00816D',
-                }}
-              >
-                <IonIcon
-                  onClick={() => {
-                    history.push('/home/organization-profile');
-                  }}
-                  slot="icon-only"
-                  icon={chevronForwardOutline}
-                />
-              </IonLabel>
-            </IonCol>
-          </IonRow>
-        </IonItem>
-        <IonItem
-          onClick={() => {
-            history.push('/home/organization-profile');
-          }}
-          disabled
-        >
-          <IonRow
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <IonCol size="1">
-              <div>
-                <IonIcon name="card"></IonIcon>
-              </div>
-            </IonCol>
-            <IonCol offset=".25" size="9">
-              <IonLabel
-                style={{
-                  color: '#00816D',
-                }}
-              >
-                <h2>Account Settings</h2>
-              </IonLabel>
-            </IonCol>
-            <IonCol size="1">
-              <IonLabel
-                style={{
-                  color: '#00816D',
-                }}
-              >
-                <IonIcon
-                  onClick={() => {
-                    history.push('/home/organization-profile');
-                  }}
-                  slot="icon-only"
-                  icon={chevronForwardOutline}
-                />
-              </IonLabel>
-            </IonCol>
-          </IonRow>
-        </IonItem>
-        <IonItem
-          onClick={() => {
-            history.push('/home/organization-profile');
-          }}
-          disabled
-        >
-          <IonRow
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <IonCol size="1">
-              <div>
-                <IonIcon name="card"></IonIcon>
-              </div>
-            </IonCol>
-            <IonCol offset=".25" size="9">
-              <IonLabel
-                style={{
-                  color: '#00816D',
-                }}
-              >
-                <h2>Change Password</h2>
-              </IonLabel>
-            </IonCol>
-          </IonRow>
-        </IonItem>
-        <IonItem
-          onClick={() => {
-            history.push('/home/organization-profile');
-          }}
-          style={{ marginTop: '4rem' }}
-          disabled
-        >
-          <IonRow
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <IonCol size="1">
-              <div>
-                <IonIcon name="card"></IonIcon>
-              </div>
-            </IonCol>
-            <IonCol offset=".25" size="9">
-              <IonLabel
-                style={{
-                  color: '#00816D',
-                }}
-              >
-                <h2>Notifications</h2>
-              </IonLabel>
-            </IonCol>
-            <IonCol size="1">
-              <IonLabel
-                style={{
-                  color: '#00816D',
-                }}
-              >
-                <IonIcon
-                  onClick={() => {
-                    history.push('/home/all-organizations');
-                  }}
-                  slot="icon-only"
-                  icon={chevronForwardOutline}
-                />
-              </IonLabel>
-            </IonCol>
-          </IonRow>
-        </IonItem>
-        <IonItem
-          onClick={() => {
-            openContactUs();
+          Account Settings
+        </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/shipping');
           }}
         >
-          <IonRow
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <IonCol size="1">
-              <div>
-                <IonIcon name="card"></IonIcon>
-              </div>
-            </IonCol>
-            <IonCol offset=".25" size="9">
-              <IonLabel
-                style={{
-                  color: '#00816D',
-                }}
-              >
-                <h2>Contact Us / Delete Account</h2>
-              </IonLabel>
-            </IonCol>
-            <IonCol size="1">
-              <IonLabel
-                style={{
-                  color: '#00816D',
-                }}
-              >
-                <IonIcon slot="icon-only" icon={chevronForwardOutline} />
-              </IonLabel>
-            </IonCol>
-          </IonRow>
-        </IonItem>
-        {userSubscribed && (
-          <IonItem
-            onClick={() => {
-              history.push(`home/profile-insights/${userId}`);
-            }}
-          >
-            <IonRow
-              style={{
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <IonCol size="1">
-                <div>
-                  <IonIcon name="card"></IonIcon>
-                </div>
-              </IonCol>
-              <IonCol offset=".25" size="9">
-                <IonLabel
-                  style={{
-                    color: '#00816D',
-                  }}
-                >
-                  <h2>View Insights</h2>
-                </IonLabel>
-              </IonCol>
-              <IonCol size="1">
-                <IonLabel
-                  style={{
-                    color: '#00816D',
-                  }}
-                >
-                  <IonIcon
-                    onClick={() => {
-                      history.push(`home/profile-insights/${userId}`);
-                    }}
-                    slot="icon-only"
-                    icon={chevronForwardOutline}
-                  />
-                </IonLabel>
-              </IonCol>
-            </IonRow>
-          </IonItem>
-        )}
-        <IonRow>
-          <IonCol
-            className="nobo-center"
-            style={{ paddingTop: '2rem', textAlign: 'center' }}
-            size="11"
-          >
-            <a
-              onClick={(e) => {
-                e.preventDefault();
-                logout();
-              }}
-            >
-              <h5>Logout</h5>
-            </a>
-          </IonCol>
-          <IonCol
-            className="nobo-center"
-            style={{
-              paddingTop: '2rem',
-              textAlign: 'center',
-              textDecoration: 'underline',
-            }}
-            size="11"
-          >
-            <a href="/terms-and-conditions">
-              <h5>Terms & Conditions</h5>
-            </a>
-          </IonCol>
-          <IonCol
-            className="nobo-center"
-            style={{ textAlign: 'center', textDecoration: 'underline' }}
-            size="11"
-          >
-            <a href="/privacy-policy">
-              <h5>Privacy Policy</h5>
-            </a>
-          </IonCol>
-        </IonRow>
+          Shipping
+        </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/payment');
+          }}
+        >
+          My Payment Methods
+        </div>
+        <div className="sep"></div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/trades');
+          }}
+        >
+          My Trades
+        </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/purchases');
+          }}
+        >
+          My Purchases
+        </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/sales');
+          }}
+        >
+          My Sales
+        </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/offers');
+          }}
+        >
+          My Offers
+        </div>
+        <div className="sep"></div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/returns');
+          }}
+        >
+          My Returns
+        </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/withdraw');
+          }}
+        >
+          Withdrawal Requests
+        </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/savings');
+          }}
+        >
+          Savings &amp; Sustainability
+        </div>
+        <div
+          className="logout"
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            authService.logout();
+            history.push('/');
+          }}
+        >
+          <div>Logout</div>
+          <img src="/assets/images/logout.svg" alt="logout" />
+        </div>
+        <div
+          className="delete-account"
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('delete account');
+          }}
+        >
+          Delete Account
+        </div>
       </IonContent>
     </IonPage>
   );

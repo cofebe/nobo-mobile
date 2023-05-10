@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import { LikeItem } from '../data/athlete-feed';
 import {
   IonButtons,
@@ -17,8 +17,8 @@ import {
   IonText,
 } from '@ionic/react';
 import './PostDetailLikes.scss';
-import { chevronBackOutline } from "ionicons/icons";
-import { FeedService } from "../services/FeedService";
+import { chevronBackOutline } from 'ionicons/icons';
+import { FeedService } from '../services/FeedService';
 import PostLikeItem from '../components/PostLikeItem';
 
 const PostDetailLikes: React.FC = () => {
@@ -28,15 +28,15 @@ const PostDetailLikes: React.FC = () => {
   const [likes, setLikes] = useState<LikeItem[]>([]);
   const [searchText, setSearchText] = useState<string>('');
 
-  console.log("PostDetailLikes: ", postId);
+  console.log('PostDetailLikes: ', postId);
 
   useIonViewWillEnter(() => {
-    let storage: any = window.localStorage.getItem("persistedState");
+    let storage: any = window.localStorage.getItem('persistedState');
     let user = JSON.parse(storage);
 
     setPostId(getPostId());
 
-    console.log("feedService.getPostLikes():", postId)
+    console.log('feedService.getPostLikes():', postId);
     feedService
       .getPostLikes(user.user['user_id'], postId)
       .then(res => res.json())
@@ -58,17 +58,16 @@ const PostDetailLikes: React.FC = () => {
       <IonHeader>
         <IonToolbar
           style={{
-            padding: "40px 10px 10px 10px",
+            padding: '40px 10px 10px 10px',
           }}
         >
-          <IonButtons slot="start"
-              onClick={() => {
-                history.goBack()
-              }}>
-            <IonIcon
-              slot="icon-only"
-              icon={chevronBackOutline}
-            />
+          <IonButtons
+            slot="start"
+            onClick={() => {
+              history.goBack();
+            }}
+          >
+            <IonIcon slot="icon-only" icon={chevronBackOutline} />
             <IonText>Post</IonText>
           </IonButtons>
         </IonToolbar>
@@ -92,26 +91,30 @@ const PostDetailLikes: React.FC = () => {
                     />
                   </svg>
                 </div>
-                <div>
-                  {likes?.length || 0}
-                </div>
+                <div>{likes?.length || 0}</div>
               </div>
             </div>
-            <div className="like-label-container">
-              Total Likes
-            </div>
+            <div className="like-label-container">Total Likes</div>
           </IonCol>
         </IonRow>
       </IonItem>
       <IonContent className="post-detail-page" fullscreen>
-      <IonSearchbar id="searchInput" value={searchText} onIonChange={(e) => {
-        setSearchText(e.detail.value || '');
-      }} enterkeyhint="search"></IonSearchbar>
+        <IonSearchbar
+          id="searchInput"
+          value={searchText}
+          onIonChange={e => {
+            setSearchText(e.detail.value || '');
+          }}
+          enterkeyhint="search"
+        ></IonSearchbar>
         <IonList className="nobo-post-detail-background">
           {(likes || [])
-            .filter(like => !searchText || (like.from_name.toLowerCase().includes(searchText.toLowerCase())))
-            .map(like => <PostLikeItem like={like} postId={postId} />)
-          }
+            .filter(
+              like => !searchText || like.from_name.toLowerCase().includes(searchText.toLowerCase())
+            )
+            .map(like => (
+              <PostLikeItem like={like} postId={postId} />
+            ))}
         </IonList>
       </IonContent>
     </IonPage>

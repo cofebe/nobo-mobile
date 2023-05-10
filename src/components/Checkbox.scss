@@ -1,0 +1,31 @@
+.app-checkbox-container {
+
+    .checkbox {
+        display: flex;
+        align-items: center;
+
+        .image {
+            img {
+                height: 16px;
+                width: 16px;
+                display: block;
+            }
+        }
+
+        .label {
+            margin-left: 8px;
+            font-size: 10px;
+            color: black;
+        }
+    }
+
+    .error-message {
+        margin-top: 8px;
+        margin-left: 6px;
+        margin-right: 6px;
+        color: red;
+        font-size: 10px;
+        text-transform: uppercase;
+    }
+
+}
