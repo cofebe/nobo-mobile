@@ -20,7 +20,7 @@ import { Cropper } from "react-cropper";
 
 
 
-const ProfilePicture:React.FC = () => {
+const ProfilePicture: React.FC = () => {
   const userService = new UserService()
   const history = useHistory();
   const [photoData, setPhotoData] = useState(Object);
@@ -40,14 +40,14 @@ const ProfilePicture:React.FC = () => {
 
 
   const handleSubmit = async (imgData: any) => {
-      userService.uploadProfileImg( imgData)
-        .then((res) => {
-          history.push("/follow-people")
-        })
-        .catch((err: any) => {
-          console.log(" ProfilePicture error", err);
-        });
-  
+    userService.uploadProfileImg(imgData)
+      .then((res) => {
+        history.push("/follow-people")
+      })
+      .catch((err: any) => {
+        console.log(" ProfilePicture error", err);
+      });
+
   };
 
 
@@ -119,7 +119,7 @@ const ProfilePicture:React.FC = () => {
 
 
 
-  
+
   return (
     <IonPage id="profile-picture-page" className="profile-picture-main-container">
       <IonContent className="profile-picture-ion-content">
@@ -187,7 +187,7 @@ const ProfilePicture:React.FC = () => {
 
 
             {/* CLEAR PHOTO */}
-            {cropperToggler && (<div className='profile-picture-clear-photo' 
+            {cropperToggler && (<div className='profile-picture-clear-photo'
               onClick={(e) => {
                 e.preventDefault();
                 clearCameraPhoto()

@@ -2,7 +2,8 @@
     "rules": {
             "indent": [ "error", 2, { "SwitchCase": 1 } ],
             "quotes": [ 2, "single" ],
-            "linebreak-style": [ 2, "unix" ],
+            "linebreak-style": 0,
+        //     "linebreak-style": [ 2, "unix" ],
             "semi": [ 2, "always" ],
             "no-console": 0,
             "camelcase": [ 2, { "properties": "always" } ],

@@ -4,14 +4,10 @@ export interface LoginResponse {
   error: string;
 }
 export interface SignUpResponse {
-<<<<<<< HEAD
   success: string;
   user: User;
   token: string;
- 
-=======
-  success: boolean;
->>>>>>> 04990fa4d6b12b251bc4006b8c857ef0b2b3ef26
+
 }
 
 export interface User {
@@ -487,7 +483,6 @@ export interface Conversation {
   _id: string;
 }
 
-<<<<<<< HEAD
 // signup type
 export interface SignUpType{
   firstName:string
@@ -497,15 +492,6 @@ export interface SignUpType{
   password:string
   comfirmPassword:string
  
-=======
-export interface SignUpType {
-  firstName: string;
-  lastName: string;
-  email: string;
-  userName: string;
-  password: string;
-  comfirmPassword: string;
->>>>>>> 04990fa4d6b12b251bc4006b8c857ef0b2b3ef26
 }
 
 

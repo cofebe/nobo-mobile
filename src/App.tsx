@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
@@ -48,10 +47,6 @@ import FollowPeople from './pages/FollowPeople';
 import SelectBrands from './pages/SelectBrands';
 import CreateFirstPost from './pages/CreateFirstPost';
 
-
-
-
-
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -71,7 +66,6 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import OfferComplete from './pages/OfferComplete';
-
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -218,9 +212,28 @@ const App: React.FC = () => {
             </Route>
 
             {/* URP */}
-           
-            
-            
+
+            <Route path="/signup-details" exact={true}>
+              <SignUpDetails />
+            </Route>
+            <Route path="/signup" exact={true}>
+              <SignUp />
+            </Route>
+            <Route path="/experience" exact={true}>
+              <Experience />
+            </Route>
+            <Route path="/profile-picture" exact={true}>
+              <ProfilePicture />
+            </Route>
+            <Route path="/follow-people" exact={true}>
+              <FollowPeople />
+            </Route>
+            <Route path="/select-brands" exact={true}>
+              <SelectBrands />
+            </Route>
+            <Route path="/onboarding-post" exact={true}>
+              <CreateFirstPost />
+            </Route>
             <Route path="/onboarding-post" exact={true}>
               <CreateFirstPost />
             </Route>
@@ -233,7 +246,7 @@ const App: React.FC = () => {
             <Route path="/signup-roles" exact={true}>
               <Roles />
             </Route>
-           
+
             <Route path="/signup-athlete" exact={true}>
               <SignUpAthlete />
             </Route>

@@ -39,7 +39,6 @@ const SignUp = () => {
 
   const signup = () => {
     if (person.password !== person.comfirmPassword) return
-
     userService
       .signup(person)
       .then((user: User) => {
