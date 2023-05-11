@@ -38,35 +38,36 @@ const FollowPeople: React.FC = () => {
       })
   });
 
- 
+  const myFollowList = () => {
+    userService.getMe()
+      .then((user: User) => {
+        setPeopleIfollow(user.following)
+      })
+      .catch((error) => { console.log("error msg while fetching user profile", error) })
+  }
 
-  // Getting current User
+  // Load My Following List
   useIonViewWillEnter(() => {
-      userService.getMe()
-        .then((user:User) => {
-          setPeopleIfollow(user.following)
-        })
-        .catch((error) => { console.log("error msg while fetching user profile", error) })
+    myFollowList()
   })
 
 
-// Following  a user
-  const followUser = (userToFollowId: string) => {
-    setFollow([...follow, userToFollowId])
-    const result = peopleIfollow.includes(userToFollowId, 0)
+  // Following  a user
+  const followUser = async (userId: string) => {
+    myFollowList()
+    setFollow([...follow, userId])
+    const result = peopleIfollow.includes(userId, 0)
     if (!result) {
-      userService.followUserS(userToFollowId)
-        .then((user: User) => {
-          console.log(" Your updated following list ", user.following)
+      userService.followUsers(userId)
+        .then((user) => {
+          console.log(" my updated following list ", user.following)
         })
         .catch((err: any) => {
           console.log(" FollowUser", err);
         });
     } else {
-      console.log(`You already followed this user ${userToFollowId}`)
+      console.log(`You already followed this user ${userId}`)
     }
-
-
   }
 
 
@@ -134,7 +135,7 @@ const FollowPeople: React.FC = () => {
           ))}
         </div>
 
-         {follow.length > 0 ? "" : <IonRow className={"follow-people-skip-container"}>
+        {follow.length > 0 ? "" : <IonRow className={"follow-people-skip-container"}>
           <IonButton fill='clear' className="follow-people-skip-text"
             disabled={follow.length > 0}
             onClick={() => {
@@ -145,7 +146,7 @@ const FollowPeople: React.FC = () => {
 
 
 
-        <div className={follow.length < 1 ?  "follow-people-submit-btn-container2" : "follow-people-submit-btn-container"}>
+        <div className={follow.length < 1 ? "follow-people-submit-btn-container2" : "follow-people-submit-btn-container"}>
           <Button
             label="NEXT"
             large={true}

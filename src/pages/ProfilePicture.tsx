@@ -42,7 +42,7 @@ const ProfilePicture: React.FC = () => {
   const handleSubmit = async (imgData: any) => {
     userService.uploadProfileImg(imgData)
       .then((res) => {
-        history.push("/follow-people")
+        if(res){history.push("/follow-people")}
       })
       .catch((err: any) => {
         console.log(" ProfilePicture error", err);

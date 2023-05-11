@@ -401,9 +401,9 @@ export class UserService extends BaseService {
 
 
 
-// SIGNUP
+  // SIGNUP
   async signup(person: SignUpType): Promise<User> {
-    const response = await super.fetch('POST', '/api/users/register',{
+    const response = await super.fetch('POST', '/api/users/register', {
       firstName: person.firstName,
       lastName: person.lastName,
       email: person.email,
@@ -411,33 +411,32 @@ export class UserService extends BaseService {
       password: person.password
     });
 
-    const json:SignUpResponse = await response.json()
+    const json: SignUpResponse = await response.json()
+    if (json.token) {
+      const authService = new AuthService();
+      authService.setUserToken(json.token);
+      authService.setUserId(json.user._id);
+      authService.setUserDisplayName(json.user.displayName);
+    }
+
     return json.user;
   }
 
-
-
-  // EXPERIENCE
-  async experience(experienceOption: string) {
-    const response = await super.fetch('POST', '/api/users/me',{
-      "experiencePreferences": experienceOption 
-    });
-    const json:ExperienceResponse = await response.json()
+  // EXPERIENCE PREFERENCE
+  async experience(experiencePreferences: string) {
+    const response = await super.fetch('POST', '/api/users/me', { experiencePreferences });
+    const json: ExperienceResponse = await response.json()
     return json.currentUser;
 
   }
 
-
   //UPLOAD PROFILE PICTURE
-  async uploadProfileImg( picData: any) {
-    const response = await super.fetch('POST', '/api/users/update-avatar',{
-      "imgUrl": picData  
-    });
-    const json:ProfilPicResponse = await response.json()
+  async uploadProfileImg(imgUrl: any) {
+    const response = await super.fetch('POST', '/api/users/update-avatar', { imgUrl });
+    const json: ProfilPicResponse = await response.json()
     return json.url;
 
   }
-
 
   // GET EXISTING USERS
   async getUsers() {
@@ -451,38 +450,30 @@ export class UserService extends BaseService {
   }
 
   // FOLLOW A USER 
-  async followUserS(usersToFollow: any) {
-    const response = await super.fetch('POST', '/api/users/follow',{
-      "userId": usersToFollow  
-    });
-       return response.json()
+  async followUsers(userId: string): Promise<User> {
+    console.log("res from server ", userId)
+    const response = await super.fetch('POST', '/api/users/follow', { userId });
+    return response.json()
 
   }
 
-
- 
   // GET BRANDS
   async getBrands() {
     const response = await fetch("https://thenobo.com/api/brands/all")
-    const json:BrandsResponse = await response.json()
+    const json: BrandsResponse = await response.json()
     return json.brands
 
   }
 
-
   // SELECTED BRAND
-  async selectBrand( brandId: string) {
-    const response = await super.fetch('POST', '/api/brands/add-favorite',{
-      "brandId": brandId   
-    });
-        return response.json()
+  async selectBrand(brandId: string) {
+    const response = await super.fetch('POST', '/api/brands/add-favorite', { brandId });
+    return response.json()
   }
 
   //CREATE FIRST POST
-  async createPost(post:string) {
-    const response = await super.fetch('POST', '/api/feed/create-item',{
-      "userMessage": post
-    });
+  async createPost(userMessage: string) {
+    const response = await super.fetch('POST', '/api/feed/create-item', { userMessage });
     return response.json()
   }
 

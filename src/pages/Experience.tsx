@@ -34,10 +34,10 @@ const Experience: React.FC = () => {
     userService
       .experience(expOptionSelected)
       .then((user: User) => {
-        history.push("/profile-picture");
+        if(user){ history.push("/profile-picture");}
       })
       .catch((err: any) => {
-        console.log("signup error", err);
+        console.log("experience error", err);
       });
 
   };

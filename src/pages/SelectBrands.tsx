@@ -54,13 +54,11 @@ const SelectBrands: React.FC = () => {
     }
   }
 
-
-
   const handleSubmit = async () => {
     userService
       .selectBrand(tickedBrand)
       .then((res) => {
-        history.push("/onboarding-post")
+        if(res){history.push("/onboarding-post")}        
       })
       .catch((err: any) => {
         console.log("SelectBrand error", err);

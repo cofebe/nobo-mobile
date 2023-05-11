@@ -42,7 +42,9 @@ const SignUp = () => {
     userService
       .signup(person)
       .then((user: User) => {
-        history.replace("/experience");
+        if(user){
+          history.replace("/experience");
+        }
       })
       .catch((err: any) => {
         console.log('SignUp error', err);
