@@ -42,7 +42,9 @@ const ProfilePicture: React.FC = () => {
   const handleSubmit = async (imgData: any) => {
     userService.uploadProfileImg(imgData)
       .then((res) => {
-        if(res){history.push("/follow-people")}
+        if(res){
+          history.push("/follow-people")
+        }
       })
       .catch((err: any) => {
         console.log(" ProfilePicture error", err);
@@ -126,7 +128,7 @@ const ProfilePicture: React.FC = () => {
         <div className="profile-picture-header">
           <img
             onClick={() => {
-              history.push("/get-started");
+              history.push("/experience");
             }}
             className="profile-picture-back-btn"
             style={{ color: "black" }}

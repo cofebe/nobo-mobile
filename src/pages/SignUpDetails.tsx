@@ -61,7 +61,7 @@ const SignUpDetails: React.FC = () => {
       <div className="signup-details-background-image">
         <div>
           <img
-            style={{ marginLeft: '5%', marginTop: '13%' }}
+            style={{ marginLeft: '20px', marginTop: '55px' }}
             onClick={() => {
               history.goBack();
             }}
@@ -72,7 +72,7 @@ const SignUpDetails: React.FC = () => {
         </div>
         <IonRow className="signup-details-nobo-logo">
           <IonCol class="ion-justify-content-center" style={{ display: 'flex' }}>
-            <img height={60} src="assets/images/nobo-logo-white.png" alt="logo" />
+            <img height={65} src="assets/images/nobo-logo-white.png" alt="logo" />
           </IonCol>
         </IonRow>
 

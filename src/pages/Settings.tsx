@@ -19,7 +19,6 @@ const Settings: React.FC = () => {
       setUser(user);
     });
   });
-console.log("checking the settings avater :",user?.avatar )
   return (
     <IonPage className="settings-container">
       <IonHeader className="settings-header">

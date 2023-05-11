@@ -1,6 +1,6 @@
 import ProfileSummary from '../components/ProfileSections/ProfileSummary';
 import { useState, useRef } from 'react';
-import { isPlatform } from '@ionic/react';
+import { IonTitle, isPlatform } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { NoboProfile, emptyProfile } from '../data/nobo-profile';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing';
@@ -51,10 +51,11 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
   const [targetSection, setTargetSection] = useState('Feed');
   const [reviewData, setReviewData] = useState<any[]>([]);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false)
 
   useIonViewDidEnter(() => {
     reset();
-
+    modalSwitch()
     const onPageLoad = () => {
       loadProfile();
 
@@ -73,8 +74,22 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
     }
   });
 
+  const modalSwitch = () => {
+    const newUser = localStorage.getItem("newUser")
+    if (newUser) {
+      setModalVisible(true)
+      console.log("we found new newUser")
+
+    } else {
+      console.log("no newUser")
+    }
+  }
+
+
   useIonViewDidLeave(() => {
     reset();
+    localStorage.removeItem("newUser")
+
   });
 
   var options = {
@@ -165,7 +180,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           text: 'Cancel',
           role: 'cancel',
           data: {
-            action: () => {}, // noop
+            action: () => { }, // noop
           },
         },
       ],
@@ -299,6 +314,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
       checkIfFollowing();
     }, 250);
   }
+
   return (
     <IonPage className="home-page-athlete-profile" style={{ backgroundColor: '#F9FBFB' }}>
       <IonContent className="athlete-profile-content" scrollY={false}>
@@ -454,6 +470,49 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
         {targetSection === 'Reviews' && <ReviewList reviewData={noboProfile.reviews}></ReviewList>}
         <div style={{ height: '5vh' }}></div>
       </IonContent>
+      {modalVisible && (<div className='nobo-modal-container' id='relative'>
+      </div>)}
+
+      {modalVisible && (<div className='nobo-modal'>
+
+        <h3 className="profile-modal-title">
+          Check Out your style feed post!
+        </h3>
+        <div className="profile-modal-image">
+          <img
+            style={{ height: "98%", width: "98%", borderRadius: "50%" }}
+            className=''
+            src={noboProfile.avatar}
+            alt="avatar"
+          />
+        </div>
+        <h5 className="profile-modal-text">
+          GO TO YOUR STYLE FEED TO CONNECT WITH THE COMMUNITY!
+        </h5>
+        <div className="profile-modal-btn">
+          <Button
+            label='VIEW MY POST'
+            onClick={(e) => {
+              e.preventDefault();
+              history.push(`/home/style-feed`)
+              localStorage.removeItem("newUser")
+            }}
+            large
+          />
+        </div>
+        <h3 className="profile-modal-later"
+          onClick={
+            () => {
+              setModalVisible(false)
+              localStorage.removeItem("newUser")
+            }
+
+          }
+        >
+          MAYBE LATER
+        </h3>
+
+      </div>)}
     </IonPage>
   );
 };

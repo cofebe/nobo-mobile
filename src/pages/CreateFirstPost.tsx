@@ -46,9 +46,12 @@ const CreateFirstPost: React.FC = () => {
     userService
       .createPost(textValue)
       .then((success: PostResponse) => {
-        setTimeout(() => {
-          history.push(`/home/my-profile`)
-        }, 2000);
+        if(success){
+          localStorage.setItem("newUser", "newUser")
+          setTimeout(() => {
+            history.push(`/home/my-profile`)
+          }, 2000);
+        }
       })
       .catch((err) => console.log("getting a user", err));
   };

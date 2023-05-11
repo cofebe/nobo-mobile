@@ -58,7 +58,9 @@ const SelectBrands: React.FC = () => {
     userService
       .selectBrand(tickedBrand)
       .then((res) => {
-        if(res){history.push("/onboarding-post")}        
+        if(res){
+          history.push("/onboarding-post")
+        }        
       })
       .catch((err: any) => {
         console.log("SelectBrand error", err);
