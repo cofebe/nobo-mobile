@@ -240,7 +240,7 @@ export class UserService extends BaseService {
     return json.currentUser;
   }
 
-  async removeShippingAddress(index: number): Promise<User> {
+  async removeShippingAddress(index: number): Promise<User> { 
     const body = {
       action: 'remove',
       index,
