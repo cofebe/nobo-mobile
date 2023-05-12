@@ -66,6 +66,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import OfferComplete from './pages/OfferComplete';
+import AccountSettings from './pages/AccountSettings';
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -209,6 +210,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/settings/payment" exact={true}>
               <SettingsPayment />
+            </Route>
+            <Route path="/settings/account" exact={true}>
+              <AccountSettings />
             </Route>
 
             {/* URP */}
