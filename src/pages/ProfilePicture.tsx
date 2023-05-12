@@ -1,27 +1,16 @@
-import { useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
-import {
-  IonContent,
-  IonPage,
-  IonRow,
-  IonCol,
-  IonGrid,
-  IonButton,
-
-} from "@ionic/react";
-import "cropperjs/dist/cropper.css";
-import "./ProfilePicture.scss";
-import { Camera, CameraResultType, CameraSource, } from '@capacitor/camera';
-import Button from "../components/Button";
-import "cropperjs/dist/cropper.css";
-import { UserService } from "../services/UserService";
-import { Cropper } from "react-cropper";
-
-
-
+import { useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { IonContent, IonPage, IonRow, IonCol, IonGrid, IonButton } from '@ionic/react';
+import 'cropperjs/dist/cropper.css';
+import './ProfilePicture.scss';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import Button from '../components/Button';
+import 'cropperjs/dist/cropper.css';
+import { UserService } from '../services/UserService';
+import { Cropper } from 'react-cropper';
 
 const ProfilePicture: React.FC = () => {
-  const userService = new UserService()
+  const userService = new UserService();
   const history = useHistory();
   const [photoData, setPhotoData] = useState(Object);
   const [cropperToggler, setCropperToggler] = useState(false);
@@ -32,31 +21,27 @@ const ProfilePicture: React.FC = () => {
       source: CameraSource.Camera,
       quality: 100,
     });
-    setCropperToggler(true)
-    setPhotoData(photo)
-
+    setCropperToggler(true);
+    setPhotoData(photo);
   };
 
-
-
   const handleSubmit = async (imgData: any) => {
-    userService.uploadProfileImg(imgData)
-      .then((res) => {
-        if(res){
-          history.push("/follow-people")
+    userService
+      .uploadProfileImg(imgData)
+      .then(res => {
+        if (res) {
+          history.push('/follow-people');
         }
       })
       .catch((err: any) => {
-        console.log(" ProfilePicture error", err);
+        console.log(' ProfilePicture error', err);
       });
-
   };
-
 
   // clear the photo to take another
   const clearCameraPhoto = () => {
     setCropperToggler(false);
-  }
+  };
 
   async function executeProfilePicCrop() {
     const imageElement: any = cropperRef?.current;
@@ -98,7 +83,7 @@ const ProfilePicture: React.FC = () => {
               base64String: base64data.split(',')[1],
             });
             // setPreviewImgFile(base64data);
-            handleSubmit(base64data)
+            handleSubmit(base64data);
           }, 500);
         };
       });
@@ -106,21 +91,17 @@ const ProfilePicture: React.FC = () => {
     // setToggleCropper(false);
   }
 
-
   const cropperRef = useRef<HTMLImageElement>(null);
   const onPhotoCrop = async () => {
     const imageElement: any = cropperRef?.current;
     const cropper: any = imageElement?.cropper;
     if (cropper) {
       /*let canvas =*/ cropper.getCroppedCanvas({
-      maxWidth: 800,
-      maxHeight: 800,
-    });
+        maxWidth: 800,
+        maxHeight: 800,
+      });
     }
   };
-
-
-
 
   return (
     <IonPage id="profile-picture-page" className="profile-picture-main-container">
@@ -128,20 +109,16 @@ const ProfilePicture: React.FC = () => {
         <div className="profile-picture-header">
           <img
             onClick={() => {
-              history.push("/experience");
+              history.push('/experience');
             }}
             className="profile-picture-back-btn"
-            style={{ color: "black" }}
+            style={{ color: 'black' }}
             height={23}
             src="assets/images/arrow-left.svg"
             alt="logo"
           />
 
-          <img
-            className="profile-picture-nobo-logo"
-            src="assets/images/nobo_logo.png"
-            alt="logo"
-          />
+          <img className="profile-picture-nobo-logo" src="assets/images/nobo_logo.png" alt="logo" />
         </div>
 
         <IonRow>
@@ -155,57 +132,56 @@ const ProfilePicture: React.FC = () => {
 
         <IonRow
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative"
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
           }}
         >
-          <div className="profile-picture-image-container" >
-            {!cropperToggler && (<div style={{ position: "relative", }}>
-              <IonRow >
-                <IonCol>
-                  <img
-                    className=""
-                    src="assets/images/nobo-profile-upload-circle.png"
-                    alt=""
-                  />
-                </IonCol>
+          <div className="profile-picture-image-container">
+            {!cropperToggler && (
+              <div style={{ position: 'relative' }}>
+                <IonRow>
+                  <IonCol>
+                    <img className="" src="assets/images/nobo-profile-upload-circle.png" alt="" />
+                  </IonCol>
 
-                <IonCol style={{ position: "absolute", top: "35%", left: "35%" }} >
-                  <img
-                    onClick={(e) => {
-                      e.preventDefault();
-                      // uploadProfilePic();
-                      takePhoto()
-                      console.log("starting... camera")
-                    }}
-                    src="assets/images/nobo-profile-upload-plus.png"
-                    alt=""
-                  />
-                </IonCol>
-              </IonRow>
-            </div>)}
-
+                  <IonCol style={{ position: 'absolute', top: '35%', left: '35%' }}>
+                    <img
+                      onClick={e => {
+                        e.preventDefault();
+                        // uploadProfilePic();
+                        takePhoto();
+                        console.log('starting... camera');
+                      }}
+                      src="assets/images/nobo-profile-upload-plus.png"
+                      alt=""
+                    />
+                  </IonCol>
+                </IonRow>
+              </div>
+            )}
 
             {/* CLEAR PHOTO */}
-            {cropperToggler && (<div className='profile-picture-clear-photo'
-              onClick={(e) => {
-                e.preventDefault();
-                clearCameraPhoto()
-              }}
-            >
-              <img src="assets/images/close-black.svg" alt="close" />
-            </div>)}
-
             {cropperToggler && (
               <div
-                className="profile-picture-image-cropper" >
+                className="profile-picture-clear-photo"
+                onClick={e => {
+                  e.preventDefault();
+                  clearCameraPhoto();
+                }}
+              >
+                <img src="assets/images/close-black.svg" alt="close" />
+              </div>
+            )}
+
+            {cropperToggler && (
+              <div className="profile-picture-image-cropper">
                 <Cropper
                   className="profile-picture-cropper"
                   src={`data:image/png;base64,${photoData?.base64String}`}
                   // CropperJS options
-                  style={{ height: '200px', borderRadius: "50%", }}
+                  style={{ height: '200px', borderRadius: '50%' }}
                   initialAspectRatio={75 / 75}
                   guides={false}
                   crop={onPhotoCrop}
@@ -220,27 +196,32 @@ const ProfilePicture: React.FC = () => {
               </div>
             )}
           </div>
+        </IonRow>
+        <IonGrid></IonGrid>
 
-        </IonRow >
-        <IonGrid>
-        </IonGrid>
-
-        <IonRow className={cropperToggler ? "profile-picture-skip-container" : "profile-picture-skip-container2"}>
-          <IonButton fill='clear' className="profile-picture-skip-text"
+        <IonRow
+          className={
+            cropperToggler ? 'profile-picture-skip-container' : 'profile-picture-skip-container2'
+          }
+        >
+          <IonButton
+            fill="clear"
+            className="profile-picture-skip-text"
             onClick={() => {
-              history.push("/follow-people")
+              history.push('/follow-people');
             }}
-          >SKIP FOR NOW</IonButton>
+          >
+            SKIP FOR NOW
+          </IonButton>
         </IonRow>
 
         <div className="profile-picture-btn-container">
           <Button
             label="NEXT"
             large
-            onClick={(e) => {
-              e.preventDefault()
-              executeProfilePicCrop()
-
+            onClick={e => {
+              e.preventDefault();
+              executeProfilePicCrop();
             }}
             disabled={!cropperToggler}
           />
@@ -248,6 +229,6 @@ const ProfilePicture: React.FC = () => {
       </IonContent>
     </IonPage>
   );
-}
+};
 
 export default ProfilePicture;

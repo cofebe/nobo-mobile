@@ -79,7 +79,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons)/)'",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write src/**/*.tsx"
   },
   "eslintConfig": {
     "extends": [
@@ -101,7 +102,8 @@
   },
   "devDependencies": {
     "@capacitor/cli": "^3.5.1",
-    "cordova-res": "0.15.4"
+    "cordova-res": "0.15.4",
+    "prettier": "^2.8.8"
   },
   "description": "An Ionic project"
 }

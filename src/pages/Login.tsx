@@ -166,9 +166,8 @@ const Login: React.FC = () => {
                   color: '#D6980E',
                   fontSize: '15px',
                 }}
-
                 onClick={() => {
-                  history.push("/signup-details")
+                  history.push('/signup-details');
                 }}
               >
                 Sign Up

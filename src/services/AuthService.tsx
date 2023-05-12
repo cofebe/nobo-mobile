@@ -34,7 +34,7 @@ export class AuthService {
   setUserToken(tokenId: string) {
     window.localStorage[USER_TOKEN_KEY] = tokenId;
   }
- 
+
   getUserData() {
     let user: any;
     if (window.localStorage.getItem('persistedState')) {

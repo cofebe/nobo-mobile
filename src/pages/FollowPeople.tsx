@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   IonContent,
   IonPage,
@@ -8,68 +8,68 @@ import {
   IonLabel,
   useIonViewWillEnter,
   IonButton,
-
-} from "@ionic/react";
-import "cropperjs/dist/cropper.css";
-import "./FollowPeople.scss";
-import Button from "../components/Button";
-import "cropperjs/dist/cropper.css";
-import { UserService } from "../services/UserService";
-import { User } from "../models";
-
+} from '@ionic/react';
+import 'cropperjs/dist/cropper.css';
+import './FollowPeople.scss';
+import Button from '../components/Button';
+import 'cropperjs/dist/cropper.css';
+import { UserService } from '../services/UserService';
+import { User } from '../models';
 
 const FollowPeople: React.FC = () => {
-  const userService = new UserService()
+  const userService = new UserService();
   const history = useHistory();
-  const [users, setUsers] = useState<User[]>([])
-  const [follow, setFollow] = useState<string[]>([])
-  const [peopleIfollow, setPeopleIfollow] = useState<string[]>([])
-
+  const [users, setUsers] = useState<User[]>([]);
+  const [follow, setFollow] = useState<string[]>([]);
+  const [peopleIfollow, setPeopleIfollow] = useState<string[]>([]);
 
   //  fetching exiting users to follow
   useIonViewWillEnter(() => {
-    userService.getUsers()
+    userService
+      .getUsers()
       .then(res => res)
       .then(users => {
-        setUsers(users?.users)
+        setUsers(users?.users);
       })
-      .catch((error) => {
-        console.log("follow users error", error)
-      })
+      .catch(error => {
+        console.log('follow users error', error);
+      });
   });
 
   const myFollowList = () => {
-    userService.getMe()
+    userService
+      .getMe()
       .then((user: User) => {
-        setPeopleIfollow(user.following)
+        setPeopleIfollow(user.following);
       })
-      .catch((error) => { console.log("error msg while fetching user profile", error) })
-  }
+      .catch(error => {
+        console.log('error msg while fetching user profile', error);
+      });
+  };
 
   // Load My Following List
   useIonViewWillEnter(() => {
-    myFollowList()
-  })
-
+    myFollowList();
+  });
 
   // Following  a user
   const followUser = async (userId: string) => {
-    myFollowList()
-    setFollow([...follow, userId])
-    const result = peopleIfollow.includes(userId, 0)
+    myFollowList();
+    setFollow([...follow, userId]);
+    const result = peopleIfollow.includes(userId, 0);
     if (!result) {
-      userService.followUsers(userId)
-        .then((user) => {
-          console.log(" my updated following list ", user.following)
+      userService
+        .followUsers(userId)
+        .then(user => {
+          console.log(' my updated following list ', user.following);
         })
         .catch((err: any) => {
-          console.log(" FollowUser", err);
+          console.log(' FollowUser', err);
         });
     } else {
-      console.log(`You already followed this user ${userId}`)
+      console.log(`You already followed this user ${userId}`);
     }
-  }
-
+  };
 
   return (
     <IonPage className="follow-people-main-container">
@@ -80,17 +80,13 @@ const FollowPeople: React.FC = () => {
               history.goBack();
             }}
             className="follow-people-back-btn"
-            style={{ color: "black" }}
+            style={{ color: 'black' }}
             height={23}
             src="assets/images/arrow-left.svg"
             alt="logo"
           />
 
-          <img
-            className="follow-people-nobo-logo"
-            src="assets/images/nobo_logo.png"
-            alt="logo"
-          />
+          <img className="follow-people-nobo-logo" src="assets/images/nobo_logo.png" alt="logo" />
         </div>
 
         <IonRow>
@@ -103,56 +99,61 @@ const FollowPeople: React.FC = () => {
         </IonRow>
 
         <div className="follow-people-body-container" style={{}}>
-          {users?.map((user) => (
-            <div key={user._id} className="follow-people-users-row" >
+          {users?.map(user => (
+            <div key={user._id} className="follow-people-users-row">
               <div className="follow-people-users-img-container">
-                <img
-                  className="follow-people-users-img"
-                  src={user.avatar}
-                  alt={user.displayName}
-
-                />
+                <img className="follow-people-users-img" src={user.avatar} alt={user.displayName} />
               </div>
               <div className="follow-people-user-names-container">
                 <IonLabel>@{user.displayName}</IonLabel>
               </div>
 
-              <div className="follow-people-button-container" >
+              <div className="follow-people-button-container">
                 <Button
                   disabled={follow.includes(user._id, 0)}
-                  className='profile-picture-btn'
-                  label={!follow.includes(user._id, 0) ? "FOLLOW" : "FOLLOWING"}
+                  className="profile-picture-btn"
+                  label={!follow.includes(user._id, 0) ? 'FOLLOW' : 'FOLLOWING'}
                   large={true}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    followUser(user._id)
-                  }
-                  }
+                  onClick={e => {
+                    e.preventDefault();
+                    followUser(user._id);
+                  }}
                 />
-
               </div>
             </div>
           ))}
         </div>
 
-        {follow.length > 0 ? "" : <IonRow className={"follow-people-skip-container"}>
-          <IonButton fill='clear' className="follow-people-skip-text"
-            disabled={follow.length > 0}
-            onClick={() => {
-              history.push("/select-brands")
-            }}
-          >SKIP FOR NOW</IonButton>
-        </IonRow>}
+        {follow.length > 0 ? (
+          ''
+        ) : (
+          <IonRow className={'follow-people-skip-container'}>
+            <IonButton
+              fill="clear"
+              className="follow-people-skip-text"
+              disabled={follow.length > 0}
+              onClick={() => {
+                history.push('/select-brands');
+              }}
+            >
+              SKIP FOR NOW
+            </IonButton>
+          </IonRow>
+        )}
 
-
-
-        <div className={follow.length < 1 ? "follow-people-submit-btn-container2" : "follow-people-submit-btn-container"}>
+        <div
+          className={
+            follow.length < 1
+              ? 'follow-people-submit-btn-container2'
+              : 'follow-people-submit-btn-container'
+          }
+        >
           <Button
             label="NEXT"
             large={true}
-            onClick={(e) => {
-              e.preventDefault()
-              history.push("/select-brands")
+            onClick={e => {
+              e.preventDefault();
+              history.push('/select-brands');
             }}
             disabled={follow.length < 5}
           />

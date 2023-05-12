@@ -10,7 +10,8 @@ export const environment = {
   // serverUrl: 'https://staging.thenobo.com',
   // serverUrl: 'http://localhost:8080',
 
-  stripeApiKey: 'pk_test_51HMEdOGy5Yw2ikdlndEcLFwdpkuaIG0ueJ7mKOJyNXK6AliTbPgKEczUkjl3R68MOQfJ6rsNKEkiHLdzAnyrliQN000RjNTljb',
+  stripeApiKey:
+    'pk_test_51HMEdOGy5Yw2ikdlndEcLFwdpkuaIG0ueJ7mKOJyNXK6AliTbPgKEczUkjl3R68MOQfJ6rsNKEkiHLdzAnyrliQN000RjNTljb',
 
   videoAuthenticationEndpoint: 'https://api.noboplus.com:3001/auth',
   videoUrlEndpoint: 'https://ik.imagekit.io/nobovideo/',

@@ -107,33 +107,13 @@ interface Props {
 function processSocialLinks(slinks: string) {
   let slinkArray = slinks.replace('{', '').replace('}', '')?.split(',');
   let slinkObj = {
-    hudl:
-      slinkArray.filter(
-        (s: string) => s.toLowerCase().indexOf('hudl') > -1
-      )[0] || '',
-    sports24:
-      slinkArray.filter((s: string) => s.toLowerCase().indexOf('24') > -1)[0] ||
-      '',
-    instagram:
-      slinkArray.filter(
-        (s: string) => s.toLowerCase().indexOf('gram') > -1
-      )[0] || '',
-    maxpreps:
-      slinkArray.filter(
-        (s: string) => s.toLowerCase().indexOf('max') > -1
-      )[0] || '',
-    rivals:
-      slinkArray.filter(
-        (s: string) => s.toLowerCase().indexOf('riv') > -1
-      )[0] || '',
-    tiktok:
-      slinkArray.filter(
-        (s: string) => s.toLowerCase().indexOf('tik') > -1
-      )[0] || '',
-    twitter:
-      slinkArray.filter(
-        (s: string) => s.toLowerCase().indexOf('twit') > -1
-      )[0] || '',
+    hudl: slinkArray.filter((s: string) => s.toLowerCase().indexOf('hudl') > -1)[0] || '',
+    sports24: slinkArray.filter((s: string) => s.toLowerCase().indexOf('24') > -1)[0] || '',
+    instagram: slinkArray.filter((s: string) => s.toLowerCase().indexOf('gram') > -1)[0] || '',
+    maxpreps: slinkArray.filter((s: string) => s.toLowerCase().indexOf('max') > -1)[0] || '',
+    rivals: slinkArray.filter((s: string) => s.toLowerCase().indexOf('riv') > -1)[0] || '',
+    tiktok: slinkArray.filter((s: string) => s.toLowerCase().indexOf('tik') > -1)[0] || '',
+    twitter: slinkArray.filter((s: string) => s.toLowerCase().indexOf('twit') > -1)[0] || '',
   };
   return slinkObj;
 }
@@ -147,29 +127,21 @@ export function embedLink(origlink: string) {
 
   if (v) {
     return `${youtubeEmbedLinkBase}${v}`;
-  } else if (
-    origlink.includes('https://www.hudl.com/') &&
-    !origlink.includes('embed')
-  ) {
+  } else if (origlink.includes('https://www.hudl.com/') && !origlink.includes('embed')) {
     return origlink.replace('https://www.hudl.com/video', hudlEmbedLinkBase);
   } else if (origlink.includes('https://youtu.be')) {
-    return (
-      youtubeEmbedLinkBase + origlink.substring(origlink.lastIndexOf('/') + 1)
-    );
+    return youtubeEmbedLinkBase + origlink.substring(origlink.lastIndexOf('/') + 1);
   }
 
   return origlink;
 }
 
-const publicKey =
-  environment?.videoLibraryPublicKey || 'public_pqTTDCXhzT8ZmQ4RFQUCQYkKY0s=';
+const publicKey = environment?.videoLibraryPublicKey || 'public_pqTTDCXhzT8ZmQ4RFQUCQYkKY0s=';
 const authenticationEndpoint =
-  environment?.videoAuthenticationEndpoint ||
-  'https://api.noboplus.com/auth/video';
-const urlEndpoint =
-  environment?.videoUrlEndpoint || 'https://ik.imagekit.io/nobovideo/';
+  environment?.videoAuthenticationEndpoint || 'https://api.noboplus.com/auth/video';
+const urlEndpoint = environment?.videoUrlEndpoint || 'https://ik.imagekit.io/nobovideo/';
 
-const SignUpAthlete: React.FC<Props> = (props) => {
+const SignUpAthlete: React.FC<Props> = props => {
   const history = useHistory();
   const location = useLocation();
   const popover = useRef<HTMLIonPopoverElement>(null);
@@ -204,11 +176,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
     let user = JSON.parse(storage);
 
     transcriptsVals.current.file = fileChangeEvent.target.files[0];
-    formData.append(
-      'file',
-      transcriptsVals?.current.file,
-      transcriptsVals.current.file.name
-    );
+    formData.append('file', transcriptsVals?.current.file, transcriptsVals.current.file.name);
     /*const response =*/ await fetch(
       `http://nobo.cofebe.com:8080/upload/${user.user['user_id']}/transcript`,
       {
@@ -246,26 +214,19 @@ const SignUpAthlete: React.FC<Props> = (props) => {
   const [state, setState] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [socialLinkInstagram, setSocialLinksInstagram] = useState<string>('');
-  const [socialLinkInstagramValid, setSocialLinksInstagramValid] =
-    useState<boolean>(true);
+  const [socialLinkInstagramValid, setSocialLinksInstagramValid] = useState<boolean>(true);
   const [socialLinkTwitter, setSocialLinksTwitter] = useState<string>('');
-  const [socialLinkTwitterValid, setSocialLinksTwitterValid] =
-    useState<boolean>(true);
+  const [socialLinkTwitterValid, setSocialLinksTwitterValid] = useState<boolean>(true);
   const [socialLinkTikTok, setSocialLinksTikTok] = useState<string>('');
-  const [socialLinkTikTokValid, setSocialLinksTikTokValid] =
-    useState<boolean>(true);
+  const [socialLinkTikTokValid, setSocialLinksTikTokValid] = useState<boolean>(true);
   const [socialLinkHudl, setSocialLinksHudl] = useState<string>('');
-  const [socialLinkHudlValid, setSocialLinksHudlValid] =
-    useState<boolean>(true);
+  const [socialLinkHudlValid, setSocialLinksHudlValid] = useState<boolean>(true);
   const [socialLink247Sports, setSocialLinks247Sports] = useState<string>('');
-  const [socialLink247SportsValid, setSocialLinks247SportsValid] =
-    useState<boolean>(true);
+  const [socialLink247SportsValid, setSocialLinks247SportsValid] = useState<boolean>(true);
   const [socialLinkRivals, setSocialLinksRivals] = useState<string>('');
-  const [socialLinkRivalsValid, setSocialLinksRivalsValid] =
-    useState<boolean>(true);
+  const [socialLinkRivalsValid, setSocialLinksRivalsValid] = useState<boolean>(true);
   const [socialLinkMaxPreps, setSocialLinksMaxPreps] = useState<string>('');
-  const [socialLinkMaxPrepsValid, setSocialLinksMaxPrepsValid] =
-    useState<boolean>(true);
+  const [socialLinkMaxPrepsValid, setSocialLinksMaxPrepsValid] = useState<boolean>(true);
 
   const [allSocialLinksValid, setAllSocialLinksValid] = useState<boolean>(true);
 
@@ -279,9 +240,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
   const [actValid, setActValid] = useState<boolean>(true);
   const [otherSports, setOtherSports] = useState<string[]>(['']);
   const [extraCurriculars, setExtraCurriculars] = useState<string[]>([]);
-  const [singleAwardDropdownField, setSingleAwardDropdownField] = useState<any>(
-    []
-  );
+  const [singleAwardDropdownField, setSingleAwardDropdownField] = useState<any>([]);
   const [awards, setAwards] = useState<any>([
     {
       award: '',
@@ -301,22 +260,15 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
   // Stats
 
-  const [
-    singlePrevTeamPositionDropdownField,
-    setSinglePrevTeamPositionDropdownField,
-  ] = useState<any>([]);
-  const [
-    singlePrevTeamStateDropdownField,
-    setSinglePrevTeamStateDropdownField,
-  ] = useState<any>([]);
-  const [numberOfTeamsPlayedFor, setNumberOfTeamsPlayedFor] =
-    useState<number>(1);
+  const [singlePrevTeamPositionDropdownField, setSinglePrevTeamPositionDropdownField] =
+    useState<any>([]);
+  const [singlePrevTeamStateDropdownField, setSinglePrevTeamStateDropdownField] = useState<any>([]);
+  const [numberOfTeamsPlayedFor, setNumberOfTeamsPlayedFor] = useState<number>(1);
 
   // Highlights
   const [highlightLink, setHighlightLink] = useState<string>('');
   const [highlightLinkValid, setHighlightLinkValid] = useState<boolean>(true);
-  const [highlightLinkOrUpload, setHighlightLinkOrUpload] =
-    useState<string>('link');
+  const [highlightLinkOrUpload, setHighlightLinkOrUpload] = useState<string>('link');
 
   // Stats
   const emptyStats = [
@@ -393,9 +345,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
   const [countries, setCountries] = useState<string[]>([]);
   const [schoolPopoverOpen, setSchoolPopoverOpen] = useState<boolean>(false);
   const [PopoverOpen, setPopoverOpen] = useState(false);
-  const [filteredUniversities, setFilteredUniversities] = useState<string[]>(
-    []
-  );
+  const [filteredUniversities, setFilteredUniversities] = useState<string[]>([]);
   const [filteredSchools, setFilteredSchools] = useState<string[]>([]);
 
   // EDIT MODE ADDED //
@@ -519,8 +469,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
   });
 
   // this when true will show the dropdown menu allowing the user to upload a video as opposed to only entering a link
-  const [uploadVideoOptionEnabled /*, setUploadVideoOptionEnabled*/] =
-    useState(false);
+  const [uploadVideoOptionEnabled /*, setUploadVideoOptionEnabled*/] = useState(false);
 
   const validUrlRegex =
     /^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
@@ -539,7 +488,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
     // some initialization code
     setCountries(allCountries);
     setStates(allStates);
-    const universitiesArray = universities.map((university) => {
+    const universitiesArray = universities.map(university => {
       return university.name;
     });
     setFilteredUniversities(universitiesArray);
@@ -607,8 +556,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
     return await userService
       .getProfile(user.user['user_id'])
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         console.log('Profile: ', data);
 
         let basicInfo = {
@@ -660,46 +609,31 @@ const SignUpAthlete: React.FC<Props> = (props) => {
         let pathUserId = getUserId();
         setProfilePicPreview(
           data.basic_user_profile.profile_image?.String ||
-          `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/pictures/${pathUserId}/profile.jpeg?fail`
+            `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/pictures/${pathUserId}/profile.jpeg?fail`
         );
         setBannerPicPreview(
           data.basic_user_profile.banner_image?.String ||
-          `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/pictures/${pathUserId}/banner.jpeg?fail`
+            `https://cofebe-upload-files.s3.us-west-2.amazonaws.com/pictures/${pathUserId}/banner.jpeg?fail`
         );
         setCity(basicInfo?.basic_user_profile?.city?.String);
         setClassYear(basicInfo?.basic_user_profile?.class_year?.String);
-        setCountry(
-          basicInfo?.basic_user_profile?.country?.String.replaceAll(`"`, '')
-        );
-        setState(
-          basicInfo?.basic_user_profile?.state?.String.replaceAll(`"`, '')
-        );
+        setCountry(basicInfo?.basic_user_profile?.country?.String.replaceAll(`"`, ''));
+        setState(basicInfo?.basic_user_profile?.state?.String.replaceAll(`"`, ''));
         setSchool(basicInfo?.basic_user_profile?.school?.String);
         setProfilePicData(basicInfo?.basic_user_profile?.profile_image);
 
         setWeight(basicInfo?.athlete_user_profile?.weight?.String);
         setHeight(basicInfo?.athlete_user_profile?.height?.String);
-        setHighlightLink(
-          JSON.parse(basicInfo?.athlete_user_profile?.highlights).url
-        );
+        setHighlightLink(JSON.parse(basicInfo?.athlete_user_profile?.highlights).url);
         setPrimarySport(basicInfo?.athlete_user_profile?.primary_sport?.String);
         setPrimaryPosition(
-          basicInfo?.athlete_user_profile?.primary_position?.String.replaceAll(
-            `"`,
-            ''
-          )
+          basicInfo?.athlete_user_profile?.primary_position?.String.replaceAll(`"`, '')
         );
         basicInfo?.athlete_user_profile?.primary_sport?.String &&
-          setSportStats(
-            getSportStats(
-              basicInfo?.athlete_user_profile?.primary_sport?.String
-            )
-          );
-        let athleteAwards = basicInfo?.athlete_user_profile?.athlete_awards.map(
-          (e: string) => {
-            return JSON.parse(e);
-          }
-        );
+          setSportStats(getSportStats(basicInfo?.athlete_user_profile?.primary_sport?.String));
+        let athleteAwards = basicInfo?.athlete_user_profile?.athlete_awards.map((e: string) => {
+          return JSON.parse(e);
+        });
         setAwards(athleteAwards);
 
         setBio(basicInfo?.basic_user_profile?.bio?.String);
@@ -724,9 +658,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
         setOffers(basicInfo?.athlete_user_profile?.offers);
 
-        if (
-          basicInfo?.athlete_user_profile?.athlete_experiences === undefined
-        ) {
+        if (basicInfo?.athlete_user_profile?.athlete_experiences === undefined) {
           setPreviousTeams([
             {
               startYear: '',
@@ -738,21 +670,18 @@ const SignUpAthlete: React.FC<Props> = (props) => {
             },
           ]);
         } else {
-          let athleteExperiences =
-            basicInfo?.athlete_user_profile?.athlete_experiences.map(
-              (e: string) => {
-                return JSON.parse(e);
-              }
-            );
+          let athleteExperiences = basicInfo?.athlete_user_profile?.athlete_experiences.map(
+            (e: string) => {
+              return JSON.parse(e);
+            }
+          );
           setPreviousTeams(athleteExperiences);
         }
 
         if (basicInfo?.athlete_user_profile?.stats === undefined) {
           setStats(emptyStats);
         } else {
-          setStats(
-            basicInfo?.athlete_user_profile?.stats?.stats2 || emptyStats
-          );
+          setStats(basicInfo?.athlete_user_profile?.stats?.stats2 || emptyStats);
         }
 
         setMeasurables(basicInfo?.athlete_user_profile?.measurables);
@@ -795,13 +724,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
         setProgressStep({ step: 4, section: 'Player Highlights' });
       }
 
-      if (
-        bio === '' ||
-        gpa === '' ||
-        sat === '' ||
-        act === '' ||
-        extraCurriculars.length === 0
-      ) {
+      if (bio === '' || gpa === '' || sat === '' || act === '' || extraCurriculars.length === 0) {
         setProgressStep({ step: 3, section: 'Background' });
       }
 
@@ -819,8 +742,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       ) {
         setProgressStep({ step: 1, section: 'Basic Info' });
       }
-      let perc =
-        Math.round((progressStep.step / totalProgressItemCount) * 100) + '%';
+      let perc = Math.round((progressStep.step / totalProgressItemCount) * 100) + '%';
 
       if (progressStep.step === totalProgressItemCount) {
         perc = '100%';
@@ -983,9 +905,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
     const cropper: any = imageElement?.cropper;
     if (cropper) {
       /*let canvas =*/ cropper.getCroppedCanvas({
-      maxWidth: 800,
-      maxHeight: 800,
-    });
+        maxWidth: 800,
+        maxHeight: 800,
+      });
     }
   };
 
@@ -995,9 +917,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
     const cropperBanner: any = imageElement?.cropper;
     if (cropperBanner) {
       /*let canvas =*/ cropperBanner.getCroppedCanvas({
-      maxWidth: 800,
-      maxHeight: 800,
-    });
+        maxWidth: 800,
+        maxHeight: 800,
+      });
     }
   };
 
@@ -1028,18 +950,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
   }
 
   const validityChecks = [
-    [
-      gpaValid,
-      '• Invalid GPA: The GPA entered is not valid. Please try again. <br/><br/>',
-    ],
-    [
-      satValid,
-      '• Invalid SAT: The SAT entered is not valid. Please try again. <br/><br/>',
-    ],
-    [
-      actValid,
-      '• Invalid ACT: The ACT entered is not valid. Please try again. <br/><br/>',
-    ],
+    [gpaValid, '• Invalid GPA: The GPA entered is not valid. Please try again. <br/><br/>'],
+    [satValid, '• Invalid SAT: The SAT entered is not valid. Please try again. <br/><br/>'],
+    [actValid, '• Invalid ACT: The ACT entered is not valid. Please try again. <br/><br/>'],
 
     [
       socialLinkInstagramValid,
@@ -1082,39 +995,27 @@ const SignUpAthlete: React.FC<Props> = (props) => {
     // basic info
     if ((request?.first_name || '').length === 0 && !props.editMode) {
       valid = false;
-      fixTheFollowing.push(
-        '• Missing First Name: Please enter a first name.  <br/><br/>'
-      );
+      fixTheFollowing.push('• Missing First Name: Please enter a first name.  <br/><br/>');
     }
     if ((request?.last_name || '').length === 0 && !props.editMode) {
       valid = false;
-      fixTheFollowing.push(
-        '• Missing Last Name: Please enter a last name.  <br/><br/>'
-      );
+      fixTheFollowing.push('• Missing Last Name: Please enter a last name.  <br/><br/>');
     }
     if ((request?.primary_position || '').length === 0 && !props.editMode) {
       valid = false;
-      fixTheFollowing.push(
-        '• Missing Position: Please select a position.  <br/><br/>'
-      );
+      fixTheFollowing.push('• Missing Position: Please select a position.  <br/><br/>');
     }
     if ((request?.class || '').length === 0 && !props.editMode) {
       valid = false;
-      fixTheFollowing.push(
-        '• Missing Class Year: Please select a class year.  <br/><br/>'
-      );
+      fixTheFollowing.push('• Missing Class Year: Please select a class year.  <br/><br/>');
     }
     if ((request?.weight || '').length === 0 && !props.editMode) {
       valid = false;
-      fixTheFollowing.push(
-        '• Missing Weight: Please enter a weight.  <br/><br/>'
-      );
+      fixTheFollowing.push('• Missing Weight: Please enter a weight.  <br/><br/>');
     }
     if ((request?.height || '').length === 0 && !props.editMode) {
       valid = false;
-      fixTheFollowing.push(
-        '• Missing Height: Please enter a height.  <br/><br/>'
-      );
+      fixTheFollowing.push('• Missing Height: Please enter a height.  <br/><br/>');
     }
     if (!request?.profile_picture?.base64String && !props.editMode) {
       valid = false;
@@ -1130,21 +1031,15 @@ const SignUpAthlete: React.FC<Props> = (props) => {
     }
     if ((request?.school || '').length === 0 && !props.editMode) {
       valid = false;
-      fixTheFollowing.push(
-        '• Missing School: Please enter a school.  <br/><br/>'
-      );
+      fixTheFollowing.push('• Missing School: Please enter a school.  <br/><br/>');
     }
     if ((request?.country || '').length === 0 && !props.editMode) {
       valid = false;
-      fixTheFollowing.push(
-        '• Missing Country: Please select a country.  <br/><br/>'
-      );
+      fixTheFollowing.push('• Missing Country: Please select a country.  <br/><br/>');
     }
     if ((request?.state || '').length === 0 && !props.editMode) {
       valid = false;
-      fixTheFollowing.push(
-        '• Missing State: Please select a state.  <br/><br/>'
-      );
+      fixTheFollowing.push('• Missing State: Please select a state.  <br/><br/>');
     }
     if ((request?.city || '').length === 0 && !props.editMode) {
       valid = false;
@@ -1183,7 +1078,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       );
     }
 
-    validityChecks.forEach((v) => {
+    validityChecks.forEach(v => {
       const [isValid, message] = v;
       if (!isValid) {
         valid = false;
@@ -1210,23 +1105,15 @@ const SignUpAthlete: React.FC<Props> = (props) => {
     let sportStats = { stats2: stats };
 
     let req = {
-      first_name: firstName
-        ? firstName
-        : profile.basic_user_profile?.first_name.String,
-      last_name: lastName
-        ? lastName
-        : profile.basic_user_profile?.last_name.String,
-      profile_picture: profilePicData
-        ? profilePicData
-        : profile.basic_user_profile?.profile_image,
+      first_name: firstName ? firstName : profile.basic_user_profile?.first_name.String,
+      last_name: lastName ? lastName : profile.basic_user_profile?.last_name.String,
+      profile_picture: profilePicData ? profilePicData : profile.basic_user_profile?.profile_image,
       banner_picture: bannerPicData,
       primary_position: primaryPosition
         ? primaryPosition
         : profile.athlete_user_profile?.primary_position.String,
       //   primary_sport: location.state,
-      class_year: classYear
-        ? classYear
-        : profile.basic_user_profile?.class_year.String,
+      class_year: classYear ? classYear : profile.basic_user_profile?.class_year.String,
       weight: weight ? weight : profile.athlete_user_profile?.weight.String,
       height: height ? height : profile.athlete_user_profile?.height.String,
       //   birthday: birthday,
@@ -1236,26 +1123,21 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       city: city ? city : profile.basic_user_profile?.city.String,
       social_links: allSocialLinksValid
         ? [
-          socialLinkInstagram,
-          socialLinkTwitter,
-          socialLinkTikTok,
-          socialLinkHudl,
-          socialLink247Sports,
-          socialLinkRivals,
-          socialLinkMaxPreps,
-        ]
+            socialLinkInstagram,
+            socialLinkTwitter,
+            socialLinkTikTok,
+            socialLinkHudl,
+            socialLink247Sports,
+            socialLinkRivals,
+            socialLinkMaxPreps,
+          ]
         : [],
       bio: bio ? bio : profile.basic_user_profile?.bio.String,
-      rating:
-        yourRating || yourRating === 0
-          ? yourRating
-          : profile.athlete_user_profile?.rating,
+      rating: yourRating || yourRating === 0 ? yourRating : profile.athlete_user_profile?.rating,
       gpa: gpa ? gpa : profile.athlete_user_profile?.gpa.String,
       sat: sat ? sat : profile.athlete_user_profile?.sat.String,
       act: act ? act : profile.athlete_user_profile?.act.String,
-      other_sports: otherSports
-        ? otherSports
-        : profile.athlete_user_profile?.other_sports.String,
+      other_sports: otherSports ? otherSports : profile.athlete_user_profile?.other_sports.String,
       extra_curriculars: extraCurriculars,
       athlete_awards: awardsString,
       // awardsArray[0] === "{}"
@@ -1263,16 +1145,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       //   : awardsArray,
       athlete_experiences:
         JSON.stringify(previousTeams) ===
-          JSON.stringify([
-            {
-              startYear: '',
-              endYear: '',
-              position: '',
-              school: '',
-              city: '',
-              state: '',
-            },
-          ])
+        JSON.stringify([
+          {
+            startYear: '',
+            endYear: '',
+            position: '',
+            school: '',
+            city: '',
+            state: '',
+          },
+        ])
           ? []
           : previousTeams,
       highlights: [
@@ -1296,8 +1178,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
       userService
         .updateProfile(req, user.user['user_id'])
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           console.log('updateProfile: ', data);
           //   authService.setUserData(data);
 
@@ -1306,7 +1188,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
             history.push('/home/my-athlete-profile');
           }, 1000);
         })
-        .catch((err) => {
+        .catch(err => {
           console.error('Error:', err);
           if (retry < 3) {
             retry += 1;
@@ -1322,35 +1204,21 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
       if (videoVals.current.file) {
         console.log('sending video file...');
-        formData.append(
-          'video',
-          videoVals?.current.file,
-          videoVals.current.file.name
-        );
-        /*const response =*/ await fetch(
-          'http://localhost:8500/fileuploads/video',
-          {
-            method: 'POST',
-            body: formData,
-          }
-        );
+        formData.append('video', videoVals?.current.file, videoVals.current.file.name);
+        /*const response =*/ await fetch('http://localhost:8500/fileuploads/video', {
+          method: 'POST',
+          body: formData,
+        });
         console.log('sent video file.');
       }
 
       if (transcriptsVals.current.file) {
         console.log('sending transcript file...');
-        formData.append(
-          'video',
-          videoVals?.current.file,
-          videoVals.current.file.name
-        );
-        /*const response =*/ await fetch(
-          'http://localhost:8500/fileuploads/transcripts',
-          {
-            method: 'POST',
-            body: formData,
-          }
-        );
+        formData.append('video', videoVals?.current.file, videoVals.current.file.name);
+        /*const response =*/ await fetch('http://localhost:8500/fileuploads/transcripts', {
+          method: 'POST',
+          body: formData,
+        });
         console.log('sent transcript file.');
       }
     } else {
@@ -1360,9 +1228,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       let correctionSummary = validationResults?.corrections?.join('\r\n');
       // alert("To continue, please correct the following:\r\n" + correctionSummary);
       showError(
-        '<div>To continue, please correct the following: <br/><br/>' +
-        correctionSummary +
-        '<div>'
+        '<div>To continue, please correct the following: <br/><br/>' + correctionSummary + '<div>'
       );
     }
   }
@@ -1396,14 +1262,14 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       city: city,
       social_links: allSocialLinksValid
         ? [
-          socialLinkInstagram,
-          socialLinkTwitter,
-          socialLinkTikTok,
-          socialLinkHudl,
-          socialLink247Sports,
-          socialLinkRivals,
-          socialLinkMaxPreps,
-        ]
+            socialLinkInstagram,
+            socialLinkTwitter,
+            socialLinkTikTok,
+            socialLinkHudl,
+            socialLink247Sports,
+            socialLinkRivals,
+            socialLinkMaxPreps,
+          ]
         : [],
       bio: bio,
       rating: yourRating,
@@ -1415,16 +1281,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       athlete_awards: awardsString,
       athlete_experiences:
         JSON.stringify(previousTeams) ===
-          JSON.stringify([
-            {
-              startYear: '',
-              endYear: '',
-              position: '',
-              school: '',
-              city: '',
-              state: '',
-            },
-          ])
+        JSON.stringify([
+          {
+            startYear: '',
+            endYear: '',
+            position: '',
+            school: '',
+            city: '',
+            state: '',
+          },
+        ])
           ? []
           : previousTeams,
       highlights: [
@@ -1448,8 +1314,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
       authService
         .signUpAthlete(req, user.user['user_id'])
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           console.log('signUpAthlete: ', data);
           authService.setUserData(data);
 
@@ -1458,7 +1324,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
             history.push('/home/my-athlete-profile');
           }, 1000);
         })
-        .catch((err) => {
+        .catch(err => {
           console.error('Error:', err);
           if (retry < 3) {
             retry += 1;
@@ -1474,35 +1340,21 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
       if (videoVals.current.file) {
         console.log('sending video file...');
-        formData.append(
-          'video',
-          videoVals?.current.file,
-          videoVals.current.file.name
-        );
-        /*const response =*/ await fetch(
-          'http://localhost:8500/fileuploads/video',
-          {
-            method: 'POST',
-            body: formData,
-          }
-        );
+        formData.append('video', videoVals?.current.file, videoVals.current.file.name);
+        /*const response =*/ await fetch('http://localhost:8500/fileuploads/video', {
+          method: 'POST',
+          body: formData,
+        });
         console.log('sent video file.');
       }
 
       if (transcriptsVals.current.file) {
         console.log('sending transcript file...');
-        formData.append(
-          'video',
-          videoVals?.current.file,
-          videoVals.current.file.name
-        );
-        /*const response =*/ await fetch(
-          'http://localhost:8500/fileuploads/transcripts',
-          {
-            method: 'POST',
-            body: formData,
-          }
-        );
+        formData.append('video', videoVals?.current.file, videoVals.current.file.name);
+        /*const response =*/ await fetch('http://localhost:8500/fileuploads/transcripts', {
+          method: 'POST',
+          body: formData,
+        });
         console.log('sent transcript file.');
       }
     } else {
@@ -1512,9 +1364,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       let correctionSummary = validationResults?.corrections?.join('\r\n');
       // alert("To continue, please correct the following:\r\n" + correctionSummary);
       showError(
-        '<div>To continue, please correct the following: <br/><br/>' +
-        correctionSummary +
-        '<div>'
+        '<div>To continue, please correct the following: <br/><br/>' + correctionSummary + '<div>'
       );
     }
   }
@@ -1774,20 +1624,15 @@ const SignUpAthlete: React.FC<Props> = (props) => {
   }
 
   function getAvailableSeasons(currentSeason?: string) {
-    const selectedSeasons = stats.map((s) => s.season);
+    const selectedSeasons = stats.map(s => s.season);
     const availableSeasons = statSeasonOptions.filter(
-      (option) =>
-        option.value === currentSeason ||
-        !selectedSeasons.includes(option.value)
+      option => option.value === currentSeason || !selectedSeasons.includes(option.value)
     );
     return availableSeasons;
   }
 
   return (
-    <IonPage
-      id="sign-up-athlete-page"
-      className="nobo-page sign-up-athlete-page"
-    >
+    <IonPage id="sign-up-athlete-page" className="nobo-page sign-up-athlete-page">
       <div className="square-logo-desktop">
         <img src="assets/images/nobo-box-logo.png" alt="logo" />
       </div>
@@ -1797,7 +1642,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       {toggleCropper && (
         <div className="nobo-image-cropper">
           <span
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               closeProfilePicCropper();
             }}
@@ -1808,7 +1653,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
             Crop your profile photo
           </span>
           <span
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               executeProfilePicCrop();
             }}
@@ -1838,7 +1683,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
       {toggleCropperBanner && (
         <div className="nobo-image-cropper">
           <span
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               closeBannerPicCropper();
             }}
@@ -1849,7 +1694,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
             Crop your banner photo
           </span>
           <span
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               executeBannerPicCrop();
             }}
@@ -1893,15 +1738,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
               </div>
             </div>
           )}
-          <IonButtons
-            style={{ marginTop: props.editMode ? '10px' : '40px' }}
-            slot="start"
-          >
+          <IonButtons style={{ marginTop: props.editMode ? '10px' : '40px' }} slot="start">
             {!props.editMode && (
-              <IonBackButton
-                text="&nbsp;  Sign Up"
-                className="nobo-nav-text"
-              ></IonBackButton>
+              <IonBackButton text="&nbsp;  Sign Up" className="nobo-nav-text"></IonBackButton>
             )}
             {props.editMode && (
               <IonBackButton
@@ -1921,10 +1760,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
             <div className="progress-desktop">
               <span className="bar-label-desktop">Basic Information</span>
               <div className="bar-desktop">
-                <div
-                  className="bar-value-desktop"
-                  style={{ width: progressPercentage }}
-                ></div>
+                <div className="bar-value-desktop" style={{ width: progressPercentage }}></div>
               </div>
               <span className="bar-steps-desktop">
                 {progressStep.step}/{totalProgressItemCount}
@@ -1939,12 +1775,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   slot="header"
                   style={{ class: 'item-inner' }}
                   className="nobo-section-head"
-                  onClick={(e) => scollToSection('basic-info')}
+                  onClick={e => scollToSection('basic-info')}
                 >
                   <span className="nobo-step-num">1</span>
-                  <h5 className="nobo-section-title required">
-                    Basic Information
-                  </h5>
+                  <h5 className="nobo-section-title required">Basic Information</h5>
                 </IonItem>
 
                 <IonList className="nobo-list-input" slot="content">
@@ -1955,7 +1789,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
                     <IonInput
                       value={firstName}
-                      onIonChange={(e) => setFirstName(e.detail.value!)}
+                      onIonChange={e => setFirstName(e.detail.value!)}
                       placeholder="First Name"
                       autocapitalize="on word"
                       autocorrect="on"
@@ -1970,7 +1804,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
 
                     <IonInput
                       value={lastName}
-                      onIonChange={(e) => setLastName(e.detail.value!)}
+                      onIonChange={e => setLastName(e.detail.value!)}
                       placeholder="Last Name"
                       autocapitalize="on word"
                       autocorrect="on"
@@ -1981,15 +1815,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   <IonItem className="nobo-input" lines="none">
                     <IonRow>
                       <IonCol>
-                        <IonLabel
-                          className="nobo-signup-label"
-                          position="stacked"
-                        >
+                        <IonLabel className="nobo-signup-label" position="stacked">
                           Profile Picture
                         </IonLabel>
                         <IonFabButton
                           className="photo-button-container"
-                          onClick={(e) => {
+                          onClick={e => {
                             e.preventDefault();
                             uploadProfilePic();
                           }}
@@ -2011,7 +1842,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <a
                           href="#"
                           className="nobo-upload-photo"
-                          onClick={(e) => {
+                          onClick={e => {
                             e.preventDefault();
                             uploadProfilePic();
                           }}
@@ -2032,7 +1863,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     {bannerPicPreview === '' && (
                       <IonButton
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           uploadBannerPic();
                         }}
@@ -2056,7 +1887,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     {bannerPicPreview !== '' && (
                       <div
                         className="nobo-banner-pic-previewer"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           uploadBannerPic();
                         }}
@@ -2080,18 +1911,18 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     <UrpSelect
                       value={primaryPosition}
-                      onChange={(e) => {
+                      onChange={e => {
                         setPrimaryPosition(e?.length ? e[0] : '');
                       }}
                       placeholder="Select Position"
                       options={getPositions()
-                        .filter((p) => {
+                        .filter(p => {
                           return (
                             p.sport === normalizeSportGender(location.state) ||
                             p.sport === primarySport
                           );
                         })
-                        .map((p) => {
+                        .map(p => {
                           return {
                             value: p.symbol || p.name,
                             label: p.name + (p.symbol ? ` (${p.symbol})` : ''),
@@ -2100,23 +1931,17 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     />
                   </IonItem>
 
-                  <IonItem
-                    lines="none"
-                    style={{ '--background-activated': '#fff' }}
-                  >
+                  <IonItem lines="none" style={{ '--background-activated': '#fff' }}>
                     <IonGrid style={{ paddingLeft: '0px' }}>
                       <IonRow>
                         <IonCol size="5" style={{ paddingLeft: '0px' }}>
                           <IonItem className="nobo-input" lines="none">
-                            <IonLabel
-                              className="nobo-signup-label"
-                              position="stacked"
-                            >
+                            <IonLabel className="nobo-signup-label" position="stacked">
                               Class Year
                             </IonLabel>
                             <UrpSelect
                               value={classYear}
-                              onChange={(e) => {
+                              onChange={e => {
                                 setClassYear(e?.length ? e[0] : '');
                               }}
                               placeholder="Class"
@@ -2197,15 +2022,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         </IonCol>
                         <IonCol size="4" style={{ paddingLeft: '0px' }}>
                           <IonItem className="nobo-input" lines="none">
-                            <IonLabel
-                              className="nobo-signup-label"
-                              position="stacked"
-                            >
+                            <IonLabel className="nobo-signup-label" position="stacked">
                               Weight
                             </IonLabel>
                             <UrpSelect
                               value={weight}
-                              onChange={(e) => {
+                              onChange={e => {
                                 setWeight(e.length ? e[0] : '');
                               }}
                               placeholder="lbs"
@@ -2217,15 +2039,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         </IonCol>
                         <IonCol size="3">
                           <IonItem className="nobo-input" lines="none">
-                            <IonLabel
-                              className="nobo-signup-label"
-                              position="stacked"
-                            >
+                            <IonLabel className="nobo-signup-label" position="stacked">
                               Height
                             </IonLabel>
                             <UrpSelect
                               value={height}
-                              onChange={(e) => {
+                              onChange={e => {
                                 setHeight(e?.length ? e[0] : '');
                               }}
                               placeholder={`0‘0"`}
@@ -2237,10 +2056,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       </IonRow>
                       <IonRow>
                         <IonCol style={{ paddingLeft: '0px' }}>
-                          <IonLabel
-                            className="nobo-signup-label"
-                            position="stacked"
-                          >
+                          <IonLabel className="nobo-signup-label" position="stacked">
                             Birthday{' '}
                             <span className="disclaimer-text">
                               {' '}
@@ -2249,20 +2065,13 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonLabel>
                         </IonCol>
                         <IonCol size="5" style={{ paddingLeft: '0px' }}>
-                          <IonItem
-                            style={{ marginTop: 0 }}
-                            className="nobo-input"
-                            lines="none"
-                          >
-                            <IonLabel
-                              className="nobo-signup-label"
-                              position="stacked"
-                            >
+                          <IonItem style={{ marginTop: 0 }} className="nobo-input" lines="none">
+                            <IonLabel className="nobo-signup-label" position="stacked">
                               Month
                             </IonLabel>
                             <UrpSelect
                               value={birthdayMonth}
-                              onChange={(e) => {
+                              onChange={e => {
                                 setBirthdayMonth(e?.length ? e[0] : '');
                               }}
                               placeholder="Month"
@@ -2328,20 +2137,13 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonItem>
                         </IonCol>
                         <IonCol size="4" style={{ paddingLeft: '0px' }}>
-                          <IonItem
-                            style={{ marginTop: 0 }}
-                            className="nobo-input"
-                            lines="none"
-                          >
-                            <IonLabel
-                              className="nobo-signup-label"
-                              position="stacked"
-                            >
+                          <IonItem style={{ marginTop: 0 }} className="nobo-input" lines="none">
+                            <IonLabel className="nobo-signup-label" position="stacked">
                               Day
                             </IonLabel>
                             <UrpSelect
                               value={birthdayDay}
-                              onChange={(e) => {
+                              onChange={e => {
                                 setBirthdayDay(e.length ? e[0] : '');
                               }}
                               placeholder="Day"
@@ -2352,20 +2154,13 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonItem>
                         </IonCol>
                         <IonCol size="3">
-                          <IonItem
-                            style={{ marginTop: 0 }}
-                            className="nobo-input"
-                            lines="none"
-                          >
-                            <IonLabel
-                              className="nobo-signup-label"
-                              position="stacked"
-                            >
+                          <IonItem style={{ marginTop: 0 }} className="nobo-input" lines="none">
+                            <IonLabel className="nobo-signup-label" position="stacked">
                               Year
                             </IonLabel>
                             <UrpSelect
                               value={birthdayYear}
-                              onChange={(e) => {
+                              onChange={e => {
                                 setBirthdayYear(e?.length ? e[0] : '');
                               }}
                               placeholder="Year"
@@ -2384,18 +2179,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     <IonInput
                       autofocus
                       value={school}
-                      onIonChange={(e) => {
+                      onIonChange={e => {
                         let count = 0;
                         if (e.detail.value === undefined) return;
 
                         const inputtedSchool = e.detail.value;
                         const autoCompleteSchools = allSchools.filter(
-                          (singleSchool) => {
+                          singleSchool => {
                             if (
                               count < 5 &&
-                              singleSchool
-                                .toLowerCase()
-                                .includes(inputtedSchool!.toLowerCase())
+                              singleSchool.toLowerCase().includes(inputtedSchool!.toLowerCase())
                             ) {
                               count++;
                               return true;
@@ -2404,8 +2197,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           },
                           { count: 0 }
                         );
-                        !autoCompleteSchools.includes(inputtedSchool!) &&
-                          openSchoolPopover(e);
+                        !autoCompleteSchools.includes(inputtedSchool!) && openSchoolPopover(e);
                         setFilteredSchools(autoCompleteSchools);
                         setSchool(e.detail.value!);
                       }}
@@ -2422,17 +2214,15 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       onDidDismiss={() => setSchoolPopoverOpen(false)}
                     >
                       <IonList lines="none">
-                        {filteredSchools.map((oneSchool) => (
+                        {filteredSchools.map(oneSchool => (
                           <IonItem
-                            onClick={(e) => {
+                            onClick={e => {
                               setSchool(oneSchool);
                               setSchoolPopoverOpen(false);
                             }}
                             key={oneSchool}
                           >
-                            <IonLabel style={{ paddingLeft: '10px' }}>
-                              {oneSchool}
-                            </IonLabel>
+                            <IonLabel style={{ paddingLeft: '10px' }}>{oneSchool}</IonLabel>
                           </IonItem>
                         ))}
                       </IonList>
@@ -2444,9 +2234,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     <UrpSelect
                       value={country}
-                      onChange={(e) => setCountry(e?.length ? e[0] : '')}
+                      onChange={e => setCountry(e?.length ? e[0] : '')}
                       placeholder="Select Country"
-                      options={countries.map((c) => {
+                      options={countries.map(c => {
                         return { value: c, label: c };
                       })}
                     />
@@ -2457,9 +2247,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     <UrpSelect
                       value={state}
-                      onChange={(e) => setState(e?.length ? e[0] : '')}
+                      onChange={e => setState(e?.length ? e[0] : '')}
                       placeholder="Select State"
-                      options={states.map((c) => {
+                      options={states.map(c => {
                         return { value: c, label: c };
                       })}
                     />
@@ -2470,7 +2260,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     <IonInput
                       value={city}
-                      onIonChange={(e) => setCity(e.detail.value!)}
+                      onIonChange={e => setCity(e.detail.value!)}
                       placeholder="Los Angeles"
                       autocapitalize="on word"
                       autocorrect="on"
@@ -2485,7 +2275,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     <IonTextarea
                       value={bio}
                       autoGrow={true}
-                      onIonChange={(e) => setBio(e.detail.value!)}
+                      onIonChange={e => setBio(e.detail.value!)}
                       autocapitalize="on sentence"
                       spellcheck={true}
                       placeholder="Bio"
@@ -2494,10 +2284,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     ></IonTextarea>
                   </IonItem>
                   <IonItem
-                    className={
-                      'nobo-input' +
-                      (socialLinkInstagramValid ? '' : ' invalid')
-                    }
+                    className={'nobo-input' + (socialLinkInstagramValid ? '' : ' invalid')}
                     lines="full"
                   >
                     <IonLabel className="nobo-signup-label" position="stacked">
@@ -2505,11 +2292,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     <IonInput
                       value={socialLinkInstagram}
-                      onIonChange={(e) => {
+                      onIonChange={e => {
                         const target: any = e.target;
-                        setSocialLinksInstagramValid(
-                          target.nativeInput.validity.valid
-                        );
+                        setSocialLinksInstagramValid(target.nativeInput.validity.valid);
                         setSocialLinksInstagram(e.detail.value!);
                       }}
                       placeholder="https://instagram.com/"
@@ -2518,9 +2303,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     ></IonInput>
                   </IonItem>
                   <IonItem
-                    className={
-                      'nobo-input' + (socialLinkTwitterValid ? '' : ' invalid')
-                    }
+                    className={'nobo-input' + (socialLinkTwitterValid ? '' : ' invalid')}
                     lines="full"
                   >
                     <IonLabel className="nobo-signup-label" position="stacked">
@@ -2528,11 +2311,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     <IonInput
                       value={socialLinkTwitter}
-                      onIonChange={(e) => {
+                      onIonChange={e => {
                         const target: any = e.target;
-                        setSocialLinksTwitterValid(
-                          target.nativeInput.validity.valid
-                        );
+                        setSocialLinksTwitterValid(target.nativeInput.validity.valid);
                         setSocialLinksTwitter(e.detail.value!);
                       }}
                       placeholder="https://twitter.com/"
@@ -2541,9 +2322,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     ></IonInput>
                   </IonItem>
                   <IonItem
-                    className={
-                      'nobo-input' + (socialLinkTikTokValid ? '' : ' invalid')
-                    }
+                    className={'nobo-input' + (socialLinkTikTokValid ? '' : ' invalid')}
                     lines="full"
                   >
                     <IonLabel className="nobo-signup-label" position="stacked">
@@ -2551,11 +2330,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     <IonInput
                       value={socialLinkTikTok}
-                      onIonChange={(e) => {
+                      onIonChange={e => {
                         const target: any = e.target;
-                        setSocialLinksTikTokValid(
-                          target.nativeInput.validity.valid
-                        );
+                        setSocialLinksTikTokValid(target.nativeInput.validity.valid);
                         setSocialLinksTikTok(e.detail.value!);
                       }}
                       placeholder="https://www.tiktok.com/"
@@ -2564,9 +2341,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     ></IonInput>
                   </IonItem>
                   <IonItem
-                    className={
-                      'nobo-input' + (socialLinkHudlValid ? '' : ' invalid')
-                    }
+                    className={'nobo-input' + (socialLinkHudlValid ? '' : ' invalid')}
                     lines="full"
                   >
                     <IonLabel className="nobo-signup-label" position="stacked">
@@ -2574,11 +2349,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     <IonInput
                       value={socialLinkHudl}
-                      onIonChange={(e) => {
+                      onIonChange={e => {
                         const target: any = e.target;
-                        setSocialLinksHudlValid(
-                          target.nativeInput.validity.valid
-                        );
+                        setSocialLinksHudlValid(target.nativeInput.validity.valid);
                         setSocialLinksHudl(e.detail.value!);
                       }}
                       placeholder="https://www.hudl.com/"
@@ -2587,10 +2360,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     ></IonInput>
                   </IonItem>
                   <IonItem
-                    className={
-                      'nobo-input' +
-                      (socialLink247SportsValid ? '' : ' invalid')
-                    }
+                    className={'nobo-input' + (socialLink247SportsValid ? '' : ' invalid')}
                     lines="full"
                   >
                     <IonLabel className="nobo-signup-label" position="stacked">
@@ -2598,11 +2368,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     <IonInput
                       value={socialLink247Sports}
-                      onIonChange={(e) => {
+                      onIonChange={e => {
                         const target: any = e.target;
-                        setSocialLinks247SportsValid(
-                          target.nativeInput.validity.valid
-                        );
+                        setSocialLinks247SportsValid(target.nativeInput.validity.valid);
                         setSocialLinks247Sports(e.detail.value!);
                       }}
                       placeholder="https://247sports.com/"
@@ -2611,9 +2379,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     ></IonInput>
                   </IonItem>
                   <IonItem
-                    className={
-                      'nobo-input' + (socialLinkRivalsValid ? '' : ' invalid')
-                    }
+                    className={'nobo-input' + (socialLinkRivalsValid ? '' : ' invalid')}
                     lines="full"
                   >
                     <IonLabel className="nobo-signup-label" position="stacked">
@@ -2621,11 +2387,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     <IonInput
                       value={socialLinkRivals}
-                      onIonChange={(e) => {
+                      onIonChange={e => {
                         const target: any = e.target;
-                        setSocialLinksRivalsValid(
-                          target.nativeInput.validity.valid
-                        );
+                        setSocialLinksRivalsValid(target.nativeInput.validity.valid);
                         setSocialLinksRivals(e.detail.value!);
                       }}
                       placeholder="https://n.rivals.com/"
@@ -2634,9 +2398,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     ></IonInput>
                   </IonItem>
                   <IonItem
-                    className={
-                      'nobo-input' + (socialLinkMaxPrepsValid ? '' : ' invalid')
-                    }
+                    className={'nobo-input' + (socialLinkMaxPrepsValid ? '' : ' invalid')}
                     lines="full"
                   >
                     <IonLabel className="nobo-signup-label" position="stacked">
@@ -2644,11 +2406,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     </IonLabel>
                     <IonInput
                       value={socialLinkMaxPreps}
-                      onIonChange={(e) => {
+                      onIonChange={e => {
                         const target: any = e.target;
-                        setSocialLinksMaxPrepsValid(
-                          target.nativeInput.validity.valid
-                        );
+                        setSocialLinksMaxPrepsValid(target.nativeInput.validity.valid);
                         setSocialLinksMaxPreps(e.detail.value!);
                       }}
                       placeholder="https://www.maxpreps.com/"
@@ -2665,7 +2425,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   lines="none"
                   slot="header"
                   className="nobo-section-head"
-                  onClick={(e) => scollToSection('stats')}
+                  onClick={e => scollToSection('stats')}
                 >
                   <span className="nobo-step-num">2</span>
                   <h5 className="nobo-section-title">Stats</h5>
@@ -2674,10 +2434,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   </span>
                 </IonItem>
 
-                <IonList
-                  className="nobo-list-input stats-section"
-                  slot="content"
-                >
+                <IonList className="nobo-list-input stats-section" slot="content">
                   {stats.map((s: any) => {
                     return (
                       <>
@@ -2687,7 +2444,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               <IonCol size="12">
                                 <UrpSelect
                                   value={s.season}
-                                  onChange={(e) => {
+                                  onChange={e => {
                                     if (e?.length) {
                                       const statsCopy = getStatsCopy();
                                       const season = statsCopy.find(
@@ -2704,11 +2461,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 />
                                 <div
                                   className="add-season"
-                                  onClick={(e) => {
+                                  onClick={e => {
                                     e.preventDefault();
                                     const statsCopy = getStatsCopy();
-                                    const availableSeasons =
-                                      getAvailableSeasons();
+                                    const availableSeasons = getAvailableSeasons();
                                     statsCopy.push({
                                       season: availableSeasons[0].value,
                                       categories: [],
@@ -2716,10 +2472,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                     setStats(statsCopy);
                                   }}
                                 >
-                                  <img
-                                    src="assets/images/create-post.svg"
-                                    alt="Add season"
-                                  />
+                                  <img src="assets/images/create-post.svg" alt="Add season" />
                                 </div>
                               </IonCol>
                             </IonRow>
@@ -2732,8 +2485,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 Category
                               </IonCol>
                               <IonCol size="8" className="subtext">
-                                Select a category and all stats that apply for
-                                that category
+                                Select a category and all stats that apply for that category
                               </IonCol>
                             </IonRow>
                           </IonGrid>
@@ -2753,32 +2505,25 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             (cat: any) => cat.name === c.category
                           );
                           if (!category) {
-                            console.error(
-                              'Could not find category',
-                              c.category
-                            );
+                            console.error('Could not find category', c.category);
                           }
 
                           return (
                             <>
                               <IonItem className="stats-category">
-                                <IonLabel className="stats-category-name">
-                                  {category.name}
-                                </IonLabel>
+                                <IonLabel className="stats-category-name">{category.name}</IonLabel>
                                 <IonLabel
                                   className="stats-category-remove"
-                                  onClick={(e) => {
+                                  onClick={e => {
                                     e.preventDefault();
                                     const statsCopy = getStatsCopy();
                                     const season = statsCopy.find(
                                       (seas: any) => seas.name === s.name
                                     );
                                     if (season) {
-                                      season.categories =
-                                        season.categories.filter(
-                                          (cat: any) =>
-                                            cat.category !== c.category
-                                        );
+                                      season.categories = season.categories.filter(
+                                        (cat: any) => cat.category !== c.category
+                                      );
                                     }
                                     setStats(statsCopy);
                                   }}
@@ -2803,19 +2548,15 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                             inputmode="numeric"
                                             type="number"
                                             min="-99999999"
-                                            onIonChange={(e) => {
+                                            onIonChange={e => {
                                               const statsCopy = getStatsCopy();
                                               const season = statsCopy.find(
-                                                (seas: any) =>
-                                                  seas.season === s.season
+                                                (seas: any) => seas.season === s.season
                                               );
                                               if (season) {
-                                                const category =
-                                                  season.categories.find(
-                                                    (cat: any) =>
-                                                      cat.category ===
-                                                      c.category
-                                                  );
+                                                const category = season.categories.find(
+                                                  (cat: any) => cat.category === c.category
+                                                );
                                                 if (category) {
                                                   const value = e.detail.value!;
                                                   if (
@@ -2824,13 +2565,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                                     value === null ||
                                                     value === undefined
                                                   ) {
-                                                    category.values[
-                                                      stat.fieldName
-                                                    ] = undefined;
+                                                    category.values[stat.fieldName] = undefined;
                                                   } else {
-                                                    category.values[
-                                                      stat.fieldName
-                                                    ] = +value;
+                                                    category.values[stat.fieldName] = +value;
                                                   }
                                                   setStats(statsCopy);
                                                 }
@@ -2851,7 +2588,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonItem lines="none">
                           <IonLabel
                             className="add-category"
-                            onClick={(e) => {
+                            onClick={e => {
                               e.preventDefault();
                               season = s;
                               setSeason(season);
@@ -2859,10 +2596,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             }}
                           >
                             <span>Add Another Category</span>
-                            <img
-                              src="/assets/images/create-post.svg"
-                              alt="Add category"
-                            />
+                            <img src="/assets/images/create-post.svg" alt="Add category" />
                           </IonLabel>
                         </IonItem>
                       </>
@@ -2877,7 +2611,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   lines="none"
                   slot="header"
                   className="nobo-section-head"
-                  onClick={(e) => scollToSection('background')}
+                  onClick={e => scollToSection('background')}
                 >
                   <span className="nobo-step-num">3</span>
                   <h5 className="nobo-section-title">Background</h5>
@@ -2900,10 +2634,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   </IonItem> */}
                   {isSectionActive('football') && (
                     <IonItem className="nobo-input" lines="none">
-                      <IonLabel
-                        className="nobo-signup-label nobo-rating-label"
-                        position="stacked"
-                      >
+                      <IonLabel className="nobo-signup-label nobo-rating-label" position="stacked">
                         Your Rating
                       </IonLabel>
                       <IonRow>
@@ -2924,7 +2655,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                   id="star-1"
                                   className="fa-star"
                                   d="M11 0L13.4697 7.60081H21.4616L14.996 12.2984L17.4656 19.8992L11 15.2016L4.53436 19.8992L7.00402 12.2984L0.538379 7.60081H8.53035L11 0Z"
-                                  onClick={(e) => {
+                                  onClick={e => {
                                     setRating(1);
                                   }}
                                 />
@@ -2932,7 +2663,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                   id="star-2"
                                   className="fa-star"
                                   d="M37 0L39.4697 7.60081H47.4616L40.996 12.2984L43.4656 19.8992L37 15.2016L30.5344 19.8992L33.004 12.2984L26.5384 7.60081H34.5303L37 0Z"
-                                  onClick={(e) => {
+                                  onClick={e => {
                                     setRating(2);
                                   }}
                                 />
@@ -2940,7 +2671,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                   id="star-3"
                                   className="fa-star"
                                   d="M63 0L65.4697 7.60081H73.4616L66.996 12.2984L69.4656 19.8992L63 15.2016L56.5344 19.8992L59.004 12.2984L52.5384 7.60081H60.5303L63 0Z"
-                                  onClick={(e) => {
+                                  onClick={e => {
                                     setRating(3);
                                   }}
                                 />
@@ -2948,7 +2679,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                   id="star-4"
                                   className="fa-star"
                                   d="M89 0L91.4697 7.60081H99.4616L92.996 12.2984L95.4656 19.8992L89 15.2016L82.5344 19.8992L85.004 12.2984L78.5384 7.60081H86.5303L89 0Z"
-                                  onClick={(e) => {
+                                  onClick={e => {
                                     setRating(4);
                                   }}
                                 />
@@ -2956,7 +2687,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                   id="star-5"
                                   className="fa-star"
                                   d="M118 0L120.47 7.60081H128.462L121.996 12.2984L124.466 19.8992L118 15.2016L111.534 19.8992L114.004 12.2984L107.538 7.60081H115.53L118 0Z"
-                                  onClick={(e) => {
+                                  onClick={e => {
                                     setRating(5);
                                   }}
                                 />
@@ -2964,9 +2695,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             </span>
                           </div>
                         </IonCol>
-                        <IonCol
-                          style={{ display: 'flex', alignItems: 'center' }}
-                        >
+                        <IonCol style={{ display: 'flex', alignItems: 'center' }}>
                           <IonText
                             style={{ paddingTop: '5px' }}
                             className="nobo-optional"
@@ -2984,26 +2713,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     <IonGrid style={{ paddingLeft: '0px' }}>
                       <IonRow>
                         <IonCol style={{ paddingLeft: '0px' }}>
-                          <IonItem
-                            className={gpaValid ? '' : ' invalid'}
-                            lines="full"
-                          >
-                            <IonLabel
-                              className="nobo-signup-label"
-                              position="stacked"
-                            >
+                          <IonItem className={gpaValid ? '' : ' invalid'} lines="full">
+                            <IonLabel className="nobo-signup-label" position="stacked">
                               GPA
                             </IonLabel>
                             <IonInput
                               value={gpa}
-                              onIonChange={(e) => {
+                              onIonChange={e => {
                                 const value = e.detail.value!;
                                 let isValid = true;
-                                if (
-                                  value !== null &&
-                                  value !== undefined &&
-                                  value !== ''
-                                ) {
+                                if (value !== null && value !== undefined && value !== '') {
                                   if (!/^[0-9.]{1,3}$/.test(value)) {
                                     isValid = false;
                                   } else {
@@ -3013,12 +2732,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                     }
                                   }
                                 }
-                                console.log(
-                                  'value',
-                                  value,
-                                  typeof value,
-                                  isValid
-                                );
+                                console.log('value', value, typeof value, isValid);
                                 setGpaValid(isValid);
                                 setGpa(value);
                               }}
@@ -3030,26 +2744,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonItem>
                         </IonCol>
                         <IonCol>
-                          <IonItem
-                            className={satValid ? '' : ' invalid'}
-                            lines="full"
-                          >
-                            <IonLabel
-                              className="nobo-signup-label"
-                              position="stacked"
-                            >
+                          <IonItem className={satValid ? '' : ' invalid'} lines="full">
+                            <IonLabel className="nobo-signup-label" position="stacked">
                               SAT
                             </IonLabel>
                             <IonInput
                               value={sat}
-                              onIonChange={(e) => {
+                              onIonChange={e => {
                                 const value = e.detail.value!;
                                 let isValid = true;
-                                if (
-                                  value !== null &&
-                                  value !== undefined &&
-                                  value !== ''
-                                ) {
+                                if (value !== null && value !== undefined && value !== '') {
                                   if (!/^[0-9]{1,4}$/.test(value)) {
                                     isValid = false;
                                   } else {
@@ -3059,12 +2763,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                     }
                                   }
                                 }
-                                console.log(
-                                  'value',
-                                  value,
-                                  typeof value,
-                                  isValid
-                                );
+                                console.log('value', value, typeof value, isValid);
                                 setSatValid(isValid);
                                 setSat(value);
                               }}
@@ -3076,26 +2775,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonItem>
                         </IonCol>
                         <IonCol>
-                          <IonItem
-                            className={actValid ? '' : ' invalid'}
-                            lines="full"
-                          >
-                            <IonLabel
-                              className="nobo-signup-label"
-                              position="stacked"
-                            >
+                          <IonItem className={actValid ? '' : ' invalid'} lines="full">
+                            <IonLabel className="nobo-signup-label" position="stacked">
                               ACT
                             </IonLabel>
                             <IonInput
                               value={act}
-                              onIonChange={(e) => {
+                              onIonChange={e => {
                                 const value = e.detail.value!;
                                 let isValid = true;
-                                if (
-                                  value !== null &&
-                                  value !== undefined &&
-                                  value !== ''
-                                ) {
+                                if (value !== null && value !== undefined && value !== '') {
                                   if (!/^[0-9]{1,2}$/.test(value)) {
                                     isValid = false;
                                   } else {
@@ -3105,12 +2794,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                     }
                                   }
                                 }
-                                console.log(
-                                  'value',
-                                  value,
-                                  typeof value,
-                                  isValid
-                                );
+                                console.log('value', value, typeof value, isValid);
                                 setActValid(isValid);
                                 setAct(value);
                               }}
@@ -3135,7 +2819,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       autocapitalize="on word"
                       autocorrect="on"
                       type="text"
-                      onIonChange={(e) => {
+                      onIonChange={e => {
                         if (e?.detail?.value) {
                           setExtraCurriculars(e.detail.value!.split(',') || []);
                         } else {
@@ -3148,15 +2832,13 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   <IonItem className="nobo-input" lines="none">
                     <IonLabel className="nobo-signup-label" position="stacked">
                       Additional Sport(s)
-                      <span className="nobo-optional">
-                        Select all that apply
-                      </span>
+                      <span className="nobo-optional">Select all that apply</span>
                     </IonLabel>
                     <UrpSelect
                       placeholder="Select Sport"
                       className="nobo-select"
                       value={otherSports}
-                      onChange={(e) => setOtherSports(e)}
+                      onChange={e => setOtherSports(e)}
                       multiple={true}
                       border={true}
                       options={[
@@ -3167,7 +2849,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         { value: 'volleyball', label: 'Volleyball' },
                         { value: 'softball', label: 'Softball' },
                         { value: 'lacrosse', label: 'Lacrosse' },
-                      ].filter((o) => {
+                      ].filter(o => {
                         let sport = primarySport || (location.state as string);
                         if (sport) {
                           if (sport[0] === 'w' || sport[0] === 'm') {
@@ -3182,10 +2864,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     return (
                       <div key={index}>
                         <IonItem className="nobo-input" lines="none">
-                          <IonLabel
-                            className="nobo-signup-label"
-                            position="stacked"
-                          >
+                          <IonLabel className="nobo-signup-label" position="stacked">
                             Awards / Recognition
                           </IonLabel>
                           {isSectionActive('football') && (
@@ -3193,21 +2872,13 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               value={awards[index].award}
                               placeholder="Select Award"
                               border={true}
-                              onChange={(e) => {
+                              onChange={e => {
                                 const newAwards = [...awards];
                                 const event = e?.length ? e[0] : '';
-                                if (
-                                  event !== '' &&
-                                  newAwards[index].description === ''
-                                ) {
-                                  setInvalidAwardIds([
-                                    ...invalidAwardIds,
-                                    index,
-                                  ]);
+                                if (event !== '' && newAwards[index].description === '') {
+                                  setInvalidAwardIds([...invalidAwardIds, index]);
                                 } else {
-                                  setInvalidAwardIds(
-                                    invalidAwardIds.filter((id) => id !== index)
-                                  );
+                                  setInvalidAwardIds(invalidAwardIds.filter(id => id !== index));
                                 }
                                 newAwards[index] = {
                                   ...newAwards[index],
@@ -3245,21 +2916,13 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               value={awards[index].award}
                               placeholder="Select Award"
                               border={true}
-                              onChange={(e) => {
+                              onChange={e => {
                                 const newAwards = [...awards];
                                 const event = e?.length ? e[0] : '';
-                                if (
-                                  event !== '' &&
-                                  newAwards[index].description === ''
-                                ) {
-                                  setInvalidAwardIds([
-                                    ...invalidAwardIds,
-                                    index,
-                                  ]);
+                                if (event !== '' && newAwards[index].description === '') {
+                                  setInvalidAwardIds([...invalidAwardIds, index]);
                                 } else {
-                                  setInvalidAwardIds(
-                                    invalidAwardIds.filter((id) => id !== index)
-                                  );
+                                  setInvalidAwardIds(invalidAwardIds.filter(id => id !== index));
                                 }
                                 newAwards[index] = {
                                   ...newAwards[index],
@@ -3305,21 +2968,13 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               value={awards[index].award}
                               placeholder="Select Award"
                               border={true}
-                              onChange={(e) => {
+                              onChange={e => {
                                 const newAwards = [...awards];
                                 const event = e?.length ? e[0] : '';
-                                if (
-                                  event !== '' &&
-                                  newAwards[index].description === ''
-                                ) {
-                                  setInvalidAwardIds([
-                                    ...invalidAwardIds,
-                                    index,
-                                  ]);
+                                if (event !== '' && newAwards[index].description === '') {
+                                  setInvalidAwardIds([...invalidAwardIds, index]);
                                 } else {
-                                  setInvalidAwardIds(
-                                    invalidAwardIds.filter((id) => id !== index)
-                                  );
+                                  setInvalidAwardIds(invalidAwardIds.filter(id => id !== index));
                                 }
                                 newAwards[index] = {
                                   ...newAwards[index],
@@ -3353,196 +3008,158 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               ]}
                             />
                           )}
-                          {(isSectionActive('msoccer') ||
-                            isSectionActive('wsoccer')) && (
-                              <UrpSelect
-                                value={awards[index].award}
-                                placeholder="Select Award"
-                                border={true}
-                                onChange={(e) => {
-                                  const newAwards = [...awards];
-                                  const event = e?.length ? e[0] : '';
-                                  if (
-                                    event !== '' &&
-                                    newAwards[index].description === ''
-                                  ) {
-                                    setInvalidAwardIds([
-                                      ...invalidAwardIds,
-                                      index,
-                                    ]);
-                                  } else {
-                                    setInvalidAwardIds(
-                                      invalidAwardIds.filter((id) => id !== index)
-                                    );
-                                  }
-                                  newAwards[index] = {
-                                    ...newAwards[index],
-                                    award: e?.length ? e[0] : '',
-                                  };
-                                  setAwards(newAwards);
-                                }}
-                                options={[
-                                  {
-                                    value: 'Golden Boot',
-                                    label: 'Golden Boot',
-                                  },
-                                  {
-                                    value: 'Golden Ball',
-                                    label: 'Golden Ball',
-                                  },
-                                  {
-                                    value: 'Golden Glove',
-                                    label: 'Golden Glove',
-                                  },
-                                  { value: 'Other', label: 'Other' },
-                                ]}
-                              />
-                            )}
-                          {(isSectionActive('mbasketball') ||
-                            isSectionActive('wbasketball')) && (
-                              <UrpSelect
-                                value={awards[index].award}
-                                placeholder="Select Award"
-                                border={true}
-                                onChange={(e) => {
-                                  const newAwards = [...awards];
-                                  const event = e?.length ? e[0] : '';
-                                  if (
-                                    event !== '' &&
-                                    newAwards[index].description === ''
-                                  ) {
-                                    setInvalidAwardIds([
-                                      ...invalidAwardIds,
-                                      index,
-                                    ]);
-                                  } else {
-                                    setInvalidAwardIds(
-                                      invalidAwardIds.filter((id) => id !== index)
-                                    );
-                                  }
-                                  newAwards[index] = {
-                                    ...newAwards[index],
-                                    award: e?.length ? e[0] : '',
-                                  };
-                                  setAwards(newAwards);
-                                }}
-                                options={[
-                                  {
-                                    value: 'All-star Game MVP',
-                                    label: 'All-star Game MVP',
-                                  },
-                                  {
-                                    value: 'Defensive Player of the Year',
-                                    label: 'Defensive Player of the Year',
-                                  },
-                                  {
-                                    value: 'Most Improved Player',
-                                    label: 'Most Improved Player',
-                                  },
-                                  { value: 'MVP', label: 'MVP' },
-                                  {
-                                    value: 'Rookie of the Year',
-                                    label: 'Rookie of the Year',
-                                  },
-                                  { value: 'Other', label: 'Other' },
-                                ]}
-                              />
-                            )}
-                          {(isSectionActive('mvolleyball') ||
-                            isSectionActive('wvolleyball')) && (
-                              <UrpSelect
-                                value={awards[index].award}
-                                placeholder="Select Award"
-                                border={true}
-                                onChange={(e) => {
-                                  const newAwards = [...awards];
-                                  const event = e?.length ? e[0] : '';
-                                  if (
-                                    event !== '' &&
-                                    newAwards[index].description === ''
-                                  ) {
-                                    setInvalidAwardIds([
-                                      ...invalidAwardIds,
-                                      index,
-                                    ]);
-                                  } else {
-                                    setInvalidAwardIds(
-                                      invalidAwardIds.filter((id) => id !== index)
-                                    );
-                                  }
-                                  newAwards[index] = {
-                                    ...newAwards[index],
-                                    award: e?.length ? e[0] : '',
-                                  };
-                                  setAwards(newAwards);
-                                }}
-                                options={[
-                                  {
-                                    value: 'Player of the Year',
-                                    label: 'Player of the Year',
-                                  },
-                                  {
-                                    value: 'Freshman of the Year',
-                                    label: 'Freshman of the Year',
-                                  },
-                                  {
-                                    value: 'Libero of the Year',
-                                    label: 'Libero of the Year',
-                                  },
-                                  {
-                                    value: 'Setter of the Year',
-                                    label: 'Setter of the Year',
-                                  },
-                                  { value: 'Other', label: 'Other' },
-                                ]}
-                              />
-                            )}
-                          {(isSectionActive('mlacrosse') ||
-                            isSectionActive('wlacrosse')) && (
-                              <UrpSelect
-                                value={awards[index].award}
-                                placeholder="Select Award"
-                                border={true}
-                                onChange={(e) => {
-                                  const newAwards = [...awards];
-                                  const event = e?.length ? e[0] : '';
-                                  if (
-                                    event !== '' &&
-                                    newAwards[index].description === ''
-                                  ) {
-                                    setInvalidAwardIds([
-                                      ...invalidAwardIds,
-                                      index,
-                                    ]);
-                                  } else {
-                                    setInvalidAwardIds(
-                                      invalidAwardIds.filter((id) => id !== index)
-                                    );
-                                  }
-                                  newAwards[index] = {
-                                    ...newAwards[index],
-                                    award: e?.length ? e[0] : '',
-                                  };
-                                  setAwards(newAwards);
-                                }}
-                                options={[
-                                  {
-                                    value: 'The Tewaaraton Award',
-                                    label: 'The Tewaaraton Award',
-                                  },
-                                  {
-                                    value: 'F. Morris Touchstone Award',
-                                    label: 'F. Morris Touchstone Award',
-                                  },
-                                  { value: 'Other', label: 'Other' },
-                                ]}
-                              />
-                            )}
+                          {(isSectionActive('msoccer') || isSectionActive('wsoccer')) && (
+                            <UrpSelect
+                              value={awards[index].award}
+                              placeholder="Select Award"
+                              border={true}
+                              onChange={e => {
+                                const newAwards = [...awards];
+                                const event = e?.length ? e[0] : '';
+                                if (event !== '' && newAwards[index].description === '') {
+                                  setInvalidAwardIds([...invalidAwardIds, index]);
+                                } else {
+                                  setInvalidAwardIds(invalidAwardIds.filter(id => id !== index));
+                                }
+                                newAwards[index] = {
+                                  ...newAwards[index],
+                                  award: e?.length ? e[0] : '',
+                                };
+                                setAwards(newAwards);
+                              }}
+                              options={[
+                                {
+                                  value: 'Golden Boot',
+                                  label: 'Golden Boot',
+                                },
+                                {
+                                  value: 'Golden Ball',
+                                  label: 'Golden Ball',
+                                },
+                                {
+                                  value: 'Golden Glove',
+                                  label: 'Golden Glove',
+                                },
+                                { value: 'Other', label: 'Other' },
+                              ]}
+                            />
+                          )}
+                          {(isSectionActive('mbasketball') || isSectionActive('wbasketball')) && (
+                            <UrpSelect
+                              value={awards[index].award}
+                              placeholder="Select Award"
+                              border={true}
+                              onChange={e => {
+                                const newAwards = [...awards];
+                                const event = e?.length ? e[0] : '';
+                                if (event !== '' && newAwards[index].description === '') {
+                                  setInvalidAwardIds([...invalidAwardIds, index]);
+                                } else {
+                                  setInvalidAwardIds(invalidAwardIds.filter(id => id !== index));
+                                }
+                                newAwards[index] = {
+                                  ...newAwards[index],
+                                  award: e?.length ? e[0] : '',
+                                };
+                                setAwards(newAwards);
+                              }}
+                              options={[
+                                {
+                                  value: 'All-star Game MVP',
+                                  label: 'All-star Game MVP',
+                                },
+                                {
+                                  value: 'Defensive Player of the Year',
+                                  label: 'Defensive Player of the Year',
+                                },
+                                {
+                                  value: 'Most Improved Player',
+                                  label: 'Most Improved Player',
+                                },
+                                { value: 'MVP', label: 'MVP' },
+                                {
+                                  value: 'Rookie of the Year',
+                                  label: 'Rookie of the Year',
+                                },
+                                { value: 'Other', label: 'Other' },
+                              ]}
+                            />
+                          )}
+                          {(isSectionActive('mvolleyball') || isSectionActive('wvolleyball')) && (
+                            <UrpSelect
+                              value={awards[index].award}
+                              placeholder="Select Award"
+                              border={true}
+                              onChange={e => {
+                                const newAwards = [...awards];
+                                const event = e?.length ? e[0] : '';
+                                if (event !== '' && newAwards[index].description === '') {
+                                  setInvalidAwardIds([...invalidAwardIds, index]);
+                                } else {
+                                  setInvalidAwardIds(invalidAwardIds.filter(id => id !== index));
+                                }
+                                newAwards[index] = {
+                                  ...newAwards[index],
+                                  award: e?.length ? e[0] : '',
+                                };
+                                setAwards(newAwards);
+                              }}
+                              options={[
+                                {
+                                  value: 'Player of the Year',
+                                  label: 'Player of the Year',
+                                },
+                                {
+                                  value: 'Freshman of the Year',
+                                  label: 'Freshman of the Year',
+                                },
+                                {
+                                  value: 'Libero of the Year',
+                                  label: 'Libero of the Year',
+                                },
+                                {
+                                  value: 'Setter of the Year',
+                                  label: 'Setter of the Year',
+                                },
+                                { value: 'Other', label: 'Other' },
+                              ]}
+                            />
+                          )}
+                          {(isSectionActive('mlacrosse') || isSectionActive('wlacrosse')) && (
+                            <UrpSelect
+                              value={awards[index].award}
+                              placeholder="Select Award"
+                              border={true}
+                              onChange={e => {
+                                const newAwards = [...awards];
+                                const event = e?.length ? e[0] : '';
+                                if (event !== '' && newAwards[index].description === '') {
+                                  setInvalidAwardIds([...invalidAwardIds, index]);
+                                } else {
+                                  setInvalidAwardIds(invalidAwardIds.filter(id => id !== index));
+                                }
+                                newAwards[index] = {
+                                  ...newAwards[index],
+                                  award: e?.length ? e[0] : '',
+                                };
+                                setAwards(newAwards);
+                              }}
+                              options={[
+                                {
+                                  value: 'The Tewaaraton Award',
+                                  label: 'The Tewaaraton Award',
+                                },
+                                {
+                                  value: 'F. Morris Touchstone Award',
+                                  label: 'F. Morris Touchstone Award',
+                                },
+                                { value: 'Other', label: 'Other' },
+                              ]}
+                            />
+                          )}
                         </IonItem>
                         <IonItem
-                          className={
-                            invalidAwardIds.includes(index) ? 'invalid' : ''
-                          }
+                          className={invalidAwardIds.includes(index) ? 'invalid' : ''}
                           lines="full"
                         >
                           <IonInput
@@ -3550,21 +3167,14 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             placeholder="Year Awarded"
                             type="text"
                             inputmode="numeric"
-                            onIonChange={(e) => {
+                            onIonChange={e => {
                               const newAwards = [...awards];
-                              const event = e.detail.value
-                                ? e.detail.value
-                                : '';
-                              if (
-                                newAwards[index].award !== '' &&
-                                event === ''
-                              ) {
+                              const event = e.detail.value ? e.detail.value : '';
+                              if (newAwards[index].award !== '' && event === '') {
                                 setInvalidAwardIds([...invalidAwardIds, index]);
                                 //regex to check if string is less than 4 characters and contains no symbols
                               } else {
-                                setInvalidAwardIds(
-                                  invalidAwardIds.filter((id) => id !== index)
-                                );
+                                setInvalidAwardIds(invalidAwardIds.filter(id => id !== index));
                               }
                               newAwards[index] = {
                                 ...newAwards[index],
@@ -3582,15 +3192,11 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       {awards.length > 1 ? (
                         <IonLabel
                           style={{ color: '#9BC9C2', fontWeight: 'bold' }}
-                          onClick={(e) => {
-                            setSingleAwardDropdownField([
-                              ...singleAwardDropdownField.slice(0, -1),
-                            ]);
+                          onClick={e => {
+                            setSingleAwardDropdownField([...singleAwardDropdownField.slice(0, -1)]);
                             setAwards([...awards.slice(0, awards.length - 1)]);
                             setInvalidAwardIds(
-                              invalidAwardIds.filter(
-                                (id) => id !== awards.length - 1
-                              )
+                              invalidAwardIds.filter(id => id !== awards.length - 1)
                             );
                             // setNumberOfAwards(numberOfAwards - 1);
 
@@ -3612,11 +3218,8 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     <IonCol size="4" offset="4">
                       <IonLabel
                         style={{ color: '#2F736F', fontWeight: 'bold' }}
-                        onClick={(e) => {
-                          setSingleAwardDropdownField([
-                            ...singleAwardDropdownField,
-                            '',
-                          ]);
+                        onClick={e => {
+                          setSingleAwardDropdownField([...singleAwardDropdownField, '']);
                           const newAwards = [...awards];
                           newAwards.push({
                             award: '',
@@ -3641,10 +3244,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     return (
                       <div key={index}>
                         <IonItem className="nobo-input" lines="full">
-                          <IonLabel
-                            className="nobo-signup-label"
-                            position="stacked"
-                          >
+                          <IonLabel className="nobo-signup-label" position="stacked">
                             Previous Team
                           </IonLabel>
                           <IonInput
@@ -3653,7 +3253,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             autocapitalize="on word"
                             autocorrect="on"
                             type="text"
-                            onIonChange={(e) => {
+                            onIonChange={e => {
                               const newPreviousTeams = [...previousTeams];
                               newPreviousTeams[index] = {
                                 ...newPreviousTeams[index],
@@ -3665,7 +3265,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               //   team: e.detail.value,
                               // });
                             }}
-                          // required
+                            // required
                           ></IonInput>
                         </IonItem>
                         <IonItem className="nobo-input" lines="none">
@@ -3673,17 +3273,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             <IonRow>
                               <IonCol style={{ paddingLeft: '0px' }}>
                                 <IonItem
-                                  className={
-                                    invalidStartYearIds.includes(index)
-                                      ? 'invalid'
-                                      : ''
-                                  }
+                                  className={invalidStartYearIds.includes(index) ? 'invalid' : ''}
                                   lines="full"
                                 >
-                                  <IonLabel
-                                    className="nobo-signup-label"
-                                    position="stacked"
-                                  >
+                                  <IonLabel className="nobo-signup-label" position="stacked">
                                     Start Year
                                   </IonLabel>
                                   <IonInput
@@ -3691,58 +3284,36 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                     placeholder="YYYY"
                                     type="text"
                                     value={previousTeams[index].startYear}
-                                    onIonChange={(e) => {
+                                    onIonChange={e => {
                                       const value = e.detail.value!;
                                       let lastPreviousTeamEndYear =
                                         previousTeams[index - 1]?.endYear;
-                                      if (
-                                        value !== null &&
-                                        value !== undefined &&
-                                        value !== ''
-                                      ) {
+                                      if (value !== null && value !== undefined && value !== '') {
                                         if (!/^[0-9]{4}$/.test(value)) {
-                                          setInvalidStartYearIds([
-                                            ...invalidStartYearIds,
-                                            index,
-                                          ]);
+                                          setInvalidStartYearIds([...invalidStartYearIds, index]);
                                         } else if (
                                           value < lastPreviousTeamEndYear &&
                                           lastPreviousTeamEndYear !== undefined
                                         ) {
-                                          setInvalidStartYearIds([
-                                            ...invalidStartYearIds,
-                                            index,
-                                          ]);
+                                          setInvalidStartYearIds([...invalidStartYearIds, index]);
                                         } else if (
-                                          value >
-                                          previousTeams[index].endYear &&
-                                          previousTeams[index].endYear !==
-                                          undefined &&
+                                          value > previousTeams[index].endYear &&
+                                          previousTeams[index].endYear !== undefined &&
                                           previousTeams[index].endYear !== '' &&
                                           previousTeams[index].endYear !== null
                                         ) {
-                                          setInvalidStartYearIds([
-                                            ...invalidStartYearIds,
-                                            index,
-                                          ]);
+                                          setInvalidStartYearIds([...invalidStartYearIds, index]);
                                         } else {
                                           const v = +value;
                                           setInvalidStartYearIds(
-                                            invalidStartYearIds.filter(
-                                              (id) => id !== index
-                                            )
+                                            invalidStartYearIds.filter(id => id !== index)
                                           );
-                                          if (
-                                            v < 1970 ||
-                                            v > new Date().getFullYear() + 1
-                                          ) {
+                                          if (v < 1970 || v > new Date().getFullYear() + 1) {
                                             invalidStartYearIds.push(index);
                                           }
                                         }
                                       }
-                                      const newPreviousTeams = [
-                                        ...previousTeams,
-                                      ];
+                                      const newPreviousTeams = [...previousTeams];
                                       newPreviousTeams[index] = {
                                         ...newPreviousTeams[index],
                                         startYear: e.detail.value,
@@ -3754,23 +3325,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                       //   startYear: e.detail.value,
                                       // });
                                     }}
-                                  // required
+                                    // required
                                   ></IonInput>
                                 </IonItem>
                               </IonCol>
                               <IonCol>
                                 <IonItem
-                                  className={
-                                    invalidEndYearIds.includes(index)
-                                      ? 'invalid'
-                                      : ''
-                                  }
+                                  className={invalidEndYearIds.includes(index) ? 'invalid' : ''}
                                   lines="full"
                                 >
-                                  <IonLabel
-                                    className="nobo-signup-label"
-                                    position="stacked"
-                                  >
+                                  <IonLabel className="nobo-signup-label" position="stacked">
                                     End Year
                                   </IonLabel>
                                   <IonInput
@@ -3778,55 +3342,33 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                     placeholder="YYYY"
                                     type="text"
                                     value={previousTeams[index].endYear}
-                                    onIonChange={(e) => {
+                                    onIonChange={e => {
                                       const value = e.detail.value!;
-                                      if (
-                                        value !== null &&
-                                        value !== undefined &&
-                                        value !== ''
-                                      ) {
+                                      if (value !== null && value !== undefined && value !== '') {
                                         if (!/^[0-9]{4}$/.test(value)) {
                                           // isValid = false;
-                                          setInvalidEndYearIds([
-                                            ...invalidEndYearIds,
-                                            index,
-                                          ]);
+                                          setInvalidEndYearIds([...invalidEndYearIds, index]);
                                         } else {
                                           const v = +value;
                                           setInvalidEndYearIds(
-                                            invalidEndYearIds.filter(
-                                              (id) => id !== index
-                                            )
+                                            invalidEndYearIds.filter(id => id !== index)
                                           );
-                                          if (
-                                            v < 1970 ||
-                                            v > new Date().getFullYear() + 1
-                                          ) {
-                                            setInvalidEndYearIds([
-                                              ...invalidEndYearIds,
-                                              index,
-                                            ]);
-                                          } else if (
-                                            v < previousTeams[index].startYear
-                                          ) {
-                                            setInvalidEndYearIds([
-                                              ...invalidEndYearIds,
-                                              index,
-                                            ]);
+                                          if (v < 1970 || v > new Date().getFullYear() + 1) {
+                                            setInvalidEndYearIds([...invalidEndYearIds, index]);
+                                          } else if (v < previousTeams[index].startYear) {
+                                            setInvalidEndYearIds([...invalidEndYearIds, index]);
                                           }
                                         }
                                       }
 
-                                      const newPreviousTeams = [
-                                        ...previousTeams,
-                                      ];
+                                      const newPreviousTeams = [...previousTeams];
                                       newPreviousTeams[index] = {
                                         ...newPreviousTeams[index],
                                         endYear: e.detail.value,
                                       };
                                       setPreviousTeams(newPreviousTeams);
                                     }}
-                                  // required
+                                    // required
                                   ></IonInput>
                                 </IonItem>
                               </IonCol>
@@ -3834,18 +3376,13 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             <IonRow>
                               <IonCol>
                                 <IonItem lines="full">
-                                  <IonLabel
-                                    className="nobo-signup-label"
-                                    position="stacked"
-                                  >
+                                  <IonLabel className="nobo-signup-label" position="stacked">
                                     Position
                                   </IonLabel>
                                   <UrpSelect
                                     value={previousTeams[index].position}
-                                    onChange={(e) => {
-                                      const newPreviousTeams = [
-                                        ...previousTeams,
-                                      ];
+                                    onChange={e => {
+                                      const newPreviousTeams = [...previousTeams];
                                       newPreviousTeams[index] = {
                                         ...newPreviousTeams[index],
                                         position: e?.length ? e[0] : '',
@@ -3854,20 +3391,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                     }}
                                     placeholder="Select Position"
                                     options={getPositions()
-                                      .filter((p) => {
+                                      .filter(p => {
                                         return (
-                                          p.sport ===
-                                          normalizeSportGender(
-                                            location.state
-                                          ) || p.sport === primarySport
+                                          p.sport === normalizeSportGender(location.state) ||
+                                          p.sport === primarySport
                                         );
                                       })
-                                      .map((p) => {
+                                      .map(p => {
                                         return {
                                           value: p.symbol || p.name,
-                                          label:
-                                            p.name +
-                                            (p.symbol ? ` (${p.symbol})` : ''),
+                                          label: p.name + (p.symbol ? ` (${p.symbol})` : ''),
                                         };
                                       })}
                                   />
@@ -3877,10 +3410,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonGrid>
                         </IonItem>
                         <IonItem className="nobo-input" lines="full">
-                          <IonLabel
-                            className="nobo-signup-label"
-                            position="stacked"
-                          >
+                          <IonLabel className="nobo-signup-label" position="stacked">
                             School
                           </IonLabel>
                           <IonInput
@@ -3889,7 +3419,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             autocapitalize="on word"
                             autocorrect="on"
                             type="text"
-                            onIonChange={(e) => {
+                            onIonChange={e => {
                               const newPreviousTeams = [...previousTeams];
                               newPreviousTeams[index] = {
                                 ...newPreviousTeams[index],
@@ -3900,15 +3430,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           ></IonInput>
                         </IonItem>
                         <IonItem className="nobo-input" lines="full">
-                          <IonLabel
-                            className="nobo-signup-label"
-                            position="stacked"
-                          >
+                          <IonLabel className="nobo-signup-label" position="stacked">
                             State
                           </IonLabel>
                           <UrpSelect
                             value={previousTeams[index].state}
-                            onChange={(e) => {
+                            onChange={e => {
                               const newPreviousTeams = [...previousTeams];
                               newPreviousTeams[index] = {
                                 ...newPreviousTeams[index],
@@ -3917,16 +3444,13 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                               setPreviousTeams(newPreviousTeams);
                             }}
                             placeholder="Select State"
-                            options={states.map((c) => {
+                            options={states.map(c => {
                               return { value: c, label: c };
                             })}
                           />
                         </IonItem>
                         <IonItem className="nobo-input" lines="full">
-                          <IonLabel
-                            className="nobo-signup-label"
-                            position="stacked"
-                          >
+                          <IonLabel className="nobo-signup-label" position="stacked">
                             City
                           </IonLabel>
                           <IonInput
@@ -3935,7 +3459,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             autocapitalize="on word"
                             autocorrect="on"
                             type="text"
-                            onIonChange={(e) => {
+                            onIonChange={e => {
                               const newPreviousTeams = [...previousTeams];
                               newPreviousTeams[index] = {
                                 ...newPreviousTeams[index],
@@ -3953,31 +3477,19 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       {previousTeams.length > 1 ? (
                         <IonLabel
                           style={{ color: '#9BC9C2', fontWeight: 'bold' }}
-                          onClick={(e) => {
+                          onClick={e => {
                             setSinglePrevTeamStateDropdownField([
                               ...singlePrevTeamStateDropdownField.slice(0, -1),
                             ]);
                             setSinglePrevTeamPositionDropdownField([
-                              ...singlePrevTeamPositionDropdownField.slice(
-                                0,
-                                -1
-                              ),
+                              ...singlePrevTeamPositionDropdownField.slice(0, -1),
                             ]);
-                            setPreviousTeams([
-                              ...previousTeams.slice(
-                                0,
-                                previousTeams.length - 1
-                              ),
-                            ]);
+                            setPreviousTeams([...previousTeams.slice(0, previousTeams.length - 1)]);
                             setInvalidEndYearIds(
-                              invalidEndYearIds.filter(
-                                (id) => id !== previousTeams.length - 1
-                              )
+                              invalidEndYearIds.filter(id => id !== previousTeams.length - 1)
                             );
                             setInvalidStartYearIds(
-                              invalidEndYearIds.filter(
-                                (id) => id !== previousTeams.length - 1
-                              )
+                              invalidEndYearIds.filter(id => id !== previousTeams.length - 1)
                             );
 
                             const elem: any = e.target;
@@ -3998,7 +3510,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     <IonCol size="4" offset="4">
                       <IonLabel
                         style={{ color: '#2F736F', fontWeight: 'bold' }}
-                        onClick={(e) => {
+                        onClick={e => {
                           setSinglePrevTeamStateDropdownField([
                             ...singlePrevTeamStateDropdownField,
                             '',
@@ -4039,7 +3551,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   lines="none"
                   slot="header"
                   className="nobo-section-head"
-                  onClick={(e) => scollToSection('player-highlights')}
+                  onClick={e => scollToSection('player-highlights')}
                 >
                   <span className="nobo-step-num">4</span>
                   <h5 className="nobo-section-title">Player Highlights</h5>
@@ -4050,13 +3562,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     <IonItem lines="none">
                       <UrpSelect
                         placeholder={
-                          highlightLinkOrUpload === 'link'
-                            ? 'Add a Link'
-                            : 'Upload Video'
+                          highlightLinkOrUpload === 'link' ? 'Add a Link' : 'Upload Video'
                         }
-                        onChange={(e) =>
-                          setHighlightLinkOrUpload(e?.length ? e[0] : '')
-                        }
+                        onChange={e => setHighlightLinkOrUpload(e?.length ? e[0] : '')}
                         options={[
                           { value: 'link', label: 'Add a Link' },
                           { value: 'upload', label: 'Upload Video' },
@@ -4074,10 +3582,9 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         }}
                       >
                         <p>
-                          Highlight link should be a Youtube or Hudl URL. Please
-                          verify your video displays correctly in the preview
-                          window which should appear below after you provide a
-                          link.
+                          Highlight link should be a Youtube or Hudl URL. Please verify your video
+                          displays correctly in the preview window which should appear below after
+                          you provide a link.
                         </p>
 
                         <p>Maximum size for video upload is 260MB.</p>
@@ -4102,14 +3609,11 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             // useUniqueFileName={true}
                             // responseFields={["tags"]}
                             validateFile={(file: any) => {
-                              let fileMax =
-                                environment?.maxVideoFileSize || 260000000; // 260MB
+                              let fileMax = environment?.maxVideoFileSize || 260000000; // 260MB
                               if (file.size < fileMax) {
                                 return true;
                               } else {
-                                alert(
-                                  'Video file is too large, must be less than 10MB'
-                                );
+                                alert('Video file is too large, must be less than 10MB');
                                 return false;
                               }
                             }}
@@ -4149,24 +3653,17 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       {!uploadVideoMode && (
                         <>
                           <div className="nobo-upload-text-or">OR</div>
-                          <div className="nobo-upload-text-signup">
-                            Highlight Link
-                          </div>
+                          <div className="nobo-upload-text-signup">Highlight Link</div>
                           <IonItem
                             style={{ marginTop: 0 }}
-                            className={
-                              'nobo-input' +
-                              (highlightLinkValid ? '' : ' invalid')
-                            }
+                            className={'nobo-input' + (highlightLinkValid ? '' : ' invalid')}
                             lines="full"
                           >
                             <IonInput
                               value={highlightLink}
-                              onIonChange={(e) => {
+                              onIonChange={e => {
                                 const target: any = e.target;
-                                setHighlightLinkValid(
-                                  target.nativeInput.validity.valid
-                                );
+                                setHighlightLinkValid(target.nativeInput.validity.valid);
                                 setHighlightLink(e.detail.value!);
                               }}
                               placeholder="https://www.youtube.com/watch?v=4x4MND-Rhrc"
@@ -4184,10 +3681,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           type="file"
                           ref={videoUpload}
                           className="nobo-file-upload video"
-                          onChange={(ev) => onVideoFileChange(ev)}
+                          onChange={ev => onVideoFileChange(ev)}
                         ></input>
                         <IonButton
-                          onClick={(e) => {
+                          onClick={e => {
                             e.preventDefault();
                           }}
                           color={btnColor}
@@ -4232,7 +3729,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   lines="none"
                   slot="header"
                   className="nobo-section-head"
-                  onClick={(e) => scollToSection('measurables')}
+                  onClick={e => scollToSection('measurables')}
                 >
                   <span className="nobo-step-num">5</span>
                   <h5 className="nobo-section-title">Measureables</h5>
@@ -4241,10 +3738,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 {isSectionActive('football') && (
                   <IonList className="nobo-list-input" slot="content">
                     <IonItem lines="full" className="nobo-blank">
-                      <IonLabel
-                        className="nobo-signup-label"
-                        position="stacked"
-                      >
+                      <IonLabel className="nobo-signup-label" position="stacked">
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4253,10 +3747,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonRow>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Wingspan
                               </IonLabel>
                               <UrpSelect
@@ -4264,7 +3755,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Wingspan"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     wingspan: e?.length ? e[0] : '',
@@ -4308,10 +3799,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonCol>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Vertical
                               </IonLabel>
                               <UrpSelect
@@ -4319,7 +3807,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Vertical"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     vertical: e?.length ? e[0] : '',
@@ -4337,10 +3825,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonRow>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Squat
                               </IonLabel>
                               <UrpSelect
@@ -4348,7 +3833,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="lbs"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     squat: e?.length ? e[0] : '',
@@ -4378,10 +3863,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonCol>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Shuttle Time
                               </IonLabel>
                               <UrpSelect
@@ -4389,7 +3871,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Seconds"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     shuttleTime: e?.length ? e[0] : '',
@@ -4407,10 +3889,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonRow>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 40 yd Dash
                               </IonLabel>
                               <UrpSelect
@@ -4418,7 +3897,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Seconds"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     fortyYardDash: e?.length ? e[0] : '',
@@ -4430,10 +3909,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonCol>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 3-Cone Drill
                               </IonLabel>
                               <UrpSelect
@@ -4441,7 +3917,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Seconds"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     threeConeDrill: e?.length ? e[0] : '',
@@ -4458,134 +3934,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 )}
 
                 {/* basketball */}
-                {(isSectionActive('wbasketball') ||
-                  isSectionActive('mbasketball')) && (
-                    <IonList className="nobo-list-input" slot="content">
-                      <IonItem lines="full" className="nobo-blank">
-                        <IonLabel
-                          className="nobo-signup-label"
-                          position="stacked"
-                        >
-                          BLANK AREA
-                        </IonLabel>
-                      </IonItem>
-                      <IonItem lines="none">
-                        <IonGrid>
-                          <IonRow>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  Standing vertical
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.vertical}
-                                  placeholder="Vertical"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      vertical: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  options={verticalList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  3/4 Sprint
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.threeForthsCourtSprint}
-                                  placeholder="Seconds"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      threeForthsCourtSprint: e?.length
-                                        ? e[0]
-                                        : '',
-                                    });
-                                  }}
-                                  options={threeForthsCourtSprintList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                          </IonRow>
-                        </IonGrid>
-                      </IonItem>
-                      <IonItem lines="none">
-                        <IonGrid>
-                          <IonRow>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  Lane agility drill
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.laneAgilityDrill}
-                                  placeholder="Seconds"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      laneAgilityDrill: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  options={laneAgilityDrillList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  Shuttle Run
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.shuttleRun}
-                                  placeholder="Seconds"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      shuttleRun: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  options={shuttleList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                          </IonRow>
-                        </IonGrid>
-                      </IonItem>
-                    </IonList>
-                  )}
-
-                {/* baseball */}
-                {isSectionActive('baseball') && (
+                {(isSectionActive('wbasketball') || isSectionActive('mbasketball')) && (
                   <IonList className="nobo-list-input" slot="content">
                     <IonItem lines="full" className="nobo-blank">
-                      <IonLabel
-                        className="nobo-signup-label"
-                        position="stacked"
-                      >
+                      <IonLabel className="nobo-signup-label" position="stacked">
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4594,10 +3946,110 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonRow>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                Standing vertical
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.vertical}
+                                placeholder="Vertical"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    vertical: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={verticalList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                3/4 Sprint
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.threeForthsCourtSprint}
+                                placeholder="Seconds"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    threeForthsCourtSprint: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={threeForthsCourtSprintList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonItem>
+                    <IonItem lines="none">
+                      <IonGrid>
+                        <IonRow>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                Lane agility drill
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.laneAgilityDrill}
+                                placeholder="Seconds"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    laneAgilityDrill: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={laneAgilityDrillList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                Shuttle Run
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.shuttleRun}
+                                placeholder="Seconds"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    shuttleRun: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={shuttleList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonItem>
+                  </IonList>
+                )}
+
+                {/* baseball */}
+                {isSectionActive('baseball') && (
+                  <IonList className="nobo-list-input" slot="content">
+                    <IonItem lines="full" className="nobo-blank">
+                      <IonLabel className="nobo-signup-label" position="stacked">
+                        BLANK AREA
+                      </IonLabel>
+                    </IonItem>
+                    <IonItem lines="none">
+                      <IonGrid>
+                        <IonRow>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Bat Speed
                               </IonLabel>
                               <UrpSelect
@@ -4605,7 +4057,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Mph"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     batSpeed: e?.length ? e[0] : '',
@@ -4617,10 +4069,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonCol>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Arm Velocity
                               </IonLabel>
                               <UrpSelect
@@ -4628,7 +4077,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Mph"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     armVelocity: e?.length ? e[0] : '',
@@ -4646,10 +4095,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonRow>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Exit Velocity
                               </IonLabel>
                               <UrpSelect
@@ -4657,7 +4103,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Mph"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     exitVelocity: e?.length ? e[0] : '',
@@ -4669,10 +4115,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonCol>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 60 time
                               </IonLabel>
                               <UrpSelect
@@ -4680,7 +4123,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Seconds"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     sixtyYardDash: e?.length ? e[0] : '',
@@ -4700,10 +4143,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 {isSectionActive('softball') && (
                   <IonList className="nobo-list-input" slot="content">
                     <IonItem lines="full" className="nobo-blank">
-                      <IonLabel
-                        className="nobo-signup-label"
-                        position="stacked"
-                      >
+                      <IonLabel className="nobo-signup-label" position="stacked">
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -4712,10 +4152,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonRow>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Bat Speed
                               </IonLabel>
                               <UrpSelect
@@ -4723,7 +4160,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Mph"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     batSpeed: e?.length ? e[0] : '',
@@ -4735,10 +4172,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonCol>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Arm Velocity
                               </IonLabel>
                               <UrpSelect
@@ -4746,7 +4180,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Mph"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     armVelocity: e?.length ? e[0] : '',
@@ -4764,10 +4198,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonRow>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Exit Velocity
                               </IonLabel>
                               <UrpSelect
@@ -4775,7 +4206,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Mph"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     exitVelocity: e?.length ? e[0] : '',
@@ -4787,10 +4218,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           </IonCol>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 60 time
                               </IonLabel>
                               <UrpSelect
@@ -4798,7 +4226,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Seconds"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     sixtyYardDash: e?.length ? e[0] : '',
@@ -4815,305 +4243,10 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 )}
 
                 {/* Volleyball */}
-                {(isSectionActive('wvolleyball') ||
-                  isSectionActive('mvolleyball')) && (
-                    <IonList className="nobo-list-input" slot="content">
-                      <IonItem lines="full" className="nobo-blank">
-                        <IonLabel
-                          className="nobo-signup-label"
-                          position="stacked"
-                        >
-                          BLANK AREA
-                        </IonLabel>
-                      </IonItem>
-                      <IonItem lines="none">
-                        <IonGrid>
-                          <IonRow>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  Standing Reach
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.standingReach}
-                                  placeholder="Reach"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      standingReach: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  // disabled={true}
-                                  options={standingReachList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  Block Jump
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.blockJump}
-                                  placeholder="Vertical"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      blockJump: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  // disabled={true}
-                                  options={blockJumpList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                          </IonRow>
-                        </IonGrid>
-                      </IonItem>
-                      <IonItem lines="none">
-                        <IonGrid>
-                          <IonRow>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  Vertical Jump
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.vertical}
-                                  placeholder="Vertical"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      vertical: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  // disabled={true}
-                                  options={verticalList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  Attack Jump
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.attackJump}
-                                  placeholder="Vertical"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      attackJump: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  options={attackJumpList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                          </IonRow>
-                        </IonGrid>
-                      </IonItem>
-                    </IonList>
-                  )}
-                {/* Lacrosse */}
-                {(isSectionActive('wlacrosse') ||
-                  isSectionActive('mlacrosse')) && (
-                    <IonList className="nobo-list-input" slot="content">
-                      <IonItem lines="full" className="nobo-blank">
-                        <IonLabel
-                          className="nobo-signup-label"
-                          position="stacked"
-                        >
-                          BLANK AREA
-                        </IonLabel>
-                      </IonItem>
-                      <IonItem lines="none">
-                        <IonGrid>
-                          <IonRow>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  Power Ball Toss
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.powerballToss}
-                                  placeholder="Feet"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      powerballToss: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  options={powerballTossList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  Vertical
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.vertical}
-                                  placeholder="Vertical"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      vertical: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  options={verticalList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                          </IonRow>
-                        </IonGrid>
-                      </IonItem>
-                      <IonItem lines="none">
-                        <IonGrid>
-                          <IonRow>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  Shot Speed
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.shotSpeed}
-                                  placeholder="Mph"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      shotSpeed: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  options={shotSpeedList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  Shuttle Time
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.shuttleTime}
-                                  placeholder="Seconds"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      shuttleTime: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  options={shuttleList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                          </IonRow>
-                        </IonGrid>
-                      </IonItem>
-                      <IonItem lines="none">
-                        <IonGrid>
-                          <IonRow>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  40 yd Dash
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.fortyYardDash}
-                                  placeholder="Seconds"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      fortyYardDash: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  options={fortyYardDashList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                            <IonCol>
-                              <IonItem lines="none">
-                                <IonLabel
-                                  className="nobo-signup-label"
-                                  position="stacked"
-                                >
-                                  10 yd Split
-                                </IonLabel>
-                                <UrpSelect
-                                  value={measurables?.tenYardSplit}
-                                  placeholder="Seconds"
-                                  className="nobo-select-half"
-                                  border={true}
-                                  onChange={(e) => {
-                                    setMeasurables({
-                                      ...measurables,
-                                      tenYardSplit: e?.length ? e[0] : '',
-                                    });
-                                  }}
-                                  options={tenYardSplitList}
-                                />
-                              </IonItem>
-                            </IonCol>
-                          </IonRow>
-                        </IonGrid>
-                      </IonItem>
-                    </IonList>
-                  )}
-
-                {/* Soccer */}
-                {(isSectionActive('wsoccer') || isSectionActive('msoccer')) && (
+                {(isSectionActive('wvolleyball') || isSectionActive('mvolleyball')) && (
                   <IonList className="nobo-list-input" slot="content">
                     <IonItem lines="full" className="nobo-blank">
-                      <IonLabel
-                        className="nobo-signup-label"
-                        position="stacked"
-                      >
+                      <IonLabel className="nobo-signup-label" position="stacked">
                         BLANK AREA
                       </IonLabel>
                     </IonItem>
@@ -5122,33 +4255,55 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonRow>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
-                                40 Yard Dash
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                Standing Reach
                               </IonLabel>
                               <UrpSelect
-                                value={measurables?.fortyYardDash}
-                                placeholder="Seconds"
+                                value={measurables?.standingReach}
+                                placeholder="Reach"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
-                                    fortyYardDash: e?.length ? e[0] : '',
+                                    standingReach: e?.length ? e[0] : '',
                                   });
                                 }}
-                                options={fortyYardDashList}
+                                // disabled={true}
+                                options={standingReachList}
                               />
                             </IonItem>
                           </IonCol>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                Block Jump
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.blockJump}
+                                placeholder="Vertical"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    blockJump: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                // disabled={true}
+                                options={blockJumpList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonItem>
+                    <IonItem lines="none">
+                      <IonGrid>
+                        <IonRow>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Vertical Jump
                               </IonLabel>
                               <UrpSelect
@@ -5156,7 +4311,84 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Vertical"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    vertical: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                // disabled={true}
+                                options={verticalList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                Attack Jump
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.attackJump}
+                                placeholder="Vertical"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    attackJump: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={attackJumpList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonItem>
+                  </IonList>
+                )}
+                {/* Lacrosse */}
+                {(isSectionActive('wlacrosse') || isSectionActive('mlacrosse')) && (
+                  <IonList className="nobo-list-input" slot="content">
+                    <IonItem lines="full" className="nobo-blank">
+                      <IonLabel className="nobo-signup-label" position="stacked">
+                        BLANK AREA
+                      </IonLabel>
+                    </IonItem>
+                    <IonItem lines="none">
+                      <IonGrid>
+                        <IonRow>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                Power Ball Toss
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.powerballToss}
+                                placeholder="Feet"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    powerballToss: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={powerballTossList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                Vertical
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.vertical}
+                                placeholder="Vertical"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     vertical: e?.length ? e[0] : '',
@@ -5174,10 +4406,156 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         <IonRow>
                           <IonCol>
                             <IonItem lines="none">
-                              <IonLabel
-                                className="nobo-signup-label"
-                                position="stacked"
-                              >
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                Shot Speed
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.shotSpeed}
+                                placeholder="Mph"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    shotSpeed: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={shotSpeedList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                Shuttle Time
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.shuttleTime}
+                                placeholder="Seconds"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    shuttleTime: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={shuttleList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonItem>
+                    <IonItem lines="none">
+                      <IonGrid>
+                        <IonRow>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                40 yd Dash
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.fortyYardDash}
+                                placeholder="Seconds"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    fortyYardDash: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={fortyYardDashList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                10 yd Split
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.tenYardSplit}
+                                placeholder="Seconds"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    tenYardSplit: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={tenYardSplitList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonItem>
+                  </IonList>
+                )}
+
+                {/* Soccer */}
+                {(isSectionActive('wsoccer') || isSectionActive('msoccer')) && (
+                  <IonList className="nobo-list-input" slot="content">
+                    <IonItem lines="full" className="nobo-blank">
+                      <IonLabel className="nobo-signup-label" position="stacked">
+                        BLANK AREA
+                      </IonLabel>
+                    </IonItem>
+                    <IonItem lines="none">
+                      <IonGrid>
+                        <IonRow>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                40 Yard Dash
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.fortyYardDash}
+                                placeholder="Seconds"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    fortyYardDash: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={fortyYardDashList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
+                                Vertical Jump
+                              </IonLabel>
+                              <UrpSelect
+                                value={measurables?.vertical}
+                                placeholder="Vertical"
+                                className="nobo-select-half"
+                                border={true}
+                                onChange={e => {
+                                  setMeasurables({
+                                    ...measurables,
+                                    vertical: e?.length ? e[0] : '',
+                                  });
+                                }}
+                                options={verticalList}
+                              />
+                            </IonItem>
+                          </IonCol>
+                        </IonRow>
+                      </IonGrid>
+                    </IonItem>
+                    <IonItem lines="none">
+                      <IonGrid>
+                        <IonRow>
+                          <IonCol>
+                            <IonItem lines="none">
+                              <IonLabel className="nobo-signup-label" position="stacked">
                                 Mile Run
                               </IonLabel>
                               <UrpSelect
@@ -5185,7 +4563,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                                 placeholder="Minutes"
                                 className="nobo-select-half"
                                 border={true}
-                                onChange={(e) => {
+                                onChange={e => {
                                   setMeasurables({
                                     ...measurables,
                                     mileRun: e?.length ? e[0] : '',
@@ -5208,7 +4586,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   lines="none"
                   slot="header"
                   className="nobo-section-head"
-                  onClick={(e) => scollToSection('offers')}
+                  onClick={e => scollToSection('offers')}
                 >
                   <span className="nobo-step-num">6</span>
                   <h5 className="nobo-section-title">Offers</h5>
@@ -5218,29 +4596,22 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                     <IonInput
                       autofocus
                       value={offersBubble.join(',')}
-                      onIonChange={(e) => {
+                      onIonChange={e => {
                         let count = 0;
                         if (e.detail.value === undefined) return;
 
-                        const lastElement = e.detail
-                          .value!.split(',')
-                          .pop()
-                          ?.trim();
+                        const lastElement = e.detail.value!.split(',').pop()?.trim();
                         const autoCompleteSchools = allUniversities.filter(
-                          (school) => {
+                          school => {
                             if (
                               count < 5 &&
-                              school.name
-                                .toLowerCase()
-                                .includes(lastElement!.toLowerCase())
+                              school.name.toLowerCase().includes(lastElement!.toLowerCase())
                             ) {
                               count++;
                               return true;
                             } else if (
                               count < 5 &&
-                              school.acronym
-                                .toLowerCase()
-                                .includes(lastElement!.toLowerCase())
+                              school.acronym.toLowerCase().includes(lastElement!.toLowerCase())
                             ) {
                               count++;
                               return true;
@@ -5249,15 +4620,16 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                           },
                           { count: 0 }
                         );
-                        const arrayOfAutoCompleteSchools =
-                          autoCompleteSchools.map((school) => school.name);
+                        const arrayOfAutoCompleteSchools = autoCompleteSchools.map(
+                          school => school.name
+                        );
                         !arrayOfAutoCompleteSchools.includes(lastElement!) &&
                           lastElement !== '' &&
                           openPopover(e);
                         setFilteredUniversities(arrayOfAutoCompleteSchools);
                         setOffersBubble(e.detail.value!.split(','));
                       }}
-                      onIonFocus={(e) => {
+                      onIonFocus={e => {
                         const elem: any = e.target;
                         elem.scrollIntoView();
                       }}
@@ -5274,19 +4646,15 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                       onDidDismiss={() => setPopoverOpen(false)}
                     >
                       <IonList lines="none">
-                        {filteredUniversities.map((university) => (
+                        {filteredUniversities.map(university => (
                           <IonItem
-                            onClick={(e) => {
+                            onClick={e => {
                               let newOffers = [];
-                              if (
-                                offers?.length === 0 ||
-                                offers === undefined
-                              ) {
+                              if (offers?.length === 0 || offers === undefined) {
                                 newOffers.push(university);
                               } else {
                                 newOffers = [...offers];
-                                newOffers.indexOf(university) === -1 &&
-                                  newOffers.push(university);
+                                newOffers.indexOf(university) === -1 && newOffers.push(university);
                               }
                               setOffers(newOffers);
                               setOffersBubble([]);
@@ -5294,9 +4662,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                             }}
                             key={university}
                           >
-                            <IonLabel style={{ paddingLeft: '10px' }}>
-                              {university}
-                            </IonLabel>
+                            <IonLabel style={{ paddingLeft: '10px' }}>{university}</IonLabel>
                           </IonItem>
                         ))}
                       </IonList>
@@ -5305,12 +4671,12 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   <IonItem lines="none">
                     <IonRow>
                       {offers &&
-                        offers.map((offer) => {
+                        offers.map(offer => {
                           return (
                             <div key={offer}>
                               <div
                                 onClick={() => {
-                                  setOffers(offers.filter((o) => o !== offer));
+                                  setOffers(offers.filter(o => o !== offer));
                                 }}
                                 className={'nobo-signup-tab-menu-item'}
                                 style={{
@@ -5349,7 +4715,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                   lines="none"
                   slot="header"
                   className="nobo-section-head"
-                  onClick={(e) => scollToSection('uploads')}
+                  onClick={e => scollToSection('uploads')}
                 >
                   <span className="nobo-step-num">7</span>
                   <h5 className="nobo-section-title">Transcript Upload</h5>
@@ -5391,11 +4757,11 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                         type="file"
                         ref={transcriptsUpload}
                         className="nobo-file-upload transcripts"
-                        onChange={(ev) => onTranscriptFileChange(ev)}
+                        onChange={ev => onTranscriptFileChange(ev)}
                         accept="image/jpg,image/png,application/pdf"
                       ></input>
                       <IonButton
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           uploadTranscripts();
                         }}
@@ -5424,7 +4790,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 }}
               >
                 <IonButton
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     signUpAthlete();
                   }}
@@ -5444,7 +4810,7 @@ const SignUpAthlete: React.FC<Props> = (props) => {
                 }}
               >
                 <IonButton
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     editAthlete();
                   }}

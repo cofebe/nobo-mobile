@@ -33,22 +33,19 @@ const Settings: React.FC = () => {
           <img src="/assets/images/close-black.svg" alt="close" />
         </div>
         <div className="content">
-{/* <<<<<<< HEAD */}
+          {/* <<<<<<< HEAD */}
 
+          {/* This is the div i inserted to fetch user-image that works */}
+          <div className="avatar">
+            <img className={``} src={user?.avatar} alt="avatar" />
+          </div>
 
-        {/* This is the div i inserted to fetch user-image that works */}
-        <div className="avatar">
-          <img
-            className={``}
-            src={user?.avatar}
-            alt="avatar"
-          />
-        </div>
-
-        {/* This div below was not fetching the user image so i try replacing with this one above and it worked */}
+          {/* This div below was not fetching the user image so i try replacing with this one above and it worked */}
           {/* <div className="avatar" style={{ backgroundImage: getImageUrl(user?.avatar || '') }}></div> */}
-          <div className="name">{user?.firstName} {user?.lastName}</div>
-{/* ======= */}
+          <div className="name">
+            {user?.firstName} {user?.lastName}
+          </div>
+          {/* ======= */}
           {/* <div
             className="avatar"
             style={{ backgroundImage: getImageUrl(user?.avatar || '') }}
@@ -56,7 +53,7 @@ const Settings: React.FC = () => {
           <div className="name">
             {user?.firstName} {user?.lastName}
           </div> */}
-{/* >>>>>>> 04990fa4d6b12b251bc4006b8c857ef0b2b3ef26 */}
+          {/* >>>>>>> 04990fa4d6b12b251bc4006b8c857ef0b2b3ef26 */}
         </div>
       </IonHeader>
       <IonContent className="settings-content">
