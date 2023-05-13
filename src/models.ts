@@ -491,7 +491,7 @@ export interface SignUpType{
   userName:string
   password:string
   comfirmPassword:string
- 
+
 }
 
 

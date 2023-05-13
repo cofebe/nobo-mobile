@@ -1,75 +1,75 @@
 import { BaseService } from './BaseService';
 
 export class ConnectionService extends BaseService {
-  async getConnections() {
-    const response = await super.fetch('GET', `/connections?connection_type=connected`);
+ async getConnections() {
+  const response = await super.fetch('GET', `/connections?connection_type=connected`);
 
-    if (response.status === 401) {
-      console.log('Unauthorized');
-      throw response;
-    }
-
-    return response;
+  if (response.status === 401) {
+   console.log('Unauthorized');
+   throw response;
   }
 
-  async getPendingConnections() {
-    const response = await super.fetch('GET', `/connections?connection_type=pending`);
+  return response;
+ }
 
-    if (response.status === 401) {
-      console.log('Unauthorized');
-      throw response;
-    }
+ async getPendingConnections() {
+  const response = await super.fetch('GET', `/connections?connection_type=pending`);
 
-    return response;
+  if (response.status === 401) {
+   console.log('Unauthorized');
+   throw response;
   }
 
-  async createConnection(requesteeID: number) {
-    const response = await super.fetch('POST', '/connections', { requestee: requesteeID });
+  return response;
+ }
 
-    if (response.status === 401) {
-      console.log('Unauthorized');
-      throw response;
-    }
+ async createConnection(requesteeID: number) {
+  const response = await super.fetch('POST', '/connections', { requestee: requesteeID });
 
-    return response;
+  if (response.status === 401) {
+   console.log('Unauthorized');
+   throw response;
   }
 
-  async acceptConnection(connectionID: number) {
-    const response = await super.fetch('POST', `/connections/${connectionID}`, {
-      new_status: 'connected',
-    });
+  return response;
+ }
 
-    if (response.status === 401) {
-      console.log('Unauthorized');
-      throw response;
-    }
+ async acceptConnection(connectionID: number) {
+  const response = await super.fetch('POST', `/connections/${connectionID}`, {
+   new_status: 'connected',
+  });
 
-    return response;
+  if (response.status === 401) {
+   console.log('Unauthorized');
+   throw response;
   }
 
-  async rejectConnection(connectionID: number) {
-    const response = await super.fetch('POST', `/connections/${connectionID}`, {
-      new_status: 'rejected',
-    });
+  return response;
+ }
 
-    if (response.status === 401) {
-      console.log('Unauthorized');
-      throw response;
-    }
+ async rejectConnection(connectionID: number) {
+  const response = await super.fetch('POST', `/connections/${connectionID}`, {
+   new_status: 'rejected',
+  });
 
-    return response;
+  if (response.status === 401) {
+   console.log('Unauthorized');
+   throw response;
   }
 
-  async removeConnection(connectionID: number) {
-    const response = await super.fetch('POST', `/connections/${connectionID}`, {
-      new_status: 'removed',
-    });
+  return response;
+ }
 
-    if (response.status === 401) {
-      console.log('Unauthorized');
-      throw response;
-    }
+ async removeConnection(connectionID: number) {
+  const response = await super.fetch('POST', `/connections/${connectionID}`, {
+   new_status: 'removed',
+  });
 
-    return response;
+  if (response.status === 401) {
+   console.log('Unauthorized');
+   throw response;
   }
+
+  return response;
+ }
 }

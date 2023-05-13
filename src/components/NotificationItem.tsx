@@ -6,20 +6,20 @@ import { Notification } from '../data/notifications';
 import './Notifications.css';
 
 interface NotificationsItemProps {
-  notification: Notification;
+ notification: Notification;
 }
 
 const NotificationItem: React.FC<NotificationsItemProps> = ({ notification }) => {
-  return (
-    <IonRow className="nobo-notification-container">
-      <IonCol className="nobo-notification-name" size="5">
-        {notification.subject}
-      </IonCol>
-      <IonCol className="nobo-notification-message" size="6">
-        {notification.message}
-      </IonCol>
-    </IonRow>
-  );
+ return (
+  <IonRow className="nobo-notification-container">
+   <IonCol className="nobo-notification-name" size="5">
+    {notification.subject}
+   </IonCol>
+   <IonCol className="nobo-notification-message" size="6">
+    {notification.message}
+   </IonCol>
+  </IonRow>
+ );
 };
 
 export default NotificationItem;

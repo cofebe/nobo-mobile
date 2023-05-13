@@ -5,30 +5,30 @@ import '../styles.scss';
 import './Splash.css';
 
 const Splash: React.FC = () => {
-  const history = useHistory();
+ const history = useHistory();
 
-  useIonViewWillEnter(() => {
-    setTimeout(() => {
-      history.push('/get-started');
-    }, 2000);
-    // some initialization code
-  });
+ useIonViewWillEnter(() => {
+  setTimeout(() => {
+   history.push('/get-started');
+  }, 2000);
+  // some initialization code
+ });
 
-  return (
-    <IonPage
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#ffffff',
-      }}
-      id="nobo-splash-page"
-    >
-      <div>
-        <img className="splash-logo" src="assets/images/nobo_logo.png" alt="logo" />
-      </div>
-    </IonPage>
-  );
+ return (
+  <IonPage
+   style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+   }}
+   id="nobo-splash-page"
+  >
+   <div>
+    <img className="splash-logo" src="assets/images/nobo_logo.png" alt="logo" />
+   </div>
+  </IonPage>
+ );
 };
 
 export default Splash;
