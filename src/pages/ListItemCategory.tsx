@@ -32,7 +32,7 @@ interface ItemAttributesWithValues extends ItemAttributes {
   value: string;
 }
 
-const ListItem: React.FC = () => {
+const ListItemCategory: React.FC = () => {
   const history = useHistory();
   const categoryService = new CategoryService();
   const productService = new ProductService();
@@ -399,18 +399,11 @@ const ListItem: React.FC = () => {
           <IonRow>
             <IonCol>
               <div className="list-item-instruction">
-                {tradeSteps === 1 && (
-                  <>
-                    Choose the category for the item being listed to unlock
-                    other details
-                  </>
-                )}
-                {tradeSteps === 2 && <>Add photos and pricing for your item</>}
-                {tradeSteps === 3 && <>Input your product details</>}
+                Choose the category for the item being listed to unlock
+                other details
               </div>
             </IonCol>
           </IonRow>
-          {tradeSteps === 1 && (
             <>
               <IonRow className="margin-bottom-5">
                 <IonCol>
@@ -503,327 +496,8 @@ const ListItem: React.FC = () => {
                 </IonCol>
               </IonRow>
             </>
-          )}
-          {tradeSteps === 2 && (
-            <div className="padding-bottom-container">
-              <div className="photo-uploader">
-                <div className="upload-container">
-                  <label htmlFor="upload-input">
-                    {photos.length > 0 ? (
-                      <img src={photos[0]} alt="Uploaded photo" />
-                    ) : (
-                      <div className="upload-placeholder">
-                        <svg width="175" height="171" viewBox="0 0 175 171" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <rect x="1" y="1" width="173" height="168.706" rx="4" fill="white" stroke="black" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6 6"/>
-                          <path d="M117.025 89.0307C117.025 89.583 116.577 90.0307 116.025 90.0307H92.1779V113.877C92.1779 114.43 91.7302 114.877 91.1779 114.877H84.8957C84.3434 114.877 83.8957 114.43 83.8957 113.877V90.0307H60.0491C59.4968 90.0307 59.0491 89.583 59.0491 89.0307V82.7485C59.0491 82.1962 59.4968 81.7485 60.0491 81.7485H83.8957V57.9019C83.8957 57.3496 84.3434 56.9019 84.8957 56.9019H91.1779C91.7302 56.9019 92.1779 57.3496 92.1779 57.9019V81.7485H116.025C116.577 81.7485 117.025 82.1962 117.025 82.7485V89.0307Z" fill="black"/>
-                        </svg>
-                      </div>
-                    )}
-                  </label>
-                  <input
-                    className="upload-input"
-                    id="upload-input"
-                    type="file"
-                    accept="image/*"
-                    onChange={onPostImageFileChange}
-                  />
-                </div>
-                <div className="thumbnail-container">
-                  {Array(3)
-                    .fill(0)
-                    .map((_, index) => (
-                      <div key={index} className="small-upload-container">
-                        <label htmlFor={`small-upload-input-${index}`}>
-                          {additionalPhotos[index] ? (
-                            <img src={additionalPhotos[index]} alt="Thumbnail" />
-                          ) : (
-                            <div className="upload-placeholder">
-                              <svg width="56" height="55" viewBox="0 0 56 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="0.5" y="0.5" width="55" height="53.6258" rx="4.5" fill="white" stroke="black" stroke-linejoin="round" stroke-dasharray="6 6"/>
-                                <path d="M37.4479 27.8097C37.4479 28.362 37.0002 28.8097 36.4479 28.8097H29.497V35.7606C29.497 36.3129 29.0493 36.7606 28.497 36.7606H27.8467C27.2944 36.7606 26.8467 36.3129 26.8467 35.7606V28.8097H19.8958C19.3435 28.8097 18.8958 28.362 18.8958 27.8097V27.1594C18.8958 26.6071 19.3435 26.1594 19.8958 26.1594H26.8467V19.2085C26.8467 18.6562 27.2944 18.2085 27.8467 18.2085H28.497C29.0493 18.2085 29.497 18.6562 29.497 19.2085V26.1594H36.4479C37.0002 26.1594 37.4479 26.6071 37.4479 27.1594V27.8097Z" fill="black"/>
-                              </svg>
-                            </div>
-                          )}
-                        </label>
-                        <input
-                          className="upload-input"
-                          id={`small-upload-input-${index}`}
-                          type="file"
-                          accept="image/*"
-                          onChange={(e) => onPostImageFileChange(e, index)}
-                        />
-                      </div>
-                    ))}
-                </div>
-              </div>
-              <p className="nobo-upload-image-text">Upload at least 4 photos in the order you would like them to appear on your listing.</p>
-              <p className="nobo-upload-image-text">Must be in standard format .png, .jpeg and no more than 800x400px</p>
-              <p className="nobo-upload-image-text">GENERAL PHOTO TIPS</p>
-              <p className="nobo-upload-image-text">Use natural Lighting, with a blank background with no distractions. 
-                Take photos of your actual items, don’t use the brand photos or stock photography.</p>
-            </div>
-          )}
-          {tradeSteps === 3 && seletectedAttributes && (
-            <div className="padding-bottom-container">
-              {seletectedAttributes.map((attr: ItemAttributes) => {
-                if (
-                  attr.type === 'select' &&
-                  showIfAttributeIsVisible(attr.id) &&
-                  hideIfAttributeIsVisible(attr.id)
-                ) {
-                  return (
-                    <IonRow key={attr.id} className="margin-bottom-5">
-                      <IonCol>
-                        <Select
-                          value={getAttributeValue(attr.id).value}
-                          placeholder={`${getAttributeValue(attr.id).name}${
-                            attr.required ? '*' : ''
-                          }`}
-                          options={
-                            getAttributeValue(attr.id).options?.map(
-                              (o: any) => ({
-                                label: o,
-                                value: o,
-                              })
-                            ) || []
-                          }
-                          onChange={(e) => {
-                            setAttributeValue(attr.id, e?.length ? e[0] : '');
-                          }}
-                        />
-                      </IonCol>
-                    </IonRow>
-                  );
-                } else if (
-                  attr.type === 'input' &&
-                  showIfAttributeIsVisible(attr.id) &&
-                  hideIfAttributeIsVisible(attr.id)
-                ) {
-                  return (
-                    <IonRow key={attr.id} className="margin-bottom-5">
-                      <IonCol>
-                        <Input
-                          value={getAttributeValue(attr.id).value}
-                          className="input-height"
-                          placeholder={`${getAttributeValue(attr.id).name}${
-                            attr.required ? '*' : ''
-                          }`}
-                          onChange={(val) => {
-                            setAttributeValue(attr.id, val);
-                          }}
-                        />
-                      </IonCol>
-                    </IonRow>
-                  );
-                } else if (attr.type === 'textarea') {
-                  return (
-                    <IonRow key={attr.id} className="margin-bottom-5">
-                      <IonCol>
-                        <Textarea
-                          value={getAttributeValue(attr.id).value}
-                          placeholder={`${getAttributeValue(attr.id).name}${
-                            attr.required ? '*' : ''
-                          }`}
-                          onChange={(val) => {
-                            setAttributeValue(attr.id, val);
-                          }}
-                        />
-                      </IonCol>
-                    </IonRow>
-                  );
-                } else if (attr.type === 'select-multiple') {
-                  return (
-                    <IonRow key={attr.id} className="margin-bottom-5">
-                      <IonCol
-                        onClick={() => {
-                          setShowAdditionalConditionDetails(
-                            !showAdditionalConditionDetails
-                          );
-                        }}
-                        className="additional-condition-details-title"
-                        size="12"
-                      >
-                        ADD ADDITIONAL CONDITION DETAILS
-                        <img
-                          className="additional-details-arrow"
-                          src={`assets/images/arrow-${
-                            showAdditionalConditionDetails ? 'up' : 'down'
-                          }-filled-primary.svg`}
-                          alt="arrow"
-                        />
-                      </IonCol>
-                      {showAdditionalConditionDetails &&
-                        attr.options?.map((o: any) => {
-                          return (
-                            <div
-                              onClick={() => {
-                                handleAdditionalConditionDetails(o);
-                              }}
-                              className={`${
-                                additionalConditionDetails.includes(o)
-                                  ? 'selected-detail'
-                                  : ''
-                              } additional-condition-details`}
-                            >
-                              {o}
-                            </div>
-                          );
-                        })}
-                    </IonRow>
-                  );
-                }
-              })}
-              <IonRow>
-                <IonCol>
-                  <IonRow>
-                    <IonCol
-                      size="12"
-                      className="input-height file-input-border"
-                    >
-                      <label
-                        className={`${
-                          fileName ? 'opacity-full' : 'opacity-low'
-                        }`}
-                        htmlFor="fileInput"
-                      >
-                        {fileName ? fileName : 'UPLOAD RECEIPT'}
-                      </label>
-                      <input
-                        id="fileInput"
-                        ref={imageRef}
-                        type="file"
-                        onChange={(e) => onFileChange(e)}
-                        accept="image/*"
-                        placeholder="UPLOAD RECEIPT"
-                        className="hide-native-file-button"
-                      />
-                    </IonCol>
-                  </IonRow>
-                </IonCol>
-              </IonRow>
-            </div>
-          )}
-          {tradeSteps === 5 && (
-            <div className="padding-bottom-container">
-              {[...Array(3)].map((_, i) => (
-                <>
-                  <IonRow key={i} className="margin-bottom-5">
-                    {i === 0 ? (
-                      <>
-                        <IonCol className="trade-option-title" size="6">
-                          Trade Option {i + 1}
-                        </IonCol>
-                        <IonCol
-                          style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'flex-end',
-                          }}
-                          size="6"
-                        >
-                          <input type="checkbox" />
-                          <div
-                            style={{ marginLeft: 4 }}
-                            className="luxury-options-title"
-                          >
-                            Open to all luxury options
-                          </div>
-                        </IonCol>
-                      </>
-                    ) : (
-                      <IonCol className="trade-option-title">
-                        Trade Option {i + 1}
-                      </IonCol>
-                    )}
-                  </IonRow>
-                  <IonRow>
-                    <IonCol>
-                      <Select
-                        value={tradeOptions[i].brand}
-                        options={brands.map((b: Brand) => ({
-                          label: b.name,
-                          value: b.name,
-                        }))}
-                        placeholder="DESIGNER/BRAND"
-                        onChange={(e) => {
-                          setTradeOptions((prev) => {
-                            prev[i].brand = e?.length ? e[0] : '';
-                            return [...prev];
-                          });
-                        }}
-                      />
-                    </IonCol>
-                  </IonRow>
-                  <IonRow>
-                    <IonCol>
-                      <Input
-                        className="input-height"
-                        value={tradeOptions[i].title}
-                        placeholder="PRODUCT TITLE"
-                        onChange={(val) => {
-                          setTradeOptions((prev) => {
-                            prev[i].title = val;
-                            return [...prev];
-                          });
-                        }}
-                      />
-                    </IonCol>
-                  </IonRow>
-                  <IonRow>
-                    <IonCol>
-                      <Input
-                        className="input-height"
-                        value={tradeOptions[i].description}
-                        placeholder="DESCRIPTION"
-                        onChange={(val) => {
-                          setTradeOptions((prev) => {
-                            prev[i].description = val;
-                            return [...prev];
-                          });
-                        }}
-                      />
-                    </IonCol>
-                  </IonRow>
-                </>
-              ))}
-            </div>
-          )}
-          {tradeSteps === 4 && (
-            <div className="padding-bottom-container">
-              <p className="nobo-list-confirmation-header">ITEM SUBMITTED!</p>
-              <p className="nobo-list-confirmation-sub-header">YOUR ITEM HAS BEEN SUBMITTED FOR REVIEW</p>
-              <p className="nobo-list-confirmation-text">An email confirmation has been sent to your inbox. You can see the status of the trade in your account dashboard.</p>
-              <div className="nobo-list-confirmation-container">
-                <h2 className="nobo-list-confirmation-container-header">WHAT YOU LISTED</h2>
-                <img className="nobo-list-confirmation-image" src="https://thenobo.sfo3.digitaloceanspaces.com/dev/a3ErI6cIF7yyKqCTxg_OV.webp" alt="Example image"/>
-                <p className="nobo-list-confirmation-container-item">BVLGARI Clutch</p>
-                <p className="nobo-list-confirmation-container-item">$1,200.00</p>
-              </div>
-              <Button
-                className="nobo-list-btn"
-                label="VIEW MY SELL CLOSET"
-                large={true}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setTradeSteps(tradeSteps + 1);
-                }}
-              />
-              <Button
-                className="nobo-list-btn nobo-list-back-home"
-                label="BACK TO HOME FEED"
-                large={true}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setTradeSteps(tradeSteps + 1);
-                }}
-              />
-            </div>
-          )}
         </IonGrid>
       </IonContent>
-      {tradeSteps === 1 && (
         <div className="footer">
           <Button
             disabled={!valid()}
@@ -833,10 +507,10 @@ const ListItem: React.FC = () => {
               e.preventDefault();
               e.stopPropagation();
               setTradeSteps(tradeSteps + 1);
+              history.push('/list/image');
             }}
           />
         </div>
-      )}
       {tradeSteps === 2 && (
         <div className="footer footer-gradient">
           <Button
@@ -882,4 +556,4 @@ const ListItem: React.FC = () => {
   );
 };
 
-export default ListItem;
+export default ListItemCategory;

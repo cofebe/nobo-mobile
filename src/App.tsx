@@ -38,6 +38,9 @@ import PrimarySport from './pages/PrimarySport';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
 import PostDetail from './pages/PostDetail';
 import ListItem from './pages/ListItem';
+import ListItemCategory from './pages/ListItemCategory';
+import ListItemImage from './pages/ListItemImage';
+import ListItemProduct from './pages/ListItemProduct';
 import SignUp1 from './pages/SignUp1';
 import SignUp2 from './pages/SignUp2';
 
@@ -192,6 +195,15 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/list-item/trade">
               <ListItem />
+            </Route>
+            <Route exact path="/list/category">
+              <ListItemCategory />
+            </Route>
+            <Route exact path="/list/image">
+              <ListItemImage />
+            </Route>
+            <Route exact path="/list/product">
+              <ListItemProduct />
             </Route>
             <Route path="/chat/:id" exact={true}>
               <Chat />
