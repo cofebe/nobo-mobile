@@ -1,7 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import {
-  IonHeader,
-} from '@ionic/react';
+import { IonHeader } from '@ionic/react';
 import './Header.scss';
 
 interface HeaderProps {

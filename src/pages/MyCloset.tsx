@@ -57,9 +57,12 @@ const MyCloset: React.FC = () => {
         <img src="assets/images/nobo_logo.png" className="logo" alt="logo" />
       </Header>
       <IonContent className="my-closet-content">
-        <Search value={search} onChange={(val) => {
-          searchOnChange(val);
-        }} />
+        <Search
+          value={search}
+          onChange={val => {
+            searchOnChange(val);
+          }}
+        />
         {search ? (
           <>
             {searchProducts.length > 0 ? (
@@ -78,19 +81,25 @@ const MyCloset: React.FC = () => {
           </>
         ) : (
           <IonList>
-            <IonItem lines="none" onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              history.push('/home/closet/trade');
-            }}>
+            <IonItem
+              lines="none"
+              onClick={e => {
+                e.preventDefault();
+                e.stopPropagation();
+                history.push('/home/closet/trade');
+              }}
+            >
               My Trade Closet <span>({tradeProducts.length})</span>
               <img src="assets/images/arrow-right.svg" alt="go" />
             </IonItem>
-            <IonItem lines="none" onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              history.push('/home/closet/sell');
-            }}>
+            <IonItem
+              lines="none"
+              onClick={e => {
+                e.preventDefault();
+                e.stopPropagation();
+                history.push('/home/closet/sell');
+              }}
+            >
               My Sell Closet <span>({sellProducts.length})</span>
               <img src="assets/images/arrow-right.svg" alt="go" />
             </IonItem>

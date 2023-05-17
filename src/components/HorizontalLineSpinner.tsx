@@ -24,8 +24,14 @@ const HorizontalLineSpinner: React.FC = () => {
 
   return (
     <div className="horizontal-line-spinner-container">
-      <img style={{width: '266px', height: '81px'}} src="assets/images/the-nobo-logo.png" />
-      <svg width="222" height="10" viewBox="0 0 222 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <img style={{ width: '266px', height: '81px' }} src="assets/images/the-nobo-logo.png" />
+      <svg
+        width="222"
+        height="10"
+        viewBox="0 0 222 10"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         {lines.map((line, index) => (
           <line
             key={index}
@@ -36,8 +42,8 @@ const HorizontalLineSpinner: React.FC = () => {
             stroke="#D6980E"
             strokeWidth={index === currentLine ? 10 : 6}
             strokeLinecap="round"
-            strokeDasharray={index === currentLine ? "100 0" : "0 100"}
-            style={{ transition: "all 0.3s ease-in-out" }}
+            strokeDasharray={index === currentLine ? '100 0' : '0 100'}
+            style={{ transition: 'all 0.3s ease-in-out' }}
           />
         ))}
       </svg>

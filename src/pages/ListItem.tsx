@@ -20,13 +20,7 @@ import { CategoryService } from '../services/CategoryService';
 import { ProductService } from '../services/ProductService';
 import { FileService } from '../services/FileService';
 import { attributes } from '../data/list-item-attributes';
-import {
-  Category,
-  CategoriesResponse,
-  BrandsResponse,
-  Brand,
-  ItemAttributes,
-} from '../models';
+import { Category, CategoriesResponse, BrandsResponse, Brand, ItemAttributes } from '../models';
 
 interface ItemAttributesWithValues extends ItemAttributes {
   value: string;
@@ -51,9 +45,7 @@ const ListItem: React.FC = () => {
   const [allCategories, setAllCategories] = useState<Category[]>([]);
   const [brands, setBrands] = useState<Brand[]>([]);
   const [fileName, setFileName] = useState<string>('');
-  const [seletectedAttributes, setSelectedAttributes] = useState<
-    ItemAttributesWithValues[]
-  >(
+  const [seletectedAttributes, setSelectedAttributes] = useState<ItemAttributesWithValues[]>(
     attributes.map((attribute: ItemAttributes) => {
       return {
         ...attribute,
@@ -61,12 +53,9 @@ const ListItem: React.FC = () => {
       };
     })
   );
-  const [showAdditionalConditionDetails, setShowAdditionalConditionDetails] =
-    useState(false);
+  const [showAdditionalConditionDetails, setShowAdditionalConditionDetails] = useState(false);
 
-  const [additionalConditionDetails, setAdditionalConditionDetails] = useState<
-    string[]
-  >([]);
+  const [additionalConditionDetails, setAdditionalConditionDetails] = useState<string[]>([]);
   const [tradeOptions, setTradeOptions] = useState<TradeOption[]>([
     {
       brand: '',
@@ -114,10 +103,10 @@ const ListItem: React.FC = () => {
     formData.append('file', fileVals.current.file);
     fileService
       .uploadFiles(formData)
-      .then((res) => {
+      .then(res => {
         console.log('res', res);
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('error uploading file', err);
       });
   };
@@ -224,17 +213,15 @@ const ListItem: React.FC = () => {
   };
 
   const setAttributeValue = (key: string, value: string) => {
-    const newAttributes = seletectedAttributes.map(
-      (attribute: ItemAttributesWithValues) => {
-        if (attribute.id === key) {
-          return {
-            ...attribute,
-            value,
-          };
-        }
-        return attribute;
+    const newAttributes = seletectedAttributes.map((attribute: ItemAttributesWithValues) => {
+      if (attribute.id === key) {
+        return {
+          ...attribute,
+          value,
+        };
       }
-    );
+      return attribute;
+    });
     setSelectedAttributes(newAttributes);
   };
 
@@ -281,52 +268,42 @@ const ListItem: React.FC = () => {
         const uniqueWomenCategoryNames = new Set();
         const uniqueMenCategoryNames = new Set();
         res.docs
-          .filter(
-            (doc: Category) =>
-              doc.parent === null && !doc.name.includes('[WOMEN]')
-          )
+          .filter((doc: Category) => doc.parent === null && !doc.name.includes('[WOMEN]'))
           .forEach((doc: Category) => {
             if (!uniqueMenCategoryNames.has(doc.name)) {
               uniqueMenCategoryNames.add(doc.name);
             }
           });
         res.docs
-          .filter(
-            (doc: Category) =>
-              doc.parent === null && !doc.name.includes('[MEN]')
-          )
+          .filter((doc: Category) => doc.parent === null && !doc.name.includes('[MEN]'))
           .forEach((doc: Category) => {
             if (!uniqueWomenCategoryNames.has(doc.name)) {
               uniqueWomenCategoryNames.add(doc.name);
             }
           });
-        const uniqueWomenCategories = Array.from(uniqueWomenCategoryNames).map(
-          (name: any) => {
-            return {
-              label: name.replace('[WOMEN]', '').trim(),
-              value: name,
-            };
-          }
-        );
-        const uniqueMenCategories = Array.from(uniqueMenCategoryNames).map(
-          (name: any) => {
-            return {
-              label: name.replace('[MEN]', '').trim(),
-              value: name,
-            };
-          }
-        );
+        const uniqueWomenCategories = Array.from(uniqueWomenCategoryNames).map((name: any) => {
+          return {
+            label: name.replace('[WOMEN]', '').trim(),
+            value: name,
+          };
+        });
+        const uniqueMenCategories = Array.from(uniqueMenCategoryNames).map((name: any) => {
+          return {
+            label: name.replace('[MEN]', '').trim(),
+            value: name,
+          };
+        });
         setMenItems(uniqueMenCategories);
         setWomenItems(uniqueWomenCategories);
         setAllCategories(res.docs);
       })
-      .catch((err) => console.error(err));
+      .catch(err => console.error(err));
     productService
       .getBrands()
       .then((res: BrandsResponse) => {
         setBrands(res.brands);
       })
-      .catch((err) => console.error(err));
+      .catch(err => console.error(err));
   });
 
   const postImgeFileUploadVals = useRef<InternalValues>({
@@ -388,9 +365,7 @@ const ListItem: React.FC = () => {
               else setTradeSteps(tradeSteps - 1);
             }}
           />
-          <div className="title">
-            {isTrade ? 'LIST MY ITEM TO TRADE' : 'LIST MY ITEM TO SELL'}
-          </div>
+          <div className="title">{isTrade ? 'LIST MY ITEM TO TRADE' : 'LIST MY ITEM TO SELL'}</div>
         </div>
         <span className="trade-steps">{tradeSteps}/3</span>
       </IonHeader>
@@ -400,10 +375,7 @@ const ListItem: React.FC = () => {
             <IonCol>
               <div className="list-item-instruction">
                 {tradeSteps === 1 && (
-                  <>
-                    Choose the category for the item being listed to unlock
-                    other details
-                  </>
+                  <>Choose the category for the item being listed to unlock other details</>
                 )}
                 {tradeSteps === 2 && <>Add photos and pricing for your item</>}
                 {tradeSteps === 3 && <>Input your product details</>}
@@ -417,7 +389,7 @@ const ListItem: React.FC = () => {
                   <Select
                     value={itemCategory}
                     placeholder="Select Category"
-                    onChange={(e) => {
+                    onChange={e => {
                       setItem('');
                       setItemType('');
                       setBrand('');
@@ -448,7 +420,7 @@ const ListItem: React.FC = () => {
                       <Select
                         disabled={!itemCategory}
                         value={item}
-                        onChange={(e) => {
+                        onChange={e => {
                           setItemType('');
                           setBrand('');
                           setPrice('');
@@ -464,7 +436,7 @@ const ListItem: React.FC = () => {
                         disabled={!item}
                         value={itemType}
                         placeholder="Select Type"
-                        onChange={(e) => {
+                        onChange={e => {
                           setItemType(e?.length ? e[0] : '');
                         }}
                         options={getItemType()}
@@ -478,7 +450,7 @@ const ListItem: React.FC = () => {
                   <Select
                     disabled={!itemType && itemCategory !== 'sneakers'}
                     value={brand}
-                    onChange={(e) => {
+                    onChange={e => {
                       setBrand(e?.length ? e[0] : '');
                     }}
                     placeholder="Select Brand"
@@ -496,7 +468,7 @@ const ListItem: React.FC = () => {
                     value={price}
                     className={`input-height ${!brand && 'disabled-input'}`}
                     placeholder="PRICE"
-                    onChange={(val) => {
+                    onChange={val => {
                       setPrice(val);
                     }}
                   />
@@ -580,14 +552,12 @@ const ListItem: React.FC = () => {
                             attr.required ? '*' : ''
                           }`}
                           options={
-                            getAttributeValue(attr.id).options?.map(
-                              (o: any) => ({
-                                label: o,
-                                value: o,
-                              })
-                            ) || []
+                            getAttributeValue(attr.id).options?.map((o: any) => ({
+                              label: o,
+                              value: o,
+                            })) || []
                           }
-                          onChange={(e) => {
+                          onChange={e => {
                             setAttributeValue(attr.id, e?.length ? e[0] : '');
                           }}
                         />
@@ -608,7 +578,7 @@ const ListItem: React.FC = () => {
                           placeholder={`${getAttributeValue(attr.id).name}${
                             attr.required ? '*' : ''
                           }`}
-                          onChange={(val) => {
+                          onChange={val => {
                             setAttributeValue(attr.id, val);
                           }}
                         />
@@ -624,7 +594,7 @@ const ListItem: React.FC = () => {
                           placeholder={`${getAttributeValue(attr.id).name}${
                             attr.required ? '*' : ''
                           }`}
-                          onChange={(val) => {
+                          onChange={val => {
                             setAttributeValue(attr.id, val);
                           }}
                         />
@@ -636,9 +606,7 @@ const ListItem: React.FC = () => {
                     <IonRow key={attr.id} className="margin-bottom-5">
                       <IonCol
                         onClick={() => {
-                          setShowAdditionalConditionDetails(
-                            !showAdditionalConditionDetails
-                          );
+                          setShowAdditionalConditionDetails(!showAdditionalConditionDetails);
                         }}
                         className="additional-condition-details-title"
                         size="12"
@@ -660,9 +628,7 @@ const ListItem: React.FC = () => {
                                 handleAdditionalConditionDetails(o);
                               }}
                               className={`${
-                                additionalConditionDetails.includes(o)
-                                  ? 'selected-detail'
-                                  : ''
+                                additionalConditionDetails.includes(o) ? 'selected-detail' : ''
                               } additional-condition-details`}
                             >
                               {o}
@@ -676,14 +642,9 @@ const ListItem: React.FC = () => {
               <IonRow>
                 <IonCol>
                   <IonRow>
-                    <IonCol
-                      size="12"
-                      className="input-height file-input-border"
-                    >
+                    <IonCol size="12" className="input-height file-input-border">
                       <label
-                        className={`${
-                          fileName ? 'opacity-full' : 'opacity-low'
-                        }`}
+                        className={`${fileName ? 'opacity-full' : 'opacity-low'}`}
                         htmlFor="fileInput"
                       >
                         {fileName ? fileName : 'UPLOAD RECEIPT'}
@@ -692,7 +653,7 @@ const ListItem: React.FC = () => {
                         id="fileInput"
                         ref={imageRef}
                         type="file"
-                        onChange={(e) => onFileChange(e)}
+                        onChange={e => onFileChange(e)}
                         accept="image/*"
                         placeholder="UPLOAD RECEIPT"
                         className="hide-native-file-button"
@@ -722,18 +683,13 @@ const ListItem: React.FC = () => {
                           size="6"
                         >
                           <input type="checkbox" />
-                          <div
-                            style={{ marginLeft: 4 }}
-                            className="luxury-options-title"
-                          >
+                          <div style={{ marginLeft: 4 }} className="luxury-options-title">
                             Open to all luxury options
                           </div>
                         </IonCol>
                       </>
                     ) : (
-                      <IonCol className="trade-option-title">
-                        Trade Option {i + 1}
-                      </IonCol>
+                      <IonCol className="trade-option-title">Trade Option {i + 1}</IonCol>
                     )}
                   </IonRow>
                   <IonRow>
@@ -745,8 +701,8 @@ const ListItem: React.FC = () => {
                           value: b.name,
                         }))}
                         placeholder="DESIGNER/BRAND"
-                        onChange={(e) => {
-                          setTradeOptions((prev) => {
+                        onChange={e => {
+                          setTradeOptions(prev => {
                             prev[i].brand = e?.length ? e[0] : '';
                             return [...prev];
                           });
@@ -760,8 +716,8 @@ const ListItem: React.FC = () => {
                         className="input-height"
                         value={tradeOptions[i].title}
                         placeholder="PRODUCT TITLE"
-                        onChange={(val) => {
-                          setTradeOptions((prev) => {
+                        onChange={val => {
+                          setTradeOptions(prev => {
                             prev[i].title = val;
                             return [...prev];
                           });
@@ -775,8 +731,8 @@ const ListItem: React.FC = () => {
                         className="input-height"
                         value={tradeOptions[i].description}
                         placeholder="DESCRIPTION"
-                        onChange={(val) => {
-                          setTradeOptions((prev) => {
+                        onChange={val => {
+                          setTradeOptions(prev => {
                             prev[i].description = val;
                             return [...prev];
                           });
@@ -829,7 +785,7 @@ const ListItem: React.FC = () => {
             disabled={!valid()}
             label="Next"
             large={true}
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               e.stopPropagation();
               setTradeSteps(tradeSteps + 1);
@@ -842,7 +798,7 @@ const ListItem: React.FC = () => {
           <Button
             label="Next"
             large={true}
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               e.stopPropagation();
               setTradeSteps(tradeSteps + 1);
@@ -856,7 +812,7 @@ const ListItem: React.FC = () => {
             disabled={!validItemDetails()}
             label="Next"
             large={true}
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               e.stopPropagation();
               setTradeSteps(tradeSteps + 1);
@@ -875,7 +831,6 @@ const ListItem: React.FC = () => {
               setTradeSteps(tradeSteps + 1);
             }}
           />
-          {/*<div className="cancel-exit">Cancel and Exit</div>*/}
         </div>
       )}
     </IonPage>

@@ -8,7 +8,6 @@ const USER_NAME_KEY = 'appUsername';
 const USER_TOKEN_KEY = 'appUserToken';
 
 export class AuthService {
-
   getUserId() {
     const storage = window.localStorage.getItem(USER_ID_KEY);
     return storage;

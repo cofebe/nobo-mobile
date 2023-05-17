@@ -1,4 +1,3 @@
-
 export function getImageUrl(url: string) {
   if (!url) {
     return '';
@@ -19,7 +18,7 @@ export function formatPrice(val: number, includeDecimals: boolean = true): strin
   let ret = '$';
   ret += val.toFixed(includeDecimals ? 2 : 0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   if (includeDecimals) {
-    if(!ret.includes('.')) {
+    if (!ret.includes('.')) {
       ret += '.00';
     }
     while (ret[ret.length - 3] !== '.') {
@@ -70,7 +69,7 @@ export function getTradeFeePercentage(subtotal: number): number {
 export function getTradeFee(price1: number, price2: number): number {
   const sum = price1 + price2;
   const feePercentage = getTradeFeePercentage(sum);
-  return sum / 2 * feePercentage;
+  return (sum / 2) * feePercentage;
 }
 
 export function getMinTradeFee(price: number): number {

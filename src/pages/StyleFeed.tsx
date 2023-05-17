@@ -32,7 +32,7 @@ import { Profile } from '../data/profile';
 
 interface FeedItem {
   likes: any[];
-  images: { url: string, originalName: string }[];
+  images: { url: string; originalName: string }[];
   _id: string;
   user: {
     _id: string;
@@ -92,9 +92,7 @@ const StyleFeed: React.FC = () => {
     if (atBottomOfFeedListElem) {
       const elemBounds = atBottomOfFeedListElem.getBoundingClientRect();
       const parentBounds = e.target.getBoundingClientRect();
-      const isVisible =
-        elemBounds.top >= parentBounds.top &&
-        elemBounds.top < parentBounds.bottom;
+      const isVisible = elemBounds.top >= parentBounds.top && elemBounds.top < parentBounds.bottom;
       if (isVisible) {
         console.log('loading next page');
         loadPosts(page + 1);
@@ -125,14 +123,14 @@ const StyleFeed: React.FC = () => {
     presentLoading(loadingOptions);
     isLoading = true;
     setIsLoading(isLoading);
-    console.log("FeedService.getProfileFeed userId: ", myUserId)
+    console.log('FeedService.getProfileFeed userId: ', myUserId);
     feedService
-      .getProfileFeed(myUserId || "")
-      .then((res) => res.json())
-      .then((data) => {
+      .getProfileFeed(myUserId || '')
+      .then(res => res.json())
+      .then(data => {
         console.log('Feed: ', data);
-        setFeed(data.feed.feed)
-        setMessages(data.feed.feed)
+        setFeed(data.feed.feed);
+        setMessages(data.feed.feed);
         if (page > 0) {
           // setMessages((messages || []).concat(data.FeedItems));
         } else {
@@ -141,10 +139,7 @@ const StyleFeed: React.FC = () => {
 
         atBottomOfFeedListElem = document.querySelector('#atBottomOfFeedList');
 
-        if (
-          (data.FeedItems || []).length < data.page_size &&
-          atBottomOfFeedListElem
-        ) {
+        if ((data.FeedItems || []).length < data.page_size && atBottomOfFeedListElem) {
           atBottomOfFeedListElem.style.display = 'none';
         }
 
@@ -202,51 +197,87 @@ const StyleFeed: React.FC = () => {
       ></ImageZoom>
       <IonContent
         className="home-content"
-        style={{backgroundColor: '#FEFCF7'}}
+        style={{ backgroundColor: '#FEFCF7' }}
         scrollY={false}
         scrollEvents={true}
-        onIonScrollEnd={(e) => scroll(e)}
+        onIonScrollEnd={e => scroll(e)}
         fullscreen
       >
         <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
-        <div
-          className="profile-banner-container"
-          style={{ backgroundColor: '#FEFCF7' }}
-        >
-        <img className="style-feed-nobo-logo" src="/assets/images/style-feed-nobo-logo.png"/>
+        <div className="profile-banner-container" style={{ backgroundColor: '#FEFCF7' }}>
+          <img className="style-feed-nobo-logo" src="/assets/images/style-feed-nobo-logo.png" />
         </div>
         <div
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault();
             history.push(`/home/my-profile`);
           }}
           className="profile-header-container"
           style={{ backgroundImage: `url('assets/images/style-feed-header.svg')` }}
+        ></div>
+        <div
+          className="profile-create-post"
+          onClick={e => {
+            e.preventDefault();
+            history.push('/home/post-create');
+          }}
         >
-        </div>
-        <div className="profile-create-post"
-            onClick={(e) => {
-              e.preventDefault();
-              history.push('/home/post-create');
-            }}>
-          <svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            width="90"
+            height="90"
+            viewBox="0 0 90 90"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <g filter="url(#filter0_d_1150_5872)">
-            <path d="M30.5 36C30.5 32.9624 32.9624 30.5 36 30.5H42.157H45H47.843H54C57.0376 30.5 59.5 32.9624 59.5 36V54C59.5 57.0376 57.0376 59.5 54 59.5H45H36C32.9624 59.5 30.5 57.0376 30.5 54V36Z" stroke="black" shape-rendering="crispEdges"/>
+              <path
+                d="M30.5 36C30.5 32.9624 32.9624 30.5 36 30.5H42.157H45H47.843H54C57.0376 30.5 59.5 32.9624 59.5 36V54C59.5 57.0376 57.0376 59.5 54 59.5H45H36C32.9624 59.5 30.5 57.0376 30.5 54V36Z"
+                stroke="black"
+                shape-rendering="crispEdges"
+              />
             </g>
-            <path d="M52.0625 45.0312C52.0625 45.5835 51.6148 46.0357 51.0625 46.0357H46.0357V51.0625C46.0357 51.6148 45.5835 52.0625 45.0312 52.0625C44.479 52.0625 44.0268 51.6148 44.0268 51.0625V46.0357H39C38.4477 46.0357 38 45.5835 38 45.0312C38 44.479 38.4477 44.0268 39 44.0268H44.0268V39C44.0268 38.4477 44.479 38 45.0312 38C45.5835 38 46.0357 38.4477 46.0357 39V44.0268H51.0625C51.6148 44.0268 52.0625 44.479 52.0625 45.0312Z" fill="black"/>
+            <path
+              d="M52.0625 45.0312C52.0625 45.5835 51.6148 46.0357 51.0625 46.0357H46.0357V51.0625C46.0357 51.6148 45.5835 52.0625 45.0312 52.0625C44.479 52.0625 44.0268 51.6148 44.0268 51.0625V46.0357H39C38.4477 46.0357 38 45.5835 38 45.0312C38 44.479 38.4477 44.0268 39 44.0268H44.0268V39C44.0268 38.4477 44.479 38 45.0312 38C45.5835 38 46.0357 38.4477 46.0357 39V44.0268H51.0625C51.6148 44.0268 52.0625 44.479 52.0625 45.0312Z"
+              fill="black"
+            />
             <defs>
-            <filter id="filter0_d_1150_5872" x="0" y="0" width="90" height="90" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-            <feOffset/>
-            <feGaussianBlur stdDeviation="15"/>
-            <feComposite in2="hardAlpha" operator="out"/>
-            <feColorMatrix type="matrix" values="0 0 0 0 0.87451 0 0 0 0 0.87451 0 0 0 0 0.87451 0 0 0 1 0"/>
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1150_5872"/>
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1150_5872" result="shape"/>
-            </filter>
+              <filter
+                id="filter0_d_1150_5872"
+                x="0"
+                y="0"
+                width="90"
+                height="90"
+                filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB"
+              >
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feColorMatrix
+                  in="SourceAlpha"
+                  type="matrix"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  result="hardAlpha"
+                />
+                <feOffset />
+                <feGaussianBlur stdDeviation="15" />
+                <feComposite in2="hardAlpha" operator="out" />
+                <feColorMatrix
+                  type="matrix"
+                  values="0 0 0 0 0.87451 0 0 0 0 0.87451 0 0 0 0 0.87451 0 0 0 1 0"
+                />
+                <feBlend
+                  mode="normal"
+                  in2="BackgroundImageFix"
+                  result="effect1_dropShadow_1150_5872"
+                />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_1150_5872"
+                  result="shape"
+                />
+              </filter>
             </defs>
           </svg>
         </div>
@@ -259,29 +290,34 @@ const StyleFeed: React.FC = () => {
                 className="nobo-list-background"
                 style={{ paddingBottom: '2em', paddingLeft: '64px', paddingRight: '64px' }}
               >
-                {messages.map((m) => {
+                {messages.map(m => {
                   return (
-                      <FeedListItem
-                        refreshFeed={() => loadPosts(0)}
-                        message={m}
-                        zoomAction={(i: number) => {
-                          try {
-                            if (m && m.images && m.images.length > 0) {
-                              let targetIndex = i;
-                              let zoomImageUrl = (m.images[0].url || '')
-                                .replace('[', '')
-                                .replace(']', '')
-                                .split("'")
-                                .join('')
-                                .split(',')[targetIndex];
-                              setImageZoom(zoomImageUrl);
-                            }
-                          } catch (exZoomPicNoExist) {}
-                        }}
-                      />
+                    <FeedListItem
+                      refreshFeed={() => loadPosts(0)}
+                      message={m}
+                      zoomAction={(i: number) => {
+                        try {
+                          if (m && m.images && m.images.length > 0) {
+                            let targetIndex = i;
+                            let zoomImageUrl = (m.images[0].url || '')
+                              .replace('[', '')
+                              .replace(']', '')
+                              .split("'")
+                              .join('')
+                              .split(',')[targetIndex];
+                            setImageZoom(zoomImageUrl);
+                          }
+                        } catch (exZoomPicNoExist) {}
+                      }}
+                    />
                   );
                 })}
-                <IonItem id="atBottomOfFeedList" style={{'--background': 'rgb(254, 252, 247)'}} key="bottom" lines="none">
+                <IonItem
+                  id="atBottomOfFeedList"
+                  style={{ '--background': 'rgb(254, 252, 247)' }}
+                  key="bottom"
+                  lines="none"
+                >
                   <IonRow>
                     <IonCol>Loading...</IonCol>
                   </IonRow>
@@ -302,14 +338,13 @@ const StyleFeed: React.FC = () => {
               <>
                 <div
                   className="no-feed-items-container"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault();
                     document.location = '/home/explore';
                   }}
                   key="none"
-                >
-                </div>
-                {profileMessages.map((m) => (
+                ></div>
+                {profileMessages.map(m => (
                   <ExploreListItem key={m.user_id} profile={m} />
                 ))}
               </>

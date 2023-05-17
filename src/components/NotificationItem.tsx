@@ -5,13 +5,11 @@ import { useHistory } from 'react-router-dom';
 import { Notification } from '../data/notifications';
 import './Notifications.css';
 
-
 interface NotificationsItemProps {
   notification: Notification;
 }
 
-const NotificationItem: React.FC<NotificationsItemProps> = ({notification}) => {
-
+const NotificationItem: React.FC<NotificationsItemProps> = ({ notification }) => {
   return (
     <IonRow className="nobo-notification-container">
       <IonCol className="nobo-notification-name" size="5">
@@ -21,7 +19,7 @@ const NotificationItem: React.FC<NotificationsItemProps> = ({notification}) => {
         {notification.message}
       </IonCol>
     </IonRow>
-  )
-}
+  );
+};
 
 export default NotificationItem;

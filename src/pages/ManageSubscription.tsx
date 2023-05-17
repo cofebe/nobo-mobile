@@ -36,16 +36,8 @@ const athleteSubscriptionBenefits = [
   'NIL Deals',
   'Personal Training',
 ];
-const coachSubscriptionBenefits = [
-  'Watchlist',
-  'Unlimited Reach',
-  'Unlimited Messaging',
-];
-const trainerSubscriptionBenefits = [
-  'Reach',
-  'Add photos/videos',
-  'Scout Reports',
-];
+const coachSubscriptionBenefits = ['Watchlist', 'Unlimited Reach', 'Unlimited Messaging'];
+const trainerSubscriptionBenefits = ['Reach', 'Add photos/videos', 'Scout Reports'];
 
 const ManageSubscription: React.FC = () => {
   const history = useHistory();
@@ -64,9 +56,7 @@ const ManageSubscription: React.FC = () => {
   let subscriptionBenefits = [] as string[];
 
   if (userType === 'athlete') {
-    subscriptionPricing = subscriptionService.getProductPriceString(
-      'com.nobo.athlete.1month'
-    );
+    subscriptionPricing = subscriptionService.getProductPriceString('com.nobo.athlete.1month');
     if (!subscriptionService.getProductPrice('com.nobo.athlete.1month')) {
       subscriptionPricing = '$14.99';
     }
@@ -75,16 +65,12 @@ const ManageSubscription: React.FC = () => {
     subscriptionPricing = subscriptionService.getProductPriceString(
       'com.nobo.coachrecruiter.1month'
     );
-    if (
-      !subscriptionService.getProductPrice('com.nobo.coachrecruiter.1month')
-    ) {
+    if (!subscriptionService.getProductPrice('com.nobo.coachrecruiter.1month')) {
       subscriptionPricing = '$29.99';
     }
     subscriptionBenefits = coachSubscriptionBenefits;
   } else if (userType === 'trainer') {
-    subscriptionPricing = subscriptionService.getProductPriceString(
-      'com.nobo.trainer.1month'
-    );
+    subscriptionPricing = subscriptionService.getProductPriceString('com.nobo.trainer.1month');
     if (!subscriptionService.getProductPrice('com.nobo.trainer.1month')) {
       subscriptionPricing = '$29.99';
     }
@@ -124,7 +110,7 @@ const ManageSubscription: React.FC = () => {
       presentLoading(loadingOptions);
       setTimeout(() => {
         dismissLoading();
-      }, 20000)
+      }, 20000);
       subscriptionService
         .subscribe(userSubscriptionId)
         .then((res: any) => {
@@ -269,7 +255,7 @@ const ManageSubscription: React.FC = () => {
               </div>
             </div>
             <div>
-              {subscriptionBenefits.map((benefit) => (
+              {subscriptionBenefits.map(benefit => (
                 <div
                   key={benefit}
                   style={{
@@ -279,15 +265,9 @@ const ManageSubscription: React.FC = () => {
                   }}
                 >
                   <div style={{ paddingLeft: '3.5rem' }}>
-                    <IonIcon
-                      slot="icon-only"
-                      icon={star}
-                      style={{ color: '#00D6B6' }}
-                    />
+                    <IonIcon slot="icon-only" icon={star} style={{ color: '#00D6B6' }} />
                   </div>
-                  <div style={{ paddingLeft: '1rem', color: '#9BC9C1' }}>
-                    {benefit}
-                  </div>
+                  <div style={{ paddingLeft: '1rem', color: '#9BC9C1' }}>{benefit}</div>
                 </div>
               ))}
             </div>

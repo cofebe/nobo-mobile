@@ -1,0 +1,126 @@
+.settings-shipping-container {
+  background-color: #FEFCF7;
+
+  .settings-shipping-header {
+
+    .settings-shipping-header-toolbar {
+      padding: 0;
+      --background: #FEFCF7;
+
+      .title {
+        position: relative;
+        font-size: 15px;
+        font-weight: 600;
+        text-align: center;
+        margin-top: 35px;
+        text-transform: uppercase;
+
+        .back-button {
+          position: absolute;
+          top: 50%;
+          left: 20px;
+          transform: translateY(-50%);
+
+          img {
+            height: 24px;
+            width: 24px;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .settings-shipping-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 20px;
+    --padding-top: 20px;
+    --background: #FEFCF7;
+
+    .add-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      text-transform: uppercase;
+      color: #D6980E;
+      font-size: 12px;
+      margin-bottom: 20px;
+
+      img {
+        display: block;
+        height: 20px;
+        width: 20px;
+        margin-right: 6px;
+      }
+    }
+
+    .settings-shipping-item {
+      background: #FEFCF7;
+      box-shadow: 0px 0px 10px #EDEAE3;
+      border-radius: 5px;
+      padding: 16px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      position: relative;
+      border: 1px solid white;
+
+      &.selected {
+        border: 1px solid #D6980E;
+      }
+
+      .select {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+
+        img {
+          height: 16px;
+          width: 16px;
+        }
+      }
+
+      .name {
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .address1,
+      .address2,
+      .city,
+      .state,
+      .zip,
+      .phone {
+        margin-top: 10px;
+      }
+
+      .is-default {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        text-transform: uppercase;
+        color: #D6980E;
+        font-weight: bold;
+      }
+
+      .action-container {
+        border-top: 1px solid #DFDFDF;
+        margin-left: -16px;
+        margin-right: -16px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 20px;
+        padding-top: 8px;
+        padding-right: 20px;
+        padding-left: 20px;
+
+        .action {
+          color: #D6980E;
+          font-weight: 700;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+}

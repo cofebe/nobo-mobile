@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './PostComment.scss';
 import { viewUser } from '../util';
-import { FeedService } from "../services/FeedService";
-import { AuthService } from "../services/AuthService";
+import { FeedService } from '../services/FeedService';
+import { AuthService } from '../services/AuthService';
 
 interface FeedItem {
   likes: Comment[];
-  images: { url: string, originalName: string }[];
+  images: { url: string; originalName: string }[];
   _id: string;
   user: {
     _id: string;
@@ -59,7 +59,7 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
 
     let myUserId = authService.getUserId();
     if (comment.likes.includes(myUserId)) {
-      flipLike(true)
+      flipLike(true);
     }
   }, [message, comment]);
 
@@ -68,35 +68,34 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
     const likedComment = document.getElementById(`liked-comment-${comment._id}`);
 
     if (likeComment && likedComment) {
-      if (likeComment.style.display == "none" && !forceSet) {
-        comment.likes.pop()
-        likeComment.style.display = "block";
-        likedComment.style.display = "none";
+      if (likeComment.style.display == 'none' && !forceSet) {
+        comment.likes.pop();
+        likeComment.style.display = 'block';
+        likedComment.style.display = 'none';
       } else {
-        comment.likes.push(authService.getUserId())
-        likeComment.style.display = "none";
-        likedComment.style.display = "block";
+        comment.likes.push(authService.getUserId());
+        likeComment.style.display = 'none';
+        likedComment.style.display = 'block';
       }
     }
 
     setMsgComment(comment);
-    setLikeCount(comment.likes.length)
+    setLikeCount(comment.likes.length);
   }
 
   function likeComment() {
-
-    flipLike()
+    flipLike();
 
     let req = {
       commentId: msgComment._id,
-      itemId: message._id
-    }
+      itemId: message._id,
+    };
     feedService
       .likeComment(req)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Post Comment success: ", data)
-      })
+      .then(res => res.json())
+      .then(data => {
+        console.log('Post Comment success: ', data);
+      });
   }
 
   function getTimeDifferenceString(date: Date) {
@@ -107,16 +106,16 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
     const day = 24 * hour;
 
     if (difference < minute) {
-      return "just now";
+      return 'just now';
     } else if (difference < hour) {
       const minutes = Math.floor(difference / minute);
-      return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+      return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
     } else if (difference < day) {
       const hours = Math.floor(difference / hour);
-      return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+      return `${hours} hour${hours === 1 ? '' : 's'} ago`;
     } else {
       const days = Math.floor(difference / day);
-      return `${days} day${days === 1 ? "" : "s"} ago`;
+      return `${days} day${days === 1 ? '' : 's'} ago`;
     }
   }
 
@@ -126,7 +125,7 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
         <IonCol size="2" sizeLg="1" sizeMd="1" offsetMd="3" offsetLg="3">
           <IonAvatar className="feed-list-feed-image">
             <img
-              onClick={(e) => {
+              onClick={e => {
                 e.preventDefault();
                 // viewUser(history, msgComment.user_id, msgComment.account_type);
               }}
@@ -142,21 +141,57 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
         <IonCol className="feed-content" size="10" sizeMd="5" sizeLg="5">
           <h2
             className="feed-list-nobo-badge-line"
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               // viewUser(history, msgComment.user_id, msgComment.account_type);
             }}
           >
             <p className="feed-list-feed-name">{msgComment.user.displayName}</p>
           </h2>
-          <p className="feed-list-feed-message" dangerouslySetInnerHTML={{__html: msgComment.message}} style={{ paddingLeft: 0 }}>
-          </p>
+          <p
+            className="feed-list-feed-message"
+            dangerouslySetInnerHTML={{ __html: msgComment.message }}
+            style={{ paddingLeft: 0 }}
+          ></p>
           <div className="feed-list-bottom-icons">
-            <div className="feed-list-date">{getTimeDifferenceString(new Date(msgComment.createdAt))}
-              <span style={{marginRight: "80px", float: 'right'}}>{likeCount}</span>
-              <img id={`like-comment-${comment._id}`} onClick={() => likeComment()} style={{marginRight: "10px", float: 'right'}} src="/assets/images/like-comment.png" height="15px" width="15px"/>
-              <div id={`liked-comment-${comment._id}`} onClick={() => likeComment()} style={{height: '13px', width: '13px', marginRight: "10px", float: 'right', display: 'none'}}>
-                <svg fill="#d6980e" viewBox="0 0 512 512" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg"><g transform="translate(256 256)" transform-origin="128 0"><g transform="translate(0,0) scale(1,1)"><path d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z" transform="translate(-256 -256)"></path></g></g></svg>
+            <div className="feed-list-date">
+              {getTimeDifferenceString(new Date(msgComment.createdAt))}
+              <span style={{ marginRight: '80px', float: 'right' }}>{likeCount}</span>
+              <img
+                id={`like-comment-${comment._id}`}
+                onClick={() => likeComment()}
+                style={{ marginRight: '10px', float: 'right' }}
+                src="/assets/images/like-comment.png"
+                height="15px"
+                width="15px"
+              />
+              <div
+                id={`liked-comment-${comment._id}`}
+                onClick={() => likeComment()}
+                style={{
+                  height: '13px',
+                  width: '13px',
+                  marginRight: '10px',
+                  float: 'right',
+                  display: 'none',
+                }}
+              >
+                <svg
+                  fill="#d6980e"
+                  viewBox="0 0 512 512"
+                  aria-hidden="true"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g transform="translate(256 256)" transform-origin="128 0">
+                    <g transform="translate(0,0) scale(1,1)">
+                      <path
+                        d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z"
+                        transform="translate(-256 -256)"
+                      ></path>
+                    </g>
+                  </g>
+                </svg>
               </div>
             </div>
             {false /*!msgComment.liked_post*/ && (
@@ -175,9 +210,7 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
                     />
                   </svg>
                 </div>
-                <div className="feed-list-nobo-likes-count">
-
-                </div>
+                <div className="feed-list-nobo-likes-count"></div>
               </div>
             )}
             {false /*msgComment.liked_post*/ && (
@@ -196,9 +229,7 @@ const PostComment: React.FC<PostCommentProps> = ({ message, comment }) => {
                     />
                   </svg>
                 </div>
-                <div className="feed-list-nobo-likes-count">
-                  {msgComment.likes.length}
-                </div>
+                <div className="feed-list-nobo-likes-count">{msgComment.likes.length}</div>
               </div>
             )}
           </div>

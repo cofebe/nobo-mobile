@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 import {
   IonButtons,
   IonContent,
@@ -18,8 +18,8 @@ import {
   useIonActionSheet,
 } from '@ionic/react';
 import './PostStats.scss';
-import { chevronBackOutline, chevronDownOutline } from "ionicons/icons";
-import { FeedService } from "../services/FeedService";
+import { chevronBackOutline, chevronDownOutline } from 'ionicons/icons';
+import { FeedService } from '../services/FeedService';
 
 const PostStats: React.FC = () => {
   const history = useHistory();
@@ -30,12 +30,14 @@ const PostStats: React.FC = () => {
 
   const postId = getPostId();
 
-  console.log("PostStats: ", postId);
+  console.log('PostStats: ', postId);
 
   function getPostId() {
-    let postid = history.location.pathname.substring(history.location.pathname.lastIndexOf('/') + 1)
-    console.log("getPostId: ", postid)
-    return parseInt(postid)
+    let postid = history.location.pathname.substring(
+      history.location.pathname.lastIndexOf('/') + 1
+    );
+    console.log('getPostId: ', postid);
+    return parseInt(postid);
   }
 
   useIonViewWillEnter(() => {
@@ -45,13 +47,13 @@ const PostStats: React.FC = () => {
   function loadStats() {
     feedService
       .getPostStats(postId, age)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Stats: ", data);
+      .then(res => res.json())
+      .then(data => {
+        console.log('Stats: ', data);
         setStats(data);
       })
-      .catch((err) => {
-        console.error("Error: ", err);
+      .catch(err => {
+        console.error('Error: ', err);
       });
   }
 
@@ -105,17 +107,16 @@ const PostStats: React.FC = () => {
       <IonHeader>
         <IonToolbar
           style={{
-            padding: "40px 10px 10px 10px",
+            padding: '40px 10px 10px 10px',
           }}
         >
-          <IonButtons slot="start"
-              onClick={() => {
-                history.goBack()
-              }}>
-            <IonIcon
-              slot="icon-only"
-              icon={chevronBackOutline}
-            />
+          <IonButtons
+            slot="start"
+            onClick={() => {
+              history.goBack();
+            }}
+          >
+            <IonIcon slot="icon-only" icon={chevronBackOutline} />
             <IonText>Statistics Overview</IonText>
           </IonButtons>
         </IonToolbar>
@@ -127,26 +128,31 @@ const PostStats: React.FC = () => {
         <IonList className="nobo-post-detail-background">
           <IonItem className="nobo-post-stats-header-row">
             <div>
-              <div className="nobo-post-stats-header-select" onClick={(e) => {
-                showActionSheet();
-              }}>
+              <div
+                className="nobo-post-stats-header-select"
+                onClick={e => {
+                  showActionSheet();
+                }}
+              >
                 {age > 0 ? `Last ${age} Day${age > 1 ? 's' : ''}` : 'All Time'}
                 <IonIcon icon={chevronDownOutline} />
               </div>
             </div>
             <div>
-              <div className="nobo-post-stats-header-dates">
-                {/*May 10 - May 23*/}
-              </div>
+              <div className="nobo-post-stats-header-dates">{/*May 10 - May 23*/}</div>
             </div>
           </IonItem>
           <IonItem className="nobo-post-stats-item">
             <IonLabel className="nobo-post-stats-label">Impressions</IonLabel>
-            <IonNote className="nobo-post-stats-value">{stats?.impressions === undefined ? '' : stats?.impressions || 0}</IonNote>
+            <IonNote className="nobo-post-stats-value">
+              {stats?.impressions === undefined ? '' : stats?.impressions || 0}
+            </IonNote>
           </IonItem>
           <IonItem className="nobo-post-stats-item">
             <IonLabel className="nobo-post-stats-label">Profile visits</IonLabel>
-            <IonNote className="nobo-post-stats-value">{stats?.profile_visits === undefined ? '' : stats?.profile_visits || 0}</IonNote>
+            <IonNote className="nobo-post-stats-value">
+              {stats?.profile_visits === undefined ? '' : stats?.profile_visits || 0}
+            </IonNote>
           </IonItem>
           {/*
           <IonItem className="nobo-post-stats-item">
@@ -162,11 +168,15 @@ const PostStats: React.FC = () => {
           */}
           <IonItem className="nobo-post-stats-item">
             <IonLabel className="nobo-post-stats-label">Likes</IonLabel>
-            <IonNote className="nobo-post-stats-value">{stats?.likes === undefined ? '' : stats?.likes || 0}</IonNote>
+            <IonNote className="nobo-post-stats-value">
+              {stats?.likes === undefined ? '' : stats?.likes || 0}
+            </IonNote>
           </IonItem>
           <IonItem className="nobo-post-stats-item">
             <IonLabel className="nobo-post-stats-label">Comments</IonLabel>
-            <IonNote className="nobo-post-stats-value">{stats?.comments === undefined ? '' : stats?.comments || 0}</IonNote>
+            <IonNote className="nobo-post-stats-value">
+              {stats?.comments === undefined ? '' : stats?.comments || 0}
+            </IonNote>
           </IonItem>
         </IonList>
       </IonContent>

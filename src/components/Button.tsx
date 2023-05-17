@@ -1,6 +1,4 @@
-import {
-  IonButton,
-} from '@ionic/react';
+import { IonButton } from '@ionic/react';
 import './Button.scss';
 
 interface ButtonProps {
@@ -20,7 +18,6 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   onClick,
 }) => {
-
   function getClassName() {
     const classNames = ['app-button'];
     if (type) {
@@ -36,11 +33,7 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <IonButton
-      onClick={(e) => onClick(e)}
-      className={getClassName()}
-      disabled={disabled}
-    >
+    <IonButton onClick={e => onClick(e)} className={getClassName()} disabled={disabled}>
       {label}
     </IonButton>
   );

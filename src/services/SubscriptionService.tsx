@@ -229,7 +229,7 @@ export class SubscriptionService {
 
   getProductPrice(productId: string) {
     let p = this.store.get(productId).price;
-    p = p.slice(1)
+    p = p.slice(1);
     return parseFloat(p);
   }
 

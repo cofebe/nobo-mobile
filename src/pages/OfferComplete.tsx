@@ -59,10 +59,7 @@ const OfferComplete: React.FC = () => {
         <div className="thank-container">
           <div className="top">
             <div>
-              <img
-                src="assets/images/checkmark-green.svg"
-                alt="order complete"
-              />
+              <img src="assets/images/checkmark-green.svg" alt="order complete" />
             </div>
             <div className="offer-submitted">
               You're offer to{' '}
@@ -74,8 +71,7 @@ const OfferComplete: React.FC = () => {
               >
                 @{product?.vendor?.displayName}
               </span>{' '}
-              for their <span className="primary-color">{product?.name}</span>{' '}
-              was submitted
+              for their <span className="primary-color">{product?.name}</span> was submitted
             </div>
           </div>
           <div className="offer-card-charged-warning">
@@ -83,10 +79,9 @@ const OfferComplete: React.FC = () => {
           </div>
           <div className="text">
             <div>
-              If the other party accepts your request, you will be charged and
-              the product will be shipped. An email notification, with your
-              offer details has been sent to your inbox. You can always check
-              the status of your offer in YOUR OFFERS.
+              If the other party accepts your request, you will be charged and the product will be
+              shipped. An email notification, with your offer details has been sent to your inbox.
+              You can always check the status of your offer in YOUR OFFERS.
             </div>
           </div>
         </div>

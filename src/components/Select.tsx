@@ -1,12 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import {
-  IonButton,
-  IonModal,
-  IonItem,
-  IonList,
-  IonLabel,
-  IonIcon,
-} from '@ionic/react';
+import { IonButton, IonModal, IonItem, IonList, IonLabel, IonIcon } from '@ionic/react';
 import { checkmarkOutline } from 'ionicons/icons';
 import './Select.css';
 
@@ -37,23 +30,16 @@ const Select: React.FC<SelectProps> = ({
   onChange,
 }) => {
   const initialValues = value
-    ? getSelectedOptions(
-        Array.isArray(value) ? value : [value].filter((v) => v),
-        options
-      )
+    ? getSelectedOptions(Array.isArray(value) ? value : [value].filter(v => v), options)
     : [];
-  const [internalSelected, setInternalSelected] =
-    useState<SelectOption[]>(initialValues);
+  const [internalSelected, setInternalSelected] = useState<SelectOption[]>(initialValues);
   const [internalSelectedString, setInternalSelectedValue] = useState<string>(
     getSelectedStringValue(initialValues)
   );
 
   useEffect(() => {
     const initialValues = value
-      ? getSelectedOptions(
-          Array.isArray(value) ? value : [value].filter((v) => v),
-          options
-        )
+      ? getSelectedOptions(Array.isArray(value) ? value : [value].filter(v => v), options)
       : [];
     setInternalSelected(initialValues);
     setInternalSelectedValue(getSelectedStringValue(initialValues));
@@ -61,14 +47,11 @@ const Select: React.FC<SelectProps> = ({
 
   const modal = useRef<HTMLIonModalElement>(null);
 
-  function getSelectedOptions(
-    values: string[],
-    options: SelectOption[]
-  ): SelectOption[] {
+  function getSelectedOptions(values: string[], options: SelectOption[]): SelectOption[] {
     const ret = values
-      .map((v) => options?.find((o) => (o.value || o.label) === v))
-      .filter((v) => v)
-      .map((v) => v!);
+      .map(v => options?.find(o => (o.value || o.label) === v))
+      .filter(v => v)
+      .map(v => v!);
     return ret;
   }
 
@@ -77,7 +60,7 @@ const Select: React.FC<SelectProps> = ({
       return '';
     }
 
-    const stringVals = vals.map((v) => v.label || v.value);
+    const stringVals = vals.map(v => v.label || v.value);
     stringVals.sort();
     return stringVals.join(', ');
   }
@@ -104,7 +87,7 @@ const Select: React.FC<SelectProps> = ({
     if (multiple) {
       setInternalSelectedValue(getSelectedStringValue(internalSelected));
       if (onChange) {
-        onChange(internalSelected.map((v) => v.value || v.label));
+        onChange(internalSelected.map(v => v.value || v.label));
       }
     }
   }
@@ -155,16 +138,13 @@ const Select: React.FC<SelectProps> = ({
         (className ? ' ' + className : '')
       }
     >
-      <div className="nobo-select-container" onClick={(e) => open()}>
+      <div className="nobo-select-container" onClick={e => open()}>
         <div
           className={
-            'nobo-select-label' +
-            (internalSelectedString ? '' : ' nobo-select-label-empty')
+            'nobo-select-label' + (internalSelectedString ? '' : ' nobo-select-label-empty')
           }
         >
-          {internalSelectedString
-            ? internalSelectedString
-            : placeholder || 'Select Option'}
+          {internalSelectedString ? internalSelectedString : placeholder || 'Select Option'}
         </div>
         <div className="nobo-select-chevron">
           <img src="assets/images/arrow-down-filled.svg" alt="down" />
@@ -174,7 +154,7 @@ const Select: React.FC<SelectProps> = ({
         <div className="wrapper">
           <IonList lines="none">
             {options &&
-              options?.map((o) => (
+              options?.map(o => (
                 <IonItem
                   key={o.value || o.label}
                   button={true}
@@ -190,10 +170,7 @@ const Select: React.FC<SelectProps> = ({
         </div>
         {multiple ? (
           <div className="nobo-select-button-container">
-            <IonButton
-              className="nobo-select-button-select"
-              onClick={(e) => close()}
-            >
+            <IonButton className="nobo-select-button-select" onClick={e => close()}>
               Select
             </IonButton>
           </div>
@@ -201,10 +178,7 @@ const Select: React.FC<SelectProps> = ({
           ''
         )}
         <div className="nobo-select-button-container">
-          <IonButton
-            className="nobo-select-button-cancel"
-            onClick={(e) => cancel()}
-          >
+          <IonButton className="nobo-select-button-cancel" onClick={e => cancel()}>
             Cancel
           </IonButton>
         </div>

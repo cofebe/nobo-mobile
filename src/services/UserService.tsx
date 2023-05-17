@@ -2,6 +2,7 @@ import { BaseService } from './BaseService';
 import { environment } from '../environments/environment';
 import { AuthService } from './AuthService';
 import {
+  Address,
   AddressRequest,
   Conversation,
   CreateShippingAddressResponse,
@@ -50,7 +51,10 @@ export class UserService extends BaseService {
     return await super.fetch('GET', `/api/users/${userId}/profile`);
   }
 
-  async getMyProducts(productType: string, options?: ProductSearchOptions): Promise<ProductsResponse> {
+  async getMyProducts(
+    productType: string,
+    options?: ProductSearchOptions
+  ): Promise<ProductsResponse> {
     const authService = new AuthService();
     return this.getProducts(authService.getUserId(), productType, options);
   }
@@ -62,14 +66,12 @@ export class UserService extends BaseService {
   }
 
   async markNotificationsAsRead(noteIds: string[]) {
-    /*const res =*/ await super.fetch('POST', '/api/notifications/update/status',
-    { noteIds });
+    /*const res =*/ await super.fetch('POST', '/api/notifications/update/status', { noteIds });
     return true;
   }
 
   async deleteNotifications(noteIds: string[]) {
-    /*const res =*/ await super.fetch('POST', '/api/notifications/remove',
-    { noteIds });
+    /*const res =*/ await super.fetch('POST', '/api/notifications/remove', { noteIds });
     return true;
   }
 
@@ -94,24 +96,35 @@ export class UserService extends BaseService {
     return json;
   }
 
-  async newConversation(orderId: string | null, productId: string | null, message: string): Promise<Conversation> {
+  async newConversation(
+    orderId: string | null,
+    productId: string | null,
+    message: string
+  ): Promise<Conversation> {
     const res = await super.fetch('POST', '/api/messages/new-conv', {
       message,
       orderId,
       productId,
-      ref: (orderId ? 'order' : 'product'),
+      ref: orderId ? 'order' : 'product',
     });
     const json: Conversation = await res.json();
     return json;
   }
 
-  async getMyPendingProducts(productType: string, options: ProductSearchOptions = {}): Promise<ProductsResponse> {
+  async getMyPendingProducts(
+    productType: string,
+    options: ProductSearchOptions = {}
+  ): Promise<ProductsResponse> {
     const authService = new AuthService();
     options.active = false;
     return this.getProducts(authService.getUserId(), productType, options);
   }
 
-  async getProducts(userId: any, productType: string, options?: ProductSearchOptions): Promise<ProductsResponse> {
+  async getProducts(
+    userId: any,
+    productType: string,
+    options?: ProductSearchOptions
+  ): Promise<ProductsResponse> {
     let perPage = 100;
     let page = 1;
     const filter: any = {
@@ -163,7 +176,7 @@ export class UserService extends BaseService {
       perPage: perPage.toString(),
       page: page.toString(),
       filter: JSON.stringify(filter),
-      sort: JSON.stringify(sort)
+      sort: JSON.stringify(sort),
     }).toString();
 
     const res = await super.fetch('GET', `api/products/all?${queryParams}`);
@@ -202,9 +215,30 @@ export class UserService extends BaseService {
     return json.currentUser;
   }
 
+  async updateShippingAddress(data: Address, index: number): Promise<User> {
+    const body = {
+      action: 'update',
+      address: data,
+      index,
+    };
+    const res = await super.fetch('POST', '/api/users/shipping-address', body);
+    const json: CreateShippingAddressResponse = await res.json();
+    return json.currentUser;
+  }
+
   async setDefaultShippingAddress(index: number): Promise<User> {
     const body = {
       action: 'default',
+      index,
+    };
+    const res = await super.fetch('POST', '/api/users/shipping-address', body);
+    const json: CreateShippingAddressResponse = await res.json();
+    return json.currentUser;
+  }
+
+  async removeShippingAddress(index: number): Promise<User> {
+    const body = {
+      action: 'remove',
       index,
     };
     const res = await super.fetch('POST', '/api/users/shipping-address', body);
@@ -229,6 +263,15 @@ export class UserService extends BaseService {
       cardID: id,
     };
     const res = await super.fetch('POST', '/api/orders/default-payment-method', body);
+    const json: SuccessResponse = await res.json();
+    return json.success;
+  }
+
+  async removePaymentMethod(id: string): Promise<boolean> {
+    const body = {
+      cardID: id,
+    };
+    const res = await super.fetch('POST', '/api/orders/remove-payment-method', body);
     const json: SuccessResponse = await res.json();
     return json.success;
   }
@@ -312,15 +355,15 @@ export class UserService extends BaseService {
   }
 
   async followUser(userId: string) {
-    return await super.fetch('POST', `/api/users/follow`, {userId});
+    return await super.fetch('POST', `/api/users/follow`, { userId });
   }
 
   async getFollowers(userId: string) {
-    return await super.fetch('POST', `/api/users/get-follows`, {userId});
+    return await super.fetch('POST', `/api/users/get-follows`, { userId });
   }
 
   async removeFollowUser(userId: string) {
-    return await super.fetch('POST', `/api/users/unfollow`, {userId});
+    return await super.fetch('POST', `/api/users/unfollow`, { userId });
   }
 
   async getUserPraise(userId: number) {
@@ -335,7 +378,6 @@ export class UserService extends BaseService {
     return await super.fetch('GET', `/user/${userId}/insights?age=${age}`);
   }
 
-
   // checking if email already exist
   async checkExistingEmail(email: string) {
     const res = await fetch(` https://thenobo.com/api/users/exists/${email}`, {
@@ -343,7 +385,6 @@ export class UserService extends BaseService {
       headers: {
         'Content-Type': 'application/json',
       },
-
     });
 
     if (res.status === 404) {
@@ -353,12 +394,11 @@ export class UserService extends BaseService {
     return res.json();
   }
 
-
-
   // signing up a user
   async signup(person: SignUpType) {
-    console.log("the code  reaches service ", person)
-    const res = await fetch("https://thenobo.com/api/users/register",
+    console.log('the code  reaches service ', person);
+    const res = await fetch(
+      'https://thenobo.com/api/users/register',
 
       {
         method: 'POST',
@@ -371,10 +411,10 @@ export class UserService extends BaseService {
           lastName: person.lastName,
           email: person.email,
           displayName: person.userName,
-          password: person.password
+          password: person.password,
         }),
-      });
-
+      }
+    );
 
     if (res.status === 404) {
       console.log('404', res.json);
@@ -382,10 +422,4 @@ export class UserService extends BaseService {
 
     return res.json();
   }
-
-
-
-
-
-
 }

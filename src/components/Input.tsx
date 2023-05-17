@@ -44,9 +44,7 @@ const Input: React.FC<InputProps> = ({
     <div
       className={
         'app-input-container ' +
-        (invalid || errorMessage || (required && isDirty && !internalValue)
-          ? 'invalid'
-          : '') +
+        (invalid || errorMessage || (required && isDirty && !internalValue) ? 'invalid' : '') +
         (small ? ' small' : '')
       }
     >
@@ -54,7 +52,7 @@ const Input: React.FC<InputProps> = ({
         className={className}
         placeholder={placeholder}
         value={value}
-        onIonChange={(e) => change(e)}
+        onIonChange={e => change(e)}
         disabled={disabled}
         readonly={readonly}
         required={required}

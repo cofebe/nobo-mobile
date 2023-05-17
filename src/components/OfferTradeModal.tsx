@@ -1,14 +1,6 @@
 import { useState, useEffect, useRef, forwardRef } from 'react';
 import { useHistory } from 'react-router-dom';
-import {
-  IonContent,
-  IonHeader,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonToolbar,
-  IonModal,
-} from '@ionic/react';
+import { IonContent, IonHeader, IonGrid, IonRow, IonCol, IonToolbar, IonModal } from '@ionic/react';
 import './OfferTradeModal.scss';
 import { UserService } from '../services/UserService';
 import { Product } from '../models';
@@ -21,7 +13,7 @@ import { formatPrice, getMinTradeValue } from '../utils';
 export interface OfferTradeModalProps {
   product: Product;
   onClose: () => void;
-};
+}
 
 export type Ref = HTMLIonModalElement;
 
@@ -43,11 +35,10 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
 
     setMinTradeValue(getMinTradeValue(product.price));
 
-    userService.getMyProducts('trade')
-      .then(products => {
-        //console.log('products', products);
-        setTradeProducts(products.docs);
-      });
+    userService.getMyProducts('trade').then(products => {
+      //console.log('products', products);
+      setTradeProducts(products.docs);
+    });
 
     return () => {
       subscription.unsubscribe();
@@ -72,7 +63,12 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
   }
 
   return (
-    <IonModal className="offer-trade-container" ref={ref} backdropDismiss={true} swipeToClose={true}>
+    <IonModal
+      className="offer-trade-container"
+      ref={ref}
+      backdropDismiss={true}
+      swipeToClose={true}
+    >
       <IonHeader className="offer-trade-header">
         <IonToolbar className="offer-trade-header-toolbar">
           <IonGrid>
@@ -83,7 +79,7 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
             </IonRow>
             <IonRow className="name">
               <IonCol size="12">
-                Select a product from  your Trade Closet to offer a trade for the&nbsp;
+                Select a product from your Trade Closet to offer a trade for the&nbsp;
                 <span>{product.name}</span>
               </IonCol>
             </IonRow>
@@ -91,20 +87,30 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
               <IonCol size="8" className={'fee-container ' + (validate() ? 'valid' : '')}>
                 NOBO Trade Feed: <span>{formatPrice(cart.tradeFee)}</span>
               </IonCol>
-              <IonCol size="4" className="fee-modal-container" onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                modal.current?.present();
-              }}>
-                <img
-                  src="assets/images/question-mark-tooltip.svg"
-                  alt="what is this fee?"
-                />
+              <IonCol
+                size="4"
+                className="fee-modal-container"
+                onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  modal.current?.present();
+                }}
+              >
+                <img src="assets/images/question-mark-tooltip.svg" alt="what is this fee?" />
                 <div>What is this fee?</div>
               </IonCol>
             </IonRow>
             <IonRow className={'slider-container ' + (validate() ? 'valid' : '')}>
-              <IonCol size="12" className={!cart.productOffered ? 'empty' : ((cart.productOffered?.price || 0) < minTradeValue ? 'low' : 'high')}>
+              <IonCol
+                size="12"
+                className={
+                  !cart.productOffered
+                    ? 'empty'
+                    : (cart.productOffered?.price || 0) < minTradeValue
+                    ? 'low'
+                    : 'high'
+                }
+              >
                 <div className="slider">
                   <img
                     src="assets/images/trade-checkmark.svg"
@@ -119,7 +125,7 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
                   <div>min value</div>
                 </div>
                 <div className="price-selected">
-                  {formatPrice((cart.productOffered?.price || 0), false)}
+                  {formatPrice(cart.productOffered?.price || 0, false)}
                   <div>your product</div>
                 </div>
               </IonCol>
@@ -134,8 +140,17 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
               <>
                 {tradeProducts.map(product => (
                   <IonCol size="6" key={product._id} className="product-card-container">
-                    <ProductCard product={product} onClick={() => select(product)} priceLabel="Product Value:" />
-                    <img src={`assets/images/checkmark-${product._id === cart.productOffered?._id ? 'checked' : 'unchecked'}.svg`} alt="checkbox" />
+                    <ProductCard
+                      product={product}
+                      onClick={() => select(product)}
+                      priceLabel="Product Value:"
+                    />
+                    <img
+                      src={`assets/images/checkmark-${
+                        product._id === cart.productOffered?._id ? 'checked' : 'unchecked'
+                      }.svg`}
+                      alt="checkbox"
+                    />
                   </IonCol>
                 ))}
               </>
@@ -147,7 +162,7 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
           </IonRow>
           <IonRow className="buttons">
             <IonCol size="6" offset="3">
-              <Button label="Offer Trade" disabled={!validate()} onClick={(e) => submit(e)} />
+              <Button label="Offer Trade" disabled={!validate()} onClick={e => submit(e)} />
             </IonCol>
           </IonRow>
         </IonGrid>

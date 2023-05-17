@@ -4,10 +4,10 @@ import { getTradeFee, getTradeFeePercentage } from './utils';
 
 export interface TradeState {
   //id: string;
-  productWanted: Product|null|undefined;
-  productOffered: Product|null|undefined;
-  shippingAddress: Address|null|undefined;
-  paymentMethod: PaymentMethod|null|undefined;
+  productWanted: Product | null | undefined;
+  productOffered: Product | null | undefined;
+  shippingAddress: Address | null | undefined;
+  paymentMethod: PaymentMethod | null | undefined;
   tradeFee: number;
   tradeFeePercentage: number;
   shipping: number;
@@ -38,7 +38,9 @@ const tradeSubject = new BehaviorSubject<TradeState>(tradeInitialState);
 function recalculateState(state: TradeState): TradeState {
   if (state.productOffered && state.productWanted) {
     state.tradeFee = getTradeFee(state.productWanted.price, state.productOffered.price);
-    state.tradeFeePercentage = getTradeFeePercentage(state.productWanted.price + state.productOffered.price);
+    state.tradeFeePercentage = getTradeFeePercentage(
+      state.productWanted.price + state.productOffered.price
+    );
   } else {
     state.tradeFee = 0;
     state.tradeFeePercentage = getTradeFeePercentage(0);
@@ -47,7 +49,7 @@ function recalculateState(state: TradeState): TradeState {
   return state;
 }
 
-export const tradeStore  = {
+export const tradeStore = {
   // get the initial/empty state
   initialState: tradeInitialState,
   reset: () => {
@@ -119,7 +121,7 @@ export const tradeStore  = {
       }
     }
   },
-  setShippingAddress: (addr: Address|null|undefined) => {
+  setShippingAddress: (addr: Address | null | undefined) => {
     // return if no changes
     if (!addr && !tradeState.shippingAddress) {
       return;
@@ -139,7 +141,7 @@ export const tradeStore  = {
       tradeSubject.next(tradeState);
     }
   },
-  setPaymentMethod: (pm: PaymentMethod|null|undefined, tradeStateUpdating = false) => {
+  setPaymentMethod: (pm: PaymentMethod | null | undefined, tradeStateUpdating = false) => {
     // return if no changes
     if (!pm && !tradeState.paymentMethod) {
       return;
@@ -160,4 +162,3 @@ export const tradeStore  = {
     }
   },
 };
-

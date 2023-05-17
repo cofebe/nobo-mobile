@@ -24,13 +24,8 @@ const Connections: React.FC = () => {
   const history = useHistory();
 
   const [connections, setConnections] = useState<ConnectionItem[]>([]);
-  const [connectionsSort, setConnectionsSort] = useState<string[]>([
-    'Name',
-    'asc',
-  ]);
-  const [pendingConnections, setPendingConnections] = useState<
-    ConnectionItem[]
-  >([]);
+  const [connectionsSort, setConnectionsSort] = useState<string[]>(['Name', 'asc']);
+  const [pendingConnections, setPendingConnections] = useState<ConnectionItem[]>([]);
   const [filter, setFilter] = useState<string | undefined>();
 
   useIonViewWillEnter(() => {
@@ -119,15 +114,11 @@ const Connections: React.FC = () => {
               onIonChange={(e: any) => setFilter(e.target.value?.toLowerCase())}
             />
           </IonCol>
-          <IonCol
-            size="2"
-            className="connections-sort"
-            style={{ display: 'none' }}
-          >
+          <IonCol size="2" className="connections-sort" style={{ display: 'none' }}>
             <SortWidget
               types={['Name', 'School']}
               asc={true}
-              onSort={(val) => {
+              onSort={val => {
                 setConnections(sortConnections(connections, val));
               }}
             />
@@ -139,7 +130,7 @@ const Connections: React.FC = () => {
               Connection Requests
               <span
                 className="connection-requests-view-all"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   history.push('/home/connections/pending');
                 }}
@@ -152,11 +143,8 @@ const Connections: React.FC = () => {
         {pendingConnections.length > 0 && (
           <IonRow className="pending-connections-container">
             <IonCol>
-              {pendingConnections.map((c) => (
-                <PendingConnectionAvatarItem
-                  key={c.user_id + 1}
-                  connection={c}
-                />
+              {pendingConnections.map(c => (
+                <PendingConnectionAvatarItem key={c.user_id + 1} connection={c} />
               ))}
             </IonCol>
           </IonRow>
@@ -165,18 +153,16 @@ const Connections: React.FC = () => {
           <IonCol>
             {connections
               .filter(
-                (c) =>
+                c =>
                   !filter ||
-                  (c.first_name + ' ' + c.last_name)
-                    .toLowerCase()
-                    .includes(filter) ||
+                  (c.first_name + ' ' + c.last_name).toLowerCase().includes(filter) ||
                   c.school.toLowerCase().includes(filter)
               )
-              .map((c) => (
+              .map(c => (
                 <ConnectionListItem
                   key={c.user_id + 1}
                   connection={c}
-                  onDelete={(conn) => removeConnection(conn)}
+                  onDelete={conn => removeConnection(conn)}
                 />
               ))}
           </IonCol>

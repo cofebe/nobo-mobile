@@ -27,12 +27,12 @@ const Forgot: React.FC = () => {
   function forgotPassword() {
     setIsButtonClickable(false);
     Auth.forgotPassword(email)
-      .then((data) => {
+      .then(data => {
         setIsButtonClickable(true);
         console.log(data);
         window.location.href = '/forgot-reset';
       })
-      .catch((err) => {
+      .catch(err => {
         setIsButtonClickable(true);
         console.log(err);
       });
@@ -65,7 +65,7 @@ const Forgot: React.FC = () => {
                 <IonInput
                   value={email}
                   type="email"
-                  onIonChange={(e) => setEmail(e.detail.value!)}
+                  onIonChange={e => setEmail(e.detail.value!)}
                   required
                 ></IonInput>
               </IonItem>
@@ -77,7 +77,7 @@ const Forgot: React.FC = () => {
           <IonRow>
             <IonCol className="nobo-center" size="11">
               <IonButton
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   forgotPassword();
                 }}

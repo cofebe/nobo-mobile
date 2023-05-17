@@ -1,11 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  IonCol,
-  IonRow,
-  IonPage,
-  IonContent,
-  useIonViewWillEnter,
-} from '@ionic/react';
+import { IonCol, IonRow, IonPage, IonContent, useIonViewWillEnter } from '@ionic/react';
 import './Explore.scss';
 import ExploreHeader from '../components/ExploreHeader';
 import NoboHomeItem from '../components/NoboHomeItem';
@@ -18,9 +12,7 @@ const Explore: React.FC = () => {
   const [products, setProducts] = useState<any>([]);
 
   useIonViewWillEnter(() => {
-    const ionRouterOutlet = document.querySelector(
-      'ion-router-outlet'
-    ) as HTMLElement;
+    const ionRouterOutlet = document.querySelector('ion-router-outlet') as HTMLElement;
     if (ionRouterOutlet) {
       ionRouterOutlet.style.setProperty('--animation-duration', '0s');
     }
@@ -42,10 +34,10 @@ const Explore: React.FC = () => {
   function getProducts(group: string, action: string, onSale: boolean) {
     productService
       .getProducts(group, action, onSale)
-      .then((products) => {
+      .then(products => {
         setProducts(products.docs);
       })
-      .catch((error) => {
+      .catch(error => {
         console.log('error', error);
       });
   }
@@ -62,9 +54,7 @@ const Explore: React.FC = () => {
           </IonRow>
           {products.length > 1 && (
             <IonRow>
-              <IonCol className="featured-items">
-                FEATURED ITEMS
-              </IonCol>
+              <IonCol className="featured-items">FEATURED ITEMS</IonCol>
             </IonRow>
           )}
           <IonRow>

@@ -14,10 +14,7 @@ import {
 import { caretUpOutline, caretDownOutline } from 'ionicons/icons';
 import './CheckoutComplete.scss';
 import Button from '../components/Button';
-import {
-  FullOrder,
-  User,
-} from '../models';
+import { FullOrder, User } from '../models';
 import { UserService } from '../services/UserService';
 import { formatPrice, getImageUrl, getCardImage } from '../utils';
 
@@ -38,29 +35,24 @@ const CheckoutComplete: React.FC = () => {
   let [experience, setExperience] = useState<string>('women');
 
   useIonViewWillEnter(() => {
+    userService.getOrder(params.id).then((order: FullOrder) => {
+      setOrder(order);
 
-    userService
-      .getOrder(params.id)
-      .then((order: FullOrder) => {
-        setOrder(order);
+      setCartImage(order.products[0].images[0].url);
+      //console.log('getCart', products);
 
-        setCartImage(order.products[0].images[0].url);
-        //console.log('getCart', products);
+      setCardBrand(order.charge.source.brand);
+      setCardName(order.charge.source.name);
+      setCardLast4(order.charge.source.last4);
+      setCardExpMonth(order.charge.source.exp_month);
+      setCardExpYear(order.charge.source.exp_year);
+    });
 
-        setCardBrand(order.charge.source.brand);
-        setCardName(order.charge.source.name);
-        setCardLast4(order.charge.source.last4);
-        setCardExpMonth(order.charge.source.exp_month);
-        setCardExpYear(order.charge.source.exp_year);
-      });
-
-    userService
-      .getMe()
-      .then((user: User) => {
-        experience = user.experiencePreferences;
-        setExperience(experience);
-        setName(user.firstName);
-      });
+    userService.getMe().then((user: User) => {
+      experience = user.experiencePreferences;
+      setExperience(experience);
+      setName(user.firstName);
+    });
 
     setShowCart(false);
     setShowOrderSummary(true);
@@ -77,9 +69,7 @@ const CheckoutComplete: React.FC = () => {
           <IonGrid>
             <IonRow>
               <IonCol size="12">
-                <div className="title">
-                  Purchase Complete!
-                </div>
+                <div className="title">Purchase Complete!</div>
               </IonCol>
             </IonRow>
           </IonGrid>
@@ -95,15 +85,21 @@ const CheckoutComplete: React.FC = () => {
           </div>
           <div className="text">
             <div>
-              Hi {name}, your order has been received. We have notified your seller(s)
-              and will update you when your order has been shipped!
+              Hi {name}, your order has been received. We have notified your seller(s) and will
+              update you when your order has been shipped!
             </div>
             <div>
-              Please track your order in <span className="link" onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                goToMyPurchases();
-              }}>My Purchases!</span>
+              Please track your order in{' '}
+              <span
+                className="link"
+                onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  goToMyPurchases();
+                }}
+              >
+                My Purchases!
+              </span>
             </div>
           </div>
         </div>
@@ -112,7 +108,10 @@ const CheckoutComplete: React.FC = () => {
             {order?.products.map(product => (
               <div className="cart-item" key={product._id}>
                 <div className="product-image-container">
-                  <div className="product-image" style={{ backgroundImage: getImageUrl(product.images[0].url) }}></div>
+                  <div
+                    className="product-image"
+                    style={{ backgroundImage: getImageUrl(product.images[0].url) }}
+                  ></div>
                 </div>
                 <div className="product-info-container">
                   <div className="brand">{product.brand}</div>
@@ -129,12 +128,19 @@ const CheckoutComplete: React.FC = () => {
           <div className="cart-placeholder">
             <div className="cart-placeholder-item">
               <div className="product-image-container">
-                <div className="product-image" style={{ backgroundImage: getImageUrl(cartImage) }}></div>
+                <div
+                  className="product-image"
+                  style={{ backgroundImage: getImageUrl(cartImage) }}
+                ></div>
               </div>
               <div className="cart-placeholder-link">
-                <div onClick={(e) => {
-                  setShowCart(true);
-                }}>View Cart</div>
+                <div
+                  onClick={e => {
+                    setShowCart(true);
+                  }}
+                >
+                  View Cart
+                </div>
               </div>
             </div>
           </div>
@@ -147,16 +153,25 @@ const CheckoutComplete: React.FC = () => {
           </div>
           <div className="right">
             <div className="name">{cardName}</div>
-            <div className="last4">* &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; {cardLast4}</div>
-            <div className="expiration">Exp. {cardExpMonth}/{cardExpYear}</div>
+            <div className="last4">
+              * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; * &nbsp;&nbsp; {cardLast4}
+            </div>
+            <div className="expiration">
+              Exp. {cardExpMonth}/{cardExpYear}
+            </div>
           </div>
         </div>
         <div className="order-summary">
           <div className="title">
             <div>Order Summary</div>
-            <div><IonIcon icon={showOrderSummary ? caretUpOutline : caretDownOutline} onClick={(e) => {
-              setShowOrderSummary(!showOrderSummary);
-            }} /></div>
+            <div>
+              <IonIcon
+                icon={showOrderSummary ? caretUpOutline : caretDownOutline}
+                onClick={e => {
+                  setShowOrderSummary(!showOrderSummary);
+                }}
+              />
+            </div>
           </div>
           {showOrderSummary ? (
             <div>
@@ -173,7 +188,9 @@ const CheckoutComplete: React.FC = () => {
                 <div className="value">{formatPrice(order?.salesTax || 0)}</div>
               </div>
             </div>
-          ) : ''}
+          ) : (
+            ''
+          )}
           <div className="summary-info total">
             <div className="label">Your Total</div>
             <div className="value">{formatPrice(order?.total || 0)}</div>
@@ -181,17 +198,26 @@ const CheckoutComplete: React.FC = () => {
         </div>
         <div className="footer">
           <div className="button-container">
-            <Button label="View My Purchases" large={true} onClick={(e: any) => {
-              e.preventDefault();
-              e.stopPropagation();
-              goToMyPurchases();
-            }} />
-            <Button label="Back to Home Feed" type="secondary" large={true} onClick={(e: any) => {
-              e.preventDefault();
-              e.stopPropagation();
-              const url = `/home/explore/${experience}/explore`;
-              history.push(url);
-            }} />
+            <Button
+              label="View My Purchases"
+              large={true}
+              onClick={(e: any) => {
+                e.preventDefault();
+                e.stopPropagation();
+                goToMyPurchases();
+              }}
+            />
+            <Button
+              label="Back to Home Feed"
+              type="secondary"
+              large={true}
+              onClick={(e: any) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const url = `/home/explore/${experience}/explore`;
+                history.push(url);
+              }}
+            />
           </div>
         </div>
       </IonContent>

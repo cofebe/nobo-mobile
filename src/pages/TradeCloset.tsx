@@ -37,11 +37,14 @@ const TradeCloset: React.FC = () => {
       <Header title="My Trade Closet" />
       <IonContent className="trade-closet-content">
         {pendingProductCount && (
-          <div className="pending-products" onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            history.push('/home/closet/trade/pending');
-          }}>
+          <div
+            className="pending-products"
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+              history.push('/home/closet/trade/pending');
+            }}
+          >
             <div>{pendingProductCount} Items Pending Approval</div>
             <IonIcon icon={caretForwardOutline} />
           </div>

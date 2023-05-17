@@ -84,33 +84,19 @@ const PromotePost: React.FC = () => {
     console.log('This is the store ', store);
     switch (duration) {
       case 1:
-        return subscriptionService.getProductPrice(
-          'com.nobo.promotedpost.1day'
-        );
+        return subscriptionService.getProductPrice('com.nobo.promotedpost.1day');
       case 2:
-        return subscriptionService.getProductPrice(
-          'com.nobo.promotedpost.2day'
-        );
+        return subscriptionService.getProductPrice('com.nobo.promotedpost.2day');
       case 3:
-        return subscriptionService.getProductPrice(
-          'com.nobo.promotedpost.3day'
-        );
+        return subscriptionService.getProductPrice('com.nobo.promotedpost.3day');
       case 4:
-        return subscriptionService.getProductPrice(
-          'com.nobo.promotedpost.4day'
-        );
+        return subscriptionService.getProductPrice('com.nobo.promotedpost.4day');
       case 5:
-        return subscriptionService.getProductPrice(
-          'com.nobo.promotedpost.5day'
-        );
+        return subscriptionService.getProductPrice('com.nobo.promotedpost.5day');
       case 6:
-        return subscriptionService.getProductPrice(
-          'com.nobo.promotedpost.6day'
-        );
+        return subscriptionService.getProductPrice('com.nobo.promotedpost.6day');
       case 7:
-        return subscriptionService.getProductPrice(
-          'com.nobo.promotedpost.1week'
-        );
+        return subscriptionService.getProductPrice('com.nobo.promotedpost.1week');
       default:
         return 0;
     }
@@ -128,7 +114,7 @@ const PromotePost: React.FC = () => {
       .then(() => {
         history.goBack();
       })
-      .catch((err) => {
+      .catch(err => {
         console.error('Error promoting post:', err);
       });
   }
@@ -156,8 +142,8 @@ const PromotePost: React.FC = () => {
         <IonGrid className="post-promote-grid">
           <IonRow>
             <IonCol size="12" className="intro">
-              Promote your post to reach more users. Promoted posts are shown to
-              all users for a set duration and include reporting of impressions.
+              Promote your post to reach more users. Promoted posts are shown to all users for a set
+              duration and include reporting of impressions.
             </IonCol>
           </IonRow>
           <IonRow>
@@ -181,9 +167,9 @@ const PromotePost: React.FC = () => {
                 snaps={true}
                 ticks={false}
                 value={duration}
-                onIonChange={(e) => {
+                onIonChange={e => {
                   setDuration(e.detail.value as number);
-                  let c = calculateCost(e.detail.value as number)
+                  let c = calculateCost(e.detail.value as number);
                   setCost(c);
                 }}
               />
@@ -199,7 +185,7 @@ const PromotePost: React.FC = () => {
             <IonCol size="12" className="buttons">
               <IonButton
                 id="open-subscription-modal"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault();
                   if (isPlatform('ios')) {
                     presentLoading(loadingOptions);
