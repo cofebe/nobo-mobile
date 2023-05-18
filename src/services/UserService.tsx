@@ -185,7 +185,7 @@ export class UserService extends BaseService {
   }
 
   async login(email: string, password: string): Promise<User> {
-    const res = await super.fetch('POST', '/api/users/login', { email, password });
+    const res = await super.fetch('POST', '/api/users/login', { email, password }, undefined, true);
     //console.log('res', res);
     const json: LoginResponse = await res.json();
     //console.log('json', json);
