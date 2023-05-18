@@ -64,7 +64,9 @@ const GetStarted: React.FC = () => {
               border: '0.5px solid #ffffff',
             }}
             // id="open-subscription-modal"
-            onClick={() => {}}
+            onClick={() => {
+              history.push('/signup1');
+            }}
             //   color={btnColor}
             // disabled={!isActive || isSubscribed}
             type="submit"
@@ -88,7 +90,7 @@ const GetStarted: React.FC = () => {
           </div>
           <div
             style={{
-              textDecorationLine: 'underline',
+              textDecorationLine: 'none',
               fontFamily: 'Nunito Sans',
               fontWeight: '700',
               color: '#D6980E',

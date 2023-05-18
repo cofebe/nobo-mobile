@@ -160,7 +160,7 @@ const Login: React.FC = () => {
               <IonCol
                 size="4"
                 style={{
-                  textDecorationLine: 'underline',
+                  textDecorationLine: 'none',
                   fontFamily: 'Nunito Sans',
                   fontWeight: '700',
                   color: '#D6980E',
