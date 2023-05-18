@@ -69,15 +69,14 @@ const Purchases: React.FC = () => {
 			<IonContent className='purchase-item-content'>
 
 				{/* PURCHASE-ITEMS-CONTAINER */}
-				{productsData[0]?.docs?.map((product:FullOrder) => (
-					<div className="purchase-item-container">
+				{productsData[0]?.docs?.map((product: FullOrder) => (
+					<div className="purchase-itsem-container">
 
 						<div className="purchase-item-info">
 							<div className="purchase-item-order-date">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }}>ORDER DATE</p>
 								<p style={{ textAlign: 'center' }}>{
-
-									new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(parseInt("2023-05-16T19:34:29Z")).split(",")[0]
+									new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(parseInt(product.products[0].updatedAt)).split(",")[0]
 
 
 								}</p>
