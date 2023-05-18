@@ -26,6 +26,16 @@
     height: 62px;
     left: 94px;
     top: 50px;
+
+		@media only screen and (device-height:1024px) {
+			left: 37%;
+			height: 65px;
+		}
+
+		@media only screen and (device-height:1180px) {
+			left: 37%;
+			height: 65px;
+		}
   }
 
   .select-brands-title {
@@ -95,7 +105,7 @@
     margin-bottom: -20px;
     // background-color: aqua;
   }
- 
+
 
   .select-brands-skip-text {
     text-align: center;
@@ -161,18 +171,18 @@
 
   }
   .select-brand-img-col {
-
      margin: 2px;
-    // background-color: rgb(212, 129, 106);
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 140px;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
     margin-bottom: 20px;
     border-radius: 10px;
-    position: relative;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5); 
+		object-fit: cover;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
 
 
   }
+
+
+
 }

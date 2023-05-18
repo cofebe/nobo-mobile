@@ -1,0 +1,226 @@
+.purchase-item-main-container {
+	background-color: #FEFCF7;
+
+	.purchase-item-header {
+
+		.purchase-item-header-toolbar {
+			padding: 0;
+			--background: #FEFCF7;
+
+			.purchase-item-title {
+				position: relative;
+				font-size: 15px;
+				font-weight: 600;
+				text-align: center;
+				margin-top: 35px;
+				text-transform: uppercase;
+
+				.purchase-item-back-button {
+					position: absolute;
+					top: 50%;
+					left: 20px;
+					transform: translateY(-50%);
+
+					img {
+						height: 24px;
+						width: 24px;
+						display: block;
+					}
+				}
+			}
+		}
+	}
+
+	.purchase-item-search-container {
+		padding-left: 20px;
+		padding-right: 20px;
+		margin-top: 24px;
+	}
+
+	.purchase-item-content {
+		--padding-start: 20px;
+		--padding-end: 20px;
+		--padding-bottom: 20px;
+		// --padding-top: 20px;
+		--background: #FEFCF7;
+
+
+
+
+		.purchase-item-container {
+			margin-top: 24px;
+			height: 175px;
+			// border-top: 1px solid #707070;
+			border-bottom: 1px solid #707070;
+			display: flex;
+			flex-direction: column;
+
+		}
+
+		.purchase-item-info {
+			overflow: hidden;
+
+			// background-color: teal;
+			height: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: space-evenly;
+
+			.purchase-item-order-date {
+				text-transform: uppercase;
+				font-size: 12px;
+				font-family: 'Nunito Sans';
+				font-style: normal;
+				font-weight: 600;
+				font-size: 10px;
+				line-height: 150%;
+			}
+
+			.purchase-item-order-num {
+				text-transform: uppercase;
+				font-size: 12px;
+				font-family: 'Nunito Sans';
+				font-style: normal;
+				font-weight: 600;
+				font-size: 10px;
+				line-height: 150%;
+			}
+
+			.purchase-item-order-payment {
+				text-transform: uppercase;
+				font-size: 12px;
+				font-family: 'Nunito Sans';
+				font-style: normal;
+				font-weight: 600;
+				font-size: 10px;
+				line-height: 150%;
+			}
+
+			.purchase-item-order-status {
+				text-transform: uppercase;
+				font-size: 12px;
+				font-family: 'Nunito Sans';
+				font-style: normal;
+				font-weight: 600;
+				font-size: 10px;
+				line-height: 150%;
+				// display: flex;
+				// flex-direction: column;
+				// align-items: center;
+				// justify-content:center;
+			}
+
+
+		}
+
+
+		.purchase-item {
+			// margin-top: 20px;
+			// background-color: purple;
+			height: 120px;
+			display: flex;
+			align-items: center;
+			justify-content: space-evenly;
+
+			.purchases-item-img-container {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 90px;
+				width: 90px;
+				background-repeat: no-repeat;
+				background-position: 50% 50%;
+				object-fit: cover;
+
+
+
+
+				// background-color: rgb(56, 116, 180);
+			}
+
+			.purchse-item-props {
+				width: 140px;
+				height: 90px;
+				// background-color: yellowgreen;
+				padding-left: 5px;
+
+
+				// justify-content: space-evenly;
+				.purchases-item-name1 {
+					margin-top: 5px;
+					font-family: 'Nunito Sans';
+					font-style: normal;
+					font-weight: 700;
+					font-size: 10px;
+					line-height: 150%;
+					letter-spacing: 0.05em;
+					text-transform: uppercase;
+					color: #000000;
+				}
+
+				.purchases-item-name {
+					margin-top: -5px;
+
+					font-family: 'Nunito Sans';
+					font-style: normal;
+					font-weight: 600;
+					font-size: 10px;
+					line-height: 150%;
+					letter-spacing: 0.05em;
+					text-transform: uppercase;
+					color: #000000;
+				}
+
+				.purchases-item-src {
+					margin-top: -5px;
+					font-family: 'Nunito Sans';
+					font-style: normal;
+					font-weight: 400;
+					font-size: 8px;
+					line-height: 150%;
+					width: 140px;
+					color: #000000;
+				}
+
+				.purchases-item-price {
+
+					font-family: 'Nunito Sans';
+					font-style: normal;
+					font-weight: 600;
+					font-size: 20px;
+					line-height: 150%;
+					letter-spacing: 0.05em;
+					text-transform: uppercase;
+					color: #000000;
+					margin-top: -5px;
+
+				}
+
+			}
+
+			.purchase-item-view-container {
+
+				height: 90px;
+				width: 90px;
+				// background-color: bisque;
+				position: relative;
+
+				.purchase-item-view-text {
+					position: absolute;
+					top: 63px;
+					text-align: center;
+					text-decoration: underline;
+					font-family: 'Nunito Sans';
+					font-style: normal;
+					font-weight: 600;
+					font-size: 12px;
+					line-height: 150%;
+					color: #D6980E;
+				}
+			}
+
+		}
+
+
+	}
+}

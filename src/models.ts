@@ -195,6 +195,28 @@ export interface Product {
     used: { [key: string]: any };
   };
   trade: { [key: string]: string[] };
+	shipmentInfo:{
+
+		from_address:{
+			carrier_facility:null
+			city:string
+			company:string
+			created_at:string
+			email:string
+			id:string
+			federal_tax_id:null
+			mode:string
+			name:string
+			object:string
+			phone:string
+			residential:boolean
+			state_tax_id:null
+			street1:string
+			street2:null
+			updated_at:string
+			zip:string
+		}
+	}
 }
 
 export interface ProductCategory {
@@ -512,4 +534,16 @@ export interface ProfileResponse {
 
 export interface PostResponse {
   success: boolean;
+}
+
+export interface UserAccData{
+	firstName:string
+	lastName:string
+	displayName:string
+	email:string
+	phoneNumber:string
+	saleSchedule: []
+	experiencePreferences:string
+	currentPassword:string
+	newPassword:string
 }

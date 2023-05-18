@@ -35,11 +35,8 @@ const Settings: React.FC = () => {
     <div className="content">
      {/* <<<<<<< HEAD */}
 
-     {/* This is the div i inserted to fetch user-image that works */}
-     <div className="avatar">
-      <img className={``} src={user?.avatar} alt="avatar" />
-     </div>
 
+     <div className="avatar" style={{ backgroundImage:`url(${user?.avatar})` }}></div>
      {/* This div below was not fetching the user image so i try replacing with this one above and it worked */}
      {/* <div className="avatar" style={{ backgroundImage: getImageUrl(user?.avatar || '') }}></div> */}
      <div className="name">

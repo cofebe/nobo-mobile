@@ -1,115 +1,188 @@
 .experience-main-container {
-  .experience-ion-content {
-    --background: #fefcf7;
-  }
+	.experience-ion-content {
+		--background: #fefcf7;
+		// --padding-start: 20px;
+		// --padding-end: 20px;
+		// --padding-top: 20px;
+		--padding-bottom: 20px;
+	}
 
-  .experience-header {
-    width: 100%;
-    height: 110px;
-    position: relative;
-    left: 0;
-    top: 0;
-  }
+	.experience-header {
+		width: 100%;
+		height: 110px;
+		position: relative;
+		left: 0;
+		top: 0;
+	}
 
-  .experience-back-btn {
-    position: absolute;
-    left: 6%;
-    top: 40%;
-  }
+	.experience-back-btn {
+		position: absolute;
+		left: 6%;
+		top: 40%;
+		height: 23px;
 
-  .experience-nobo-logo {
-    position: absolute;
-    height: 62px;
-    left: 94px;
-    top: 50px;
-  }
+	}
 
-  .experience-title {
-    margin-top: 24px;
-    font-weight: 600;
-    font-size: 20px;
-    text-align: center;
-    font-family: "Baskerville";
-    line-height: 18px;
-  }
+	.experience-nobo-logo {
+		position: absolute;
+		height: 62px;
+		left: 94px;
+		top: 50px;
 
-  .experience-desc-container {
-    padding-left: 30px;
-    padding-right: 30px;
-  }
+		@media only screen and (device-height:667px) {
+			height: 50px;
+		}
 
-  .experience-desc {
-    width: 80%;
-    line-height: 18px;
-    font-weight: 400;
-    font-size: 14px;
-    color: gray;
+		@media only screen and (device-height:1024px) {
+			left: 37%;
+			height: 65px;
+		}
 
-    text-align: start;
-  }
+		@media only screen and (device-height:1180px) {
+			left: 37%;
+			height: 65px;
+		}
 
-  .experience-img-container {
-    // width: 380px;
-    height: 17vh;
-    width: 98%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+	}
 
-  .experience-img-container-selected {
-    width: 94%;
+	.experience-title {
+		margin-top: 24px;
+		font-weight: 600;
+		font-size: 20px;
+		text-align: center;
+		font-family: "Baskerville";
+		line-height: 18px;
 
-    // height: 16vh;
-    transition: all 400ms ease-in;
-    transition: all 400ms ease-out;
-  }
-  .experience-img-container-selected2 {
-    width: 94%;
-    transform: scale(1.04);
-    transition: all 400ms ease-in;
-    transition: all 400ms ease-out;
-  }
 
-  .experience-checkbox {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    // background-color: red;
-    bottom: 90%;
-    left: 70%;
-  }
+		@media only screen and (device-height:667px) {
+			margin-bottom: -48px;
+		}
+	}
 
-  .experience-prefrence-img {
-    width: 90%;
-    height: 15vh;
-  }
+	.experience-desc-container {
+		padding-left: 30px;
+		padding-right: 30px;
+		margin: auto;
+	}
 
-  .experience-btn-container {
-    display: flex;
-    align-items: end;
-    margin: auto;
-    width: 350px;
-    margin-top: 5vh;
-    margin-bottom: 35px;
-  }
+	.experience-desc {
+		width: 330px;
+		line-height: 18px;
+		font-weight: 400;
+		font-size: 14px;
+		color: gray;
+		text-align: start;
+		margin: auto;
 
-  .experience-checkbox {
-    position: absolute;
-    left: 85%;
-    top: 20%;
-    width: 20px;
-    border-radius: 50px;
-  }
+		@media only screen and (device-height:667px) {
+			gap: 3rem;
+			margin-top: 50px;
+			margin-bottom: 30px;
+		}
 
-  .experience-form-container {
-    height: 60vh;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
+		@media only screen and (device-height:1180px) {
+			font-size: 22px;
+			color: gray;
+			text-align: center;
+		}
+
+	}
+
+	.experience-img-container {
+		height: 17vh;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.experience-img-container-selected {
+		transition: all 400ms ease-in;
+		transition: all 400ms ease-out;
+
+		@media only screen and (device-height:1180px) {
+			height: 200px;
+			width: 700px;
+		}
+
+		@media only screen and (device-height:1024px) {
+			height: 180px;
+			width: 600px;
+		}
+	}
+
+	// WHEN SELECTED
+	.experience-img-container-selected2 {
+		transform: scale(1.04);
+		transition: all 400ms ease-in;
+		transition: all 400ms ease-out;
+		border: 2px solid black;
+		border-radius: 10px;
+
+		@media only screen and (device-height:1180px) {
+			height: 200px;
+			width: 700px;
+
+		}
+
+		@media only screen and (device-height:1024px) {
+			height: 180px;
+			width: 600px;
+		}
+
+	}
+
+	.experience-checkbox {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		bottom: 90%;
+		left: 70%;
+	}
+
+
+
+	.experience-btn-container {
+		display: flex;
+		align-items: end;
+		margin: auto;
+		width: 350px;
+		margin-top: 5vh;
+	}
+
+	.experience-checkbox {
+		position: absolute;
+		left: 85%;
+		top: 20%;
+		width: 20px;
+		border-radius: 50px;
+	}
+
+	.experience-form-container {
+		height: 61vh;
+		display: flex;
+		gap: 2.2px;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+
+		// margin-top: -22px;
+		@media only screen and (device-height:667px) {
+			gap: 2.2rem;
+			margin-bottom: 100px;
+		}
+
+		@media only screen and (device-height:844px) {
+			gap: 6px;
+		}
+
+		@media only screen and (device-height:1180px) {
+			gap: 10px;
+		}
+
+		@media only screen and (device-height:1024px) {
+			gap: 16px;
+		}
+	}
 }

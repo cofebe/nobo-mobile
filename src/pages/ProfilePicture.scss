@@ -26,6 +26,16 @@
     height: 62px;
     left: 94px;
     top: 50px;
+
+		@media only screen and (device-height:1024px) {
+			left: 37%;
+			height: 65px;
+		}
+
+		@media only screen and (device-height:1180px) {
+			left: 37%;
+			height: 65px;
+		}
   }
 
   .profile-picture-title {
@@ -35,7 +45,7 @@
     text-align: center;
     font-family: "Baskerville";
     line-height: 18px;
-  } 
+  }
 
   .profile-picture-desc-container {
     padding-left: 30px;
@@ -116,7 +126,7 @@
     // right: 0;
     // bottom: 0;
     // background-size: contain !important;
- 
+
     left: 17%;
     top: 10%;
     height: 260px;
@@ -153,23 +163,13 @@
     position: absolute;
     top: 0.5%;
     border-radius: 50%;
-    // height: 200px;
-    // width: 200px;
-
-    // left: 0;
-    // right: 0;
-    // bottom: 0;
-    // background-size: contain !important;
   }
   .profile-picture-image-cropper {
-    // margin-left: 50px;
     position: absolute;
    left: 38%;
    top: 30%;
-  //  height: 250px;
-  
   }
- 
+
 
   .profile-picture-cropper-info {
     display: flex;

@@ -26,6 +26,16 @@
     height: 62px;
     left: 94px;
     top: 50px;
+
+		@media only screen and (device-height:1024px) {
+			left: 37%;
+			height: 65px;
+		}
+
+		@media only screen and (device-height:1180px) {
+			left: 37%;
+			height: 65px;
+		}
   }
 
   .create-post-title {

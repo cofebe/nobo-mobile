@@ -1,14 +1,17 @@
 import { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { IonContent, IonPage, useIonViewWillEnter, IonCol, IonRow, IonModal } from '@ionic/react';
+import { IonContent, IonPage, useIonViewWillEnter, IonCol, IonRow, IonModal, IonGrid, IonHeader } from '@ionic/react';
 import './AccountSettings.scss';
 import './AccountSetings.css';
 import { UserService } from '../services/UserService';
-import { User } from '../models';
+import { ExperienceResponse, User, UserAccData } from '../models';
 import Header from '../components/Header';
 import Input from '../components/Input';
 import Checkbox from '../components/Checkbox';
 import Button from '../components/Button';
+
+
+
 
 const AccountSettings: React.FC = () => {
 	const history = useHistory();
@@ -17,12 +20,33 @@ const AccountSettings: React.FC = () => {
 	const [expOptionSelected, setExpOptionSelected] = useState('');
 	const [firstName, setFirstName] = useState('')
 	const [lastName, setLastName] = useState('')
-	const [userName, setUserName] = useState('')
+	const [displayName, setdisplayName] = useState('')
 	const [email, setEmail] = useState('')
-	const [phoneNumber, setPhoneNumber] = useState('')
-	const [password, setPassword] = useState('')
+	const [phoneNumber, setCurrentPassword] = useState('')
+	const [currentPassword, setPassword] = useState('')
+	const [newPassword, setNewPassword] = useState('')
 	const [comfirmPassword, setComfirmPassword] = useState('')
+	const [wrongPassword, seTwrongPassword] = useState(false)
 
+
+
+	const modal = useRef<HTMLIonModalElement>(null)
+	const dismiss = () => {
+		modal.current?.dismiss()
+	}
+
+
+	const data: UserAccData = {
+		firstName,
+		lastName,
+		displayName,
+		email,
+		phoneNumber,
+		saleSchedule: [],
+		experiencePreferences: expOptionSelected,
+		currentPassword,
+		newPassword
+	}
 
 
 
@@ -32,13 +56,22 @@ const AccountSettings: React.FC = () => {
 				setFirstName(user.firstName)
 				setLastName(user.lastName)
 				setEmail(user.email)
-				setUserName(user.displayName)
+				setdisplayName(user.displayName)
+
+				if (!selectedExperienceArray.includes(user.experiencePreferences, 0)) {
+					selectedExperienceArray.push(user.experiencePreferences);
+				} else {
+					const experienceItem = selectedExperienceArray.filter(brand => brand === user.experiencePreferences);
+					setExpOptionSelected(experienceItem[0]);
+				}
+
 
 			})
 			.then(() => {
 
 			})
 	});
+
 
 
 
@@ -55,12 +88,16 @@ const AccountSettings: React.FC = () => {
 		}
 	};
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (data: UserAccData) => {
+		// console.log(data.experiencePreferences)
 		userService
-			.experience(expOptionSelected)
-			.then((user: User) => {
-				if (user) {
-					console.log(user);
+			.updateUserAccount(data)
+			.then((user:ExperienceResponse) => {
+				if (user.passwordError) {
+					seTwrongPassword(true)
+					console.log("password incorrect");
+				}else{
+console.log(user.currentUser)
 				}
 			})
 			.catch((err: any) => {
@@ -69,14 +106,44 @@ const AccountSettings: React.FC = () => {
 	};
 
 
-
-
+	const validate = () => {
+		if (
+			firstName === ''
+			&& lastName === ''
+			&& displayName === ''
+			&& email === ''
+			&& phoneNumber === ''
+			&& expOptionSelected === ''
+			&& currentPassword === ''
+			&& newPassword === ''
+		) {
+			return true
+		} else {
+			return false
+		}
+	}
 
 	return (
 		<IonPage className="account-settings-container">
-			<Header title="ACCOUNT SETTINGS" />
+
 			<IonContent className="account-settings-content">
-				<div className="acc-settings-input-box" style={{ marginTop: '50px' }}>
+				<IonHeader>
+					<IonGrid className='account-settings-header-container'>
+						<IonRow>
+							<img
+								onClick={() => { history.goBack() }}
+								className="account-settings-back-btn"
+								style={{ color: 'black' }}
+								height={23}
+								src="assets/images/arrow-left.svg"
+								alt="logo"
+							/>
+							<p className='account-settings-title-text-container'>ACCOUNT SETTINGS</p>
+						</IonRow>
+					</IonGrid>
+				</IonHeader>
+
+				<div className="acc-settings-input-box" style={{ marginTop: '150px' }}>
 					<div className="acc-text-input-box">
 						<p className="acc-text-input-title">FIRST NAME</p>
 						<Input
@@ -95,7 +162,7 @@ const AccountSettings: React.FC = () => {
 							value={lastName}
 							className={`nobo-input `}
 							placeholder="LAST NAME"
-							onChange={e => { }}
+							onChange={(e) => setLastName(e)}
 						/>
 					</div>
 
@@ -103,10 +170,10 @@ const AccountSettings: React.FC = () => {
 						<p className="acc-text-input-title">USERNAME</p>
 						<Input
 							type="text"
-							value={userName}
+							value={displayName}
 							className={`nobo-input `}
 							placeholder="USERNAME"
-							onChange={e => { }}
+							onChange={e => setdisplayName(e)}
 						/>
 					</div>
 					<div className="acc-text-input-box">
@@ -116,17 +183,17 @@ const AccountSettings: React.FC = () => {
 							value={email}
 							className={`nobo-input `}
 							placeholder="EMAIL"
-							onChange={e => { }}
+							onChange={e => setEmail(e)}
 						/>
 					</div>
 					<div className="acc-text-input-box">
 						<p className="acc-text-input-title">PHONE NUMBER</p>
 						<Input
-							type="tel"
+							type="number"
 							value={phoneNumber}
 							className={`nobo-input `}
 							placeholder="PHONE NUMBER"
-							onChange={e => { }}
+							onChange={e => setCurrentPassword(e)}
 						/>
 					</div>
 					<div className="acc-change-password-box">
@@ -191,41 +258,43 @@ const AccountSettings: React.FC = () => {
 						large
 						onClick={e => {
 							e.preventDefault();
-							handleSubmit();
+							handleSubmit(data);
 						}}
-						disabled={expOptionSelected === ''}
+						disabled={validate()}
 					/>
 				</div>
 			</IonContent>
-			<IonModal trigger="open-modal" initialBreakpoint={0.8} breakpoints={[0, 1]}>
+			<IonModal ref={modal} trigger="open-modal" initialBreakpoint={0.8} breakpoints={[0, 1]}>
 				<div className="acc-password-change-box" >
 					<p style={{ fontWeight: 700, fontSize: '22px' }} className='acc-password-change-title' >NEW PASSWORD</p>
 					<div className="acc-password-change-input">
 						<Input
+						errorMessage={ wrongPassword == true ? 'Incorrect password':'' }
 							type="text"
-							value={password}
+							value={currentPassword}
 							className={`nobo-input `}
-							placeholder="PASSWORD"
-							onChange={e => { }}
+							placeholder="CURRENT PASSWORD"
+							onChange={e => { setPassword(e) }}
 						/>
 					</div>
 					<div className="acc-password-change-input">
 						<Input
 							type="text"
-							value={password}
+							value={newPassword}
 							className={`nobo-input `}
 							placeholder="NEW PASSWORD"
-							onChange={e => { }}
+							onChange={e => { setNewPassword(e) }}
 						/>
 					</div>
 
 					<div className="acc-password-change-input" >
 						<Input
+							errorMessage={newPassword !== comfirmPassword ? 'password mismatch' : ''}
 							type="text"
 							value={comfirmPassword}
 							className={`nobo-input `}
 							placeholder="COMFIRM PASSWORD"
-							onChange={e => { }}
+							onChange={e => { setComfirmPassword(e) }}
 						/>
 					</div>
 					<div className="acc-password-btn-box" >
@@ -236,9 +305,10 @@ const AccountSettings: React.FC = () => {
 							large={true}
 							onClick={e => {
 								e.preventDefault();
-								// handleSubmit();
+								handleSubmit(data);
+								// dismiss()
 							}}
-						// disabled={expOptionSelected === ''}
+							disabled={validate() || newPassword !== comfirmPassword}
 						/>
 					</div>
 				</div>

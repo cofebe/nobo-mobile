@@ -6,8 +6,8 @@
 export const environment = {
  development: true,
 
- serverUrl: 'https://thenobo.com',
- // serverUrl: 'https://staging.thenobo.com',
+//  serverUrl: 'https://thenobo.com',
+ serverUrl: 'https://staging.thenobo.com',
  // serverUrl: 'http://localhost:8080',
 
  stripeApiKey:
