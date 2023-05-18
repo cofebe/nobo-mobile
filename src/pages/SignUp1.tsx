@@ -195,10 +195,10 @@ const SignUp1: React.FC = () => {
                 already have an account?
               </IonCol>
               <IonCol
-                onClick={() => history.push('/signin')}
+                onClick={() => history.push('/login')}
                 size="4"
                 style={{
-                  textDecorationLine: 'underline',
+                  textDecorationLine: 'none',
                   fontFamily: 'Nunito Sans',
                   fontWeight: '700',
                   color: '#D6980E',
