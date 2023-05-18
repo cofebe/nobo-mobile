@@ -5,12 +5,14 @@ import { loadingStore } from '../loading-store';
 export class BaseService {
   authService: AuthService = new AuthService();
 
-  getHeaders(others: { [key: string]: string } | null | undefined): { [key: string]: string } {
+  getHeaders(others: { [key: string]: string } | null | undefined, skipAuth: boolean): { [key: string]: string } {
     const headers: { [key: string]: string } = {};
 
-    const token = this.authService.getUserToken();
-    if (token) {
-      headers.Authorization = `Bearer ${token}`;
+    if (!skipAuth) {
+      const token = this.authService.getUserToken();
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
     }
 
     return Object.assign(headers, others || {});
@@ -20,7 +22,8 @@ export class BaseService {
     method: string,
     path: string,
     data?: any,
-    headers?: { [key: string]: string } | null | undefined
+    headers?: { [key: string]: string } | null | undefined,
+    skipAuth?: boolean
   ) {
     const url = `${environment.serverUrl}${path.startsWith('/') ? '' : '/'}${path}`;
     headers = headers || {};
@@ -39,7 +42,7 @@ export class BaseService {
       return await fetch(url, {
         method,
         cache: 'no-cache',
-        headers: this.getHeaders(headers),
+        headers: this.getHeaders(headers, skipAuth || false),
         body,
       });
     } finally {
