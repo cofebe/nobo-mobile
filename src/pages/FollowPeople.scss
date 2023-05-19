@@ -1,0 +1,167 @@
+.follow-people-main-container {
+  .follow-people-ion-content {
+    --background: #fefcf7;
+  }
+
+
+  .follow-people-header {
+    width: 100%;
+    height: 110px;
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+
+  .follow-people-back-btn {
+    position: absolute;
+    left: 6%;
+    top: 40%;
+  }
+
+  
+
+  .follow-people-header-container {
+    position: relative;
+  }
+  .follow-people-nobo-logo {
+    z-index: 1000;
+    position: absolute;
+    height: 62px;
+    left: 94px;
+    top: 50px;
+  }
+
+  .follow-people-title {
+    margin-top: 24px;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    font-family: "Baskerville";
+    line-height: 18px;
+  }
+
+  .follow-people-desc-container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .follow-people-desc {
+    width: 80%;
+    line-height: 18px;
+    font-weight: 400;
+    font-size: 18px;
+    color: gray;
+    text-align: center;
+  }
+
+  .follow-people-body-container {
+    margin-top: 20px;
+    height: 54vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-top: 20px;
+    flex-direction: column;
+
+  }
+
+  .follow-people-users-row {
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  margin-bottom: 10px;
+    width: 90%;
+  }
+
+  .follow-people-users-img-container {
+    height: 90%;
+    width: 18%;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+  }
+
+  .follow-people-users-img {
+    height: 90%;
+     width: 90%;
+    border-radius: 50%;
+  }
+
+  .follow-people-user-names-container {
+    width: 45%;
+    font-size: 22px;
+    font-weight: 500;
+    color: #D69A0E;
+    margin-right: 10px;
+    font-weight: 500;
+  }
+
+
+  .follow-people-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 3rem;
+  }
+  .follow-people-Sbutton-container {
+    // margin-top: 30px;
+    // //  position: absolute;
+    // height: 160px;
+    // width: 160px;
+  }
+
+  .follow-people-skip-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 14%;
+    margin-bottom: -10px;
+    // background-color: aqua;
+  }
+  .follow-people-skip-container2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 61%;
+    margin-bottom: -10px;
+    // background-color: aqua;
+  }
+
+  .follow-people-skip-text {
+    text-align: center;
+    color: black;
+  }
+
+  .follow-people-skip-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 11%;
+    // margin-bottom: -10px;
+    // background-col: aqua;
+  }
+
+  .follow-people-skip-text {
+    text-align: center;
+    color: black;
+  }
+
+  .follow-people-submit-btn-container {
+    display: flex;
+    align-items: end;
+    margin: auto;
+    width: 350px;
+    margin-bottom: 35px;
+    margin-top: 100px;
+  }
+  .follow-people-submit-btn-container2 {
+    display: flex;
+    align-items: end;
+    margin: auto;
+    width: 350px;
+    margin-bottom: 35px;
+    margin-top:10px;
+  }
+}
