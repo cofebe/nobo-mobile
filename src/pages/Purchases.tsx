@@ -124,8 +124,7 @@ const Purchases: React.FC = () => {
 							<div className="purchase-item-view-container">
 								<p className="purchase-item-view-text"
 									onClick={() => {
-										console.log("view details")
-										history.push({ pathname: `/settings/purchases/single-order/${product._id}`, state: {} })
+										history.push({ pathname: `/settings/purchases/single-order/${product._id}`, state:product.fromVendors[0] })
 									}}
 								>
 									VIEW DETAILS</p>

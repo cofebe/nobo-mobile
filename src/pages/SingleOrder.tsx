@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonModal, IonPage, IonRow, IonToolbar, useIonViewWillEnter } from '@ionic/react'
+import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonModal, IonPage, IonRow, IonToolbar, useIonViewDidEnter, useIonViewWillEnter } from '@ionic/react'
 import './SingleOrder.scss'
 import { useHistory, useParams } from 'react-router'
 import Search from '../components/Search'
@@ -21,9 +21,7 @@ const SingleOrder: React.FC = () => {
 	const history = useHistory()
 	const [productsData, setProductData] = useState<FullOrder[]>([])
 	const [inputValue, setInputValue] = useState('')
-	const [peopleIfollow, setPeopleIfollow] = useState<string[]>([]);
 	const [following, setFollowing] = useState(false)
-	const [sellerId, setsellerId] = useState<any>('')
 
 
 
@@ -31,62 +29,44 @@ const SingleOrder: React.FC = () => {
 		userService.getOrder(userId.id)
 			.then((products: FullOrder) => {
 				if (products) {
-					// console.log("product res info ---",products.docs[0]?.products[0]?.attributes.map((att)=>att))
 					setProductData([products])
-					// setsellerId(products?.fromVendors[0])
-					// console.log(products)
 				} else { console.log("something went wrong") }
 			})
 			.catch((err) => { console.log("err info while fetching products ", err) })
 	})
 
-	useIonViewWillEnter(()=>{
-
-			userService.getOrder(userId.id)
-			.then((products: FullOrder) => {
-				// console.log(products.fromVendors[0])
-				setsellerId(products.fromVendors[0])
-
-
-
+	useIonViewDidEnter(()=>{
+		const vendorId:any = history.location.state
 				userService
 				.getMe()
 				.then((user:User)=>{
-					setPeopleIfollow(user.following)
+					console.log("from location " , user.following.includes(vendorId, 0))
+					if(user.following.includes(vendorId, 0)){
+						setFollowing(true)
+					}else{
+						setFollowing(false)
+					}
 
 
 				})
 			})
 
-	})
 
 
 
-
-console.log("the people i follow ",peopleIfollow)
-setTimeout(() => {
-	console.log("the people i follow ", peopleIfollow.includes(sellerId, 0))
-}, 4000);
 	const followVendor = (vendorId: any) => {
 		userService
 			.getMe()
 			.then((user: User) => {
 				const result = user.following.includes(vendorId, 0)
-				if (result === true) {
-					console.log(result);
+				if (result) {
 					userService.removeFollowUser(vendorId)
-						.then((res) => {
-							if (!peopleIfollow.includes(vendorId)) {
+						.then(() => {
 								setFollowing(false)
-								console.log(' you have successfully unfollowed ', vendorId);
-							} else {
-								console.log(' something went wrong, unable to unfollow ');
-							}
 						})
 						.catch((error) => { console.log(error) })
 
 				} else {
-					console.log(result);
 
 					userService
 						.followUsers(vendorId)
@@ -131,9 +111,7 @@ setTimeout(() => {
 		product.products[0]?.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)
 	);
 
-	// console.log(productsData[0]?.docs?.map((pro: any) => pro.products[0]))
-	// console.log("testing --> ",productsData.map((product)=>typeof(product._id)))
-	// console.log("pr ",vendorId)
+
 	return (
 		<IonPage className='order-details-item-main-container'>
 			<IonHeader className="order-details-item-header">
