@@ -170,7 +170,6 @@ const SingleOrder: React.FC = () => {
 
 						<div className="order-details-item">
 							<div className='order-details-item-img-container'>
-
 								<img
 									className='order-details-item-img'
 									src={`https://staging.thenobo.com/${product.products[0].images[0]?.url}`} alt="img"
@@ -224,7 +223,9 @@ const SingleOrder: React.FC = () => {
 						</IonRow>
 						<IonRow className='order-details-general-class'>
 							<IonCol >DISCOUNT CODE</IonCol>
-							<IonCol style={{ color: '#D6980E' }} className='order-details-general-col'>{currencyFormat.format(product.products[0].summary.coupon)}</IonCol>
+							<IonCol style={{ color: '#D6980E' }} className='order-details-general-col'>
+								{currencyFormat.format(product.products[0].summary.coupon)}
+							</IonCol>
 						</IonRow>
 
 						<div className='order-details-value-line' style={{ backgroundColor: '#707070', height: '1px' }}></div>

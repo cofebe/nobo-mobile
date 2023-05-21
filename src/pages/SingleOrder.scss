@@ -65,8 +65,6 @@
 
 		.order-details-item-info {
 			overflow: hidden;
-
-			// background-color: teal;
 			height: 50px;
 			display: flex;
 			align-items: center;
@@ -147,21 +145,21 @@
 				background-repeat: no-repeat;
 				background-position: 50% 50%;
 				object-fit: cover;
+				border-radius: 10px;
+				.order-details-item-img{
+				border-radius: 10px;
+
+				}
 
 
-
-
-				// background-color: rgb(56, 116, 180);
 			}
 
 			.order-details-item-props {
 				width: 140px;
 				height: 90px;
-				// background-color: yellowgreen;
 				padding-left: 5px;
 
 
-				// justify-content: space-evenly;
 				.order-details-item-name1 {
 					margin-top: 5px;
 					font-family: 'Nunito Sans';
@@ -239,22 +237,16 @@
 
 
 		.order-details-item-msg-flw {
-			// background-color: teal;
-			//  height: 100px;
-			// width: 100%;
 			margin-bottom: 2px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			// width: 300px;
 			gap: 1rem;
-			// padding-right:20px;
 		}
 
 
 
 		.order-details-summary-container {
-			// background-color: rgb(217, 212, 212);
 			margin-top: 24px;
 			height: 185px;
 			border-bottom: 1px solid #707070;
@@ -270,7 +262,6 @@
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				// background-color: aqua;
 				height: 18px;
 				font-family: 'Nunito Sans';
 				font-style: normal;
@@ -285,7 +276,6 @@
 				height: 10px;
 				width: 335px;
 				background-color: #D6980E;
-				// margin: auto;
 			}
 
 
@@ -303,7 +293,6 @@
 			font-weight: 700;
 			font-size: 12px;
 			line-height: 150%;
-			/* identical to box height, or 18px */
 			height: 50px;
 			display: flex;
 			align-items: center;

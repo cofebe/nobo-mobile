@@ -140,24 +140,19 @@
 				justify-content: center;
 				height: 90px;
 				width: 90px;
-				background-repeat: no-repeat;
-				background-position: 50% 50%;
-				object-fit: cover;
+				border-radius: 10px;
 
-
-
-
-				// background-color: rgb(56, 116, 180);
+				.purchases-item-img{
+					border-radius: 10px;
+				}
 			}
 
 			.purchse-item-props {
 				width: 140px;
 				height: 90px;
-				// background-color: yellowgreen;
 				padding-left: 5px;
 
 
-				// justify-content: space-evenly;
 				.purchases-item-name1 {
 					margin-top: 5px;
 					font-family: 'Nunito Sans';

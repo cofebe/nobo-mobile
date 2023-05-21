@@ -84,17 +84,17 @@ const AccountSettings: React.FC = () => {
 		}
 	};
 
-	useIonViewDidEnter(()=>{
+	useIonViewDidEnter(() => {
 		userService.getMe()
-		.then((user:User)=>{
-			handleTicker(user.experiencePreferences)
-			if (!selectedExperienceArray.includes(user.experiencePreferences, 0)) {
-				selectedExperienceArray.push(user.experiencePreferences);
-			} else {
-				const experienceItem = selectedExperienceArray.filter(brand => brand === user.experiencePreferences);
-				setExpOptionSelected(experienceItem[0]);
-			}
-		})
+			.then((user: User) => {
+				handleTicker(user.experiencePreferences)
+				if (!selectedExperienceArray.includes(user.experiencePreferences, 0)) {
+					selectedExperienceArray.push(user.experiencePreferences);
+				} else {
+					const experienceItem = selectedExperienceArray.filter(brand => brand === user.experiencePreferences);
+					setExpOptionSelected(experienceItem[0]);
+				}
+			})
 	})
 
 	const handleSubmit = async (data: UserAccData) => {
@@ -137,13 +137,20 @@ const AccountSettings: React.FC = () => {
 				{/* --------------------HEADER----------------------- */}
 				<IonRow >
 					<IonCol style={{ height: '118px' }} size='12'>
-						<img
-							onClick={() => { history.goBack() }}
-							className="account-settings-back-btn"
-							height={23}
-							src="assets/images/arrow-left.svg"
-							alt="logo"
-						/>
+						<div
+						className="account-settings-back-btn"
+							onClick={() => {
+								console.log('click')
+								history.goBack()
+							}}
+						>
+							<img
+								height={23}
+								src="assets/images/arrow-left.svg"
+								alt="logo"
+							/>
+						</div>
+
 						<IonCol className='account-settings-title-text-container'>ACCOUNT SETTINGS</IonCol>
 					</IonCol>
 				</IonRow>
