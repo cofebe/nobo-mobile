@@ -26,7 +26,7 @@ const Purchases: React.FC = () => {
 				if (products) {
 					// console.log("product res info ---",products.docs[0]?.products[0]?.attributes.map((att)=>att))
 					setProductData([products])
-					 console.log(products)
+					console.log(products)
 				} else { console.log("something went wrong") }
 			})
 			.catch((err) => { console.log("err info while fetching products ", err) })
@@ -90,17 +90,16 @@ const Purchases: React.FC = () => {
 						<div className="purchase-item-info">
 							<div className="purchase-item-order-date">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }}>ORDER DATE</p>
-								<p style={{ textAlign: 'center' }}>{formatter.format(parseInt(product.createdAt))}</p>
+								<p style={{ textAlign: 'center' }}>{new Date(product.updatedAt).toDateString().slice(0 - 11)}</p>
 							</div>
 							<div className="purchase-item-order-num">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }}>ORDER NO.</p>
 								<p style={{ textAlign: 'center' }}>{product.uniqueNumber}</p>
 							</div>
 							<div className="purchase-item-order-payment">
-								<p style={{ color: '#ACACAC', textAlign: 'center' }} >PAYMENT METHOD</p>
-								<img className='order-details-card-brand' src={getCardImage(product.charge.source.brand)} alt="card brand" />
+								<p className="purchase-item-payment-method" >PAYMENT METHOD</p>
+								<img className='purchase-details-card-brand' src={getCardImage(product.charge.source.brand)} alt="card brand" />
 
-								{/* <p style={{ textAlign: 'center' }} >{product.charge.payment_method_details.card.brand}</p> */}
 							</div>
 							<div className="purchase-item-order-status">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }}>STATUS</p>
@@ -108,11 +107,8 @@ const Purchases: React.FC = () => {
 							</div>
 						</div>
 
-
-
 						<div className="purchase-item">
 							<div className='purchases-item-img-container'>
-
 								<img
 									className='purchases-item-img'
 									src={`https://staging.thenobo.com/${product.products[0].images[0]?.url}`} alt="img"
@@ -121,13 +117,15 @@ const Purchases: React.FC = () => {
 							<div className="purchse-item-props">
 								<p className="purchases-item-name1">{product.products[0].brand}</p>
 								<p className="purchases-item-name">{product.products[0].name}</p>
-								<p className="purchases-item-src">purchased from <span style={{ color: '#D6980E' }}>@{product.products[0]?.shipmentInfo.from_address.name.split(" ")[0].toLocaleLowerCase()}</span></p>
+								<p className="purchases-item-src">purchased from <span style={{ color: '#D6980E' }}>
+									@{product.products[0]?.vendor.displayName}</span>
+								</p>
 								<p className="purchases-item-price">{currencyFormat.format(product.products[0].price)}</p>
 							</div>
 							<div className="purchase-item-view-container">
 								<p className="purchase-item-view-text"
 									onClick={() => {
-										history.push({ pathname: `/settings/purchases/single-order/${product._id}`, state:product.fromVendors[0] })
+										history.push({ pathname: `/settings/purchases/single-order/${product._id}`, state: product.fromVendors[0] })
 									}}
 								>
 									VIEW DETAILS</p>

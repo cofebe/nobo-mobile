@@ -2,9 +2,8 @@ import { useRef, useState } from 'react'
 import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonModal, IonPage, IonRow, IonToolbar, useIonViewDidEnter, useIonViewWillEnter } from '@ionic/react'
 import './SingleOrder.scss'
 import { useHistory, useParams } from 'react-router'
-import Search from '../components/Search'
 import { UserService } from '../services/UserService'
-import { FullOrder, OrdersResponse, User } from '../models'
+import { FullOrder, User } from '../models'
 import { getCardImage } from '../utils'
 
 
@@ -96,13 +95,6 @@ const SingleOrder: React.FC = () => {
 
 
 
-	const formatter = new Intl.DateTimeFormat('en-US', {
-		year: 'numeric',
-		month: 'short',
-		day: '2-digit'
-	})
-
-
 
 	const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
@@ -153,7 +145,9 @@ const SingleOrder: React.FC = () => {
 						<div className="order-details-item-info">
 							<div className="order-details-item-order-date">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }}>ORDER DATE</p>
-								<p style={{ textAlign: 'center' }}>{formatter.format(parseInt(product.createdAt))}</p>
+								<p style={{ textAlign: 'center' }}>
+									{new Date(product.updatedAt).toDateString().slice(0-11)}
+									</p>
 							</div>
 							<div className="order-details-item-order-num">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }}>ORDER NO.</p>
@@ -185,19 +179,17 @@ const SingleOrder: React.FC = () => {
 								<p className="order-details-item-name1">{product.products[0].brand}</p>
 								<p className="order-details-item-name">{product.products[0].name}</p>
 								<p className="order-details-item-src">
-									purchased from <span style={{ color: '#D6980E' }}>@{product.products[0]?.shipmentInfo.from_address.name.split(" ")[0].toLocaleLowerCase()}</span>
+									purchased from <span style={{ color: '#D6980E' }}>@{product.products[0]?.vendor.displayName}</span>
 
 								</p>
+								{/* <p className="order-details-item-src">
+									purchased from <span style={{ color: '#D6980E' }}>@{product.products[0]?.shipmentInfo.from_address.name.split(" ")[0].toLocaleLowerCase()}</span>
+
+								</p> */}
 								<p className="order-details-item-price">{currencyFormat.format(product.products[0].price)}</p>
 							</div>
 							<div className='order-details-item-view-container'>
-								{/* <p className="purchase-item-view-text"
-									onClick={() =>{
-										 console.log("view details")
-										history.push(`/settings/purchases/single-order/${product._id}`)
-										}}
-								>
-									VIEW DETAILS</p> */}
+
 							</div>
 						</div>
 						<IonRow>
@@ -206,8 +198,8 @@ const SingleOrder: React.FC = () => {
 								<IonButton size='small'>MESSAGE SELLER</IonButton>
 								<IonButton size='small'
 									onClick={(e) => {
-										// e.preventDefault()
-										// e.stopPropagation()
+										e.preventDefault()
+										e.stopPropagation()
 										followVendor(product.fromVendors[0])
 									}}
 								>{following ? 'FOLLOWING' : 'FOLLOW SELLER'}</IonButton>
