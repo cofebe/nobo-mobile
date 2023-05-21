@@ -1,31 +1,32 @@
 .select-brands-main-container {
-  .select-brands-header {
-    width: 100%;
-    height: 110px;
-    position: relative;
-    left: 0;
-    top: 0;
-  }
+	.select-brands-header {
+		width: 100%;
+		height: 110px;
+		position: relative;
+		left: 0;
+		top: 0;
+	}
 
-  .select-brands-back-btn {
-    position: absolute;
-    left: 6%;
-    top: 40%;
-  }
+	.select-brands-back-btn {
+		position: absolute;
+		left: 6%;
+		top: 40%;
+	}
 
-  .select-brands-ion-content {
-    --background: #fefcf7;
-  }
+	.select-brands-ion-content {
+		--background: #fefcf7;
+	}
 
-  .select-brands-header-container {
-    position: relative;
-  }
-  .select-brands-nobo-logo {
-    z-index: 1000;
-    position: absolute;
-    height: 62px;
-    left: 94px;
-    top: 50px;
+	.select-brands-header-container {
+		position: relative;
+	}
+
+	.select-brands-nobo-logo {
+		z-index: 1000;
+		position: absolute;
+		height: 62px;
+		left: 94px;
+		top: 50px;
 
 		@media only screen and (device-height:1024px) {
 			left: 37%;
@@ -36,152 +37,143 @@
 			left: 37%;
 			height: 65px;
 		}
-  }
+	}
 
-  .select-brands-title {
-    margin-top: 24px;
-    font-weight: 600;
-    font-size: 20px;
-    text-align: center;
-    font-family: "Baskerville";
-    line-height: 18px;
-  }
+	.select-brands-title {
+		margin-top: 24px;
+		font-weight: 600;
+		font-size: 20px;
+		text-align: center;
+		font-family: "Baskerville";
+		line-height: 18px;
+	}
 
-  .select-brands-desc-container {
-    padding-left: 30px;
-    padding-right: 30px;
-  }
+	.select-brands-desc-container {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
 
-  .select-brands-desc {
-    width: 80%;
-    line-height: 18px;
-    font-weight: 400;
-    font-size: 18px;
-    color: gray;
+	.select-brands-desc {
+		width: 80%;
+		line-height: 18px;
+		font-weight: 400;
+		font-size: 18px;
+		color: gray;
 
-    text-align: center;
-  }
+		text-align: center;
+	}
 
-  .select-brands-body-container {
-    margin: auto;
-    height: 56vh;
-    width: 90%;
-    overflow: hidden;
-  }
+	.select-brands-body-container {
+		margin: auto;
+		height: 58vh;
+		width: 90%;
+		overflow: scroll;
+	}
 
-  .select-brands-search-container{
-    width: 90%;
-    margin-bottom: 20px;
-    margin: auto;
-  }
+	.select-brands-search-container {
+		width: 90%;
+		margin-bottom: 20px;
+		margin: auto;
+	}
 
-  .select-brands-search {
-    width: 100%;
-  }
-  .select-brands-box {
-    // background-color: teal;
-    height: 150px;
-    // margin: 2px;
-    border-radius: 10px;
-    box-shadow: -5px -5px 10px 1px #ffffff, 5px 5px 10px 2px #f2efe7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
+	.select-brands-search {
+		width: 100%;
+	}
 
-  .select-brands-button-container {
-    margin-top: 30px;
-    //  position: absolute;
-    height: 160px;
-    width: 160px;
-  }
+	.select-brands-box {
+		height: 150px;
+		border-radius: 10px;
+		box-shadow: -5px -5px 10px 1px #ffffff, 5px 5px 10px 2px #f2efe7;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+	}
 
-  .select-brands-skip-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-     margin-top: 2%;
-    margin-bottom: -20px;
-    // background-color: aqua;
-  }
+	.select-brands-button-container {
+		margin-top: 30px;
+		height: 160px;
+		width: 160px;
+	}
+
+	.select-brands-skip-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 2%;
+		margin-bottom: -20px;
+	}
 
 
-  .select-brands-skip-text {
-    text-align: center;
-    color: black;
-  }
+	.select-brands-skip-text {
+		text-align: center;
+		color: black;
+	}
 
-  .select-brands-btn-container {
-    display: flex;
-    align-items: end;
-    margin: auto;
-    width: 350px;
-    margin-bottom: 35px;
-    margin-top: 20px;
-  }
-  .select-brands-btn-container2 {
-    display: flex;
-    align-items: end;
-    margin: auto;
-    width: 350px;
-    margin-bottom: 35px;
-    margin-top: 56px;
-  }
+	.select-brands-btn-container {
+		display: flex;
+		align-items: end;
+		margin: auto;
+		width: 350px;
+		margin-bottom: 35px;
+		margin-top: 20px;
+	}
 
-  // .select-brands-img{
-  //   object-fit: cover;
-  //   height: 160px;
-  // }
-
-  .select-brand-checkbox {
-    position: absolute;
-    left: 80%;
-    bottom: 75%;
-  }
-  .select-brand-checkbox2 {
-    position: absolute;
-    left: 75%;
-    bottom: 75%;
-  }
-
-  .brand-container {
-    background-color: gray;
-    display: flex;
-    border: 3px solid black;
-    flex-direction: row;
-    // flex-wrap:wrap;
-
-    // display: flex;
-    //     align-items: center;
-    //     justify-content: center;
-    //     flex-direction: column;
-    // flex-wrap: wrap;
-  }
-
-  .select-brand-img-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    height: 300px;
-    width: 95%;
-    margin: auto;
-
-  }
-  .select-brand-img-col {
-     margin: 2px;
-    height: 140px;
-		background-repeat: no-repeat;
-		background-position: 50% 50%;
-    margin-bottom: 20px;
-    border-radius: 10px;
-		object-fit: cover;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+	.select-brands-btn-container2 {
+		display: flex;
+		align-items: end;
+		margin: auto;
+		width: 350px;
+		margin-bottom: 35px;
+		margin-top: 56px;
+	}
 
 
-  }
+	.select-brand-checkbox {
+		position: absolute;
+		left: 80%;
+		bottom: 75%;
+	}
+
+	.select-brand-checkbox2 {
+		position: absolute;
+		left: 75%;
+		bottom: 75%;
+	}
+
+	.brand-container {
+		background-color: gray;
+		display: flex;
+		border: 3px solid black;
+		flex-direction: row;
+	}
+
+	.select-brand-img-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		height: 300px;
+		width: 95%;
+		margin: auto;
+
+	}
+
+	.select-brand-img-col {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 2px;
+		height: 140px;
+		margin-bottom: 20px;
+		border-radius: 10px;
+		overflow: hidden;
+		padding: 10px;
+		box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+
+
+	}
 
 
 

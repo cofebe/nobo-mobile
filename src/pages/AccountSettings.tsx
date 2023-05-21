@@ -98,7 +98,6 @@ const AccountSettings: React.FC = () => {
 	})
 
 	const handleSubmit = async (data: UserAccData) => {
-		// console.log(data.experiencePreferences)
 		userService
 			.updateUserAccount(data)
 			.then((user: ExperienceResponse) => {

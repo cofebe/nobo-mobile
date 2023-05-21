@@ -113,9 +113,9 @@ const SelectBrands: React.FC = () => {
 								console.log(brand.name, " "+ brand._id)
 								handleTicker(brand._id)
 							}}
-								style={{ backgroundImage: `url(${brand.url})` }}
 								className="select-brand-img-col" key={brand._id} size="5"
 							>
+								<img src={brand.url} alt="" />
 								<div className="select-brand-checkbox">
 									<Checkbox value={tickedBrand === brand._id} onChange={e => { }} />
 								</div>
