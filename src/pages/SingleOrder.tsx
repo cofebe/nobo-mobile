@@ -5,6 +5,7 @@ import { useHistory, useParams } from 'react-router'
 import { UserService } from '../services/UserService'
 import { FullOrder, User } from '../models'
 import { getCardImage } from '../utils'
+import CreateConversationModal from '../components/CreateConversationModal'
 
 
 
