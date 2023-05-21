@@ -1,11 +1,10 @@
 import { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { IonContent, IonPage, useIonViewWillEnter, IonCol, IonRow, IonModal, IonGrid, IonHeader } from '@ionic/react';
+import { IonContent, IonPage, useIonViewWillEnter, IonCol, IonRow, IonModal, IonGrid, IonHeader, useIonViewDidEnter } from '@ionic/react';
 import './AccountSettings.scss';
 import './AccountSetings.css';
 import { UserService } from '../services/UserService';
 import { ExperienceResponse, User, UserAccData } from '../models';
-import Header from '../components/Header';
 import Input from '../components/Input';
 import Checkbox from '../components/Checkbox';
 import Button from '../components/Button';
@@ -75,9 +74,6 @@ const AccountSettings: React.FC = () => {
 
 
 
-
-
-
 	// Handling the ticker
 	const handleTicker = (experienceOption: string) => {
 		if (!selectedExperienceArray.includes(experienceOption, 0)) {
@@ -88,16 +84,29 @@ const AccountSettings: React.FC = () => {
 		}
 	};
 
+	useIonViewDidEnter(()=>{
+		userService.getMe()
+		.then((user:User)=>{
+			handleTicker(user.experiencePreferences)
+			if (!selectedExperienceArray.includes(user.experiencePreferences, 0)) {
+				selectedExperienceArray.push(user.experiencePreferences);
+			} else {
+				const experienceItem = selectedExperienceArray.filter(brand => brand === user.experiencePreferences);
+				setExpOptionSelected(experienceItem[0]);
+			}
+		})
+	})
+
 	const handleSubmit = async (data: UserAccData) => {
 		// console.log(data.experiencePreferences)
 		userService
 			.updateUserAccount(data)
-			.then((user:ExperienceResponse) => {
+			.then((user: ExperienceResponse) => {
 				if (user.passwordError) {
 					seTwrongPassword(true)
 					console.log("password incorrect");
-				}else{
-console.log(user.currentUser)
+				} else {
+					console.log(user.currentUser)
 				}
 			})
 			.catch((err: any) => {
@@ -125,26 +134,24 @@ console.log(user.currentUser)
 
 	return (
 		<IonPage className="account-settings-container">
-
 			<IonContent className="account-settings-content">
-				<IonHeader>
-					<IonGrid className='account-settings-header-container'>
-						<IonRow>
-							<img
-								onClick={() => { history.goBack() }}
-								className="account-settings-back-btn"
-								style={{ color: 'black' }}
-								height={23}
-								src="assets/images/arrow-left.svg"
-								alt="logo"
-							/>
-							<p className='account-settings-title-text-container'>ACCOUNT SETTINGS</p>
-						</IonRow>
-					</IonGrid>
-				</IonHeader>
+				{/* --------------------HEADER----------------------- */}
+				<IonRow >
+					<IonCol style={{ height: '118px' }} size='12'>
+						<img
+							onClick={() => { history.goBack() }}
+							className="account-settings-back-btn"
+							height={23}
+							src="assets/images/arrow-left.svg"
+							alt="logo"
+						/>
+						<IonCol className='account-settings-title-text-container'>ACCOUNT SETTINGS</IonCol>
+					</IonCol>
+				</IonRow>
 
-				<div className="acc-settings-input-box" style={{ marginTop: '150px' }}>
-					<div className="acc-text-input-box">
+
+				<IonRow className="acc-settings-input-box" >
+					<IonCol sizeXs='12' sizeLg='6' className="acc-text-input-box">
 						<p className="acc-text-input-title">FIRST NAME</p>
 						<Input
 							type="text"
@@ -153,9 +160,9 @@ console.log(user.currentUser)
 							placeholder="FIRST NAME"
 							onChange={(e) => setFirstName(e)}
 						/>
-					</div>
+					</IonCol>
 
-					<div className="acc-text-input-box">
+					<IonCol sizeLg='6' sizeXs='12' className="acc-text-input-box">
 						<p className="acc-text-input-title">LAST NAME</p>
 						<Input
 							type="text"
@@ -164,9 +171,9 @@ console.log(user.currentUser)
 							placeholder="LAST NAME"
 							onChange={(e) => setLastName(e)}
 						/>
-					</div>
+					</IonCol>
 
-					<div className="acc-text-input-box">
+					<IonCol sizeLg='6' sizeXs='12' className="acc-text-input-box">
 						<p className="acc-text-input-title">USERNAME</p>
 						<Input
 							type="text"
@@ -175,8 +182,8 @@ console.log(user.currentUser)
 							placeholder="USERNAME"
 							onChange={e => setdisplayName(e)}
 						/>
-					</div>
-					<div className="acc-text-input-box">
+					</IonCol>
+					<IonCol sizeLg='6' sizeXs='12' className="acc-text-input-box">
 						<p className="acc-text-input-title">EMAIL</p>
 						<Input
 							type="email"
@@ -185,8 +192,8 @@ console.log(user.currentUser)
 							placeholder="EMAIL"
 							onChange={e => setEmail(e)}
 						/>
-					</div>
-					<div className="acc-text-input-box">
+					</IonCol>
+					<IonCol sizeLg='6' sizeXs='12' className="acc-text-input-box">
 						<p className="acc-text-input-title">PHONE NUMBER</p>
 						<Input
 							type="number"
@@ -195,14 +202,14 @@ console.log(user.currentUser)
 							placeholder="PHONE NUMBER"
 							onChange={e => setCurrentPassword(e)}
 						/>
-					</div>
-					<div className="acc-change-password-box">
+					</IonCol>
+					<IonCol size='12' className="acc-change-password-box">
 						<p className="acc-change-password-text" id="open-modal">CHANGE PASSWORD</p>
 						<img height={15} src="assets/images/account-change-password.png" alt="" />
-					</div>
-				</div>
+					</IonCol>
+				</IonRow>
 				<IonRow style={{ width: '350px', margin: 'auto' }}>
-					<div className="acc-experience-title">EXPERIENCE</div>
+					<IonCol size='12' className="acc-experience-title">EXPERIENCE</IonCol>
 				</IonRow>
 
 				<div className="acc-experience-option-box">
@@ -269,7 +276,7 @@ console.log(user.currentUser)
 					<p style={{ fontWeight: 700, fontSize: '22px' }} className='acc-password-change-title' >NEW PASSWORD</p>
 					<div className="acc-password-change-input">
 						<Input
-						errorMessage={ wrongPassword == true ? 'Incorrect password':'' }
+							errorMessage={wrongPassword == true ? 'Incorrect password' : ''}
 							type="text"
 							value={currentPassword}
 							className={`nobo-input `}

@@ -35,21 +35,21 @@ const SingleOrder: React.FC = () => {
 			.catch((err) => { console.log("err info while fetching products ", err) })
 	})
 
-	useIonViewDidEnter(()=>{
-		const vendorId:any = history.location.state
-				userService
-				.getMe()
-				.then((user:User)=>{
-					console.log("from location " , user.following.includes(vendorId, 0))
-					if(user.following.includes(vendorId, 0)){
-						setFollowing(true)
-					}else{
-						setFollowing(false)
-					}
+	useIonViewDidEnter(() => {
+		const vendorId: any = history.location.state
+		userService
+			.getMe()
+			.then((user: User) => {
+				console.log("from location ", user.following.includes(vendorId, 0))
+				if (user.following.includes(vendorId, 0)) {
+					setFollowing(true)
+				} else {
+					setFollowing(false)
+				}
 
 
-				})
 			})
+	})
 
 
 
@@ -62,7 +62,7 @@ const SingleOrder: React.FC = () => {
 				if (result) {
 					userService.removeFollowUser(vendorId)
 						.then(() => {
-								setFollowing(false)
+							setFollowing(false)
 						})
 						.catch((error) => { console.log(error) })
 
@@ -210,7 +210,7 @@ const SingleOrder: React.FC = () => {
 										// e.stopPropagation()
 										followVendor(product.fromVendors[0])
 									}}
-								>{following? 'FOLLOWING' :'FOLLOW SELLER'}</IonButton>
+								>{following ? 'FOLLOWING' : 'FOLLOW SELLER'}</IonButton>
 							</IonCol>
 						</IonRow>
 						<div className='order-details-value-line' style={{ backgroundColor: '#707070', height: '1px' }}></div>
@@ -233,7 +233,9 @@ const SingleOrder: React.FC = () => {
 							<IonCol >DISCOUNT CODE</IonCol>
 							<IonCol style={{ color: '#D6980E' }} className='order-details-general-col'>{currencyFormat.format(product.products[0].summary.coupon)}</IonCol>
 						</IonRow>
+
 						<div className='order-details-value-line' style={{ backgroundColor: '#707070', height: '1px' }}></div>
+
 						<IonRow style={{ color: '#D6980E', fontWeight: 700 }} className='order-details-general-class'>
 							<IonCol >TOTAL</IonCol>
 							<IonCol
@@ -241,18 +243,24 @@ const SingleOrder: React.FC = () => {
 								{currencyFormat.format(product.total + product.shipping + product.salesTax - product.products[0].summary.coupon)}
 							</IonCol>
 						</IonRow>
+
 						<div className='order-details-value-line' style={{ backgroundColor: '#707070', height: '1px' }}></div>
+
 						<IonRow style={{ marginBottom: '14px' }}>
 							<IonCol size='12' className='order-details-summary-title'>PAYMENT METHOD</IonCol>
 							<IonCol style={{ fontWeight: 500 }} className='order-details-payment-method' size='12' >
-							<img className='order-details-card-brand' src={getCardImage(product.charge.source.brand)} alt="card brand" />
-								<p>**** {product.charge.payment_method_details.card.last4}</p>
-								<p>Exp. {product?.charge.payment_method_details.card.exp_month}
-									/ {product?.charge.payment_method_details.card.exp_year.toString().slice(-2)}</p>
-								<p>{product.customer.firstName.toUpperCase() + " " + product.customer.lastName.toUpperCase()}</p>
+								<img className='order-details-card-brand' src={getCardImage(product.charge.source.brand)} alt="card brand" />
+								<p style={{ width: '74px' }}>**** {product.charge.payment_method_details.card.last4}</p>
+								<p style={{ width: '74px' }}>
+									Exp.{product?.charge.payment_method_details.card.exp_month}
+									/{product?.charge.payment_method_details.card.exp_year.toString().slice(-2)}
+								</p>
+								<p>{product.customer.firstName + " " + product.customer.lastName}</p>
 							</IonCol>
 						</IonRow>
+
 						<div className='order-details-value-line' style={{ backgroundColor: '#707070', height: '1px' }}></div>
+
 						<IonRow style={{ marginBottom: '14px' }}>
 							<IonCol size='12' className='order-details-summary-title'>BILLING ADDRESS</IonCol>
 							<IonCol size='12' className='order-details-general-billing'>{product.shippingAddress.address1}</IonCol>

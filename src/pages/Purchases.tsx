@@ -5,6 +5,7 @@ import { useHistory, } from 'react-router'
 import Search from '../components/Search'
 import { UserService } from '../services/UserService'
 import { FullOrder, OrdersResponse } from '../models'
+import { getCardImage } from '../utils'
 
 
 
@@ -97,7 +98,9 @@ const Purchases: React.FC = () => {
 							</div>
 							<div className="purchase-item-order-payment">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }} >PAYMENT METHOD</p>
-								<p style={{ textAlign: 'center' }} >{product.charge.payment_method_details.card.brand}</p>
+								<img className='order-details-card-brand' src={getCardImage(product.charge.source.brand)} alt="card brand" />
+
+								{/* <p style={{ textAlign: 'center' }} >{product.charge.payment_method_details.card.brand}</p> */}
 							</div>
 							<div className="purchase-item-order-status">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }}>STATUS</p>
