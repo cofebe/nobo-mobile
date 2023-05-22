@@ -283,7 +283,7 @@ const AccountSettings: React.FC = () => {
 					<div className="acc-password-change-input">
 						<Input
 							errorMessage={wrongPassword == true ? 'Incorrect password' : ''}
-							type="text"
+							type="password"
 							value={currentPassword}
 							className={`nobo-input `}
 							placeholder="CURRENT PASSWORD"
@@ -292,7 +292,7 @@ const AccountSettings: React.FC = () => {
 					</div>
 					<div className="acc-password-change-input">
 						<Input
-							type="text"
+							type="password"
 							value={newPassword}
 							className={`nobo-input `}
 							placeholder="NEW PASSWORD"
@@ -303,7 +303,7 @@ const AccountSettings: React.FC = () => {
 					<div className="acc-password-change-input" >
 						<Input
 							errorMessage={newPassword !== comfirmPassword ? 'password mismatch' : ''}
-							type="text"
+							type="password"
 							value={comfirmPassword}
 							className={`nobo-input `}
 							placeholder="COMFIRM PASSWORD"

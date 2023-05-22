@@ -5,7 +5,6 @@ import { useHistory, useParams } from 'react-router'
 import { UserService } from '../services/UserService'
 import { FullOrder, User } from '../models'
 import { getCardImage } from '../utils'
-import CreateConversationModal from '../components/CreateConversationModal'
 
 
 
@@ -22,7 +21,7 @@ const SingleOrder: React.FC = () => {
 	const [productsData, setProductData] = useState<FullOrder[]>([])
 	const [inputValue, setInputValue] = useState('')
 	const [following, setFollowing] = useState(false)
-
+const [showItem, setShowItem] = useState(false)
 
 
 	useIonViewWillEnter(() => {
@@ -104,7 +103,7 @@ const SingleOrder: React.FC = () => {
 		product.products[0]?.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)
 	);
 
-
+	console.log(filteredProduct)
 	return (
 		<IonPage className='order-details-item-main-container'>
 			<IonHeader className="order-details-item-header">
@@ -147,8 +146,8 @@ const SingleOrder: React.FC = () => {
 							<div className="order-details-item-order-date">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }}>ORDER DATE</p>
 								<p style={{ textAlign: 'center' }}>
-									{new Date(product.updatedAt).toDateString().slice(0-11)}
-									</p>
+									{new Date(product.updatedAt).toDateString().slice(0 - 11)}
+								</p>
 							</div>
 							<div className="order-details-item-order-num">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }}>ORDER NO.</p>
@@ -203,10 +202,41 @@ const SingleOrder: React.FC = () => {
 										followVendor(product.fromVendors[0])
 									}}
 								>{following ? 'FOLLOWING' : 'FOLLOW SELLER'}</IonButton>
+							<div style={{fontSize:'12px',  }} onClick={()=>setShowItem(!showItem)}>{showItem ? 'HIDE' : 'SHOW'}</div>
 							</IonCol>
 						</IonRow>
-						<div className='order-details-value-line' style={{ backgroundColor: '#707070', height: '1px' }}></div>
-						<IonRow>
+
+						<IonRow className={ showItem ? 'order-item-info-container': 'order-item-info-container-hide'}>
+							<div className='order-item-img-container'>
+								<img src={`https://staging.thenobo.com/${product.products[0].images[0]?.url}`} alt={product.products[0].name} />
+							</div>
+							<IonCol size='12' className='order-item-year-purchsed'>
+								<p>{product.products[0].attributes[0].id.toUpperCase()}</p>
+								<p>{product.products[0].attributes[0].value}</p>
+							</IonCol>
+
+							<IonCol size='12' className='order-item-year-purchsed'>
+								<p>{product.products[0].attributes[1].id.toUpperCase()}</p>
+								<p>{product.products[0].attributes[1].value}</p>
+							</IonCol>
+
+							<IonCol size='12' className='order-item-year-purchsed'>
+								<p>{product.products[0].attributes[2].id.toUpperCase()}</p>
+								<p>{product.products[0].attributes[2].value}</p>
+							</IonCol>
+							<IonCol size='12' className='order-item-year-purchsed'>
+								<p>{product.products[0].attributes[3].id.toUpperCase()}</p>
+								<p>{product.products[0].attributes[3].value}</p>
+							</IonCol>
+							<IonCol size='12' className='order-item-year-purchsed'>
+								<p>{product.products[0].attributes[4].id.toUpperCase()}</p>
+								<p>{product.products[0].attributes[4].value}</p>
+							</IonCol>
+							<IonCol size='12' className='order-item-year-purchsed'>
+								<p>{product.products[0].attributes[5].id.toUpperCase()}</p>
+								<p>{product.products[0].attributes[5].value}</p>
+							</IonCol>
+
 							<IonCol size='12' className='order-details-summary-title'>ORDER SUMMARY</IonCol>
 						</IonRow>
 						<IonRow className='order-details-general-class'>

@@ -9,7 +9,6 @@
 
 			.order-details-item-title {
 				height: 90px;
-				// background-color: teal;
 				position: relative;
 				font-size: 15px;
 				font-weight: 600;
@@ -376,8 +375,33 @@
 			color: #000000;
 
 		}
+		.order-item-info-container-hide{
+			display: none;
+			transition: opacity 200ms, display 200ms;
+			opacity: 0;
+		}
+		.order-item-info-container{
+display: block;
+opacity: 1;
+		.order-item-img-container{
+			background-color: #D6980E;
+			padding: 3px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 
 
+		}
+
+		.order-item-year-purchsed{
+			// background-color: teal;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			height: 35px;
+			border-bottom: 1px solid #707070;
+		}
+	}
 
 
 
