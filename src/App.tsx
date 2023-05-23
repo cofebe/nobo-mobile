@@ -12,10 +12,6 @@ import { loadingStore, LoadingState } from './loading-store';
 import Home from './Home';
 import Splash from './pages/Splash';
 import Login from './pages/Login';
-// import SignUp from './pages/SignUpOld';
-import Forgot from './pages/Forgot';
-import ForgotReset from './pages/ForgotReset';
-import Roles from './pages/Roles';
 import Chat from './pages/Chat';
 import GetStarted from './pages/GetStarted';
 import ShoppingCart from './pages/ShoppingCart';
@@ -27,24 +23,28 @@ import CheckoutShipping from './pages/CheckoutShipping';
 import CheckoutPayment from './pages/CheckoutPayment';
 import CheckoutSummary from './pages/CheckoutSummary';
 import CheckoutComplete from './pages/CheckoutComplete';
-import SignUpAthlete from './pages/SignUpAthlete';
-import FilterSearch from './pages/FilterSearch';
-import ContactUs from './pages/ContactUs';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsAndConditions from './pages/TermsAndConditions';
 import Settings from './pages/Settings';
 import SettingsShipping from './pages/SettingsShipping';
 import SettingsPayment from './pages/SettingsPayment';
-import ManageSubscription from './pages/ManageSubscription';
-import PrimarySport from './pages/PrimarySport';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
 import PostDetail from './pages/PostDetail';
 import ListItem from './pages/ListItem';
 import ListItemCategory from './pages/ListItemCategory';
 import ListItemImage from './pages/ListItemImage';
 import ListItemProduct from './pages/ListItemProduct';
-import SignUp1 from './pages/SignUp1';
-import SignUp2 from './pages/SignUp2';
+// import SignUp from './pages/SignUpOld';
+//import Forgot from './pages/Forgot';
+//import ForgotReset from './pages/ForgotReset';
+//import Roles from './pages/Roles';
+//import SignUpAthlete from './pages/SignUpAthlete';
+//import FilterSearch from './pages/FilterSearch';
+//import ContactUs from './pages/ContactUs';
+//import PrivacyPolicy from './pages/PrivacyPolicy';
+//import TermsAndConditions from './pages/TermsAndConditions';
+//import ManageSubscription from './pages/ManageSubscription';
+//import PrimarySport from './pages/PrimarySport';
+//import SignUp1 from './pages/SignUp1';
+//import SignUp2 from './pages/SignUp2';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -221,6 +221,7 @@ const App: React.FC = () => {
 
             {/* URP */}
 
+            {/*
             <Route path="/signup1" exact={true}>
               <SignUp1 />
             </Route>
@@ -257,6 +258,7 @@ const App: React.FC = () => {
             <Route path="/primary-sport" exact={true}>
               <PrimarySport />
             </Route>
+            */}
           </IonRouterOutlet>
         </IonReactRouter>
         {showLoading ? <HorizontalLineSpinner /> : ''}

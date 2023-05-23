@@ -194,6 +194,27 @@ export interface Product {
   trade: { [key: string]: string[] };
 }
 
+export interface CreateProductRequest {
+  attributes: {
+    id: string;
+    value: string | string[];
+  }[];
+  images: {
+    url: string;
+    originalName: string;
+  }[];
+  action: string;
+  name: string;
+  brand: string;
+  description: string;
+  receipt: string;
+  price: number;
+  retailPrice: number;
+  category: string;
+  parentCategory: string;
+  potentialTradeItems: any[];
+}
+
 export interface ProductCategory {
   parent: string;
   _id: string;
@@ -431,6 +452,10 @@ export interface ItemAttributes {
   visible: string[] | string;
   hideIf?: ItemHideIf;
   showIf?: ItemShowIf;
+}
+
+export interface ItemAttributesWithValues extends ItemAttributes {
+  value: string;
 }
 
 export interface ItemHideIf {
