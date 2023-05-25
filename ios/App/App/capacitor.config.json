@@ -1,15 +1,1 @@
-{
-	"appId": "com.urp.urp",
-	"appName": "URP+",
-	"webDir": "build",
-	"bundledWebRuntime": false,
-	"plugins": {
-		"PushNotifications": {
-			"presentationOptions": [
-				"badge",
-				"sound",
-				"alert"
-			]
-		}
-	}
-}
+{}

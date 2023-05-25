@@ -77,7 +77,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/trades');
+            //history.push('/settings/trades');
           }}
         >
           My Trades
@@ -86,7 +86,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/purchases');
+            //history.push('/settings/purchases');
           }}
         >
           My Purchases
@@ -95,7 +95,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/sales');
+            //history.push('/settings/sales');
           }}
         >
           My Sales
@@ -104,7 +104,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/offers');
+            //history.push('/settings/offers');
           }}
         >
           My Offers
@@ -114,7 +114,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/returns');
+            //history.push('/settings/returns');
           }}
         >
           My Returns
@@ -123,7 +123,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/withdraw');
+            //history.push('/settings/withdraw');
           }}
         >
           Withdrawal Requests
@@ -132,7 +132,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/savings');
+            //history.push('/settings/savings');
           }}
         >
           Savings &amp; Sustainability
