@@ -156,6 +156,7 @@ const AccountSettings: React.FC = () => {
 				</IonRow>
 
 
+					<div style={{marginLeft:'10px', marginRight:'10px'}}>
 				<IonRow className="acc-settings-input-box" >
 					<IonCol sizeXs='12' sizeLg='6' className="acc-text-input-box">
 						<p className="acc-text-input-title">FIRST NAME</p>
@@ -214,6 +215,7 @@ const AccountSettings: React.FC = () => {
 						<img height={15} src="assets/images/account-change-password.png" alt="" />
 					</IonCol>
 				</IonRow>
+					</div>
 				<IonRow style={{ width: '350px', margin: 'auto' }}>
 					<IonCol size='12' className="acc-experience-title">EXPERIENCE</IonCol>
 				</IonRow>
