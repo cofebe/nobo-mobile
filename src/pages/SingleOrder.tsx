@@ -5,6 +5,7 @@ import { useHistory, useParams } from 'react-router'
 import { UserService } from '../services/UserService'
 import { FullOrder, User } from '../models'
 import { getCardImage } from '../utils'
+import SendMessageModal from '../components/SendMessageModal'
 
 
 
@@ -14,18 +15,30 @@ import { getCardImage } from '../utils'
 
 const SingleOrder: React.FC = () => {
 	const userService = new UserService()
-	const params = useParams()
-	const userId: any = params
+	const params: any = useParams()
 
 	const history = useHistory()
 	const [productsData, setProductData] = useState<FullOrder[]>([])
 	const [inputValue, setInputValue] = useState('')
 	const [following, setFollowing] = useState(false)
-const [showItem, setShowItem] = useState(false)
+	const [showItem, setShowItem] = useState(false)
+	const tooltipModal = useRef<HTMLIonModalElement>(null);
+	const offerTradeModal = useRef<HTMLIonModalElement>(null);
+	const offerModal = useRef<HTMLIonModalElement>(null);
+	const sendMessageModal = useRef<HTMLIonModalElement>(null);
+	const [data, setData] = useState('')
 
+
+
+	function message() {
+		console.log('sending message...')
+		console.log('orderId', params.id)
+		console.log('productId', data)
+		sendMessageModal.current?.present();
+	}
 
 	useIonViewWillEnter(() => {
-		userService.getOrder(userId.id)
+		userService.getOrder(params.id)
 			.then((products: FullOrder) => {
 				if (products) {
 					setProductData([products])
@@ -81,11 +94,6 @@ const [showItem, setShowItem] = useState(false)
 							console.log(' FollowUser', err);
 						});
 				}
-
-
-
-
-
 			})
 			.catch(error => {
 				console.log('error msg while fetching user profile', error);
@@ -103,7 +111,7 @@ const [showItem, setShowItem] = useState(false)
 		product.products[0]?.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)
 	);
 
-	console.log(filteredProduct)
+	console.log(productsData.map((p) => p))
 	return (
 		<IonPage className='order-details-item-main-container'>
 			<IonHeader className="order-details-item-header">
@@ -139,8 +147,8 @@ const [showItem, setShowItem] = useState(false)
 			<IonContent className='order-details-item-content'>
 
 				{/* PURCHASE-ITEMS-CONTAINER */}
-				{filteredProduct?.map((product: FullOrder) => (
-					<IonRow key={product._id} className="order-details-item-container">
+				{productsData.map((product: any) => (
+					<IonRow key={product.uniqueNumber} className="order-details-item-container">
 
 						<div className="order-details-item-info">
 							<div className="order-details-item-order-date">
@@ -155,89 +163,68 @@ const [showItem, setShowItem] = useState(false)
 							</div>
 							<div className="order-details-item-order-payment">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }} >PAYMENT METHOD</p>
-								{/* <p style={{ textAlign: 'center' }} >{product.charge.payment_method_details.card.brand}</p> */}
 								<img className='order-details-card-brand' src={getCardImage(product.charge.source.brand)} alt="card brand" />
 
 							</div>
-							<div className="order-details-item-order-status">
+							{/* <div className="order-details-item-order-status">
 								<p style={{ color: '#ACACAC', textAlign: 'center' }}>STATUS</p>
 								<p style={{ color: '#42D60E', textAlign: 'center' }}>{product.status}</p>
-							</div>
+							</div> */}
 						</div>
 
 
+						{product.products.map((singleProduct: any) => (
+							<IonRow className="order-details-item">
+								<IonCol className='order-details-vendor-container' size='12'>
+									<p className='order-details-purchased-from'>Purchased From</p>
+									<p className='order-details-vendor-name'>{singleProduct.vendor.displayName}</p>
+								</IonCol>
+								<IonCol size='12' className='order-details-img-props'>
+									<img
+										className='order-details-item-img'
+										height={68}
+										width={68}
+										src={singleProduct.images[0]?.url.length < 60 ? `https://staging.thenobo.com/${singleProduct.images[0]?.url}`
+											: `${singleProduct.images[0]?.url}`} alt={singleProduct.name}
+									/>
+									<div className='order-details-item-info'>
+										<p className='order-details-brand'>{singleProduct.brand}</p>
+										<p className='order-details-name'>{singleProduct.name}</p>
+										<p className='order-details-price'>{currencyFormat.format(singleProduct.price)}</p>
+									</div>
+									<div className='order-details-showmore'>
+										<p className='order-details-text' style={{}}>
+											show more
+										</p>
+									</div>
 
-						<div className="order-details-item">
-							<div className='order-details-item-img-container'>
-								<img
-									className='order-details-item-img'
-									src={`https://staging.thenobo.com/${product.products[0].images[0]?.url}`} alt="img"
-								/>
-							</div>
-							<div className='order-details-item-props'>
-								<p className="order-details-item-name1">{product.products[0].brand}</p>
-								<p className="order-details-item-name">{product.products[0].name}</p>
-								<p className="order-details-item-src">
-									purchased from <span style={{ color: '#D6980E' }}>@{product.products[0]?.vendor.displayName}</span>
+								</IonCol>
+								<IonCol className='order-details-item-msg-flw'>
+									<IonButton size='small'
+										onClick={
+											() => {
+												 message()
+												 setData(singleProduct._id)
+												}
+										}
+									>MESSAGE SELLER</IonButton>
+									<IonButton size='small'
+										onClick={(e) => {
+											e.preventDefault()
+											e.stopPropagation()
+											followVendor(singleProduct.fromVendors)
+										}}
+									>{following ? 'FOLLOWING' : 'FOLLOW SELLER'}</IonButton>
 
-								</p>
-								{/* <p className="order-details-item-src">
-									purchased from <span style={{ color: '#D6980E' }}>@{product.products[0]?.shipmentInfo.from_address.name.split(" ")[0].toLocaleLowerCase()}</span>
+								</IonCol>
+							</IonRow>
+						))}
 
-								</p> */}
-								<p className="order-details-item-price">{currencyFormat.format(product.products[0].price)}</p>
-							</div>
-							<div className='order-details-item-view-container'>
+						<div className='order-details-value-line'></div>
 
-							</div>
-						</div>
-						<IonRow>
-
-							<IonCol className='order-details-item-msg-flw'>
-								<IonButton size='small'>MESSAGE SELLER</IonButton>
-								<IonButton size='small'
-									onClick={(e) => {
-										e.preventDefault()
-										e.stopPropagation()
-										followVendor(product.fromVendors[0])
-									}}
-								>{following ? 'FOLLOWING' : 'FOLLOW SELLER'}</IonButton>
-							<div style={{fontSize:'12px',  }} onClick={()=>setShowItem(!showItem)}>{showItem ? 'HIDE' : 'SHOW'}</div>
-							</IonCol>
-						</IonRow>
-
-						<IonRow className={ showItem ? 'order-item-info-container': 'order-item-info-container-hide'}>
-							<div className='order-item-img-container'>
-								<img src={`https://staging.thenobo.com/${product.products[0].images[0]?.url}`} alt={product.products[0].name} />
-							</div>
-							<IonCol size='12' className='order-item-year-purchsed'>
-								<p>{product.products[0].attributes[0].id.toUpperCase()}</p>
-								<p>{product.products[0].attributes[0].value}</p>
-							</IonCol>
-
-							<IonCol size='12' className='order-item-year-purchsed'>
-								<p>{product.products[0].attributes[1].id.toUpperCase()}</p>
-								<p>{product.products[0].attributes[1].value}</p>
-							</IonCol>
-
-							<IonCol size='12' className='order-item-year-purchsed'>
-								<p>{product.products[0].attributes[2].id.toUpperCase()}</p>
-								<p>{product.products[0].attributes[2].value}</p>
-							</IonCol>
-							<IonCol size='12' className='order-item-year-purchsed'>
-								<p>{product.products[0].attributes[3].id.toUpperCase()}</p>
-								<p>{product.products[0].attributes[3].value}</p>
-							</IonCol>
-							<IonCol size='12' className='order-item-year-purchsed'>
-								<p>{product.products[0].attributes[4].id.toUpperCase()}</p>
-								<p>{product.products[0].attributes[4].value}</p>
-							</IonCol>
-							<IonCol size='12' className='order-item-year-purchsed'>
-								<p>{product.products[0].attributes[5].id.toUpperCase()}</p>
-								<p>{product.products[0].attributes[5].value}</p>
-							</IonCol>
-
-							<IonCol size='12' className='order-details-summary-title'>ORDER SUMMARY</IonCol>
+						<div style={{marginLeft:'20px', marginRight:'20px'}}>
+						<IonRow className='order-details-subtotal'>
+							<IonCol className='order-details-subtotal-title' size='12'>ORDER SUMMARY</IonCol>
 						</IonRow>
 						<IonRow className='order-details-general-class'>
 							<IonCol>ORDER SUBTOTAL</IonCol>
@@ -254,22 +241,25 @@ const [showItem, setShowItem] = useState(false)
 						<IonRow className='order-details-general-class'>
 							<IonCol >DISCOUNT CODE</IonCol>
 							<IonCol style={{ color: '#D6980E' }} className='order-details-general-col'>
-								{currencyFormat.format(product.products[0].summary.coupon)}
+								{currencyFormat.format(product?.products?.summary?.coupon)}
 							</IonCol>
 						</IonRow>
+						</div>
+						<div className='order-details-value-line2'></div>
 
-						<div className='order-details-value-line' style={{ backgroundColor: '#707070', height: '1px' }}></div>
-
+						<div style={{marginLeft:'20px', marginRight:'20px'}}>
 						<IonRow style={{ color: '#D6980E', fontWeight: 700 }} className='order-details-general-class'>
 							<IonCol >TOTAL</IonCol>
 							<IonCol
 								className='order-details-general-col'>
-								{currencyFormat.format(product.total + product.shipping + product.salesTax - product.products[0].summary.coupon)}
+								{/* {currencyFormat.format(product.total + product.shipping + product.salesTax - product.products.summary.coupon)} */}
 							</IonCol>
 						</IonRow>
+						</div>
 
-						<div className='order-details-value-line' style={{ backgroundColor: '#707070', height: '1px' }}></div>
+						<div className='order-details-value-line'></div>
 
+						<div style={{marginLeft:'20px', marginRight:'20px'}}>
 						<IonRow style={{ marginBottom: '14px' }}>
 							<IonCol size='12' className='order-details-summary-title'>PAYMENT METHOD</IonCol>
 							<IonCol style={{ fontWeight: 500 }} className='order-details-payment-method' size='12' >
@@ -283,7 +273,6 @@ const [showItem, setShowItem] = useState(false)
 							</IonCol>
 						</IonRow>
 
-						<div className='order-details-value-line' style={{ backgroundColor: '#707070', height: '1px' }}></div>
 
 						<IonRow style={{ marginBottom: '14px' }}>
 							<IonCol size='12' className='order-details-summary-title'>BILLING ADDRESS</IonCol>
@@ -293,11 +282,24 @@ const [showItem, setShowItem] = useState(false)
 							<IonCol size='12' className='order-details-general-billing'>{product.shippingAddress.postalCode}</IonCol>
 							<IonCol size='12' className='order-details-general-billing'>{product.shippingAddress.phone}</IonCol>
 						</IonRow>
-					</IonRow>
+						</div>
 
+					</IonRow>
 				))}
 
 			</IonContent>
+			<SendMessageModal
+
+				ref={sendMessageModal}
+				productId={data}
+				orderId={params.id}
+				onCancel={() => {
+					sendMessageModal.current?.dismiss();
+				}}
+				onClose={() => {
+					sendMessageModal.current?.dismiss();
+				}}
+			/>
 		</IonPage>
 	)
 }
