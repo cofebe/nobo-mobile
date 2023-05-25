@@ -47,8 +47,8 @@
 	}
 
 	.order-details-item-content {
-		--padding-start: 20px;
-		--padding-end: 20px;
+		// --padding-start: 20px;
+		// --padding-end: 20px;
 		--padding-bottom: 20px;
 		--background: #FEFCF7;
 
@@ -56,7 +56,7 @@
 
 
 		.order-details-item-container {
-			border-bottom: 1px solid #707070;
+			// border-bottom: 1px solid #707070;
 			display: flex;
 			flex-direction: column;
 
@@ -128,12 +128,141 @@
 
 
 		.order-details-item {
-			// margin-top: 20px;
-			// background-color: purple;
-			height: 120px;
-			display: flex;
-			align-items: center;
-			justify-content: space-evenly;
+			margin-left: 24px;
+			margin-right: 17px;
+			margin-bottom: 14px;
+
+			.order-details-vendor-container {
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+				height: 15px;
+
+				.order-details-purchased-from {
+					height: 15px;
+					width: 100px;
+					font-family: 'Nunito Sans';
+					font-style: normal;
+					font-weight: 600;
+					font-size: 10px;
+					line-height: 150%;
+					display: flex;
+					align-items: center;
+					letter-spacing: 0.05em;
+					color: #000000;
+				}
+
+				.order-details-vendor-name {
+					font-family: 'Nunito Sans';
+					font-style: normal;
+					font-weight: 600;
+					font-size: 10px;
+					line-height: 150%;
+					display: flex;
+					align-items: center;
+					letter-spacing: 0.05em;
+					color: #D6980E;
+				}
+
+
+
+			}
+
+			.order-details-img-props {
+				height: 68px;
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+			}
+
+			.order-details-item-info {
+				position: relative;
+				margin-left: 14px;
+				height: 68px;
+				width: 130px;
+				// display: flex;
+				// align-items: flex-start;
+				// justify-content: center;
+				// flex-direction: column;
+
+				.order-details-name {
+					position: absolute;
+					top: 12px;
+					left: 0px;
+					width: 130px;
+					height: 15px;
+					font-family: 'Nunito Sans';
+					font-style: normal;
+					font-weight: 600;
+					font-size: 10px;
+					line-height: 150%;
+					display: flex;
+					align-items: center;
+					letter-spacing: 0.05em;
+					text-transform: uppercase;
+					color: #000000;
+				}
+
+				.order-details-brand {
+					position: absolute;
+					top: -7px;
+					left: 0px;
+					width: 130px;
+					height: 15px;
+					font-family: 'Nunito Sans';
+					font-style: normal;
+					font-weight: 600;
+					font-size: 10px;
+					line-height: 150%;
+					display: flex;
+					align-items: center;
+					letter-spacing: 0.05em;
+					text-transform: uppercase;
+					color: #000000;
+				}
+
+				.order-details-price {
+					position: absolute;
+					top: 22px;
+					left: 0px;
+					width: 130px;
+					width: 83px;
+					height: 18px;
+					font-family: 'Nunito Sans';
+					font-style: normal;
+					font-weight: 600;
+					font-size: 20px;
+					line-height: 150%;
+					display: flex;
+					align-items: center;
+					letter-spacing: 0.05em;
+					text-transform: uppercase;
+					color: #000000;
+				}
+			}
+
+			.order-details-showmore {
+				position: relative;
+				width: 110px;
+				height: 68px;
+
+
+				.order-details-text {
+					position: absolute;
+					right: 0px;
+					bottom: -12px;
+					font-family: 'Nunito Sans';
+					font-style: normal;
+					font-weight: 600;
+					font-size: 10px;
+					line-height: 150%;
+					letter-spacing: 0.05em;
+					text-decoration-line: underline;
+					text-transform: uppercase;
+					color: #D6980E;
+				}
+
+			}
 
 			.order-details-item-img-container {
 				display: flex;
@@ -145,8 +274,9 @@
 				background-position: 50% 50%;
 				object-fit: cover;
 				border-radius: 10px;
-				.order-details-item-img{
-				border-radius: 10px;
+
+				.order-details-item-img {
+					border-radius: 10px;
 
 				}
 
@@ -236,11 +366,32 @@
 
 
 		.order-details-item-msg-flw {
+			margin-top: 10px;
 			margin-bottom: 2px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			gap: 1rem;
+
+			.order-item-arrow-box {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				// transition: all 400ms ease-in;
+				transition: all 200ms ease-out;
+			}
+
+			.order-item-arrow-box2 {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				rotate: -90deg;
+				transition: all 200ms ease-out;
+
+			}
+
+
+
 		}
 
 
@@ -270,16 +421,45 @@
 				margin-top: 14px;
 			}
 
-			.order-details-value-line {
-				border-bottom: 1px solid #707070;
-				height: 10px;
-				width: 335px;
-				background-color: #D6980E;
-			}
+
 
 
 		}
 
+		.order-details-value-line {
+			border-bottom: 1px solid #707070;
+			height: 10px;
+			width: 100%;
+			margin-bottom: 5px;
+		}
+
+		.order-details-value-line2 {
+			border-bottom: 1px solid #707070;
+			height: 10px;
+			width: 87%;
+			margin: auto;
+			margin-bottom: 5px;
+		}
+
+		.order-details-subtotal {
+
+			.order-details-subtotal-title {
+				font-family: 'Nunito Sans';
+				font-style: normal;
+				font-weight: 600;
+				font-size: 15px;
+				line-height: 150%;
+				/* identical to box height, or 22px */
+
+				display: flex;
+				align-items: center;
+				letter-spacing: 0.05em;
+				text-transform: uppercase;
+
+				color: #000000;
+
+			}
+		}
 
 		.order-details-total-container {
 			// background-color: #D6980E;
@@ -375,33 +555,46 @@
 			color: #000000;
 
 		}
-		.order-item-info-container-hide{
+
+		.order-item-info-container-hide {
 			display: none;
-			transition: opacity 200ms, display 200ms;
-			opacity: 0;
-		}
-		.order-item-info-container{
-display: block;
-opacity: 1;
-		.order-item-img-container{
-			background-color: #D6980E;
-			padding: 3px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-
-
 		}
 
-		.order-item-year-purchsed{
-			// background-color: teal;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			height: 35px;
-			border-bottom: 1px solid #707070;
+		.order-item-info-container {
+			display: block;
+			animation: fadeIn .1s;
+
+			@keyframes fadeIn {
+				from {
+					transform: scaleX(0);
+
+				}
+
+				to {
+					transform: scaleX(1);
+				}
+			}
+
+			.order-item-img-container {
+				background-color: #D6980E;
+				padding: 3px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+
+			}
+
+
+			.order-item-year-purchsed {
+				// background-color: teal;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				height: 35px;
+				border-bottom: 1px solid #707070;
+			}
 		}
-	}
 
 
 
