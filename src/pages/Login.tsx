@@ -33,6 +33,7 @@ const Login: React.FC = () => {
     userService
       .login(email, password)
       .then((user: User) => {
+        console.log('user', user);
         setTimeout(() => {
           loadingStore.decrement('Login:timeout');
           history.push(`/home/explore/${user.experiencePreferences}/explore`);

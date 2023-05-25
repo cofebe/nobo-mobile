@@ -50,7 +50,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
   const authService = new AuthService();
   const feedService = new FeedService();
   const reportService = new ReportService();
-  console.log('Post Detail: ', message);
+  //console.log('Post Detail: ', message);
   // const [commentCount, setCommentCount] = useState<number>(
   //   message.comment_count || 0
   // );

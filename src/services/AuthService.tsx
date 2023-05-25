@@ -43,8 +43,7 @@ export class AuthService {
     }
     //console.log('getUserData: ', user);
 
-    if (user) return user;
-    return '';
+    return user ? user : '';
   }
 
   setUserData(data: any) {

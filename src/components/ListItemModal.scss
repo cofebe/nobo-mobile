@@ -1,5 +1,5 @@
 .list-item-container {
-  --height: 160px;
+  --height: calc(var(--ion-safe-area-bottom, 0) + 160px);
   --backdrop-opacity: 0.1;
   align-items: end;
 
@@ -26,6 +26,8 @@
   }
 
   ion-header {
+    padding-top: 0;
+
     ion-toolbar {
       --background: white;
       --padding-top: 0;
