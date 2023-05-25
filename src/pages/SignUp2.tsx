@@ -1,183 +1,162 @@
 import {
-  IonButton,
-  IonPage,
-  IonRow,
-  IonCol,
-  IonGrid,
-  useIonViewWillEnter,
-  IonLabel,
+	IonPage,
+	IonRow,
+	IonCol,
+	IonGrid,
+	useIonViewWillEnter,
+	IonLabel,
+	IonContent,
 } from '@ionic/react';
-import { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { UserService } from '../services/UserService';
 import { SignUpType, User } from '../models';
-import { loadingStore } from '../loading-store';
 import Input from '../components/Input';
 import './SignUp2.scss';
 import Button from '../components/Button';
 
 const SignUp2 = () => {
-  const history = useHistory();
-  const userService = new UserService();
-  const [error, setError] = useState<boolean>(false);
+	const history = useHistory();
+	const userService = new UserService();
+	const [error, setError] = useState<boolean>(false);
 
-  useIonViewWillEnter(() => {
-    setError(false);
-  });
+	useIonViewWillEnter(() => {
+		setError(false);
+	});
 
-  const state2: any = history.location.state;
+	const state2: any = history.location.state;
+	console.log(state2);
+	const [person, setPerson] = useState<SignUpType>({
+		firstName: state2?.firstName,
+		lastName: state2?.lastName,
+		userName: '',
+		email: state2?.email,
+		password: '',
+		comfirmPassword: '',
+	});
 
-  const [person, setPerson] = useState<SignUpType>({
-    firstName: state2?.firstName,
-    lastName: state2?.lastName,
-    userName: '',
-    email: state2?.email,
-    password: '',
-    comfirmPassword: '',
-  });
+	const signup = () => {
+		if (person.password !== person.comfirmPassword) return;
+		userService
+			.signup(person)
+			.then((user: User) => {
+				if (user) {
+					history.replace('/experience');
+				} else {
+					setError(true);
+				}
+			})
+			.catch((err: any) => {
+				console.log('SignUp error', err);
+				setError(true);
+			});
+	};
 
-  const signup = () => {
-    loadingStore.increment('Signup:timeout');
+	const validate = () => {
+		if (
+			person.userName.length < 3 ||
+			person.password.length < 6 ||
+			person.comfirmPassword.length < 6
+		) {
+			return true;
+		} else {
+			return false;
+		}
+	};
 
-    userService
-      .signup(person)
-      .then(user => {
-        console.log('loging the user ', user);
-        loadingStore.decrement('SignUp:timeout');
-        if (user?.success) {
-          history.replace(`/profile`);
-        } else if (user?.displayName === 'exists') {
-          setError(true);
-        }
-      })
-      .catch((err: any) => {
-        loadingStore.decrement('SignUp:timeout');
-        console.log('signup error', err);
-        setError(true);
-      });
-  };
+	return (
+		<IonPage className="signup-container">
+			<IonContent className="signup-ion-content">
+				<div>
+					<img
+						style={{ marginLeft: '5%', marginTop: '13%' }}
+						onClick={() => {
+							history.goBack();
+						}}
+						height={40}
+						src="assets/images/nobo-back-icon.png"
+						alt="logo"
+					/>
+				</div>
+				<IonRow>
+					<IonCol class="ion-justify-content-center" style={{ display: 'flex' }}>
+						<img height={60} src="assets/images/nobo-logo-white.png" alt="logo" />
+					</IonCol>
+				</IonRow>
 
-  const validate = () => {
-    if (
-      person.userName.length < 3 ||
-      person.password.length < 6 ||
-      person.comfirmPassword.length < 6 ||
-      person.password !== person.comfirmPassword
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+				<IonRow>
+					<IonCol className="signup-title">GET REGISTERED</IonCol>
+				</IonRow>
+				<IonGrid className="form-grid" style={{ marginTop: '150px' }}>
+					<IonRow style={{ marginBottom: '-20px' }} >
+						<IonCol size='12' >
+							<Input
+								errorMessage={error ? 'Username already in use' : ''}
+								invalid={error}
+								value={person.userName}
+								className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
+								placeholder="USERNAME"
+								onChange={val => {
+									setPerson({ ...person, userName: val });
+								}}
+							/>
+						</IonCol>
+					</IonRow>
+					<IonRow >
+						<IonCol size='12' >
+							<IonLabel className="signup-privacy-info">
+								For privacy concerns, your username cannot be your email, it will be displayed in your style
+								feed, account selection, and reviews
+							</IonLabel>
+						</IonCol>
+					</IonRow>
 
-  return (
-    <IonPage className="main-container">
-      <div className="background-image">
-        <IonRow className="icon-container">
-          <IonCol style={{ flex: 1, marginLeft: '20px' }} size="2">
-            <div
-              onClick={() => {
-                history.goBack();
-              }}
-            >
-              <img height={40} src="assets/images/nobo-back-icon.png" alt="logo" />
-            </div>
-          </IonCol>
-          <IonCol className="nobo-logo-container">
-            <img height={70} src="assets/images/nobo-logo-white.png" alt="logo" />
-          </IonCol>
-          <IonRow className="get-registered-container">
-            <IonCol className="get-registered">GET REGISTERED</IonCol>
-          </IonRow>
-        </IonRow>
-        <IonGrid className="form-grid">
-          <IonRow>
-            <IonCol>
-              <Input
-                invalid={error}
-                value={person.userName}
-                className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
-                placeholder="USERNAME"
-                onChange={val => {
-                  setPerson({ ...person, userName: val });
-                }}
-              />
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol>
-              <IonLabel className="info">
-                For privacy concerns, your username cannot be your email, it will be displayed in
-                your style feed, account selection, and reviews
-              </IonLabel>
-            </IonCol>
-          </IonRow>
+					<IonRow >
+						<IonCol size='12'>
+							<Input
+								type="password"
+								value={person.password}
+								className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
+								placeholder="PASSWORD"
+								onChange={val => {
+									setPerson({ ...person, password: val });
+								}}
+							/>
+						</IonCol>
+					</IonRow>
+					<IonRow >
+						<IonCol size='12'>
+							<Input
+								errorMessage={person.password !== person.comfirmPassword ? 'password mismatch' : ''}
+								type="password"
+								value={person.comfirmPassword}
+								className={`nobo-input ${person.password !== person.comfirmPassword ? 'invalid-text-color' : ''
+									}`}
+								placeholder="COMFIRM PASSWORD"
+								onChange={val => {
+									setPerson({ ...person, comfirmPassword: val });
+								}}
+							></Input>
+						</IonCol>
+					</IonRow>
+				</IonGrid>
 
-          <IonRow>
-            <IonCol>
-              <Input
-                invalid={error}
-                value={person.password}
-                className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
-                placeholder="PASSWORD"
-                onChange={val => {
-                  setPerson({ ...person, password: val });
-                }}
-              />
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol>
-              <Input
-                invalid={error}
-                value={person.comfirmPassword}
-                className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
-                placeholder="COMFIRM PASSWORD"
-                errorMessage={error ? 'Username already in use' : ''}
-                onChange={val => {
-                  setPerson({ ...person, comfirmPassword: val });
-                }}
-              ></Input>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-
-        <IonRow>
-          <IonCol style={{ marginTop: 180 }}>
-            {/* <IonButton
-
-              style={{
-                height: '51px',
-                fontFamily: 'Nunito Sans',
-                fontSize: '20px',
-                fontWeight: '700',
-                lineHeight: '15px',
-                marginTop: 180,
-                letterSpacing: 3
-              }}
-              disabled={validate()}
-              type="submit"
-              expand="block"
-              onClick={() => { signup() }}
-            >
-              REGISTER
-            </IonButton> */}
-
-            <Button
-              onClick={() => {
-                signup();
-              }}
-              label="REGISTER"
-              type="primary"
-              large={true}
-              className=""
-              disabled={validate()}
-            />
-          </IonCol>
-        </IonRow>
-      </div>
-    </IonPage>
-  );
+				<IonRow className='signup-btn-container'>
+					<IonCol >
+						<Button
+							onClick={() => {
+								signup();
+							}}
+							label="REGISTER"
+							type="primary"
+							large={true}
+							disabled={validate()}
+						/>
+					</IonCol>
+				</IonRow>
+			</IonContent>
+		</IonPage>
+	);
 };
 
 export default SignUp2;

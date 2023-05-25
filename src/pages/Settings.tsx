@@ -36,7 +36,8 @@ const Settings: React.FC = () => {
         <div className="content">
           <div
             className="avatar"
-            style={{ backgroundImage: getImageUrl(user?.avatar || '') }}
+            style={{ backgroundImage:`url(${user?.avatar})` }}
+            // style={{ backgroundImage: getImageUrl(user?.avatar || '') }}
           ></div>
           <div className="name">
             {user?.firstName} {user?.lastName}
@@ -85,7 +86,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/purchases');
+            history.push('/settings/purchases');
           }}
         >
           My Purchases

@@ -4,8 +4,10 @@ import { AuthService } from './AuthService';
 import {
   Address,
   AddressRequest,
+  BrandsResponse,
   Conversation,
   CreateShippingAddressResponse,
+  ExperienceResponse,
   FullOrder,
   LoginResponse,
   Notification,
@@ -13,11 +15,13 @@ import {
   OrdersResponse,
   PaymentMethodsResponse,
   ProductsResponse,
+  ProfilPicResponse,
   SignUpResponse,
   SignUpType,
   SuccessResponse,
   TradesResponse,
   User,
+  UserAccData,
 } from '../models';
 
 const API_URL = environment.serverUrl + '/api';
@@ -378,48 +382,109 @@ export class UserService extends BaseService {
     return await super.fetch('GET', `/user/${userId}/insights?age=${age}`);
   }
 
-  // checking if email already exist
-  async checkExistingEmail(email: string) {
-    const res = await fetch(` https://thenobo.com/api/users/exists/${email}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+ // checking if email already exist
+ async checkExistingEmail(email: string) {
+	const res = await fetch(` https://thenobo.com/api/users/exists/${email}`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
 
-    if (res.status === 404) {
-      console.log('404', res.json);
-    }
+	if (res.status === 404) {
+		console.log('404', res.json);
+	}
 
-    return res.json();
-  }
+	return res.json();
+}
 
-  // signing up a user
-  async signup(person: SignUpType) {
-    console.log('the code  reaches service ', person);
-    const res = await fetch(
-      'https://thenobo.com/api/users/register',
+// SIGNUP
+async signup(person: SignUpType): Promise<User> {
+	const response = await super.fetch('POST', '/api/users/register', {
+		firstName: person.firstName,
+		lastName: person.lastName,
+		email: person.email,
+		displayName: person.userName,
+		password: person.password,
+	});
 
-      {
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName: person.firstName,
-          lastName: person.lastName,
-          email: person.email,
-          displayName: person.userName,
-          password: person.password,
-        }),
-      }
-    );
+	const json: SignUpResponse = await response.json();
+	if (json.token) {
+		const authService = new AuthService();
+		authService.setUserToken(json.token);
+		authService.setUserId(json.user._id);
+		authService.setUserDisplayName(json.user.displayName);
+	}
 
-    if (res.status === 404) {
-      console.log('404', res.json);
-    }
+	return json.user;
+}
 
-    return res.json();
-  }
+// EXPERIENCE PREFERENCE
+async experience(experiencePreferences: string) {
+	const response = await super.fetch('POST', '/api/users/me', { experiencePreferences });
+	const json: ExperienceResponse = await response.json();
+	return json.currentUser;
+}
+
+//UPLOAD PROFILE PICTURE
+async uploadProfileImg(imgUrl: any) {
+	const response = await super.fetch('POST', '/api/users/update-avatar', { imgUrl });
+	const json: ProfilPicResponse = await response.json();
+	return json.url;
+}
+
+// GET EXISTING USERS
+async getUsers() {
+	try {
+		const response = await fetch('https://thenobo.com/api/users/q/term/a');
+		return response.json();
+	} catch (error) {
+		console.log('err from userService response', error);
+	}
+}
+
+// FOLLOW A USER
+async followUsers(userId: string): Promise<User> {
+	console.log('res from server ', userId);
+	const response = await super.fetch('POST', '/api/users/follow', { userId });
+	return response.json();
+}
+
+// GET BRANDS
+async getBrands() {
+	const response = await fetch('https://thenobo.com/api/brands/all');
+	const json: BrandsResponse = await response.json();
+	return json.brands;
+}
+
+// SELECTED BRAND
+async selectBrand(brandId: string) {
+console.log("userService sec ", brandId)
+	const response = await super.fetch('POST', '/api/brands/add-favorite', { brandId });
+	return response.json();
+}
+
+//CREATE FIRST POST
+async createPost(userMessage: string) {
+	const response = await super.fetch('POST', '/api/feed/create-item', { userMessage });
+	return response.json();
+}
+//UPDATE USER ACCOUNT INFO
+async updateUserAccount(data: UserAccData) {
+	console.log("userservice", data)
+	const response = await super.fetch('POST', '/api/users/me', {
+		firstName: data.firstName,
+		lastName: data.lastName,
+		displayName: data.displayName,
+		phoneNumber: data.phoneNumber,
+		saleSchedule: [],
+		experiencePreferences: data.experiencePreferences,
+		currentPassword: data.currentPassword,
+		newPassword: data.newPassword
+	});
+	return response.json();
+}
+
+
+
 }
