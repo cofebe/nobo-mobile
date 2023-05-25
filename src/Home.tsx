@@ -219,24 +219,6 @@ const Home: React.FC = () => {
             <Conversations />
           </Route>
 
-          <Route exact path="/home/post-promote/:id">
-            <PromotePost />
-          </Route>
-          <Route exact path="/home/post-detail/:id/likes">
-            <PostDetailLikes />
-          </Route>
-          <Route exact path="/home/post-stats/:id">
-            <PostStats />
-          </Route>
-          <Route exact path="/home/profile-insights/:id">
-            <ProfileInsights />
-          </Route>
-          <Route exact path="/home/edit-athlete">
-            <SignUpAthlete editMode={true} />
-          </Route>
-          <Route exact path="/home/edit-athlete/:id">
-            <SignUpAthlete editMode={true} />
-          </Route>
           <Route path="/home/my-profile" exact={true}>
             <ProfilePage myProfile={true} />
           </Route>
@@ -248,15 +230,6 @@ const Home: React.FC = () => {
           </Route>
           <Route path="/home/roles">
             <Roles />
-          </Route>
-          <Route exact path="/home/connections">
-            <Connections />
-          </Route>
-          <Route exact path="/home/connections/pending">
-            <PendingConnections />
-          </Route>
-          <Route exact path="/home/watchlist">
-            <Watchlist />
           </Route>
           {/* <Route exact path="/home">
             <Redirect to="/home/feed" />

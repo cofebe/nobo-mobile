@@ -223,9 +223,6 @@ const App: React.FC = () => {
             <Route path="/settings/purchases/single-order/:id" exact={true}>
               <SingleOrder />
             </Route>
-
-            {/* URP */}
-
             <Route path="/signup1" exact={true}>
               <SignUp1 />
             </Route>
@@ -247,17 +244,14 @@ const App: React.FC = () => {
             <Route path="/onboarding-post" exact={true}>
               <CreateFirstPost />
             </Route>
+
+            {/* URP */}
+
             <Route path="/forgot" exact={true}>
               <Forgot />
             </Route>
             <Route path="/forgot-reset" exact={true}>
               <ForgotReset />
-            </Route>
-            <Route path="/signup-roles" exact={true}>
-              <Roles />
-            </Route>
-            <Route path="/signup-athlete" exact={true}>
-              <SignUpAthlete />
             </Route>
             <Route path="/contact-us" exact={true}>
               <ContactUs />
@@ -267,15 +261,6 @@ const App: React.FC = () => {
             </Route>
             <Route path="/terms-and-conditions" exact={true}>
               <TermsAndConditions />
-            </Route>
-            <Route path="/manage-subscription" exact={true}>
-              <ManageSubscription />
-            </Route>
-            <Route path="/filter-search" exact={true}>
-              <FilterSearch />
-            </Route>
-            <Route path="/primary-sport" exact={true}>
-              <PrimarySport />
             </Route>
           </IonRouterOutlet>
         </IonReactRouter>
