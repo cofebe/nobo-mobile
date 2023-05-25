@@ -36,7 +36,7 @@ const TradeCloset: React.FC = () => {
     <IonPage className="trade-closet-container">
       <Header title="My Trade Closet" />
       <IonContent className="trade-closet-content">
-        {pendingProductCount && (
+        {pendingProductCount !== 0 && (
           <div
             className="pending-products"
             onClick={e => {

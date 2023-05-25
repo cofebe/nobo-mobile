@@ -101,6 +101,7 @@ const StyleFeed: React.FC = () => {
   }
 
   function loadPosts(pg: number) {
+    console.log('loadPosts', pg);
     if (isLoading) {
       console.warn('Skipping loading page; already loading!');
       return;
@@ -114,11 +115,6 @@ const StyleFeed: React.FC = () => {
     if (!page && atBottomOfFeedListElem) {
       atBottomOfFeedListElem.style.display = 'block';
     }
-
-    let storage: any = window.localStorage.getItem('persistedState');
-    let user = JSON.parse(storage);
-    let state = '';
-    let sport = '';
 
     presentLoading(loadingOptions);
     isLoading = true;
@@ -146,11 +142,17 @@ const StyleFeed: React.FC = () => {
         isLoading = false;
         setIsLoading(isLoading);
         dismissLoading();
+        setTimeout(() => {
+          dismissLoading();
+        }, 500);
       })
       .catch(() => {
         isLoading = false;
         setIsLoading(isLoading);
         dismissLoading();
+        setTimeout(() => {
+          dismissLoading();
+        }, 500);
       });
   }
 

@@ -15,7 +15,6 @@ import Login from './pages/Login';
 // import SignUp from './pages/SignUpOld';
 import Forgot from './pages/Forgot';
 import ForgotReset from './pages/ForgotReset';
-import Roles from './pages/Roles';
 import Chat from './pages/Chat';
 import GetStarted from './pages/GetStarted';
 import ShoppingCart from './pages/ShoppingCart';
@@ -27,16 +26,12 @@ import CheckoutShipping from './pages/CheckoutShipping';
 import CheckoutPayment from './pages/CheckoutPayment';
 import CheckoutSummary from './pages/CheckoutSummary';
 import CheckoutComplete from './pages/CheckoutComplete';
-import SignUpAthlete from './pages/SignUpAthlete';
-import FilterSearch from './pages/FilterSearch';
 import ContactUs from './pages/ContactUs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsAndConditions from './pages/TermsAndConditions';
 import Settings from './pages/Settings';
 import SettingsShipping from './pages/SettingsShipping';
 import SettingsPayment from './pages/SettingsPayment';
-import ManageSubscription from './pages/ManageSubscription';
-import PrimarySport from './pages/PrimarySport';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
 import PostDetail from './pages/PostDetail';
 import ListItem from './pages/ListItem';
@@ -223,9 +218,6 @@ const App: React.FC = () => {
             <Route path="/settings/purchases/single-order/:id" exact={true}>
               <SingleOrder />
             </Route>
-
-            {/* URP */}
-
             <Route path="/signup1" exact={true}>
               <SignUp1 />
             </Route>
@@ -247,17 +239,14 @@ const App: React.FC = () => {
             <Route path="/onboarding-post" exact={true}>
               <CreateFirstPost />
             </Route>
+
+            {/* URP */}
+
             <Route path="/forgot" exact={true}>
               <Forgot />
             </Route>
             <Route path="/forgot-reset" exact={true}>
               <ForgotReset />
-            </Route>
-            <Route path="/signup-roles" exact={true}>
-              <Roles />
-            </Route>
-            <Route path="/signup-athlete" exact={true}>
-              <SignUpAthlete />
             </Route>
             <Route path="/contact-us" exact={true}>
               <ContactUs />
@@ -267,15 +256,6 @@ const App: React.FC = () => {
             </Route>
             <Route path="/terms-and-conditions" exact={true}>
               <TermsAndConditions />
-            </Route>
-            <Route path="/manage-subscription" exact={true}>
-              <ManageSubscription />
-            </Route>
-            <Route path="/filter-search" exact={true}>
-              <FilterSearch />
-            </Route>
-            <Route path="/primary-sport" exact={true}>
-              <PrimarySport />
             </Route>
           </IonRouterOutlet>
         </IonReactRouter>

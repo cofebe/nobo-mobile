@@ -36,7 +36,7 @@ const SellCloset: React.FC = () => {
     <IonPage className="sell-closet-container">
       <Header title="Sell Closet" />
       <IonContent className="sell-closet-content">
-        {pendingProductCount && (
+        {pendingProductCount !== 0 && (
           <div
             className="pending-products"
             onClick={e => {

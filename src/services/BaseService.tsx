@@ -5,7 +5,10 @@ import { loadingStore } from '../loading-store';
 export class BaseService {
   authService: AuthService = new AuthService();
 
-  getHeaders(others: { [key: string]: string } | null | undefined, skipAuth: boolean): { [key: string]: string } {
+  getHeaders(
+    others: { [key: string]: string } | null | undefined,
+    skipAuth: boolean
+  ): { [key: string]: string } {
     const headers: { [key: string]: string } = {};
 
     if (!skipAuth) {
