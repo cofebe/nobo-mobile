@@ -21,7 +21,6 @@ import {
 } from '@ionic/react';
 import { AuthService } from '../services/AuthService';
 import { UserService } from '../services/UserService';
-import { SubscriptionService } from '../services/SubscriptionService';
 import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
 
 import './Profile.scss';
@@ -39,7 +38,6 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
   const history = useHistory();
   const authService = new AuthService();
   const userService = new UserService();
-  let subscriptionService: any;
   let [userId, setUserId] = useState<string>('');
   const [profileURL, setProfileURL] = useState('');
   const [presentLoading, dismissLoading] = useIonLoading();
@@ -47,7 +45,6 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
   const [present] = useIonActionSheet();
   const [presentProfileReportingActionSheet] = useIonActionSheet();
   let [noboProfile, setNoboProfile] = useState<NoboProfile>(emptyProfile);
-  const [userSubscribed, setUserSubscribed] = useState(false);
   const [targetSection, setTargetSection] = useState('Feed');
   const [reviewData, setReviewData] = useState<any[]>([]);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -58,12 +55,6 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
     modalSwitch();
     const onPageLoad = () => {
       loadProfile();
-
-      if (isPlatform('ios') && profile.myProfile) {
-        subscriptionService = new SubscriptionService(new InAppPurchase2());
-        subscriptionService.register();
-        setUserSubscribed(subscriptionService.isSubscribed('com.nobo.athlete.1month'));
-      }
     };
 
     if (document.readyState === 'complete') {
@@ -398,11 +389,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           ></Button>
         )}
         <div className="profile-bubble-container">
-          <img
-            className={`profile-bubble ${userSubscribed && 'profile-bubble-premium-border'}`}
-            src={noboProfile.avatar}
-            alt="avatar"
-          />
+          <img className="profile-bubble" src={noboProfile.avatar} alt="avatar" />
         </div>
         <ProfileSummary profile={noboProfile} openSocialShare={openShare}></ProfileSummary>
 

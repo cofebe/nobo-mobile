@@ -23,7 +23,6 @@ import ExploreListItem from '../components/ExploreListItem';
 import { FeedService } from '../services/FeedService';
 import { ExploreService } from '../services/ExploreService';
 import { UserService } from '../services/UserService';
-import { SubscriptionService } from '../services/SubscriptionService';
 import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
 // import UrpHeader from '../components/NoboHeader';
 import { loadingOptions } from '../util';
@@ -52,10 +51,6 @@ const Feed: React.FC = () => {
     setProfileMessages(profileMessages);
     page = 0;
     setPage(0);
-    if (isPlatform('ios')) {
-      const subscriptionService = new SubscriptionService(new InAppPurchase2());
-      subscriptionService.register();
-    }
     let storage: any = window.localStorage.getItem('persistedState');
     let user = JSON.parse(storage);
     console.log('HomeAthlete User: ', user);

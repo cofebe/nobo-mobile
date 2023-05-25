@@ -15,15 +15,9 @@ import {
   PushNotifications,
   Token,
 } from '@capacitor/push-notifications';
-import { Amplify /*, Auth*/ } from 'aws-amplify';
 import './styles.scss';
 //import Feed from './pages/Feed';
 import StyleFeedPage from './pages/StyleFeed';
-import PostDetail from './pages/PostDetail';
-import PromotePost from './pages/PromotePost';
-import PostDetailLikes from './pages/PostDetailLikes';
-import PostStats from './pages/PostStats';
-import Roles from './pages/Roles';
 import ProfilePage from './pages/Profile';
 import Explore from './pages/Explore';
 import MyCloset from './pages/MyCloset';
@@ -32,24 +26,16 @@ import TradePendingCloset from './pages/TradePendingCloset';
 import SellCloset from './pages/SellCloset';
 import SellPendingCloset from './pages/SellPendingCloset';
 import PostCreate from './pages/PostCreate';
-import Connections from './pages/Connections';
-import PendingConnections from './pages/PendingConnections';
 import Notifications from './pages/Notifications';
 import Conversations from './pages/Conversations';
-import Watchlist from './pages/Watchlist';
-import ProfileInsights from './pages/ProfileInsights';
 import ProductDetail from './pages/ProductDetail';
 import { AuthService } from './services/AuthService';
 import { UserService } from './services/UserService';
-import awsconfig from './aws-exports.js';
-import SignUpAthlete from './pages/SignUpAthlete';
 import { NotificationService } from './services/NotificationService';
 import { User } from './models';
 import ListItemModal from './components/ListItemModal';
 
 import { viewUser } from './util';
-
-Amplify.configure(awsconfig);
 
 const Home: React.FC = () => {
   const history = useHistory();
@@ -227,9 +213,6 @@ const Home: React.FC = () => {
           </Route>
           <Route path="/home/style-feed" exact={true}>
             <StyleFeedPage />
-          </Route>
-          <Route path="/home/roles">
-            <Roles />
           </Route>
           {/* <Route exact path="/home">
             <Redirect to="/home/feed" />
