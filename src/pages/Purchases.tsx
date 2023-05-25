@@ -18,7 +18,11 @@ const Purchases: React.FC = () => {
 	const history = useHistory()
 	const [productsData, setProductData] = useState<OrdersResponse[]>([])
 	const [inputValue, setInputValue] = useState('')
+	const [imageError, setImageError] = useState(false);
 
+	const handleImageError = () => {
+		setImageError(true);
+	};
 
 	useIonViewWillEnter(() => {
 		userService.getOrders()
@@ -26,7 +30,7 @@ const Purchases: React.FC = () => {
 				if (products) {
 					// console.log("product res info ---",products.docs[0]?.products[0]?.attributes.map((att)=>att))
 					setProductData([products])
-					console.log(products)
+					// console.log(products)
 				} else { console.log("something went wrong") }
 			})
 			.catch((err) => { console.log("err info while fetching products ", err) })
@@ -50,6 +54,8 @@ const Purchases: React.FC = () => {
 
 	// console.log(productsData[0]?.docs?.map((pro: any) => pro.products[0]))
 	// console.log(filteredProduct)
+	const newp: any = productsData[0]?.docs.map((p) => p.products.filter((an) => an.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)))
+	console.log('productDat -->', newp)
 	return (
 		<IonPage className='purchase-item-main-container'>
 			<IonHeader className="purchase-item-header">
@@ -84,8 +90,8 @@ const Purchases: React.FC = () => {
 			<IonContent className='purchase-item-content'>
 
 				{/* PURCHASE-ITEMS-CONTAINER */}
-				{filteredProduct?.map((product: FullOrder) => (
-					<div key={product._id} className="purchase-item-container">
+				{productsData[0]?.docs.map((product: FullOrder) => (
+					<IonRow key={product._id} className="purchase-item-container">
 
 						<div className="purchase-item-info">
 							<div className="purchase-item-order-date">
@@ -99,40 +105,45 @@ const Purchases: React.FC = () => {
 							<div className="purchase-item-order-payment">
 								<p className="purchase-item-payment-method" >PAYMENT METHOD</p>
 								<img className='purchase-details-card-brand' src={getCardImage(product.charge.source.brand)} alt="card brand" />
-
-							</div>
-							<div className="purchase-item-order-status">
-								<p style={{ color: '#ACACAC', textAlign: 'center' }}>STATUS</p>
-								<p style={{ color: '#42D60E', textAlign: 'center' }}>{product.status}</p>
 							</div>
 						</div>
 
-						<div className="purchase-item">
-							<div className='purchases-item-img-container'>
-								<img
-									className='purchases-item-img'
-									src={`https://staging.thenobo.com/${product.products[0].images[0]?.url}`} alt="img"
-								/>
-							</div>
-							<div className="purchse-item-props">
-								<p className="purchases-item-name1">{product.products[0].brand}</p>
-								<p className="purchases-item-name">{product.products[0].name}</p>
-								<p className="purchases-item-src">purchased from <span style={{ color: '#D6980E' }}>
-									@{product.products[0]?.vendor.displayName}</span>
-								</p>
-								<p className="purchases-item-price">{currencyFormat.format(product.products[0].price)}</p>
-							</div>
-							<div className="purchase-item-view-container">
-								<p className="purchase-item-view-text"
-									onClick={() => {
-										history.push({ pathname: `/settings/purchases/single-order/${product._id}`, state: product.fromVendors[0] })
-									}}
-								>
-									VIEW DETAILS</p>
-							</div>
+						{product.products.map((singleProduct: any) => (
+							<IonRow className="purchase-item" >
+								<IonCol size='3' className='purchases-item-img-container'>
+									{<img
+										className='purchases-item-img'
+										src={singleProduct.images[0]?.url.length < 60 ? `https://staging.thenobo.com/${singleProduct.images[0]?.url}` : `${singleProduct.images[0]?.url}`} alt={singleProduct.name}
+									/>}
+								</IonCol>
+								<IonCol size='4.5' className="purchse-item-props">
+									<p className="purchases-item-brand">{singleProduct.brand}</p>
+									<p className="purchases-item-name">{singleProduct.name}</p>
+									<p className="purchases-item-price">{currencyFormat.format(singleProduct.price)}</p>
+								</IonCol>
+								<IonCol size='3.7' className='purchases-item-status-container'>
+									<p className='purchases-item-status'>STATUS</p>
+									<p className='purchases-item-status-info'>{product.status}</p>
+									<p className='purchases-item-track'>Track</p>
+								</IonCol>
+							</IonRow>
+						))}
+
+
+						<div
+
+							className="purchase-product-view-container"
+						>
+							<p className="purchase-product-view-text"
+								onClick={() => {
+									history.push({ pathname: `/settings/purchases/single-order/${product._id}`, state: product.fromVendors[0] })
+								}}
+							>
+								VIEW DETAILS</p>
 						</div>
 
-					</div>
+					</IonRow>
+
 
 				))}
 			</IonContent>
