@@ -75,12 +75,15 @@
 			border-radius: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
+			margin-left: 0px;
 		}
 
 		.acc-change-password-box {
 			height: 30px;
 			width: 290px;
-			margin: auto;
+			margin-top: 8px;
+			margin-bottom: 8px;
+			// margin: auto;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;

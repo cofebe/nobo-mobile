@@ -86,7 +86,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/purchases');
+            history.push('/settings/purchases');
           }}
         >
           My Purchases
