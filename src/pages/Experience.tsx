@@ -6,6 +6,7 @@ import { UserService } from '../services/UserService';
 import { User } from '../models';
 import Checkbox from '../components/Checkbox';
 import Button from '../components/Button';
+import HeaderComponent from '../components/HeaderComponent';
 
 const Experience: React.FC = () => {
 	const userService = new UserService();
@@ -42,37 +43,7 @@ const Experience: React.FC = () => {
 	return (
 		<IonPage className="experience-main-container">
 			<IonContent className="experience-ion-content">
-				<IonRow>
-					<IonCol size='12' style={{ height: '110px' }}>
-
-						<img
-							onClick={() => {
-								history.push('/get-started');
-							}}
-							className="experience-back-btn"
-							src="assets/images/arrow-left.svg"
-							alt="logo"
-						/>
-						<div className="experience-nobo-logo">
-
-							<img height={65} src="assets/images/nobo_logo.png" alt="logo" />
-						</div>
-					</IonCol>
-
-				</IonRow>
-				{/* <div className="experience-header">
-					<img
-						onClick={() => {
-							history.push('/get-started');
-						}}
-						className="experience-back-btn"
-						src="assets/images/arrow-left.svg"
-						alt="logo"
-					/>
-
-					<img className="experience-nobo-logo" src="assets/images/nobo_logo.png" alt="logo" />
-				</div> */}
-
+			<HeaderComponent/>
 				<IonRow style={{ marginTop: '50px' }}>
 					<IonCol className="experience-title">CHOOSE YOUR EXPERIENCE</IonCol>
 				</IonRow>
