@@ -9,6 +9,7 @@ import { UserService } from '../services/UserService';
 import Search from '../components/Search';
 import Checkbox from '../components/Checkbox';
 import { Brand } from '../models';
+import HeaderComponent from '../components/HeaderComponent';
 
 const SelectBrands: React.FC = () => {
 	const userService = new UserService();
@@ -74,22 +75,9 @@ const SelectBrands: React.FC = () => {
 	return (
 		<IonPage className="select-brands-main-container">
 			<IonContent className="select-brands-ion-content">
-				<div className="select-brands-header">
-					<img
-						onClick={() => {
-							history.goBack();
-						}}
-						className="select-brands-back-btn"
-						style={{ color: 'black' }}
-						height={23}
-						src="assets/images/arrow-left.svg"
-						alt="logo"
-					/>
+				<HeaderComponent/>
 
-					<img className="select-brands-nobo-logo" src="assets/images/nobo_logo.png" alt="logo" />
-				</div>
-
-				<IonRow>
+				<IonRow style={{marginTop:'50px'}}>
 					<IonCol className="select-brands-title">SELECT BRANDS</IonCol>
 				</IonRow>
 				<IonRow className="select-brands-desc-container">

@@ -41,7 +41,7 @@
 
 	.select-brands-title {
 		margin-top: 24px;
-		font-weight: 600;
+		font-weight: 500;
 		font-size: 20px;
 		text-align: center;
 		font-family: "Baskerville";
@@ -51,28 +51,30 @@
 	.select-brands-desc-container {
 		padding-left: 30px;
 		padding-right: 30px;
+		width: 300px;
+		margin: auto;
+
 	}
 
 	.select-brands-desc {
-		width: 80%;
 		line-height: 18px;
 		font-weight: 400;
-		font-size: 18px;
+		font-size: 12px;
 		color: gray;
-
 		text-align: center;
 	}
 
 	.select-brands-body-container {
 		margin: auto;
-		height: 58vh;
+		margin-bottom: -10px;
+		height: 420px;
 		width: 90%;
 		overflow: scroll;
 	}
 
 	.select-brands-search-container {
 		width: 90%;
-		margin-bottom: 20px;
+		margin-bottom: 15px;
 		margin: auto;
 	}
 
@@ -108,6 +110,7 @@
 	.select-brands-skip-text {
 		text-align: center;
 		color: black;
+		font-size: 12px;
 	}
 
 	.select-brands-btn-container {
@@ -124,7 +127,7 @@
 		align-items: end;
 		margin: auto;
 		width: 350px;
-		margin-bottom: 35px;
+		margin-bottom: 25px;
 		margin-top: 56px;
 	}
 

@@ -45,18 +45,18 @@ const Experience: React.FC = () => {
 				<IonRow>
 					<IonCol size='12' style={{ height: '110px' }}>
 
-					<img
-						onClick={() => {
-							history.push('/get-started');
-						}}
-						className="experience-back-btn"
-						src="assets/images/arrow-left.svg"
-						alt="logo"
-					/>
-					<div className="experience-nobo-logo">
+						<img
+							onClick={() => {
+								history.push('/get-started');
+							}}
+							className="experience-back-btn"
+							src="assets/images/arrow-left.svg"
+							alt="logo"
+						/>
+						<div className="experience-nobo-logo">
 
-					<img  height={65} src="assets/images/nobo_logo.png" alt="logo" />
-					</div>
+							<img height={65} src="assets/images/nobo_logo.png" alt="logo" />
+						</div>
 					</IonCol>
 
 				</IonRow>
@@ -73,13 +73,13 @@ const Experience: React.FC = () => {
 					<img className="experience-nobo-logo" src="assets/images/nobo_logo.png" alt="logo" />
 				</div> */}
 
-				<IonRow style={{marginTop:'50px'}}>
+				<IonRow style={{ marginTop: '50px' }}>
 					<IonCol className="experience-title">CHOOSE YOUR EXPERIENCE</IonCol>
 				</IonRow>
 				<IonRow className="experience-desc-container">
 					<IonCol className="experience-desc">
-						Select the category of clothing you prefer to shop. Don't worry, you can still vieww other
-						experiences later
+						Select the category of clothing you prefer to shop. Don't worry, you can stil view other
+						experiences later.
 					</IonCol>
 				</IonRow>
 
@@ -181,19 +181,23 @@ const Experience: React.FC = () => {
 						</div>
 					</div>
 				</IonGrid>
+				<IonRow >
+					<IonCol size='12'>
+						<div className="experience-btn-container">
+							<Button
+								className="experience-btn"
+								label="NEXT"
+								large
+								onClick={e => {
+									e.preventDefault();
+									handleSubmit();
+								}}
+								disabled={expOptionSelected === ''}
+							/>
+						</div>
+					</IonCol>
+				</IonRow>
 
-				<div className="experience-btn-container">
-					<Button
-						className="experience-btn"
-						label="NEXT"
-						large
-						onClick={e => {
-							e.preventDefault();
-							handleSubmit();
-						}}
-						disabled={expOptionSelected === ''}
-					/>
-				</div>
 			</IonContent>
 		</IonPage>
 	);

@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import 'cropperjs/dist/cropper.css';
 import { UserService } from '../services/UserService';
 import { Cropper } from 'react-cropper';
+import HeaderComponent from '../components/HeaderComponent';
 
 const ProfilePicture: React.FC = () => {
 	const userService = new UserService();
@@ -32,7 +33,7 @@ const ProfilePicture: React.FC = () => {
 				if (res) {
 					console.log(res);
 					history.push('/follow-people');
-				}else{
+				} else {
 					console.log('something went wrong');
 				}
 			})
@@ -109,22 +110,9 @@ const ProfilePicture: React.FC = () => {
 	return (
 		<IonPage id="profile-picture-page" className="profile-picture-main-container">
 			<IonContent className="profile-picture-ion-content">
-				<div className="profile-picture-header">
-					<img
-						onClick={() => {
-							history.push('/experience');
-						}}
-						className="profile-picture-back-btn"
-						style={{ color: 'black' }}
-						height={23}
-						src="assets/images/arrow-left.svg"
-						alt="logo"
-					/>
 
-					<img className="profile-picture-nobo-logo" src="assets/images/nobo_logo.png" alt="logo" />
-				</div>
-
-				<IonRow>
+				<HeaderComponent />
+				<IonRow style={{ marginTop: '50px' }}>
 					<IonCol className="profile-picture-title">PROFILE PICTURE</IonCol>
 				</IonRow>
 				<IonRow className="profile-picture-desc-container">
@@ -144,7 +132,7 @@ const ProfilePicture: React.FC = () => {
 					<div className="profile-picture-image-container">
 						{!cropperToggler && (
 							<div style={{ position: 'relative' }}>
-								<IonRow>
+								<IonRow >
 									<IonCol>
 										<img className="" src="assets/images/nobo-profile-upload-circle.png" alt="" />
 									</IonCol>
@@ -202,12 +190,8 @@ const ProfilePicture: React.FC = () => {
 				</IonRow>
 				<IonGrid></IonGrid>
 
-				<IonRow
-					className={
-						cropperToggler ? 'profile-picture-skip-container' : 'profile-picture-skip-container2'
-					}
-				>
-					<IonButton
+				<IonRow	className={'profile-picture-skip-container'}	>
+					{ !cropperToggler &&(<IonButton
 						fill="clear"
 						className="profile-picture-skip-text"
 						onClick={() => {
@@ -215,10 +199,10 @@ const ProfilePicture: React.FC = () => {
 						}}
 					>
 						SKIP FOR NOW
-					</IonButton>
+					</IonButton>)}
 				</IonRow>
 
-				<div className="profile-picture-btn-container">
+				<div className={cropperToggler ? 'profile-picture-btn-container' : 'profile-picture-btn-container2'}>
 					<Button
 						label="NEXT"
 						large

@@ -15,6 +15,7 @@ import Button from '../components/Button';
 import 'cropperjs/dist/cropper.css';
 import { UserService } from '../services/UserService';
 import { PostResponse, User } from '../models';
+import HeaderComponent from '../components/HeaderComponent';
 
 const CreateFirstPost: React.FC = () => {
 	const userService = new UserService();
@@ -60,22 +61,9 @@ const CreateFirstPost: React.FC = () => {
 	return (
 		<IonPage className="create-post-main-container">
 			<IonContent className="create-post-ion-content">
-				<div className="create-post-header">
-					<img
-						onClick={() => {
-							history.goBack();
-						}}
-						className="create-post-back-btn"
-						style={{ color: 'black' }}
-						height={23}
-						src="assets/images/arrow-left.svg"
-						alt="logo"
-					/>
+				<HeaderComponent/>
 
-					<img className="create-post-nobo-logo" src="assets/images/nobo_logo.png" alt="logo" />
-				</div>
-
-				<IonRow>
+				<IonRow style={{marginTop:'50px'}}>
 					<IonCol className="create-post-title">YOUR FIRST POST</IonCol>
 				</IonRow>
 				<IonRow className="create-post-desc-container">

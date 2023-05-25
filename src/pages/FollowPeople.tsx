@@ -15,6 +15,7 @@ import Button from '../components/Button';
 import 'cropperjs/dist/cropper.css';
 import { UserService } from '../services/UserService';
 import { User } from '../models';
+import HeaderComponent from '../components/HeaderComponent';
 
 const FollowPeople: React.FC = () => {
 	const userService = new UserService();
@@ -74,22 +75,8 @@ const FollowPeople: React.FC = () => {
 	return (
 		<IonPage className="follow-people-main-container">
 			<IonContent className="follow-people-ion-content">
-				<div className="follow-people-header">
-					<img
-						onClick={() => {
-							history.goBack();
-						}}
-						className="follow-people-back-btn"
-						style={{ color: 'black' }}
-						height={23}
-						src="assets/images/arrow-left.svg"
-						alt="logo"
-					/>
-
-					<img className="follow-people-nobo-logo" src="assets/images/nobo_logo.png" alt="logo" />
-				</div>
-
-				<IonRow>
+				<HeaderComponent />
+				<IonRow style={{ marginTop: '50px' }}>
 					<IonCol className="follow-people-title">FOLLOW PEOPLE</IonCol>
 				</IonRow>
 				<IonRow className="follow-people-desc-container">
