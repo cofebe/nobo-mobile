@@ -30,7 +30,7 @@ const Experience: React.FC = () => {
 				if (user) {
 					console.log(user);
 					history.push('/profile-picture');
-				}else{
+				} else {
 					console.log('something went wrong');
 				}
 			})
@@ -42,7 +42,25 @@ const Experience: React.FC = () => {
 	return (
 		<IonPage className="experience-main-container">
 			<IonContent className="experience-ion-content">
-				<div className="experience-header">
+				<IonRow>
+					<IonCol size='12' style={{ height: '110px' }}>
+
+					<img
+						onClick={() => {
+							history.push('/get-started');
+						}}
+						className="experience-back-btn"
+						src="assets/images/arrow-left.svg"
+						alt="logo"
+					/>
+					<div className="experience-nobo-logo">
+
+					<img  height={65} src="assets/images/nobo_logo.png" alt="logo" />
+					</div>
+					</IonCol>
+
+				</IonRow>
+				{/* <div className="experience-header">
 					<img
 						onClick={() => {
 							history.push('/get-started');
@@ -53,10 +71,10 @@ const Experience: React.FC = () => {
 					/>
 
 					<img className="experience-nobo-logo" src="assets/images/nobo_logo.png" alt="logo" />
-				</div>
+				</div> */}
 
-				<IonRow>
-					<IonCol className="experience-title">EXPERIENCE</IonCol>
+				<IonRow style={{marginTop:'50px'}}>
+					<IonCol className="experience-title">CHOOSE YOUR EXPERIENCE</IonCol>
 				</IonRow>
 				<IonRow className="experience-desc-container">
 					<IonCol className="experience-desc">

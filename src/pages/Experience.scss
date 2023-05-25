@@ -17,17 +17,23 @@
 
 	.experience-back-btn {
 		position: absolute;
-		left: 6%;
-		top: 40%;
-		height: 23px;
-
+		left: 24px;
+		height: 38px;
+		position: absolute;
+		top: 101px;
 	}
 
 	.experience-nobo-logo {
+		height: 50px;
+		width: 190px;
 		position: absolute;
-		height: 62px;
-		left: 94px;
-		top: 50px;
+		height: 100px;
+		width: 205px;
+		left: 85px;
+		top: 70px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
 		@media only screen and (device-height:667px) {
 			height: 50px;
@@ -71,8 +77,9 @@
 		font-weight: 400;
 		font-size: 14px;
 		color: gray;
-		text-align: start;
+		text-align: center;
 		margin: auto;
+		margin-bottom: -28px;
 
 		@media only screen and (device-height:667px) {
 			gap: 3rem;
@@ -148,7 +155,7 @@
 		align-items: end;
 		margin: auto;
 		width: 350px;
-		margin-top: 5vh;
+margin-bottom: 5px;
 	}
 
 	.experience-checkbox {
