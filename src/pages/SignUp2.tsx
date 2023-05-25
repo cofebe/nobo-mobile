@@ -42,7 +42,7 @@ const SignUp2 = () => {
 			.then((user: User) => {
 				if (user) {
 					history.replace('/experience');
-				}else{
+				} else {
 					setError(true);
 				}
 			})
@@ -88,7 +88,7 @@ const SignUp2 = () => {
 					<IonCol className="signup-title">GET REGISTERED</IonCol>
 				</IonRow>
 				<IonGrid className="form-grid" style={{ marginTop: '150px' }}>
-					<IonRow >
+					<IonRow style={{ marginBottom: '-20px' }} >
 						<IonCol size='12' >
 							<Input
 								errorMessage={error ? 'Username already in use' : ''}
@@ -141,8 +141,8 @@ const SignUp2 = () => {
 					</IonRow>
 				</IonGrid>
 
-				<IonRow style={{ width: '330px', margin: 'auto' }}>
-					<IonCol style={{ marginTop: 110 }}>
+				<IonRow className='signup-btn-container'>
+					<IonCol >
 						<Button
 							onClick={() => {
 								signup();
