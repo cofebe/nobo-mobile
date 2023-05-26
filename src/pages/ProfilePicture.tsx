@@ -27,6 +27,7 @@ const ProfilePicture: React.FC = () => {
 	};
 
 	const handleSubmit = async (imgData: any) => {
+		console.log(imgData)
 		userService
 			.uploadProfileImg(imgData)
 			.then(res => {
@@ -132,12 +133,12 @@ const ProfilePicture: React.FC = () => {
 					<div className="profile-picture-image-container">
 						{!cropperToggler && (
 							<div style={{ position: 'relative' }}>
-								<IonRow >
-									<IonCol>
+								<div >
+									<div>
 										<img className="" src="assets/images/nobo-profile-upload-circle.png" alt="" />
-									</IonCol>
+									</div>
 
-									<IonCol style={{ position: 'absolute', top: '35%', left: '35%' }}>
+									<div style={{ position: 'absolute', top: '35%', left: '35%' }}>
 										<img
 											onClick={e => {
 												e.preventDefault();
@@ -148,14 +149,15 @@ const ProfilePicture: React.FC = () => {
 											src="assets/images/nobo-profile-upload-plus.png"
 											alt=""
 										/>
-									</IonCol>
-								</IonRow>
+									</div>
+								</div>
 							</div>
 						)}
 
 						{/* CLEAR PHOTO */}
 						{cropperToggler && (
 							<div
+
 								className="profile-picture-clear-photo"
 								onClick={e => {
 									e.preventDefault();
@@ -167,12 +169,18 @@ const ProfilePicture: React.FC = () => {
 						)}
 
 						{cropperToggler && (
-							<div className="profile-picture-image-cropper">
-								<Cropper
+							<div
+							// style={{  width:'50px' }}
+							 className="profile-picture-image-cropper">
+								<img
+								src={`data:image/png;base64,${photoData?.base64String}`} alt=""
+								className='profile-picture-image_'
+								/>
+								{/* <Cropper
 									className="profile-picture-cropper"
 									src={`data:image/png;base64,${photoData?.base64String}`}
 									// CropperJS options
-									style={{ height: '200px', borderRadius: '50%' }}
+									style={{ height: '300px', borderRadius: '10%' }}
 									initialAspectRatio={75 / 75}
 									guides={false}
 									crop={onPhotoCrop}
@@ -183,14 +191,14 @@ const ProfilePicture: React.FC = () => {
 									cropBoxResizable={false}
 									toggleDragModeOnDblclick={false}
 									highlight={false}
-								/>
+								/> */}
 							</div>
 						)}
 					</div>
 				</IonRow>
-				<IonGrid></IonGrid>
+				{/* <IonGrid></IonGrid> */}
 
-				<IonRow	className={'profile-picture-skip-container'}	>
+				{/* <IonRow	className={'profile-picture-skip-container'}	>
 					{ !cropperToggler &&(<IonButton
 						fill="clear"
 						className="profile-picture-skip-text"
@@ -200,7 +208,7 @@ const ProfilePicture: React.FC = () => {
 					>
 						SKIP FOR NOW
 					</IonButton>)}
-				</IonRow>
+				</IonRow> */}
 
 				<div className={cropperToggler ? 'profile-picture-btn-container' : 'profile-picture-btn-container2'}>
 					<Button
@@ -209,6 +217,7 @@ const ProfilePicture: React.FC = () => {
 						onClick={e => {
 							e.preventDefault();
 							executeProfilePicCrop();
+							// console.log(photoData?.base64String)
 						}}
 						disabled={!cropperToggler}
 					/>

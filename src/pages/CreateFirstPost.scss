@@ -45,6 +45,8 @@
   }
 
   .create-post-body-container {
+		// background-color: teal;
+		margin-top: -20px;
     height: 56vh;
     display: flex;
     align-items: center;
@@ -55,10 +57,11 @@
   .create-post-img-container {
     height: 50%;
     width: 95%;
-margin-top: 10px;
+margin-top: 5px;
     // background-color: teal;
   }
   .create-post-username-container {
+		margin-top: -5px;
     height: 10%;
     width: 95%;
     display: flex;
@@ -85,7 +88,8 @@ margin-top: 10px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
   }
   .create-post-testarea {
-    height: 150;
+		// margin-top: -10px;
+    height: 140;
     width: 90%;
 		margin-bottom: -20px;
     border-radius: 15px;
@@ -144,8 +148,8 @@ margin-top: 10px;
     align-items: end;
     margin: auto;
     width: 350px;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
 
-    margin-top: 10px;
+    margin-top: 0px;
   }
 }

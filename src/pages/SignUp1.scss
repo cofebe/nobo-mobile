@@ -106,7 +106,7 @@
 		}
 
 		.signup-details-input-container {
-			margin-bottom: -15px;
+			margin-bottom: 15px;
 		}
 
 		.signup-details-btn {
@@ -127,7 +127,13 @@
 			color: #FFFFFF;
 		}
 
+		.already-have-account-contaner {
+			display: flex;
+			justify-content: space-between;
+		}
+
 		.signup-details-signin {
+			width: 120px;
 			font-family: 'Nunito Sans';
 			font-style: normal;
 			font-weight: 700;
@@ -143,12 +149,5 @@
 		}
 
 	}
-
-
-
-
-
-
-
 
 }

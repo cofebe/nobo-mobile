@@ -63,7 +63,7 @@ const CreateFirstPost: React.FC = () => {
 			<IonContent className="create-post-ion-content">
 				<HeaderComponent/>
 
-				<IonRow style={{marginTop:'50px'}}>
+				<IonRow style={{marginTop:'40px'}}>
 					<IonCol className="create-post-title">YOUR FIRST POST</IonCol>
 				</IonRow>
 				<IonRow className="create-post-desc-container">
@@ -83,7 +83,6 @@ const CreateFirstPost: React.FC = () => {
 							<h3 className="create-post-username-text">@{currentUser?.displayName.toUpperCase()}</h3>
 						)}
 					</IonRow>
-
 					<IonTextarea
 						className="create-post-testarea"
 						placeholder="Write your post"

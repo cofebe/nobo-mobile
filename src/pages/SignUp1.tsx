@@ -109,7 +109,6 @@ const SignUp1: React.FC = () => {
 					<IonRow className='signup-details-input-container'>
 						<IonCol>
 							<Input
-								invalid={error}
 								value={lastName}
 								className={`nobo-input `}
 								placeholder="LASTNAME"
@@ -123,7 +122,6 @@ const SignUp1: React.FC = () => {
 					<IonRow className='signup-details-input-container'>
 						<IonCol>
 							<Input
-								invalid={error}
 								value={email}
 								className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
 								placeholder="EMAIL ADDRESS"
@@ -159,17 +157,17 @@ const SignUp1: React.FC = () => {
 							/>
 						</IonCol>
 					</IonRow>
-					<IonRow >
-						<IonCol className='already-have-account' size="8">
+					<IonRow className='already-have-account-contaner' >
+						<div className='already-have-account' >
 							Already have an account?
-						</IonCol>
-						<IonCol
+						</div>
+						<div
 
 						className='signup-details-signin'
-						onClick={() => history.push('/login')} size="4"
+						onClick={() => history.push('/login')}
 						>
-							<p style={{ marginLeft:'40px'  }}> SIGN IN </p>
-						</IonCol>
+							<p style={{ marginLeft:'40px', width:'80px'  }}> SIGN IN </p>
+						</div>
 					</IonRow>
 				</IonGrid>
 

@@ -16,6 +16,7 @@ import 'cropperjs/dist/cropper.css';
 import { UserService } from '../services/UserService';
 import { User } from '../models';
 import HeaderComponent from '../components/HeaderComponent';
+import Search from '../components/Search';
 
 const FollowPeople: React.FC = () => {
 	const userService = new UserService();
@@ -84,7 +85,12 @@ const FollowPeople: React.FC = () => {
 						Follow 5 other users to begin connecting with other insiders!
 					</IonCol>
 				</IonRow>
-
+<IonRow style={{marginLeft:'20px', marginRight:'20px'}}>
+	<IonCol>
+		<Search
+		onChange={()=>{}}/>
+	</IonCol>
+</IonRow>
 				<div className="follow-people-body-container" style={{}}>
 					{users?.map(user => (
 						<div key={user._id} className="follow-people-users-row">

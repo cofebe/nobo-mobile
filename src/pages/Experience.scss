@@ -104,8 +104,8 @@
 	}
 
 	.experience-img-container-selected {
-		transition: all 400ms ease-in;
-		transition: all 400ms ease-out;
+		// transition: all 400ms ease-in;
+		// transition: all 400ms ease-out;
 
 		@media only screen and (device-height:1180px) {
 			height: 200px;
@@ -120,9 +120,9 @@
 
 	// WHEN SELECTED
 	.experience-img-container-selected2 {
-		transform: scale(1.04);
-		transition: all 400ms ease-in;
-		transition: all 400ms ease-out;
+		// transform: scale(1.04);
+		// transition: all 400ms ease-in;
+		// transition: all 400ms ease-out;
 		border: 2px solid black;
 		border-radius: 10px;
 

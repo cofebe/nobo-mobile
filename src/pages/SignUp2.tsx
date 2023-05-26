@@ -87,12 +87,13 @@ const SignUp2 = () => {
 				<IonRow>
 					<IonCol className="signup-title">GET REGISTERED</IonCol>
 				</IonRow>
+				<div className="signup-input-container_">
 				<IonGrid className="form-grid" style={{ marginTop: '150px' }}>
-					<IonRow style={{ marginBottom: '-20px' }} >
+					<IonRow >
 						<IonCol size='12' >
 							<Input
 								errorMessage={error ? 'Username already in use' : ''}
-								invalid={error}
+								// invalid={error}
 								value={person.userName}
 								className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
 								placeholder="USERNAME"
@@ -102,7 +103,7 @@ const SignUp2 = () => {
 							/>
 						</IonCol>
 					</IonRow>
-					<IonRow >
+					<IonRow  style={{ marginBottom: '25px' }}>
 						<IonCol size='12' >
 							<IonLabel className="signup-privacy-info">
 								For privacy concerns, your username cannot be your email, it will be displayed in your style
@@ -111,7 +112,7 @@ const SignUp2 = () => {
 						</IonCol>
 					</IonRow>
 
-					<IonRow >
+					<IonRow style={{marginBottom:'13px'}}>
 						<IonCol size='12'>
 							<Input
 								type="password"
@@ -140,8 +141,8 @@ const SignUp2 = () => {
 						</IonCol>
 					</IonRow>
 				</IonGrid>
-
-				<IonRow className='signup-btn-container'>
+				</div>
+				<IonRow className={!error ? 'signup-btn-container' : 'signup-btn-container2'}>
 					<IonCol >
 						<Button
 							onClick={() => {

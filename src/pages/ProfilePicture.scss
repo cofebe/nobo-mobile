@@ -50,7 +50,6 @@
 .profile-picture-image-container{
   height: 34vh;
   width: 100%;
-  // background-color: teal;
   position: relative;
   display: flex;
   align-items: center;
@@ -93,7 +92,7 @@
     margin: auto;
     width: 350px;
     margin-bottom: 25px;
-    margin-top: 10px;
+    margin-top: 45px;
   }
   .profile-picture-btn-container {
     display: flex;
@@ -121,7 +120,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color:teal;
   }
 
   .profile-photo-img{
@@ -150,10 +148,20 @@
     border-radius: 50%;
   }
   .profile-picture-image-cropper {
-    position: absolute;
-   left: 38%;
-   top: 30%;
+	 background-color: goldenrod;
+	 height: 200px;
+	 width: 200px;
+	 border-radius: 50%;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
   }
+
+	.profile-picture-image_{
+		height: 198px;
+		width: 198px;
+		border-radius: 50%;
+	}
 
 
   .profile-picture-cropper-info {
@@ -162,20 +170,13 @@
     margin-top: 10px;
   }
 
-  .box {
-    display: inline-block;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-  .img-preview {
-    overflow: hidden;
-  }
+
 
 .profile-picture-clear-photo{
   width: 35px;
   height: 35px;
   position: absolute;
-  left:65%;
+  left:68%;
   top: 56%;
   z-index: 500;
 
