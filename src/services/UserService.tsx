@@ -457,10 +457,14 @@ async getBrands() {
 	return json.brands;
 }
 
+
 // SELECTED BRAND
-async selectBrand(brandId: string) {
-console.log("userService sec ", brandId)
-	const response = await super.fetch('POST', '/api/brands/add-favorite', { brandId });
+async selectBrand(brands:any) {
+	const brandId = {
+		strings:brands
+	}
+console.log("userService section ", brandId)
+	const response = await super.fetch('POST', '/api/brands/add-favorite', { brandId: brands });
 	return response.json();
 }
 

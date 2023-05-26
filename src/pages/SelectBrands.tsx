@@ -31,25 +31,29 @@ const SelectBrands: React.FC = () => {
 			});
 	});
 
+
 	// Handling the ticker
 	const handleTicker = (brandId: string) => {
+		console.log("in the ticker container ", brandId)
 		if (!brandsSelectArr.includes(brandId, 0)) {
-			brandsSelectArr.push(brandId);
-		} else {
-			const brandItem = brandsSelectArr.filter(brand => brand === brandId);
-			setTickedBrand(brandItem[0]);
+			setBrandSelectArray([...brandsSelectArr, brandId])
+			console.log(brandsSelectArr)
+		} else if (brandsSelectArr.includes(brandId, 0)) {
+			const updatedRemove = brandsSelectArr.filter((brand) => brand !== brandId)
+			setBrandSelectArray(updatedRemove)
+			console.log('after removed brand ', brandsSelectArr)
 		}
 	};
 
 	const handleSubmit = async () => {
 		userService
-			.selectBrand(tickedBrand)
+			.selectBrand(brandsSelectArr)
 			.then(res => {
 				if (res) {
-				console.log("the res ", res);
+					console.log("the res ", res);
 					history.push('/onboarding-post');
-				}else{
-				console.log("something went wrong ", res);
+				} else {
+					console.log("something went wrong ", res);
 				}
 			})
 			.catch((err: any) => {
@@ -71,13 +75,14 @@ const SelectBrands: React.FC = () => {
 		}
 		return 1;
 	});
+	console.log('updated arr ', brandsSelectArr)
 
 	return (
 		<IonPage className="select-brands-main-container">
 			<IonContent className="select-brands-ion-content">
-				<HeaderComponent/>
+				<HeaderComponent />
 
-				<IonRow style={{marginTop:'50px'}}>
+				<IonRow style={{ marginTop: '50px' }}>
 					<IonCol className="select-brands-title">SELECT BRANDS</IonCol>
 				</IonRow>
 				<IonRow className="select-brands-desc-container">
@@ -97,15 +102,16 @@ const SelectBrands: React.FC = () => {
 					<IonRow className="select-brand-img-container">
 						{mapFilter.sort().map(brand => (
 							<IonCol
-							onClick={()=>{
-								console.log(brand.name, " "+ brand._id)
-								handleTicker(brand._id)
-							}}
+								onClick={() => {
+									console.log(brand.name)
+									handleTicker(brand._id)
+								}}
 								className="select-brand-img-col" key={brand._id} size="5"
 							>
 								<img src={brand.url} alt="" />
 								<div className="select-brand-checkbox">
-									<Checkbox value={tickedBrand === brand._id} onChange={e => { }} />
+									{/* <Checkbox value={tickedBrand === brand._id} onChange={e => { }} /> */}
+									<Checkbox value={brandsSelectArr.includes(brand._id)} onChange={e => { }} />
 								</div>
 							</IonCol>
 						))}
@@ -129,7 +135,9 @@ const SelectBrands: React.FC = () => {
 				<div
 					className={tickedBrand === '' ? 'select-brands-btn-container' : 'select-brands-btn-container2'}
 				>
-					<Button label="NEXT" large onClick={handleSubmit} disabled={tickedBrand === ''} />
+					<Button
+						label="NEXT" large onClick={handleSubmit}
+						disabled={brandsSelectArr.length < 1} />
 				</div>
 			</IonContent>
 		</IonPage>

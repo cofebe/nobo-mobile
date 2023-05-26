@@ -11,22 +11,21 @@ import HeaderComponent from '../components/HeaderComponent';
 const Experience: React.FC = () => {
 	const userService = new UserService();
 	const history = useHistory();
-	const [selectedExperienceArray, setBrandSelectArray] = useState<string[]>([]);
-	const [expOptionSelected, setExpOptionSelected] = useState('');
+	const [selectedExperienceArray, setSelectedExpArray] = useState<string[]>([]);
 
-	// Handling the ticker
-	const handleTicker = (experienceOption: string) => {
-		if (!selectedExperienceArray.includes(experienceOption, 0)) {
-			selectedExperienceArray.push(experienceOption);
-		} else {
-			const experienceItem = selectedExperienceArray.filter(brand => brand === experienceOption);
-			setExpOptionSelected(experienceItem[0]);
+
+	const handleTicker = (expId: string) => {
+		if (!selectedExperienceArray.includes(expId, 0)) {
+			setSelectedExpArray([expId])
+		} else if (selectedExperienceArray.includes(expId, 0)) {
+			const updatedRemove = selectedExperienceArray.filter((expOption) => expOption !== expId)
+			setSelectedExpArray(updatedRemove)
 		}
 	};
 
 	const handleSubmit = async () => {
 		userService
-			.experience(expOptionSelected)
+			.experience(selectedExperienceArray[0])
 			.then((user: User) => {
 				if (user) {
 					console.log(user);
@@ -39,6 +38,7 @@ const Experience: React.FC = () => {
 				console.log('experience error', err);
 			});
 	};
+
 
 	return (
 		<IonPage className="experience-main-container">
@@ -68,9 +68,9 @@ const Experience: React.FC = () => {
 						>
 							<img
 								className={
-									expOptionSelected === 'women'
-										? 'experience-img-container-selected2'
-										: 'experience-img-container-selected'
+									selectedExperienceArray.includes('women')
+										? 'experience-img-container-selected'
+										: 'experience-img-container'
 								}
 								src="assets/images/experience-women.png"
 								alt="women"
@@ -85,7 +85,8 @@ const Experience: React.FC = () => {
 								WOMEN
 							</h3>
 							<div className="experience-checkbox">
-								<Checkbox value={expOptionSelected === 'women'} onChange={() => { }} />
+								<Checkbox value={selectedExperienceArray.includes('women')} onChange={() => { }} />
+								{/* <Checkbox value={expOptionSelected === 'women'} onChange={() => { }} /> */}
 							</div>
 						</IonCol>
 					</IonRow>
@@ -101,9 +102,9 @@ const Experience: React.FC = () => {
 					>
 						<img
 							className={
-								expOptionSelected === 'men'
-									? 'experience-img-container-selected2'
-									: 'experience-img-container-selected'
+								selectedExperienceArray.includes('men')
+									? 'experience-img-container-selected'
+									: 'experience-img-container'
 							}
 							src="assets/images/experience-men.png"
 							alt="sneakers"
@@ -118,7 +119,7 @@ const Experience: React.FC = () => {
 							MEN
 						</h3>
 						<div className="experience-checkbox">
-							<Checkbox value={expOptionSelected === 'men'} onChange={e => { }} />
+							<Checkbox value={selectedExperienceArray.includes('men')} onChange={e => { }} />
 						</div>
 					</div>
 
@@ -131,9 +132,9 @@ const Experience: React.FC = () => {
 					>
 						<img
 							className={
-								expOptionSelected === 'sneakers'
-									? 'experience-img-container-selected2'
-									: 'experience-img-container-selected'
+								selectedExperienceArray.includes('sneakers')
+									? 'experience-img-container-selected'
+									: 'experience-img-container'
 							}
 							src="assets/images/experience-sneaker.png"
 							alt="sneakers"
@@ -148,7 +149,7 @@ const Experience: React.FC = () => {
 							SNEAKERS
 						</h3>
 						<div className="experience-checkbox">
-							<Checkbox value={expOptionSelected === 'sneakers'} onChange={e => { }} />
+							<Checkbox value={selectedExperienceArray.includes('sneakers')} onChange={e => { }} />
 						</div>
 					</div>
 				</IonGrid>
@@ -163,7 +164,7 @@ const Experience: React.FC = () => {
 									e.preventDefault();
 									handleSubmit();
 								}}
-								disabled={expOptionSelected === ''}
+								disabled={selectedExperienceArray.length < 1}
 							/>
 						</div>
 					</IonCol>
