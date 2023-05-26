@@ -9,169 +9,169 @@ import Button from '../components/Button';
 import HeaderComponent from '../components/HeaderComponent';
 
 const Experience: React.FC = () => {
-	const userService = new UserService();
-	const history = useHistory();
-	const [selectedExperienceArray, setBrandSelectArray] = useState<string[]>([]);
-	const [expOptionSelected, setExpOptionSelected] = useState('');
-
-	// Handling the ticker
-	const handleTicker = (experienceOption: string) => {
-		if (!selectedExperienceArray.includes(experienceOption, 0)) {
-			selectedExperienceArray.push(experienceOption);
-		} else {
-			const experienceItem = selectedExperienceArray.filter(brand => brand === experienceOption);
-			setExpOptionSelected(experienceItem[0]);
-		}
-	};
-
-	const handleSubmit = async () => {
-		userService
-			.experience(expOptionSelected)
-			.then((user: User) => {
-				if (user) {
-					console.log(user);
-					history.push('/profile-picture');
-				} else {
-					console.log('something went wrong');
-				}
-			})
-			.catch((err: any) => {
-				console.log('experience error', err);
-			});
-	};
-
-	return (
-		<IonPage className="experience-main-container">
-			<IonContent className="experience-ion-content">
-			<HeaderComponent/>
-				<IonRow style={{ marginTop: '50px' }}>
-					<IonCol className="experience-title">CHOOSE YOUR EXPERIENCE</IonCol>
-				</IonRow>
-				<IonRow className="experience-desc-container">
-					<IonCol className="experience-desc">
-						Select the category of clothing you prefer to shop. Don't worry, you can stil view other
-						experiences later.
-					</IonCol>
-				</IonRow>
-
-				<IonGrid className="experience-form-container">
+  const userService = new UserService();
+  const history = useHistory();
+  const [selectedExperienceArray, setSelectedExpArray] = useState<string[]>([]);
 
 
-					{/* WOMEN */}
-					<IonRow>
-						<IonCol
-							size='12'
-							className="experience-img-container"
-							onClick={() => {
-								handleTicker('women');
-							}}
-						>
-							<img
-								className={
-									expOptionSelected === 'women'
-										? 'experience-img-container-selected2'
-										: 'experience-img-container-selected'
-								}
-								src="assets/images/experience-women.png"
-								alt="women"
-							/>
-							<h3
-								style={{
-									position: 'absolute',
-									color: 'white',
-									fontWeight: 'bold',
-								}}
-							>
-								WOMEN
-							</h3>
-							<div className="experience-checkbox">
-								<Checkbox value={expOptionSelected === 'women'} onChange={() => { }} />
-							</div>
-						</IonCol>
-					</IonRow>
+  const handleTicker = (expId: string) => {
+    if (!selectedExperienceArray.includes(expId, 0)) {
+      setSelectedExpArray([expId])
+    } else if (selectedExperienceArray.includes(expId, 0)) {
+      const updatedRemove = selectedExperienceArray.filter((expOption) => expOption !== expId)
+      setSelectedExpArray(updatedRemove)
+    }
+  };
+
+  const handleSubmit = async () => {
+    userService
+      .experience(selectedExperienceArray[0])
+      .then((user: User) => {
+        if (user) {
+          console.log(user);
+          history.push('/profile-picture');
+        } else {
+          console.log('something went wrong');
+        }
+      })
+      .catch((err: any) => {
+        console.log('experience error', err);
+      });
+  };
 
 
-					{/* MEN */}
+  return (
+    <IonPage className='experience-main-container'>
+      <IonContent className='experience-ion-content'>
+        <HeaderComponent />
+        <IonRow style={{ marginTop: '50px' }}>
+          <IonCol className='experience-title'>CHOOSE YOUR EXPERIENCE</IonCol>
+        </IonRow>
+        <IonRow className='experience-desc-container'>
+          <IonCol className='experience-desc'>
+            Select the category of clothing you prefer to shop. Don't worry, you can still view other
+            experiences later.
+          </IonCol>
+        </IonRow>
 
-					<div
-						className="experience-img-container"
-						onClick={() => {
-							handleTicker('men');
-						}}
-					>
-						<img
-							className={
-								expOptionSelected === 'men'
-									? 'experience-img-container-selected2'
-									: 'experience-img-container-selected'
-							}
-							src="assets/images/experience-men.png"
-							alt="sneakers"
-						/>
-						<h3
-							style={{
-								position: 'absolute',
-								color: 'white',
-								fontWeight: 'bold',
-							}}
-						>
-							MEN
-						</h3>
-						<div className="experience-checkbox">
-							<Checkbox value={expOptionSelected === 'men'} onChange={e => { }} />
-						</div>
-					</div>
+        <IonGrid className='experience-form-container'>
 
-					{/* SNEAKERS */}
-					<div
-						className="experience-img-container"
-						onClick={() => {
-							handleTicker('sneakers');
-						}}
-					>
-						<img
-							className={
-								expOptionSelected === 'sneakers'
-									? 'experience-img-container-selected2'
-									: 'experience-img-container-selected'
-							}
-							src="assets/images/experience-sneaker.png"
-							alt="sneakers"
-						/>
-						<h3
-							style={{
-								position: 'absolute',
-								color: 'white',
-								fontWeight: 'bold',
-							}}
-						>
-							SNEAKERS
-						</h3>
-						<div className="experience-checkbox">
-							<Checkbox value={expOptionSelected === 'sneakers'} onChange={e => { }} />
-						</div>
-					</div>
-				</IonGrid>
-				<IonRow >
-					<IonCol size='12'>
-						<div className="experience-btn-container">
-							<Button
-								className="experience-btn"
-								label="NEXT"
-								large
-								onClick={e => {
-									e.preventDefault();
-									handleSubmit();
-								}}
-								disabled={expOptionSelected === ''}
-							/>
-						</div>
-					</IonCol>
-				</IonRow>
 
-			</IonContent>
-		</IonPage>
-	);
+          {/* WOMEN */}
+          <IonRow>
+            <IonCol
+              size='12'
+              className='experience-img-container'
+              onClick={() => {
+                handleTicker('women');
+              }}
+            >
+              <img
+                className={
+                  selectedExperienceArray.includes('women')
+                    ? 'experience-img-container-selected'
+                    : 'experience-img-container'
+                }
+                src='assets/images/experience-women.png'
+                alt='women'
+              />
+              <h3
+                style={{
+                  position: 'absolute',
+                  color: 'white',
+                  fontWeight: 'bold',
+                }}
+              >
+                WOMEN
+              </h3>
+              <div className='experience-checkbox'>
+                <Checkbox value={selectedExperienceArray.includes('women')} onChange={() => { }} />
+                {/* <Checkbox value={expOptionSelected === 'women'} onChange={() => { }} /> */}
+              </div>
+            </IonCol>
+          </IonRow>
+
+
+          {/* MEN */}
+          <div
+            className='experience-img-container'
+            onClick={() => {
+              handleTicker('men');
+            }}
+          >
+            <img
+              className={
+                selectedExperienceArray.includes('men')
+                  ? 'experience-img-container-selected'
+                  : 'experience-img-container'
+              }
+              src='assets/images/experience-men.png'
+              alt='sneakers'
+            />
+            <h3
+              style={{
+                position: 'absolute',
+                color: 'white',
+                fontWeight: 'bold',
+              }}
+            >
+              MEN
+            </h3>
+            <div className='experience-checkbox'>
+              <Checkbox value={selectedExperienceArray.includes('men')} onChange={e => { }} />
+            </div>
+          </div>
+
+          {/* SNEAKERS */}
+          <div
+            className='experience-img-container'
+            onClick={() => {
+              handleTicker('sneakers');
+            }}
+          >
+            <img
+              className={
+                selectedExperienceArray.includes('sneakers')
+                  ? 'experience-img-container-selected'
+                  : 'experience-img-container'
+              }
+              src='assets/images/experience-sneaker.png'
+              alt='sneakers'
+            />
+            <h3
+              style={{
+                position: 'absolute',
+                color: 'white',
+                fontWeight: 'bold',
+              }}
+            >
+              SNEAKERS
+            </h3>
+            <div className='experience-checkbox'>
+              <Checkbox value={selectedExperienceArray.includes('sneakers')} onChange={e => { }} />
+            </div>
+          </div>
+        </IonGrid>
+        <IonRow >
+          <IonCol size='12'>
+            <div className='experience-btn-container'>
+              <Button
+                className='experience-btn'
+                label='NEXT'
+                large
+                onClick={e => {
+                  e.preventDefault();
+                  handleSubmit();
+                }}
+                disabled={selectedExperienceArray.length < 1}
+              />
+            </div>
+          </IonCol>
+        </IonRow>
+
+      </IonContent>
+    </IonPage>
+  );
 };
 
 export default Experience;
