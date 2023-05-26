@@ -24,6 +24,7 @@ const FollowPeople: React.FC = () => {
 	const [users, setUsers] = useState<User[]>([]);
 	const [follow, setFollow] = useState<string[]>([]);
 	const [peopleIfollow, setPeopleIfollow] = useState<string[]>([]);
+	const [inputValue, setInputValue] = useState('')
 
 	//  fetching exiting users to follow
 	useIonViewWillEnter(() => {
@@ -73,6 +74,9 @@ const FollowPeople: React.FC = () => {
 		}
 	};
 
+	const mapFilter = users?.filter(user =>
+		user.displayName.toLowerCase().includes(inputValue.toLowerCase(), 0)
+	);
 	return (
 		<IonPage className="follow-people-main-container">
 			<IonContent className="follow-people-ion-content">
@@ -88,11 +92,14 @@ const FollowPeople: React.FC = () => {
 <IonRow style={{marginLeft:'20px', marginRight:'20px'}}>
 	<IonCol>
 		<Search
-		onChange={()=>{}}/>
+		value={inputValue}
+		onChange={
+			(e)=>{setInputValue(e)}
+			}/>
 	</IonCol>
 </IonRow>
 				<div className="follow-people-body-container" style={{}}>
-					{users?.map(user => (
+					{mapFilter?.map(user => (
 						<div key={user._id} className="follow-people-users-row">
 							<div className="follow-people-users-img-container">
 								<img className="follow-people-users-img" src={user.avatar} alt={user.displayName} />
@@ -106,7 +113,7 @@ const FollowPeople: React.FC = () => {
 									disabled={follow.includes(user._id, 0)}
 									className="profile-picture-btn"
 									label={!follow.includes(user._id, 0) ? 'FOLLOW' : 'FOLLOWING'}
-									large={true}
+									large={false}
 									onClick={e => {
 										e.preventDefault();
 										followUser(user._id);

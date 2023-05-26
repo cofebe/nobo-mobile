@@ -15,8 +15,7 @@ import Button from '../components/Button';
 const AccountSettings: React.FC = () => {
 	const history = useHistory();
 	const userService = new UserService();
-	const [selectedExperienceArray, setBrandSelectArray] = useState<string[]>([]);
-	const [expOptionSelected, setExpOptionSelected] = useState('');
+	const [selectedExperienceArray, setSelectedExpArray] = useState<string[]>([]);
 	const [firstName, setFirstName] = useState('')
 	const [lastName, setLastName] = useState('')
 	const [displayName, setdisplayName] = useState('')
@@ -42,7 +41,7 @@ const AccountSettings: React.FC = () => {
 		email,
 		phoneNumber,
 		saleSchedule: [],
-		experiencePreferences: expOptionSelected,
+		experiencePreferences: selectedExperienceArray[0],
 		currentPassword,
 		newPassword
 	}
@@ -56,43 +55,42 @@ const AccountSettings: React.FC = () => {
 				setLastName(user.lastName)
 				setEmail(user.email)
 				setdisplayName(user.displayName)
-
-				if (!selectedExperienceArray.includes(user.experiencePreferences, 0)) {
-					selectedExperienceArray.push(user.experiencePreferences);
-				} else {
-					const experienceItem = selectedExperienceArray.filter(brand => brand === user.experiencePreferences);
-					setExpOptionSelected(experienceItem[0]);
-				}
-
-
 			})
-			.then(() => {
-
+			.catch((error) => {
+console.log(error)
 			})
 	});
 
 
 
 
-	// Handling the ticker
-	const handleTicker = (experienceOption: string) => {
-		if (!selectedExperienceArray.includes(experienceOption, 0)) {
-			selectedExperienceArray.push(experienceOption);
-		} else {
-			const experienceItem = selectedExperienceArray.filter(brand => brand === experienceOption);
-			setExpOptionSelected(experienceItem[0]);
+	// // Handling the ticker
+	// const handleTicker = (experienceOption: string) => {
+	// 	if (!selectedExperienceArray.includes(experienceOption, 0)) {
+	// 		selectedExperienceArray.push(experienceOption);
+	// 	} else {
+	// 		const experienceItem = selectedExperienceArray.filter(brand => brand === experienceOption);
+	// 		setExpOptionSelected(experienceItem[0]);
+	// 	}
+	// };
+
+	const handleTicker = (expId: string) => {
+		if (!selectedExperienceArray.includes(expId, 0)) {
+			setSelectedExpArray([expId])
+		} else if (selectedExperienceArray.includes(expId, 0)) {
+			const updatedRemove = selectedExperienceArray.filter((expOption) => expOption !== expId)
+			setSelectedExpArray(updatedRemove)
 		}
 	};
 
 	useIonViewDidEnter(() => {
 		userService.getMe()
 			.then((user: User) => {
-				handleTicker(user.experiencePreferences)
 				if (!selectedExperienceArray.includes(user.experiencePreferences, 0)) {
-					selectedExperienceArray.push(user.experiencePreferences);
-				} else {
-					const experienceItem = selectedExperienceArray.filter(brand => brand === user.experiencePreferences);
-					setExpOptionSelected(experienceItem[0]);
+					setSelectedExpArray([user.experiencePreferences])
+				} else if (selectedExperienceArray.includes(user.experiencePreferences, 0)) {
+					const updatedRemove = selectedExperienceArray.filter((expOption) => expOption !== user.experiencePreferences)
+					setSelectedExpArray(updatedRemove)
 				}
 			})
 	})
@@ -121,7 +119,7 @@ const AccountSettings: React.FC = () => {
 			&& displayName === ''
 			&& email === ''
 			&& phoneNumber === ''
-			&& expOptionSelected === ''
+			&& selectedExperienceArray[0] === ''
 			&& currentPassword === ''
 			&& newPassword === ''
 		) {
@@ -163,7 +161,7 @@ const AccountSettings: React.FC = () => {
 						<Input
 							type="text"
 							value={firstName}
-							className={`nobo-input `}
+							className={`custom-input-name nobo-input`}
 							placeholder="FIRST NAME"
 							onChange={(e) => setFirstName(e)}
 						/>
@@ -174,7 +172,7 @@ const AccountSettings: React.FC = () => {
 						<Input
 							type="text"
 							value={lastName}
-							className={`nobo-input `}
+							className={`custom-input-name nobo-input`}
 							placeholder="LAST NAME"
 							onChange={(e) => setLastName(e)}
 						/>
@@ -185,7 +183,7 @@ const AccountSettings: React.FC = () => {
 						<Input
 							type="text"
 							value={displayName}
-							className={`nobo-input `}
+							className={`custom-input-name nobo-input`}
 							placeholder="USERNAME"
 							onChange={e => setdisplayName(e)}
 						/>
@@ -195,7 +193,7 @@ const AccountSettings: React.FC = () => {
 						<Input
 							type="email"
 							value={email}
-							className={`nobo-input `}
+							className={`custom-input-name nobo-input`}
 							placeholder="EMAIL"
 							onChange={e => setEmail(e)}
 						/>
@@ -205,7 +203,7 @@ const AccountSettings: React.FC = () => {
 						<Input
 							type="number"
 							value={phoneNumber}
-							className={`nobo-input `}
+							className={`custom-input-name nobo-input`}
 							placeholder="PHONE NUMBER"
 							onChange={e => setCurrentPassword(e)}
 						/>
@@ -230,7 +228,7 @@ const AccountSettings: React.FC = () => {
 						<img className="acc-experience-optons-img" src="assets/images/women2.png" alt="women" />
 
 						<div className="acc-experience-option-ticker">
-							<Checkbox value={expOptionSelected === 'women'} onChange={e => { }} />
+						<Checkbox value={selectedExperienceArray.includes('women')} onChange={() => { }} />
 						</div>
 					</div>
 					<div
@@ -246,7 +244,8 @@ const AccountSettings: React.FC = () => {
 						/>
 
 						<div className="acc-experience-option-ticker">
-							<Checkbox value={expOptionSelected === 'men'} onChange={e => { }} />
+						<Checkbox value={selectedExperienceArray.includes('men')} onChange={e => { }} />
+
 						</div>
 					</div>
 					<div
@@ -262,7 +261,7 @@ const AccountSettings: React.FC = () => {
 						/>
 
 						<div className="acc-experience-option-ticker">
-							<Checkbox value={expOptionSelected === 'sneakers'} onChange={e => { }} />
+						<Checkbox value={selectedExperienceArray.includes('sneakers')} onChange={e => { }} />
 						</div>
 					</div>
 				</div>

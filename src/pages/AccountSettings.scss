@@ -57,7 +57,7 @@
 		}
 
 		.acc-experience-title {
-			margin-top: 30px;
+			margin-top: 20px;
 			margin-bottom: 20px;
 			font-family: 'Nunito Sans';
 			font-style: normal;
@@ -104,6 +104,7 @@
 
 		.acc-text-input-box {
 			height: 80px;
+			margin-bottom: -6px;
 		}
 
 		.acc-text-input-title {
@@ -111,9 +112,16 @@
 			font-size: 12px;
 			height: 18px;
 			margin-top: 8px;
-			margin-bottom: -10px;
-		}
+			margin-bottom: 5px;
 
+
+
+
+		}
+		.custom-input-name{
+			background-color: #FEFCF7;
+			text-transform: uppercase;
+		}
 		.acc-experience-optons {
 			display: flex;
 			align-items: flex-end;

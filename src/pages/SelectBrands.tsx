@@ -118,7 +118,7 @@ const SelectBrands: React.FC = () => {
 					</IonRow>
 				</div>
 
-				{tickedBrand === '' && (
+				{brandsSelectArr.length < 1 && (
 					<IonRow className={'select-brands-skip-container'}>
 						<IonButton
 							fill="clear"
@@ -133,7 +133,7 @@ const SelectBrands: React.FC = () => {
 				)}
 
 				<div
-					className={tickedBrand === '' ? 'select-brands-btn-container' : 'select-brands-btn-container2'}
+					className={brandsSelectArr.length < 1 ? 'select-brands-btn-container' : 'select-brands-btn-container2'}
 				>
 					<Button
 						label="NEXT" large onClick={handleSubmit}

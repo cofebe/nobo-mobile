@@ -88,7 +88,7 @@ const Login: React.FC = () => {
                 LOGIN
               </IonCol>
             </IonRow>
-            <IonRow>
+            <IonRow style={{ marginBottom: '20px' }}>
               <IonCol>
                 <Input
                   invalid={error}
@@ -101,7 +101,7 @@ const Login: React.FC = () => {
                 />
               </IonCol>
             </IonRow>
-            <IonRow>
+            <IonRow style={{ marginBottom: '40px' }}>
               <IonCol>
                 <Input
                   invalid={error}
