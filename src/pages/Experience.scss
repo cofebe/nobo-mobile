@@ -102,6 +102,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
+
   }
 
   .experience-img-container-selected {
@@ -122,6 +123,10 @@
 
   // WHEN SELECTED
   .experience-img-container {
+    @media only screen and (device-height:667px) {
+    height: 140px;
+
+    }
     @media only screen and (device-height:1180px) {
       height: 200px;
       width: 700px;

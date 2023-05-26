@@ -26,10 +26,11 @@ const ProfilePicture: React.FC = () => {
     setPhotoData(photo);
   };
 
-  const handleSubmit = async (imgData: any) => {
-    console.log(imgData)
+  const handleSubmit = async () => {
+    const profilePic = `data:image/png;base64,${photoData?.base64String}`
+    // console.log(profilePic)
     userService
-      .uploadProfileImg(imgData)
+      .uploadProfileImg(profilePic)
       .then(res => {
         if (res) {
           console.log(res);
@@ -88,7 +89,7 @@ const ProfilePicture: React.FC = () => {
               base64String: base64data.split(',')[1],
             });
             // setPreviewImgFile(base64data);
-            handleSubmit(base64data);
+            // handleSubmit(base64data);
           }, 500);
         };
       });
@@ -188,6 +189,9 @@ const ProfilePicture: React.FC = () => {
             onClick={e => {
               e.preventDefault();
               executeProfilePicCrop();
+              setTimeout(() => {
+                handleSubmit()
+              }, 1000);
             }}
             disabled={!cropperToggler}
           />
