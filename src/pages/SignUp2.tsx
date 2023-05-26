@@ -67,23 +67,25 @@ const SignUp2 = () => {
   return (
     <IonPage className='signup-container'>
       <IonContent className='signup-ion-content'>
-        <div>
+        <IonRow style={{ marginTop: '70px' }}>
+
+
+
           <img
+            className='signup2-nobo-back'
             style={{ marginLeft: '5%', marginTop: '13%' }}
-            onClick={() => {
-              history.goBack();
-            }}
+
             height={40}
             src='assets/images/nobo-back-icon.png'
             alt='logo'
           />
-        </div>
-        <IonRow>
-          <IonCol class='ion-justify-content-center' style={{ display: 'flex' }}>
+
+
+          <IonCol class='signup2-nobo-logo' style={{ display: 'flex' }}>
             <img height={60} src='assets/images/nobo-logo-white.png' alt='logo' />
           </IonCol>
-        </IonRow>
 
+        </IonRow>
         <IonRow>
           <IonCol className='signup-title'>GET REGISTERED</IonCol>
         </IonRow>
