@@ -6,10 +6,16 @@
     background-size: cover;
     background-position: center;
     padding: 50px 15px 15px 15px;
+
+    .nobo-login-back{
+      position: absolute;
+      top: 81.5px;
+      // background-color: red;
+    }
   }
 
   .login-box {
-    margin-top: 31vh;
+    margin-top: 43vh;
     margin-right: 10px;
     margin-left: 10px;
     background: linear-gradient(116.6deg,
@@ -21,7 +27,7 @@
   }
 
   .logo-margin-top {
-    margin-top: 5.3vh;
+    margin-top: 2.7vh;
   }
 
   .invalid-text-color {

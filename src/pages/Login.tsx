@@ -56,8 +56,8 @@ const Login: React.FC = () => {
   return (
     <IonPage className="nobo-login-page">
       <div className="background-image">
-        <IonRow>
-          <IonCol size="2">
+        <IonRow >
+          <IonCol size="2" className='nobo-login-back'>
             <div
               onClick={() => {
                 history.push('/get-started');
