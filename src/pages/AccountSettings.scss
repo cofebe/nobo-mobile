@@ -1,159 +1,160 @@
 .account-settings-container {
-	background-color: #FEFCF7;
+  background-color: #FEFCF7;
 
-	.account-settings-content {
-		--padding-start: 20px;
-		--padding-end: 20px;
-		--padding-bottom: 20px;
-		--background: #FEFCF7;
+  .account-settings-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 20px;
+    --background: #FEFCF7;
 
-		.account-settings-header-container {
-			height: 118px;
-			width: 390px;
-			position: absolute;
-			top: 0%;
-			left: 0%;
-			right: 0%;
-			bottom: 0%;
+    .account-settings-header-container {
+      height: 118px;
+      width: 390px;
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      right: 0%;
+      bottom: 0%;
 
-		}
-
-
-
-		.account-settings-back-btn {
-			position: absolute;
-			left: 15px;
-			bottom: 15px;
-			z-index: 1000;
-		}
-
-		.account-settings-title-text-container {
-			position: absolute;
-			top: 63%;
-			bottom: 10.71%;
-			font-family: 'Nunito Sans';
-			font-style: normal;
-			font-weight: 600;
-			font-size: 15px;
-			line-height: 150%;
-			letter-spacing: 0.05em;
-			color: #000000;
-			text-align: center;
-		}
+    }
 
 
 
-		.acc-experience-option-box {
-			display: flex;
-			align-items: center;
-			justify-content: space-around;
-			// margin-top: 32px;
-			height: 130px;
-			width: 350px;
-			// background-color: #D6980E;
-			margin: auto;
+    .account-settings-back-btn {
+      position: absolute;
+      left: 15px;
+      bottom: 15px;
+      z-index: 1000;
+    }
 
-
-		}
-
-		.acc-experience-title {
-			margin-top: 20px;
-			margin-bottom: 20px;
-			font-family: 'Nunito Sans';
-			font-style: normal;
-			font-weight: 600;
-			font-size: 15px;
-			line-height: 150%;
-			letter-spacing: 0.05em;
-			color: #000000;
-			text-align: center;
-		}
-
-		.acc-settings-input-box {
-			margin-top: 33px;
-			border: 2px solid gray;
-			border-radius: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
-			margin-left: 0px;
-		}
-
-		.acc-change-password-box {
-			height: 30px;
-			width: 290px;
-			margin-top: 8px;
-			margin-bottom: 8px;
-			// margin: auto;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-
-
-		}
-
-		.acc-change-password-text {
-			color: #D6980E;
-			font-weight: 700;
-			size: 12px;
-			line-height: 18px;
-			font-family: 'Nunito Sans';
-			font-style: normal;
-			text-decoration: underline;
-			margin-bottom: 20px;
-		}
-
-		.acc-text-input-box {
-			height: 80px;
-			margin-bottom: -6px;
-		}
-
-		.acc-text-input-title {
-			font-weight: 600;
-			font-size: 12px;
-			height: 18px;
-			margin-top: 8px;
-			margin-bottom: 5px;
+    .account-settings-title-text-container {
+      position: absolute;
+      top: 63%;
+      bottom: 10.71%;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 150%;
+      letter-spacing: 0.05em;
+      color: #000000;
+      text-align: center;
+    }
 
 
 
-
-		}
-		.custom-input-name{
-			background-color: #FEFCF7;
-			text-transform: uppercase;
-		}
-		.acc-experience-optons {
-			display: flex;
-			align-items: flex-end;
-			justify-content: space-around;
-			height: 120px;
-			width: 100px;
-			position: relative;
-			border-radius: 10px;
-			margin-bottom: 20px;
-		}
-
-		.acc-experience-option-ticker {
-			position: absolute;
-			top: 0px;
-		}
-
-		.acc-experience-option-text {
-			color: white;
-			position: absolute;
-			top: 50px;
-		}
+    .acc-experience-option-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      // margin-top: 32px;
+      height: 130px;
+      width: 350px;
+      // background-color: #D6980E;
+      margin: auto;
 
 
-		.acc-experience-optons-img {
-			height: 100px;
-			width: 100px;
-			border-radius: 10px;
-		}
+    }
+
+    .acc-experience-title {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 150%;
+      letter-spacing: 0.05em;
+      color: #000000;
+      text-align: center;
+    }
+
+    .acc-settings-input-box {
+      margin-top: 33px;
+      border: 2px solid gray;
+      border-radius: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-left: 0px;
+    }
+
+    .acc-change-password-box {
+      height: 30px;
+      width: 290px;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      // margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
 
-	}
+    }
+
+    .acc-change-password-text {
+      color: #D6980E;
+      font-weight: 700;
+      size: 12px;
+      line-height: 18px;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      text-decoration: underline;
+      margin-bottom: 20px;
+    }
+
+    .acc-text-input-box {
+      height: 80px;
+      margin-bottom: -6px;
+    }
+
+    .acc-text-input-title {
+      font-weight: 600;
+      font-size: 12px;
+      height: 18px;
+      margin-top: 8px;
+      margin-bottom: 5px;
+
+
+
+
+    }
+
+    .custom-input-name {
+      background-color: #FEFCF7;
+      text-transform: uppercase;
+    }
+
+    .acc-experience-optons {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 120px;
+      width: 100px;
+      position: relative;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .acc-experience-option-ticker {
+      position: absolute;
+      top: 0px;
+    }
+
+    .acc-experience-option-text {
+      color: white;
+      position: absolute;
+      top: 50px;
+    }
+
+
+    .acc-experience-optons-img {
+      height: 100px;
+      width: 100px;
+      border-radius: 10px;
+    }
+
+
+  }
 
 
 }
-

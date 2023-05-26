@@ -1,145 +1,145 @@
 .follow-people-main-container {
-	.follow-people-ion-content {
-		--background: #fefcf7;
-	}
+  .follow-people-ion-content {
+    --background: #fefcf7;
+  }
 
 
-	.follow-people-back-btn {
-		position: absolute;
-		left: 6%;
-		top: 40%;
-	}
+  .follow-people-back-btn {
+    position: absolute;
+    left: 6%;
+    top: 40%;
+  }
 
 
 
 
 
-	.follow-people-title {
-		margin-top: 24px;
-		font-weight: 500;
-		font-size: 20px;
-		text-align: center;
-		font-family: "Baskerville";
-		line-height: 18px;
-	}
+  .follow-people-title {
+    margin-top: 24px;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    font-family: "Baskerville";
+    line-height: 18px;
+  }
 
-	.follow-people-desc-container {
-		padding-left: 30px;
-		padding-right: 30px;
-		width: 250px;
-		margin: auto;
-	}
+  .follow-people-desc-container {
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 250px;
+    margin: auto;
+  }
 
-	.follow-people-desc {
-		line-height: 18px;
-		font-weight: 400;
-		font-size: 12px;
-		color: gray;
-		text-align: center;
-	}
+  .follow-people-desc {
+    line-height: 18px;
+    font-weight: 400;
+    font-size: 12px;
+    color: gray;
+    text-align: center;
+  }
 
-	.follow-people-body-container {
-		margin-top: -5px;
-		margin-bottom: -80px;
-		height: 54vh;
-		display: flex;
-		justify-content: start;
-		align-items: center;
-		padding-top: 20px;
-		flex-direction: column;
+  .follow-people-body-container {
+    margin-top: -5px;
+    margin-bottom: -80px;
+    height: 54vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-top: 20px;
+    flex-direction: column;
 
-	}
+  }
 
-	.follow-people-users-row {
-		height: 65px;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-bottom: -5px;
-		width: 90%;
-	}
+  .follow-people-users-row {
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: -5px;
+    width: 90%;
+  }
 
-	.follow-people-users-img-container {
-		height: 90%;
-		width: 18%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+  .follow-people-users-img-container {
+    height: 90%;
+    width: 18%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-	.follow-people-users-img {
-		height: 90%;
-		width: 90%;
-		border-radius: 50%;
-	}
+  .follow-people-users-img {
+    height: 90%;
+    width: 90%;
+    border-radius: 50%;
+  }
 
-	.follow-people-user-names-container {
-		width: 45%;
-		font-size: 22px;
-		font-weight: 500;
-		color: #D69A0E;
-		margin-right: 10px;
-		font-weight: 500;
-	}
-
-
-	.follow-people-button-container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 30%;
-		height: 3rem;
-	}
+  .follow-people-user-names-container {
+    width: 45%;
+    font-size: 18px;
+    font-weight: 500;
+    color: #D69A0E;
+    margin-right: 10px;
+    font-weight: 500;
+  }
 
 
-	.follow-people-skip-container {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
+  .follow-people-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 3rem;
+  }
 
-	.follow-people-skip-container2 {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
 
-	.follow-people-skip-text {
-		text-align: center;
-		color: black;
-		font-size: 12px;
-	}
+  .follow-people-skip-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-	.follow-people-skip-container {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin-top: 11%;
-		margin-bottom: -10px;
-		// background-col: aqua;
-	}
+  .follow-people-skip-container2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-	.follow-people-skip-text {
-		text-align: center;
-		color: black;
-		font-size: 12px;
-	}
+  .follow-people-skip-text {
+    text-align: center;
+    color: black;
+    font-size: 12px;
+  }
 
-	.follow-people-submit-btn-container {
-		display: flex;
-		align-items: end;
-		margin: auto;
-		width: 350px;
-		margin-bottom: 25px;
-		margin-top: 100px;
-	}
+  .follow-people-skip-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 11%;
+    margin-bottom: -10px;
+    // background-col: aqua;
+  }
 
-	.follow-people-submit-btn-container2 {
-		display: flex;
-		align-items: end;
-		margin: auto;
-		width: 350px;
-		margin-bottom: 25px;
-		margin-top: 10px;
-	}
+  .follow-people-skip-text {
+    text-align: center;
+    color: black;
+    font-size: 12px;
+  }
+
+  .follow-people-submit-btn-container {
+    display: flex;
+    align-items: end;
+    margin: auto;
+    width: 350px;
+    margin-bottom: 25px;
+    margin-top: 100px;
+  }
+
+  .follow-people-submit-btn-container2 {
+    display: flex;
+    align-items: end;
+    margin: auto;
+    width: 350px;
+    margin-bottom: 25px;
+    margin-top: 10px;
+  }
 }
