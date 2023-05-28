@@ -28,7 +28,6 @@ const Experience: React.FC = () => {
       .experience(selectedExperienceArray[0])
       .then((user: User) => {
         if (user) {
-          console.log(user);
           history.push('/profile-picture');
         } else {
           console.log('something went wrong');

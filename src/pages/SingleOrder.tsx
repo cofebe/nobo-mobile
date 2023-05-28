@@ -204,6 +204,7 @@ const SingleOrder: React.FC = () => {
                         setData(singleProduct._id)
                       }
                     }
+                    style={{ marginLeft: '-2px' }}
                   >MESSAGE SELLER</IonButton>
                   <IonButton size='small'
                     onClick={(e) => {
@@ -225,7 +226,7 @@ const SingleOrder: React.FC = () => {
               </IonRow>
               <IonRow className='order-details-general-class'>
                 <IonCol>ORDER SUBTOTAL</IonCol>
-                <IonCol className='order-details-general-col'>{currencyFormat.format(product.total)}</IonCol>
+                <IonCol className='order-details-general-col'>{currencyFormat.format(product.subtotal)}</IonCol>
               </IonRow>
               <IonRow className='order-details-general-class'>
                 <IonCol >SHIPPING</IonCol>
@@ -249,7 +250,7 @@ const SingleOrder: React.FC = () => {
                 <IonCol >TOTAL</IonCol>
                 <IonCol
                   className='order-details-general-col'>
-                  {/* {currencyFormat.format(product.total + product.shipping + product.salesTax - product.products.summary.coupon)} */}
+                  {currencyFormat.format(product.total)}
                 </IonCol>
               </IonRow>
             </div>

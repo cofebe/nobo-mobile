@@ -8,7 +8,7 @@ import 'cropperjs/dist/cropper.css';
 import { UserService } from '../services/UserService';
 import Search from '../components/Search';
 import Checkbox from '../components/Checkbox';
-import { Brand } from '../models';
+import { Brand, User } from '../models';
 import HeaderComponent from '../components/HeaderComponent';
 
 const SelectBrands: React.FC = () => {
@@ -37,27 +37,45 @@ const SelectBrands: React.FC = () => {
     if (!brandsSelectArr.includes(brandId, 0)) {
       setBrandSelectArray([...brandsSelectArr, brandId])
       console.log(brandsSelectArr)
-    } else if (brandsSelectArr.includes(brandId, 0)) {
-      const updatedRemove = brandsSelectArr.filter((brand) => brand !== brandId)
-      setBrandSelectArray(updatedRemove)
-      console.log('after removed brand ', brandsSelectArr)
     }
+
+    else {
+      return
+    }
+    // else if (brandsSelectArr.includes(brandId, 0)) {
+    //   const updatedRemove = brandsSelectArr.filter((brand) => brand !== brandId)
+    //   setBrandSelectArray(updatedRemove)
+    //   console.log('after removed brand ', brandsSelectArr)
+    // }
   };
 
-  const handleSubmit = async () => {
-    userService
-      .selectBrand(brandsSelectArr)
-      .then(res => {
-        if (res) {
-          console.log('the res ', res);
-          history.push('/onboarding-post');
+  const handleSubmit = async (brandOption: string) => {
+
+    userService.getMe()
+      .then((user: User) => {
+        console.log('user fav brands ' ,user.favoriteBrands)
+        if (user.favoriteBrands.includes(brandOption, 0)) {
+          return
         } else {
-          console.log('something went wrong ', res);
+          console.log('can add brand')
+          userService
+            .selectBrand(brandOption)
+            .then(res => {
+              if (res) {
+                console.log('the res ', res);
+              } else {
+                console.log('something went wrong ', res);
+              }
+            })
+            .catch((err: any) => {
+              console.log('SelectBrand error', err);
+            });
         }
       })
-      .catch((err: any) => {
-        console.log('SelectBrand error', err);
-      });
+      .catch((err) => {
+        console.log('error fetching user', err)
+      })
+
   };
 
   const mapFilter = brandsItems?.filter(brand =>
@@ -104,6 +122,7 @@ const SelectBrands: React.FC = () => {
                 onClick={() => {
                   console.log(brand.name)
                   handleTicker(brand._id)
+                  handleSubmit(brand._id)
                 }}
                 className='select-brand-img-col' key={brand._id} size='5'
               >
@@ -135,7 +154,9 @@ const SelectBrands: React.FC = () => {
           className={brandsSelectArr.length < 1 ? 'select-brands-btn-container' : 'select-brands-btn-container2'}
         >
           <Button
-            label='NEXT' large onClick={handleSubmit}
+            label='NEXT' large onClick={()=>{
+                history.push('/onboarding-post');
+            }}
             disabled={brandsSelectArr.length < 1} />
         </div>
       </IonContent>

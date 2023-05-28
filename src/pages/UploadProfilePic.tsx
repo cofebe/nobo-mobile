@@ -78,7 +78,6 @@ const UploadProfilePic: React.FC = () => {
       .uploadProfileImg(img)
       .then(res => {
         if (res) {
-          console.log('res from server:', res);
           history.push('/follow-people');
         } else {
           console.log('something went wrong');
@@ -124,7 +123,6 @@ const UploadProfilePic: React.FC = () => {
                   onClick={e => {
                     e.preventDefault();
                     takePicture();
-                    console.log('starting camera...');
                   }}
                   src='assets/images/nobo-profile-upload-plus.png'
                   alt=''
@@ -137,7 +135,6 @@ const UploadProfilePic: React.FC = () => {
                 className='profile-picture-clear-photo'
                 onClick={(e) => {
                   setImageData('')
-                  console.log('clear photo')
                 }}
               >
                 <img src='assets/images/close-black.svg' alt='close' />
