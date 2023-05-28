@@ -1,23 +1,24 @@
 .nobo-login-page {
   .background-image {
+    overflow-y: scroll;
     width: 100%;
     height: 100%;
     background-image: url(../../public/assets/images/nobo-splash-3.png);
     background-size: cover;
     background-position: center;
-    padding: 50px 15px 15px 15px;
+    // padding: 0px 15px 15px 15px;
 
-    .nobo-login-back{
-      position: absolute;
-      top: 81.5px;
-      // background-color: red;
-    }
+    // .nobo-login-back{
+    //   position: absolute;
+    //   top: 81.5px;
+    //   // background-color: red;
+    // }
   }
 
   .login-box {
     margin-top: 43vh;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
     background: linear-gradient(116.6deg,
         rgba(255, 255, 255, 0.6) 15.94%,
         rgba(255, 255, 255, 0.36) 92.73%);

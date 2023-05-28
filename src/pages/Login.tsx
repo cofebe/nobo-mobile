@@ -56,7 +56,28 @@ const Login: React.FC = () => {
   return (
     <IonPage className="nobo-login-page">
       <div className="background-image">
-        <IonRow >
+
+      <IonRow >
+          <IonCol size='12' style={{ height: '160px'  }}>
+            <div
+              onClick={() => {
+                history.push('/get-started');
+              }}
+              className="header-comp-back-btn"
+            >
+              <img
+                height={38}
+                src="assets/images/nobo-back-icon.png"
+                alt="logo"
+              />
+            </div>
+            <div
+              className="header-comp-nobo-logo">
+              <img height={65} src="assets/images/nobo-logo-white.png" alt="logo" />
+            </div>
+          </IonCol>
+        </IonRow>
+        {/* <IonRow >
           <IonCol size="2" className='nobo-login-back'>
             <div
               onClick={() => {
@@ -71,7 +92,8 @@ const Login: React.FC = () => {
           <IonCol class="ion-justify-content-center" style={{ display: 'flex' }}>
             <img height={65} src="assets/images/nobo-logo-white.png" alt="logo" />
           </IonCol>
-        </IonRow>
+        </IonRow> */}
+
         <IonRow>
           <IonGrid className="login-box">
             <IonRow style={{ paddingTop: 20 }} class="ion-justify-content-center">

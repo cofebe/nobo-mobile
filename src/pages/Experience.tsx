@@ -44,7 +44,7 @@ const Experience: React.FC = () => {
     <IonPage className='experience-main-container'>
       <IonContent className='experience-ion-content'>
         <HeaderComponent />
-        <IonRow style={{ marginTop: '50px' }}>
+        <IonRow >
           <IonCol className='experience-title'>CHOOSE YOUR EXPERIENCE</IonCol>
         </IonRow>
         <IonRow className='experience-desc-container'>
@@ -55,45 +55,32 @@ const Experience: React.FC = () => {
         </IonRow>
 
         <IonGrid className='experience-form-container'>
-
-
           {/* WOMEN */}
-          <IonRow>
-            <IonCol
-              size='12'
-              className='experience-img-container'
-              onClick={() => {
-                handleTicker('women');
-              }}
-            >
-              <img
-                className={
-                  selectedExperienceArray.includes('women')
-                    ? 'experience-img-container-selected'
-                    : 'experience-img-container'
-                }
-                src='assets/images/experience-women.png'
-                alt='women'
-              />
-              <h3
-                style={{
-                  position: 'absolute',
-                  color: 'white',
-                  fontWeight: 'bold',
-                }}
-              >
-                WOMEN
-              </h3>
-              <div className='experience-checkbox'>
-                <Checkbox value={selectedExperienceArray.includes('women')} onChange={() => { }} />
-                {/* <Checkbox value={expOptionSelected === 'women'} onChange={() => { }} /> */}
-              </div>
-            </IonCol>
-          </IonRow>
-
+          <IonCol
+            size='12'
+            className='experience-img-container'
+            onClick={() => {
+              handleTicker('women');
+            }}
+          >
+            <img
+              className={
+                selectedExperienceArray.includes('women')
+                  ? 'exp-img-selected'
+                  : ''
+              }
+              src='assets/images/experience-women.png'
+              alt='women'
+            />
+            <h3 className='exp-img-title'> WOMEN </h3>
+            <div className='exp-checkbox-ticker'>
+              <Checkbox value={selectedExperienceArray.includes('women')} onChange={() => { }} />
+            </div>
+          </IonCol>
 
           {/* MEN */}
-          <div
+          <IonCol
+            size='12'
             className='experience-img-container'
             onClick={() => {
               handleTicker('men');
@@ -102,28 +89,21 @@ const Experience: React.FC = () => {
             <img
               className={
                 selectedExperienceArray.includes('men')
-                  ? 'experience-img-container-selected'
-                  : 'experience-img-container'
+                  ? 'exp-img-selected'
+                  : ''
               }
               src='assets/images/experience-men.png'
-              alt='sneakers'
+              alt='men'
             />
-            <h3
-              style={{
-                position: 'absolute',
-                color: 'white',
-                fontWeight: 'bold',
-              }}
-            >
-              MEN
-            </h3>
-            <div className='experience-checkbox'>
-              <Checkbox value={selectedExperienceArray.includes('men')} onChange={e => { }} />
+            <h3 className='exp-img-title'> MEN </h3>
+            <div className='exp-checkbox-ticker'>
+              <Checkbox value={selectedExperienceArray.includes('men')} onChange={() => { }} />
             </div>
-          </div>
+          </IonCol>
 
           {/* SNEAKERS */}
-          <div
+          <IonCol
+            size='12'
             className='experience-img-container'
             onClick={() => {
               handleTicker('sneakers');
@@ -132,25 +112,18 @@ const Experience: React.FC = () => {
             <img
               className={
                 selectedExperienceArray.includes('sneakers')
-                  ? 'experience-img-container-selected'
-                  : 'experience-img-container'
+                  ? 'exp-img-selected'
+                  : ''
               }
               src='assets/images/experience-sneaker.png'
               alt='sneakers'
             />
-            <h3
-              style={{
-                position: 'absolute',
-                color: 'white',
-                fontWeight: 'bold',
-              }}
-            >
-              SNEAKERS
-            </h3>
-            <div className='experience-checkbox'>
-              <Checkbox value={selectedExperienceArray.includes('sneakers')} onChange={e => { }} />
+            <h3 className='exp-img-title'> SNEAKERS </h3>
+            <div className='exp-checkbox-ticker'>
+              <Checkbox value={selectedExperienceArray.includes('sneakers')} onChange={() => { }} />
             </div>
-          </div>
+          </IonCol>
+
         </IonGrid>
         <IonRow >
           <IonCol size='12'>

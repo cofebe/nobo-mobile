@@ -6,6 +6,7 @@ import { loadingStore } from '../loading-store';
 import Input from '../components/Input';
 import './SignUp1.scss';
 import Button from '../components/Button';
+import HeaderComponent from '../components/HeaderComponent';
 
 const SignUp1: React.FC = () => {
   // email check...
@@ -58,31 +59,27 @@ const SignUp1: React.FC = () => {
   return (
     <IonPage className='signup-details-container'>
       <div className='signup-details-background-image'>
-        <IonHeader className='signup-details-header'>
-          <IonGrid>
-            <IonRow >
-              <IonCol size='12' style={{ backgrounColor: 'teal' }} >
-
-                <div className='signup-details-go-back'>
-                  <img
-                    onClick={() => {
-                      history.goBack();
-                    }}
-                    height={40}
-                    src='assets/images/nobo-back-icon.png'
-                    alt='logo'
-                  />
-                </div>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </IonHeader>
-
-        <IonRow style={{ marginTop: '6vh' }}>
-          <IonCol className='signup-details-nobo-logo' size='12'>
-            <img height={65} src='assets/images/nobo-logo-white.png' alt='logo' />
+        <IonRow>
+          <IonCol size='12' style={{ height: '160px' }}>
+            <div
+              onClick={() => {
+                history.goBack();
+              }}
+              className="header-comp-back-btn"
+            >
+              <img
+                height={38}
+                src="assets/images/nobo-back-icon.png"
+                alt="logo"
+              />
+            </div>
+            <div
+              className="header-comp-nobo-logo">
+              <img height={65} src="assets/images/nobo-logo-white.png" alt="logo" />
+            </div>
           </IonCol>
         </IonRow>
+
 
         <IonGrid className='signup-details-box'>
           <IonRow   >
