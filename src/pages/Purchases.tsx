@@ -40,8 +40,14 @@ const Purchases: React.FC = () => {
   );
 
 
-  const newp: any = productsData[0]?.docs.map((p) => p.products.filter((an) => an.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)))
-  console.log('productDat -->', newp)
+  const newp: any = productsData[0]?.docs.map((product) => product.products?.map((p)=>p.name.toLowerCase().includes(inputValue.toLowerCase(), 0)))
+  console.log(newp)
+  // const fiter = productsData[0]?.docs.filter((product:any)=>product.products?.name?.toLowerCase().includes(inputValue))
+
+  console.log(filteredProduct)
+
+
+
   return (
     <IonPage className='purchase-item-main-container'>
       <IonHeader className='purchase-item-header'>
@@ -76,7 +82,7 @@ const Purchases: React.FC = () => {
       <IonContent className='purchase-item-content'>
 
         {/* PURCHASE-ITEMS-CONTAINER */}
-        {productsData[0]?.docs.map((product: FullOrder) => (
+        {filteredProduct?.map((product: FullOrder) => (
           <IonRow key={product._id} className='purchase-item-container'>
 
             <div className='purchase-item-info'>
