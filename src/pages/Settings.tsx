@@ -77,7 +77,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/trades');
+            history.push('/settings/trades');
           }}
         >
           My Trades

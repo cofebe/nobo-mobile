@@ -65,6 +65,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import OfferComplete from './pages/OfferComplete';
+import MyTrade from './pages/MyTrade';
 
 
 setupIonicReact({
@@ -218,6 +219,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/settings/purchases/single-order/:id" exact={true}>
               <SingleOrder />
+            </Route>
+            <Route path="/settings/trades" exact={true}>
+              <MyTrade />
             </Route>
             <Route path="/signup1" exact={true}>
               <SignUp1 />

@@ -1,5 +1,14 @@
 import { useRef, useState } from 'react'
-import { IonCol, IonContent, IonGrid, IonHeader, IonModal, IonPage, IonRow, IonToolbar, useIonViewWillEnter } from '@ionic/react'
+import {
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonPage,
+  IonRow,
+  IonToolbar,
+  useIonViewWillEnter
+} from '@ionic/react'
 import './Purchases.scss'
 import { useHistory, } from 'react-router'
 import Search from '../components/Search'
@@ -33,18 +42,11 @@ const Purchases: React.FC = () => {
 
 
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-
+  // Filtering products
   const filteredProduct = productsData[0]?.docs?.filter(product =>
     product.products[0]?.name.toLowerCase().includes(inputValue.toLowerCase(), 0) ||
     product.products[0]?.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)
   );
-
-
-  const newp: any = productsData[0]?.docs.map((product) => product.products?.map((p)=>p.name.toLowerCase().includes(inputValue.toLowerCase(), 0)))
-  console.log(newp)
-  // const fiter = productsData[0]?.docs.filter((product:any)=>product.products?.name?.toLowerCase().includes(inputValue))
-
-  console.log(filteredProduct)
 
 
 
