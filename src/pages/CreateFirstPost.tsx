@@ -63,7 +63,7 @@ const CreateFirstPost: React.FC = () => {
       <IonContent className='create-post-ion-content'>
         <HeaderComponent />
 
-        <IonRow style={{ marginTop: '40px' }}>
+        <IonRow style={{marginTop:'-10px' }}>
           <IonCol className='create-post-title'>YOUR FIRST POST</IonCol>
         </IonRow>
         <IonRow className='create-post-desc-container'>

@@ -37,6 +37,14 @@ import PostDetail from './pages/PostDetail';
 import ListItem from './pages/ListItem';
 import SignUp1 from './pages/SignUp1';
 import SignUp2 from './pages/SignUp2';
+import Experience from './pages/Experience';
+import FollowPeople from './pages/FollowPeople';
+import SelectBrands from './pages/SelectBrands';
+import CreateFirstPost from './pages/CreateFirstPost';
+import Purchases from './pages/Purchases';
+import SingleOrder from './pages/SingleOrder';
+import AccountSettings from './pages/AccountSettings';
+import UploadProfilePic from './pages/UploadProfilePic';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -57,14 +65,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import OfferComplete from './pages/OfferComplete';
-import Experience from './pages/Experience';
-import ProfilePicture from './pages/ProfilePicture';
-import FollowPeople from './pages/FollowPeople';
-import SelectBrands from './pages/SelectBrands';
-import CreateFirstPost from './pages/CreateFirstPost';
-import Purchases from './pages/Purchases';
-import SingleOrder from './pages/SingleOrder';
-import AccountSettings from './pages/AccountSettings';
+
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -227,9 +228,6 @@ const App: React.FC = () => {
             <Route path="/experience" exact={true}>
               <Experience />
             </Route>
-            <Route path="/profile-picture" exact={true}>
-              <ProfilePicture />
-            </Route>
             <Route path="/follow-people" exact={true}>
               <FollowPeople />
             </Route>
@@ -238,6 +236,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/onboarding-post" exact={true}>
               <CreateFirstPost />
+            </Route>
+            <Route path="/profile-picture" exact={true}>
+              <UploadProfilePic />
             </Route>
 
             {/* URP */}

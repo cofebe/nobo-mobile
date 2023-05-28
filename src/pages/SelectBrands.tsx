@@ -81,7 +81,7 @@ const SelectBrands: React.FC = () => {
       <IonContent className='select-brands-ion-content'>
         <HeaderComponent />
 
-        <IonRow style={{ marginTop: '50px' }}>
+        <IonRow>
           <IonCol className='select-brands-title'>SELECT BRANDS</IonCol>
         </IonRow>
         <IonRow className='select-brands-desc-container'>

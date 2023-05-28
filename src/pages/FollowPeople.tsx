@@ -81,7 +81,7 @@ const FollowPeople: React.FC = () => {
     <IonPage className='follow-people-main-container'>
       <IonContent className='follow-people-ion-content'>
         <HeaderComponent />
-        <IonRow style={{ marginTop: '50px' }}>
+        <IonRow>
           <IonCol className='follow-people-title'>FOLLOW PEOPLE</IonCol>
         </IonRow>
         <IonRow className='follow-people-desc-container'>

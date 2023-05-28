@@ -44,6 +44,7 @@
     "cordova-plugin-x-socialsharing": "^6.0.4",
     "date-fns": "^2.29.3",
     "graphql": "^0.13.0",
+    "image-compressor": "^2.0.3",
     "imagekitio-react": "^2.0.0",
     "ionicons": "^5.4.0",
     "node-sass": "^7.0.1",
