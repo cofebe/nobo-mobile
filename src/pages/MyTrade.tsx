@@ -55,37 +55,18 @@ const MyTrade: React.FC = () => {
             />
           </div>
 
-          <IonCol className='trade-item-title-text-container'>MY TRADE</IonCol>
+          <IonCol className='trade-item-title-text-container'>MY TRADES</IonCol>
         </IonCol>
       </IonRow>
-      {/* <IonHeader className='trade-item-header'>
-        <IonToolbar className='trade-item-header-toolbar'>
-          <IonGrid>
-            <IonRow>
-              <IonCol size='12'>
-                <div className='trade-item-title'>
-                  <div
-                    className='trade-item-back-button'
-                    onClick={e => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      history.goBack();
-                    }}
-                  >
-                    <img src='assets/images/arrow-left.svg' alt='back' />
-                  </div>
-                  MY TRADES
-                </div>
-              </IonCol>
-            </IonRow>
 
-          </IonGrid>
-        </IonToolbar>
-      </IonHeader> */}
       <IonRow>
         <IonCol size='12' className='trade-item-info-header'>
-          <div >
-            <img src='assets/images/trades-offers.png' alt="" />
+          <div
+          onClick={()=>{
+            history.push('/settings/trades/accepted/4')
+          }}
+          >
+            <img src='assets/images/trade-offer.svg' alt="" />
           </div>
         </IonCol>
       </IonRow>
@@ -124,8 +105,12 @@ const MyTrade: React.FC = () => {
 
               <div className='trade-offer-line'></div>
               <div className='trade-items-btn-container'>
-                <IonButton className='trade-item-btn' fill='outline' onClick={() => { }} >DENY</IonButton>
-                <IonButton className='trade-item-btn' onClick={() => { }} >ACCEPT</IonButton>
+                <IonButton className='trade-item-btn' fill='outline' onClick={() => {
+            history.push('/settings/trades/denied/5')
+           }} >DENY</IonButton>
+                <IonButton className='trade-item-btn'  onClick={() => {
+            history.push('/settings/trades/accepted/5')
+           }} >ACCEPT</IonButton>
               </div>
             </IonCol>
           </IonRow>

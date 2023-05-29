@@ -45,6 +45,10 @@ import Purchases from './pages/Purchases';
 import SingleOrder from './pages/SingleOrder';
 import AccountSettings from './pages/AccountSettings';
 import UploadProfilePic from './pages/UploadProfilePic';
+import OfferComplete from './pages/OfferComplete';
+import MyTrade from './pages/MyTrade';
+import TradeAccepted from './pages/TradeAccepted';
+import TradeDenied from './pages/TradeDenied';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -64,8 +68,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import OfferComplete from './pages/OfferComplete';
-import MyTrade from './pages/MyTrade';
+
 
 
 setupIonicReact({
@@ -222,6 +225,12 @@ const App: React.FC = () => {
             </Route>
             <Route path="/settings/trades" exact={true}>
               <MyTrade />
+            </Route>
+            <Route path="/settings/trades/accepted/:id" exact={true}>
+              <TradeAccepted />
+            </Route>
+            <Route path="/settings/trades/denied/:id" exact={true}>
+              <TradeDenied />
             </Route>
             <Route path="/signup1" exact={true}>
               <SignUp1 />
