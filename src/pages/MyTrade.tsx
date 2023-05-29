@@ -36,18 +36,29 @@ const MyTrade: React.FC = () => {
 
 
 
-  // const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-  // // Filtering products
-  // const filteredProduct = productsData[0]?.docs?.filter(product =>
-  //   product.products[0]?.name.toLowerCase().includes(inputValue.toLowerCase(), 0) ||
-  //   product.products[0]?.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)
-  // );
-
 
 
   return (
     <IonPage className='trade-item-main-container'>
-      <IonHeader className='trade-item-header'>
+      <IonRow style={{ backgroundColor: '#FEFCF7' }}>
+        <IonCol className='trade-item-header' size='12'>
+          <div
+            className='trade-item-back-btn'
+            onClick={() => {
+              history.goBack()
+            }}
+          >
+            <img
+              height={23}
+              src='assets/images/arrow-left.svg'
+              alt='logo'
+            />
+          </div>
+
+          <IonCol className='trade-item-title-text-container'>MY TRADE</IonCol>
+        </IonCol>
+      </IonRow>
+      {/* <IonHeader className='trade-item-header'>
         <IonToolbar className='trade-item-header-toolbar'>
           <IonGrid>
             <IonRow>
@@ -70,7 +81,7 @@ const MyTrade: React.FC = () => {
 
           </IonGrid>
         </IonToolbar>
-      </IonHeader>
+      </IonHeader> */}
       <IonRow>
         <IonCol size='12' className='trade-item-info-header'>
           <div >
@@ -82,9 +93,37 @@ const MyTrade: React.FC = () => {
         <IonGrid>
           <IonRow>
             <IonCol className='trade-item-container'>
-              <div style={{backgroundColor:'yellow', width:'100%'}}>hello</div>
+              <div className='trade-item-status-container'>
+                <div className="item-status">
+                  <p className='status_'>STATUS</p>
+                  <p className='status_text'>PENDING TRADE OFFER</p>
+                </div>
+                <div className="items-view-details">VIEW DETAILS</div>
+              </div>
+              <div className='items-view-props'>
+
+                <div className='items-view-props-left'>
+                  <img className='item-img-left' src='assets/images/test/bvlgary.svg' alt="" />
+                  <div className="trade-item-name-left">BVLGARY Clutch</div>
+                  <div className="trade-item-price-left">$500</div>
+                </div>
+
+                <div className='items-view-props-center'>
+                  <div className='line'></div>
+                  <div className='circle'></div>
+                  <img className='img' src='assets/images/12420.svg' alt="" />
+
+                </div>
+
+                <div className='items-view-props-right'>
+                  <img className='item-img-left' src='assets/images/test/bvlgary.svg' alt="" />
+                  <div className="trade-item-name-right">BVLGARY Clutch</div>
+                  <div className="trade-item-price-right">$1900</div>
+                </div>
+              </div>
+
               <div className='trade-offer-line'></div>
-              <div  className='trade-items-btn-container'>
+              <div className='trade-items-btn-container'>
                 <IonButton className='trade-item-btn' fill='outline' onClick={() => { }} >DENY</IonButton>
                 <IonButton className='trade-item-btn' onClick={() => { }} >ACCEPT</IonButton>
               </div>

@@ -126,7 +126,6 @@ const AccountSettings: React.FC = () => {
             <div
               className='account-settings-back-btn'
               onClick={() => {
-                console.log('click')
                 history.goBack()
               }}
             >
