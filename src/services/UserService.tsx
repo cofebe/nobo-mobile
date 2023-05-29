@@ -459,12 +459,9 @@ export class UserService extends BaseService {
 
 
   // SELECTED BRAND
-  async selectBrand(brands: any) {
-    const brandId = {
-      strings: brands
-    }
+  async selectBrand(brandId: any) {
     console.log("userService section ", brandId)
-    const response = await super.fetch('POST', '/api/brands/add-favorite', { brandId: brands });
+    const response = await super.fetch('POST', '/api/brands/add-favorite', { brandId });
     return response.json();
   }
 

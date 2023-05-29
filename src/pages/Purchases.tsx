@@ -1,5 +1,14 @@
 import { useRef, useState } from 'react'
-import { IonCol, IonContent, IonGrid, IonHeader, IonModal, IonPage, IonRow, IonToolbar, useIonViewWillEnter } from '@ionic/react'
+import {
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonPage,
+  IonRow,
+  IonToolbar,
+  useIonViewWillEnter
+} from '@ionic/react'
 import './Purchases.scss'
 import { useHistory, } from 'react-router'
 import Search from '../components/Search'
@@ -33,15 +42,14 @@ const Purchases: React.FC = () => {
 
 
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-
+  // Filtering products
   const filteredProduct = productsData[0]?.docs?.filter(product =>
     product.products[0]?.name.toLowerCase().includes(inputValue.toLowerCase(), 0) ||
     product.products[0]?.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)
   );
 
 
-  const newp: any = productsData[0]?.docs.map((p) => p.products.filter((an) => an.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)))
-  console.log('productDat -->', newp)
+
   return (
     <IonPage className='purchase-item-main-container'>
       <IonHeader className='purchase-item-header'>
@@ -76,7 +84,7 @@ const Purchases: React.FC = () => {
       <IonContent className='purchase-item-content'>
 
         {/* PURCHASE-ITEMS-CONTAINER */}
-        {productsData[0]?.docs.map((product: FullOrder) => (
+        {filteredProduct?.map((product: FullOrder) => (
           <IonRow key={product._id} className='purchase-item-container'>
 
             <div className='purchase-item-info'>
