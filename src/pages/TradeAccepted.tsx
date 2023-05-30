@@ -101,7 +101,7 @@ const TradeAccepted: React.FC = () => {
           <IonButton className='btn' onClick={() => {
             history.push('/settings/trades')
           }} >VIEW MY TRADES</IonButton>
-          <IonButton className='btn' fill='outline'
+          <IonButton style={{backgroundColor:'white'}} className='btn' fill='outline'
             onClick={() => { history.push('/home/style-feed') }}
           >BACK TO HOME FEED</IonButton>
         </div>

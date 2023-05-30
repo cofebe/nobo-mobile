@@ -1,0 +1,189 @@
+.single-sales-item-main-container {
+  background-color: #FEFCF7;
+
+  .single-sales-item-header {
+    // background-color: #FEFCF7;
+    height: 118px;
+    border-bottom: 1.5px solid black;
+    .single-sales-item-back-btn {
+      position: absolute;
+      left: 15px;
+      bottom: 15px;
+      z-index: 1000;
+    }
+
+    .single-sales-item-title-text-container {
+      position: absolute;
+      top: 64%;
+      bottom: 10.71%;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 150%;
+      letter-spacing: 0.05em;
+      color: #000000;
+      text-align: center;
+    }
+
+
+  }
+
+  .single-sales-item-content {
+    --padding-start: 24px;
+    --padding-end: 24px;
+    --padding-bottom: 20px;
+    // --padding-top: 20px;
+    --background: #FEFCF7;
+
+    .single-sales-shipping-label {
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 150%;
+      /* identical to box height, or 18px */
+
+      letter-spacing: 0.05em;
+      text-decoration-line: underline;
+
+      color: #D6980E;
+    }
+
+    .single-sales-items-container {
+      margin-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0px 0px 0px 0px;
+
+      .single-sales-items-props-left {
+        flex: 2;
+
+        .order-no {
+          height: 15px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 10px;
+          line-height: 150%;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: #A9A9A9;
+        }
+
+        .seller-name {
+          margin-top: 8px;
+          width: 126px;
+          height: 23px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 15px;
+          line-height: 150%;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: #000000;
+        }
+
+        .product {
+          margin-top: 8px;
+          width: 52px;
+          height: 15px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 10px;
+          line-height: 150%;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: #A9A9A9;
+        }
+
+        .product-name {
+          margin-top: 8px;
+          width: 200px;
+          height: 18px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 12px;
+          line-height: 150%;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: #000000;
+
+        }
+
+        .year {
+          margin-top: 8px;
+          width: 70px;
+          height: 15px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 150%;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: #000000;
+        }
+
+      }
+
+      .single-sales-items-props-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        .img-container {
+          height: 75px;
+          width: 75px;
+        }
+
+        .price {
+          width: 120px;
+          height: 30px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 150%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: #000000;
+        }
+
+      }
+
+    }
+
+    .single-sales-item-line-divider {
+      width: 100%;
+      height: 0.5px;
+      margin-top: -5px;
+      background-color: #707070;
+    }
+  }
+
+
+}

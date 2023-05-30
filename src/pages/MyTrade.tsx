@@ -40,7 +40,7 @@ const MyTrade: React.FC = () => {
 
   return (
     <IonPage className='trade-item-main-container'>
-      <IonRow style={{ backgroundColor: '#FEFCF7' }}>
+      <IonRow>
         <IonCol className='trade-item-header' size='12'>
           <div
             className='trade-item-back-btn'
@@ -54,7 +54,6 @@ const MyTrade: React.FC = () => {
               alt='logo'
             />
           </div>
-
           <IonCol className='trade-item-title-text-container'>MY TRADES</IonCol>
         </IonCol>
       </IonRow>
@@ -105,10 +104,10 @@ const MyTrade: React.FC = () => {
 
               <div className='trade-offer-line'></div>
               <div className='trade-items-btn-container'>
-                <IonButton className='trade-item-btn' fill='outline' onClick={() => {
+                <IonButton style={{backgroundColor:'white'}} size='small' className='trade-item-btn' fill='outline' onClick={() => {
             history.push('/settings/trades/denied/5')
            }} >DENY</IonButton>
-                <IonButton className='trade-item-btn'  onClick={() => {
+                <IonButton size='small'  className='trade-item-btn'  onClick={() => {
             history.push('/settings/trades/accepted/5')
            }} >ACCEPT</IonButton>
               </div>

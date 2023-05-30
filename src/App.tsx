@@ -68,6 +68,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import MySales from './pages/MySales';
+import SingleSalesItem from './pages/SingleSalesItem';
 
 
 
@@ -231,6 +233,12 @@ const App: React.FC = () => {
             </Route>
             <Route path="/settings/trades/denied/:id" exact={true}>
               <TradeDenied />
+            </Route>
+            <Route path="/settings/sales" exact={true}>
+              <MySales />
+            </Route>
+            <Route path="/sales/single-sales-item/:id" exact={true}>
+              <SingleSalesItem />
             </Route>
             <Route path="/signup1" exact={true}>
               <SignUp1 />

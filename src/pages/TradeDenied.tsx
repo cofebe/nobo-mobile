@@ -89,15 +89,15 @@ const TradeDenied: React.FC = () => {
                 </div>
               </div>
 
-
             </IonCol>
+
           </IonRow>
         </IonGrid>
         <div className="trade-denied-btn-below">
           <IonButton className='btn' onClick={() => {
             history.push('/home/closet/trade')
           }} >VIEW MY CLOSET</IonButton>
-          <IonButton className='btn' fill='outline' onClick={() => {
+          <IonButton style={{backgroundColor:'white'}} className='btn' fill='outline' onClick={() => {
             history.push('/home/style-feed')
           }} >BACK TO HOME FEED</IonButton>
         </div>
