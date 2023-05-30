@@ -1,141 +1,117 @@
-.trade-item-main-container {
+.accepted-accepted-item-main-container {
   background-color: #FEFCF7;
 
-
-  .trade-item-header {
-    background-color: #FEFCF7;
-    height: 118px;
-
-    .trade-item-back-btn{
-      position: absolute;
-      left: 35px;
-      bottom: 15px;
-      z-index: 1000;
-    }
-
-    .trade-item-title-text-container {
-      position: absolute;
-      top: 64%;
-      bottom: 10.71%;
-      font-family: 'Nunito Sans';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 15px;
-      line-height: 150%;
-      letter-spacing: 0.05em;
-      color: #000000;
-      text-align: center;
-    }
-
-  }
-
-  .trade-item-info-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5px;
-  }
-
-  .trade-item-content {
+  .item-accepted-content {
     --padding-start: 20px;
     --padding-end: 20px;
     --padding-bottom: 20px;
     // --padding-top: 20px;
     --background: #FEFCF7;
 
-    .trade-offer-line {
-      width: 100%;
-      height: 1px;
-      border: 0.05px solid #707070;
-      position: absolute;
-      left: 0px;
-      top: 196px;
+
+    .accepted-accepted-item-header {
+      background-color: #FEFCF7;
+      height: 118px;
+
+      .accepted-accepted-item-back-btn {
+        position: absolute;
+        left: 35px;
+        bottom: 15px;
+        z-index: 1000;
+      }
+
+      .item-accepted-title-text-container {
+        position: absolute;
+        top: 35%;
+        bottom: 10.71%;
+        font-family: 'Baskerville';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 150%;
+        /* identical to box height, or 30px */
+
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+
+        color: #000000;
+        text-align: center;
+      }
+
     }
 
-    .trade-item-container {
+    .item-accepted-info-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -20px;
+      height: 20px;
+    }
+
+    .item-accepted-desc-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .item-accepted-desc {
+        width: 273px;
+        height: 40px;
+
+
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 20px;
+        color: #000000;
+      }
+
+    }
+
+    .item-accepted-desc-container2 {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .item-accepted-desc2 {
+        width: 342px;
+        height: 40px;
+        margin-top: 10px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: #707070;
+      }
+
+    }
+
+
+
+
+
+
+
+
+
+
+    .item-accepted-container {
       position: relative;
       width: 350px;
       height: 255px;
       background: #FEFCF7;
-      border: 0.5px solid #707070;
-      border-radius: 10px;
+      border: none;
 
     }
 
-    .trade-item-status-container {
-      // background-color: teal;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 15px;
-      margin: 5px 16px 0px 10px;
 
-      .item-status {
-        // background-color: red;
-        flex: 1.1;
-        display: flex;
-        align-items: center;
-        // justify-content: center;
-        height: 15px;
-        padding-top: 5px;
-
-      }
-
-      .status_ {
-        padding-top: 1px;
-        width: 40px;
-        height: 15px;
-        font-family: 'Nunito Sans';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 9px;
-        line-height: 150%;
-        letter-spacing: 0.05em;
-        color: #707070;
-      }
-
-      .status_text {
-        width: 126px;
-        height: 15px;
-        font-family: 'Nunito Sans';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 9px;
-        line-height: 150%;
-        /* identical to box height, or 15px */
-
-        letter-spacing: 0.05em;
-
-        color: #D6980E;
-      }
-
-      .items-view-details {
-        // background-color: aqua;
-        flex: .9;
-        width: 77px;
-        height: 15px;
-        text-align: right;
-
-        font-family: 'Nunito Sans';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 10px;
-        line-height: 150%;
-        /* identical to box height, or 15px */
-
-        letter-spacing: 0.05em;
-        text-decoration-line: underline;
-
-        color: #000000;
-
-      }
-
-
-    }
 
     .items-view-props {
       // background-color: greenyellow;
-      margin: 17px 40px 0px 40px;
+      margin: 17px 25px 0px 25px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -154,7 +130,7 @@
           border-radius: 10px;
         }
 
-        .trade-item-name-left {
+        .accepted-accepted-item-name-left {
           width: 100px;
           height: 18px;
           text-align: center;
@@ -168,7 +144,7 @@
           color: #000000;
         }
 
-        .trade-item-price-left {
+        .accepted-accepted-item-price-left {
           width: 50px;
           height: 18px;
           font-family: 'Nunito Sans';
@@ -232,7 +208,7 @@
           border-radius: 5px;
         }
 
-        .trade-item-name-right {
+        .accepted-accepted-item-name-right {
           width: 100px;
           height: 18px;
           text-align: center;
@@ -246,7 +222,7 @@
           color: #000000;
         }
 
-        .trade-item-price-right {
+        .accepted-accepted-item-price-right {
           width: 50px;
           height: 18px;
           font-family: 'Nunito Sans';
@@ -265,31 +241,20 @@
 
     }
 
-    .trade-items-btn-container {
-      position: absolute;
+
+
+    .trade-accepted-btn-below {
+      margin-top: 130px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      // background-color: teal;
-      height: 40px;
-      bottom: 3%;
-      right: 5%;
+      flex-direction: column;
+      gap: 5px;
 
-      .trade-item-btn {
-        font-family: 'Nunito Sans';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 12px;
-        line-height: 150%;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.05em;
-        height: 32px;
-        width: 80px;
+      .btn {
+        width: 300px;
+        height: 51px;
       }
     }
-
-
   }
 }

@@ -95,7 +95,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/sales');
+            history.push('/settings/sales');
           }}
         >
           My Sales
