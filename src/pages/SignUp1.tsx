@@ -1,4 +1,4 @@
-import { IonButton, IonPage, IonRow, IonCol, IonGrid, useIonViewWillEnter } from '@ionic/react';
+import { IonButton, IonPage, IonRow, IonCol, IonGrid, useIonViewWillEnter, IonContent, IonHeader, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserService } from '../services/UserService';
@@ -6,6 +6,7 @@ import { loadingStore } from '../loading-store';
 import Input from '../components/Input';
 import './SignUp1.scss';
 import Button from '../components/Button';
+import HeaderComponent from '../components/HeaderComponent';
 
 const SignUp1: React.FC = () => {
   // email check...
@@ -26,12 +27,11 @@ const SignUp1: React.FC = () => {
   });
 
   const checkUserExist = () => {
-    loadingStore.increment('Login:timeout');
+    loadingStore.increment('Signup:timeout');
     userService
       .checkExistingEmail(email)
       .then(user => {
-        loadingStore.decrement('Login:timeout');
-        // console.log(user)
+        loadingStore.decrement('Signup:timeout');
         if (user.exists) {
           console.log(email, ' already exist ');
           setError(true);
@@ -57,160 +57,115 @@ const SignUp1: React.FC = () => {
   };
 
   return (
-    <IonPage className="nobo-signup-page">
-      <div className="background-image">
+    <IonPage className='signup-details-container'>
+      <div className='signup-details-background-image'>
         <IonRow>
-          <IonCol size="2">
+          <IonCol size='12' style={{ height: '160px' }}>
             <div
               onClick={() => {
-                history.push('/get-started');
+                history.goBack();
               }}
+              className="header-comp-back-btn"
             >
-              <img height={40} src="assets/images/nobo-back-icon.png" alt="logo" />
+              <img
+                height={38}
+                src="assets/images/nobo-back-icon.png"
+                alt="logo"
+              />
+            </div>
+            <div
+              className="header-comp-nobo-logo">
+              <img height={65} src="assets/images/nobo-logo-white.png" alt="logo" />
             </div>
           </IonCol>
         </IonRow>
-        <IonRow className="logo-margin-top">
-          <IonCol class="ion-justify-content-center" style={{ display: 'flex' }}>
-            <img height={60} src="assets/images/nobo-logo-white.png" alt="logo" />
-          </IonCol>
-        </IonRow>
-        <IonRow className="signup-box-container">
-          <IonGrid className="signup-box">
-            <IonRow style={{ paddingTop: 20 }} class="ion-justify-content-center">
-              <IonCol
-                size="5"
-                style={{
-                  textAlign: 'center',
-                  fontSize: 20,
-                  fontWeight: 400,
-                  fontFamily: 'Baskerville',
-                  letterSpacing: '.05rem',
-                  marginBottom: 30,
-                }}
-              >
-                SIGNUP
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol>
-                <Input
-                  invalid={error}
-                  value={firstName}
-                  className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
-                  placeholder="FIRST NAME"
-                  onChange={val => {
-                    setFirstName(val);
-                  }}
-                />
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol>
-                <Input
-                  invalid={error}
-                  value={lastName}
-                  className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
-                  placeholder="LASTNAME"
-                  type="text"
-                  // errorMessage={error ? 'Invalid username or password' : ''}
-                  onChange={val => {
-                    setLastName(val);
-                  }}
-                ></Input>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol>
-                <Input
-                  invalid={error}
-                  value={email}
-                  className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
-                  placeholder="EMAIL ADDRESS"
-                  type="email"
-                  errorMessage={error ? 'Email already in use' : ''}
-                  onChange={val => {
-                    setEmail(val);
-                    if (!emailCheck(val)) {
-                      setEmailError(true);
-                    } else {
-                      setEmailError(false);
-                    }
-                  }}
-                ></Input>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol>
-                By selecting agree and continue below, I agree to the
-                <IonCol style={{ color: 'goldenrod' }}> Terms of Service and Privacy</IonCol>
-              </IonCol>
-            </IonRow>
-            <IonRow>
-              <IonCol>
-                <Button
-                  onClick={() => {
-                    checkUserExist();
-                  }}
-                  label="REGISTER"
-                  type="primary"
-                  large={true}
-                  className=""
-                  disabled={!validate()}
-                />
-                {/* <IonButton
-                  style={{
-                    height: '51px',
-                    fontFamily: 'Nunito Sans',
-                    fontSize: '15px',
-                    fontWeight: '700',
-                    lineHeight: '15px',
-                  }}
-
-                  onClick={() => {
-                    signup();
-                  }}
 
 
-                  disabled={!validate()}
-                  type="submit"
-                  expand="block"
-                  className="nobo-button"
-                >
-                  AGREE & CONTINUE
-                </IonButton> */}
-              </IonCol>
-            </IonRow>
-            <IonRow style={{ paddingBottom: 12 }}>
-              <IonCol
-                size="8"
-                style={{
-                  fontFamily: 'Nunito Sans',
-                  fontWeight: '600',
-                  fontSize: '15px',
-                  lineHeight: '22.5px',
-                  color: '#FFFFFF',
+        <IonGrid className='signup-details-box'>
+          <IonRow   >
+            <IonCol className='signup-details-title' size='12'	>
+              SIGN UP
+            </IonCol>
+          </IonRow>
+          <IonRow className='signup-details-input-container'>
+            <IonCol>
+              <Input
+                type='text'
+                value={firstName}
+                className={`nobo-input`}
+                placeholder='FIRST NAME'
+                onChange={val => {
+                  setFirstName(val);
                 }}
-              >
-                already have an account?
-              </IonCol>
-              <IonCol
-                onClick={() => history.push('/login')}
-                size="4"
-                style={{
-                  textDecorationLine: 'none',
-                  fontFamily: 'Nunito Sans',
-                  fontWeight: '700',
-                  color: '#D6980E',
-                  fontSize: '15px',
+              />
+            </IonCol>
+          </IonRow>
+          <IonRow className='signup-details-input-container'>
+            <IonCol>
+              <Input
+                value={lastName}
+                className={`nobo-input `}
+                placeholder='LASTNAME'
+                type='text'
+                onChange={val => {
+                  setLastName(val);
                 }}
-              >
-                Sign In
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </IonRow>
+              ></Input>
+            </IonCol>
+          </IonRow>
+          <IonRow className='signup-details-input-container'>
+            <IonCol>
+              <Input
+                value={email}
+                className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
+                placeholder='EMAIL ADDRESS'
+                type='email'
+                errorMessage={error ? 'Email already in use' : ''}
+                onChange={val => {
+                  setEmail(val);
+                  if (!emailCheck(val)) {
+                    setEmailError(true);
+                  } else {
+                    setEmailError(false);
+                  }
+                }}
+              ></Input>
+            </IonCol>
+          </IonRow>
+          <IonRow >
+            <IonCol className='signup-details-terms'>
+              By selecting agree and continue below, I agree to the
+              <IonCol style={{ color: 'goldenrod' }}> Terms of Service and Privacy</IonCol>
+            </IonCol>
+          </IonRow>
+          <IonRow className='signup-details-btn'>
+            <IonCol>
+              <Button
+                onClick={() => {
+                  checkUserExist();
+                }}
+                label='AGREE AND CONTINUE'
+                large={true}
+                className=''
+                disabled={!validate()}
+              />
+            </IonCol>
+          </IonRow>
+          <IonRow className='already-have-account-contaner' >
+            <div className='already-have-account' >
+              Already have an account?
+            </div>
+            <div
+              className='signup-details-signin'
+              onClick={() => history.push('/login')}
+            >
+              <p style={{ marginLeft: '40px', width: '80px' }}> SIGN IN </p>
+            </div>
+          </IonRow>
+        </IonGrid>
+
       </div>
+
     </IonPage>
   );
 };

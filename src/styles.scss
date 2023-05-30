@@ -66,9 +66,10 @@ a:active {
       margin: 0 21px 10px;
       border-radius: 10px;
       position: fixed;
-      bottom: 0;
+      bottom: calc(var(--ion-safe-area-bottom, 10px) - 10px);
       left: 0;
       right: 0;
+      padding-bottom: 0;
 
       .nav-btn {
         width: 60px;

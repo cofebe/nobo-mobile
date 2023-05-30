@@ -60,6 +60,7 @@ const CheckoutComplete: React.FC = () => {
 
   function goToMyPurchases() {
     console.log('go to my purchases');
+		history.push('/settings/purchases')
   }
 
   return (

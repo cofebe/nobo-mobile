@@ -36,7 +36,8 @@ const Settings: React.FC = () => {
         <div className="content">
           <div
             className="avatar"
-            style={{ backgroundImage: getImageUrl(user?.avatar || '') }}
+            style={{ backgroundImage: `url(${user?.avatar})` }}
+          // style={{ backgroundImage: getImageUrl(user?.avatar || '') }}
           ></div>
           <div className="name">
             {user?.firstName} {user?.lastName}
@@ -103,7 +104,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/offers');
+            //history.push('/settings/offers');
           }}
         >
           My Offers
@@ -113,7 +114,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/returns');
+            //history.push('/settings/returns');
           }}
         >
           My Returns
@@ -122,7 +123,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/withdraw');
+            //history.push('/settings/withdraw');
           }}
         >
           Withdrawal Requests
@@ -131,7 +132,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/savings');
+            //history.push('/settings/savings');
           }}
         >
           Savings &amp; Sustainability

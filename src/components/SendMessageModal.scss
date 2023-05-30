@@ -1,8 +1,8 @@
 .send-message-container {
   --height: 250px;
   --backdrop-opacity: 0.1;
-  --background: #FEFCF7;
-  align-items: end;
+  --background: #fefcf7;
+  align-items: flex-end;
 
   &::part(content) {
     border-top-right-radius: 20px;
@@ -10,7 +10,7 @@
   }
 
   .send-message-content {
-    --background: #FEFCF7;
+    --background: #fefcf7;
     --padding-top: 20px;
 
     .post-input-text {
@@ -23,8 +23,7 @@
         --padding-top: 10px;
         --padding-bottom: 10px;
         font-size: 15px;
-        --placeholder-color: #ACACAC;
-
+        --placeholder-color: #acacac;
       }
     }
 

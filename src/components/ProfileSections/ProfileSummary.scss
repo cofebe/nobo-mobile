@@ -28,8 +28,8 @@
 
     div {
       color: #3c91e5;
-      font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light',
-        'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+      font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial,
+        'Lucida Grande', sans-serif;
       display: inline;
       margin-top: 0px;
       padding-left: 7px;
@@ -180,7 +180,7 @@
     height: 12px;
     width: 12px;
     border-radius: 50%;
-    align-self: start;
+    align-self: flex-start;
     margin: 16px 10px 16px 16px;
   }
 
@@ -311,7 +311,7 @@
 
   .nobo-profile-stats-header {
     text-align: center;
-    color: #ACACAC;
+    color: #acacac;
     font-family: Nunito Sans;
     font-weight: 600;
     font-size: 10px !important;

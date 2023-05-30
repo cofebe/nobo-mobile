@@ -14,7 +14,6 @@ import {
   IonTextarea,
   useIonViewWillEnter,
   useIonLoading,
-  IonNote,
   IonInput,
   IonModal,
   IonButtons,
@@ -27,16 +26,11 @@ import { FeedService } from '../services/FeedService';
 import { UserService } from '../services/UserService';
 import { OverlayEventDetail } from '@ionic/core/components';
 import usePlacesAutocomplete from 'use-places-autocomplete';
-import { environment } from '../environments/environment';
 import { loadingOptions } from '../util';
-import { IKContext, IKUpload } from 'imagekitio-react';
 
 interface InternalValues {
   file: any;
 }
-
-const publicKey = environment?.videoLibraryPublicKey || 'public_pqTTDCXhzT8ZmQ4RFQUCQYkKY0s=';
-const urlEndpoint = environment?.videoUrlEndpoint || 'https://ik.imagekit.io/nobovideo/';
 
 const PostCreate: React.FC = () => {
   const [userId, setUserId] = useState<number>();

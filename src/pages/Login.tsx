@@ -33,6 +33,7 @@ const Login: React.FC = () => {
     userService
       .login(email, password)
       .then((user: User) => {
+        console.log('user', user);
         setTimeout(() => {
           loadingStore.decrement('Login:timeout');
           history.push(`/home/explore/${user.experiencePreferences}/explore`);
@@ -55,8 +56,29 @@ const Login: React.FC = () => {
   return (
     <IonPage className="nobo-login-page">
       <div className="background-image">
-        <IonRow>
-          <IonCol size="2">
+
+      <IonRow >
+          <IonCol size='12' style={{ height: '160px'  }}>
+            <div
+              onClick={() => {
+                history.push('/get-started');
+              }}
+              className="header-comp-back-btn"
+            >
+              <img
+                height={38}
+                src="assets/images/nobo-back-icon.png"
+                alt="logo"
+              />
+            </div>
+            <div
+              className="header-comp-nobo-logo">
+              <img height={65} src="assets/images/nobo-logo-white.png" alt="logo" />
+            </div>
+          </IonCol>
+        </IonRow>
+        {/* <IonRow >
+          <IonCol size="2" className='nobo-login-back'>
             <div
               onClick={() => {
                 history.push('/get-started');
@@ -70,7 +92,8 @@ const Login: React.FC = () => {
           <IonCol class="ion-justify-content-center" style={{ display: 'flex' }}>
             <img height={65} src="assets/images/nobo-logo-white.png" alt="logo" />
           </IonCol>
-        </IonRow>
+        </IonRow> */}
+
         <IonRow>
           <IonGrid className="login-box">
             <IonRow style={{ paddingTop: 20 }} class="ion-justify-content-center">
@@ -87,7 +110,7 @@ const Login: React.FC = () => {
                 LOGIN
               </IonCol>
             </IonRow>
-            <IonRow>
+            <IonRow style={{ marginBottom: '20px' }}>
               <IonCol>
                 <Input
                   invalid={error}
@@ -100,7 +123,7 @@ const Login: React.FC = () => {
                 />
               </IonCol>
             </IonRow>
-            <IonRow>
+            <IonRow style={{ marginBottom: '40px' }}>
               <IonCol>
                 <Input
                   invalid={error}

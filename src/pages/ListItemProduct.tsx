@@ -225,17 +225,14 @@ const ListItemProduct: React.FC = () => {
       });
   }
 
-function a() { whee; }
-function b() {
-whee();
-}
-
   function submit() {
     console.log('submit', receiptUrl, fileName, seletectedAttributes, additionalConditionDetails);
     const state = listingStore.getCurrent();
     const product: CreateProductRequest = {
-      attributes: seletectedAttributes.filter(a => a.value).map(a => { id: a.id, value: a.value }),
-      images: state.photos.map(p => { url: p, originalName: 'photo.jpg' }),
+      attributes: [],
+      images: [],
+      //attributes: seletectedAttributes.filter(a => a.value).map(a => { id: a.id, value: a.value }),
+      //images: state.photos.map(p => { url: p, originalName: 'photo.jpg' }),
       action: 'sell',
       name: '',
       brand: state.brand,

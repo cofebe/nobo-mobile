@@ -4,7 +4,9 @@ export interface LoginResponse {
   error: string;
 }
 export interface SignUpResponse {
-  success: boolean;
+  success: string;
+  user: User;
+  token: string;
 }
 
 export interface User {
@@ -116,6 +118,36 @@ export interface ProductsResponse {
   nextPage: string;
 }
 
+export interface CreateProductRequest {
+  attributes: {
+    id: string;
+    value: string | string[];
+  }[];
+  images: {
+    url: string;
+    originalName: string;
+  }[];
+  action: string;
+  name: string;
+  brand: string;
+  description: string;
+  receipt: string;
+  price: number;
+  retailPrice: number;
+  category: string;
+  parentCategory: string;
+  potentialTradeItems?: any[];
+}
+
+export interface ProductCategory {
+  parent: string;
+  _id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Product {
   tradeOffers: {
     incoming: any[];
@@ -192,27 +224,33 @@ export interface Product {
     used: { [key: string]: any };
   };
   trade: { [key: string]: string[] };
-}
-
-export interface CreateProductRequest {
-  attributes: {
-    id: string;
-    value: string | string[];
-  }[];
-  images: {
-    url: string;
-    originalName: string;
-  }[];
-  action: string;
-  name: string;
-  brand: string;
-  description: string;
-  receipt: string;
-  price: number;
-  retailPrice: number;
-  category: string;
-  parentCategory: string;
-  potentialTradeItems: any[];
+  shipmentInfo: {
+    from_address: {
+      carrier_facility: null;
+      city: string;
+      company: string;
+      created_at: string;
+      email: string;
+      id: string;
+      federal_tax_id: null;
+      mode: string;
+      name: string;
+      object: string;
+      phone: string;
+      residential: boolean;
+      state_tax_id: null;
+      street1: string;
+      street2: null;
+      updated_at: string;
+      zip: string;
+    };
+  };
+  summary: {
+    coupon: number;
+    discount: number;
+    earnings: number;
+    theNOBOfee: number;
+  };
 }
 
 export interface ProductCategory {
@@ -301,7 +339,11 @@ export interface FullOrder {
   fromVendors: User[];
   _id: string;
   shippingAddress: Address;
-  customer: string;
+  customer: {
+    _id: string;
+    firstName: string;
+    lastName: string;
+  };
   status: string;
   taxes: any;
   shippingFees: any;
@@ -312,7 +354,69 @@ export interface FullOrder {
   salesTax: number;
   shipping: number;
   total: number;
-  charge: any;
+  charge: {
+    amount: number;
+    amount_captured: number;
+    amount_refunded: number;
+    application: any;
+    application_fee_amount: any;
+    application_fee: any;
+    balance_transaction: string;
+    billing_details: any;
+    calculated_statement_descriptor: string;
+    captured: boolean;
+    created: number;
+    currency: string;
+    customer: string;
+    description: string;
+    destination: any;
+    disputed: any;
+    failure_balance_transaction: any;
+    failure_code: any;
+    failure_message: any;
+    id: string;
+    livemode: boolean;
+    object: string;
+    on_behalf_of: any;
+    order: any;
+    outcome: any;
+    paid: boolean;
+    payment_intent: any;
+    payment_method: string;
+    payment_method_details: {
+      card: {
+        brand: string;
+        checks: any;
+        country: string;
+        exp_month: number;
+        exp_year: number;
+        fingerprint: string;
+        funding: string;
+        installments: any;
+        last4: number;
+        mandate: any;
+        network: string;
+        network_token: { used: boolean };
+        three_d_secure: any;
+        wallet: any;
+      };
+      type: string;
+    };
+
+    receipt_email: any;
+    receipt_number: any;
+    receipt_url: string;
+    refunded: boolean;
+    refunds: any;
+    review: any;
+    shipping: any;
+    source: any;
+    source_transfer: any;
+    statement_descriptor_suffix: any;
+    status: string;
+    transfer_data: any;
+    transfer_group: any;
+  };
 }
 
 export interface OrdersResponse {
@@ -380,6 +484,14 @@ export interface Trade {
   };
   createdAt: string;
   updatedAt: string;
+}
+
+export interface ItemAttributesWithValues extends ItemAttributes {
+  value: string;
+}
+
+export interface ItemHideIf {
+  category: string[];
 }
 
 export interface TradesResponse {
@@ -454,10 +566,6 @@ export interface ItemAttributes {
   showIf?: ItemShowIf;
 }
 
-export interface ItemAttributesWithValues extends ItemAttributes {
-  value: string;
-}
-
 export interface ItemHideIf {
   category: string[];
 }
@@ -505,6 +613,7 @@ export interface Conversation {
   _id: string;
 }
 
+// signup type
 export interface SignUpType {
   firstName: string;
   lastName: string;
@@ -512,4 +621,35 @@ export interface SignUpType {
   userName: string;
   password: string;
   comfirmPassword: string;
+}
+
+// response type from experiencePrefrences
+export interface ExperienceResponse {
+  currentUser: User;
+  passwordError?: string;
+}
+
+// response type from profile pic upload
+export interface ProfilPicResponse {
+  url: string;
+}
+
+export interface ProfileResponse {
+  user: User;
+}
+
+export interface PostResponse {
+  success: boolean;
+}
+
+export interface UserAccData {
+  firstName: string;
+  lastName: string;
+  displayName: string;
+  email: string;
+  phoneNumber: string;
+  saleSchedule: [];
+  experiencePreferences: string;
+  currentPassword: string;
+  newPassword: string;
 }
