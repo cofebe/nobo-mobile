@@ -1,11 +1,13 @@
 import { IonCol, IonContent, IonPage, IonRow } from '@ionic/react'
 import React from 'react'
-import { useHistory } from 'react-router'
+import { useHistory , useParams} from 'react-router'
 import './SingleSalesItem.scss'
 
 const SingleSalesItem: React.FC = () => {
   const history = useHistory()
+  const params: any = useParams()
 
+console.log(params.id)
   return (
     <IonPage className='single-sales-item-main-container'>
       <IonRow>
