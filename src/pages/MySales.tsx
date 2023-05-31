@@ -9,6 +9,7 @@ import { getImageUrl } from '../utils'
 const MySales: React.FC = () => {
   const [allSales, setAllSales] = useState<OrdersResponse[]>([])
   const history = useHistory()
+
   const userService = new UserService()
 
 
@@ -28,7 +29,7 @@ const MySales: React.FC = () => {
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
 
-  console.log('sec log ', allSales[0]?.docs.map((s: any) => s.products))
+  // console.log('sec log ', allSales[0]?.docs.map((s: any) => s.products))
 
   return (
     <IonPage className='sales-item-main-container'>
@@ -57,10 +58,10 @@ const MySales: React.FC = () => {
         {allSales[0]?.docs?.map((product) => (
           <div>
             {product.products.map((sProduct) => (
-              <IonRow >
+              <IonRow key={sProduct._id}>
                 <IonCol
                   onClick={() => {
-                    history.push(`/sales/single-sales-item/${sProduct._id}`)
+                    history.push(`/sales/single-sales-item/${product._id}`)
                   }}
                   className='sales-items-container' size='12' >
 

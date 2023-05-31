@@ -285,6 +285,12 @@ export class UserService extends BaseService {
     const json:OrdersResponse= await res.json();
     return json;
   }
+  async getSale(id:string): Promise<FullOrder> {
+    const res = await super.fetch('GET', `/api/orders/my-sales/${id}`);
+    const json:OrderResponse= await res.json();
+    return json.order;
+  }
+
   async getOrders(): Promise<OrdersResponse> {
     const res = await super.fetch('GET', '/api/orders/my-purchases');
     const json: OrdersResponse = await res.json();
