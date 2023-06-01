@@ -9,20 +9,20 @@ export interface SelectOption {
 }
 
 interface SelectOptionInternal {
-  selected: boolean;
-  value: any;
+  selected?: boolean;
+  value?: any;
   label: string;
 }
 
 interface SelectProps {
   options: SelectOption[];
   className?: string;
-  value?: any[] | any;
+  value?: SelectOption[] | SelectOption;
   placeholder?: string;
   multiple?: boolean;
   disabled?: boolean;
   border?: boolean;
-  onChange?: (val: any[]) => void;
+  onChange?: (val: SelectOption | SelectOption[]) => void;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -44,14 +44,13 @@ const Select: React.FC<SelectProps> = ({
       let selected = false;
       if (value) {
         if (Array.isArray(value)) {
-          selected = !!value.find(v => v === o.value);
+          selected = !!value.find(v => v.label === o.label);
         } else {
-          selected = value == o.value;
+          selected = value.label === o.label;
         }
       }
       const soi = {
-        label: o.label,
-        value: o.value === undefined ? o.label : o.value,
+        ...o,
         selected,
       };
       if (selected) {
@@ -61,7 +60,6 @@ const Select: React.FC<SelectProps> = ({
     });
     setInternalOptions(internalOptions);
     setInternalSelectedValue(selectedString.join(', '));
-    //console.log('options', options, 'value', value, 'internalOptions', internalOptions);
   }, [value, options]);
 
   const modal = useRef<HTMLIonModalElement>(null);
@@ -71,7 +69,7 @@ const Select: React.FC<SelectProps> = ({
     modal.current?.dismiss();
     if (multiple) {
       if (onChange) {
-        onChange(internalOptions.filter(o => !!o.selected).map(o => o.value));
+        onChange(internalOptions.filter(o => !!o.selected));
       }
     }
   }
@@ -95,7 +93,7 @@ const Select: React.FC<SelectProps> = ({
     if (!multiple) {
       modal.current?.dismiss();
       if (onChange) {
-        onChange(internalOptions.filter(o => !!o.selected).map(o => o.value));
+        onChange(val);
       }
     }
   }

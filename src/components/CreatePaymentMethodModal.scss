@@ -1,7 +1,7 @@
 .add-address-container {
   --height: 550px;
   --backdrop-opacity: 0.1;
-  align-items: end;
+  align-items: flex-end;
 
   &::part(content) {
     border-top-right-radius: 20px;

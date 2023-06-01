@@ -1,7 +1,7 @@
 .create-offer-container {
   --height: 330px;
   --backdrop-opacity: 0.1;
-  align-items: end;
+  align-items: flex-end;
 
   .send-offer-title {
     font-weight: 600;

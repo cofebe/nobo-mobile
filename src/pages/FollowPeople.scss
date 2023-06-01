@@ -3,23 +3,18 @@
     --background: #fefcf7;
   }
 
-
   .follow-people-back-btn {
     position: absolute;
     left: 6%;
     top: 40%;
   }
 
-
-
-
-
   .follow-people-title {
     margin-top: 24px;
     font-weight: 500;
     font-size: 20px;
     text-align: center;
-    font-family: "Baskerville";
+    font-family: 'Baskerville';
     line-height: 18px;
   }
 
@@ -43,11 +38,10 @@
     margin-bottom: -80px;
     height: 54vh;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     padding-top: 20px;
     flex-direction: column;
-
   }
 
   .follow-people-users-row {
@@ -77,11 +71,10 @@
     width: 45%;
     font-size: 18px;
     font-weight: 500;
-    color: #D69A0E;
+    color: #d69a0e;
     margin-right: 10px;
     font-weight: 500;
   }
-
 
   .follow-people-button-container {
     display: flex;
@@ -90,7 +83,6 @@
     width: 30%;
     height: 3rem;
   }
-
 
   .follow-people-skip-container {
     display: flex;
@@ -127,7 +119,7 @@
 
   .follow-people-submit-btn-container {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;
@@ -136,7 +128,7 @@
 
   .follow-people-submit-btn-container2 {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;

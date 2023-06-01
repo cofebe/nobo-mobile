@@ -17,13 +17,12 @@
     --background: #fefcf7;
   }
 
-
   .create-post-title {
     margin-top: 24px;
     font-weight: 500;
     font-size: 20px;
     text-align: center;
-    font-family: "Baskerville";
+    font-family: 'Baskerville';
     line-height: 18px;
   }
 
@@ -72,12 +71,10 @@
     font-weight: 500;
     font-size: 22px;
     text-align: center;
-    font-family: "Baskerville";
+    font-family: 'Baskerville';
     line-height: 22px;
     letter-spacing: 4;
   }
-
-
 
   .create-post-container1 {
     height: 30%;
@@ -141,12 +138,11 @@
     text-align: center;
     color: black;
     font-size: 12px;
-
   }
 
   .create-post-btn-container {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;

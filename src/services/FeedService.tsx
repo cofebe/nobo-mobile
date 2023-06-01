@@ -94,7 +94,7 @@ export class FeedService extends BaseService {
   }
 
   async uploadImage(data: any) {
-    return await super.fetch('POST', API_URL + 'api/files/upload', data);
+    return await super.fetch('POST', 'api/files/upload', data)
   }
 
   async comment(data = {}) {

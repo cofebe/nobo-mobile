@@ -34,7 +34,7 @@ import SettingsShipping from './pages/SettingsShipping';
 import SettingsPayment from './pages/SettingsPayment';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
 import PostDetail from './pages/PostDetail';
-import ListItem from './pages/ListItem';
+//import ListItem from './pages/ListItem';
 import SignUp1 from './pages/SignUp1';
 import SignUp2 from './pages/SignUp2';
 import Experience from './pages/Experience';
@@ -49,6 +49,10 @@ import OfferComplete from './pages/OfferComplete';
 import MyTrade from './pages/MyTrade';
 import TradeAccepted from './pages/TradeAccepted';
 import TradeDenied from './pages/TradeDenied';
+import ListItemCategory from './pages/ListItemCategory';
+import ListItemImage from './pages/ListItemImage';
+import ListItemProduct from './pages/ListItemProduct';
+import ListItemConfirm from './pages/ListItemConfirm';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -70,8 +74,6 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import MySales from './pages/MySales';
 import SingleSalesItem from './pages/SingleSalesItem';
-
-
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -198,11 +200,25 @@ const App: React.FC = () => {
             <Route path="/trade/complete/:id" exact={true}>
               <TradeOfferComplete />
             </Route>
+            {/*
             <Route exact path="/list-item/sell">
               <ListItem />
             </Route>
             <Route exact path="/list-item/trade">
               <ListItem />
+            </Route>
+            */}
+            <Route exact path="/list/category">
+              <ListItemCategory />
+            </Route>
+            <Route exact path="/list/image">
+              <ListItemImage />
+            </Route>
+            <Route exact path="/list/product">
+              <ListItemProduct />
+            </Route>
+            <Route exact path="/list/confirm">
+              <ListItemConfirm />
             </Route>
             <Route path="/chat/:id" exact={true}>
               <Chat />

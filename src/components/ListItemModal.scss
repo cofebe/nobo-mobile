@@ -1,7 +1,7 @@
 .list-item-container {
   --height: calc(var(--ion-safe-area-bottom, 0) + 160px);
   --backdrop-opacity: 0.1;
-  align-items: end;
+  align-items: flex-end;
 
   .list-item-title {
     font-weight: 700;
@@ -23,6 +23,8 @@
   &::part(content) {
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
   }
 
   ion-header {
@@ -32,6 +34,7 @@
       --background: white;
       --padding-top: 0;
       --padding-bottom: 0;
+      --border-width: 0 !important;
 
       ion-grid {
         padding: 0;

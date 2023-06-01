@@ -34,7 +34,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
   }
 
   .experience-title {
@@ -42,7 +41,7 @@
     font-weight: 500;
     font-size: 20px;
     text-align: center;
-    font-family: "Baskerville";
+    font-family: 'Baskerville';
     line-height: 18px;
   }
 
@@ -61,7 +60,6 @@
     text-align: center;
     margin: auto;
     margin-bottom: -28px;
-
   }
 
   .experience-img-container {
@@ -72,40 +70,33 @@
     justify-content: center;
     border-radius: 10px;
     margin-bottom: 20px;
-
-
   }
-
-
 
   .experience-form-container {
     margin-top: 30px;
     margin-bottom: 40px;
 
-    @media only screen and (device-height:667px) {
+    @media only screen and (device-height: 667px) {
       margin-bottom: 40px;
       margin-top: 40px;
     }
 
-    @media only screen and (device-height:1180px) {
+    @media only screen and (device-height: 1180px) {
       margin-bottom: 20px;
       // background-color: teal;
     }
-
-
 
     .experience-img-container {
       margin-bottom: 5px;
       position: relative;
 
-      @media only screen and (device-height:667px) {
+      @media only screen and (device-height: 667px) {
         margin-bottom: 40px;
       }
 
-      @media only screen and (device-height:1180px) {
+      @media only screen and (device-height: 1180px) {
         margin-bottom: -25px;
         margin-top: -20px;
-
       }
 
       .exp-img-selected {
@@ -113,15 +104,13 @@
         border-radius: 10px;
       }
 
-
-
       .exp-img-title {
         position: absolute;
         letter-spacing: 2px;
         font-weight: 600;
         font-size: 20px;
         text-align: center;
-        font-family: "Baskerville";
+        font-family: 'Baskerville';
         line-height: 18px;
         color: #fff;
       }
@@ -131,36 +120,32 @@
         left: 88%;
         top: 8%;
 
-        @media only screen and (device-height:1180px) {
+        @media only screen and (device-height: 1180px) {
           position: absolute;
           left: 68%;
           top: 18%;
         }
 
-        @media only screen and (device-height:1024px) {
+        @media only screen and (device-height: 1024px) {
           position: absolute;
           left: 69.5%;
           top: 14%;
         }
       }
     }
-
-
   }
 
   .experience-btn-container {
     margin-top: 10px;
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     margin: auto;
     width: 340px;
     margin-bottom: -25px;
 
-    @media only screen and (device-height:667px) {
+    @media only screen and (device-height: 667px) {
       margin-bottom: 10px;
       margin-top: -10px;
-
     }
   }
-
 }

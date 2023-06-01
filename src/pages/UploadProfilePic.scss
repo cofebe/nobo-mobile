@@ -17,15 +17,12 @@
     --background: #fefcf7;
   }
 
-
-
-
   .profile-picture-title {
     margin-top: 24px;
     font-weight: 500;
     font-size: 20px;
     text-align: center;
-    font-family: "Baskerville";
+    font-family: 'Baskerville';
     line-height: 18px;
   }
 
@@ -46,7 +43,6 @@
     text-align: center;
   }
 
-
   .profile-picture-image-container {
     height: 34vh;
     width: 100%;
@@ -55,8 +51,6 @@
     justify-content: center;
     margin-bottom: 165px;
   }
-
-
 
   .photo-button-container {
     margin-top: 30px;
@@ -71,13 +65,11 @@
     // width: 100px;
   }
 
-
   .profile-picture-skip-container {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: -10px;
-
   }
 
   .profile-picture-skip-text {
@@ -88,7 +80,7 @@
 
   .profile-picture-btn-container2 {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;
@@ -97,7 +89,7 @@
 
   .profile-picture-btn-container {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;
@@ -105,14 +97,12 @@
   }
   .profile-picture-btn-container2 {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;
     margin-top: 55px;
   }
-
-
 
   .profile-photo-img {
     border-radius: 50%;
@@ -142,15 +132,11 @@
     border-radius: 50%;
   }
 
-
   .profile-picture-image_ {
     height: 198px;
     width: 198px;
     border-radius: 50%;
   }
-
-
-
 
   .profile-picture-clear-photo {
     width: 35px;
@@ -159,10 +145,7 @@
     right: 24%;
     top: 40%;
     z-index: 500;
-
   }
-
-
 
   .profile-picture-container {
     height: 210px;
@@ -178,26 +161,5 @@
     height: 98%;
     width: 98%;
     border-radius: 50%;
-
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
