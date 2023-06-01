@@ -34,7 +34,7 @@ import SettingsShipping from './pages/SettingsShipping';
 import SettingsPayment from './pages/SettingsPayment';
 import HorizontalLineSpinner from './components/HorizontalLineSpinner';
 import PostDetail from './pages/PostDetail';
-import ListItem from './pages/ListItem';
+//import ListItem from './pages/ListItem';
 import SignUp1 from './pages/SignUp1';
 import SignUp2 from './pages/SignUp2';
 import Experience from './pages/Experience';
@@ -52,6 +52,7 @@ import TradeDenied from './pages/TradeDenied';
 import ListItemCategory from './pages/ListItemCategory';
 import ListItemImage from './pages/ListItemImage';
 import ListItemProduct from './pages/ListItemProduct';
+import ListItemConfirm from './pages/ListItemConfirm';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -199,12 +200,14 @@ const App: React.FC = () => {
             <Route path="/trade/complete/:id" exact={true}>
               <TradeOfferComplete />
             </Route>
+            {/*
             <Route exact path="/list-item/sell">
               <ListItem />
             </Route>
             <Route exact path="/list-item/trade">
               <ListItem />
             </Route>
+            */}
             <Route exact path="/list/category">
               <ListItemCategory />
             </Route>
@@ -213,6 +216,9 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/list/product">
               <ListItemProduct />
+            </Route>
+            <Route exact path="/list/confirm">
+              <ListItemConfirm />
             </Route>
             <Route path="/chat/:id" exact={true}>
               <Chat />

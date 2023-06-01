@@ -3,6 +3,7 @@ import {
   Address,
   BrandsResponse,
   CreateProductRequest,
+  CreateProductResponse,
   Order,
   Product,
   ProductResponse,
@@ -63,9 +64,9 @@ export class ProductService extends BaseService {
     return json;
   }
 
-  async createProduct(product: CreateProductRequest): Promise<Product> {
+  async createProduct(product: CreateProductRequest): Promise<CreateProductResponse> {
     const res = await super.fetch('POST', `/api/products`, product);
-    const json: Product = await res.json();
+    const json: CreateProductResponse = await res.json();
     return json;
   }
 

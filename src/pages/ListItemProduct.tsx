@@ -10,7 +10,7 @@ import {
   useIonViewWillLeave,
 } from '@ionic/react';
 import { useHistory } from 'react-router';
-import Select from '../components/Select';
+import Select, { SelectOption } from '../components/Select';
 import Button from '../components/Button';
 
 import './ListItem.scss';
@@ -22,12 +22,12 @@ import { FileService } from '../services/FileService';
 import { attributes } from '../data/list-item-attributes';
 import {
   CreateProductRequest,
-  Product,
+  Category,
   User,
   ItemAttributes,
   ItemAttributesWithValues,
 } from '../models';
-import { listingStore, ListingState } from '../listing-store';
+import { listingStore, TopLevelCategory, ListingState } from '../listing-store';
 
 interface InternalValues {
   file: any;
@@ -39,11 +39,12 @@ const ListItemProduct: React.FC = () => {
   const productService = new ProductService();
   const fileService = new FileService();
   const [isTrade, setIsTrade] = useState(false);
-  const [tradeSteps, setTradeSteps] = useState(4);
-  const [itemCategory, setItemCategory] = useState('');
-  const [itemSubcategory, setItemSubcategory] = useState('');
-  const [itemType, setItemType] = useState('');
+  const [tradeSteps, setTradeSteps] = useState(3);
+  const [itemCategory, setItemCategory] = useState<TopLevelCategory>('');
+  const [itemSubcategory, setItemSubcategory] = useState<Category | null>(null);
+  const [itemType, setItemType] = useState<Category | null>(null);
   const [fileName, setFileName] = useState<string>('');
+  const [productTitle, setProductTitle] = useState('');
   const [receiptUrl, setReceiptUrl] = useState<string>('');
   const [seletectedAttributes, setSelectedAttributes] = useState<ItemAttributesWithValues[]>(
     attributes.map((attribute: ItemAttributes) => {
@@ -66,8 +67,9 @@ const ListItemProduct: React.FC = () => {
   let subscription: any;
 
   useIonViewWillEnter(() => {
-    let isTradeUrl = history.location.pathname.includes('trade');
+    const isTradeUrl = history.location.pathname.includes('trade');
     setIsTrade(isTradeUrl);
+
     reset(isTradeUrl);
 
     subscription = listingStore.subscribe((state: ListingState) => {
@@ -94,22 +96,26 @@ const ListItemProduct: React.FC = () => {
   });
 
   useEffect(() => {
-    console.log('useEffect');
+    console.log('useEffect', itemCategory, itemSubcategory, itemType);
+    if (!itemCategory || !itemSubcategory || !itemType) {
+      return;
+    }
+
     const newAttributes = attributes.filter((attr: ItemAttributes) => {
       const showFieldForClothing =
         attr.visible.includes('Clothing') &&
-        (itemSubcategory.includes('[MEN]') || itemSubcategory.includes('[WOMEN]'));
+        (itemSubcategory?.name.includes('[MEN]') || itemSubcategory?.name.includes('[WOMEN]'));
       const showFieldForWomensClothing =
-        attr.visible.includes("Women's Clothing") && itemSubcategory.includes('[WOMEN]');
+        attr.visible.includes("Women's Clothing") && itemSubcategory?.name.includes('[WOMEN]');
       const showFieldForMensClothing =
-        attr.visible.includes("Men's Clothing") && itemSubcategory.includes('[MEN]');
+        attr.visible.includes("Men's Clothing") && itemSubcategory?.name.includes('[MEN]');
       const ret =
-        (attr.visible === 'All' && itemSubcategory !== 'EditSneakers') ||
+        (attr.visible === 'All' && itemSubcategory?.name !== 'EditSneakers') ||
         showFieldForClothing ||
         showFieldForMensClothing ||
         showFieldForWomensClothing ||
-        attr.visible.includes(itemSubcategory) ||
-        attr.visible.includes(itemType);
+        attr.visible.includes(itemSubcategory!.name) ||
+        attr.visible.includes(itemType!.name);
       return ret;
     });
     const attribs = newAttributes.map((attr: ItemAttributes) => {
@@ -122,7 +128,7 @@ const ListItemProduct: React.FC = () => {
     setSelectedAttributes(attribs);
     setAdditionalConditionDetails([]);
     setShowAdditionalConditionDetails(false);
-  }, [itemCategory, itemSubcategory]);
+  }, [itemCategory, itemSubcategory, itemType]);
 
   function reset(isTradeUrl: boolean) {
     setTradeSteps(isTradeUrl ? 2 : 3);
@@ -132,7 +138,7 @@ const ListItemProduct: React.FC = () => {
   }
 
   function valid() {
-    let valid = true;
+    let valid = !!productTitle;
     seletectedAttributes.forEach((attribute: ItemAttributesWithValues) => {
       if (attribute.required && !attribute.value) {
         valid = false;
@@ -198,8 +204,12 @@ const ListItemProduct: React.FC = () => {
   }
 
   function hideIfAttributeIsVisible(key: string): boolean {
+    if (itemType === null) {
+      return false;
+    }
+
     if (getAttributeValue(key).hideIf) {
-      if (getAttributeValue(key).hideIf?.category.includes(itemType)) {
+      if (getAttributeValue(key).hideIf?.category.includes(itemType!.name)) {
         return true;
       }
       return false;
@@ -229,24 +239,41 @@ const ListItemProduct: React.FC = () => {
     console.log('submit', receiptUrl, fileName, seletectedAttributes, additionalConditionDetails);
     const state = listingStore.getCurrent();
     const product: CreateProductRequest = {
-      attributes: [],
-      images: [],
-      //attributes: seletectedAttributes.filter(a => a.value).map(a => { id: a.id, value: a.value }),
-      //images: state.photos.map(p => { url: p, originalName: 'photo.jpg' }),
+      attributes: seletectedAttributes
+        .filter(a => a.value)
+        .map(a => {
+          return { id: a.id, value: a.value };
+        }),
+      images: state.photos
+        .filter(p => p)
+        .map(p => {
+          return { url: p, originalName: 'photo.jpg' };
+        }),
       action: 'sell',
-      name: '',
+      name: productTitle,
       brand: state.brand,
       description: '',
       receipt: receiptUrl,
-      price: state.price!,
-      retailPrice: 0,
-      category: '',
-      parentCategory: '',
+      price: state.price,
+      retailPrice: state.estimatedPrice,
+      category: itemType!._id,
+      parentCategory: itemSubcategory!._id,
+      group: itemCategory,
     };
+    if (showAdditionalConditionDetails) {
+      product.attributes.push({
+        id: 'condition-details',
+        value: additionalConditionDetails,
+      });
+    }
+    if (receiptUrl) {
+      product.receipt = receiptUrl;
+    }
     console.log('product', product);
-    //productService.createProduct(product).then(p => {
-    //  console.log('p', p);
-    //});
+    productService.createProduct(product).then(p => {
+      console.log('p', p, JSON.stringify(p));
+      listingStore.setProduct(p);
+    });
   }
 
   return (
@@ -281,6 +308,18 @@ const ListItemProduct: React.FC = () => {
             </IonCol>
           </IonRow>
           <div className="padding-bottom-container">
+            <IonRow className="margin-bottom-5">
+              <IonCol>
+                <Input
+                  value={productTitle}
+                  className="input-height"
+                  placeholder="Product Title *"
+                  onChange={val => {
+                    setProductTitle(val);
+                  }}
+                />
+              </IonCol>
+            </IonRow>
             {seletectedAttributes.map((attr: ItemAttributes) => {
               if (
                 attr.type === 'select' &&
@@ -302,7 +341,7 @@ const ListItemProduct: React.FC = () => {
                           })) || []
                         }
                         onChange={e => {
-                          setAttributeValue(attr.id, e?.length ? e[0] : '');
+                          setAttributeValue(attr.id, e[0]);
                         }}
                       />
                     </IonCol>

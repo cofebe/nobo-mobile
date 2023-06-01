@@ -1,28 +1,34 @@
 import { BehaviorSubject } from 'rxjs';
-import { ItemAttributesWithValues } from './models';
+import { ItemAttributesWithValues, CreateProductResponse, Category } from './models';
+
+export type TopLevelCategory = 'men' | 'women' | 'sneakers' | '';
 
 export interface ListingState {
   //id: string;
-  price: number | null;
-  itemCategory: string;
-  itemSubcategory: string;
-  itemType: string;
+  price: string;
+  estimatedPrice: string;
+  itemCategory: TopLevelCategory;
+  itemSubcategory: Category | null;
+  itemType: Category | null;
   brand: string;
   photos: string[];
   attributes: ItemAttributesWithValues[];
   conditionDetails: string[];
+  product: CreateProductResponse | null;
 }
 
 const listingInitialState: ListingState = {
   //id: '',
-  price: null,
+  price: '',
+  estimatedPrice: '',
   itemCategory: '',
-  itemSubcategory: '',
-  itemType: '',
+  itemSubcategory: null,
+  itemType: null,
   brand: '',
   photos: ['', '', '', ''],
   attributes: [],
   conditionDetails: [],
+  product: null,
 };
 
 let listingState = listingInitialState;
@@ -58,7 +64,7 @@ export const listingStore = {
   },
 
   // set properties
-  setPrice: (price: number | null) => {
+  setPrice: (price: string) => {
     listingState = {
       ...listingState,
       price,
@@ -67,7 +73,16 @@ export const listingStore = {
       listingSubject.next(listingState);
     }
   },
-  setItemCategory: (itemCategory: string) => {
+  setEstimatedPrice: (estimatedPrice: string) => {
+    listingState = {
+      ...listingState,
+      estimatedPrice,
+    };
+    if (!listingStateUpdating) {
+      listingSubject.next(listingState);
+    }
+  },
+  setItemCategory: (itemCategory: TopLevelCategory) => {
     listingState = {
       ...listingState,
       itemCategory,
@@ -76,7 +91,7 @@ export const listingStore = {
       listingSubject.next(listingState);
     }
   },
-  setItemSubcategory: (itemSubcategory: string) => {
+  setItemSubcategory: (itemSubcategory: Category | null) => {
     listingState = {
       ...listingState,
       itemSubcategory,
@@ -85,7 +100,7 @@ export const listingStore = {
       listingSubject.next(listingState);
     }
   },
-  setItemType: (itemType: string) => {
+  setItemType: (itemType: Category | null) => {
     listingState = {
       ...listingState,
       itemType,
@@ -125,6 +140,15 @@ export const listingStore = {
     listingState = {
       ...listingState,
       conditionDetails: [...conditionDetails],
+    };
+    if (!listingStateUpdating) {
+      listingSubject.next(listingState);
+    }
+  },
+  setProduct: (product: CreateProductResponse) => {
+    listingState = {
+      ...listingState,
+      product,
     };
     if (!listingStateUpdating) {
       listingSubject.next(listingState);

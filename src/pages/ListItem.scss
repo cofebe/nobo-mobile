@@ -268,32 +268,48 @@
 
   .nobo-list-confirmation-header {
     text-align: center;
-    font-family: Baskerville;
+    font-family: Georgia;
     font-size: 20px;
     font-weight: 400;
     line-height: 30px;
     letter-spacing: 0.05em;
     color: #000000;
+    text-transform: uppercase;
+  }
+
+  .nobo-list-confirmation-check {
+    margin-bottom: 4px;
+
+    img {
+      height: 16px;
+      width: 16px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   .nobo-list-confirmation-sub-header {
+    margin-top: 0;
     font-family: Nunito Sans;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 20px;
     letter-spacing: 0em;
     text-align: center;
     color: #000000;
+    text-transform: uppercase;
   }
 
-  .nobo-list-confirmation-header-text {
+  .nobo-list-confirmation-text {
     font-family: Nunito Sans;
     font-size: 12px;
     font-weight: 400;
     line-height: 20px;
     letter-spacing: 0em;
-    text-align: center;
     color: #707070;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .nobo-list-confirmation-container {
@@ -301,31 +317,46 @@
     padding-bottom: 1.5rem;
     margin-bottom: 2rem;
     text-align: center;
-    box-shadow: 2px 2px 4px #888888;
+    box-shadow: -5px -5px 10px 1px #ffffff, 5px 5px 10px 2px #f2efe7;
     border-radius: 5px;
   }
 
   .nobo-list-confirmation-image {
     height: 90px;
     width: 90px;
+    border-radius: 5px;
   }
 
   .nobo-list-confirmation-container-header {
     font-family: Nunito Sans;
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 15px;
     letter-spacing: 0.05em;
     text-align: center;
+    text-transform: uppercase;
   }
 
-  .nobo-list-confirmation-container-item {
+  .nobo-list-confirmation-container-name {
     font-family: Nunito Sans;
     font-size: 12px;
     font-weight: 600;
     line-height: 18px;
     letter-spacing: 0.05em;
     text-align: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+
+  .nobo-list-confirmation-container-price {
+    font-family: Nunito Sans;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 0.05em;
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 4px;
   }
 
   .nobo-list-back-home {

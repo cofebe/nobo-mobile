@@ -11,33 +11,27 @@ import {
 } from '@ionic/react';
 import { useHistory } from 'react-router';
 import './ListItem.scss';
-import Select from '../components/Select';
+import Select, { SelectOption } from '../components/Select';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { CategoryService } from '../services/CategoryService';
-import { ProductService } from '../services/ProductService';
-import { listingStore, ListingState } from '../listing-store';
-import { Category, CategoriesResponse, Brand, BrandsResponse } from '../models';
-
-interface Option {
-  label: string;
-  value: string;
-}
+import { listingStore, TopLevelCategory, ListingState } from '../listing-store';
+import { Category, CategoriesResponse } from '../models';
+import { brands } from '../data/brands';
 
 const ListItemCategory: React.FC = () => {
   const history = useHistory();
   const categoryService = new CategoryService();
-  const productService = new ProductService();
   const [isTrade, setIsTrade] = useState(false);
   const [price, setPrice] = useState('');
-  const [itemCategory, setItemCategory] = useState('');
-  const [itemSubcategory, setItemSubcategory] = useState('');
-  const [itemType, setItemType] = useState('');
-  const [brand, setBrand] = useState('');
-  const [menItems, setMenItems] = useState<Option[]>([]);
-  const [womenItems, setWomenItems] = useState<Option[]>([]);
+  const [estimatedPrice, setEstimatedPrice] = useState('');
+  const [itemCategory, setItemCategory] = useState<TopLevelCategory>('');
+  const [itemSubcategory, setItemSubcategory] = useState<Category | null>(null);
+  const [itemType, setItemType] = useState<Category | null>(null);
+  const [brand, setBrand] = useState<string>('');
+  const [menItems, setMenItems] = useState<SelectOption[]>([]);
+  const [womenItems, setWomenItems] = useState<SelectOption[]>([]);
   const [allCategories, setAllCategories] = useState<Category[]>([]);
-  const [brands, setBrands] = useState<Brand[]>([]);
 
   let subscription: any;
 
@@ -49,63 +43,44 @@ const ListItemCategory: React.FC = () => {
 
     //listingStore.reset();
     subscription = listingStore.subscribe((state: ListingState) => {
-      console.log('state', state);
       setItemCategory(state.itemCategory);
       setItemSubcategory(state.itemSubcategory);
       setItemType(state.itemType);
       setBrand(state.brand);
-      setPrice(state.price === null ? '' : state.price.toString());
+      setPrice(state.price);
+      setEstimatedPrice(state.estimatedPrice);
     });
 
     categoryService
       .getAllCategories()
       .then((res: CategoriesResponse) => {
-        const uniqueWomenCategoryNames = new Set();
-        const uniqueMenCategoryNames = new Set();
+        const uniqueWomenCategories: SelectOption[] = [];
+        const uniqueMenCategories: SelectOption[] = [];
         res.docs
           .filter((doc: Category) => doc.parent === null && !doc.name.includes('[WOMEN]'))
           .forEach((doc: Category) => {
-            if (!uniqueMenCategoryNames.has(doc.name)) {
-              uniqueMenCategoryNames.add(doc.name);
+            const label = doc.name.replace('[MEN]', '').trim();
+            if (!uniqueMenCategories.find(c => c.label === label)) {
+              uniqueMenCategories.push({
+                label,
+                value: doc,
+              });
             }
           });
         res.docs
           .filter((doc: Category) => doc.parent === null && !doc.name.includes('[MEN]'))
           .forEach((doc: Category) => {
-            if (!uniqueWomenCategoryNames.has(doc.name)) {
-              uniqueWomenCategoryNames.add(doc.name);
+            const label = doc.name.replace('[WOMEN]', '').trim();
+            if (!uniqueWomenCategories.find(c => c.label === label)) {
+              uniqueWomenCategories.push({
+                label: doc.name.replace('[WOMEN]', '').trim(),
+                value: doc,
+              });
             }
           });
-        const uniqueWomenCategories = Array.from(uniqueWomenCategoryNames).map((name: any) => {
-          return {
-            label: name.replace('[WOMEN]', '').trim(),
-            value: name,
-          };
-        });
-        const uniqueMenCategories = Array.from(uniqueMenCategoryNames).map((name: any) => {
-          return {
-            label: name.replace('[MEN]', '').trim(),
-            value: name,
-          };
-        });
         setMenItems(uniqueMenCategories);
         setWomenItems(uniqueWomenCategories);
         setAllCategories(res.docs);
-      })
-      .catch(err => console.error(err));
-    productService
-      .getBrands()
-      .then((res: BrandsResponse) => {
-        res.brands.sort((a, b) => {
-          if (a.name < b.name) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
-          return 0;
-        });
-        setBrands(res.brands);
       })
       .catch(err => console.error(err));
   });
@@ -116,9 +91,10 @@ const ListItemCategory: React.FC = () => {
 
   function reset() {
     setPrice('');
+    setEstimatedPrice('');
     setItemCategory('');
-    setItemSubcategory('');
-    setItemType('');
+    setItemSubcategory(null);
+    setItemType(null);
     setBrand('');
   }
 
@@ -134,26 +110,31 @@ const ListItemCategory: React.FC = () => {
   }
 
   function getItemType() {
+    if (!itemSubcategory) {
+      return [];
+    }
+
     const uniqueItemTypes = new Set();
     allCategories
-      .filter((category: Category) => category?.parent?.name === itemSubcategory)
+      .filter((category: Category) => category?.parent?._id === itemSubcategory!._id)
       .forEach((category: Category) => {
-        if (!uniqueItemTypes.has(category.name)) {
-          uniqueItemTypes.add(category.name);
+        if (!uniqueItemTypes.has(category)) {
+          uniqueItemTypes.add(category);
         }
       });
-    return Array.from(uniqueItemTypes).map((itemType: any) => {
+    const ret = Array.from(uniqueItemTypes).map((itemType: any) => {
       return {
-        label: itemType,
+        label: itemType.name,
         value: itemType,
       };
     });
+    return ret;
   }
 
   function valid() {
-    if (itemCategory === 'sneakers') return itemCategory && brand && price;
+    if (itemCategory === 'sneakers') return itemCategory && brand && price && estimatedPrice;
     else {
-      return itemCategory && itemSubcategory && brand && price && itemType;
+      return itemCategory && itemSubcategory && brand && price && itemType && estimatedPrice;
     }
   }
 
@@ -192,17 +173,19 @@ const ListItemCategory: React.FC = () => {
                   value={itemCategory}
                   placeholder="Select Category"
                   onChange={e => {
-                    setItemSubcategory('');
-                    setItemType('');
+                    setItemSubcategory(null);
+                    setItemType(null);
                     setBrand('');
                     setPrice('');
-                    setItemCategory(e?.length ? e[0] : '');
+                    setEstimatedPrice('');
+                    setItemCategory(e[0]);
                     listingStore.beginUpdate();
-                    listingStore.setItemCategory(e?.length ? e[0] : '');
-                    listingStore.setItemSubcategory('');
-                    listingStore.setItemType('');
+                    listingStore.setItemCategory(e[0]);
+                    listingStore.setItemSubcategory(null);
+                    listingStore.setItemType(null);
                     listingStore.setBrand('');
-                    listingStore.setPrice(null);
+                    listingStore.setPrice('');
+                    listingStore.setEstimatedPrice('');
                     listingStore.endUpdate();
                   }}
                   options={[
@@ -230,15 +213,17 @@ const ListItemCategory: React.FC = () => {
                       disabled={!itemCategory}
                       value={itemSubcategory}
                       onChange={e => {
-                        setItemType('');
+                        setItemType(null);
                         setBrand('');
                         setPrice('');
-                        setItemSubcategory(e?.length ? e[0] : '');
+                        setEstimatedPrice('');
+                        setItemSubcategory(e[0]);
                         listingStore.beginUpdate();
-                        listingStore.setItemType('');
+                        listingStore.setItemType(null);
                         listingStore.setBrand('');
-                        listingStore.setPrice(null);
-                        listingStore.setItemSubcategory(e?.length ? e[0] : '');
+                        listingStore.setPrice('');
+                        listingStore.setEstimatedPrice('');
+                        listingStore.setItemSubcategory(e[0]);
                         listingStore.endUpdate();
                       }}
                       options={getItems()}
@@ -252,8 +237,8 @@ const ListItemCategory: React.FC = () => {
                       value={itemType}
                       placeholder="Select Type"
                       onChange={e => {
-                        setItemType(e?.length ? e[0] : '');
-                        listingStore.setItemType(e?.length ? e[0] : '');
+                        setItemType(e[0].value);
+                        listingStore.setItemType(e[0]);
                       }}
                       options={getItemType()}
                     />
@@ -267,14 +252,30 @@ const ListItemCategory: React.FC = () => {
                   disabled={!itemType && itemCategory !== 'sneakers'}
                   value={brand}
                   onChange={e => {
-                    setBrand(e?.length ? e[0] : '');
-                    listingStore.setBrand(e?.length ? e[0] : '');
+                    console.log('selectBrand', e);
+                    setBrand(e[0]);
+                    listingStore.setBrand(e[0]);
                   }}
                   placeholder="Select Brand"
-                  options={brands.map((b: Brand) => ({
-                    label: b.name,
-                    value: b.name,
+                  options={brands.map((b: string) => ({
+                    label: b,
+                    value: b,
                   }))}
+                />
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol>
+                <Input
+                  disabled={!brand && !itemSubcategory && !itemType}
+                  type="number"
+                  value={estimatedPrice}
+                  className={`input-height ${!brand && 'disabled-input'}`}
+                  placeholder="ESTIMATED RETAIL PRICE"
+                  onChange={val => {
+                    setEstimatedPrice(val);
+                    listingStore.setEstimatedPrice(val);
+                  }}
                 />
               </IonCol>
             </IonRow>
@@ -288,7 +289,7 @@ const ListItemCategory: React.FC = () => {
                   placeholder="PRICE"
                   onChange={val => {
                     setPrice(val);
-                    listingStore.setPrice(+val);
+                    listingStore.setPrice(val);
                   }}
                 />
               </IonCol>

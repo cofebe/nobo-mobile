@@ -132,20 +132,66 @@ export interface CreateProductRequest {
   brand: string;
   description: string;
   receipt: string;
-  price: number;
-  retailPrice: number;
+  price: string;
+  retailPrice: string;
   category: string;
+  group: string;
   parentCategory: string;
   potentialTradeItems?: any[];
 }
 
-export interface ProductCategory {
-  parent: string;
+export interface CreateProductResponse {
+  tradeOffers: {
+    incoming: any[];
+    outgoing: any[];
+  };
+  attributes: {
+    id: string;
+    value: string | string[];
+  }[];
+  images: {
+    url: string;
+    originalName: string;
+  }[];
+  tags: any[];
+  sold: boolean;
+  active: boolean;
+  rejected: boolean;
+  receivedByNobo: boolean;
+  returnRequested: boolean;
+  returnBy: any;
+  giveaway: null | {
+    active: boolean;
+    ticket_allocation_limit: number;
+    distributed: string[];
+    concluded: boolean;
+    _id: string;
+    name: string;
+    product: string;
+    entry_steps: {
+      _id: string;
+      text: string;
+      id: number;
+    }[];
+    event: string;
+  };
   _id: string;
+  group: string;
+  vendor: string;
+  action: string;
   name: string;
+  brand: string;
   description: string;
+  receipt: string;
+  price: number;
+  retailPrice: number;
+  category: string;
+  parentCategory: string;
+  potentialTradeItems: any[];
   createdAt: string;
   updatedAt: string;
+  image: string;
+  link: string;
 }
 
 export interface Product {
@@ -212,8 +258,8 @@ export interface Product {
   receipt: string;
   price: number;
   retailPrice: number;
-  category: ProductCategory;
-  parentCategory: ProductCategory;
+  category: Category;
+  parentCategory: Category;
   potentialTradeItems: any[];
   createdAt: string;
   updatedAt: string;
@@ -251,15 +297,6 @@ export interface Product {
     earnings: number;
     theNOBOfee: number;
   };
-}
-
-export interface ProductCategory {
-  parent: string;
-  _id: string;
-  name: string;
-  description: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export interface FileUploadResponse {
@@ -516,16 +553,7 @@ export interface Category {
   createdAt: string;
   description: string;
   name: string;
-  parent: CategoryParent | null;
-  updatedAt: string;
-  _id: string;
-}
-
-export interface CategoryParent {
-  createdAt: string;
-  description: string;
-  name: string;
-  parent: string | null;
+  parent: Category | null;
   updatedAt: string;
   _id: string;
 }

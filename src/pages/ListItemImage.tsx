@@ -70,7 +70,7 @@ const ListItemImage: React.FC = () => {
   };
 
   function valid() {
-    return true;
+    //return true;
     return photos.filter(p => p).length === 4;
   }
 
