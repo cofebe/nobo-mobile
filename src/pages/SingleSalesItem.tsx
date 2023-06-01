@@ -68,7 +68,7 @@ const SingleSalesItem: React.FC = () => {
 
                       <p className='num' style={{ color: 'black' }}>{sale.uniqueNumber}</p>
                     </div>
-                    <div className="seller-name">KATELLAN PELL</div>
+                    <div className="seller-name">{`${sale.customer.firstName} ${sale.customer.lastName}`}</div>
                     <div className="product">product</div>
                     <div className="product-name">
                       <p>{product.brand}</p>

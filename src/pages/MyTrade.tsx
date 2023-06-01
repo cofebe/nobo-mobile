@@ -21,8 +21,8 @@ import { TradesResponse } from '../models'
 const MyTrade: React.FC = () => {
   const userService = new UserService()
   const history = useHistory()
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
   const [tradesData, setTradesData] = useState<TradesResponse[]>([])
+  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
 
 
@@ -81,7 +81,7 @@ const acceptTrade = (productId:string) => {
         <IonCol size='12' className='trade-item-info-header'>
           <div
             onClick={() => {
-              history.push('/settings/trades/trades-completed')
+              history.replace('/settings/trades/trades-completed')
             }}
           >
             <img src='assets/images/trade-offer.svg' alt="" />

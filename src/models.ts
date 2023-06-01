@@ -317,6 +317,7 @@ export interface LoginResponse {
 		  _id:string
 		  firstName:string
 		  lastName:string
+		  displayName:string
 	  }
 	status: string;
 	taxes: any;

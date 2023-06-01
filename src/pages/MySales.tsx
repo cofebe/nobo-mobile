@@ -70,7 +70,7 @@ const MySales: React.FC = () => {
                       <p className='order'>ORDER N0.</p>
                       <p className='num' style={{ color: 'black' }}>{product.uniqueNumber}</p>
                     </div>
-                    <div className="seller-name">KATELLAN PELL</div>
+                    <div className="seller-name">{`${product.customer.firstName} ${product.customer.lastName}`}</div>
                     <div className="product">product</div>
                     <div className="product-name">
                       <p>{sProduct.brand}</p>
@@ -85,7 +85,7 @@ const MySales: React.FC = () => {
                     <p className='price'>{currencyFormat.format(sProduct.price)}</p>
                   </div>
                 </IonCol>
-<div className='sales-item-line-divider'></div>
+                <div className='sales-item-line-divider'></div>
               </IonRow>
             ))}
 

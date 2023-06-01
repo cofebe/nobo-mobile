@@ -21,8 +21,8 @@ import { TradesResponse } from '../models'
 const TradeCompleted: React.FC = () => {
   const userService = new UserService()
   const history = useHistory()
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
   const [tradesData, setTradesData] = useState<TradesResponse[]>([])
+  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
 
 
@@ -81,7 +81,7 @@ const TradeCompleted: React.FC = () => {
         <IonCol size='12' className='trade-completed-item-info-header'>
           <div
             onClick={() => {
-              history.push('/settings/trades')
+              history.replace('/settings/trades')
             }}
           >
             <img src='assets/images/trades-completed.svg' alt="" />
@@ -97,12 +97,39 @@ const TradeCompleted: React.FC = () => {
                 <div className="trade-completed-status-container">
                   <div className='left-status-container'>
                     <p className='status'>STATUS</p>
-                    <p className='status-text'>PENDING</p>
+                    <p className='status-text'>{product.status.toUpperCase()}</p>
                   </div>
                   <p className='track-shipping'>Track Shipping</p>
                 </div>
                 <div className="trade-completed-props-container">
-                  props
+                  <div className="trade-completed-props-left">
+                    <div className="trade-completed-line-l"></div>
+                    <div className='trade-completed-circle-l'></div>
+                    <img className='trade-completed-connect-l' src='assets/images/12420.svg' alt="" />
+                    {<img
+                      className='trade-completed-img-l'
+                      src={product.products.requested.images[0]?.url.length < 60 ? `https://thenobo.com/${product.products.requested.images[0].url}` : `${product.products.requested.images[0].url}`} alt=''
+                    />}
+                    {<img
+                      className='trade-completed-img-r'
+                      src={product.products.offered.images[0]?.url.length < 60 ? `https://thenobo.com/${product.products.offered.images[0].url}` : `${product.products.offered.images[0].url}`} alt=''
+                    />}
+                  </div>
+                  <div className="trade-completed-props-right">
+                    <div className="trade-with-container-l">
+                      <p className="trade-with-title">TRADE WITH</p>
+                      <p className="trade-with-name">@JAMESBAILY</p>
+                      <p className="trade-fee">TRADE FEE</p>
+                      <p className="trade-amount">{currencyFormat.format(product.fee)}</p>
+                    </div>
+                    <div className="trade-with-container-r">
+                      <p className="trade-accepted-title">TRADE WITH</p>
+                      <p className="trade-accepted-date">{new Date(product.updatedAt).toDateString().slice(0 - 11)}</p>
+                      <p className="trade-value-title">TRANSACTION VALUE</p>
+                      <p className="trade-value-text">{currencyFormat.format(product.total)}</p>
+                    </div>
+                  </div>
+
                 </div>
 
               </IonCol>
