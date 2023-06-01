@@ -1,0 +1,123 @@
+.trade-completed-main-container {
+  background-color: #FEFCF7;
+
+
+  .trade-completed-item-header {
+    background-color: #FEFCF7;
+    height: 118px;
+
+    .trade-completed-item-back-btn {
+      position: absolute;
+      left: 35px;
+      bottom: 15px;
+      z-index: 1000;
+    }
+
+    .trade-completed-item-title-text-container {
+      position: absolute;
+      top: 64%;
+      bottom: 10.71%;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 150%;
+      letter-spacing: 0.05em;
+      color: #000000;
+      text-align: center;
+    }
+
+  }
+
+  .trade-completed-item-info-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+  }
+
+  .trade-completed-item-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 20px;
+    // --padding-top: 20px;
+    --background: #FEFCF7;
+
+
+
+    .trade-completed-item-container {
+      position: relative;
+      width: 344px;
+      height: 121px;
+      border: 0.5px solid #707070;
+      border-radius: 10px;
+      padding: 0px 0px 0px 0px;
+      display: flex;
+      flex-direction: column;
+
+      .trade-completed-status-container {
+        height: 26px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 10px 0px 7px;
+        .left-status-container {
+          display: flex;
+        }
+
+        .status {
+          width: 50px;
+          height: 15px;
+          left: 32px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #ACACAC;
+        }
+
+        .status-text {
+          width: 50px;
+          height: 15px;
+          font-family: 'Nunito Sans';
+          font-style: italic;
+          font-weight: 600;
+          font-size: 10px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #729A00;
+        }
+
+        .track-shipping{
+          width: 76px;
+          height: 15px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 10px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          text-decoration-line: underline;
+          color: #D6980E;
+        }
+
+      }
+
+      .trade-completed-props-container {
+        background-color: yellow;
+        height: 95px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+      }
+
+    }
+
+
+
+  }
+}

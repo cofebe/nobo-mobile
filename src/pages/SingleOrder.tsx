@@ -181,7 +181,7 @@ const SingleOrder: React.FC = () => {
                     className='order-details-item-img'
                     height={68}
                     width={68}
-                    src={singleProduct.images[0]?.url.length < 60 ? `https://staging.thenobo.com/${singleProduct.images[0]?.url}`
+                    src={singleProduct.images[0]?.url.length < 60 ? `https://thenobo.com/${singleProduct.images[0]?.url}`
                       : `${singleProduct.images[0]?.url}`} alt={singleProduct.name}
                   />
                   <div className='order-details-item-info'>
@@ -198,6 +198,7 @@ const SingleOrder: React.FC = () => {
                 </IonCol>
                 <IonCol className='order-details-item-msg-flw'>
                   <IonButton size='small'
+                    className='single-order-btn'
                     onClick={
                       () => {
                         message()
@@ -207,6 +208,7 @@ const SingleOrder: React.FC = () => {
                     style={{ marginLeft: '-2px' }}
                   >MESSAGE SELLER</IonButton>
                   <IonButton size='small'
+                    className='single-order-btn'
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()

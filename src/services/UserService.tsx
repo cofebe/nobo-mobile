@@ -308,6 +308,11 @@ export class UserService extends BaseService {
     const json: TradesResponse = await res.json();
     return json;
   }
+  async acceptTradeOffer(tradeid:string): Promise<TradesResponse> {
+    const res = await super.fetch('POST', '/api/trades/accept',{tradeid});
+    const json: TradesResponse = await res.json();
+    return json;
+  }
 
   // From URP /////////////////////////////////////////////////////////////////
   getUserCache() {

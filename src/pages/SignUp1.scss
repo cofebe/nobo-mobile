@@ -49,8 +49,8 @@
 
 
   .signup-details-box {
-    padding-left: 11px;
-    padding-right: 11px;
+    padding-left: 15px;
+    padding-right: 15px;
     // position: absolute;
     margin-left: 24px;
     margin-right: 24px;
@@ -79,14 +79,15 @@
     .signup-details-title {
       text-align: center;
       font-size: 20px;
-      font-family: 'Baskerville';
+      font-family: 'Georgia';
       font-weight: 400;
-      margin-top: 20px;
+      margin-top: 22px;
+      margin-bottom: 22px;
       letter-spacing: 0.2rem;
 
       // @media screen and (max-height:668px) {
       //   font-size: 18px;
-      //   font-family: 'Baskerville';
+      //   font-family: 'Georgia';
       //   font-weight: 400;
       //   margin-top: 15px;
       //   letter-spacing: 0.2rem;
@@ -105,34 +106,53 @@
 
 
     .signup-details-terms {
+      width: 306px;
+      height: 36px;
+
+
       font-family: 'Nunito Sans';
       font-style: normal;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 12px;
       line-height: 150%;
+      /* or 18px */
+
       letter-spacing: 0.05em;
+
       color: #050505;
-      margin-top: 15px;
     }
 
     .signup-details-input-container {
       margin-bottom: 15px;
     }
 
+    .signup-details-btn-container {
+      margin-top: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0px 0px 0px 0px;
+    }
     .signup-details-btn {
-      margin-top: 15px;
+      // margin-top: 15px;
+      height: 51px;
+      width: 340px;
+      border-radius: 5px
     }
 
     .already-have-account {
+      // background-color: palevioletred;
       font-family: 'Nunito Sans';
       font-style: normal;
       font-weight: 600;
       font-size: 15px;
       line-height: 150%;
+      width: 350px;
+       display: flex;
+      align-items: center;
       /* identical to box height, or 22px */
 
-      display: flex;
-      align-items: center;
+
       letter-spacing: 0.05em;
       color: #FFFFFF;
     }
@@ -143,7 +163,8 @@
     }
 
     .signup-details-signin {
-      width: 120px;
+      // background-color: #;
+      width: 90px;
       font-family: 'Nunito Sans';
       font-style: normal;
       font-weight: 700;
