@@ -56,23 +56,17 @@ const Login: React.FC = () => {
   return (
     <IonPage className="nobo-login-page">
       <div className="background-image">
-
-      <IonRow >
-          <IonCol size='12' style={{ height: '160px'  }}>
+        <IonRow>
+          <IonCol size="12" style={{ height: '160px' }}>
             <div
               onClick={() => {
                 history.push('/get-started');
               }}
               className="header-comp-back-btn"
             >
-              <img
-                height={38}
-                src="assets/images/nobo-back-icon.png"
-                alt="logo"
-              />
+              <img height={38} src="assets/images/nobo-back-icon.png" alt="logo" />
             </div>
-            <div
-              className="header-comp-nobo-logo">
+            <div className="header-comp-nobo-logo">
               <img height={65} src="assets/images/nobo-logo-white.png" alt="logo" />
             </div>
           </IonCol>
@@ -103,7 +97,7 @@ const Login: React.FC = () => {
                   textAlign: 'center',
                   fontSize: 20,
                   fontWeight: 400,
-                  fontFamily: 'Baskerville',
+                  fontFamily: 'Georgia',
                   letterSpacing: '.05rem',
                 }}
               >

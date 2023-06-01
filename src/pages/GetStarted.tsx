@@ -35,7 +35,7 @@ const GetStarted: React.FC = () => {
       >
         <div
           style={{
-            fontFamily: 'Baskerville',
+            fontFamily: 'Georgia',
             fontSize: '40px',
             fontWeight: '400',
             lineHeight: '60px',
