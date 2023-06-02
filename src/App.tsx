@@ -49,10 +49,18 @@ import OfferComplete from './pages/OfferComplete';
 import MyTrade from './pages/MyTrade';
 import TradeAccepted from './pages/TradeAccepted';
 import TradeDenied from './pages/TradeDenied';
+
 import ListItemCategory from './pages/ListItemCategory';
 import ListItemImage from './pages/ListItemImage';
 import ListItemProduct from './pages/ListItemProduct';
 import ListItemConfirm from './pages/ListItemConfirm';
+
+import MySales from './pages/MySales';
+import SingleSalesItem from './pages/SingleSalesItem';
+import TradeCompleted from './pages/TradeCompleted';
+import SalesShippingLabel from './pages/SalesShippingLabel';
+
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -72,8 +80,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import MySales from './pages/MySales';
-import SingleSalesItem from './pages/SingleSalesItem';
+
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -244,6 +251,9 @@ const App: React.FC = () => {
             <Route path="/settings/trades" exact={true}>
               <MyTrade />
             </Route>
+            <Route path="/settings/trades/trades-completed" exact={true}>
+              <TradeCompleted />
+            </Route>
             <Route path="/settings/trades/accepted/:id" exact={true}>
               <TradeAccepted />
             </Route>
@@ -255,6 +265,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/sales/single-sales-item/:id" exact={true}>
               <SingleSalesItem />
+            </Route>
+            <Route path="/sales/shipping-label" exact={true}>
+              <SalesShippingLabel />
             </Route>
             <Route path="/signup1" exact={true}>
               <SignUp1 />

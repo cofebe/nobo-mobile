@@ -4,6 +4,12 @@
   .signup-ion-content {
     // --padding-start: 20px;
     // --padding-end: 20px;
+    --background: linear-gradient(goldenrod,
+        rgb(252, 250, 243),
+        white,
+        white,
+        white);
+
     --background: linear-gradient(goldenrod, rgb(252, 250, 243), white, white, white);
   }
 
@@ -87,3 +93,6 @@
     margin-right: 20px;
   }
 }
+
+
+

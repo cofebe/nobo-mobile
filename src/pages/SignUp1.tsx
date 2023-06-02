@@ -58,6 +58,7 @@ const SignUp1: React.FC = () => {
 
   return (
     <IonPage className='signup-details-container'>
+      <IonContent>
       <div className='signup-details-background-image'>
         <IonRow>
           <IonCol size='12' style={{ height: '160px' }}>
@@ -105,7 +106,7 @@ const SignUp1: React.FC = () => {
               <Input
                 value={lastName}
                 className={`nobo-input `}
-                placeholder='LASTNAME'
+                placeholder='LAST NAME'
                 type='text'
                 onChange={val => {
                   setLastName(val);
@@ -132,26 +133,31 @@ const SignUp1: React.FC = () => {
               ></Input>
             </IonCol>
           </IonRow>
-          <IonRow >
+          <IonRow style={{marginTop:'20px'}} >
             <IonCol className='signup-details-terms'>
-              By selecting agree and continue below, I agree to the
-              <IonCol style={{ color: 'goldenrod' }}> Terms of Service and Privacy</IonCol>
+            By selecting Agree and continue below, I agree to the <span style={{textDecoration:'underline'}}>Terms and Conditions</span>
+              {/* <IonCol style={{ color: 'goldenrod' }}> Terms of Service and Privacy</IonCol> */}
             </IonCol>
           </IonRow>
-          <IonRow className='signup-details-btn'>
-            <IonCol>
+          <IonRow >
+            <IonCol className='signup-details-btn-container'>
               <Button
+
                 onClick={() => {
                   checkUserExist();
                 }}
-                label='AGREE AND CONTINUE'
+                label='NEXT'
                 large={true}
-                className=''
+                className='signup-details-btn'
                 disabled={!validate()}
               />
             </IonCol>
           </IonRow>
-          <IonRow className='already-have-account-contaner' >
+          <IonRow   >
+            <IonCol className='already-have-account-contaner' size='12' style={{
+              display:'flex'
+              }}>
+
             <div className='already-have-account' >
               Already have an account?
             </div>
@@ -159,13 +165,15 @@ const SignUp1: React.FC = () => {
               className='signup-details-signin'
               onClick={() => history.push('/login')}
             >
-              <p style={{ marginLeft: '40px', width: '80px' }}> SIGN IN </p>
+              <p style={{ marginLeft: '40px', width: '80px' }}> LOGIN </p>
             </div>
+            </IonCol>
+
           </IonRow>
         </IonGrid>
 
       </div>
-
+      </IonContent>
     </IonPage>
   );
 };

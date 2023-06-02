@@ -470,15 +470,15 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
             GO TO YOUR STYLE FEED TO CONNECT WITH THE COMMUNITY!
           </h5>
           <div className="profile-modal-btn">
-            <Button
-              label="VIEW MY POST"
+            <IonButton
+            className='modal-btn_'
               onClick={e => {
                 e.preventDefault();
                 history.push(`/home/style-feed`);
                 localStorage.removeItem('newUser');
               }}
-              large
-            />
+
+            >VIEW MY POST</IonButton>
           </div>
           <h3
             className="profile-modal-later"

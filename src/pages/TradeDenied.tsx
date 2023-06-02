@@ -1,43 +1,40 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import {
   IonButton,
   IonCol,
   IonContent,
   IonGrid,
-  IonHeader,
   IonPage,
   IonRow,
-  IonToolbar,
   useIonViewWillEnter
 } from '@ionic/react'
 import './TradeDenied.scss'
-import { useHistory, } from 'react-router'
+import { useHistory, useParams, } from 'react-router'
 import { UserService } from '../services/UserService'
-import Button from '../components/Button'
-
-
-
-
+import { TradesResponse } from '../models'
 
 
 const TradeDenied: React.FC = () => {
   const userService = new UserService()
   const history = useHistory()
-
-  // useIonViewWillEnter(() => {
-  //   userService.getOrders()
-  //     .then((products) => {
-  //       if (products) {
-  //         setProductData([products])
-  //       } else { console.log('something went wrong') }
-  //     })
-  //     .catch((err) => { console.log('err info while fetching products ', err) })
-  // })
+  const params: any = useParams()
+  const [tradesData, setTradesData] = useState<TradesResponse[]>([])
 
 
+  useIonViewWillEnter(() => {
+    userService.denyTradeOffer(params.id)
+      .then((res) => {
+        console.log(res)
+        setTradesData([res])
+      })
+      .catch((error) => {
+        console.log('error denying trade : ', error)
+      })
+  })
 
 
-
+const tradeData:any = tradesData[0]
+  console.log('deny page any', tradeData)
   return (
     <IonPage className='denied-item-main-container'>
       <IonContent className='item-denied-content'>
@@ -55,7 +52,7 @@ const TradeDenied: React.FC = () => {
 
         <div className='item-denied-desc-container'>
           <div className='item-denied-desc'>
-            YOU DENIED <span style={{ color: '#D6980E', fontStyle: 'italic' }}>@NBONNER’s </span>
+            YOU DENIED <span style={{ color: '#D6980E', fontStyle: 'italic' }}>@{tradeData?.initiator.displayName} </span>
             TRADE OFFER
           </div>
         </div>
@@ -72,9 +69,12 @@ const TradeDenied: React.FC = () => {
 
               <div className='items-view-props'>
                 <div className='items-view-props-left'>
-                  <img className='item-img-left' src='assets/images/test/bvlgary.svg' alt="" />
-                  {/* <div className="denied-item-name-left">BVLGARY Clutch</div>
-                  <div className="adenied-item-price-left">$500</div> */}
+                  <img
+                    className='item-img-left'
+                    src={tradeData?.products?.requested[0]?.url.length < 60 ? `https://thenobo.com/${tradeData?.products?.requested[0]?.url}`
+                      : `${tradeData?.products?.requested.images[0]?.url}`} alt={tradeData?.products?.requested.name}
+                  />
+
                 </div>
 
                 <div className='items-view-props-center'>
@@ -83,9 +83,12 @@ const TradeDenied: React.FC = () => {
                 </div>
 
                 <div className='items-view-props-right'>
-                  <img className='item-img-left' src='assets/images/test/bvlgary.svg' alt="" />
-                  {/* <div className="denied-item-name-right">BVLGARY Clutch</div>
-                  <div className="denied-item-price-right">$1900</div> */}
+                  <img
+                    className='item-img-right'
+                    src={tradeData?.products?.offered[0]?.url.length < 60 ? `https://thenobo.com/${tradeData.products?.offered[0]?.url}`
+                      : `${tradeData?.products?.offered.images[0]?.url}`} alt={tradeData?.products?.offered.name}
+                  />
+
                 </div>
               </div>
 
@@ -97,8 +100,8 @@ const TradeDenied: React.FC = () => {
           <IonButton className='btn' onClick={() => {
             history.push('/home/closet/trade')
           }} >VIEW MY CLOSET</IonButton>
-          <IonButton style={{backgroundColor:'white'}} className='btn' fill='outline' onClick={() => {
-            history.push('/home/style-feed')
+          <IonButton style={{ backgroundColor: 'white' }} className='btn' fill='outline' onClick={() => {
+            history.replace({ pathname: `/home/style-feed`, state: {} })
           }} >BACK TO HOME FEED</IonButton>
         </div>
 
