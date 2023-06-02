@@ -13,7 +13,8 @@ const GetStarted: React.FC = () => {
   const sentences = [
     'TRADE \n BUY, & SELL LUXURY',
     'RECEIVE \n BETTER \n DEALS',
-    'DISCOVER NEW \n ELEGANCE',
+    // 'DISCOVER NEW \n ELEGANCE',
+    'DISCOVER SUSTAINABLE \n LUXURY',
   ];
 
   useEffect(() => {
@@ -37,12 +38,15 @@ const GetStarted: React.FC = () => {
           style={{
             fontFamily: 'Georgia',
             fontSize: '40px',
+            // fontFamily: 'Baskerville',
+            fontSize: '37px',
             fontWeight: '400',
             lineHeight: '60px',
             marginTop: '474px',
             maxWidth: '259px',
             color: '#FFFFFF',
             marginLeft: '40px',
+            height:'200px',
           }}
         >
           {sentences[currentImageIndex]}
@@ -58,10 +62,10 @@ const GetStarted: React.FC = () => {
               width: '341px',
               height: '51px',
               fontFamily: 'Nunito Sans',
-              fontSize: '10px',
+              fontSize: '12px',
               fontWeight: '700',
               lineHeight: '15px',
-              border: '0.5px solid #ffffff',
+              // border: '0.5px solid #ffffff',
             }}
             // id="open-subscription-modal"
             onClick={() => {
@@ -90,10 +94,10 @@ const GetStarted: React.FC = () => {
           </div>
           <div
             style={{
-              textDecorationLine: 'none',
+              textDecorationLine: 'underline',
               fontFamily: 'Nunito Sans',
               fontWeight: '700',
-              color: '#D6980E',
+              color: 'white',
               fontSize: '15px',
               marginLeft: '24px',
             }}
@@ -101,7 +105,7 @@ const GetStarted: React.FC = () => {
               history.push('/login');
             }}
           >
-            Login
+            REGISTER
           </div>
         </div>
       </div>

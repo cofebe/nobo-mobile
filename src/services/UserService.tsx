@@ -280,6 +280,17 @@ export class UserService extends BaseService {
     return json.success;
   }
 
+  async getSales(): Promise<OrdersResponse> {
+    const res = await super.fetch('GET', '/api/orders/my-sales');
+    const json:OrdersResponse= await res.json();
+    return json;
+  }
+  async getSale(id:string): Promise<FullOrder> {
+    const res = await super.fetch('GET', `/api/orders/my-sales/${id}`);
+    const json:OrderResponse= await res.json();
+    return json.order;
+  }
+
   async getOrders(): Promise<OrdersResponse> {
     const res = await super.fetch('GET', '/api/orders/my-purchases');
     const json: OrdersResponse = await res.json();
@@ -294,6 +305,11 @@ export class UserService extends BaseService {
 
   async getMyTrades(): Promise<TradesResponse> {
     const res = await super.fetch('GET', '/api/trades/my-trades/all');
+    const json: TradesResponse = await res.json();
+    return json;
+  }
+  async acceptTradeOffer(tradeid:string): Promise<TradesResponse> {
+    const res = await super.fetch('POST', '/api/trades/accept',{tradeid});
     const json: TradesResponse = await res.json();
     return json;
   }

@@ -14,6 +14,7 @@ import './TradeAccepted.scss'
 import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
 import Button from '../components/Button'
+import { FullOrder } from '../models'
 
 
 
@@ -23,20 +24,16 @@ import Button from '../components/Button'
 const TradeAccepted: React.FC = () => {
   const userService = new UserService()
   const history = useHistory()
+  const [trade, setTrade] = useState()
+  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
   // useIonViewWillEnter(() => {
-  //   userService.getOrders()
-  //     .then((products) => {
-  //       if (products) {
-  //         setProductData([products])
-  //       } else { console.log('something went wrong') }
-  //     })
-  //     .catch((err) => { console.log('err info while fetching products ', err) })
+  //  setTrade
   // })
 
+  const tradeData: any = history.location.state
 
-
-
+  console.log('message recieved at state changed ', tradeData)
 
   return (
     <IonPage className='accepted-accepted-item-main-container'>
@@ -55,8 +52,8 @@ const TradeAccepted: React.FC = () => {
 
         <div className='item-accepted-desc-container'>
           <div className='item-accepted-desc'>
-            YOU ACCEPTED <span style={{ color: '#D6980E' }}>@NBONNER’s</span>
-            TRADE OFFER FOR <span style={{ color: '#D6980E' }}> THEIR PRODUCT NAME</span>
+            YOU ACCEPTED <span style={{ color: '#D6980E' }}>@{tradeData.initiator.displayName} </span>
+            TRADE OFFER FOR <span style={{ color: '#D6980E' }}>{tradeData.products.offered.name}</span>
           </div>
         </div>
 
@@ -74,9 +71,14 @@ const TradeAccepted: React.FC = () => {
               <div className='items-view-props'>
 
                 <div className='items-view-props-left'>
-                  <img className='item-img-left' src='assets/images/test/bvlgary.svg' alt="" />
-                  <div className="accepted-accepted-item-name-left">BVLGARY Clutch</div>
-                  <div className="accepted-accepted-item-price-left">$500</div>
+                  <img
+                    className='img'
+                    src={tradeData.products.requested[0]?.url.length < 60 ? `https://thenobo.com/${tradeData.products.requested[0]?.url}`
+                      : `${tradeData.products.requested.images[0]?.url}`} alt={tradeData.products.requested.name}
+                  />
+                  {/* <img className='item-img-left' src='assets/images/test/bvlgary.svg' alt="" /> */}
+                  <div className="accepted-accepted-item-name-left">{tradeData.products.requested.name}</div>
+                  <div className="accepted-accepted-item-price-left">{currencyFormat.format(tradeData.products.requested.price)}</div>
                 </div>
 
                 <div className='items-view-props-center'>
@@ -87,9 +89,14 @@ const TradeAccepted: React.FC = () => {
                 </div>
 
                 <div className='items-view-props-right'>
-                  <img className='item-img-left' src='assets/images/test/bvlgary.svg' alt="" />
-                  <div className="accepted-accepted-item-name-right">BVLGARY Clutch</div>
-                  <div className="accepted-accepted-item-price-right">$1900</div>
+                  {/* <img className='item-img-left' src='assets/images/test/bvlgary.svg' alt="" /> */}
+                  <img
+                    className='img'
+                    src={tradeData.products.offered[0]?.url.length < 60 ? `https://thenobo.com/${tradeData.products.offered[0]?.url}`
+                      : `${tradeData.products.offered.images[0]?.url}`} alt={tradeData.products.offered.name}
+                  />
+                  <div className="accepted-accepted-item-name-right">{tradeData.products.offered.name}</div>
+                  <div className="accepted-accepted-item-price-right">{currencyFormat.format(tradeData.products.offered.price)}</div>
                 </div>
               </div>
 
@@ -101,7 +108,7 @@ const TradeAccepted: React.FC = () => {
           <IonButton className='btn' onClick={() => {
             history.push('/settings/trades')
           }} >VIEW MY TRADES</IonButton>
-          <IonButton style={{backgroundColor:'white'}} className='btn' fill='outline'
+          <IonButton style={{ backgroundColor: 'white' }} className='btn' fill='outline'
             onClick={() => { history.push('/home/style-feed') }}
           >BACK TO HOME FEED</IonButton>
         </div>
