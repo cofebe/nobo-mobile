@@ -24,7 +24,7 @@ import CreateCommentModal from '../components/CreateCommentModal';
 import { chevronBackOutline } from 'ionicons/icons';
 import { AuthService } from '../services/AuthService';
 import { FeedService } from '../services/FeedService';
-import ImageZoom from '../components/ImageZoom';
+//import ImageZoom from '../components/ImageZoom';
 
 interface FeedItem {
   likes: Comment[];
@@ -68,7 +68,7 @@ const PostDetail: React.FC = () => {
   const [postId, setPostId] = useState<string>(getPostId());
   const [message, setMessage] = useState<FeedItem>();
   const [comments, setComments] = useState<Comment[]>([]);
-  const [imageZoom, setImageZoom] = useState('');
+  //const [imageZoom, setImageZoom] = useState('');
   const [currentUserAvatar, setCurrentUserAvatar] = useState<string>('');
   const [commentMessage, setCommentMessage] = useState<string>('');
 
@@ -88,7 +88,7 @@ const PostDetail: React.FC = () => {
 
     // postId = getPostId();
     // setPostId(postId);
-    setImageZoom('');
+    //setImageZoom('');
 
     console.log('feedService.getPost(): ', userID, getPostId());
     feedService
@@ -144,11 +144,11 @@ const PostDetail: React.FC = () => {
 
   return (
     <IonPage className="post-detail-page">
-      <ImageZoom
+      {/*<ImageZoom
         show={!!imageZoom}
         imageUrl={imageZoom}
         onClose={() => setImageZoom('')}
-      ></ImageZoom>
+      ></ImageZoom>*/}
       <IonHeader>
         <IonToolbar
           style={{

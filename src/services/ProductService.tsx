@@ -1,14 +1,16 @@
 import { BaseService } from './BaseService';
 import {
   Address,
+  BrandsResponse,
+  CreateProductRequest,
+  CreateProductResponse,
   Order,
   Product,
   ProductResponse,
-  SuccessResponse,
   ShoppingCartResponse,
+  SuccessResponse,
   TaxShippingResponse,
   Trade,
-  BrandsResponse,
 } from '../models';
 
 export class ProductService extends BaseService {
@@ -59,6 +61,12 @@ export class ProductService extends BaseService {
   async deleteProduct(productId: string): Promise<SuccessResponse> {
     const res = await super.fetch('POST', `/api/products/${productId}/delete`, {});
     const json: SuccessResponse = await res.json();
+    return json;
+  }
+
+  async createProduct(product: CreateProductRequest): Promise<CreateProductResponse> {
+    const res = await super.fetch('POST', `/api/products`, product);
+    const json: CreateProductResponse = await res.json();
     return json;
   }
 

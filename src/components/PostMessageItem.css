@@ -24,7 +24,7 @@ ion-item ion-icon {
 }
 
 ion-item ion-note {
-  color: #1A3A35;
+  color: #1a3a35;
   font-size: 15px;
   margin-right: 8px;
   font-weight: 400;
@@ -39,7 +39,7 @@ ion-item ion-note.md {
   height: 12px;
   width: 12px;
   border-radius: 50%;
-  align-self: start;
+  align-self: flex-start;
   margin: 16px 10px 16px 16px;
 }
 
@@ -60,7 +60,7 @@ ion-footer ion-title {
 .nobo-badge-line {
   font-weight: bold;
   font-size: 1rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .feed-image {
@@ -81,21 +81,20 @@ ion-footer ion-title {
 
 .feed-primary-sport {
   font-weight: 400;
-  font-size: .7rem;
+  font-size: 0.7rem;
 }
 
 .feed-l2 {
   font-weight: 400;
-  color: #1A3A35;
+  color: #1a3a35;
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .feed-l2 {
-  font-size: .9rem;
-  color:#1A3A35;
+  font-size: 0.9rem;
+  color: #1a3a35;
 }
-
 
 .feed-border {
   margin-left: 4px;
@@ -114,13 +113,15 @@ ion-footer ion-title {
 }
 
 a > div.item-inner {
-  border-bottom:none !important;
+  border-bottom: none !important;
 }
 
-.list-md-lines-inset .item, .list-md .item-lines-inset {
+.list-md-lines-inset .item,
+.list-md .item-lines-inset {
   --inner-border-width: 0 0 0 0;
 }
-.list-md-lines-inset .item, .list-md .item-lines-inset {
+.list-md-lines-inset .item,
+.list-md .item-lines-inset {
   --inner-border-width: 0 0 0 0;
 }
 
@@ -131,16 +132,16 @@ a > div.item-inner {
   position: absolute;
   width: 100%;
   height: 5px;
-  background-image:none;
+  background-image: none;
   /* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHBAMAAADzDtBxAAAAD1BMVEUAAAAAAAAAAAAAAAAAAABPDueNAAAABXRSTlMUCS0gBIh/TXEAAAAaSURBVAjXYxCEAgY4UIICBmMogMsgFLtAAQCNSwXZKOdPxgAAAABJRU5ErkJggg==); */
   background-repeat: repeat-x;
-  content: "";
+  content: '';
 }
 
 .feed-message {
-  color: #1A3A35;
-  font-size: .9rem;
-  margin-top: .5rem;
+  color: #1a3a35;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
   height: auto;
   display: block;
 }
@@ -157,3 +158,4 @@ a > div.item-inner {
   border-top: 1px solid #d6d6d6;
   padding-right: 10px;
 }
+
