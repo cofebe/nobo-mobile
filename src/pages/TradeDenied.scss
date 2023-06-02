@@ -1,24 +1,22 @@
 .denied-item-main-container {
-  background-color: #FEFCF7;
+  background-color: #fefcf7;
 
   .item-denied-content {
     --padding-start: 20px;
     --padding-end: 20px;
     --padding-bottom: 20px;
     // --padding-top: 20px;
-    --background: #FEFCF7;
-
+    --background: #fefcf7;
 
     .denied-item-header {
-      background-color: #FEFCF7;
+      background-color: #fefcf7;
       height: 118px;
-
 
       .item-denied-title-text-container {
         position: absolute;
         top: 35%;
         bottom: 10.71%;
-        font-family: 'Baskerville';
+        font-family: 'Georgia';
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
@@ -28,7 +26,6 @@
         color: #000000;
         text-align: center;
       }
-
     }
 
     .item-denied-info-header {
@@ -50,7 +47,6 @@
         height: 40px;
         text-align: center;
 
-
         font-family: 'Nunito Sans';
         font-style: normal;
         font-weight: 600;
@@ -58,7 +54,6 @@
         line-height: 20px;
         color: #000000;
       }
-
     }
 
     .item-denied-container2 {
@@ -78,19 +73,15 @@
         line-height: 20px;
         color: #707070;
       }
-
     }
 
     .item-denied-container {
       position: relative;
       width: 350px;
       height: 255px;
-      background: #FEFCF7;
+      background: #fefcf7;
       border: none;
-
     }
-
-
 
     .items-view-props {
       // background-color: greenyellow;
@@ -141,7 +132,6 @@
           text-transform: uppercase;
           color: #000000;
         }
-
       }
 
       .items-view-props-center {
@@ -154,7 +144,7 @@
 
         .line {
           height: 95px;
-          border: .1px solid red;
+          border: 0.1px solid red;
           margin-top: 45px;
         }
 
@@ -162,7 +152,6 @@
           position: absolute;
           top: 60%;
         }
-
       }
 
       .items-view-props-right {
@@ -173,7 +162,6 @@
         align-items: center;
         justify-content: flex-start;
         border-radius: 5px;
-
 
         .item-img-right {
           height: 90px;
@@ -209,12 +197,8 @@
           text-transform: uppercase;
           color: #000000;
         }
-
       }
-
     }
-
-
 
     .trade-denied-btn-below {
       margin-top: 130px;

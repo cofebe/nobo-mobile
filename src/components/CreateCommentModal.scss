@@ -2,160 +2,159 @@
   --height: 275px;
   --border-radius: 10px;
   --backdrop-opacity: 0.1;
-  align-items: end;
+  align-items: flex-end;
 
   .post-comment-content {
-      background: white;
+    background: white;
   }
 
   .post-comment-btn {
-      height: 2rem !important;
-      opacity: 1;
-      --background: #94fff3;
-      --color: #FFFFFF;
-      --background-activated: #94fff3;
+    height: 2rem !important;
+    opacity: 1;
+    --background: #94fff3;
+    --color: #ffffff;
+    --background-activated: #94fff3;
   }
 
-  .post-comment-btn[disabled=""] {
-      --background: #C4C4C4;
+  .post-comment-btn[disabled=''] {
+    --background: #c4c4c4;
   }
 
   .post-comment-create-page .post-comment-content {
-
   }
 
   .toolbar-container {
-      --padding-bottom: 0;
+    --padding-bottom: 0;
   }
 
   ion-toolbar.post-comment-header-toolbar {
-      --background: #FFFFFF;
-      padding: 0;
+    --background: #ffffff;
+    padding: 0;
   }
 
-  .post-comment-btn, .cancel-btn {
-      text-transform: unset;
+  .post-comment-btn,
+  .cancel-btn {
+    text-transform: unset;
   }
 
   .cancel-btn {
-      background: none !important;
-      color: #9BC9C1 !important;
-      height: 2rem !important;
+    background: none !important;
+    color: #9bc9c1 !important;
+    height: 2rem !important;
   }
 
   ion-button.cancel-btn {
-      --background: none;
-      --color: #FFFFFF;
-      --background-activated: none;
+    --background: none;
+    --color: #ffffff;
+    --background-activated: none;
   }
 
   .home-page {
-
   }
 
   .post-comment-text {
-      /* color: #9BC9C1; */
-      /* height: 100px; */
+    /* color: #9BC9C1; */
+    /* height: 100px; */
   }
 
   .post-comment-text::placeholder {
-      color: #9BC9C1;
+    color: #9bc9c1;
   }
 
   .post-comment-create-bubble {
-      display: block;
-      position: absolute;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background-position: center;
-      background-size: 100px;
-      z-index: 10000;
+    display: block;
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: 100px;
+    z-index: 10000;
   }
 
   .nobo-add-video {
-      display:none;
+    display: none;
   }
 
   .post-comment-label {
-      margin-left: 100px;
+    margin-left: 100px;
   }
 
   .nobo-post-input-text {
-      width: 100%;
+    width: 100%;
   }
 
   .post-comment-text {
-      padding-left: 75px;
-      padding-right: 60px;
+    padding-left: 75px;
+    padding-right: 60px;
   }
 
   .post-comment-input-count {
-      text-align: right;
-      font-size: 10px;
-      color: #9BC9C1;
-      padding: 8px 0;
+    text-align: right;
+    font-size: 10px;
+    color: #9bc9c1;
+    padding: 8px 0;
   }
 
   .post-comment-text textarea {
   }
 
   .post-comment-create-bubble {
-      position: absolute;
-      top: 0;
-      left: 10px;
-      z-index: 10000;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    z-index: 10000;
   }
 
   .nobo-post-input-area {
-      /* background: #d4e7e429; */
-      /* margin-top: 64px;*/
-      /* height: 200px; */
-      /* margin-left: 20px;*/
-      /* margin-right: 20px;*/
-      margin: 0 20px;
-      --padding-start: 0;
-      --padding-end: 0;
-      --inner-padding-start: 0;
-      --inner-padding-end: 0;
+    /* background: #d4e7e429; */
+    /* margin-top: 64px;*/
+    /* height: 200px; */
+    /* margin-left: 20px;*/
+    /* margin-right: 20px;*/
+    margin: 0 20px;
+    --padding-start: 0;
+    --padding-end: 0;
+    --inner-padding-start: 0;
+    --inner-padding-end: 0;
   }
 
   .nobo-post-tool-menu {
-      position: absolute;
-      top: 0;
-      right: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
 
-      z-index: 1000000;
+    z-index: 1000000;
   }
 
   .nobo-post-tool-menu svg {
-      height: 36px;
-      width: 36px;
-      transition: height 0.25s, width 0.25s;
+    height: 36px;
+    width: 36px;
+    transition: height 0.25s, width 0.25s;
   }
 
   .nobo-post-input-area.item-has-focus .nobo-post-tool-menu svg,
   .nobo-post-input-area.item-has-value .nobo-post-tool-menu svg {
-      height: 24px;
-      width: 24px;
+    height: 24px;
+    width: 24px;
   }
 
   .nobo-add-location-grid {
-      --ion-grid-padding: 0px;
-      --ion-grid-column-padding: 0px;
+    --ion-grid-padding: 0px;
+    --ion-grid-column-padding: 0px;
   }
 
   .nobo-add-location-grid ion-item {
-      --min-height: 36px;
-      --padding-start: 10px;
-      --padding-end: 10px;
-      --detail-icon-color: #00816D;
-      --detail-icon-opacity: 1;
+    --min-height: 36px;
+    --padding-start: 10px;
+    --padding-end: 10px;
+    --detail-icon-color: #00816d;
+    --detail-icon-opacity: 1;
   }
 
   .nobo-add-location-grid ion-label {
-      font-size: 10px !important;
-      margin-top: 4px;
-      margin-bottom: 4px;
+    font-size: 10px !important;
+    margin-top: 4px;
+    margin-bottom: 4px;
   }
 }

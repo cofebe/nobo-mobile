@@ -26,6 +26,7 @@
   --padding-start: 20px;
   --padding-end: 20px;
   --padding-top: 10px;
+  --padding-bottom: calc(var(--ion-safe-area-bottom, 0px) + 100px);
 
   .sneaker-cards-container {
     padding-top: 10px;
@@ -74,7 +75,7 @@
     text-decoration-line: underline;
     font-size: 10px;
     font-weight: 700;
-    text-align: end;
+    text-align: flex-end;
     letter-spacing: 0.1em;
     padding-top: 3px;
   }
