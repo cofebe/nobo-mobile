@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import './MySales.scss'
 import { UserService } from '../services/UserService'
 import { FullOrder, OrdersResponse } from '../models'
-import { getImageUrl } from '../utils'
+
 
 const MySales: React.FC = () => {
   const [allSales, setAllSales] = useState<OrdersResponse[]>([])
@@ -53,36 +53,40 @@ const MySales: React.FC = () => {
 
       <IonContent className='sales-item-content'>
         <IonRow >
-          <IonCol className='sales-shipping-label' size='12' >SHIPPING LABELS</IonCol>
+          <IonCol className='sales-shipping-label' size='12'
+            onClick={() => {
+              history.push({ pathname: `/sales/shipping-label`, state: allSales })
+            }}
+          >SHIPPING LABELS</IonCol>
         </IonRow>
         {allSales[0]?.docs?.map((product) => (
           <div>
-            {product.products.map((sProduct) => (
-              <IonRow key={sProduct._id}>
+            {product?.products?.map((sProduct) => (
+              <IonRow key={sProduct?._id}>
                 <IonCol
                   onClick={() => {
-                    history.push(`/sales/single-sales-item/${product._id}`)
+                    history.push(`/sales/single-sales-item/${product?._id}`)
                   }}
                   className='sales-items-container' size='12' >
 
                   <div className="sales-items-props-left">
                     <div className="order-no">
                       <p className='order'>ORDER N0.</p>
-                      <p className='num' style={{ color: 'black' }}>{product.uniqueNumber}</p>
+                      <p className='num' style={{ color: 'black' }}>{product?.uniqueNumber}</p>
                     </div>
-                    <div className="seller-name">{`${product.customer.firstName} ${product.customer.lastName}`}</div>
+                    <div className="seller-name">{`${product?.customer.firstName} ${product?.customer.lastName}`}</div>
                     <div className="product">product</div>
                     <div className="product-name">
-                      <p>{sProduct.brand}</p>
-                      <p style={{ fontWeight: 600 }}>{sProduct.name}</p>
+                      <p>{sProduct?.brand}</p>
+                      <p style={{ fontWeight: 600 }}>{sProduct?.name}</p>
                     </div>
-                    <div className="year">{new Date(sProduct.createdAt).toDateString().slice(0 - 11)}</div>
+                    <div className="year">{new Date(sProduct?.createdAt).toDateString().slice(0 - 11)}</div>
                   </div>
                   <div className="sales-items-props-right">
                     <div className="img-container">
-                      <img src={`${sProduct.images[0].url}`} alt="channel" />
+                      <img src={`${sProduct?.images[0].url}`} alt="channel" />
                     </div>
-                    <p className='price'>{currencyFormat.format(sProduct.price)}</p>
+                    <p className='price'>{currencyFormat.format(sProduct?.price)}</p>
                   </div>
                 </IonCol>
                 <div className='sales-item-line-divider'></div>

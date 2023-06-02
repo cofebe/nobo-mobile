@@ -5,7 +5,7 @@ ion-modal {
 }
 
 .acc-password-change-box {
-  /* background-color: #D6980E; */
+  gap: 24px;
   width: 352px;
   margin: auto;
   display: flex;
@@ -20,21 +20,24 @@ ion-modal {
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 150%;
   letter-spacing: 0.05em;
   color: #000000;
 }
 
 .acc-password-btn-box {
-
   margin-top: 10px;
   margin-right: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 308px;
-  /* background-color: teal; */
+}
+
+
+.acc-settings-btn{
+  height: 51px;
 }
 
 .acc-password-change-input {

@@ -52,6 +52,8 @@ import TradeDenied from './pages/TradeDenied';
 import MySales from './pages/MySales';
 import SingleSalesItem from './pages/SingleSalesItem';
 import TradeCompleted from './pages/TradeCompleted';
+import SalesShippingLabel from './pages/SalesShippingLabel';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -244,6 +246,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/sales/single-sales-item/:id" exact={true}>
               <SingleSalesItem />
+            </Route>
+            <Route path="/sales/shipping-label" exact={true}>
+              <SalesShippingLabel />
             </Route>
             <Route path="/signup1" exact={true}>
               <SignUp1 />

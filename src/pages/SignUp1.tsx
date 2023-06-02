@@ -58,6 +58,7 @@ const SignUp1: React.FC = () => {
 
   return (
     <IonPage className='signup-details-container'>
+      <IonContent>
       <div className='signup-details-background-image'>
         <IonRow>
           <IonCol size='12' style={{ height: '160px' }}>
@@ -172,7 +173,7 @@ const SignUp1: React.FC = () => {
         </IonGrid>
 
       </div>
-
+      </IonContent>
     </IonPage>
   );
 };

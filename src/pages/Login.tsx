@@ -6,6 +6,7 @@ import {
   IonGrid,
   IonInput,
   useIonViewWillEnter,
+  IonContent,
 } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -33,13 +34,17 @@ const Login: React.FC = () => {
     userService
       .login(email, password)
       .then((user: User) => {
-        console.log('user', user);
-        setTimeout(() => {
-          loadingStore.decrement('Login:timeout');
-          history.push(`/home/explore/${user.experiencePreferences}/explore`);
-        }, 3000);
+        loadingStore.decrement('Login:timeout');
+        if(user){
+          console.log('user', user);
+          setTimeout(() => {
+            loadingStore.decrement('Login:timeout');
+            history.push(`/home/explore/${user.experiencePreferences}/explore`);
+          }, 3000);
+        }
       })
       .catch((err: any) => {
+        loadingStore.decrement('Login:timeout');
         console.log('login error', err);
         setError(true);
       });
@@ -55,6 +60,7 @@ const Login: React.FC = () => {
 
   return (
     <IonPage className="nobo-login-page">
+      <IonContent>
       <div className="background-image">
 
       <IonRow >
@@ -95,7 +101,7 @@ const Login: React.FC = () => {
         </IonRow> */}
 
         <IonRow>
-          <IonGrid className="login-box">
+          <IonGrid  className={error? 'login-box-error' : 'login-box'}>
             <IonRow style={{ paddingTop: 20 }} class="ion-justify-content-center">
               <IonCol
                 size="5"
@@ -115,7 +121,7 @@ const Login: React.FC = () => {
                 <Input
                   invalid={error}
                   value={email}
-                  className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
+                  className={`nobo-input ${error ? 'invalid-text-color' : 'nobo-input2'}`}
                   placeholder="USERNAME"
                   onChange={val => {
                     setEmail(val);
@@ -132,10 +138,10 @@ const Login: React.FC = () => {
                   //   color: error ? 'red' : '',
                   // }}
                   value={password}
-                  className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
+                  className={`nobo-input nobo-input2 ${error ? 'invalid-text-color' : ''}`}
                   placeholder="PASSWORD"
                   type="password"
-                  errorMessage={error ? 'Invalid username or password' : ''}
+                  errorMessage={error ? 'INCORRECT USERNAME OR PASSWORD' : ''}
                   onChange={val => {
                     setPassword(val);
                   }}
@@ -199,6 +205,7 @@ const Login: React.FC = () => {
           </IonGrid>
         </IonRow>
       </div>
+      </IonContent>
     </IonPage>
   );
 };

@@ -38,6 +38,7 @@ export interface LoginResponse {
 	tradeCloset: number;
 	unfinishedOnboardActivity: string;
 	updatedAt: string;
+  phoneNumber:string
   }
   export interface SignUpUser {
 	exist: number;

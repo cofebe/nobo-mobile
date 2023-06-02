@@ -20,7 +20,7 @@ const AccountSettings: React.FC = () => {
   const [lastName, setLastName] = useState('')
   const [displayName, setdisplayName] = useState('')
   const [email, setEmail] = useState('')
-  const [phoneNumber, setCurrentPassword] = useState('')
+  const [phoneNumber, setPhoneNum] = useState('')
   const [currentPassword, setPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [comfirmPassword, setComfirmPassword] = useState('')
@@ -55,6 +55,7 @@ const AccountSettings: React.FC = () => {
         setLastName(user.lastName)
         setEmail(user.email)
         setdisplayName(user.displayName)
+        setPhoneNum(user.phoneNumber)
       })
       .catch((error) => {
         console.log(error)
@@ -192,7 +193,7 @@ const AccountSettings: React.FC = () => {
                 value={phoneNumber}
                 className={`custom-input-name nobo-input`}
                 placeholder='PHONE NUMBER'
-                onChange={e => setCurrentPassword(e)}
+                onChange={e => setPhoneNum(e)}
               />
             </IonCol>
             <IonCol size='12' className='acc-change-password-box'>
@@ -300,7 +301,6 @@ const AccountSettings: React.FC = () => {
           </div>
           <div className='acc-password-btn-box' >
             <Button
-
               className='acc-settings-btn'
               label='SAVE'
               large={true}

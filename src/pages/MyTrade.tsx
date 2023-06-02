@@ -4,16 +4,13 @@ import {
   IonCol,
   IonContent,
   IonGrid,
-  IonHeader,
   IonPage,
   IonRow,
-  IonToolbar,
   useIonViewWillEnter
 } from '@ionic/react'
 import './MyTrade.scss'
 import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
-// import Button from '../components/Button'
 import { TradesResponse } from '../models'
 
 
@@ -23,9 +20,6 @@ const MyTrade: React.FC = () => {
   const history = useHistory()
   const [tradesData, setTradesData] = useState<TradesResponse[]>([])
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-
-
-
 
 
   useIonViewWillEnter(() => {
@@ -38,25 +32,8 @@ const MyTrade: React.FC = () => {
       .catch((err) => { console.log('err info while fetching products ', err) })
   })
 
-const acceptTrade = (productId:string) => {
-  console.log(productId)
-  userService.acceptTradeOffer(productId)
-  .then((res)=>{
-    console.log(res)
-    history.push({pathname:`trades/accepted/${productId}`, state:res})
-  })
-  .catch((error)=>{
-    console.log('error accepting trade : ',error)
-  })
-}
 
 
-
-
-
-
-
-  // console.log(tradesData[0]?.received)
   return (
     <IonPage className='trade-item-main-container'>
       <IonRow>
@@ -90,9 +67,9 @@ const acceptTrade = (productId:string) => {
       </IonRow>
       <IonContent className='trade-item-content'>
         <IonGrid>
-          {tradesData[0]?.received.map((product: any) =>(
+          {tradesData[0]?.received.map((product: any) => product.status === 'pending' &&(
             // <div>{product.status}</div>
-            <IonRow key={product._id} style={{marginBottom:'14px'}}>
+            <IonRow key={product._id} style={{ marginBottom: '14px' }}>
               <IonCol className='trade-item-container'>
                 <div className='trade-item-status-container'>
                   <div className="item-status">
@@ -108,7 +85,6 @@ const acceptTrade = (productId:string) => {
                       className='item-img-left'
                       src={product.products.offered.images[0]?.url.length < 60 ? `https://thenobo.com/${product.products.offered.images[0].url}` : `${product.products.offered.images[0].url}`} alt={product.products.name}
                     />}
-                    {/* <img className='item-img-left' src={`${product.products.offered.images[0].url}`} alt="" /> */}
                     <div className="trade-item-name-left">{product.products.offered.name.toUpperCase()}</div>
                     <div className="trade-item-price-left">{currencyFormat.format(product.products.offered.price)}</div>
                   </div>
@@ -121,11 +97,10 @@ const acceptTrade = (productId:string) => {
                   </div>
 
                   <div className='items-view-props-right'>
-                  {<img
+                    {<img
                       className='item-img-right'
                       src={product.products.requested.images[0]?.url.length < 60 ? `https://thenobo.com/${product.products.requested.images[0].url}` : `${product.products.requested.images[0].url}`} alt={product.products.name}
                     />}
-                    {/* <img className='item-img-left' src='assets/images/test/bvlgary.svg' alt="" /> */}
                     <div className="trade-item-name-right">{product.products.requested.name.toUpperCase()}</div>
                     <div className="trade-item-price-right">{currencyFormat.format(product.products.requested.price)}</div>
                   </div>
@@ -134,11 +109,10 @@ const acceptTrade = (productId:string) => {
                 <div className='trade-offer-line'></div>
                 <div className='trade-items-btn-container'>
                   <IonButton style={{ backgroundColor: 'white' }} size='small' className='trade-item-btn' fill='outline' onClick={() => {
-                    history.push('/settings/trades/denied/5')
+                    history.push(`trades/denied/${product._id}`)
                   }} >DENY</IonButton>
                   <IonButton size='small' className='trade-item-btn' onClick={() => {
-                    acceptTrade(product._id)
-                    // history.push('/settings/trades/accepted/5')
+                    history.push(`trades/accepted/${product._id}`)
                   }} >ACCEPT</IonButton>
                 </div>
               </IonCol>

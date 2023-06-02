@@ -313,6 +313,11 @@ export class UserService extends BaseService {
     const json: TradesResponse = await res.json();
     return json;
   }
+  async denyTradeOffer(tradeid:string): Promise<TradesResponse> {
+    const res = await super.fetch('POST', '/api/trades/reject',{tradeid});
+    const json: TradesResponse = await res.json();
+    return json;
+  }
 
   // From URP /////////////////////////////////////////////////////////////////
   getUserCache() {
