@@ -457,7 +457,7 @@ export class UserService extends BaseService {
   // GET EXISTING USERS
   async getUsers() {
     try {
-      const response = await fetch('https://thenobo.com/api/users/q/term/a');
+      const response = await fetch('https://staging.thenobo.com/api/users/q/term/a');
       return response.json();
     } catch (error) {
       console.log('err from userService response', error);
@@ -473,16 +473,20 @@ export class UserService extends BaseService {
 
   // GET BRANDS
   async getBrands() {
-    const response = await fetch('https://thenobo.com/api/brands/all');
+    const response = await fetch('https://staging.thenobo.com/api/brands/all');
     const json: BrandsResponse = await response.json();
     return json.brands;
   }
 
 
-  // SELECTED BRAND
-  async selectBrand(brandId: any) {
-    console.log("userService section ", brandId)
+  // ADD FAVOURITE BRAND
+  async addBrand(brandId: string) {
     const response = await super.fetch('POST', '/api/brands/add-favorite', { brandId });
+    return response.json();
+  }
+  // REMOVE BRAND
+  async deleteBrand(brandId: string) {
+    const response = await super.fetch('POST', '/api/brands/remove-favorite', { brandId });
     return response.json();
   }
 

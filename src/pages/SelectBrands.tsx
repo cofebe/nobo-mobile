@@ -17,6 +17,7 @@ const SelectBrands: React.FC = () => {
   const [brandsItems, setBrandItems] = useState<Brand[]>([]);
   const [brandsSelectArr, setBrandSelectArray] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [brand, setbrand] = useState('')
 
   // fetching all brands
   useIonViewWillEnter(() => {
@@ -33,36 +34,59 @@ const SelectBrands: React.FC = () => {
 
   // Handling the ticker
   const handleTicker = (brandId: string) => {
-    console.log('in the ticker container ', brandId)
+    // console.log('in the ticker container ', brandId)
     if (!brandsSelectArr.includes(brandId, 0)) {
       setBrandSelectArray([...brandsSelectArr, brandId])
-      console.log(brandsSelectArr)
+      // console.log(brandsSelectArr)
     }
 
-    else {
-      return
-    }
-    // else if (brandsSelectArr.includes(brandId, 0)) {
-    //   const updatedRemove = brandsSelectArr.filter((brand) => brand !== brandId)
-    //   setBrandSelectArray(updatedRemove)
-    //   console.log('after removed brand ', brandsSelectArr)
+    // else {
+    //   return
     // }
+    else if (brandsSelectArr.includes(brandId, 0)) {
+      const updatedRemove = brandsSelectArr.filter((brand) => brand !== brandId)
+      setBrandSelectArray(updatedRemove)
+      // console.log('after removed brand ', brandsSelectArr)
+    }
   };
 
-  const handleSubmit = async (brandOption: string) => {
 
+  const handleSubmit = async (brandId: any) => {
     userService.getMe()
       .then((user: User) => {
-        console.log('user fav brands ' ,user.favoriteBrands)
-        if (user.favoriteBrands.includes(brandOption, 0)) {
-          return
-        } else {
-          console.log('can add brand')
+        if (user.favoriteBrands.includes(brandId, 0)) {
+          console.log('removing : ', brandId)
           userService
-            .selectBrand(brandOption)
+            .deleteBrand(brandId)
             .then(res => {
               if (res) {
                 console.log('the res ', res);
+                // userService.getMe()
+                //   .then((user: User) => {
+                //     console.log('updated brands after delete', user.favoriteBrands)
+                //     setBrandSelectArray([...brandsSelectArr, brandId])
+
+                //   })
+                //   .catch(err => console.log(err))
+              }
+              else {
+                console.log('something went wrong ', res);
+              }
+            })
+            .catch((err: any) => {
+              console.log('SelectBrand error', err);
+            });
+        } else {
+          console.log('adding :', brandId)
+          userService
+            .addBrand(brandId)
+            .then(res => {
+              if (res) {
+                console.log('the res ', res);
+                // userService.getMe()
+                //   .then((user: User) => console.log('updated brands after add', user.favoriteBrands))
+                //   .catch(err => console.log(err))
+
               } else {
                 console.log('something went wrong ', res);
               }
@@ -92,7 +116,6 @@ const SelectBrands: React.FC = () => {
     }
     return 1;
   });
-  console.log('updated arr ', brandsSelectArr)
 
   return (
     <IonPage className='select-brands-main-container'>
@@ -104,7 +127,7 @@ const SelectBrands: React.FC = () => {
         </IonRow>
         <IonRow className='select-brands-desc-container'>
           <IonCol className='select-brands-desc'>
-            Let other people know your favourite brands to trade, buy, or sell.
+          Let other NOBO insiders know your top 4 brands to Trade, Buy, or Sell.
           </IonCol>
         </IonRow>
         <div className='select-brands-search-container'>
@@ -120,7 +143,6 @@ const SelectBrands: React.FC = () => {
             {mapFilter.sort().map(brand => (
               <IonCol
                 onClick={() => {
-                  console.log(brand.name)
                   handleTicker(brand._id)
                   handleSubmit(brand._id)
                 }}
@@ -154,8 +176,8 @@ const SelectBrands: React.FC = () => {
           className={brandsSelectArr.length < 1 ? 'select-brands-btn-container' : 'select-brands-btn-container2'}
         >
           <Button
-            label='NEXT' large onClick={()=>{
-                history.push('/onboarding-post');
+            label='NEXT' large onClick={() => {
+              history.push('/onboarding-post');
             }}
             disabled={brandsSelectArr.length < 1} />
         </div>

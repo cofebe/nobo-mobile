@@ -71,8 +71,10 @@ const tradeData:any = tradesData[0]
                 <div className='items-view-props-left'>
                   <img
                     className='item-img-left'
-                    src={tradeData?.products?.requested[0]?.url.length < 60 ? `https://thenobo.com/${tradeData?.products?.requested[0]?.url}`
-                      : `${tradeData?.products?.requested.images[0]?.url}`} alt={tradeData?.products?.requested.name}
+                    src={tradeData?.products?.requested[0]?.url.length < 60 ?
+                      `https://staging.thenobo.com/${tradeData?.products?.requested[0]?.url}`
+                      : `${tradeData?.products?.requested.images[0]?.url}`}
+                      alt={tradeData?.products?.requested.name}
                   />
 
                 </div>
@@ -85,8 +87,10 @@ const tradeData:any = tradesData[0]
                 <div className='items-view-props-right'>
                   <img
                     className='item-img-right'
-                    src={tradeData?.products?.offered[0]?.url.length < 60 ? `https://thenobo.com/${tradeData.products?.offered[0]?.url}`
-                      : `${tradeData?.products?.offered.images[0]?.url}`} alt={tradeData?.products?.offered.name}
+                    src={tradeData?.products?.offered[0]?.url.length < 60 ?
+                      `https://staging.thenobo.com/${tradeData.products?.offered[0]?.url}`
+                      : `${tradeData?.products?.offered.images[0]?.url}`}
+                      alt={tradeData?.products?.offered.name}
                   />
 
                 </div>

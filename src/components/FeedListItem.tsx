@@ -541,6 +541,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
                     boxShadow: 'none',
                     padding: '2rem',
                     position: 'relative',
+                    borderRadius:'5px'
                   }}
                 >
                   <div

@@ -207,6 +207,7 @@ const App: React.FC = () => {
             <Route path="/trade/complete/:id" exact={true}>
               <TradeOfferComplete />
             </Route>
+
             {/*
             <Route exact path="/list-item/sell">
               <ListItem />

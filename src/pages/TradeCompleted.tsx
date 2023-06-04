@@ -108,11 +108,15 @@ const TradeCompleted: React.FC = () => {
                     <img className='trade-completed-connect-l' src='assets/images/12420.svg' alt="" />
                     {<img
                       className='trade-completed-img-l'
-                      src={product.products.requested.images[0]?.url.length < 60 ? `https://thenobo.com/${product.products.requested.images[0].url}` : `${product.products.requested.images[0].url}`} alt=''
+                      src={product.products.requested.images[0]?.url.length < 60 ?
+                         `https://staging.thenobo.com/${product.products.requested.images[0].url}` :
+                          `${product.products.requested.images[0].url}`} alt=''
                     />}
                     {<img
                       className='trade-completed-img-r'
-                      src={product.products.offered.images[0]?.url.length < 60 ? `https://thenobo.com/${product.products.offered.images[0].url}` : `${product.products.offered.images[0].url}`} alt=''
+                      src={product.products.offered.images[0]?.url.length < 60 ?
+                        `https://staging.thenobo.com/${product.products.offered.images[0].url}` :
+                        `${product.products.offered.images[0].url}`} alt=''
                     />}
                   </div>
                   <div className="trade-completed-props-right">

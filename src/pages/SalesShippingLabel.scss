@@ -47,20 +47,26 @@
 
       .label-arr-drop-down {
         position: absolute;
+        transform: rotate(180deg);
+
       }
+
       .label-arr-drop-up {
+        transform: rotate(360deg);
+
         position: absolute;
-        rotate: 180deg;
+        // rotate: 180deg;
         right: 0px;
         top: 20px;
       }
 
       .shipping-l-product-box_show {
+        position: relative;
         height: 110px;
-                  background: rgba(214, 152, 14, 0.15);
-                  padding-right: 15px;
-                  padding-left: 15px;
-border-radius: 10px;
+        background: rgba(214, 152, 14, 0.15);
+        // padding-right: 15px;
+        // padding-left: 15px;
+        border-radius: 10px;
         width: 100%;
         margin-top: 10px;
         gap: 10px;
@@ -72,11 +78,11 @@ border-radius: 10px;
 
 
         .img-box {
-          // margin-left: -10px;
+          position: absolute;
+          left: 3px;
           height: 69px;
           width: 69px;
           border-radius: 10px;
-
           display: flex;
           align-items: center;
           justify-content: center;
@@ -88,15 +94,199 @@ border-radius: 10px;
           border-radius: 10px;
         }
 
-        .shpping-props-box {
+        // -------TOP----------------
+        .top-earnings-title{
+          position: absolute;
+          top: 11.5px;
+          left: 85px;
+          width: 100px;
+          height: 12px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 8px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #ACACAC;
+        }
 
-          // flex: 3;
+        .top-earnings-text{
+          position: absolute;
+          top: 27px;
+          left: 85px;
+          width: 42px;
+          height: 15px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #000000;
+        }
+
+        .top-order-status{
+          position: absolute;
+          top: 11.5px;
+          left: 155px;
+          width: 100px;
+          height: 12px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 8px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #ACACAC;
+        }
+
+        .top-order-status-text{
+          position: absolute;
+          top: 27px;
+          left: 155px;
+          width: 100px;
+          height: 15px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #000000;
+          text-transform: uppercase;
+        }
+
+        .status-bottom-btn1_ {
+          box-sizing: border-box;
+          position: absolute;
+          width: 100px;
+          height: 32px;
+          right: 4px;
+          top: 14px;
+          background: #FFFFFF;
+          border: 0.2px solid #D6980E;
+          backdrop-filter: blur(7.5px);
+          border-radius: 10px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 8px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #D6980E;
+        }
+
+// ---------BOTTOM-----------
+        .earnings-bottom-title {
+          position: absolute;
+          top: 50px;
+          left: 85px;
+          width: 100px;
+          height: 12px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 8px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #ACACAC;
+        }
+
+        .earnings-bottom-text {
+          // margin-top: 15px;
+          position: absolute;
+          top: 67px;
+          left: 85px;
+          width: 100px;
+          height: 15px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #000000;
+        }
+
+        .status-bottom-rating {
+          position: absolute;
+          top: 50px;
+          left: 155px;
+          width: 100px;
+          height: 12px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 8px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #ACACAC;
+        }
+
+        .status-bottom-rating-text {
+          position: absolute;
+          top: 67px;
+          left: 155px;
+          width: 100px;
+          height: 15px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 10px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #000000;
+          text-transform: uppercase;
+        }
+
+
+        .status-bottom-btn2_ {
+          box-sizing: border-box;
+          position: absolute;
+          width: 100px;
+          height: 32px;
+          right: 4px;
+          bottom: 13px;
+          background: #FFFFFF;
+          border: 0.2px solid #D6980E;
+          backdrop-filter: blur(7.5px);
+          border-radius: 10px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 8px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #D6980E;
         }
 
 
 
-        .shipping-props-box {
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .shipping-props-box {
+          background-color: rebeccapurple;
           gap: 10px;
           display: flex;
           align-items: center;
@@ -148,6 +338,7 @@ border-radius: 10px;
             .status-box {
               height: 32px;
               margin-left: 20px;
+
               .status-title {
                 margin-top: 4px;
                 margin-bottom: -10px;
@@ -165,7 +356,7 @@ border-radius: 10px;
 
               .status-text {
                 margin-top: 15px;
-text-transform: uppercase;
+                text-transform: uppercase;
                 width: 70px;
                 height: 15px;
                 font-family: 'Nunito Sans';
@@ -196,11 +387,100 @@ text-transform: uppercase;
 
 
           }
+
           .bottom-info {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            background-color: #D6980E;
+            width: 100%;
             height: 32px;
+            position: relative;
+
+            .earnings-bottom-title {
+              position: absolute;
+              top: -10px;
+              left: 0px;
+              width: 60px;
+              height: 12px;
+              font-family: 'Nunito Sans';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 8px;
+              line-height: 150%;
+              letter-spacing: 0.05em;
+              color: #ACACAC;
+            }
+
+            .earnings-bottom-text {
+              // margin-top: 15px;
+              position: absolute;
+              top: 5px;
+              left: 0px;
+              width: 42px;
+              height: 15px;
+              font-family: 'Nunito Sans';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 10px;
+              line-height: 150%;
+              letter-spacing: 0.05em;
+              color: #000000;
+            }
+
+            .status-bottom-rating {
+              position: absolute;
+              top: -10px;
+              left: 70px;
+              width: 100px;
+              height: 12px;
+              font-family: 'Nunito Sans';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 8px;
+              line-height: 150%;
+              letter-spacing: 0.05em;
+              color: #ACACAC;
+            }
+
+            .status-bottom-rating-text {
+              position: absolute;
+              top: 5px;
+              left: 70px;
+              width: 100px;
+              height: 15px;
+              font-family: 'Nunito Sans';
+              font-style: normal;
+              font-weight: 400;
+              font-size: 10px;
+              line-height: 150%;
+              letter-spacing: 0.05em;
+              color: #000000;
+              text-transform: uppercase;
+            }
+
+
+            .status-bottom-btn2_ {
+              box-sizing: border-box;
+              position: absolute;
+              width: 100px;
+              height: 32px;
+              right: 4px;
+              bottom: -3px;
+              background: #FFFFFF;
+              border: 0.2px solid #D6980E;
+              backdrop-filter: blur(7.5px);
+              border-radius: 10px;
+              font-family: 'Nunito Sans';
+              font-style: normal;
+              font-weight: 700;
+              font-size: 8px;
+              line-height: 150%;
+              letter-spacing: 0.05em;
+              color: #D6980E;
+            }
+
+
+
+
+
 
 
             .earnings-bottom-box {
@@ -208,32 +488,9 @@ text-transform: uppercase;
               height: 32px;
 
 
-              .earnings-bottom-title {
-                margin-top: -4px;
-                margin-bottom: -5px;
-                width: 60px;
-                height: 12px;
-                font-family: 'Nunito Sans';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 8px;
-                line-height: 150%;
-                letter-spacing: 0.05em;
-                color: #ACACAC;
-              }
 
-              .earnings-bottom-text {
-                // margin-top: 15px;
-                width: 42px;
-                height: 15px;
-                font-family: 'Nunito Sans';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 10px;
-                line-height: 150%;
-                letter-spacing: 0.05em;
-                color: #000000;
-              }
+
+
 
 
 
@@ -243,6 +500,7 @@ text-transform: uppercase;
               margin-top: -5px;
               height: 32px;
               margin-left: 5px;
+
               .status-bottom-title {
                 margin-top: 4px;
                 margin-bottom: -10px;
@@ -259,7 +517,7 @@ text-transform: uppercase;
 
               .status-bottom-text {
                 margin-top: 15px;
-text-transform: uppercase;
+                text-transform: uppercase;
                 width: 70px;
                 height: 15px;
                 font-family: 'Nunito Sans';
@@ -558,7 +816,7 @@ text-transform: uppercase;
         top: 22px;
       }
 
-      .shipping-btn-top{
+      .shipping-btn-top {
         position: absolute;
         right: 30px;
         top: 22px;
@@ -574,9 +832,8 @@ text-transform: uppercase;
         letter-spacing: 0.05em;
         color: #D6980E;
       }
-      .shipping-btn-bottom{
 
-      }
+      .shipping-btn-bottom {}
 
 
 

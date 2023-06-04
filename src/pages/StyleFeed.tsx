@@ -290,7 +290,8 @@ const StyleFeed: React.FC = () => {
               <IonList
                 lines="none"
                 className="nobo-list-background"
-                style={{ paddingBottom: '2em', paddingLeft: '64px', paddingRight: '64px' }}
+                style={{ paddingBottom: '2em', paddingLeft: '42px', paddingRight: '54px' }}
+                // style={{ paddingBottom: '2em', paddingLeft: '64px', paddingRight: '64px' }}
               >
                 {messages.map(m => {
                   return (
