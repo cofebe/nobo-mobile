@@ -6,6 +6,7 @@ import {
   IonRow,
   IonCol,
   IonGrid,
+  IonButton,
   useIonViewWillEnter,
   useIonViewWillLeave,
 } from '@ionic/react';
@@ -29,6 +30,7 @@ const ListItemCategory: React.FC = () => {
   const [itemSubcategory, setItemSubcategory] = useState<Category | null>(null);
   const [itemType, setItemType] = useState<Category | null>(null);
   const [brand, setBrand] = useState<string>('');
+  const [showBrandModal, setShowBrandModal] = useState(false);
   const [menItems, setMenItems] = useState<SelectOption[]>([]);
   const [womenItems, setWomenItems] = useState<SelectOption[]>([]);
   const [allCategories, setAllCategories] = useState<Category[]>([]);
@@ -248,20 +250,29 @@ const ListItemCategory: React.FC = () => {
             )}
             <IonRow className="margin-bottom-5">
               <IonCol>
-                <Select
-                  disabled={!itemType && itemCategory !== 'sneakers'}
-                  value={brand}
-                  onChange={e => {
-                    console.log('selectBrand', e);
-                    setBrand(e[0]);
-                    listingStore.setBrand(e[0]);
+                <div
+                  className={
+                    'nobo-select' +
+                    (!itemType ? ' nobo-select-disabled' : '') +
+                    ' nobo-select-border'
+                  }
+                  onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setShowBrandModal(true);
                   }}
-                  placeholder="Select Brand"
-                  options={brands.map((b: string) => ({
-                    label: b,
-                    value: b,
-                  }))}
-                />
+                >
+                  <div className="nobo-select-container">
+                    <div
+                      className={'nobo-select-label' + (brand ? '' : ' nobo-select-label-empty')}
+                    >
+                      {brand || 'Select Brand'}
+                    </div>
+                    <div className="nobo-select-chevron">
+                      <img src="assets/images/arrow-down-filled.svg" alt="down" />
+                    </div>
+                  </div>
+                </div>
               </IonCol>
             </IonRow>
             <IonRow>
@@ -309,6 +320,41 @@ const ListItemCategory: React.FC = () => {
           }}
         />
       </div>
+      {showBrandModal && (
+        <div className="brand-modal-container">
+          <div className="brand-modal">
+            <div className="options">
+              {brands?.map((o, index) => (
+                <div
+                  key={index}
+                  className={'option' + (index === 3 ? ' selected' : '')}
+                  onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setBrand(o);
+                    listingStore.setBrand(o);
+                    setShowBrandModal(false);
+                  }}
+                >
+                  {o}
+                </div>
+              ))}
+            </div>
+            <div className="buttons">
+              <IonButton
+                className="button-cancel"
+                onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setShowBrandModal(false);
+                }}
+              >
+                Cancel
+              </IonButton>
+            </div>
+          </div>
+        </div>
+      )}
     </IonPage>
   );
 };
