@@ -290,7 +290,8 @@ const StyleFeed: React.FC = () => {
               <IonList
                 lines="none"
                 className="nobo-list-background"
-                style={{ paddingBottom: '2em', paddingLeft: '64px', paddingRight: '64px' }}
+                style={{ paddingBottom: '2em', paddingLeft: '42px', paddingRight: '54px' }}
+                // style={{ paddingBottom: '2em', paddingLeft: '64px', paddingRight: '64px' }}
               >
                 {messages.map(m => {
                   return (
@@ -315,8 +316,8 @@ const StyleFeed: React.FC = () => {
                   );
                 })}
                 <IonItem
-                  id="atBottomOfFeedList"
-                  style={{ '--background': 'rgb(254, 252, 247)' }}
+                  // id="atBottomOfFeedList"
+                  style={{ '--background': 'rgb(254, 252, 247)', color: '#c4c4c4' }}
                   key="bottom"
                   lines="none"
                 >

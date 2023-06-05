@@ -117,106 +117,42 @@ const SalesShippingLabel: React.FC = () => {
                         <div className="img-box">
                           {<img
                             className='img'
-                            src={product?.images[1]?.url.length < 60 ? `https://thenobo.com/${product?.images[1].url}` : `${product?.images[0].url}`} alt=''
+                            src={product?.images[1]?.url.length < 60 ?
+                              `https://staging.thenobo.com/${product?.images[1].url}`
+                            : `${product?.images[0].url}`} alt=''
                           />}
-
                         </div>
 
-                        <div className="shipping-props-box">
-                          <div className="top-info">
-                            <div className="earnings-box">
-                              <p className="earnings-title">EARNINGS</p>
-                              <p className="earnings-text">{currencyFormat.format(product?.summary.earnings)}</p>
-                            </div>
-                            <div className="status-box">
-                              <p className="status-title">ORDER STATUS</p>
-                              <p className="status-text">{products.status}</p>
-                            </div>
-                            <div className="">
-                              <IonButton
-                                fill='outline'
-                                style={{
-                                  width: '100px',
-                                  height: '32px',
-                                  fontFamily: 'NunitoSans',
-                                  fontWeight: 700,
-                                  fontSize: '8px',
-                                  color: '#D6980E',
-                                  letterSpacing: 1,
-                                  marginTop:10
 
-                                }}
-                              >SHIPPING LABEL</IonButton>
-                            </div>
-
-                            {/* <IonButton className="btn">
-                              SHIPPING LABEL
-                            </IonButton> */}
-                          </div>
+                        {/* ------TOP--------- */}
+                        <p className="top-earnings-title">EARNINGS</p>
+                        <p className="top-earnings-text">{currencyFormat.format(product?.summary.earnings)}</p>
+                        <p className="top-order-status">ORDER STATUS</p>
+                        <p className="top-order-status-text">{products.status}</p>
+                        <IonButton fill='outline'
+                          className='status-bottom-btn1_'>SHIPPING LABEL</IonButton>
 
 
-                          <div className="bottom-info">
-                            <div className="earnings-bottom-box">
-                              <p className="earnings-bottom-title">SOLD DATE</p>
-                              <p className="earnings-bottom-text">{currencyFormat.format(product?.summary.earnings)}</p>
-                            </div>
-                            <div className="status-bottom-box">
-                              <p className="status-bottom-title">RATING</p>
-                              <p className="status-bottom-text">{products.status}</p>
-                            </div>
-                            <div className="">
-                              <IonButton fill='outline'
-                                style={{
-                                  width: '100px',
-                                  height: '32px',
-                                  fontFamily: 'NunitoSans',
-                                  fontWeight: 700,
-                                  fontSize: '8px',
-                                  color: '#D6980E',
-                                  letterSpacing: 1,
-                                  marginTop:10
+                        {/* -----BOTTOM------ */}
+                        <p className="earnings-bottom-title">SOLD DATE</p>
+                        <p className="earnings-bottom-text">{new Date(product.updatedAt).toDateString().slice(0 - 11)}</p>
+                        <p className="status-bottom-rating">RATING</p>
+                        <p className="status-bottom-rating-text">N/A</p>
+                        <IonButton fill='outline'
+                          className='status-bottom-btn2_'>PACKING</IonButton>
 
-                                }}>
-                                PACKING SLIP</IonButton>
-
-                            </div>
-
-                          </div>
-
-                        </div>
                       </div>
                     ))}
                   </div>)}
                 <img
                   onClick={() => {
                     selectedDropDown(products._id)
-                    console.log(products._id)
-                    // setShowDetails(!showDetails)
                   }}
                   className={dropDown[0] === products._id ? 'label-arr-drop-down' : 'label-arr-drop-up'}
                   height={18}
                   src='assets/images/down-arrow.svg'
                   alt='logo'
                 />
-                {/* {dropDown[0] === product._id &&   ( <IonButton fill='outline' className="shipping-btn-top">
-                  Shipping label
-                </IonButton>)} */}
-                {/* {showDetails && (  <div className="shipping-l-product-details">
-                    DETAILS
-                  </div>)} */}
-
-                {/* <div className="shipping-l-product-num-box">
-                  <p className="shipping-l-product-n">{product?.uniqueNumber}</p>
-                </div>
-                <div className="shipping-l-product-total-box">
-                  <p className="shipping-l-product-price">{currencyFormat.format(product?.salesTax)}</p> */}
-                {/* <img
-                    className='label-arr-drop-down'
-                    height={18}
-                    src='assets/images/down-arrow.svg'
-                    alt='logo'
-                  /> */}
-                {/* </div> */}
               </IonCol>
             </IonRow>
             {/* ))} */}

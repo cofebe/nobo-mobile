@@ -66,14 +66,14 @@ const SignUp2 = () => {
 
   return (
     <IonPage className='signup-container'>
-      <IonContent className='signup-ion-content'>
+      <IonContent scrollY={false} className='signup-ion-content'>
       <IonRow>
-          <IonCol size='12' style={{ height: '160px' }}>
+          <IonCol className='signup-header_' size='12' >
             <div
               onClick={() => {
                 history.goBack();
               }}
-              className="header-comp-back-btn"
+              className="signup-back-btn"
             >
               <img
                 height={38}
@@ -82,7 +82,7 @@ const SignUp2 = () => {
               />
             </div>
             <div
-              className="header-comp-nobo-logo">
+              className="signup-nobo-logo">
               <img height={65} src="assets/images/nobo-logo-white.png" alt="logo" />
             </div>
           </IonCol>

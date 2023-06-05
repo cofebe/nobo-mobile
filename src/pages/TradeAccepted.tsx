@@ -78,8 +78,10 @@ const TradeAccepted: React.FC = () => {
                 <div className='items-view-props-left'>
                   <img
                     className='img'
-                    src={tradeData?.products?.requested[0]?.url.length < 60 ? `https://thenobo.com/${tradeData?.products?.requested[0]?.url}`
-                      : `${tradeData?.products?.requested.images[0]?.url}`} alt={tradeData?.products?.requested.name}
+                    src={tradeData?.products?.requested[0]?.url.length < 60 ?
+                       `https://staging.thenobo.com/${tradeData?.products?.requested[0]?.url}`
+                      : `${tradeData?.products?.requested.images[0]?.url}`}
+                       alt={tradeData?.products?.requested.name}
                   />
                   <div className="accepted-accepted-item-name-left">{tradeData?.products?.requested.name}</div>
                   <div className="accepted-accepted-item-price-left">{currencyFormat.format(tradeData?.products?.requested.price)}</div>
@@ -96,7 +98,8 @@ const TradeAccepted: React.FC = () => {
                   {/* <img className='item-img-left' src='assets/images/test/bvlgary.svg' alt="" /> */}
                   <img
                     className='img'
-                    src={tradeData?.products?.offered[0]?.url.length < 60 ? `https://thenobo.com/${tradeData?.products?.offered[0]?.url}`
+                    src={tradeData?.products?.offered[0]?.url.length < 60 ?
+                       `https://staging.thenobo.com/${tradeData?.products?.offered[0]?.url}`
                       : `${tradeData?.products?.offered.images[0]?.url}`} alt={tradeData?.products?.offered.name}
                   />
                   <div className="accepted-accepted-item-name-right">{tradeData?.products?.offered.name}</div>

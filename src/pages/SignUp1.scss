@@ -1,166 +1,168 @@
 .signup-details-container {
-  .signup-details-background-image {
+
+
+  .signup-details-bg-image {
+    background-image: url(../../public/assets/images/signup-bg.png);
     width: 100%;
     height: 100%;
-    background-image: url(../../public/assets/images/nobo-splash-3.png);
     background-size: cover;
     background-position: center;
   }
 
-  .signup-details-header {
-    .signup-details-header-toolbar {
-      --background: transparent;
-    }
+  .signup-details-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 20px;
+    --background: transparent;
+    // --keyboard-offset:0px
 
-    .signup-details-go-back {
-      position: absolute;
-      top: 81.5px;
-      left: 15px;
-    }
-  }
 
-  .signup-details-nobo-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 50px;
 
-    @media only screen and (device-height: 667px) {
-      margin-top: 5vh;
-      margin-bottom: 1vh;
-    }
+    .signup-details-header {
+      padding: 0px;
+      height: 160px;
 
-    @media only screen and (device-height: 844px) {
-      margin-bottom: 15vh;
-      margin-top: 9.5vh;
-    }
+      .back-btn {
+        position: absolute;
+        // left: 24px;
+        height: 50px;
+        position: absolute;
+        top: 101px;
+        z-index: 1000;
+      }
 
-    @media only screen and (device-height: 1180px) {
-      margin-bottom: 35.5vh;
-    }
+      .nobo-logo {
+        height: 50px;
+        width: 190px;
+        position: absolute;
+        height: 100px;
+        width: 100%;
+        top: 73px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+      }
 
-    @media only screen and (device-height: 1024px) {
-      margin-bottom: 28.2vh;
-    }
-  }
-
-  .signup-details-box {
-    padding-left: 15px;
-    padding-right: 15px;
-    // position: absolute;
-    margin-left: 24px;
-    margin-right: 24px;
-    bottom: 24px;
-    margin-top: 175px;
-    // margin-bottom: 100px;
-    // margin-bottom: 200px;
-    height: 480px;
-    background: linear-gradient(
-      116.6deg,
-      rgba(255, 255, 255, 0.6) 15.94%,
-      rgba(255, 255, 255, 0.36) 92.73%
-    );
-    backdrop-filter: blur(2px);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-
-    @media only screen and (height:896px) {
-    margin-top: 230px;
-
-    }
-    @media only screen and (height:667px) {
-    margin-top: 50px;
-    background-color: teal;
 
     }
 
-    .signup-details-title {
-      text-align: center;
-      font-size: 20px;
-      font-family: 'Georgia';
-      font-weight: 400;
-      margin-top: 22px;
-      margin-bottom: 22px;
-      letter-spacing: 0.2rem;
+    .signup-details-box_ {
+      padding: 0px;
+      background-color: thistle;
+      margin-top: 185px;
+      height: 475px;
+      background: linear-gradient(116.6deg, rgba(255, 255, 255, 0.6) 15.94%, rgba(255, 255, 255, 0.36) 92.73%);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(2px);
+      border-radius: 5px;
 
-      @media screen and (max-height: 668px) {
-        font-size: 18px;
+      .signup-details-box_row {
+        margin-top: 31px;
+        height: 30px;
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .signup-text-title-container {
+        margin-top: 31px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+      }
+
+      .signup-text-title {
+        height: 30px;
+        width: 88px;
         font-family: 'Georgia';
+        font-style: normal;
         font-weight: 400;
-        margin-top: 15px;
-        letter-spacing: 0.2rem;
+        font-size: 20px;
+        line-height: 150%;
+        letter-spacing: 0.05em;
+        color: #000000;
+      }
+
+      .signup-text-box-row-wrapper {
+        padding: 0px 18px 0px 18px;
+      }
+
+      .signup-text-input-container {
+        // margin: auto;
+        margin-top: 32px;
+        height: 37px;
+        padding: 0;
+      }
+
+      .signup-text-input {
+        height: 37px;
+        // width: 306px;
       }
 
 
-      .invalid-text-color {
-        color: red;
-      }
     }
 
-    @media only screen and (device-height: 667px) {
-    }
-
-
-    .signup-details-terms {
-      width: 306px;
+    .signup-terms-container {
+      margin-top: 32px;
       height: 36px;
-
-
-      font-family: 'Nunito Sans';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 12px;
-      line-height: 150%;
-      /* or 18px */
-
-      letter-spacing: 0.05em;
-
-      color: #050505;
-    }
-
-    .signup-details-input-container {
-      margin-bottom: 15px;
-    }
-
-    .signup-details-btn-container {
-      margin-top: 35px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0px 0px 0px 0px;
-    }
-    .signup-details-btn {
-      // margin-top: 15px;
-      height: 51px;
-      width: 340px;
-      border-radius: 5px
+      padding: 0;
     }
 
-    .already-have-account {
-      // background-color: palevioletred;
+    .signup-terms-text {
+      width: 306px;
+      height: 36px;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 150%;
+      letter-spacing: 0.05em;
+      color: #050505;
+    }
+
+    .signup-btn-container {
+      margin-top: 29px;
+      height: 51px;
+      padding: 0;
+    }
+
+    .signup-btn {
+      // width: 302px;
+      height: 51px;
+      background: #D6980E;
+      backdrop-filter: blur(7.5px);
+      border-radius: 5px;
+    }
+
+    .signup-user-check {
+      margin-top: 20px;
+      margin: auto;
+      height: 23px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0px 5px 0px 5px;
+    }
+
+    .already-user {
       font-family: 'Nunito Sans';
       font-style: normal;
       font-weight: 600;
       font-size: 15px;
       line-height: 150%;
-      width: 350px;
-       display: flex;
-      align-items: center;
-      /* identical to box height, or 22px */
-
-
-      letter-spacing: 0.05em;
-      color: #ffffff;
-    }
-
-    .already-have-account-contaner {
       display: flex;
-      justify-content: space-between;
+      align-items: center;
+      letter-spacing: 0.05em;
+      color: #FFFFFF;
     }
 
-    .signup-details-signin {
-      // background-color: #;
-      width: 90px;
+
+    .login {
       font-family: 'Nunito Sans';
       font-style: normal;
       font-weight: 700;
@@ -170,8 +172,199 @@
       align-items: center;
       letter-spacing: 0.05em;
       text-decoration-line: underline;
-      color: #d6980e;
-      text-align: right;
+      color: #D6980E;
     }
+
+
+
+
+
   }
 }
+
+
+
+
+
+
+
+
+
+
+// .signup-details-container {
+//   .signup-details-background-image {
+//     width: 100%;
+//     height: 100%;
+//     background-image: url(../../public/assets/images/nobo-splash-3.png);
+//     background-size: cover;
+//     background-position: center;
+//   }
+
+//   .signup-details-header {
+//     .signup-details-header-toolbar {
+//       --background: transparent;
+//     }
+
+//     .signup-details-go-back {
+//       position: absolute;
+//       top: 81.5px;
+//       left: 15px;
+//     }
+//   }
+
+//   .signup-details-nobo-logo {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     margin-bottom: 50px;
+
+//     @media only screen and (device-height: 667px) {
+//       margin-top: 5vh;
+//       margin-bottom: 1vh;
+//     }
+
+//     @media only screen and (device-height: 844px) {
+//       margin-bottom: 15vh;
+//       margin-top: 9.5vh;
+//     }
+
+//     @media only screen and (device-height: 1180px) {
+//       margin-bottom: 35.5vh;
+//     }
+
+//     @media only screen and (device-height: 1024px) {
+//       margin-bottom: 28.2vh;
+//     }
+//   }
+
+//   .signup-details-box {
+//     padding-left: 15px;
+//     padding-right: 15px;
+//     // position: absolute;
+//     margin-left: 24px;
+//     margin-right: 24px;
+//     bottom: 24px;
+//     margin-top: 175px;
+//     // margin-bottom: 100px;
+//     // margin-bottom: 200px;
+//     height: 480px;
+//     background: linear-gradient(
+//       116.6deg,
+//       rgba(255, 255, 255, 0.6) 15.94%,
+//       rgba(255, 255, 255, 0.36) 92.73%
+//     );
+//     backdrop-filter: blur(2px);
+//     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+//     border-radius: 5px;
+
+//     @media only screen and (height:896px) {
+//     margin-top: 230px;
+
+//     }
+//     @media only screen and (height:667px) {
+//     margin-top: 50px;
+//     background-color: teal;
+
+//     }
+
+//     .signup-details-title {
+//       text-align: center;
+//       font-size: 20px;
+//       font-family: 'Georgia';
+//       font-weight: 400;
+//       margin-top: 22px;
+//       margin-bottom: 22px;
+//       letter-spacing: 0.2rem;
+
+//       @media screen and (max-height: 668px) {
+//         font-size: 18px;
+//         font-family: 'Georgia';
+//         font-weight: 400;
+//         margin-top: 15px;
+//         letter-spacing: 0.2rem;
+//       }
+
+
+//       .invalid-text-color {
+//         color: red;
+//       }
+//     }
+
+//     @media only screen and (device-height: 667px) {
+//     }
+
+
+//     .signup-details-terms {
+//       width: 306px;
+//       height: 36px;
+
+
+//       font-family: 'Nunito Sans';
+//       font-style: normal;
+//       font-weight: 600;
+//       font-size: 12px;
+//       line-height: 150%;
+//       /* or 18px */
+
+//       letter-spacing: 0.05em;
+
+//       color: #050505;
+//     }
+
+//     .signup-details-input-container {
+//       margin-bottom: 15px;
+//     }
+
+//     .signup-details-btn-container {
+//       margin-top: 35px;
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       padding: 0px 0px 0px 0px;
+//     }
+//     .signup-details-btn {
+//       // margin-top: 15px;
+//       height: 51px;
+//       width: 340px;
+//       border-radius: 5px
+//     }
+
+//     .already-have-account {
+//       // background-color: palevioletred;
+//       font-family: 'Nunito Sans';
+//       font-style: normal;
+//       font-weight: 600;
+//       font-size: 15px;
+//       line-height: 150%;
+//       width: 350px;
+//        display: flex;
+//       align-items: center;
+//       /* identical to box height, or 22px */
+
+
+//       letter-spacing: 0.05em;
+//       color: #ffffff;
+//     }
+
+//     .already-have-account-contaner {
+//       display: flex;
+//       justify-content: space-between;
+//     }
+
+//     .signup-details-signin {
+//       // background-color: #;
+//       width: 90px;
+//       font-family: 'Nunito Sans';
+//       font-style: normal;
+//       font-weight: 700;
+//       font-size: 15px;
+//       line-height: 150%;
+//       display: flex;
+//       align-items: center;
+//       letter-spacing: 0.05em;
+//       text-decoration-line: underline;
+//       color: #d6980e;
+//       text-align: right;
+//     }
+//   }
+// }

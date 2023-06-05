@@ -67,8 +67,7 @@ const MyTrade: React.FC = () => {
       </IonRow>
       <IonContent className='trade-item-content'>
         <IonGrid>
-          {tradesData[0]?.received.map((product: any) => product.status === 'pending' &&(
-            // <div>{product.status}</div>
+          {tradesData[0]?.received.map((product: any) => product.status === 'pending' && (
             <IonRow key={product._id} style={{ marginBottom: '14px' }}>
               <IonCol className='trade-item-container'>
                 <div className='trade-item-status-container'>
@@ -83,7 +82,9 @@ const MyTrade: React.FC = () => {
                   <div className='items-view-props-left'>
                     {<img
                       className='item-img-left'
-                      src={product.products.offered.images[0]?.url.length < 60 ? `https://thenobo.com/${product.products.offered.images[0].url}` : `${product.products.offered.images[0].url}`} alt={product.products.name}
+                      src={product.products.offered.images[0]?.url.length < 60
+                        ? `https://staging.thenobo.com/${product.products.offered.images[0].url}`
+                        : `${product.products.offered.images[0].url}`} alt={product.products.name}
                     />}
                     <div className="trade-item-name-left">{product.products.offered.name.toUpperCase()}</div>
                     <div className="trade-item-price-left">{currencyFormat.format(product.products.offered.price)}</div>
@@ -99,7 +100,9 @@ const MyTrade: React.FC = () => {
                   <div className='items-view-props-right'>
                     {<img
                       className='item-img-right'
-                      src={product.products.requested.images[0]?.url.length < 60 ? `https://thenobo.com/${product.products.requested.images[0].url}` : `${product.products.requested.images[0].url}`} alt={product.products.name}
+                      src={product.products.requested.images[0]?.url.length < 60 ?
+                        `https://staging.thenobo.com/${product.products.requested.images[0].url}` :
+                        `${product.products.requested.images[0].url}`} alt={product.products.name}
                     />}
                     <div className="trade-item-name-right">{product.products.requested.name.toUpperCase()}</div>
                     <div className="trade-item-price-right">{currencyFormat.format(product.products.requested.price)}</div>
@@ -108,9 +111,13 @@ const MyTrade: React.FC = () => {
 
                 <div className='trade-offer-line'></div>
                 <div className='trade-items-btn-container'>
-                  <IonButton style={{ backgroundColor: 'white' }} size='small' className='trade-item-btn' fill='outline' onClick={() => {
-                    history.push(`trades/denied/${product._id}`)
-                  }} >DENY</IonButton>
+                  <IonButton
+                    style={{ backgroundColor: 'white' }}
+                    size='small' className='trade-item-btn'
+                    fill='outline'
+                    onClick={() => {
+                      history.push(`trades/denied/${product._id}`)
+                    }} >DENY</IonButton>
                   <IonButton size='small' className='trade-item-btn' onClick={() => {
                     history.push(`trades/accepted/${product._id}`)
                   }} >ACCEPT</IonButton>
