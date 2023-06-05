@@ -105,7 +105,7 @@ const GetStarted: React.FC = () => {
               history.push('/login');
             }}
           >
-            REGISTER
+            LOGIN
           </div>
         </div>
       </div>

@@ -316,8 +316,8 @@ const StyleFeed: React.FC = () => {
                   );
                 })}
                 <IonItem
-                  id="atBottomOfFeedList"
-                  style={{ '--background': 'rgb(254, 252, 247)' }}
+                  // id="atBottomOfFeedList"
+                  style={{ '--background': 'rgb(254, 252, 247)', color: '#c4c4c4' }}
                   key="bottom"
                   lines="none"
                 >
