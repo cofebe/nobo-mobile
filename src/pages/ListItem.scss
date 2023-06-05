@@ -6,6 +6,7 @@
     background-color: #fefcf7;
     position: relative;
     padding-bottom: 20px;
+    padding-top: var(--ion-safe-area-top, 0);
 
     .progress-bar-container {
       position: absolute;
@@ -362,5 +363,47 @@
   .nobo-list-back-home {
     --background: #ffffff !important;
     color: #d6980e;
+  }
+
+  .brand-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 101;
+
+    .brand-modal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      border-radius: 10px;
+      padding: 16px;
+
+      .options {
+        max-height: 300px;
+        max-width: 75vw;
+        overflow: auto;
+
+        .option {
+          padding-top: 6px;
+          padding-bottom: 6px;
+        }
+      }
+
+      .buttons {
+        ion-button {
+          --color: black;
+          --background: white;
+          --border-radius: 4px;
+          height: fit-content;
+          width: 100%;
+          margin-top: 24px;
+        }
+      }
+    }
   }
 }
