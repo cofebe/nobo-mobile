@@ -10,6 +10,9 @@
 				"sound",
 				"alert"
 			]
-		}
+		},
+    "Keyboard":{
+      "resize":"ionic"
+    }
 	}
 }
