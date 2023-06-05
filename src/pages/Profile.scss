@@ -170,7 +170,7 @@
     max-width: 100%;
     position: relative;
     overflow: hidden;
-    height: 138px;
+    max-height: 138px;
     background-position: top left;
     background-size: cover;
 
@@ -181,7 +181,7 @@
 
   .profile-header-container {
     position: absolute;
-    top: 45px;
+    top: 65px;
     height: 45px;
     width: 220px;
     margin-left: auto;
