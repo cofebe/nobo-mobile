@@ -6,7 +6,7 @@ import {
   useIonViewWillEnter,
   IonContent,
 } from '@ionic/react';
-// import { useKeyboardState } from '@ionic/react-hooks/keyboard';
+import { Keyboard } from '@capacitor/keyboard';
 
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -15,6 +15,7 @@ import { loadingStore } from '../loading-store';
 import Input from '../components/Input';
 import './SignUp1.scss';
 import Button from '../components/Button';
+// import { Capacitor } from '@capacitor/core';
 
 const SignUp1: React.FC = () => {
   // email check...
@@ -33,6 +34,10 @@ const SignUp1: React.FC = () => {
   useIonViewWillEnter(() => {
     setError(false);
   });
+
+
+
+
 
   const checkUserExist = () => {
     loadingStore.increment('Signup:timeout');
@@ -90,13 +95,14 @@ const SignUp1: React.FC = () => {
           </IonRow>
           <IonRow>
             <IonGrid className={'signup-details-box_'}>
+
+
               <IonCol size='12' className='signup-text-title-container'>
                 <p className='signup-text-title'>SIGN UP</p>
               </IonCol>
 
-
-              <IonRow className='signup-details-box_row'  >
-                <IonCol className='' style={{ padding: '0px' }}>
+              <IonRow className='signup-text-box-row-wrapper'>
+                <IonCol size='12' className='signup-text-input-container' style={{}}>
                   <Input
                     type='text'
                     value={firstName}
@@ -107,10 +113,10 @@ const SignUp1: React.FC = () => {
                     }}
                   ></Input>
                 </IonCol>
-              </IonRow>
 
-              <IonRow className='signup-details-box_row'  >
-                <IonCol className='' style={{ padding: '0px' }}>
+
+
+                <IonCol size='12' className='signup-text-input-container' >
                   <Input
                     value={lastName}
                     className={`nobo-input signup-text-input`}
@@ -121,10 +127,8 @@ const SignUp1: React.FC = () => {
                     }}
                   ></Input>
                 </IonCol>
-              </IonRow>
 
-              <IonRow className='signup-details-box_row' >
-                <IonCol className='' style={{ padding: '0px' }}>
+                <IonCol size='12' className='signup-text-input-container' >
                   <Input
                     value={email}
                     className={`nobo-input signup-text-input ${error ? 'invalid-text-color' : ''}`}
@@ -141,20 +145,16 @@ const SignUp1: React.FC = () => {
                     }}
                   ></Input>
                 </IonCol>
-              </IonRow>
 
-              <IonRow className='signup-details-box_row' style={{ padding: '0px', marginTop: '33px' }}>
-                <IonCol className='signup-terms-container' style={{}}>
+                <IonCol size='12' className='signup-terms-container' style={{}}>
                   <p className='signup-terms-text'>
                     By selecting Agree and continue below,
                     I agree to the Terms and Conditions
                   </p>
                 </IonCol>
-              </IonRow>
 
 
-              <IonRow className='signup-details-box_row'>
-                <IonCol >
+                <IonCol size='12' className='signup-btn-container' >
                   <Button
                     onClick={() => {
                       checkUserExist();
@@ -165,10 +165,8 @@ const SignUp1: React.FC = () => {
                     disabled={!validate()}
                   />
                 </IonCol>
-              </IonRow>
 
-              <IonRow className='signup-details-box_row' style={{ marginTop: '33px' }} >
-                <IonCol className='signup-user-check'>
+                <IonCol size='12' className='signup-user-check' style={{ marginTop: '8px' }}>
                   <p className='already-user'>
                     Already have an account?
                   </p>
@@ -178,9 +176,9 @@ const SignUp1: React.FC = () => {
                     LOGIN
                   </p>
                 </IonCol>
+
               </IonRow>
             </IonGrid>
-
           </IonRow>
         </IonContent>
       </div>

@@ -1,17 +1,41 @@
 .signup-container {
-  background-image: linear-gradient(goldenrod, rgb(252, 250, 243), white, white, white);
 
   .signup-ion-content {
     // --padding-start: 20px;
     // --padding-end: 20px;
-    --background: linear-gradient(goldenrod,
-        rgb(252, 250, 243),
-        white,
-        white,
-        white);
 
-    --background: linear-gradient(goldenrod, rgb(252, 250, 243), white, white, white);
-  }
+.signup-header_{
+  background: linear-gradient(180deg, #D6980E 0%, rgba(254, 252, 247, 0.47) 81.34%);
+border-radius: 0px 0px 5px 5px;
+
+  height: 232px;
+
+
+.signup-back-btn{
+  position: absolute;
+	left: 24px;
+	height: 50px;
+	position: absolute;
+	top: 101px;
+  z-index: 1000;
+}
+
+.signup-nobo-logo{
+  height: 50px;
+  width: 190px;
+  position: absolute;
+  height: 100px;
+  width: 100%;
+  top: 73px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+background-color: transparent;
+}
+
+}
+
+
 
   .icon-container {
     display: flex;
@@ -64,13 +88,14 @@
     font-size: 24px;
     font-weight: 500;
     font-family: 'Georgia';
-    margin-top: 25px;
+    margin-top:-55px;
   }
 
   .signup-input-container_ {
     height: 380px;
     margin-right: 20px;
     margin-left: 20px;
+    margin-top: -70px;
   }
 
   .signup-privacy-info {
@@ -81,13 +106,13 @@
 
   .signup-btn-container {
     margin-bottom: 25px;
-    margin-top: 5px;
+    margin-top: 60px;
     margin-left: 20px;
     margin-right: 20px;
   }
 
   .signup-btn-container2 {
-    margin-bottom: 25px;
+    margin-bottom: 40px;
     margin-top: 5px;
     margin-left: 20px;
     margin-right: 20px;
@@ -96,3 +121,4 @@
 
 
 
+}

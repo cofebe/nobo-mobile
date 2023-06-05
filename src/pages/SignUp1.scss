@@ -83,15 +83,15 @@
         color: #000000;
       }
 
+      .signup-text-box-row-wrapper {
+        padding: 0px 18px 0px 18px;
+      }
+
       .signup-text-input-container {
-        margin: auto;
+        // margin: auto;
         margin-top: 32px;
         height: 37px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         padding: 0;
-        background-color: #D6980E;
       }
 
       .signup-text-input {
@@ -103,7 +103,7 @@
     }
 
     .signup-terms-container {
-      // margin-top: 32px;
+      margin-top: 32px;
       height: 36px;
       display: flex;
       align-items: center;
@@ -126,9 +126,6 @@
     .signup-btn-container {
       margin-top: 29px;
       height: 51px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       padding: 0;
     }
 
@@ -141,7 +138,7 @@
     }
 
     .signup-user-check {
-      margin-top: 8px;
+      margin-top: 20px;
       margin: auto;
       height: 23px;
       display: flex;
