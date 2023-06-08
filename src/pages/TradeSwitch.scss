@@ -1,0 +1,51 @@
+.t-item-main-container {
+  background-color: #FEFCF7;
+
+
+  .t-item-header {
+    background-color: #FEFCF7;
+    height: 118px;
+
+    .t-item-back-btn{
+      position: absolute;
+      left: 35px;
+      bottom: 15px;
+      z-index: 1000;
+    }
+
+    .t-item-title-text-container {
+      position: absolute;
+      top: 64%;
+      bottom: 10.71%;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 150%;
+      letter-spacing: 0.05em;
+      color: #000000;
+      text-align: center;
+    }
+
+  }
+
+  .t-item-info-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+  }
+
+  .t-item-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 20px;
+    // --padding-top: 20px;
+    --background: #FEFCF7;
+
+
+    }
+
+
+  }
+

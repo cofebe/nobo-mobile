@@ -60,6 +60,9 @@ import SingleSalesItem from './pages/SingleSalesItem';
 import TradeCompleted from './pages/TradeCompleted';
 import SalesShippingLabel from './pages/SalesShippingLabel';
 
+import Returns from './pages/Returns';
+import ReturnRequest from './pages/ReturnRequest';
+
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -80,6 +83,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+
 
 
 setupIonicReact({
@@ -269,6 +273,12 @@ const App: React.FC = () => {
             </Route>
             <Route path="/sales/shipping-label" exact={true}>
               <SalesShippingLabel />
+            </Route>
+            <Route path="/settings/returns" exact={true}>
+              <Returns />
+            </Route>
+            <Route path="/settings/returns/:id" exact={true}>
+              <ReturnRequest />
             </Route>
             <Route path="/signup1" exact={true}>
               <SignUp1 />

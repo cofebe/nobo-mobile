@@ -58,10 +58,10 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/shipping');
+            // history.push('/settings/shipping');
           }}
         >
-          Shipping
+          Shipping Address
         </div>
         <div
           onClick={e => {
@@ -72,16 +72,6 @@ const Settings: React.FC = () => {
         >
           My Payment Methods
         </div>
-        <div className="sep"></div>
-        <div
-          onClick={e => {
-            e.preventDefault();
-            e.stopPropagation();
-            history.push('/settings/trades');
-          }}
-        >
-          My Trades
-        </div>
         <div
           onClick={e => {
             e.preventDefault();
@@ -91,6 +81,9 @@ const Settings: React.FC = () => {
         >
           My Purchases
         </div>
+        <div className="sep"></div>
+
+
         <div
           onClick={e => {
             e.preventDefault();
@@ -109,12 +102,22 @@ const Settings: React.FC = () => {
         >
           My Offers
         </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/trades');
+          }}
+        >
+          My Trades
+        </div>
+
         <div className="sep"></div>
         <div
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/returns');
+            history.push('/settings/returns');
           }}
         >
           My Returns
@@ -137,6 +140,55 @@ const Settings: React.FC = () => {
         >
           Savings &amp; Sustainability
         </div>
+        <div className="sep"></div>
+        <div className='help-container'>NEED HELP ?</div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            //history.push('/settings/savings');
+          }}
+        >
+          HELP
+        </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            history.push('/settings/shipping');
+          }}
+        >
+          Shipping
+        </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            // history.push('/settings/return-policy');
+          }}
+        >
+          RETURN POLICY
+        </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            //history.push('/settings/savings');
+          }}
+        >
+          TERMS &amp; CONDITION
+        </div>
+        <div
+          onClick={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            //history.push('/settings/savings');
+          }}
+        >
+          FAQ
+        </div>
+
+
         <div
           className="logout"
           onClick={e => {

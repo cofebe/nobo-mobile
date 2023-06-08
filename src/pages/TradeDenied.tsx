@@ -6,35 +6,31 @@ import {
   IonGrid,
   IonPage,
   IonRow,
-  useIonViewWillEnter
+  useIonViewWillEnter,
 } from '@ionic/react'
 import './TradeDenied.scss'
-import { useHistory, useParams, } from 'react-router'
-import { UserService } from '../services/UserService'
-import { TradesResponse } from '../models'
+import { useHistory, } from 'react-router'
+import { FullOrder } from '../models'
 
 
 const TradeDenied: React.FC = () => {
-  const userService = new UserService()
   const history = useHistory()
-  const params: any = useParams()
-  const [tradesData, setTradesData] = useState<TradesResponse[]>([])
+  const [tradesData, setTradesData] = useState<FullOrder[]>([])
+
 
 
   useIonViewWillEnter(() => {
-    userService.denyTradeOffer(params.id)
-      .then((res) => {
-        console.log(res)
-        setTradesData([res])
-      })
-      .catch((error) => {
-        console.log('error denying trade : ', error)
-      })
+    const data1 = localStorage.getItem('denyTradeData')
+    if (data1) {
+      const resp = JSON.parse(data1)
+      setTradesData(resp)
+    }
   })
 
 
-const tradeData:any = tradesData[0]
-  console.log('deny page any', tradeData)
+  const product: any = tradesData
+
+
   return (
     <IonPage className='denied-item-main-container'>
       <IonContent className='item-denied-content'>
@@ -52,7 +48,7 @@ const tradeData:any = tradesData[0]
 
         <div className='item-denied-desc-container'>
           <div className='item-denied-desc'>
-            YOU DENIED <span style={{ color: '#D6980E', fontStyle: 'italic' }}>@{tradeData?.initiator.displayName} </span>
+            YOU DENIED <span style={{ color: '#D6980E', fontStyle: 'italic' }}>@{product?.initiator?.displayName} </span>
             TRADE OFFER
           </div>
         </div>
@@ -71,10 +67,10 @@ const tradeData:any = tradesData[0]
                 <div className='items-view-props-left'>
                   <img
                     className='item-img-left'
-                    src={tradeData?.products?.requested[0]?.url.length < 60 ?
-                      `https://staging.thenobo.com/${tradeData?.products?.requested[0]?.url}`
-                      : `${tradeData?.products?.requested.images[0]?.url}`}
-                      alt={tradeData?.products?.requested.name}
+                    src={product?.products?.requested[0]?.url.length < 60 ?
+                      `https://staging.thenobo.com/${product?.products?.requested[0]?.url}`
+                      : `${product?.products?.requested.images[0]?.url}`}
+                    alt={product?.products?.requested.name}
                   />
 
                 </div>
@@ -87,10 +83,10 @@ const tradeData:any = tradesData[0]
                 <div className='items-view-props-right'>
                   <img
                     className='item-img-right'
-                    src={tradeData?.products?.offered[0]?.url.length < 60 ?
-                      `https://staging.thenobo.com/${tradeData.products?.offered[0]?.url}`
-                      : `${tradeData?.products?.offered.images[0]?.url}`}
-                      alt={tradeData?.products?.offered.name}
+                    src={product?.products?.offered[0]?.url.length < 60 ?
+                      `https://staging.thenobo.com/${product.products?.offered[0]?.url}`
+                      : `${product?.products?.offered.images[0]?.url}`}
+                    alt={product?.products?.offered.name}
                   />
 
                 </div>
@@ -102,10 +98,12 @@ const tradeData:any = tradesData[0]
         </IonGrid>
         <div className="trade-denied-btn-below">
           <IonButton className='btn' onClick={() => {
-            history.push('/home/closet/trade')
+            history.replace('/home/closet/trade')
+            localStorage.removeItem('denyTradeData')
+
           }} >VIEW MY CLOSET</IonButton>
           <IonButton style={{ backgroundColor: 'white' }} className='btn' fill='outline' onClick={() => {
-            history.replace({ pathname: `/home/style-feed`, state: {} })
+            history.replace(`/home/style-feed`)
           }} >BACK TO HOME FEED</IonButton>
         </div>
 

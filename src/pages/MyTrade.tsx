@@ -11,7 +11,7 @@ import {
 import './MyTrade.scss'
 import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
-import { TradesResponse } from '../models'
+import { FullOrder, TradesResponse } from '../models'
 
 
 
@@ -19,6 +19,7 @@ const MyTrade: React.FC = () => {
   const userService = new UserService()
   const history = useHistory()
   const [tradesData, setTradesData] = useState<TradesResponse[]>([])
+
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
 
@@ -31,6 +32,48 @@ const MyTrade: React.FC = () => {
       })
       .catch((err) => { console.log('err info while fetching products ', err) })
   })
+
+  const denyTrade = (productId:string) =>{
+    userService.denyTradeOffer(productId)
+    .then((res:TradesResponse) => {
+      if (res){
+
+        setTimeout(() => {
+          localStorage.setItem('denyTradeData', JSON.stringify(res))
+          history.push(`trades/denied/${productId}`)
+        }, 1000);
+      }else{
+        return
+      }
+
+    })
+    .catch((error) => {
+      console.log('error denying trade : ', error)
+    })
+  }
+
+
+  const acceptTrade = (productId:string) =>{
+    userService.denyTradeOffer(productId)
+    .then((res:TradesResponse) => {
+      if (res){
+        console.log('response from acacepted trade ',res)
+        setTimeout(() => {
+          localStorage.setItem('acceptTradeData', JSON.stringify(res))
+          history.push(`trades/accepted/${productId}`)
+        }, 500);
+      }else{
+        return
+      }
+
+    })
+    .catch((error) => {
+      console.log('error denying trade : ', error)
+    })
+  }
+
+
+
 
 
 
@@ -116,10 +159,13 @@ const MyTrade: React.FC = () => {
                     size='small' className='trade-item-btn'
                     fill='outline'
                     onClick={() => {
-                      history.push(`trades/denied/${product._id}`)
+                      denyTrade(product._id)
                     }} >DENY</IonButton>
-                  <IonButton size='small' className='trade-item-btn' onClick={() => {
-                    history.push(`trades/accepted/${product._id}`)
+
+                  <IonButton size='small'
+                  className='trade-item-btn'
+                   onClick={() => {
+                    acceptTrade(product._id)
                   }} >ACCEPT</IonButton>
                 </div>
               </IonCol>
