@@ -241,7 +241,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
       userId = myUserId || '';
     }
 
-    if (userIdStr !== 'my-profile') {
+    if (userIdStr !== 'my-profile' && userIdStr !== 'style-feed') {
       userId = userIdStr;
     }
 
@@ -303,7 +303,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
     }, 250);
   }
   return (
-    <IonPage className="home-page-athlete-profile" style={{ backgroundColor: '#F9FBFB' }}>
+    <div className="stylefeed-page">
       <IonContent className="athlete-profile-content" scrollY={false}>
         {!profile.myProfile && (
           <IonButtons
@@ -348,16 +348,6 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           className="profile-banner-container"
           style={{ backgroundImage: `url(${noboProfile.profileBg})` }}
         ></div>
-        {profile.myProfile && (
-          <div
-            onClick={e => {
-              e.preventDefault();
-              history.push(`/home/style-feed`);
-            }}
-            className="profile-header-container"
-            style={{ backgroundImage: `url('assets/images/my-profile-header.svg')` }}
-          ></div>
-        )}
         {profile.myProfile && (
           <IonButton
             onClick={e => {
@@ -499,7 +489,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           </h3>
         </div>
       )}
-    </IonPage>
+    </div>
   );
 };
 

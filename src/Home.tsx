@@ -19,6 +19,7 @@ import './styles.scss';
 //import Feed from './pages/Feed';
 import StyleFeedPage from './pages/StyleFeed';
 import ProfilePage from './pages/Profile';
+import ProfileOverviewPage from './pages/ProfileOverview';
 import Explore from './pages/Explore';
 import MyCloset from './pages/MyCloset';
 import TradeCloset from './pages/TradeCloset';
@@ -205,18 +206,18 @@ const Home: React.FC = () => {
             <Conversations />
           </Route>
 
+          <Route path="/home/profile-overview">
+            <ProfileOverviewPage defaultToggled={false}/>
+          </Route>
           <Route path="/home/my-profile" exact={true}>
-            <ProfilePage myProfile={true} />
+            <ProfileOverviewPage defaultToggled={false}/>
           </Route>
           <Route path="/home/profile/:id" exact={true}>
-            <ProfilePage myProfile={false} />
+            <ProfileOverviewPage defaultToggled={false} myProfile={false}/>
           </Route>
           <Route path="/home/style-feed" exact={true}>
-            <StyleFeedPage />
+            <ProfileOverviewPage defaultToggled={true}/>
           </Route>
-          {/* <Route exact path="/home">
-            <Redirect to="/home/feed" />
-          </Route> */}
           <Route path="/home/post-create" exact={true}>
             <PostCreate />
           </Route>
