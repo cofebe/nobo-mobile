@@ -19,7 +19,6 @@ const MyTrade: React.FC = () => {
   const userService = new UserService()
   const history = useHistory()
   const [tradesData, setTradesData] = useState<TradesResponse[]>([])
-  const [denyData, setDenyData] = useState<TradesResponse[]>([])
 
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
@@ -38,8 +37,7 @@ const MyTrade: React.FC = () => {
     userService.denyTradeOffer(productId)
     .then((res:TradesResponse) => {
       if (res){
-        console.log('response from deny trade ',res)
-        setDenyData([res])
+
         setTimeout(() => {
           localStorage.setItem('denyTradeData', JSON.stringify(res))
           history.push(`trades/denied/${productId}`)
@@ -60,7 +58,6 @@ const MyTrade: React.FC = () => {
     .then((res:TradesResponse) => {
       if (res){
         console.log('response from acacepted trade ',res)
-        setDenyData([res])
         setTimeout(() => {
           localStorage.setItem('acceptTradeData', JSON.stringify(res))
           history.push(`trades/accepted/${productId}`)

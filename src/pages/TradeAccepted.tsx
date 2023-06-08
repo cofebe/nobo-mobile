@@ -4,38 +4,33 @@ import {
   IonCol,
   IonContent,
   IonGrid,
-  IonHeader,
   IonPage,
   IonRow,
-  IonToolbar,
   useIonViewWillEnter
 } from '@ionic/react'
 import './TradeAccepted.scss'
 import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
-import {  TradesResponse } from '../models'
+import { TradesResponse } from '../models'
 import { useParams, } from 'react-router'
 
 
 
 const TradeAccepted: React.FC = () => {
-  const userService = new UserService()
   const history = useHistory()
-  const params: any = useParams()
   const [tradesData, setTradesData] = useState<TradesResponse[]>([])
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
-useIonViewWillEnter(()=>{
-  const data1 = localStorage.getItem('acceptTradeData')
-if(data1){
-  const resp = JSON.parse(data1)
-  setTradesData(resp)
-}
-})
+  useIonViewWillEnter(() => {
+    const data1 = localStorage.getItem('acceptTradeData')
+    if (data1) {
+      const resp = JSON.parse(data1)
+      setTradesData(resp)
+    }
+  })
 
 
-  const tradeData:any = tradesData
-  console.log('accepted', tradeData)
+  const tradeData: any = tradesData
 
   return (
     <IonPage className='accepted-accepted-item-main-container'>
@@ -76,9 +71,9 @@ if(data1){
                   <img
                     className='img'
                     src={tradeData?.products?.requested[0]?.url.length < 60 ?
-                       `https://staging.thenobo.com/${tradeData?.products?.requested[0]?.url}`
+                      `https://staging.thenobo.com/${tradeData?.products?.requested[0]?.url}`
                       : `${tradeData?.products?.requested.images[0]?.url}`}
-                       alt={tradeData?.products?.requested.name}
+                    alt={tradeData?.products?.requested.name}
                   />
                   <div className="accepted-accepted-item-name-left">{tradeData?.products?.requested.name}</div>
                   <div className="accepted-accepted-item-price-left">{currencyFormat.format(tradeData?.products?.requested.price)}</div>
@@ -96,7 +91,7 @@ if(data1){
                   <img
                     className='img'
                     src={tradeData?.products?.offered[0]?.url.length < 60 ?
-                       `https://staging.thenobo.com/${tradeData?.products?.offered[0]?.url}`
+                      `https://staging.thenobo.com/${tradeData?.products?.offered[0]?.url}`
                       : `${tradeData?.products?.offered.images[0]?.url}`} alt={tradeData?.products?.offered.name}
                   />
                   <div className="accepted-accepted-item-name-right">{tradeData?.products?.offered.name}</div>
@@ -110,12 +105,12 @@ if(data1){
         </IonGrid>
         <div className="trade-accepted-btn-below">
           <IonButton className='btn' onClick={() => {
-            history.push('/settings/trades')
-  localStorage.removeItem('acceptTradeData')
+            history.replace('/settings/trades')
+            localStorage.removeItem('acceptTradeData')
 
           }} >VIEW MY TRADES</IonButton>
           <IonButton style={{ backgroundColor: 'white' }} className='btn' fill='outline'
-            onClick={() => { history.push('/home/style-feed') }}
+            onClick={() => { history.replace('/home/style-feed') }}
           >BACK TO HOME FEED</IonButton>
         </div>
 

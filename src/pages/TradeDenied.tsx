@@ -19,17 +19,16 @@ const TradeDenied: React.FC = () => {
 
 
 
-useIonViewWillEnter(()=>{
-  const data1 = localStorage.getItem('denyTradeData')
-if(data1){
-  const resp = JSON.parse(data1)
-  setTradesData(resp)
-}
-})
+  useIonViewWillEnter(() => {
+    const data1 = localStorage.getItem('denyTradeData')
+    if (data1) {
+      const resp = JSON.parse(data1)
+      setTradesData(resp)
+    }
+  })
 
 
-const product:any = tradesData
-console.log('deny', product)
+  const product: any = tradesData
 
 
   return (
@@ -49,7 +48,6 @@ console.log('deny', product)
 
         <div className='item-denied-desc-container'>
           <div className='item-denied-desc'>
-            {/* YOU DENIED <span style={{ color: '#D6980E', fontStyle: 'italic' }}>@{tradesData.initiator.displayName} </span> */}
             YOU DENIED <span style={{ color: '#D6980E', fontStyle: 'italic' }}>@{product?.initiator?.displayName} </span>
             TRADE OFFER
           </div>
@@ -72,7 +70,7 @@ console.log('deny', product)
                     src={product?.products?.requested[0]?.url.length < 60 ?
                       `https://staging.thenobo.com/${product?.products?.requested[0]?.url}`
                       : `${product?.products?.requested.images[0]?.url}`}
-                      alt={product?.products?.requested.name}
+                    alt={product?.products?.requested.name}
                   />
 
                 </div>
@@ -88,7 +86,7 @@ console.log('deny', product)
                     src={product?.products?.offered[0]?.url.length < 60 ?
                       `https://staging.thenobo.com/${product.products?.offered[0]?.url}`
                       : `${product?.products?.offered.images[0]?.url}`}
-                      alt={product?.products?.offered.name}
+                    alt={product?.products?.offered.name}
                   />
 
                 </div>
@@ -100,13 +98,12 @@ console.log('deny', product)
         </IonGrid>
         <div className="trade-denied-btn-below">
           <IonButton className='btn' onClick={() => {
-            history.push('/home/closet/trade')
- localStorage.removeItem('denyTradeData')
+            history.replace('/home/closet/trade')
+            localStorage.removeItem('denyTradeData')
 
           }} >VIEW MY CLOSET</IonButton>
           <IonButton style={{ backgroundColor: 'white' }} className='btn' fill='outline' onClick={() => {
-
-              history.push(`/home/style-feed`)
+            history.replace(`/home/style-feed`)
           }} >BACK TO HOME FEED</IonButton>
         </div>
 
