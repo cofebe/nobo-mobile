@@ -323,6 +323,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
               slot="icon-only"
               icon={chevronBackOutline}
             />
+            hi
           </IonButtons>
         )}
 
@@ -393,16 +394,21 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
         </div>
         <ProfileSummary profile={noboProfile} openSocialShare={openShare}></ProfileSummary>
 
-        <IonRow className="nobo-menu-container">
+        <IonRow className="nobo-menu-container" >
           <div className="nobo-menu-circle" onClick={() => setTargetSection('Feed')}>
             <div className="circle-background">
+
               <img
-                className={
-                  targetSection === 'Feed'
-                    ? 'nobo-profile-menu-selected'
-                    : 'nobo-profile-menu-not-selected'
-                }
-                src="assets/images/navigation/nav-profile-items.svg"
+                // className={
+                //   targetSection === 'Feed'
+                //     ? 'nobo-profile-menu-selected'
+                //     : 'nobo-profile-menu-not-selected'
+                // }
+
+                className='nobo-profile-menu-selected2'
+                src={targetSection === 'Feed' ?
+                "assets/images/navigation/feeds-dark.svg"
+                :"assets/images/navigation/feeds-gray.svg"}
                 alt="feed"
               />
             </div>
@@ -410,12 +416,14 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           <div className="nobo-menu-circle" onClick={() => setTargetSection('Trades')}>
             <div className="circle-background">
               <img
-                className={
-                  targetSection === 'Trades'
-                    ? 'nobo-profile-menu-selected'
-                    : 'nobo-profile-menu-not-selected'
-                }
-                src="assets/images/navigation/nav-trade.svg"
+                // className={
+                //   targetSection === 'Trades'
+                //     ? 'nobo-profile-menu-selected'
+                //     : 'nobo-profile-menu-not-selected'
+                // }
+                src={targetSection === 'Trades' ?
+                "assets/images/navigation/trades-dark.svg"
+                :"assets/images/navigation/trades-gray.svg"}
                 alt="trades"
               />
             </div>

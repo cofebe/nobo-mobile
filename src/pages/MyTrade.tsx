@@ -61,7 +61,7 @@ const MyTrade: React.FC = () => {
         setTimeout(() => {
           localStorage.setItem('acceptTradeData', JSON.stringify(res))
           history.push(`trades/accepted/${productId}`)
-        }, 1000);
+        }, 500);
       }else{
         return
       }
@@ -110,7 +110,7 @@ const MyTrade: React.FC = () => {
       </IonRow>
       <IonContent className='trade-item-content'>
         <IonGrid>
-          {tradesData[0]?.received.map((product: any) => product.status !== 'pending' && (
+          {tradesData[0]?.received.map((product: any) => product.status === 'pending' && (
             <IonRow key={product._id} style={{ marginBottom: '14px' }}>
               <IonCol className='trade-item-container'>
                 <div className='trade-item-status-container'>
