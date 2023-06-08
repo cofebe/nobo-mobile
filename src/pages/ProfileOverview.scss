@@ -1,0 +1,56 @@
+.profile-header-container {
+  position: absolute;
+  top: 65px;
+  height: 45px;
+  width: 220px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+.toggle-switch {
+  z-index: 10000;
+  position: absolute;
+  top: 75px;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 200px;
+  min-height: 30px;
+  background: white;
+  border-radius: 25px;
+  border: .5px solid black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.toggle-switch-slider {
+  position: absolute;
+  width: 100px;
+  height: 30px;
+  background: #d7980d;
+  border-radius: 20px;
+  transition: 0.3s ease;
+}
+
+.toggle-switch.checked .toggle-switch-slider {
+  transform: translateX(100px);
+}
+
+.toggle-switch-text {
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  color: black;
+  transition: 0.3s ease;
+}
+
+.toggle-switch-text.on {
+  color: white;
+}

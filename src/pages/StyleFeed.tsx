@@ -191,7 +191,7 @@ const StyleFeed: React.FC = () => {
   //  loadPosts(0);
   //}
   return (
-    <IonPage className="home-page">
+    <div className="stylefeed-page">
       <ImageZoom
         show={!!imageZoom}
         imageUrl={imageZoom}
@@ -211,14 +211,6 @@ const StyleFeed: React.FC = () => {
         <div className="profile-banner-container" style={{ backgroundColor: '#FEFCF7' }}>
           <img className="style-feed-nobo-logo" src="/assets/images/style-feed-nobo-logo.png" />
         </div>
-        <div
-          onClick={e => {
-            e.preventDefault();
-            history.push(`/home/my-profile`);
-          }}
-          className="profile-header-container"
-          style={{ backgroundImage: `url('assets/images/style-feed-header.svg')` }}
-        ></div>
         <div
           className="profile-create-post"
           onClick={e => {
@@ -355,7 +347,7 @@ const StyleFeed: React.FC = () => {
           </IonCol>
         </IonRow>
       </IonContent>
-    </IonPage>
+    </div>
   );
 };
 
