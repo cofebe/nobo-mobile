@@ -52,8 +52,8 @@
     --padding-top: 20px;
     --background: #fefcf7;
 
-    & > div {
-      font-size: 15px;
+    &>div {
+      font-size: 12px;
       padding: 8px 0 8px 0;
       font-weight: 600;
       text-transform: uppercase;
@@ -67,7 +67,7 @@
       }
 
       &.logout {
-        margin-top: 80px;
+        margin-top: 10px;
         display: flex;
         color: #d6980e;
         text-align: center;
@@ -84,8 +84,19 @@
       &.delete-account {
         color: #fa0707;
         text-align: center;
-        margin-top: 20px;
+        // margin-top: 10px;
       }
+    }
+
+    .help-container {
+      text-align: center;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 150%;
+      letter-spacing: 0.05em;
+      color: #000000;
     }
   }
 }

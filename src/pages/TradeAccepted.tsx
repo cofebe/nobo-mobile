@@ -25,20 +25,17 @@ const TradeAccepted: React.FC = () => {
   const [tradesData, setTradesData] = useState<TradesResponse[]>([])
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
-  useIonViewWillEnter(() => {
-    userService.acceptTradeOffer(params.id)
-    .then((res)=>{
-      console.log(res)
-      setTradesData([res])
-    })
-    .catch((error)=>{
-      console.log('error accepting trade : ',error)
-    })
-  })
+useIonViewWillEnter(()=>{
+  const data1 = localStorage.getItem('acceptTradeData')
+if(data1){
+  const resp = JSON.parse(data1)
+  setTradesData(resp)
+}
+})
 
 
-  const tradeData:any = tradesData[0]
-  console.log('message recieved  ', tradeData)
+  const tradeData:any = tradesData
+  console.log('accepted', tradeData)
 
   return (
     <IonPage className='accepted-accepted-item-main-container'>
@@ -114,6 +111,8 @@ const TradeAccepted: React.FC = () => {
         <div className="trade-accepted-btn-below">
           <IonButton className='btn' onClick={() => {
             history.push('/settings/trades')
+  localStorage.removeItem('acceptTradeData')
+
           }} >VIEW MY TRADES</IonButton>
           <IonButton style={{ backgroundColor: 'white' }} className='btn' fill='outline'
             onClick={() => { history.push('/home/style-feed') }}
