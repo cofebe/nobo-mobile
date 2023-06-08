@@ -36,19 +36,48 @@ export interface ProductSearchOptions {
   sortDirection?: number;
 }
 
+function parseJwt(token: string) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+};
+
+function isTokenExpired(token: string) {
+    const decodedToken = parseJwt(token);
+    const currentTime = Date.now().valueOf() / 1000;
+
+    if (decodedToken.exp < currentTime) {
+        return true;
+    }
+    return false;
+}
+
 export class UserService extends BaseService {
   async getMe(): Promise<User> {
-    const res = await super.fetch('GET', '/api/users/me');
-    const json: LoginResponse = await res.json();
+    try {
+      const res = await super.fetch('GET', '/api/users/me');
+      const json: LoginResponse = await res.json();
 
-    if (json.token) {
-      const authService = new AuthService();
-      authService.setUserToken(json.token);
-      authService.setUserId(json.user._id);
-      authService.setUserDisplayName(json.user.displayName);
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
+      if (isTokenExpired(json.token)) {
+        const authService = new AuthService();
+        authService.setUserToken(json.token);
+        authService.setUserId(json.user._id);
+        authService.setUserDisplayName(json.user.displayName);
+      }
+
+      return json.user;
+    } catch (error) {
+      console.error(`There was an error fetching the user: ${error}`);
+      throw error;
     }
-
-    return json.user;
   }
 
   async getProfile(userId: any) {

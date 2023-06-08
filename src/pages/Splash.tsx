@@ -9,17 +9,22 @@ const Splash: React.FC = () => {
 
   useIonViewWillEnter(() => {
     const userService = new UserService();
-    userService.getMe().then(user => {
-      if (user) {
-        history.push(`/home/explore/${user.experiencePreferences}/explore`);
-        return;
-      }
-
-      setTimeout(() => {
-        history.push('/get-started');
-      }, 2000);
-    });
-  });
+    userService.getMe()
+      .then(user => {
+        if (user) {
+          history.push(`/home/explore/${user.experiencePreferences}/explore`);
+          return;
+        }
+      })
+      .catch(error => {
+        console.error(`There was an error fetching the user: ${error}`);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          history.push('/get-started');
+        }, 2000);
+      });
+  })
 
   return (
     <IonPage
