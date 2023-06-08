@@ -36,7 +36,7 @@ const ListItemModal = forwardRef<Ref, ListItemModalProps>(({ onClose }, ref) => 
             <IonRow
               onClick={() => {
                 onClose();
-                //history.push('/list-item/trade');
+                history.push('/list/trade-category');
               }}
               class="ion-justify-content-center"
             >

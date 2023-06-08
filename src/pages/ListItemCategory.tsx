@@ -13,6 +13,7 @@ import {
 import { useHistory } from 'react-router';
 import './ListItem.scss';
 import Select, { SelectOption } from '../components/Select';
+import BrandSelect from '../components/BrandSelect';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { CategoryService } from '../services/CategoryService';
@@ -159,7 +160,7 @@ const ListItemCategory: React.FC = () => {
         </div>
         <span className="trade-steps">1/3</span>
       </IonHeader>
-      <IonContent>
+      <IonContent style={{ zIndex: 100 }}>
         <IonGrid className="list-item-content">
           <IonRow>
             <IonCol>
@@ -250,35 +251,21 @@ const ListItemCategory: React.FC = () => {
             )}
             <IonRow className="margin-bottom-5">
               <IonCol>
-                <div
-                  className={
-                    'nobo-select' +
-                    (!itemType ? ' nobo-select-disabled' : '') +
-                    ' nobo-select-border'
-                  }
-                  onClick={e => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setShowBrandModal(true);
+                <BrandSelect
+                  placeholder="SELECT BRAND"
+                  disabled={!itemType}
+                  value={brand}
+                  onChange={val => {
+                    setBrand(val);
+                    listingStore.setBrand(val);
                   }}
-                >
-                  <div className="nobo-select-container">
-                    <div
-                      className={'nobo-select-label' + (brand ? '' : ' nobo-select-label-empty')}
-                    >
-                      {brand || 'Select Brand'}
-                    </div>
-                    <div className="nobo-select-chevron">
-                      <img src="assets/images/arrow-down-filled.svg" alt="down" />
-                    </div>
-                  </div>
-                </div>
+                ></BrandSelect>
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol>
                 <Input
-                  disabled={!brand && !itemSubcategory && !itemType}
+                  disabled={!brand}
                   type="number"
                   value={estimatedPrice}
                   className={`input-height ${!brand && 'disabled-input'}`}
@@ -293,7 +280,7 @@ const ListItemCategory: React.FC = () => {
             <IonRow>
               <IonCol>
                 <Input
-                  disabled={!brand && !itemSubcategory && !itemType}
+                  disabled={!brand}
                   type="number"
                   value={price}
                   className={`input-height ${!brand && 'disabled-input'}`}
@@ -307,54 +294,19 @@ const ListItemCategory: React.FC = () => {
             </IonRow>
           </>
         </IonGrid>
-      </IonContent>
-      <div className="footer">
-        <Button
-          disabled={!valid()}
-          label="Next"
-          large={true}
-          onClick={e => {
-            e.preventDefault();
-            e.stopPropagation();
-            history.push('/list/image');
-          }}
-        />
-      </div>
-      {showBrandModal && (
-        <div className="brand-modal-container">
-          <div className="brand-modal">
-            <div className="options">
-              {brands?.map((o, index) => (
-                <div
-                  key={index}
-                  className={'option' + (index === 3 ? ' selected' : '')}
-                  onClick={e => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setBrand(o);
-                    listingStore.setBrand(o);
-                    setShowBrandModal(false);
-                  }}
-                >
-                  {o}
-                </div>
-              ))}
-            </div>
-            <div className="buttons">
-              <IonButton
-                className="button-cancel"
-                onClick={e => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setShowBrandModal(false);
-                }}
-              >
-                Cancel
-              </IonButton>
-            </div>
-          </div>
+        <div className="footer">
+          <Button
+            disabled={!valid()}
+            label="Next"
+            large={true}
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+              history.push(isTrade ? '/list/trade-product' : '/list/image');
+            }}
+          />
         </div>
-      )}
+      </IonContent>
     </IonPage>
   );
 };

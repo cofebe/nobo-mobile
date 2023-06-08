@@ -128,7 +128,7 @@ export interface CreateProductRequest {
     url: string;
     originalName: string;
   }[];
-  action: string;
+  action: 'sell' | 'trade';
   name: string;
   brand: string;
   description: string;
@@ -138,7 +138,12 @@ export interface CreateProductRequest {
   category: string;
   group: string;
   parentCategory: string;
-  potentialTradeItems?: any[];
+  potentialTradeItems?: {
+    designer?: string;
+    productName?: string;
+    notes?: string;
+  }[];
+  openToAllLuxuryOptions?: boolean;
 }
 
 export interface CreateProductResponse {
@@ -188,7 +193,10 @@ export interface CreateProductResponse {
   retailPrice: number;
   category: string;
   parentCategory: string;
-  potentialTradeItems: any[];
+  potentialTradeItems?: {
+    _id: string;
+  }[];
+  openToAllLuxuryOptions?: boolean;
   createdAt: string;
   updatedAt: string;
   image: string;
