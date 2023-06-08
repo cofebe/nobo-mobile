@@ -228,6 +228,7 @@ const ListItemProduct: React.FC = () => {
       .uploadFiles(formData)
       .then(res => {
         setReceiptUrl(res.url);
+        listingStore.setReceiptUrl(res.url);
         setFileName(res.originalName);
       })
       .catch(err => {
@@ -237,6 +238,12 @@ const ListItemProduct: React.FC = () => {
 
   function submit() {
     console.log('submit', receiptUrl, fileName, seletectedAttributes, additionalConditionDetails);
+    if (isTrade) {
+      listingStore.setAttributes(seletectedAttributes);
+      history.push('/list/trade-options');
+      return;
+    }
+
     const state = listingStore.getCurrent();
     const product: CreateProductRequest = {
       attributes: seletectedAttributes
@@ -271,8 +278,9 @@ const ListItemProduct: React.FC = () => {
     }
     console.log('product', product);
     productService.createProduct(product).then(p => {
-      console.log('p', p, JSON.stringify(p));
+      //console.log('p', p, JSON.stringify(p));
       listingStore.setProduct(p);
+      history.push('/list/confirm');
     });
   }
 
@@ -316,6 +324,7 @@ const ListItemProduct: React.FC = () => {
                   placeholder="Product Title *"
                   onChange={val => {
                     setProductTitle(val);
+                    listingStore.setProductTitle(val);
                   }}
                 />
               </IonCol>
@@ -451,7 +460,7 @@ const ListItemProduct: React.FC = () => {
       </IonContent>
       <div className="footer footer-gradient">
         <Button
-          label="SUBMIT"
+          label={isTrade ? 'Next' : 'SUBMIT'}
           large={true}
           disabled={!valid()}
           onClick={e => {
@@ -461,20 +470,22 @@ const ListItemProduct: React.FC = () => {
             submit();
           }}
         />
-        <div
-          className="cancel-exit"
-          onClick={e => {
-            e.preventDefault();
-            e.stopPropagation();
+        {!isTrade && (
+          <div
+            className="cancel-exit"
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
 
-            listingStore.reset();
+              listingStore.reset();
 
-            const url = `/home/explore/${experience}/explore`;
-            history.push(url);
-          }}
-        >
-          Cancel and Exit
-        </div>
+              const url = `/home/explore/${experience}/explore`;
+              history.push(url);
+            }}
+          >
+            Cancel and Exit
+          </div>
+        )}
       </div>
     </IonPage>
   );
