@@ -17,19 +17,19 @@ const TradeHelpModal = forwardRef<Ref, TradeHelpModalProps>((props, ref) => {
             </IonCol>
           </IonRow>
           <IonRow className="bullet">
-            <IonCol size="1" className="label">
+            <IonCol size="1.1" className="label">
               1.
             </IonCol>
-            <IonCol size="11" className="value">
+            <IonCol size="10.9" className="value">
               <h1>List Your Product for Trade</h1>
               <p>Trade products from your closet, quickly and easily!</p>
             </IonCol>
           </IonRow>
           <IonRow className="bullet">
-            <IonCol size="1" className="label">
+            <IonCol size="1.1" className="label">
               2.
             </IonCol>
-            <IonCol size="11" className="value">
+            <IonCol size="10.9" className="value">
               <h1>Get Paid</h1>
               <p>
                 When the other NOBO user accepts your trade request and both of you split the cost
@@ -65,11 +65,11 @@ const TradeHelpModal = forwardRef<Ref, TradeHelpModalProps>((props, ref) => {
             </IonCol>
           </IonRow>
           <IonRow className="bullet">
-            <IonCol size="1" className="label">
+            <IonCol size="1.1" className="label">
               3.
             </IonCol>
-            <IonCol size="11" className="value">
-              <h1>Support</h1>
+            <IonCol size="10.9" className="value">
+              <h1 style={{textTransform:'none'}}>Support</h1>
               <p>We’re here to help, in any way we can.</p>
               <p>
                 Contact us:{' '}
