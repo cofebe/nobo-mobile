@@ -660,7 +660,7 @@ const ProductDetail: React.FC = () => {
             )}
             {isMine && (
               <IonRow className="buttons">
-                <IonCol size="6" className="button-container left">
+                <IonCol size="12" className="button-container left">
                   <Button
                     label="Remove Item"
                     onClick={e => {
@@ -670,6 +670,7 @@ const ProductDetail: React.FC = () => {
                     }}
                   />
                 </IonCol>
+                {/*
                 <IonCol size="6" className="button-container right">
                   <Button
                     label="Edit Item"
@@ -680,6 +681,7 @@ const ProductDetail: React.FC = () => {
                     }}
                   />
                 </IonCol>
+                */}
               </IonRow>
             )}
             {isSneaker && sneakersSteps === 1 && !sneakersIsNew && (

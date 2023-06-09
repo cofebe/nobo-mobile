@@ -13,6 +13,8 @@ export interface ListingState {
   brand: string;
   photos: string[];
   attributes: ItemAttributesWithValues[];
+  receiptUrl: string;
+  productTitle: string;
   conditionDetails: string[];
   product: CreateProductResponse | null;
 }
@@ -27,6 +29,8 @@ const listingInitialState: ListingState = {
   brand: '',
   photos: ['', '', '', ''],
   attributes: [],
+  receiptUrl: '',
+  productTitle: '',
   conditionDetails: [],
   product: null,
 };
@@ -131,6 +135,24 @@ export const listingStore = {
     listingState = {
       ...listingState,
       attributes: [...attributes],
+    };
+    if (!listingStateUpdating) {
+      listingSubject.next(listingState);
+    }
+  },
+  setReceiptUrl: (receiptUrl: string) => {
+    listingState = {
+      ...listingState,
+      receiptUrl,
+    };
+    if (!listingStateUpdating) {
+      listingSubject.next(listingState);
+    }
+  },
+  setProductTitle: (productTitle: string) => {
+    listingState = {
+      ...listingState,
+      productTitle,
     };
     if (!listingStateUpdating) {
       listingSubject.next(listingState);

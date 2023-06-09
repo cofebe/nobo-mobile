@@ -13,7 +13,6 @@ import {
   useIonActionSheet,
   useIonViewDidEnter,
   useIonViewDidLeave,
-  useIonLoading,
   IonIcon,
   IonButtons,
   IonModal,
@@ -40,7 +39,6 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
   const userService = new UserService();
   let [userId, setUserId] = useState<string>('');
   const [profileURL, setProfileURL] = useState('');
-  const [presentLoading, dismissLoading] = useIonLoading();
   const profileModal = useRef<HTMLIonModalElement>(null);
   const [present] = useIonActionSheet();
   const [presentProfileReportingActionSheet] = useIonActionSheet();
@@ -252,7 +250,6 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
   }
 
   function getProfile(id: any = '') {
-    presentLoading(loadingOptions);
     userService
       .getProfile(id)
       .then(res => res.json())
@@ -268,11 +265,8 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           }
           setNoboProfile(data['user']);
         }
-        dismissLoading();
       })
-      .catch(() => {
-        dismissLoading();
-      });
+      .catch(() => {});
   }
 
   function checkIfFollowing() {

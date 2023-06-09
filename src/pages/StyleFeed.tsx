@@ -12,7 +12,6 @@ import {
   IonRefresher,
   IonRefresherContent,
   IonRow,
-  useIonLoading,
   useIonViewWillEnter,
 } from '@ionic/react';
 import './Feed.scss';
@@ -62,7 +61,6 @@ const StyleFeed: React.FC = () => {
   //const [filter, setFilter] = useState<string>();
   const [imageZoom, setImageZoom] = useState('');
   let [isLoading, setIsLoading] = useState<boolean>(false);
-  const [presentLoading, dismissLoading] = useIonLoading();
   let [page, setPage] = useState<number>(0);
   let atBottomOfFeedListElem: HTMLElement | null;
 
@@ -116,7 +114,6 @@ const StyleFeed: React.FC = () => {
       atBottomOfFeedListElem.style.display = 'block';
     }
 
-    presentLoading(loadingOptions);
     isLoading = true;
     setIsLoading(isLoading);
     console.log('FeedService.getProfileFeed userId: ', myUserId);
@@ -141,18 +138,10 @@ const StyleFeed: React.FC = () => {
 
         isLoading = false;
         setIsLoading(isLoading);
-        dismissLoading();
-        setTimeout(() => {
-          dismissLoading();
-        }, 500);
       })
       .catch(() => {
         isLoading = false;
         setIsLoading(isLoading);
-        dismissLoading();
-        setTimeout(() => {
-          dismissLoading();
-        }, 500);
       });
   }
 

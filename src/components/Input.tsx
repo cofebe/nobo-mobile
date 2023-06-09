@@ -44,6 +44,7 @@ const Input: React.FC<InputProps> = ({
     <div
       className={
         'app-input-container ' +
+        (disabled ? ' disabled' : '') +
         (invalid || errorMessage || (required && isDirty && !internalValue) ? 'invalid' : '') +
         (small ? ' small' : '')
       }

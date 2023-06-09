@@ -54,6 +54,8 @@ import ListItemCategory from './pages/ListItemCategory';
 import ListItemImage from './pages/ListItemImage';
 import ListItemProduct from './pages/ListItemProduct';
 import ListItemConfirm from './pages/ListItemConfirm';
+import ListItemTradeOptions from './pages/ListItemTradeOptions';
+import ListItemTradeConfirm from './pages/ListItemTradeConfirm';
 
 import MySales from './pages/MySales';
 import SingleSalesItem from './pages/SingleSalesItem';
@@ -62,8 +64,6 @@ import SalesShippingLabel from './pages/SalesShippingLabel';
 
 import Returns from './pages/Returns';
 import ReturnRequest from './pages/ReturnRequest';
-
-
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -85,8 +85,6 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import MyOffers from './pages/MyOffers';
 import OfferAccepted from './pages/OfferAccepted';
-
-
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -239,6 +237,18 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/list/confirm">
               <ListItemConfirm />
+            </Route>
+            <Route exact path="/list/trade-category">
+              <ListItemCategory />
+            </Route>
+            <Route exact path="/list/trade-product">
+              <ListItemProduct />
+            </Route>
+            <Route exact path="/list/trade-options">
+              <ListItemTradeOptions />
+            </Route>
+            <Route exact path="/list/trade-confirm">
+              <ListItemTradeConfirm />
             </Route>
             <Route path="/chat/:id" exact={true}>
               <Chat />
