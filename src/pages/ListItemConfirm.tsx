@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import {
   IonContent,
-  IonHeader,
   IonPage,
-  IonRow,
-  IonCol,
   IonGrid,
   useIonViewWillEnter,
   useIonViewWillLeave,
@@ -84,6 +81,7 @@ const ListItemConfirm: React.FC = () => {
               onClick={e => {
                 e.preventDefault();
                 e.stopPropagation();
+
                 history.push('/home/closet/sell');
               }}
             />
