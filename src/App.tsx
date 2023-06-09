@@ -83,6 +83,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import MyOffers from './pages/MyOffers';
+import OfferAccepted from './pages/OfferAccepted';
 
 
 
@@ -195,6 +197,12 @@ const App: React.FC = () => {
             </Route>
             <Route exact path="/post-detail/:id">
               <PostDetail />
+            </Route>
+            <Route path="/settings/offers" exact={true}>
+              <MyOffers />
+            </Route>
+            <Route path="/settings/offers/offer-accepted/:id" exact={true}>
+              <OfferAccepted />
             </Route>
             <Route path="/offer-submitted/:id" exact={true}>
               <OfferComplete />

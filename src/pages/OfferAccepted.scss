@@ -1,0 +1,258 @@
+.offer-accepted-item-main-container {
+  background-color: #fefcf7;
+
+  .offer-accepted-content {
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-bottom: 20px;
+    // --padding-top: 20px;
+    --background: #fefcf7;
+
+    .offer-accepted-item-header {
+      background-color: #fefcf7;
+      height: 118px;
+
+      .offer-accepted-item-back-btn {
+        position: absolute;
+        left: 35px;
+        bottom: 15px;
+        z-index: 1000;
+      }
+
+      .offer-accepted-title-text-container {
+        position: absolute;
+        top: 35%;
+        bottom: 10.71%;
+        font-family: 'Georgia';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 150%;
+        /* identical to box height, or 30px */
+
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+
+        color: #000000;
+        text-align: center;
+      }
+    }
+
+    .offer-accepted-info-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -20px;
+      height: 20px;
+    }
+
+    .offer-accepted-desc-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .offer-accepted-desc {
+        width: 273px;
+        height: 40px;
+
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 20px;
+        color: #000000;
+      }
+    }
+
+    .item-accepted-desc-container2 {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .offer-accepted-desc2 {
+        width: 342px;
+        height: 40px;
+        margin-top: 10px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        color: #707070;
+      }
+    }
+
+    .offer-accepted-next-step {
+      text-align: center;
+      height: 20px;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 20px;
+      color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 30px;
+      text-transform: uppercase;
+    }
+
+    .offer-accepted-download-step {
+      padding: 0px;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      // justify-content: center;
+
+      .offer-accepted-circle-1 {
+        margin-top: 10px;
+        box-sizing: border-box;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: #D6980E;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+
+
+        .download-slip {}
+      }
+
+      .print-prepaid-slip {
+
+        height: 20px;
+
+
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 20px;
+        /* identical to box height, or 167% */
+
+
+        color: #000000;
+      }
+
+    }
+
+    .offer-accepted-btn-box {
+      padding: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .offer-accepted-package-step {
+      padding: 0px;
+margin-top: 37px;
+      background-color: yellow;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      // justify-content: center;
+
+      .offer-accepted-circle-2 {
+        margin-top: 10px;
+        box-sizing: border-box;
+        width: 80px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: #D6980E;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+
+
+        .download-slip {}
+      }
+
+      .print-package-slip {
+
+        height: 20px;
+
+
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 20px;
+        /* identical to box height, or 167% */
+
+
+        color: #000000;
+      }
+
+    }
+
+    .offer-accepted-drop-shipping {
+      padding: 0px;
+margin-top: 37px;
+      background-color: teal;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      // justify-content: center;
+
+      .offer-accepted-circle-3 {
+        margin-top: 10px;
+        box-sizing: border-box;
+        width: 110px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: #D6980E;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+
+
+        .download-slip {}
+      }
+
+      .print-drop-shipping {
+
+        height: 20px;
+
+
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 20px;
+        /* identical to box height, or 167% */
+
+
+        color: #000000;
+      }
+
+    }
+
+
+
+
+    .trade-accepted-btn-below {
+      margin-top: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+
+      .btn {
+        width: 300px;
+        height: 51px;
+      }
+    }
+  }
+}
