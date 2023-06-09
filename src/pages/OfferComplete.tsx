@@ -94,6 +94,7 @@ const OfferComplete: React.FC = () => {
               onClick={(e: any) => {
                 e.preventDefault();
                 e.stopPropagation();
+                history.replace('settings/offers')
               }}
             />
             <Button

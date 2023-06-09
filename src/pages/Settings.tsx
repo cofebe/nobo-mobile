@@ -97,7 +97,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/offers');
+            history.push('/settings/offers');
           }}
         >
           My Offers
