@@ -11,6 +11,7 @@ import {
   FullOrder,
   LoginResponse,
   Notification,
+  OfferedStatus,
   OrderResponse,
   OrdersResponse,
   PaymentMethodsResponse,
@@ -82,6 +83,10 @@ export class UserService extends BaseService {
 
   async getProfile(userId: any) {
     return await super.fetch('GET', `/api/users/${userId}/profile`);
+  }
+  async getBuyer(userId: any) {
+    const res = await super.fetch('GET', `/api/users/${userId}/profile`);
+    return res.json()
   }
 
   async getMyProducts(
@@ -338,11 +343,23 @@ export class UserService extends BaseService {
     return json;
   }
 
-  async getOffers() {
+  async getOffers():Promise<OfferedStatus> {
     const res = await super.fetch('GET', '/api/offers/my-offers/all');
-    return res.json();
+    const json: OfferedStatus = await res.json();
+
+    return json;
   }
 
+  async acceptOffer(offerid:string): Promise<OfferedStatus> {
+    const res = await super.fetch('POST', '/api/offers/accept',{offerid});
+    const json: OfferedStatus = await res.json();
+    return json;
+  }
+  async denyOffer(offerid:string): Promise<OfferedStatus> {
+    const res = await super.fetch('POST', '/api/offers/reject',{offerid});
+    const json: OfferedStatus = await res.json();
+    return json;
+  }
   async acceptTradeOffer(tradeid:string): Promise<TradesResponse> {
     const res = await super.fetch('POST', '/api/trades/accept',{tradeid});
     const json: TradesResponse = await res.json();

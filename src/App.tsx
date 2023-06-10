@@ -85,6 +85,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import MyOffers from './pages/MyOffers';
 import OfferAccepted from './pages/OfferAccepted';
+import OfferDenied from './pages/OfferDenied';
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -201,6 +202,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/settings/offers/offer-accepted/:id" exact={true}>
               <OfferAccepted />
+            </Route>
+            <Route path="/settings/offers/offer-denied/:id" exact={true}>
+              <OfferDenied />
             </Route>
             <Route path="/offer-submitted/:id" exact={true}>
               <OfferComplete />

@@ -54,7 +54,7 @@ const MyTrade: React.FC = () => {
 
 
   const acceptTrade = (productId:string) =>{
-    userService.denyTradeOffer(productId)
+    userService.acceptTradeOffer(productId)
     .then((res:TradesResponse) => {
       if (res){
         console.log('response from acacepted trade ',res)
@@ -110,15 +110,18 @@ const MyTrade: React.FC = () => {
       </IonRow>
       <IonContent className='trade-item-content'>
         <IonGrid>
-          {tradesData[0]?.received.map((product: any) => product.status === 'pending' && (
+        {/* product.status === 'pending' && */}
+          {tradesData[0]?.received.map((product: any) => (
             <IonRow key={product._id} style={{ marginBottom: '14px' }}>
               <IonCol className='trade-item-container'>
                 <div className='trade-item-status-container'>
                   <div className="item-status">
                     <p className='status_'>STATUS</p>
-                    <p className='status_text'>{product.status.toUpperCase()} TRADE OFFER</p>
+                   {product.status !== 'accepted' ? (<p className='status_text'>{product.status.toUpperCase()} TRADE OFFER</p>) :
+                   (<p className='status_text-accepted'>TRADE {product.status.toUpperCase()}</p>)
+                   }
                   </div>
-                  <div className="items-view-details">VIEW DETAILS</div>
+                  <div className="items-view-details"></div>
                 </div>
                 <div className='items-view-props'>
 
@@ -153,7 +156,7 @@ const MyTrade: React.FC = () => {
                 </div>
 
                 <div className='trade-offer-line'></div>
-                <div className='trade-items-btn-container'>
+               {product?.status === 'pending'? (<div className='trade-items-btn-container'>
                   <IonButton
                     style={{ backgroundColor: 'white' }}
                     size='small' className='trade-item-btn'
@@ -167,7 +170,11 @@ const MyTrade: React.FC = () => {
                    onClick={() => {
                     acceptTrade(product._id)
                   }} >ACCEPT</IonButton>
+                </div>):
+               <div className='trade-items-btn-container-2'>
+                Oops! It looks like this Product is no longer available.
                 </div>
+                }
               </IonCol>
             </IonRow>
           ))}

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 import './MySales.scss'
 import { UserService } from '../services/UserService'
-import { FullOrder, OrdersResponse } from '../models'
+import { OrdersResponse } from '../models'
 
 
 const MySales: React.FC = () => {
@@ -28,8 +28,6 @@ const MySales: React.FC = () => {
 
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
-
-  // console.log('sec log ', allSales[0]?.docs.map((s: any) => s.products))
 
   return (
     <IonPage className='sales-item-main-container'>
