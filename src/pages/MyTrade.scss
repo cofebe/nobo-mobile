@@ -102,11 +102,19 @@
         font-weight: 700;
         font-size: 9px;
         line-height: 150%;
-        /* identical to box height, or 15px */
-
         letter-spacing: 0.05em;
-
         color: #D6980E;
+      }
+      .status_text-accepted{
+        width: 126px;
+        height: 15px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 9px;
+        line-height: 150%;
+        letter-spacing: 0.05em;
+        color:#42D60E;
       }
 
       .items-view-details {
@@ -288,6 +296,23 @@
         height: 32px;
         width: 80px;
       }
+    }
+
+
+    .trade-items-btn-container-2{
+      width: 90%;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      // background-color: teal;
+      height: 40px;
+      bottom: 3%;
+      right: 5%;
+      color: red;
+      text-align: center;
+      font-weight: 600;
     }
 
 

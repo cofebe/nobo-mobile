@@ -690,3 +690,15 @@ export interface UserAccData {
   currentPassword: string;
   newPassword: string;
 }
+
+export interface OfferedStatus{
+  buyer:string
+  createdAt:string
+  offeredPrice:number
+  product:any
+  seller:string
+  status:string
+  updatedAt:string
+  _id:string
+
+}
