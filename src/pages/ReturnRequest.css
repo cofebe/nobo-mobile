@@ -1,0 +1,43 @@
+.return-modal-container {
+  padding: 14px 20px 14px 20px;
+
+  ion-modal {
+    --height: 240px;
+    /* --border-radius: 28px; */
+    /* --background: #FEFCF7; */
+  }
+}
+ion-modal {
+  --height: 280px;
+  /* --border-radius: 28px; */
+  /* --background: #FEFCF7; */
+}
+.return-reason-title {
+  /* width: 172px; */
+  height: 23px;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 150%;
+  letter-spacing: 0.05em;
+  color: #ACACAC;
+  text-align: center;
+  /* margin-top: 14px; */
+}
+.return-reason-title2 {
+  width: 215px;
+  height: 23px;
+margin-top: 15px;
+
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 150%;
+  /* identical to box height, or 22px */
+
+  letter-spacing: 0.05em;
+
+  color: #000000;
+}

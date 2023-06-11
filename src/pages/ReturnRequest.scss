@@ -33,32 +33,47 @@
 
   .return-r-item-content {
     --padding-start: 24px;
-    --padding-end: 24px;
+    --padding-end: 64px;
     --padding-bottom: 20px;
     // --padding-top: 20px;
     --background: #FEFCF7;
 
     .return-r-item-prop-container {
-      position: relative;
+      // position: relative;
       height: 90px;
       padding: 0px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      // justify-content: center;
+
+      .img-container {
+        border-radius: 10px;
+        height: 90px;
+        background-color: purple;
+      }
+
+      .right-props {
+        height: 90px;
+        display: flex;
+        flex-direction: column;
+
+      }
 
       >img {
-        position: absolute;
-        left: 0px;
-        top: 0px;
+        // position: absolute;
+        // left: 0px;
+        // top: 0px;
 
       }
 
       .return-r-brand-name-box {
-        position: absolute;
         display: flex;
         align-items: center;
         height: 18px;
         font-size: 12px;
-        right: 0px;
-        top: 0px;
-        width: 68%;
+
+        // width: 68%;
         text-transform: uppercase;
         gap: 15px;
 
@@ -75,6 +90,7 @@
         }
 
         .return-r-item-name {
+
           font-family: 'Nunito Sans';
           font-style: normal;
           font-weight: 550;
@@ -92,14 +108,12 @@
 
 
       .return-r-purchased-info {
-        position: absolute;
+        margin-top: 7px;
         display: flex;
         align-items: center;
         height: 18px;
         font-size: 12px;
-        right: 0px;
-        top: 55px;
-        width: 68%;
+
         text-transform: uppercase;
         gap: 15px;
 
@@ -128,48 +142,80 @@
           color: #000000;
         }
       }
-        .return-r-vendor-info {
-          position: absolute;
-          display: flex;
+
+      .return-r-vendor-info {
+        // background-color: palevioletred;
+        margin-top: 7px;
+        display: flex;
+        align-items: center;
+        height: 18px;
+        font-size: 10px;
+        gap: 15px;
+
+
+        .return-r-vendor {
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 300;
+          font-size: 12px;
+          line-height: 150%;
           align-items: center;
-          height: 18px;
-          font-size: 10px;
-          right: 0px;
-          top: 25px;
-          width: 68%;
-          gap: 15px;
-
-
-          .return-r-vendor {
-            font-family: 'Nunito Sans';
-            font-style: normal;
-            font-weight: 300;
-            font-size: 12px;
-            line-height: 150%;
-            align-items: center;
-            letter-spacing: 0.05em;
-            color: #000000;
-          }
-
-          .return-r-vendor-name {
-            font-family: 'Nunito Sans';
-            font-style: normal;
-            font-weight: 300;
-            font-size: 12px;
-            line-height: 150%;
-            align-items: center;
-            letter-spacing: 0.05em;
-            color: #D6980E;
-          }
-
+          letter-spacing: 0.05em;
+          color: #000000;
         }
 
+        .return-r-vendor-name {
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 300;
+          font-size: 12px;
+          line-height: 150%;
+          align-items: center;
+          letter-spacing: 0.05em;
+          color: #D6980E;
+        }
+
+      }
 
 
+
+    }
+
+    .return-input-container {
+      position: relative;
+      margin-top: 24px;
+      padding: 0px;
+
+      .return-input {
+        box-sizing: border-box;
+        height: 37px;
+        border: 0.5px solid #000000;
+        border-radius: 2px;
+      }
+
+      .img {
+        position: absolute;
+        right: 10px;
+        top: 25%;
+        z-index: 500;
+      }
+    }
+
+    .return-item-testarea-box {
+      padding: 0px;
+      margin-top: 10px;
+
+      .return-item-testarea {
+        padding-left: 5px;
+        box-sizing: border-box;
+        height: 107px;
+        border: 0.5px solid #000000;
+        border-radius: 2px;
       }
 
     }
 
-
   }
 
+
+}
