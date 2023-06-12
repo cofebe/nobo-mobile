@@ -15,7 +15,7 @@ const Settings: React.FC = () => {
 
   useIonViewWillEnter(() => {
     userService.getMe().then(user => {
-      console.log('user', user);
+      // console.log('user', user);
       setUser(user);
     });
   });
@@ -117,7 +117,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            // history.push('/settings/returns');
+            history.push('/settings/returns');
           }}
         >
           My Returns

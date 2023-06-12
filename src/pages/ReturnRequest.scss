@@ -72,10 +72,9 @@
         align-items: center;
         height: 18px;
         font-size: 12px;
-
-        // width: 68%;
         text-transform: uppercase;
         gap: 15px;
+
 
 
         .return-r-item-brand {
@@ -99,6 +98,10 @@
           align-items: center;
           letter-spacing: 0.05em;
           color: #000000;
+
+      @media only screen and (device-height: 667px) {
+        font-size: 11px;
+      }
         }
 
       }
@@ -162,6 +165,11 @@
           align-items: center;
           letter-spacing: 0.05em;
           color: #000000;
+
+          @media only screen and (device-height: 667px) {
+            font-size: 10.9px;
+          }
+
         }
 
         .return-r-vendor-name {

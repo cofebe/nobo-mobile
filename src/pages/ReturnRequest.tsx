@@ -11,7 +11,6 @@ const ReturnRequest: React.FC = () => {
   const history = useHistory()
   const modal = useRef<HTMLIonModalElement>(null)
   const dismiss = () => {
-    console.log('dismis')
     modal.current?.dismiss()
   }
 
@@ -50,7 +49,7 @@ const ReturnRequest: React.FC = () => {
             </div>
 
             <div className="right-props">
-              <div className='return-r-brand-name-box'>
+              <div className='return-r-brand-name-box' >
                 <p className='return-r-item-brand'>Chanel</p>
                 <p className='return-r-item-name'>Taupe HandBag</p>
               </div>

@@ -87,6 +87,7 @@ import MyOffers from './pages/MyOffers';
 import OfferAccepted from './pages/OfferAccepted';
 import OfferDenied from './pages/OfferDenied';
 import ReturnSubmitted from './pages/ReturnSubmitted';
+import TradesDetails from './pages/TradesDetails';
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -221,6 +222,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/trade/complete/:id" exact={true}>
               <TradeOfferComplete />
+            </Route>
+            <Route path="/settings/trades/details/:id" exact={true}>
+              <TradesDetails />
             </Route>
 
             {/*
