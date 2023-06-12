@@ -58,7 +58,7 @@ const Returns: React.FC = () => {
           <div
             className='return-back-btn'
             onClick={() => {
-              history.replace('/settings/sales')
+              history.goBack()
             }}
           >
             <img

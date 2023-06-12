@@ -1,13 +1,17 @@
-ion-modal {
-  --height: 440px;
+.ion-modal {
+  --height: 320px;
   --border-radius: 28px;
   /* --background: #FEFCF7; */
 }
 
+
+
+
 .acc-password-change-box {
+  /* height: 700px; */
   gap: 24px;
-  width: 352px;
-  margin: auto;
+  /* width: 352px; */
+  /* margin: auto; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,16 +19,24 @@ ion-modal {
 }
 
 .acc-password-change-title {
-  margin-top: -80px;
-  margin-bottom: 30px;
+  margin-top: 5px;
+  text-align: center;
+  /* margin-bottom: 30px; */
   font-family: 'Nunito Sans';
   font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 22px;
   line-height: 150%;
   letter-spacing: 0.05em;
   color: #000000;
 }
+
+
+.input-container{
+  margin-top: 10px;
+}
+
+
 
 .acc-password-btn-box {
   margin-top: 10px;
