@@ -50,7 +50,7 @@ const Returns: React.FC = () => {
 
   // console.log('sec log ', allSales[0]?.docs.map((s: any) => s.products))
   // console.log('state checking...', salesData)
-  console.log(allSales)
+  // console.log(allSales)
   return (
     <IonPage className='return-main-container'>
       <IonRow>
@@ -58,7 +58,7 @@ const Returns: React.FC = () => {
           <div
             className='return-back-btn'
             onClick={() => {
-              history.replace('/settings/sales')
+              history.goBack()
             }}
           >
             <img

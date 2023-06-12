@@ -58,7 +58,7 @@ const MySales: React.FC = () => {
           >SHIPPING LABELS</IonCol>
         </IonRow>
         {allSales[0]?.docs?.map((product) => (
-          <div>
+          <div key={product._id}>
             {product?.products?.map((sProduct) => (
               <IonRow key={sProduct?._id}>
                 <IonCol

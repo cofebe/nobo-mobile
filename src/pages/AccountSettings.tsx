@@ -266,53 +266,64 @@ const AccountSettings: React.FC = () => {
           />
         </div>
       </IonContent>
-      <IonModal ref={modal} trigger='open-modal' initialBreakpoint={0.8} breakpoints={[0, 1]}>
-        <div className='acc-password-change-box' >
-          <p style={{ fontWeight: 700, fontSize: '22px' }} className='acc-password-change-title' >NEW PASSWORD</p>
-          <div className='acc-password-change-input'>
-            <Input
-              errorMessage={wrongPassword == true ? 'Incorrect password' : ''}
-              type='password'
-              value={currentPassword}
-              className={`nobo-input `}
-              placeholder='CURRENT PASSWORD'
-              onChange={e => { setPassword(e) }}
-            />
-          </div>
-          <div className='acc-password-change-input'>
-            <Input
-              type='password'
-              value={newPassword}
-              className={`nobo-input `}
-              placeholder='NEW PASSWORD'
-              onChange={e => { setNewPassword(e) }}
-            />
-          </div>
+      <IonModal className='ion-modal' ref={modal} trigger='open-modal' initialBreakpoint={1} breakpoints={[0, 5]}>
+        <IonPage className='acc-password-change-box' >
+          <IonRow style={{ paddingLeft: '20px', paddingRight: '20px', height: '500px' }}>
 
-          <div className='acc-password-change-input' >
-            <Input
-              errorMessage={newPassword !== comfirmPassword ? 'password mismatch' : ''}
-              type='password'
-              value={comfirmPassword}
-              className={`nobo-input `}
-              placeholder='COMFIRM PASSWORD'
-              onChange={e => { setComfirmPassword(e) }}
-            />
-          </div>
-          <div className='acc-password-btn-box' >
-            <Button
-              className='acc-settings-btn'
-              label='SAVE'
-              large={true}
-              onClick={e => {
-                e.preventDefault();
-                handleSubmit(data);
-                // dismiss()
-              }}
-              disabled={validate() || newPassword !== comfirmPassword}
-            />
-          </div>
-        </div>
+            <IonCol size='12'
+              style={{ fontWeight: 700, fontSize: '22px', backgroundCollor: 'yellow' }}
+              className='acc-password-change-title' >
+              NEW PASSWORD
+            </IonCol>
+
+            <IonCol class='input-container' size='12'>
+              <Input
+                errorMessage={wrongPassword == true ? 'Incorrect password' : ''}
+                type='password'
+                value={currentPassword}
+                className={`nobo-input `}
+                placeholder='CURRENT PASSWORD'
+                onChange={e => { setPassword(e) }}
+              />
+            </IonCol>
+
+            <IonCol class='input-container' size='12'>
+              <Input
+                type='password'
+                value={newPassword}
+                className={`nobo-input `}
+                placeholder='NEW PASSWORD'
+                onChange={e => { setNewPassword(e) }}
+              />
+            </IonCol>
+
+            <IonCol class='input-container' size='12'>
+              <Input
+                errorMessage={newPassword !== comfirmPassword ? 'password mismatch' : ''}
+                type='password'
+                value={comfirmPassword}
+                className={`nobo-input `}
+                placeholder='COMFIRM PASSWORD'
+                onChange={e => { setComfirmPassword(e) }}
+              />
+            </IonCol>
+
+            <IonCol class='input-container' size='12'>
+              <Button
+                className='acc-settings-btn'
+                label='SAVE'
+                large={true}
+                onClick={e => {
+                  e.preventDefault();
+                  handleSubmit(data);
+                  // dismiss()
+                }}
+                disabled={validate() || newPassword !== comfirmPassword}
+              />
+            </IonCol>
+
+          </IonRow>
+        </IonPage>
       </IonModal>
     </IonPage>
   );

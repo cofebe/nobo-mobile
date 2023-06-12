@@ -11,7 +11,7 @@ import {
 import './MyTrade.scss'
 import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
-import { FullOrder, TradesResponse } from '../models'
+import { FullOrder, Trade, TradesResponse } from '../models'
 
 
 
@@ -73,8 +73,12 @@ const MyTrade: React.FC = () => {
   }
 
 
+const productDetails = (productId:string) =>{
+  const singleProduct:any = tradesData[0]?.received.filter((data:any)=>data._id === productId)
+  history.push({pathname:`trades/details/${productId}`, state:singleProduct})
+  console.log('product pushed to path', productId)
 
-
+}
 
 
   return (
@@ -108,11 +112,17 @@ const MyTrade: React.FC = () => {
           </div>
         </IonCol>
       </IonRow>
-      <IonContent className='trade-item-content'>
+      <IonContent className='trade-item-content'
+
+      >
         <IonGrid>
         {/* product.status === 'pending' && */}
           {tradesData[0]?.received.map((product: any) => (
-            <IonRow key={product._id} style={{ marginBottom: '14px' }}>
+            <IonRow key={product._id} style={{ marginBottom: '14px' }}
+            onClick={()=>{
+              productDetails(product._id)
+            }}
+            >
               <IonCol className='trade-item-container'>
                 <div className='trade-item-status-container'>
                   <div className="item-status">

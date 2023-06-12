@@ -15,7 +15,7 @@ const Settings: React.FC = () => {
 
   useIonViewWillEnter(() => {
     userService.getMe().then(user => {
-      console.log('user', user);
+      // console.log('user', user);
       setUser(user);
     });
   });

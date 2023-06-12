@@ -1,0 +1,218 @@
+.return-s-item-main-container {
+  background-color: #fefcf7;
+
+  .return-s-content {
+    --padding-start: 44px;
+    --padding-end: 44px;
+    --padding-bottom: 20px;
+    // --padding-top: 20px;
+    --background: #fefcf7;
+
+    .return-s-item-header {
+      background-color: #fefcf7;
+      height: 118px;
+
+      .return-s-title-text-container {
+        position: absolute;
+        top: 35%;
+        bottom: 10.71%;
+        font-family: 'Georgia';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 150%;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #000000;
+        text-align: center;
+      }
+    }
+
+    .return-s-info-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -20px;
+      height: 20px;
+    }
+
+
+
+    .return-s-container2 {
+      margin-top: 10px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .return-s-desc2 {
+        width: 342px;
+        height: 40px;
+        margin-bottom: 30px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 20px;
+        color: #000000;
+        ;
+      }
+    }
+
+    .return-s-info-body {
+      height: 98px;
+      margin-top: 330px;
+      padding: 0px;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 14px;
+      /* or 140% */
+
+      display: flex;
+      align-items: center;
+
+      color: #707070;
+    }
+
+    .return-s-container {
+      position: relative;
+      width: 350px;
+      height: 255px;
+      background: #fefcf7;
+      border: none;
+    }
+
+    .return-s-view-props {
+      // background-color: greenyellow;
+      margin: 17px 25px 0px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .return-s-view-props-left {
+        // background-color: #D6980E;
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        .return-s-img-left {
+          height: 90px;
+          width: 90px;
+          border-radius: 10px;
+        }
+
+        .return-s-item-name-left {
+          width: 100px;
+          height: 18px;
+          text-align: center;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 11px;
+          margin-top: 10px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #000000;
+        }
+
+        .denied-item-price-left {
+          width: 50px;
+          height: 18px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 150%;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: #000000;
+        }
+      }
+
+      .items-view-props-center {
+        position: relative;
+        width: 80px;
+        margin-top: -45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .line {
+          height: 95px;
+          border: 0.1px solid red;
+          margin-top: 45px;
+        }
+
+        .img {
+          position: absolute;
+          top: 60%;
+        }
+      }
+
+      .items-view-props-right {
+        width: 100px;
+        // background-color: palevioletred;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        border-radius: 5px;
+
+        .item-img-right {
+          height: 90px;
+          width: 90px;
+          border-radius: 5px;
+        }
+
+        .denied-item-name-right {
+          width: 100px;
+          height: 18px;
+          text-align: center;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 11px;
+          margin-top: 10px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #000000;
+        }
+
+        .denied-item-price-right {
+          width: 50px;
+          height: 18px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 150%;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          color: #000000;
+        }
+      }
+    }
+
+    .return-s-btn-below {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+
+      .btn {
+        width: 300px;
+        height: 51px;
+      }
+    }
+  }
+}
