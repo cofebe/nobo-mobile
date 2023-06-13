@@ -87,6 +87,10 @@ const ProductDetail: React.FC = () => {
   };
 
   const activeSneakerSizes = (product: Product, isNew: boolean) => {
+    if (!product) {
+      return;
+    }
+
     isNew
       ? mensSneakerSizesList.forEach(size => {
           if (product.shop && Object.keys(product.shop?.new).includes(size.size)) {
@@ -734,7 +738,10 @@ const ProductDetail: React.FC = () => {
               <div className="selected-sneakers-margin-top">
                 {selectedSneakers?.map((sneaker, index) => {
                   return (
-                    <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
+                    <IonRow
+                      class="ion-justify-content-center ion-align-items-center selected-sneakers-container"
+                      key={index}
+                    >
                       <IonCol size="8">
                         <div className="selected-sneakers-trade-price">
                           EST. PRICE {calculateEstPrice(sneaker.price)}
@@ -761,13 +768,18 @@ const ProductDetail: React.FC = () => {
               <div className="selected-sneakers-margin-top">
                 {selectedSneakers?.map((sneaker, index) => {
                   return (
-                    <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
+                    <IonRow
+                      class="ion-justify-content-center ion-align-items-center selected-sneakers-container"
+                      key={index}
+                    >
                       <IonCol size="4">
                         <div className="selected-sneakers-price">{formatPrice(sneaker.price)}</div>
                         <div className="selected-sneakers-tags">{sneaker.attributes[6].value}</div>
                       </IonCol>
                       <IonCol size="4">
-                        <div>@{sneaker.vendor.displayName}</div>
+                        <div style={{ textTransform: 'uppercase' }}>
+                          @{sneaker.vendor.displayName}
+                        </div>
                       </IonCol>
                       <IonCol size="4">
                         {cart.products.find(p => p._id === selectedSneakers[index]._id) ? (
@@ -808,13 +820,18 @@ const ProductDetail: React.FC = () => {
               <div className="selected-sneakers-margin-top">
                 {selectedSneakers?.map((sneaker, index) => {
                   return (
-                    <IonRow class="ion-justify-content-center ion-align-items-center selected-sneakers-container">
+                    <IonRow
+                      class="ion-justify-content-center ion-align-items-center selected-sneakers-container"
+                      key={index}
+                    >
                       <IonCol size="4">
                         <div className="selected-sneakers-price">{formatPrice(sneaker.price)}</div>
                         <div className="selected-sneakers-tags">{sneaker.attributes[6].value}</div>
                       </IonCol>
                       <IonCol size="4">
-                        <div>@{sneaker.vendor.displayName}</div>
+                        <div style={{ textTransform: 'uppercase' }}>
+                          @{sneaker.vendor.displayName}
+                        </div>
                       </IonCol>
                       <IonCol size="4">
                         {cart.products.find(p => p._id === selectedSneakers[index]._id) ? (
