@@ -109,7 +109,7 @@ const SettingsShipping: React.FC = () => {
                 className={'settings-shipping-item ' + (addr.default ? 'selected' : '')}
                 key={addr._id}
               >
-                {addr.default && <div className="is-default">Default</div>}
+                {addr.default && <div className="is-default">Default Address</div>}
                 <div className="name">
                   {addr.firstName} {addr.lastName}
                 </div>
