@@ -120,16 +120,18 @@ const SettingsShipping: React.FC = () => {
                 <div className="zip">{addr.postalCode}</div>
                 <div className="phone">{addr.phone}</div>
                 <div className="action-container">
-                  <div
-                    className="action"
-                    onClick={e => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setDefault(addr, index);
-                    }}
-                  >
-                    Set as Default
-                  </div>
+                  {!addr.default && (
+                    <div
+                      className="action"
+                      onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setDefault(addr, index);
+                      }}
+                    >
+                      Set as Default
+                    </div>
+                  )}
                   <div
                     className="action"
                     onClick={e => {

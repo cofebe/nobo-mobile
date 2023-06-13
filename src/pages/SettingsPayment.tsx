@@ -118,16 +118,18 @@ const SettingsPayment: React.FC = () => {
                   </div>
                 </div>
                 <div className="action-container">
-                  <div
-                    className="action"
-                    onClick={e => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setDefault(pm);
-                    }}
-                  >
-                    Set as Default
-                  </div>
+                  {defaultPaymentMethodId !== pm.id && (
+                    <div
+                      className="action"
+                      onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setDefault(pm);
+                      }}
+                    >
+                      Set as Default
+                    </div>
+                  )}
                   <div
                     className="action"
                     onClick={e => {
