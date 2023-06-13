@@ -6,7 +6,6 @@ import {
   useIonViewWillEnter,
   IonContent,
 } from '@ionic/react';
-import { Keyboard } from '@capacitor/keyboard';
 
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -30,6 +29,7 @@ const SignUp1: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [emailError, setEmailError] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
+  const [checked, setchecked] = useState(false)
 
   useIonViewWillEnter(() => {
     setError(false);
@@ -62,7 +62,11 @@ const SignUp1: React.FC = () => {
 
   //    input validation to avoid empty string or two characters input
   const validate = () => {
-    if (emailError || firstName.length < 3 || lastName.length < 3 || email.length < 3) {
+    if (emailError ||
+      firstName.length < 3 ||
+      lastName.length < 3 ||
+      email.length < 3
+      || checked === false) {
       return false;
     } else {
       return true;
@@ -146,10 +150,23 @@ const SignUp1: React.FC = () => {
                   ></Input>
                 </IonCol>
 
-                <IonCol size='12' className='signup-terms-container' style={{}}>
+                <IonCol size='12' className='signup-terms-container signup-terms-container-terms ' style={{}}>
+                  <input
+                    className='signup-input-checkbox'
+                    type="checkbox" name="" id=""
+                    checked={checked}
+                    onClick={() => {
+                      setchecked(!checked)
+                      console.log(checked)
+                    }}
+                  />
                   <p className='signup-terms-text'>
-                    By selecting Agree and continue below,
-                    I agree to the Terms and Conditions
+                    I have read and agreed to the
+                     <a className='terms-and-agree' href='https://thenobo.sfo3.digitaloceanspaces.com/terms.pdf'
+                     target='_blank'
+                     rel='noreferrer'
+                      style={{ textDecoration: 'underLine' }}> Terms and Conditions
+                    </a>
                   </p>
                 </IonCol>
 

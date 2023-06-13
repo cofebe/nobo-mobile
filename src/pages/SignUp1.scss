@@ -49,9 +49,10 @@
 
     .signup-details-box_ {
       padding: 0px;
-      background-color: thistle;
+      // background-color: rgb(158, 12, 158);
       margin-top: 185px;
       height: 475px;
+      width: 275px;
       background: linear-gradient(116.6deg, rgba(255, 255, 255, 0.6) 15.94%, rgba(255, 255, 255, 0.36) 92.73%);
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
       backdrop-filter: blur(2px);
@@ -101,6 +102,10 @@
         // width: 306px;
       }
 
+      @media only screen and (device-height: 896px) {
+              margin-top: 235px;
+            }
+
 
     }
 
@@ -110,20 +115,48 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0;
+      padding: 0px;
     }
 
-    .signup-terms-text {
-      width: 306px;
+    .signup-terms-container-terms {
+      margin-top: 32px;
       height: 36px;
-      font-family: 'Nunito Sans';
-      font-style: normal;
-      font-weight: 600;
-      font-size: 13px;
-      line-height: 150%;
-      letter-spacing: 0.05em;
-      color: #050505;
+      display: flex;
+      // align-items: center;
+      justify-content: center;
+      padding: 0px;
+      gap: 10px;
+
+      .signup-input-checkbox {
+        height: 25px;
+        width: 25px;
+      }
+
+      .signup-terms-text {
+        width: 306px;
+        height: 36px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 150%;
+        letter-spacing: 0.05em;
+        color: #050505;
+      }
+
+      .terms-and-agree {
+        width: 306px;
+        height: 36px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 150%;
+        letter-spacing: 0.05em;
+        color: #050505;
+      }
     }
+
 
     .signup-btn-container {
       margin-top: 29px;
