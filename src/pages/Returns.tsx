@@ -1,56 +1,43 @@
 import { IonCol, IonContent, IonPage, IonRow, useIonViewWillEnter } from '@ionic/react'
 import React, { useState } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import './Returns.scss'
 import { UserService } from '../services/UserService'
 import Search from '../components/Search'
-import { FullOrder, OrdersResponse } from '../models'
+import { FullOrder, OrdersResponse, Product } from '../models'
 
 
 const Returns: React.FC = () => {
   const history = useHistory()
-
+  const params: any = useParams()
+  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
   const userService = new UserService()
-  // const salesData: any = history.location.state
   const [allSales, setAllSales] = useState<OrdersResponse[]>([])
   const [showDetails, setShowDetails] = useState(false)
   const [dropDown, setDropDownArray] = useState<string[]>([]);
+  const [productsData, setProductData] = useState<FullOrder[]>([])
 
 
 
 
 
-
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-
-  // useIonViewWillEnter(() => {
-  //   userService.getSales()
-  //     .then((sales: OrdersResponse) => {
-  //       if (sales) {
-  //         setAllSales([sales])
-  //         console.log(sales)
-
-  //       } else { console.log('something went wrong') }
-  //     })
-  //     .catch((err) => { console.log('err info while fetching products ', err) })
-  // })
-  // useIonViewWillEnter(() => {
-  //   userService.getSales()
-  //     .then((sales: OrdersResponse) => {
-  //       if (sales) {
-  //         setAllSales([sales])
-  //         console.log(sales)
-
-  //       } else { console.log('something went wrong') }
-  //     })
-  //     .catch((err) => { console.log('err info while fetching products ', err) })
-  // })
+  useIonViewWillEnter(() => {
+    console.log('params1', params.id)
+    userService.getOrder(params.id)
+      .then((products: FullOrder) => {
+        if (products) {
+          setProductData([products])
+        } else { console.log('something went wrong') }
+      })
+      .catch((err) => { console.log('err info while fetching products ', err) })
+  })
 
 
 
-  // console.log('sec log ', allSales[0]?.docs.map((s: any) => s.products))
-  // console.log('state checking...', salesData)
-  // console.log(allSales)
+
+
+  console.log(productsData)
+
   return (
     <IonPage className='return-main-container'>
       <IonRow>
@@ -72,25 +59,27 @@ const Returns: React.FC = () => {
       </IonRow>
 
       <IonContent className='return-item-content'>
-        <IonRow className='return-item-container'
-        onClick={()=>{
-          history.push('/settings/returns/4')
-        }}
-        >
-          <IonCol className='return-item-box' size='12'>
-            <p className="return-brand">Channel</p>
-            <p className="return-date">Submitted feb 5 2022</p>
-          </IonCol>
-          <IonCol className='return-item-name' size='12'>
-            HandBag
-          </IonCol>
-          <IonCol className='return-cost-info' size='2.5'>
-            <p className="return-cost-title">Cost</p>
-            <p className="return-cost">$120</p>
-          </IonCol>
+        {productsData[0]?.products.map((product: Product) => (
+          <IonRow key={product._id} className='return-item-container'
+            onClick={() => {
+              history.push({pathname:`/purchases/return-product-details`, state:product})
+              console.log(product)
+            }}
+          >
+            <IonCol className='return-item-box' size='12'>
+              <p className="return-brand">{product.brand}</p>
+              <p className="return-date"> {new Date().toDateString()}  </p>
+            </IonCol>
+            <IonCol className='return-item-name' size='12'>
+              {product.name}
+            </IonCol>
+            <IonCol className='return-cost-info' size='2.5'>
+              <p className="return-cost-title">Cost</p>
+              <p className="return-cost">{currencyFormat.format(product.price)}</p>
+            </IonCol>
+          </IonRow>
+        ))}
 
-
-        </IonRow>
       </IonContent>
     </IonPage>
   )

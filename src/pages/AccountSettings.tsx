@@ -197,7 +197,11 @@ const AccountSettings: React.FC = () => {
               />
             </IonCol>
             <IonCol size='12' className='acc-change-password-box'>
-              <p className='acc-change-password-text' id='open-modal'>CHANGE PASSWORD</p>
+              <p className='acc-change-password-text'
+               onClick={()=>{
+                modal.current?.present()
+              }}
+              >CHANGE PASSWORD</p>
               <img height={15} src='assets/images/account-change-password.png' alt='' />
             </IonCol>
           </IonRow>
@@ -266,8 +270,8 @@ const AccountSettings: React.FC = () => {
           />
         </div>
       </IonContent>
-      <IonModal className='ion-modal' ref={modal} trigger='open-modal' initialBreakpoint={1} breakpoints={[0, 5]}>
-        <IonPage className='acc-password-change-box' >
+      <IonModal className='ion-modal' ref={modal}  initialBreakpoint={1} breakpoints={[0, 5]}>
+        {/* <IonContent className='acc-password-change-box' > */}
           <IonRow style={{ paddingLeft: '20px', paddingRight: '20px', height: '500px' }}>
 
             <IonCol size='12'
@@ -323,7 +327,7 @@ const AccountSettings: React.FC = () => {
             </IonCol>
 
           </IonRow>
-        </IonPage>
+        {/* </IonContent> */}
       </IonModal>
     </IonPage>
   );

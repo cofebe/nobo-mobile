@@ -155,7 +155,7 @@ const SignUp1: React.FC = () => {
                     className='signup-input-checkbox'
                     type="checkbox" name="" id=""
                     checked={checked}
-                    onClick={() => {
+                    onChange={() => {
                       setchecked(!checked)
                       console.log(checked)
                     }}
