@@ -68,10 +68,6 @@
     width: 100%;
     z-index: 100;
 
-    &.brand-select-disabled {
-      opacity: 0.1;
-    }
-
     .brand-select-container {
       display: flex;
       padding: 8px;
@@ -85,6 +81,16 @@
           opacity: 0.2;
           text-transform: uppercase;
         }
+      }
+    }
+
+    &.brand-select-disabled {
+      .brand-select-container {
+        border-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .brand-select-chevron {
+        opacity: 0.1;
       }
     }
   }
