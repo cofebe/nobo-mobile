@@ -15,7 +15,6 @@ const Splash: React.FC = () => {
       .then(user => {
         if (user) {
           userLoggedIn = true;
-          console.log('*1', userLoggedIn);
           history.push(`/home/explore/${user.experiencePreferences}/explore`);
           return;
         }
@@ -25,7 +24,6 @@ const Splash: React.FC = () => {
       })
       .finally(() => {
         setTimeout(() => {
-          console.log('*2', userLoggedIn);
           if (!userLoggedIn) {
             history.push('/get-started');
           }
