@@ -100,7 +100,7 @@ const ListItemImage: React.FC = () => {
               <div className="list-item-instruction">Add photos and pricing for your item</div>
             </IonCol>
           </IonRow>
-          <div className="padding-bottom-container">
+          <div className="">
             <div className="photo-uploader">
               <div className="upload-container">
                 <label htmlFor="upload-input">
@@ -208,20 +208,22 @@ const ListItemImage: React.FC = () => {
               your actual items, don’t use the brand photos or stock photography.
             </p>
           </div>
+          <IonRow>
+            <IonCol className="button-container">
+              <Button
+                label="Next"
+                large={true}
+                disabled={!valid()}
+                onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  history.push('/list/product');
+                }}
+              />
+            </IonCol>
+          </IonRow>
         </IonGrid>
       </IonContent>
-      <div className="footer">
-        <Button
-          label="Next"
-          large={true}
-          disabled={!valid()}
-          onClick={e => {
-            e.preventDefault();
-            e.stopPropagation();
-            history.push('/list/product');
-          }}
-        />
-      </div>
     </IonPage>
   );
 };
