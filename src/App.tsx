@@ -64,6 +64,11 @@ import SalesShippingLabel from './pages/SalesShippingLabel';
 
 import Returns from './pages/Returns';
 import ReturnRequest from './pages/ReturnRequest';
+import MyOffers from './pages/MyOffers';
+import OfferAccepted from './pages/OfferAccepted';
+import OfferDenied from './pages/OfferDenied';
+import ReturnSubmitted from './pages/ReturnSubmitted';
+import TradesDetails from './pages/TradesDetails';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -83,11 +88,9 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import MyOffers from './pages/MyOffers';
-import OfferAccepted from './pages/OfferAccepted';
-import OfferDenied from './pages/OfferDenied';
-import ReturnSubmitted from './pages/ReturnSubmitted';
-import TradesDetails from './pages/TradesDetails';
+import Withdraw from './pages/Withdraw';
+import WithdrawalSubmit from './pages/WithdrawalSubmit';
+
 
 setupIonicReact({
   swipeBackEnabled: false,
@@ -310,6 +313,13 @@ const App: React.FC = () => {
             <Route path="/settings/returns/:id/submitted" exact={true}>
               <ReturnSubmitted />
             </Route>
+            <Route path="/settings/withdraw" exact={true}>
+              <Withdraw/>
+            </Route>
+            <Route path="/settings/withdraw/submitted" exact={true}>
+              <WithdrawalSubmit/>
+            </Route>
+
             <Route path="/signup1" exact={true}>
               <SignUp1 />
             </Route>

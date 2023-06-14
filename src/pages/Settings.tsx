@@ -117,7 +117,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/returns');
+            // history.push('/settings/returns');
           }}
         >
           My Returns
@@ -126,7 +126,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/withdraw');
+            history.push('/settings/withdraw');
           }}
         >
           Withdrawal Requests

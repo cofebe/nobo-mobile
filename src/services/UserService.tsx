@@ -314,11 +314,18 @@ export class UserService extends BaseService {
     return json.success;
   }
 
+  async getAccount(){
+    const res = await super.fetch('GET', '/api/users/accountBalance')
+    return res.json();
+  }
+
+
   async getSales(): Promise<OrdersResponse> {
     const res = await super.fetch('GET', '/api/orders/my-sales');
     const json:OrdersResponse= await res.json();
     return json;
   }
+
   async getSale(id:string): Promise<FullOrder> {
     const res = await super.fetch('GET', `/api/orders/my-sales/${id}`);
     const json:OrderResponse= await res.json();

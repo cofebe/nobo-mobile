@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import './Returns.scss'
 import { UserService } from '../services/UserService'
-import Search from '../components/Search'
-import { FullOrder, OrdersResponse, Product } from '../models'
+import { FullOrder, Product } from '../models'
 
 
 const Returns: React.FC = () => {
@@ -12,9 +11,6 @@ const Returns: React.FC = () => {
   const params: any = useParams()
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
   const userService = new UserService()
-  const [allSales, setAllSales] = useState<OrdersResponse[]>([])
-  const [showDetails, setShowDetails] = useState(false)
-  const [dropDown, setDropDownArray] = useState<string[]>([]);
   const [productsData, setProductData] = useState<FullOrder[]>([])
 
 

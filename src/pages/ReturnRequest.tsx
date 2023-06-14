@@ -1,9 +1,17 @@
-import { IonButton, IonCol, IonContent, IonModal, IonPage, IonRow, IonTextarea, useIonViewWillEnter } from '@ionic/react'
+import {
+  IonButton,
+  IonCol,
+  IonContent,
+  IonModal,
+  IonPage,
+  IonRow,
+  IonTextarea,
+  useIonViewWillEnter
+} from '@ionic/react'
 import React, { useRef, useState } from 'react'
 import { useHistory } from 'react-router'
 import './ReturnRequest.scss'
 import './ReturnRequest.css'
-import { UserService } from '../services/UserService'
 import Input from '../components/Input'
 import { Product } from '../models'
 
@@ -20,7 +28,6 @@ const ReturnRequest: React.FC = () => {
     modal.current?.dismiss()
   }
 
-  const userService = new UserService()
   const [textValue, setTextValue] = useState<any>('')
   const [reasonForReturn, setReasonForReturn] = useState('')
 
