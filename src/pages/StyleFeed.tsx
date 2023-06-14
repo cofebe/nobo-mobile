@@ -296,16 +296,18 @@ const StyleFeed: React.FC = () => {
                     />
                   );
                 })}
-                <IonItem
-                  // id="atBottomOfFeedList"
-                  style={{ '--background': 'rgb(254, 252, 247)', color: '#c4c4c4' }}
-                  key="bottom"
-                  lines="none"
-                >
-                  <IonRow>
-                    <IonCol>Loading...</IonCol>
-                  </IonRow>
-                </IonItem>
+                {isLoading && (
+                  <IonItem
+                    // id="atBottomOfFeedList"
+                    style={{ '--background': 'rgb(254, 252, 247)', color: '#c4c4c4' }}
+                    key="bottom"
+                    lines="none"
+                  >
+                    <IonRow>
+                      <IonCol>Loading...</IonCol>
+                    </IonRow>
+                  </IonItem>
+                )}
               </IonList>
             ) : (
               // <div>

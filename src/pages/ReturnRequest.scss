@@ -39,18 +39,21 @@
     --background: #FEFCF7;
 
     .return-r-item-prop-container {
-      // position: relative;
       height: 90px;
       padding: 0px;
       display: flex;
       align-items: center;
-      gap: 24px;
-      // justify-content: center;
+      gap: 14px;
 
       .img-container {
         border-radius: 10px;
         height: 90px;
+        width: 90px;
         background-color: purple;
+
+        >img{
+          border-radius: 10px;
+        }
       }
 
       .right-props {
@@ -60,12 +63,12 @@
 
       }
 
-      >img {
-        // position: absolute;
-        // left: 0px;
-        // top: 0px;
+      // >img {
+      //   // position: absolute;
+      //   // left: 0px;
+      //   // top: 0px;
 
-      }
+      // }
 
       .return-r-brand-name-box {
         display: flex;
@@ -73,7 +76,7 @@
         height: 18px;
         font-size: 12px;
         text-transform: uppercase;
-        gap: 15px;
+        gap: 10px;
 
 
 
@@ -81,27 +84,29 @@
           font-family: 'Nunito Sans';
           font-style: normal;
           font-weight: 700;
-          font-size: 12px;
+          font-size: 9px;
           line-height: 150%;
           align-items: center;
           letter-spacing: 0.05em;
           color: #000000;
+          @media only screen and (device-height: 667px) {
+            font-size: 9px;
+          }
         }
 
         .return-r-item-name {
-
           font-family: 'Nunito Sans';
           font-style: normal;
-          font-weight: 550;
-          font-size: 12px;
+          font-weight: 600;
+          font-size: 10px;
           line-height: 150%;
           align-items: center;
           letter-spacing: 0.05em;
           color: #000000;
 
-      @media only screen and (device-height: 667px) {
-        font-size: 11px;
-      }
+          @media only screen and (device-height: 667px) {
+            font-size: 9px;
+          }
         }
 
       }
@@ -147,7 +152,6 @@
       }
 
       .return-r-vendor-info {
-        // background-color: palevioletred;
         margin-top: 7px;
         display: flex;
         align-items: center;
@@ -221,6 +225,20 @@
         border-radius: 2px;
       }
 
+    }
+
+    .return-s-btn-below {
+      margin-top: 320px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+
+      .btn {
+        width: 300px;
+        height: 51px;
+      }
     }
 
   }
