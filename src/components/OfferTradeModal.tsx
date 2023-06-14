@@ -33,11 +33,12 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
 
     tradeStore.setProductWanted(product);
 
-    setMinTradeValue(getMinTradeValue(product.price));
+    const minTradeValue = getMinTradeValue(product.price);
+    setMinTradeValue(minTradeValue);
 
     userService.getMyProducts('trade').then(products => {
       //console.log('products', products);
-      setTradeProducts(products.docs);
+      setTradeProducts(products.docs.filter(p => p.price >= minTradeValue && !p.sold));
     });
 
     return () => {
@@ -79,13 +80,13 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
             </IonRow>
             <IonRow className="name">
               <IonCol size="12">
-                Select a product from your Trade Closet to offer a trade for the&nbsp;
-                <span>{product.name}</span>
+                Select a product from your Trade Closet to offer a trade for the....'
+                <span>{product.name}</span>'
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol size="8" className={'fee-container ' + (validate() ? 'valid' : '')}>
-                NOBO Trade Feed: <span>{formatPrice(cart.tradeFee)}</span>
+                NOBO Trade Fee: <span>{formatPrice(cart.tradeFee)}</span>
               </IonCol>
               <IonCol
                 size="4"
@@ -122,11 +123,11 @@ const OfferTradeModal = forwardRef<Ref, OfferTradeModalProps>(({ product, onClos
                 <div className="zero">$0</div>
                 <div className="price-min">
                   {formatPrice(minTradeValue, false)}
-                  <div>min value</div>
+                  <div>(min. product value)</div>
                 </div>
                 <div className="price-selected">
                   {formatPrice(cart.productOffered?.price || 0, false)}
-                  <div>your product</div>
+                  <div>(Your product value)</div>
                 </div>
               </IonCol>
             </IonRow>

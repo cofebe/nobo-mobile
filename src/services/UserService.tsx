@@ -89,6 +89,8 @@ export class UserService extends BaseService {
     return res.json()
   }
 
+
+
   async getMyProducts(
     productType: string,
     options?: ProductSearchOptions
@@ -563,6 +565,18 @@ export class UserService extends BaseService {
     return response.json();
   }
 
+  async updateProfileBackground(data: any) {
+    const response = await super.fetch('POST', 'api/users/update-profile-bg', data);
+    return response.json();
+  }
 
+  async updateAvatar(data: any) {
+    const response = await super.fetch('POST', 'api/users/update-avatar', data);
+    return response.json();
+  }
 
+  async updateBlurb(data: any) {
+    const response = await super.fetch('POST', 'api/users/update-blurb', data);
+    return response.json();
+  }
 }

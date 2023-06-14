@@ -194,7 +194,7 @@ const TradeOfferSummary: React.FC = () => {
                 </div>
                 <div className="summary-info">
                   <div className="label">
-                    <div>TheNOBO Trade Fee ({cart.tradeFeePercentage}%)</div>
+                    <div>TheNOBO Trade Fee ({cart.tradeFeePercentage * 100}%)</div>
                     <img
                       src="assets/images/question-mark-tooltip.svg"
                       alt="fee calculation"

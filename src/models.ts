@@ -689,6 +689,9 @@ export interface UserAccData {
   experiencePreferences: string;
   currentPassword: string;
   newPassword: string;
+  profileBg?: string;
+  avatar?: string;
+  blurbText?: string;
 }
 
 export interface OfferedStatus{
