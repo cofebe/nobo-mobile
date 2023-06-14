@@ -346,7 +346,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           <IonButton
             onClick={e => {
               e.preventDefault();
-              //history.push(`edit-athlete/${userId}`);
+              history.push(`/home/profile-edit`);
             }}
             fill="clear"
             color="#1A3A35"

@@ -16,10 +16,8 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import './styles.scss';
-//import Feed from './pages/Feed';
-import StyleFeedPage from './pages/StyleFeed';
-import ProfilePage from './pages/Profile';
 import ProfileOverviewPage from './pages/ProfileOverview';
+import EditProfilePage from './pages/EditProfile';
 import Explore from './pages/Explore';
 import MyCloset from './pages/MyCloset';
 import TradeCloset from './pages/TradeCloset';
@@ -220,6 +218,9 @@ const Home: React.FC = () => {
           </Route>
           <Route path="/home/post-create" exact={true}>
             <PostCreate />
+          </Route>
+          <Route path="/home/profile-edit" exact={true}>
+            <EditProfilePage />
           </Route>
         </IonRouterOutlet>
         <IonTabBar className="nav-bar" slot="bottom">
