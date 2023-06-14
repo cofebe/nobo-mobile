@@ -2,6 +2,7 @@
   --height: 330px;
   --backdrop-opacity: 0.1;
   align-items: flex-end;
+  padding-bottom: var(--ion-safe-area-bottom, 0);
 
   .send-offer-title {
     font-weight: 600;
