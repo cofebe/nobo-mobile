@@ -75,13 +75,13 @@ const OfferComplete: React.FC = () => {
             </div>
           </div>
           <div className="offer-card-charged-warning">
-            YOU WILL ONLY BE CHARGED IF THE OFFER IS ACCEPTED
+            YOU WILL ONLY BE CHARGED IF THE OFFER IS ACCEPTED.
           </div>
           <div className="text">
             <div>
-              If the other party accepts your request, you will be charged and the product will be
-              shipped. An email notification, with your offer details has been sent to your inbox.
-              You can always check the status of your offer in YOUR OFFERS.
+              An email notification, with your offer details has been sent to your inbox. If the
+              other party accepts your request, you will be charged and the product will be shipped.
+              You can always check the status of your offer in My Offers.
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@ const OfferComplete: React.FC = () => {
               onClick={(e: any) => {
                 e.preventDefault();
                 e.stopPropagation();
-                history.replace('settings/offers')
+                history.replace('settings/offers');
               }}
             />
             <Button
