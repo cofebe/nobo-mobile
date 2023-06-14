@@ -253,33 +253,35 @@ const ListItemTradeOptions: React.FC = () => {
               </>
             ))}
           </div>
+          <IonRow>
+            <IonCol className="button-container">
+              <Button
+                label="Submit"
+                large={true}
+                disabled={!valid()}
+                onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  submit();
+                }}
+              />
+              <div
+                className="cancel-exit"
+                onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+
+                  listingStore.reset();
+
+                  const url = `/home/explore/${experience}/explore`;
+                  history.push(url);
+                }}
+              >
+                Cancel and Exit
+              </div>
+            </IonCol>
+          </IonRow>
         </IonGrid>
-        <div className="footer footer-gradient">
-          <Button
-            label="Submit"
-            large={true}
-            disabled={!valid()}
-            onClick={e => {
-              e.preventDefault();
-              e.stopPropagation();
-              submit();
-            }}
-          />
-          <div
-            className="cancel-exit"
-            onClick={e => {
-              e.preventDefault();
-              e.stopPropagation();
-
-              listingStore.reset();
-
-              const url = `/home/explore/${experience}/explore`;
-              history.push(url);
-            }}
-          >
-            Cancel and Exit
-          </div>
-        </div>
       </IonContent>
     </IonPage>
   );

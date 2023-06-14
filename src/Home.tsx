@@ -166,7 +166,7 @@ const Home: React.FC = () => {
   });
 
   return (
-    <IonContent scrollY={false}>
+    <IonContent  scrollY={false}>
       <IonTabs className="nav-bar-background">
         <IonRouterOutlet>
           <Redirect exact path="/home" to="/home/nobo-home" />

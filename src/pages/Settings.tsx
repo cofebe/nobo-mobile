@@ -37,7 +37,7 @@ const Settings: React.FC = () => {
           <div
             className="avatar"
             style={{ backgroundImage: `url(${user?.avatar})` }}
-          // style={{ backgroundImage: getImageUrl(user?.avatar || '') }}
+            // style={{ backgroundImage: getImageUrl(user?.avatar || '') }}
           ></div>
           <div className="name">
             {user?.firstName} {user?.lastName}
@@ -58,7 +58,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            // history.push('/settings/shipping');
+            history.push('/settings/shipping');
           }}
         >
           Shipping Address
@@ -82,7 +82,6 @@ const Settings: React.FC = () => {
           My Purchases
         </div>
         <div className="sep"></div>
-
 
         <div
           onClick={e => {
@@ -141,7 +140,7 @@ const Settings: React.FC = () => {
           Savings &amp; Sustainability
         </div>
         <div className="sep"></div>
-        <div className='help-container'>NEED HELP ?</div>
+        <div className="help-container">NEED HELP ?</div>
         <div
           onClick={e => {
             e.preventDefault();
@@ -187,7 +186,6 @@ const Settings: React.FC = () => {
         >
           FAQ
         </div>
-
 
         <div
           className="logout"

@@ -292,20 +292,22 @@ const ListItemCategory: React.FC = () => {
                 />
               </IonCol>
             </IonRow>
+            <IonRow>
+              <IonCol className="button-container">
+                <Button
+                  disabled={!valid()}
+                  label="Next"
+                  large={true}
+                  onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    history.push(isTrade ? '/list/trade-product' : '/list/image');
+                  }}
+                />
+              </IonCol>
+            </IonRow>
           </>
         </IonGrid>
-        <div className="footer">
-          <Button
-            disabled={!valid()}
-            label="Next"
-            large={true}
-            onClick={e => {
-              e.preventDefault();
-              e.stopPropagation();
-              history.push(isTrade ? '/list/trade-product' : '/list/image');
-            }}
-          />
-        </div>
       </IonContent>
     </IonPage>
   );

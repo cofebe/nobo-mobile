@@ -129,6 +129,7 @@
       margin-bottom: 14px;
 
       .order-details-vendor-container {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -158,6 +159,13 @@
           align-items: center;
           letter-spacing: 0.05em;
           color: #D6980E;
+        }
+
+        .order-details-return-icon{
+          margin-left: 60px;
+          position: absolute;
+          right: 5px;
+          // left: 30px;
         }
 
 
