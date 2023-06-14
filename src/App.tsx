@@ -42,7 +42,7 @@ import FollowPeople from './pages/FollowPeople';
 import SelectBrands from './pages/SelectBrands';
 import CreateFirstPost from './pages/CreateFirstPost';
 import Purchases from './pages/Purchases';
-import SingleOrder from './pages/SingleOrder';
+import PurchaseDetails from './pages/PurchaseDetails';
 import AccountSettings from './pages/AccountSettings';
 import UploadProfilePic from './pages/UploadProfilePic';
 import OfferComplete from './pages/OfferComplete';
@@ -277,8 +277,8 @@ const App: React.FC = () => {
             <Route path="/settings/purchases" exact={true}>
               <Purchases />
             </Route>
-            <Route path="/settings/purchases/single-order/:id" exact={true}>
-              <SingleOrder />
+            <Route path="/settings/purchases/details/:id" exact={true}>
+              <PurchaseDetails />
             </Route>
             <Route path="/settings/trades" exact={true}>
               <MyTrade />
@@ -301,10 +301,10 @@ const App: React.FC = () => {
             <Route path="/sales/shipping-label" exact={true}>
               <SalesShippingLabel />
             </Route>
-            <Route path="/settings/returns" exact={true}>
+            <Route path="/purchases/return-request/:id" exact={true}>
               <Returns />
             </Route>
-            <Route path="/settings/returns/:id" exact={true}>
+            <Route path="/purchases/return-product-details" exact={true}>
               <ReturnRequest />
             </Route>
             <Route path="/settings/returns/:id/submitted" exact={true}>

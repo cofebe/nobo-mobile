@@ -1,6 +1,20 @@
 import { useRef, useState } from 'react'
-import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonModal, IonPage, IonRow, IonToolbar, useIonViewDidEnter, useIonViewWillEnter } from '@ionic/react'
-import './SingleOrder.scss'
+import {
+  IonButton,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonLabel,
+  IonModal,
+  IonPage,
+  IonRow,
+  IonToolbar,
+  useIonViewDidEnter,
+  useIonViewWillEnter
+} from '@ionic/react'
+import './PurchaseDetails.scss'
+import './PurchaseDetails.css'
 import { useHistory, useParams } from 'react-router'
 import { UserService } from '../services/UserService'
 import { FullOrder, User } from '../models'
@@ -13,23 +27,23 @@ import SendMessageModal from '../components/SendMessageModal'
 
 
 
-const SingleOrder: React.FC = () => {
+const PurchaseDetails: React.FC = () => {
   const userService = new UserService()
   const params: any = useParams()
 
   const history = useHistory()
   const [productsData, setProductData] = useState<FullOrder[]>([])
-  const [inputValue, setInputValue] = useState('')
   const [following, setFollowing] = useState(false)
   const sendMessageModal = useRef<HTMLIonModalElement>(null);
   const [data, setData] = useState('')
 
+  const modal = useRef<HTMLIonModalElement>(null)
 
 
   function message() {
-    console.log('sending message...')
-    console.log('orderId', params.id)
-    console.log('productId', data)
+    // console.log('sending message...')
+    // console.log('orderId', params.id)
+    // console.log('productId', data)
     sendMessageModal.current?.present();
   }
 
@@ -103,10 +117,7 @@ const SingleOrder: React.FC = () => {
 
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
-  const filteredProduct = productsData.filter(product =>
-    product.products[0]?.name.toLowerCase().includes(inputValue.toLowerCase(), 0) ||
-    product.products[0]?.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)
-  );
+
 
   console.log(productsData.map((p) => p))
   return (
@@ -116,7 +127,6 @@ const SingleOrder: React.FC = () => {
           <IonGrid>
             <IonRow>
               <IonCol size='12' className='order-details-item-title'>
-                {/* <div className='order-details-item-title'> */}
                 <div
                   className='order-details-item-back-button'
                   onClick={e => {
@@ -129,18 +139,12 @@ const SingleOrder: React.FC = () => {
                 </div>
 
                 <p className='order-details-item-back-text'>Back To All Purchases</p>
-                {/* </div> */}
               </IonCol>
             </IonRow>
           </IonGrid>
         </IonToolbar>
       </IonHeader>
-      {/* <div className='order-details-item-search-container'>
-				<Search
-					value={inputValue}
-					onChange={(value) => setInputValue(value)}
-				/>
-			</div> */}
+
       <IonContent className='order-details-item-content'>
 
         {/* PURCHASE-ITEMS-CONTAINER */}
@@ -175,6 +179,11 @@ const SingleOrder: React.FC = () => {
                 <IonCol className='order-details-vendor-container' size='12'>
                   <p className='order-details-purchased-from'>Purchased From</p>
                   <p className='order-details-vendor-name'>{singleProduct.vendor.displayName}</p>
+                  <p className='order-details-return-icon'
+                    onClick={() => { modal.current?.present() }}
+                  >
+                    <img src='assets/images/menu-dots.svg' alt="menu" />
+                  </p>
                 </IonCol>
                 <IonCol size='12' className='order-details-img-props'>
                   <img
@@ -189,7 +198,7 @@ const SingleOrder: React.FC = () => {
                     <p className='order-details-name'>{singleProduct.name}</p>
                     <p className='order-details-price'>{currencyFormat.format(singleProduct.price)}</p>
                   </div>
-                  <div className='order-details-showmore'>
+                  <div className='order-details-showmore' >
                     <p className='order-details-text' style={{}}>
                       show more
                     </p>
@@ -259,7 +268,7 @@ const SingleOrder: React.FC = () => {
 
             <div className='order-details-value-line'></div>
 
-            <div style={{ marginLeft: '20px', marginRight: '20px' }}>
+            <div style={{ marginLeft: '20px', marginRight: '20px' }} >
               <IonRow style={{ marginBottom: '14px' }}>
                 <IonCol size='12' className='order-details-summary-title'>PAYMENT METHOD</IonCol>
                 <IonCol style={{ fontWeight: 500 }} className='order-details-payment-method' size='12' >
@@ -286,10 +295,9 @@ const SingleOrder: React.FC = () => {
 
           </IonRow>
         ))}
-
       </IonContent>
-      <SendMessageModal
 
+      <SendMessageModal
         ref={sendMessageModal}
         productId={data}
         orderId={params.id}
@@ -300,8 +308,28 @@ const SingleOrder: React.FC = () => {
           sendMessageModal.current?.dismiss();
         }}
       />
+
+      <IonModal
+        ref={modal} trigger='open-return-modal' initialBreakpoint={1} breakpoints={[0, 5]}
+        className='purchase-details-return-ion'
+      >
+        <IonContent  >
+          <IonRow className="purchase-details-return-box">
+            <IonCol style={{ fontWeight: '500px' }} size='12'
+              onClick={() => {
+                history.push({pathname:`/purchases/return-request/${params.id}`})
+                modal.current?.dismiss()
+              }}
+              className='purchase-details-return-text'
+            >RETURN REQUEST
+            </IonCol>
+          </IonRow>
+        </IonContent>
+      </IonModal>
+
+
     </IonPage>
   )
 }
 
-export default SingleOrder
+export default PurchaseDetails
