@@ -160,7 +160,7 @@ const ListItemCategory: React.FC = () => {
         </div>
         <span className="trade-steps">1/3</span>
       </IonHeader>
-      <IonContent style={{ zIndex: 100 }}>
+      <IonContent>
         <IonGrid className="list-item-content">
           <IonRow>
             <IonCol>
