@@ -11,8 +11,8 @@
 				"alert"
 			]
 		},
-    "Keyboard":{
-      "resize":"ionic"
-    }
+		"Keyboard": {
+			"resize": "ionic"
+		}
 	}
 }
