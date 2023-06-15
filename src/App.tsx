@@ -191,7 +191,7 @@ const App: React.FC = () => {
             <Route path="/login" exact={true}>
               <Login />
             </Route>
-            <Route path="/forget-password" exact={true}>
+            <Route path="/forgot-password" exact={true}>
               <ForgetPassword />
             </Route>
             <Route path="/cart" exact={true}>

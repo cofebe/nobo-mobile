@@ -124,7 +124,7 @@ const Login: React.FC = () => {
                 />
               </IonCol>
             </IonRow>
-            <IonRow style={{ marginBottom: '40px' }}>
+            <IonRow style={{ marginBottom: '10px' }}>
               <IonCol>
                 <Input
                   invalid={error}
@@ -142,6 +142,13 @@ const Login: React.FC = () => {
                   }}
                 ></Input>
               </IonCol>
+            </IonRow>
+            <IonRow style={{color: '#FFFFFF', textDecoration:'underline'}}>
+              <IonCol
+              onClick={()=>{
+                history.push('/forgot-password')
+              }}
+              >Forgot Password</IonCol>
             </IonRow>
             <IonRow>
               <IonCol style={{ paddingBottom: 0 }}>
@@ -179,7 +186,7 @@ const Login: React.FC = () => {
                   color: '#FFFFFF',
                 }}
               >
-                Don't have an account?
+                Not a NOBO Insider?
               </IonCol>
               <IonCol
                 size="4"
@@ -187,14 +194,15 @@ const Login: React.FC = () => {
                   textDecorationLine: 'none',
                   fontFamily: 'Nunito Sans',
                   fontWeight: '700',
-                  color: '#D6980E',
+                  color: '#FFFF',
                   fontSize: '15px',
+                  textAlign:'right'
                 }}
                 onClick={() => {
                   history.push('/signup1');
                 }}
               >
-                Sign Up
+                REGISTER
               </IonCol>
             </IonRow>
           </IonGrid>
