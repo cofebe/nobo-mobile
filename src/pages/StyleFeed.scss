@@ -7,7 +7,7 @@
     /* height: auto; */
     /* --opacity-scale: 0 !important;*/
     /* background-size: cover; */
-    padding-top: var(--ion-safe-area-top);
+    margin-top: var(--ion-safe-area-top, 0);
     max-width: 100%;
     position: relative;
     overflow: hidden;
@@ -34,14 +34,14 @@
 
   .profile-create-post {
     position: absolute;
-    top: 45px;
+    top: 95px;
     right: 0;
   }
 
   .style-feed-nobo-logo {
     width: 66px;
     position: absolute;
-    top: 40px;
+    top: 30px;
     left: 40%;
   }
 
