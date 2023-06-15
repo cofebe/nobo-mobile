@@ -34,10 +34,11 @@
 
           ion-col {
             font-size: 10px;
-            color: #acacac;
+            //color: #acacac;
+            color: black;
 
             span {
-              color: black;
+              font-weight: 600;
             }
           }
         }
@@ -116,7 +117,7 @@
               height: 10px;
               border-radius: 5px;
               position: relative;
-              margin-right: 28px;
+              margin-right: 45px;
 
               .slider-indicator {
                 position: absolute;
@@ -172,7 +173,7 @@
               }
 
               .price-selected {
-                left: 75%;
+                left: 70%;
               }
             }
 
@@ -188,7 +189,7 @@
               }
 
               .price-min {
-                left: 75%;
+                left: 70%;
               }
 
               .price-selected {

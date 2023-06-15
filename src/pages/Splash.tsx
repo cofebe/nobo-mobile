@@ -9,9 +9,12 @@ const Splash: React.FC = () => {
 
   useIonViewWillEnter(() => {
     const userService = new UserService();
-    userService.getMe()
+    let userLoggedIn = false;
+    userService
+      .getMe()
       .then(user => {
         if (user) {
+          userLoggedIn = true;
           history.push(`/home/explore/${user.experiencePreferences}/explore`);
           return;
         }
@@ -21,10 +24,12 @@ const Splash: React.FC = () => {
       })
       .finally(() => {
         setTimeout(() => {
-          history.push('/get-started');
+          if (!userLoggedIn) {
+            history.push('/get-started');
+          }
         }, 2000);
       });
-  })
+  });
 
   return (
     <IonPage

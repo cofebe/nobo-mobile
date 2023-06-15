@@ -33,6 +33,7 @@
     --placeholder-opacity: 1;
     text-align: left;
     color: #d6980e;
+
     &::before {
       content: '$';
       position: relative;
@@ -58,6 +59,9 @@
       --background: white;
       --padding-top: 0;
       --padding-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      --border-width: 0 !important;
 
       ion-grid {
         padding: 0;
@@ -77,9 +81,8 @@
       padding: 20px;
 
       ion-row {
-        margin-bottom: 10px;
-
         .buttons {
+          padding-bottom: var(--ion-safe-area-bottom, 0);
         }
       }
     }

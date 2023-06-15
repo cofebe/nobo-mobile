@@ -317,7 +317,7 @@ const ProductDetail: React.FC = () => {
     <IonPage className="product-detail-page">
       <Header
         title={isTrade ? 'Trade Item' : 'Purchase Item'}
-        subtitle={`@${authService.getUserDisplayName()}`}
+        subtitle={`@${product?.vendor?.displayName}`}
       >
         <div className="cart">
           <img
@@ -427,7 +427,7 @@ const ProductDetail: React.FC = () => {
               <>
                 <IonRow>
                   <IonCol size="10" offset="1" className="product-price">
-                    <span>Cost</span> {formatPrice(price)}
+                    {formatPrice(price)}
                   </IonCol>
                 </IonRow>
 
