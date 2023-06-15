@@ -283,24 +283,24 @@ const TermsAndCondition = () => {
 
         <IonRow className='terms-container'>
           <IonCol size='12' className='terms-title'>
-          13. General Provisions
+            13. General Provisions
           </IonCol>
           <IonCol size='12' className='terms-info'>
             Any litigation or arbitration arising out of or in connection with these
-             rules or your use of Company’s services must be commenced within
-             one (1) year after the cause of action arose, or it will be permanently barred.
-Any provision of these Terms and Conditions which is determined by a court of competent
- jurisdiction to be unenforceable in any jurisdiction shall be removed
- to the minimum extent required in that jurisdiction without in any way
-  invalidating the remaining provisions of these Terms and Conditions.
-   In that event the court is hereby directed by the parties to replace
-    the legally invalid provisions with legally valid provisions which will,
-     from an economic viewpoint, most nearly and fairly approach the eliminated
-      provisions. The unenforceability of any provision in a given jurisdiction
-       shall not make that provision unenforceable in any other jurisdiction.
-Users agree that the Company has the sole right to decide all matters and
- disputes arising from these Terms and Conditions and that all decisions
- of Company shall be final and binding and not subject to challenge or appeal.
+            rules or your use of Company’s services must be commenced within
+            one (1) year after the cause of action arose, or it will be permanently barred.
+            Any provision of these Terms and Conditions which is determined by a court of competent
+            jurisdiction to be unenforceable in any jurisdiction shall be removed
+            to the minimum extent required in that jurisdiction without in any way
+            invalidating the remaining provisions of these Terms and Conditions.
+            In that event the court is hereby directed by the parties to replace
+            the legally invalid provisions with legally valid provisions which will,
+            from an economic viewpoint, most nearly and fairly approach the eliminated
+            provisions. The unenforceability of any provision in a given jurisdiction
+            shall not make that provision unenforceable in any other jurisdiction.
+            Users agree that the Company has the sole right to decide all matters and
+            disputes arising from these Terms and Conditions and that all decisions
+            of Company shall be final and binding and not subject to challenge or appeal.
 
           </IonCol>
         </IonRow>

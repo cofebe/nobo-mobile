@@ -4,15 +4,13 @@ import {
   IonRow,
   IonCol,
   IonGrid,
-  IonInput,
   useIonViewWillEnter,
   IonContent,
+  useIonToast
 } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserService } from '../services/UserService';
-import { User } from '../models';
-import { loadingStore } from '../loading-store';
 import Input from '../components/Input';
 import './ForgetPassword.scss';
 
@@ -25,9 +23,19 @@ const ForgetPassword: React.FC = () => {
   const history = useHistory();
   const userService = new UserService();
   const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<boolean>(false);
+
+  const [present] = useIonToast();
+
+  const presentToast = (position: 'top' | 'middle' | 'bottom') => {
+    present({
+      message: `Please Check Your Email`,
+      duration: 1800,
+      position: position,
+    });
+  };
+
 
 
   useIonViewWillEnter(() => {
@@ -42,7 +50,10 @@ const ForgetPassword: React.FC = () => {
       .then((res:ResData) => {
         if(res.exists){
           console.log('check your mail for reset link')
-          history.push('/login');
+          presentToast('top')
+          setTimeout(() => {
+            history.push('/login');
+          }, 1500);
 
         }else{
           console.log('email does not exist')
@@ -148,7 +159,7 @@ const ForgetPassword: React.FC = () => {
                   </IonButton>
                 </IonCol>
               </IonRow>
-              <IonRow style={{ paddingBottom: 12, }}>
+              <IonRow style={{ paddingBottom: 12, paddingLeft:8,  paddingRight:8}}>
                 <IonCol
                   size="8"
                   style={{
