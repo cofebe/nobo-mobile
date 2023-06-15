@@ -60,7 +60,7 @@ const ReturnRequest: React.FC = () => {
       </IonRow>
 
       <IonContent className='return-r-item-content'>
-        <IonRow style={{ padding: '0px' }}>
+        <IonRow style={{ padding: '0px', marginTop:'17px' }}>
           {productsData?.map((product: Product) => (
 
             <IonCol className='return-r-item-prop-container' size='12'>

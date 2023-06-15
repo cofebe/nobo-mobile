@@ -226,10 +226,14 @@ export class UserService extends BaseService {
     const res = await super.fetch('POST', '/api/users/login', { email, password }, undefined, true);
     //console.log('res', res);
     const json: LoginResponse = await res.json();
-    //console.log('json', json);
+    // console.log('json', json);
 
     if (res.status === 404) {
       console.log('404', json.error);
+      throw json.error;
+    }
+    if (res.status === 401) {
+      console.log('401', json.error);
       throw json.error;
     }
 
@@ -241,6 +245,11 @@ export class UserService extends BaseService {
     }
 
     return json.user;
+  }
+
+  async forgotPassword(email: string) {
+    const res = await super.fetch('POST', '/api/users/lostPassword', { email })
+    return res.json()
   }
 
   async addShippingAddress(data: AddressRequest): Promise<User> {

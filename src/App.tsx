@@ -58,7 +58,7 @@ import ListItemTradeOptions from './pages/ListItemTradeOptions';
 import ListItemTradeConfirm from './pages/ListItemTradeConfirm';
 
 import MySales from './pages/MySales';
-import SingleSalesItem from './pages/SingleSalesItem';
+import SalesDetails from './pages/SalesDetails';
 import TradeCompleted from './pages/TradeCompleted';
 import SalesShippingLabel from './pages/SalesShippingLabel';
 
@@ -90,6 +90,13 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import Withdraw from './pages/Withdraw';
 import WithdrawalSubmit from './pages/WithdrawalSubmit';
+import Help from './pages/Help';
+import HelpSupport from './pages/HelpSupport';
+import HelpSupportShipping from './pages/HelpSupportShipping';
+import ForgetPassword from './pages/ForgetPassword';
+import ReturnPolicy from './pages/ReturnPolicy';
+import TermsAndCondition from './pages/TermsAndCondition';
+import Faq from './pages/Faq';
 
 
 setupIonicReact({
@@ -183,6 +190,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/login" exact={true}>
               <Login />
+            </Route>
+            <Route path="/forget-password" exact={true}>
+              <ForgetPassword />
             </Route>
             <Route path="/cart" exact={true}>
               <ShoppingCart />
@@ -299,7 +309,7 @@ const App: React.FC = () => {
               <MySales />
             </Route>
             <Route path="/sales/single-sales-item/:id" exact={true}>
-              <SingleSalesItem />
+              <SalesDetails />
             </Route>
             <Route path="/sales/shipping-label" exact={true}>
               <SalesShippingLabel />
@@ -318,6 +328,24 @@ const App: React.FC = () => {
             </Route>
             <Route path="/settings/withdraw/submitted" exact={true}>
               <WithdrawalSubmit/>
+            </Route>
+            <Route path="/settings/help" exact={true}>
+              <Help />
+            </Route>
+            <Route path="/settings/help/support" exact={true}>
+              <HelpSupport />
+            </Route>
+            <Route path="/settings/help/support/shipping" exact={true}>
+              <HelpSupportShipping />
+            </Route>
+            <Route path="/settings/return-policy" exact={true}>
+              <ReturnPolicy />
+            </Route>
+            <Route path="/settings/terms-conditions" exact={true}>
+              <TermsAndCondition />
+            </Route>
+            <Route path="/settings/faq" exact={true}>
+              <Faq />
             </Route>
 
             <Route path="/signup1" exact={true}>
@@ -359,6 +387,7 @@ const App: React.FC = () => {
             <Route path="/terms-and-conditions" exact={true}>
               <TermsAndConditions />
             </Route>
+
           </IonRouterOutlet>
         </IonReactRouter>
         {showLoading ? <HorizontalLineSpinner /> : ''}

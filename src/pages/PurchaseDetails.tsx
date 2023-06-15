@@ -18,7 +18,7 @@ import './PurchaseDetails.css'
 import { useHistory, useParams } from 'react-router'
 import { UserService } from '../services/UserService'
 import { FullOrder, User } from '../models'
-import { getCardImage } from '../utils'
+import { formatPrice, getCardImage } from '../utils'
 import SendMessageModal from '../components/SendMessageModal'
 
 
@@ -116,7 +116,6 @@ const PurchaseDetails: React.FC = () => {
 
 
 
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
 
 
@@ -201,7 +200,7 @@ const PurchaseDetails: React.FC = () => {
                   <div className='order-details-item-info'>
                     <p className='order-details-brand'>{singleProduct.brand}</p>
                     <p className='order-details-name'>{singleProduct.name}</p>
-                    <p className='order-details-price'>{currencyFormat.format(singleProduct.price)}</p>
+                    <p className='order-details-price'>{formatPrice(singleProduct.price)}</p>
                   </div>
                   <div className='order-details-showmore' >
                     <p className='order-details-text' style={{}}>
@@ -242,20 +241,20 @@ const PurchaseDetails: React.FC = () => {
               </IonRow>
               <IonRow className='order-details-general-class'>
                 <IonCol>ORDER SUBTOTAL</IonCol>
-                <IonCol className='order-details-general-col'>{currencyFormat.format(product.subtotal)}</IonCol>
+                <IonCol className='order-details-general-col'>{formatPrice(product.subtotal)}</IonCol>
               </IonRow>
               <IonRow className='order-details-general-class'>
                 <IonCol >SHIPPING</IonCol>
-                <IonCol className='order-details-general-col'>{currencyFormat.format(product.shipping)}</IonCol>
+                <IonCol className='order-details-general-col'>{formatPrice(product.shipping)}</IonCol>
               </IonRow>
               <IonRow className='order-details-general-class'>
                 <IonCol >SALES TAX</IonCol>
-                <IonCol className='order-details-general-col'>{currencyFormat.format(product.salesTax)}</IonCol>
+                <IonCol className='order-details-general-col'>{formatPrice(product.salesTax)}</IonCol>
               </IonRow>
               <IonRow className='order-details-general-class'>
                 <IonCol >DISCOUNT CODE</IonCol>
                 <IonCol style={{ color: '#D6980E' }} className='order-details-general-col'>
-                  {currencyFormat.format(product?.products?.summary?.coupon)}
+                  {formatPrice(product?.products?.summary?.coupon)}
                 </IonCol>
               </IonRow>
             </div>
@@ -266,7 +265,7 @@ const PurchaseDetails: React.FC = () => {
                 <IonCol >TOTAL</IonCol>
                 <IonCol
                   className='order-details-general-col'>
-                  {currencyFormat.format(product.total)}
+                  {formatPrice(product.total)}
                 </IonCol>
               </IonRow>
             </div>

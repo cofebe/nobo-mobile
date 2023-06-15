@@ -5,6 +5,7 @@ import './MyOffers.scss'
 import { UserService } from '../services/UserService'
 import { CreateProductResponse } from '../models'
 import { useHistory } from 'react-router'
+import { formatPrice } from '../utils'
 
 
 
@@ -21,10 +22,8 @@ interface OfferResponse {
 
 const MyOffers: React.FC = () => {
   const history = useHistory()
-
   const userService = new UserService()
   const [offerData, setTradesData] = useState<OfferResponse[]>([])
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
 
   useIonViewWillEnter(() => {
@@ -97,18 +96,11 @@ const MyOffers: React.FC = () => {
                     OFFER  {` ${offer?.status}`}
                   </p>
                   <p className='product-name'>{`${offer?.product.brand} ${offer.product.name}`}</p>
-                  <p className='price'>{currencyFormat.format(offer?.product.price)}</p>
+                  <p className='price'>{formatPrice(offer?.product.price)}</p>
                   <p className='offered-price'>Price you offered</p>
                 </div>
               </IonCol>
             </IonRow>
-
-            {/* {offerData[0]?.status === 'accepted' && (<IonRow>
-          <IonCol className='view-my-purchases'>
-            <p className='browse-shop'>View in my purchases</p>
-            <p className='date'>{new Date(offerData[0]?.product.updatedAt).toDateString().slice(0 - 11)}</p>
-          </IonCol>
-        </IonRow>)} */}
 
             <IonRow style={{ marginTop: '10px' }}>
               <IonCol className='view-my-purchases_btn' >
@@ -128,7 +120,7 @@ const MyOffers: React.FC = () => {
                         history.push('/settings/sales')
                       }}
 
-                    >View in my purchases</p>}
+                    >View in my sales</p>}
                 </div>
 
                 <p className='date'>{new Date(offer?.product?.updatedAt).toDateString().slice(0 - 11)}</p>
@@ -136,14 +128,6 @@ const MyOffers: React.FC = () => {
               </IonCol>
             </IonRow>
 
-            {/* {offerData[0]?.status === 'rejected' && (<IonRow style={{ marginTop: '10px' }}>
-          <IonCol className='view-my-purchases_btn' >
-            <div className='btn-container'>
-              <IonButton className='btn-rejected' fill='outline' onClick={() => { }} >BUY AT LISTED PRICE</IonButton>
-            </div>
-            <p className='date'>{new Date(offerData[0]?.product?.updatedAt).toDateString().slice(0 - 11)}</p>
-          </IonCol>
-        </IonRow>)} */}
 
             <div className='my-0ffers-seperator'></div>
           </div>

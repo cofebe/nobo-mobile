@@ -4,6 +4,7 @@ import { useHistory } from 'react-router'
 import './MySales.scss'
 import { UserService } from '../services/UserService'
 import { OrdersResponse } from '../models'
+import { formatPrice } from '../utils'
 
 
 const MySales: React.FC = () => {
@@ -25,8 +26,6 @@ const MySales: React.FC = () => {
       .catch((err) => { console.log('err info while fetching products ', err) })
   })
 
-
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
 
   return (
@@ -84,7 +83,7 @@ const MySales: React.FC = () => {
                     <div className="img-container">
                       <img src={`${sProduct?.images[0].url}`} alt="channel" />
                     </div>
-                    <p className='price'>{currencyFormat.format(sProduct?.price)}</p>
+                    <p className='price'>{formatPrice(sProduct?.price)}</p>
                   </div>
                 </IonCol>
                 <div className='sales-item-line-divider'></div>

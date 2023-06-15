@@ -1,11 +1,12 @@
 import { IonCol, IonContent, IonPage, IonRow, useIonViewWillEnter } from '@ionic/react'
 import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router'
-import './SingleSalesItem.scss'
+import './SalesDetails.scss'
 import { UserService } from '../services/UserService'
 import { FullOrder } from '../models'
+import { formatPrice } from '../utils'
 
-const SingleSalesItem: React.FC = () => {
+const SalesDetails: React.FC = () => {
   const history = useHistory()
   const params: any = useParams()
   const userService = new UserService()
@@ -13,7 +14,6 @@ const SingleSalesItem: React.FC = () => {
 
 
 
-  console.log(params.id)
 
   useIonViewWillEnter(() => {
     userService.getSale(params.id)
@@ -26,11 +26,7 @@ const SingleSalesItem: React.FC = () => {
       })
       .catch((err) => { console.log('err info while fetching products ', err) })
   })
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
-
-
-  console.log('main', salesItem?.map((s) => s.products))
 
   return (
     <IonPage className='single-sales-item-main-container'>
@@ -80,7 +76,7 @@ const SingleSalesItem: React.FC = () => {
                     <div className="img-container">
                       <img src={`${product.images[0].url}`} alt="channel" />
                     </div>
-                    <p className='price'>{currencyFormat.format(product.price)}</p>
+                    <p className='price'>{formatPrice(product.price)}</p>
                   </div>
                 </IonCol>
                 <div className='single-sales-item-line-divider'></div>
@@ -97,4 +93,4 @@ const SingleSalesItem: React.FC = () => {
   )
 }
 
-export default SingleSalesItem
+export default SalesDetails

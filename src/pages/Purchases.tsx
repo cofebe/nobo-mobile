@@ -14,10 +14,10 @@ import { useHistory, } from 'react-router'
 import Search from '../components/Search'
 import { UserService } from '../services/UserService'
 import { FullOrder, OrdersResponse } from '../models'
-import { getCardImage } from '../utils'
+import { formatPrice, getCardImage } from '../utils'
 
 
-
+const url = 'https://thenobo.sfo3.digitaloceanspaces.com/terms.pdf'
 
 
 
@@ -41,7 +41,6 @@ const Purchases: React.FC = () => {
 
 
 
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
   // Filtering products
   const filteredProduct = productsData[0]?.docs?.filter(product =>
     product.products[0]?.name.toLowerCase().includes(inputValue.toLowerCase(), 0) ||
@@ -49,7 +48,7 @@ const Purchases: React.FC = () => {
   );
 
 
-
+console.log(filteredProduct)
   return (
     <IonPage className='purchase-item-main-container'>
       <IonHeader className='purchase-item-header'>
@@ -113,12 +112,17 @@ const Purchases: React.FC = () => {
                 <IonCol size='4.5' className='purchse-item-props'>
                   <p className='purchases-item-brand'>{singleProduct.brand}</p>
                   <p className='purchases-item-name'>{singleProduct.name}</p>
-                  <p className='purchases-item-price'>{currencyFormat.format(singleProduct.price)}</p>
+                  <p className='purchases-item-price'>{formatPrice(singleProduct.price)}</p>
                 </IonCol>
                 <IonCol size='3.7' className='purchases-item-status-container'>
                   <p className='purchases-item-status'>STATUS</p>
-                  <p className='purchases-item-status-info'>{product.status}</p>
-                  <p className='purchases-item-track'>Track</p>
+                  <p className='purchases-item-status-info'>{singleProduct.shipmentInfo?.status}</p>
+
+                    <a className='purchases-item-track' href={`${singleProduct.tracker?.public_url}`}
+                     rel='noreferrer'
+                     target='_blank'
+                    >TRACK</a>
+
                 </IonCol>
               </IonRow>
             ))}

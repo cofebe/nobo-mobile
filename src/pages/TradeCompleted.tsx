@@ -1,20 +1,17 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import {
-  IonButton,
   IonCol,
   IonContent,
   IonGrid,
-  IonHeader,
   IonPage,
   IonRow,
-  IonToolbar,
   useIonViewWillEnter
 } from '@ionic/react'
 import './TradeCompleted.scss'
 import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
-// import Button from '../components/Button'
 import { TradesResponse } from '../models'
+import { formatPrice } from '../utils'
 
 
 
@@ -22,9 +19,6 @@ const TradeCompleted: React.FC = () => {
   const userService = new UserService()
   const history = useHistory()
   const [tradesData, setTradesData] = useState<TradesResponse[]>([])
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-
-
 
 
 
@@ -38,25 +32,8 @@ const TradeCompleted: React.FC = () => {
       .catch((err) => { console.log('err info while fetching products ', err) })
   })
 
-  // const acceptTrade = (productId: string) => {
-  //   console.log(productId)
-  //   userService.acceptTradeOffer(productId)
-  //     .then((res) => {
-  //       console.log(res)
-  //       history.push({ pathname: `trades/accepted/${productId}`, state: res })
-  //     })
-  //     .catch((error) => {
-  //       console.log('error accepting trade : ', error)
-  //     })
-  // }
 
 
-
-
-
-
-
-  console.log(tradesData)
   return (
     <IonPage className='trade-completed-main-container'>
       <IonRow>
@@ -124,13 +101,13 @@ const TradeCompleted: React.FC = () => {
                       <p className="trade-with-title">TRADE WITH</p>
                       <p className="trade-with-name">@JAMESBAILY</p>
                       <p className="trade-fee">TRADE FEE</p>
-                      <p className="trade-amount">{currencyFormat.format(product.fee)}</p>
+                      <p className="trade-amount">{formatPrice(product.fee)}</p>
                     </div>
                     <div className="trade-with-container-r">
                       <p className="trade-accepted-title">TRADE WITH</p>
                       <p className="trade-accepted-date">{new Date(product.updatedAt).toDateString().slice(0 - 11)}</p>
                       <p className="trade-value-title">TRANSACTION VALUE</p>
-                      <p className="trade-value-text">{currencyFormat.format(product.total)}</p>
+                      <p className="trade-value-text">{formatPrice(product.total)}</p>
                     </div>
                   </div>
 
