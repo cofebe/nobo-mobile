@@ -3,6 +3,7 @@ import { IonButton, IonIcon } from '@ionic/react';
 import { checkmarkOutline } from 'ionicons/icons';
 import './BrandSelect.scss';
 import { brands } from '../data/brands';
+import Search from './Search';
 
 interface BrandSelectProps {
   className?: string;
@@ -22,6 +23,17 @@ const BrandSelect: React.FC<BrandSelectProps> = ({
   onChange,
 }) => {
   const [showBrandModal, setShowBrandModal] = useState(false);
+  const [search, setSearch] = useState('');
+  const [allBrands, setAllBrands] = useState(brands);
+
+  function searchOnChange(val: string) {
+    setSearch(val);
+    if (val) {
+      val = val.trim();
+      const filteredBrands = brands.filter(b => b.toLowerCase().includes(val.toLowerCase()));
+      setAllBrands(filteredBrands);
+    }
+  }
 
   return (
     <div className="brand-select-container">
@@ -50,8 +62,16 @@ const BrandSelect: React.FC<BrandSelectProps> = ({
       {showBrandModal && (
         <div className="brand-modal-container">
           <div className="brand-modal">
+            <div className="search-container">
+              <Search
+                value={search}
+                onChange={val => {
+                  searchOnChange(val);
+                }}
+              />
+            </div>
             <div className="options">
-              {brands?.map((o, index) => (
+              {allBrands.map((o, index) => (
                 <div
                   key={index}
                   className={'option' + (o === value ? ' selected' : '')}

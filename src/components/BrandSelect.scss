@@ -16,11 +16,20 @@
       background-color: white;
       border-radius: 10px;
       padding: 16px 30px;
+      height: 60vh;
+      width: 70vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      .search-container {
+        padding-bottom: 10px;
+        padding-top: 10px;
+      }
 
       .options {
-        max-height: 50vh;
-        max-width: 60vw;
         overflow: auto;
+        flex: 1;
 
         .option {
           padding-top: 10px;
