@@ -168,7 +168,7 @@ const ListItemTradeOptions: React.FC = () => {
       </IonHeader>
       <IonContent style={{ zIndex: 100 }}>
         <IonGrid className="list-item-content">
-          <div className="padding-bottom-container">
+          <div className="">
             {[...Array(3)].map((_, i) => (
               <>
                 <IonRow key={i} className="margin-bottom-5">
