@@ -1,19 +1,25 @@
 import React, { useState } from 'react'
 import './Withdraw.scss'
-import { IonCol, IonContent, IonPage, IonRow, useIonViewWillEnter } from '@ionic/react'
+import { IonButton, IonCol, IonContent, IonPage, IonRow, useIonViewWillEnter } from '@ionic/react'
 import Header from '../components/Header'
 import { UserService } from '../services/UserService'
 import { formatPrice } from '../utils'
+import Input from '../components/Input'
 
 interface AccResponse {
   availableFunds: number
   pendingFunds: number
+}
+interface FundsResponse {
+  success: boolean
 }
 
 const Withdraw: React.FC = () => {
   const userService = new UserService()
   const [pendingFunds, setPendingFunds] = useState<number>(0)
   const [availableFunds, setAvailableFunds] = useState<number>(0)
+  const [email, setEmail] = useState('')
+  const [showInput, setShowInput] = useState(false)
 
   useIonViewWillEnter(() => {
     userService.getAccount()
@@ -24,6 +30,19 @@ const Withdraw: React.FC = () => {
       })
       .catch((error) => { console.log('err getting acc details', error) })
   })
+
+  const transferFunds = (paypal:string, email:string) =>{
+    userService.transferFunds(paypal, email)
+    .then((res: FundsResponse) => {
+      console.log('res', res)
+      if(res.success){
+        console.log('transfer successfull')
+      }else{
+        console.log('transfer failed')
+      }
+    })
+    .catch((error) => { console.log('err getting acc details', error) })
+  }
 
 
   return (
@@ -66,24 +85,48 @@ const Withdraw: React.FC = () => {
         </IonRow>
         <IonRow className='withdraw-payment-method-box'>
 
-          <IonCol size='5.5' className='payment-box'>
+          <IonCol size='5.5' className='payment-box'
+          onClick={()=>{
+            setShowInput(!showInput)
+          }}
+          >
             <div className='img-container'>
               <img className='' height={78} src='assets/images/test/your-bank-eclips.svg' alt="" />
               <img className='img' height={74} src='assets/images/test/paypal-tab.svg' alt="" />
             </div>
             <div className="info1">PayPal</div>
             <div className="info2">Instantly in account</div>
-
           </IonCol>
-          <IonCol size='5.5' className='payment-box'>
-            <div className='img-container'>
+
+          {/* <IonCol size='5.5' className='payment-box'> */}
+          {/* <div className='img-container'>
               <img className='' height={78} src='assets/images/test/your-bank-eclips.svg' alt="" />
               <img className='img2' height={43} src='assets/images/test/bank.svg' alt="" />
-            </div>
-            {/* <div className="info1">PayPal</div> */}
-            <div className="info3">Add your Bank 1-3 Business Days</div>
-          </IonCol>
+            </div> */}
+          {/* <div className="info1">PayPal</div> */}
+          {/* <div className="info3">Add your Bank 1-3 Business Days</div> */}
+          {/* </IonCol> */}
         </IonRow>
+
+       { showInput  &&(<IonRow className='withdraw-payment-input-container'>
+          <IonCol size='12'>
+            <Input
+            className='withdraw-input'
+            placeholder='EMAIL ADDRESS'
+              value={email}
+              onChange={(val) => {
+                setEmail(val)
+              }}
+            ></Input>
+          </IonCol>
+          <div className="withrawal-r-btn-below">
+            <IonButton style={{ backgroundColor: 'white' }} className='btn'
+             onClick={() => {
+              transferFunds('paypal', email)
+            }} >TRANSFER FUNDS</IonButton>
+          </div>
+        </IonRow>)}
+
       </IonContent>
     </IonPage>
   )

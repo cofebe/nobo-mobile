@@ -35,7 +35,9 @@ const HelpSupport = () => {
             Make sure to include your TheNOBO account email and
             specific details of the problems you're experiencing
           </IonCol>
-          <IonCol className='faq' size='12'>Check out our <span className='support'>FAQ</span> for quick solutions </IonCol>
+          <IonCol className='faq' size='12'>Check out our <span className='support' onClick={()=>{
+            history.push('/settings/faq')
+          }}>FAQ</span> for quick solutions </IonCol>
 
         </IonRow>
 
