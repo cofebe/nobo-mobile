@@ -329,6 +329,13 @@ export class UserService extends BaseService {
     const res = await super.fetch('GET', '/api/users/accountBalance')
     return res.json();
   }
+  async transferFunds(paypal:string, email:string){
+    const res = await super.fetch('POST', '/api/users/transfer-funds', {
+      payoutMethod:paypal,
+      paypal:email
+    })
+    return res.json();
+  }
 
 
   async getSales(): Promise<OrdersResponse> {

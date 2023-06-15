@@ -329,10 +329,10 @@ const App: React.FC = () => {
             <Route path="/settings/withdraw/submitted" exact={true}>
               <WithdrawalSubmit/>
             </Route>
-            <Route path="/settings/help" exact={true}>
+            {/* <Route path="/settings/help" exact={true}>
               <Help />
-            </Route>
-            <Route path="/settings/help/support" exact={true}>
+            </Route> */}
+            <Route path="/settings/help" exact={true}>
               <HelpSupport />
             </Route>
             <Route path="/settings/help/support/shipping" exact={true}>

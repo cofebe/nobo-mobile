@@ -88,18 +88,31 @@
 
 
     .withdraw-payment-method {
-      // background-color: teal;
-      margin-bottom: 35px;
+      height: 23px;
 
-      .title {}
+
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 150%;
+      /* identical to box height, or 22px */
+
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+
+      color: #000000;
+
     }
 
     .withdraw-payment-method-box {
       // background-color: tomato;
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 5px;
+      justify-content: center;
+      // flex-wrap: wrap;
+      // gap: 5px;
       margin-bottom: 20px;
 
 
@@ -184,6 +197,35 @@
 
       }
 
+    }
+
+    .withdraw-payment-input-container{
+      // background-color: teal;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      .withdraw-input{
+        box-sizing: border-box;
+        height: 37px;
+        border: 0.5px solid #000000;
+        border-radius: 2px;
+      }
+    }
+
+    .withrawal-r-btn-below {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+
+      .btn {
+        width: 300px;
+        height: 51px;
+      }
     }
 
 
