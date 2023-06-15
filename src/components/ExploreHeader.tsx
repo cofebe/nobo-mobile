@@ -92,10 +92,10 @@ const NoboExploreHeader: React.FC = () => {
   };
 
   return (
-    <IonHeader className="explore-header">
-      <IonToolbar className="explore-header-toolbar">
-        <IonGrid>
-          <IonRow class="ion-align-items-center">
+    <IonHeader className="explore-header" >
+      {/* <IonToolbar className="explore-header-toolbar" > */}
+        <IonGrid >
+          <IonRow class="ion-align-items-center" >
             <IonCol size="3">
               <div
                 onClick={e => {
@@ -248,7 +248,7 @@ const NoboExploreHeader: React.FC = () => {
             </IonCol>
           </IonRow>
         </IonGrid>
-      </IonToolbar>
+      {/* </IonToolbar> */}
     </IonHeader>
   );
 };

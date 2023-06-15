@@ -35,6 +35,7 @@ const Login: React.FC = () => {
       .login(email, password)
       .then((user: User) => {
         loadingStore.decrement('Login:timeout');
+        console.log('res msg ', user)
         if(user){
           console.log('user', user);
           setTimeout(() => {

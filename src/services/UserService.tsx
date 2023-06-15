@@ -228,10 +228,14 @@ export class UserService extends BaseService {
     const res = await super.fetch('POST', '/api/users/login', { email, password }, undefined, true);
     //console.log('res', res);
     const json: LoginResponse = await res.json();
-    //console.log('json', json);
+    // console.log('json', json);
 
     if (res.status === 404) {
       console.log('404', json.error);
+      throw json.error;
+    }
+    if (res.status === 401) {
+      console.log('401', json.error);
       throw json.error;
     }
 
@@ -243,6 +247,11 @@ export class UserService extends BaseService {
     }
 
     return json.user;
+  }
+
+  async forgotPassword(email: string) {
+    const res = await super.fetch('POST', '/api/users/lostPassword', { email })
+    return res.json()
   }
 
   async addShippingAddress(data: AddressRequest): Promise<User> {
@@ -316,11 +325,18 @@ export class UserService extends BaseService {
     return json.success;
   }
 
+  async getAccount(){
+    const res = await super.fetch('GET', '/api/users/accountBalance')
+    return res.json();
+  }
+
+
   async getSales(): Promise<OrdersResponse> {
     const res = await super.fetch('GET', '/api/orders/my-sales');
     const json:OrdersResponse= await res.json();
     return json;
   }
+
   async getSale(id:string): Promise<FullOrder> {
     const res = await super.fetch('GET', `/api/orders/my-sales/${id}`);
     const json:OrderResponse= await res.json();

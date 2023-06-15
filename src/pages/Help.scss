@@ -1,0 +1,224 @@
+.help-main-container {
+
+  background-color: #fefcf7;
+
+  .help-header-container {
+    height: 118px;
+    width: 390px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+
+  }
+
+
+
+  .help-back-btn {
+    position: absolute;
+    left: 36px;
+    bottom: 15px;
+    z-index: 1000;
+  }
+
+  .help-title-text-container {
+    position: absolute;
+    top: 63%;
+    bottom: 10.71%;
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 150%;
+    letter-spacing: 0.05em;
+    color: #000000;
+    text-align: center;
+  }
+
+  .help-ion-content {
+    --padding-start: 42px;
+    --padding-end: 42px;
+    --padding-bottom: 20px;
+    // --padding-top: 25px;
+    --background: #fefcf7;
+
+    .help-input-container {
+      padding: 0px;
+      margin-top: 20px;
+
+      .help-input-box {
+        padding: 0px;
+      }
+
+      .list {
+        margin-left: 20px;
+        height: 15px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 150%;
+        letter-spacing: 0.05em;
+        color: #000000;
+      }
+
+      .help-text-input {
+        box-sizing: border-box;
+        height: 37px;
+        border: 0.5px solid #000000;
+        border-radius: 2px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+      }
+
+    }
+
+
+    .help-input-container2 {
+      padding: 0px;
+      margin-top: 20px;
+
+      .help-input-box2 {
+        position: relative;
+        padding: 0px;
+      }
+
+      .img-container {
+        position: absolute;
+        right: 5px;
+        bottom: 10%;
+      }
+
+      .list2 {
+        margin-left: 20px;
+        height: 15px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 150%;
+        letter-spacing: 0.05em;
+        color: #000000;
+      }
+
+      .help-text-input2 {
+        box-sizing: border-box;
+        height: 37px;
+        border: 0.5px solid #000000;
+        border-radius: 2px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+      }
+
+    }
+
+    .help-textarea-container {
+      margin-top: 30px;
+      padding: 0px;
+
+      .help-textarea-box {
+        padding: 0px;
+
+      }
+
+      .help-info-box {
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 150%;
+        /* identical to box height, or 18px */
+
+        text-align: center;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+
+        color: #000000;
+
+      }
+
+      .help-textarea {
+        // padding-left: 5px;
+        box-sizing: border-box;
+
+        height: 107px;
+        border: 0.5px solid #000000;
+        border-radius: 2px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 9px;
+        line-height: 12px;
+        text-transform: uppercase;
+        padding: 0px 14px 0px 14px;
+
+
+      }
+    }
+
+
+    .img-upload-container {
+      padding: 0px;
+      margin-top: 35px;
+
+
+
+      .img-upload-box {
+        position: relative;
+        padding: 0px;
+
+        .img-text-box {
+          margin-left: 15px;
+          height: 18px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #000000;
+        }
+
+        .img-container2 {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .rectangle {}
+
+        .plus {
+          position: absolute;
+          // left: 46%;
+          // top: 20%;
+          height: 20px;
+        }
+
+
+      }
+    }
+
+    .help-s-btn-below{
+    margin-top: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+
+    .btn {
+      width: 300px;
+      height: 51px;
+    }
+  }
+
+  }
+}

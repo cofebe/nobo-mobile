@@ -12,6 +12,7 @@ import './MyTrade.scss'
 import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
 import { FullOrder, Trade, TradesResponse } from '../models'
+import { formatPrice } from '../utils'
 
 
 
@@ -19,8 +20,6 @@ const MyTrade: React.FC = () => {
   const userService = new UserService()
   const history = useHistory()
   const [tradesData, setTradesData] = useState<TradesResponse[]>([])
-
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
 
   useIonViewWillEnter(() => {
@@ -76,7 +75,6 @@ const MyTrade: React.FC = () => {
 const productDetails = (productId:string) =>{
   const singleProduct:any = tradesData[0]?.received.filter((data:any)=>data._id === productId)
   history.push({pathname:`trades/details/${productId}`, state:singleProduct})
-  console.log('product pushed to path', productId)
 
 }
 
@@ -143,7 +141,7 @@ const productDetails = (productId:string) =>{
                         : `${product.products.offered.images[0].url}`} alt={product.products.name}
                     />}
                     <div className="trade-item-name-left">{product.products.offered.name.toUpperCase()}</div>
-                    <div className="trade-item-price-left">{currencyFormat.format(product.products.offered.price)}</div>
+                    <div className="trade-item-price-left">{formatPrice(product.products.offered.price)}</div>
                   </div>
 
                   <div className='items-view-props-center'>
@@ -161,7 +159,7 @@ const productDetails = (productId:string) =>{
                         `${product.products.requested.images[0].url}`} alt={product.products.name}
                     />}
                     <div className="trade-item-name-right">{product.products.requested.name.toUpperCase()}</div>
-                    <div className="trade-item-price-right">{currencyFormat.format(product.products.requested.price)}</div>
+                    <div className="trade-item-price-right">{formatPrice(product.products.requested.price)}</div>
                   </div>
                 </div>
 

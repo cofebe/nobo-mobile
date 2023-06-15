@@ -1,0 +1,129 @@
+.help-support-container {
+
+  background-color: #fefcf7;
+
+  .help-support-container {
+    height: 118px;
+    width: 390px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+
+  }
+
+
+
+  .help-support-back-btn {
+    position: absolute;
+    left: 36px;
+    bottom: 15px;
+    z-index: 1000;
+  }
+
+  .help-support-title-text-container {
+    position: absolute;
+    top: 63%;
+    bottom: 10.71%;
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 150%;
+    letter-spacing: 0.05em;
+    color: #000000;
+    text-align: center;
+  }
+
+  .help-support-ion-content {
+    --padding-start: 40px;
+    --padding-end: 40px;
+    --padding-bottom: 20px;
+    // --padding-top: 25px;
+    --background: #fefcf7;
+
+
+    .help-support-container-1 {
+      margin-top: 20px;
+      padding: 0px;
+
+
+      .contact {
+        padding: 0px;
+
+        width: 309px;
+        height: 23px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 150%;
+        text-align: center;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #000000;
+      }
+
+      .support {
+        padding: 0px;
+
+        font-weight: 800;
+        text-decoration: underline;
+
+      }
+
+      .info {
+        padding: 0px;
+        margin-top: 35px;
+        width: 309px;
+        height: 54px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 150%;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #000000;
+      }
+
+      .email {
+        padding: 0px;
+margin-top: 10px;
+        width: 229px;
+        height: 18px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 150%;
+        text-align: center;
+        letter-spacing: 0.05em;
+        text-decoration-line: underline;
+        text-transform: uppercase;
+        color: #000000;
+      }
+
+      .faq {
+        margin-top: 10px;
+        padding: 0px;
+        height: 23px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 150%;
+        text-align: center;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #000000;
+      }
+
+
+
+    }
+
+
+  }
+}

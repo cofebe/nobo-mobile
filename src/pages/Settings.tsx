@@ -116,7 +116,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/returns');
+            // history.push('/settings/returns');
           }}
         >
           My Returns
@@ -125,7 +125,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/withdraw');
+            history.push('/settings/withdraw');
           }}
         >
           Withdrawal Requests
@@ -145,7 +145,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/savings');
+            history.push('/settings/help');
           }}
         >
           HELP
@@ -163,7 +163,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            // history.push('/settings/return-policy');
+            history.push('/settings/return-policy');
           }}
         >
           RETURN POLICY
@@ -172,7 +172,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/savings');
+            history.push('/settings/terms-conditions');
           }}
         >
           TERMS &amp; CONDITION
@@ -181,7 +181,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/savings');
+            history.push('/settings/faq');
           }}
         >
           FAQ

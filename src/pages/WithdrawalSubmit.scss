@@ -1,0 +1,146 @@
+.withrawal-s-item-main-container {
+  background-color: #fefcf7;
+
+  .withrawal-s-content {
+    --padding-start: 44px;
+    --padding-end: 44px;
+    --padding-bottom: 20px;
+    // --padding-top: 20px;
+    --background: #fefcf7;
+
+    .withrawal-s-item-header {
+      background-color: #fefcf7;
+      height: 118px;
+
+      .withrawal-s-title-text-container {
+        position: absolute;
+        top: 35%;
+        bottom: 10.71%;
+        font-family: 'Georgia';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 150%;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #000000;
+        text-align: center;
+      }
+    }
+
+    .withrawal-s-info-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -20px;
+      height: 20px;
+    }
+
+
+
+    .withrawal-s-container2 {
+      margin-top: 10px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .withrawal-s-desc2 {
+
+        margin-bottom: 30px;
+        width: 302px;
+        height: 40px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        color: #000000;
+        ;
+      }
+    }
+
+    .withrawal-s-info-body {
+      height: 98px;
+      margin-top: 330px;
+      padding: 0px;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 14px;
+      /* or 140% */
+
+      display: flex;
+      align-items: center;
+
+      color: #707070;
+    }
+
+    .withrawal-s-container {
+      position: relative;
+      width: 350px;
+      height: 255px;
+      background: #fefcf7;
+      border: none;
+    }
+
+    .withrawal-s-view-props {
+      // background-color: greenyellow;
+      margin: 17px 25px 0px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .withrawal-s-view-props-left {
+        // background-color: #D6980E;
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        .withrawal-s-img-left {
+          height: 90px;
+          width: 90px;
+          border-radius: 10px;
+        }
+
+        .withrawal-s-item-name-left {
+          width: 100px;
+          height: 18px;
+          text-align: center;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 11px;
+          margin-top: 10px;
+          line-height: 150%;
+          letter-spacing: 0.05em;
+          color: #000000;
+        }
+
+
+      }
+
+
+
+    }
+
+    .withrawal-s-btn-below {
+      margin-top: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+
+      .btn {
+        width: 300px;
+        height: 51px;
+      }
+    }
+  }
+}

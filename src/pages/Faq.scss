@@ -1,0 +1,49 @@
+.faq-main-container {
+
+  background-color: #fefcf7;
+
+  .faq-container {
+    height: 118px;
+    width: 390px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+
+  }
+
+
+
+  .faq-back-btn {
+    position: absolute;
+    left: 15px;
+    bottom: 15px;
+    z-index: 1000;
+  }
+
+  .faq-title-text-container {
+    position: absolute;
+    top: 63%;
+    bottom: 10.71%;
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 150%;
+    letter-spacing: 0.05em;
+    color: #000000;
+    text-align: center;
+  }
+
+  .faq-ion-content {
+    --padding-start: 40px;
+    --padding-end: 40px;
+    --padding-bottom: 20px;
+    // --padding-top: 25px;
+    --background: #fefcf7;
+
+
+
+  }
+}

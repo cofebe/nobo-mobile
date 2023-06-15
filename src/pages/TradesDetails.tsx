@@ -3,18 +3,15 @@ import React, { useState } from 'react'
 import Header from '../components/Header'
 import './TradeDetails.scss'
 import { useHistory, useParams } from 'react-router'
-import { Product, Trade, TradesResponse } from '../models'
-import { getCardImage } from '../utils'
+import { Product, TradesResponse } from '../models'
+import { formatPrice } from '../utils'
 import { UserService } from '../services/UserService'
 
-interface Data {
-  data: Product
-}
+
 
 const TradesDetails: React.FC = () => {
   const params: any = useParams()
   const userService = new UserService()
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
   const history = useHistory()
   const [trade1, settrade] = useState<TradesResponse[]>([])
@@ -54,7 +51,7 @@ const TradesDetails: React.FC = () => {
   // console.log('test',offered)
 
   const data: any = tradesData[0]?.received.filter((trade) => trade._id === params.id)
-  console.log('a trades ', data)
+  console.log('a trade ', data)
 
   return (
     <IonPage className='trade-details-main-container'>
@@ -67,17 +64,22 @@ const TradesDetails: React.FC = () => {
               <div className="left">
                 <p className='your-item'>YOUR ITEM</p>
                 <div className="img-container">
-                  {<img
+                  <img
                     className='img'
                     src={product?.products?.offered?.images[0].url.length < 60
                       ? `https://staging.thenobo.com/${product?.products?.offered?.images[0].url}`
                       : `${product?.products?.offered?.images[0].url}`} alt={product?.products?.offered?.name}
-                  />}
-                  {/* <img className='img' src={`${offered?.images[0]?.url}`} alt="image" /> */}
+                  />
                 </div>
                 <p className='product-name-left'>{product?.products?.offered?.name}</p>
-                <p className='product-price-left'>{currencyFormat.format(product?.products?.offered?.price)}</p>
-                <p className='your-pay'>YOUR PAY <span className='your-pay-amount'>$142</span> </p>
+                <p className='product-price-left'>{formatPrice(product?.products?.offered?.price)}</p>
+                <p className='your-pay'>YOUR PAY <span className='your-pay-amount'>
+                {formatPrice(
+                    product?.salesTax.recipient.shipping
+                    +product.fee
+                    + product?.salesTax.recipient.taxable_amount
+                  ) || 0}
+                  </span> </p>
 
               </div>
 
@@ -102,8 +104,14 @@ const TradesDetails: React.FC = () => {
                   {/* <img className='img' src="assets/images/test/bvlgary.svg" alt="" /> */}
                 </div>
                 <p className='product-name-right'>{product?.products?.requested?.name}</p>
-                <p className='product-price-right'>{currencyFormat.format(product?.products?.requested?.price)}</p>
-                <p className='your-pay'>THEY PAY <span className='your-pay-amount'>$141.20</span> </p>
+                <p className='product-price-right'>{formatPrice(product?.products?.requested?.price)}</p>
+                <p className='your-pay'>THEY PAY <span className='your-pay-amount'>
+                  {formatPrice(
+                    product?.salesTax.initiator.shipping
+                    +product.fee
+                    + product?.salesTax.initiator.taxable_amount
+                  )}
+                  </span> </p>
               </div>
 
               <div className="line-sep-1"></div>
@@ -113,8 +121,8 @@ const TradesDetails: React.FC = () => {
             <IonCol className='trade-details-body-text'>
               <p className='bodt-text-1'>
                 To complete the transaction you will have to pay 12% trade
-                transaction fee of <span className='price'> $00.00 </span>
-                and <span className='price'>{currencyFormat.format(product?.salesTax.initiator.shipping)} </span> shipping fee. Please
+                transaction fee of <span className='price'>{formatPrice(product?.salesTax.initiator.taxable_amount)} </span>
+                and <span className='price'>{formatPrice(product?.salesTax.initiator.shipping)} </span> shipping fee. Please
                 use one of the preferred payment methods listed below.
               </p>
               <p className='bodt-text-2'>
@@ -133,19 +141,19 @@ const TradesDetails: React.FC = () => {
               <div className='trade-details-t-title'>ORDER SUMMARY</div>
               <div className='trade-details t-value'>
                 <p className='value-title'>Total Transaction Value</p>
-                <p className='value price'>{currencyFormat.format(product?.products?.offered?.price + product?.products?.requested?.price)}</p>
+                <p className='value price'>{formatPrice(product?.products?.offered?.price + product?.products?.requested?.price)}</p>
               </div>
               <div className='trade-details t-shipping'>
                 <p className='shipping-title'>Shipping</p>
-                <p className='shipping price'>{currencyFormat.format(product?.salesTax.initiator.shipping)}</p>
+                <p className='shipping price'>{formatPrice(product?.salesTax.initiator.shipping)}</p>
               </div>
               <div className='trade-details t-value'>
                 <p className='sales-title'>Sales Tax</p>
-                <p className='sales price'>{currencyFormat.format(product?.salesTax.initiator.taxable_amount)}</p>
+                <p className='sales price'>{formatPrice(product?.salesTax.initiator.taxable_amount)}</p>
               </div>
               <div className='trade-details t-value'>
                 <p className='nobo-title'>TheNOBO Trade Fee (12%)</p>
-                <p className='nobo price'>$N/A</p>
+                <p className='nobo price'>{formatPrice(product?.salesTax.initiator.taxable_amount)}</p>
               </div>
               <div className='trade-details t-value'>
                 <p className='savings-title' style={{ color: '#D6980E' }}>Your Savings</p>
@@ -154,7 +162,7 @@ const TradesDetails: React.FC = () => {
               <div className="line-sep-1"></div>
               <div className='trade-details t-value'>
                 <p className='total-title' >YOUR TOTAL</p>
-                <p className='total-price' >{currencyFormat.format(
+                <p className='total-price' >{formatPrice(
                    product?.products?.offered?.price
                   + product?.products?.requested?.price
                   + product?.salesTax.initiator.shipping

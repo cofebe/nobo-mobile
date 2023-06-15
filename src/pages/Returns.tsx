@@ -3,18 +3,14 @@ import React, { useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import './Returns.scss'
 import { UserService } from '../services/UserService'
-import Search from '../components/Search'
-import { FullOrder, OrdersResponse, Product } from '../models'
+import { FullOrder, Product } from '../models'
+import { formatPrice } from '../utils'
 
 
 const Returns: React.FC = () => {
   const history = useHistory()
   const params: any = useParams()
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
   const userService = new UserService()
-  const [allSales, setAllSales] = useState<OrdersResponse[]>([])
-  const [showDetails, setShowDetails] = useState(false)
-  const [dropDown, setDropDownArray] = useState<string[]>([]);
   const [productsData, setProductData] = useState<FullOrder[]>([])
 
 
@@ -36,7 +32,6 @@ const Returns: React.FC = () => {
 
 
 
-  console.log(productsData)
 
   return (
     <IonPage className='return-main-container'>
@@ -75,7 +70,7 @@ const Returns: React.FC = () => {
             </IonCol>
             <IonCol className='return-cost-info' size='2.5'>
               <p className="return-cost-title">Cost</p>
-              <p className="return-cost">{currencyFormat.format(product.price)}</p>
+              <p className="return-cost">{formatPrice(product.price)}</p>
             </IonCol>
           </IonRow>
         ))}
