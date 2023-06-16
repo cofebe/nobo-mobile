@@ -14,7 +14,7 @@ import './ReturnRequest.scss'
 import './ReturnRequest.css'
 import Input from '../components/Input'
 import { Product } from '../models'
-import { getImageUrl } from '../utils'
+import { formatPrice, getImageUrl } from '../utils'
 
 
 const ReturnRequest: React.FC = () => {
@@ -85,7 +85,7 @@ const ReturnRequest: React.FC = () => {
                 </div>
                 <div className='return-r-purchased-info'>
                   <p className='return-r-title'>Priced Paid</p>
-                  <p className='return-r-price'>{product.price}</p>
+                  <p className='return-r-price'>{formatPrice(product.price)}</p>
                 </div>
               </div>
 
