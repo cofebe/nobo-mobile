@@ -74,7 +74,7 @@ const SalesDetails: React.FC = () => {
                   </div>
                   <div className="single-sales-items-props-right">
                     <div className="img-container">
-                      <img src={`${product.images[0].url}`} alt="channel" />
+                      <img style={{maxHeight: '100%'}} src={`${product.images[0].url}`} alt="channel" />
                     </div>
                     <p className='price'>{formatPrice(product.price)}</p>
                   </div>
