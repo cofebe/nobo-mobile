@@ -3,6 +3,7 @@ export interface LoginResponse {
   user: User;
   error: string;
 }
+
 export interface SignUpResponse {
   success: string;
   user: User;
@@ -694,14 +695,18 @@ export interface UserAccData {
   blurbText?: string;
 }
 
-export interface OfferedStatus{
-  buyer:string
-  createdAt:string
-  offeredPrice:number
-  product:any
-  seller:string
-  status:string
-  updatedAt:string
-  _id:string
+export interface OfferedStatus {
+  buyer: string;
+  createdAt: string;
+  offeredPrice: number;
+  product: any;
+  seller: string;
+  status: string;
+  updatedAt: string;
+  _id: string;
+}
 
+export interface UnreadNotificationCountResponse {
+  unread: number;
+  token: string;
 }
