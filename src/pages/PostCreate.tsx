@@ -112,6 +112,13 @@ const PostCreate: React.FC = () => {
     // re-render the image previews
     setDisabledPost(!validate());
     setDisabledPost(!validate());
+    userService
+      .getProfile(authService.getUserId())
+      .then(res => res.json())
+      .then(data => {
+        console.log('Getprofile: ', data['user']['avatar']);
+        setProfilePic(data['user']['avatar']);
+      });
   }, [postImages, highlightLink, data]);
 
   useIonViewWillEnter(() => {
@@ -334,7 +341,7 @@ const PostCreate: React.FC = () => {
       <IonContent className="post-content" fullscreen>
         <IonGrid className="post-grid">
           <IonRow>
-            <IonCol size="12" className="nobo-post-container">
+            <IonCol size="12">
               <IonItem className="nobo-post-input-area" lines="none">
                 <div className="nobo-post-input-text">
                   <IonTextarea
