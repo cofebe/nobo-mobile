@@ -166,12 +166,10 @@ const Home: React.FC = () => {
       });
 
     userService.getUnreadNotificationCount().then(count => {
-      console.log('userService.getUnreadNotificationCount', count);
       setUnreadCount(count);
     });
     setInterval(() => {
       userService.getUnreadNotificationCount().then(count => {
-        console.log('userService.getUnreadNotificationCount', count);
         setUnreadCount(count);
       });
     }, 60000);
