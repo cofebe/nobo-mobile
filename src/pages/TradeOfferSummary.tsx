@@ -55,6 +55,7 @@ const TradeOfferSummary: React.FC = () => {
       )
       .then(res => {
         console.log('trade', res);
+        tradeStore.reset();
         history.push(`/trade/complete/${res._id}`);
       });
   }
