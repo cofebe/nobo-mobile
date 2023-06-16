@@ -32,51 +32,51 @@ const MyTrade: React.FC = () => {
       .catch((err) => { console.log('err info while fetching products ', err) })
   })
 
-  const denyTrade = (productId:string) =>{
+  const denyTrade = (productId: string) => {
     userService.denyTradeOffer(productId)
-    .then((res:TradesResponse) => {
-      if (res){
+      .then((res: TradesResponse) => {
+        if (res) {
 
-        setTimeout(() => {
-          localStorage.setItem('denyTradeData', JSON.stringify(res))
-          history.push(`trades/denied/${productId}`)
-        }, 1000);
-      }else{
-        return
-      }
+          setTimeout(() => {
+            localStorage.setItem('denyTradeData', JSON.stringify(res))
+            history.push(`trades/denied/${productId}`)
+          }, 1000);
+        } else {
+          return
+        }
 
-    })
-    .catch((error) => {
-      console.log('error denying trade : ', error)
-    })
+      })
+      .catch((error) => {
+        console.log('error denying trade : ', error)
+      })
   }
 
 
-  const acceptTrade = (productId:string) =>{
+  const acceptTrade = (productId: string) => {
     userService.acceptTradeOffer(productId)
-    .then((res:TradesResponse) => {
-      if (res){
-        console.log('response from acacepted trade ',res)
-        setTimeout(() => {
-          localStorage.setItem('acceptTradeData', JSON.stringify(res))
-          history.push(`trades/accepted/${productId}`)
-        }, 500);
-      }else{
-        return
-      }
+      .then((res: TradesResponse) => {
+        if (res) {
+          console.log('response from acacepted trade ', res)
+          setTimeout(() => {
+            localStorage.setItem('acceptTradeData', JSON.stringify(res))
+            history.push(`trades/accepted/${productId}`)
+          }, 500);
+        } else {
+          console.log('trade accept fail')
+        }
 
-    })
-    .catch((error) => {
-      console.log('error denying trade : ', error)
-    })
+      })
+      .catch((error) => {
+        console.log('error denying trade : ', error)
+      })
   }
 
 
-const productDetails = (productId:string) =>{
-  const singleProduct:any = tradesData[0]?.received.filter((data:any)=>data._id === productId)
-  history.push({pathname:`trades/details/${productId}`, state:singleProduct})
+  const productDetails = (productId: string) => {
+    const singleProduct: any = tradesData[0]?.received.filter((data: any) => data._id === productId)
+    history.push({ pathname: `trades/details/${productId}`, state: singleProduct })
 
-}
+  }
 
 
   return (
@@ -114,27 +114,29 @@ const productDetails = (productId:string) =>{
 
       >
         <IonGrid>
-        {/* product.status === 'pending' && */}
+          {/* product.status === 'pending' && */}
           {tradesData[0]?.received.map((product: any) => (
             <IonRow key={product._id} style={{ marginBottom: '14px' }}
-            onClick={()=>{
-              productDetails(product._id)
-            }}
+              onClick={() => {
+                if (product.status === 'accepted') {
+                  productDetails(product._id)
+                }
+              }}
             >
               <IonCol className='trade-item-container'>
                 <div className='trade-item-status-container'>
                   <div className="item-status">
                     <p className='status_'>STATUS</p>
-                   {product.status !== 'accepted' ? (<p className='status_text'>{product.status.toUpperCase()} TRADE OFFER</p>) :
-                   (<p className='status_text-accepted'>TRADE {product.status.toUpperCase()}</p>)
-                   }
+                    {product.status !== 'accepted' ? (<p className='status_text'>{product.status.toUpperCase()} TRADE OFFER</p>) :
+                      (<p className='status_text-accepted'>TRADE {product.status.toUpperCase()}</p>)
+                    }
                   </div>
                   <div className="items-view-details"></div>
                 </div>
                 <div className='items-view-props'>
 
                   <div className='items-view-props-left'>
-                  <div className='item-img-left'
+                    <div className='item-img-left'
                       style={{
                         backgroundImage: product.products.offered.images?.length
                           ? getImageUrl(product.products.offered.images[0]?.url)
@@ -154,7 +156,7 @@ const productDetails = (productId:string) =>{
                   </div>
 
                   <div className='items-view-props-right'>
-                  <div className='item-img-right'
+                    <div className='item-img-right'
                       style={{
                         backgroundImage: product.products.requested.images?.length
                           ? getImageUrl(product.products.requested.images[0]?.url)
@@ -168,7 +170,7 @@ const productDetails = (productId:string) =>{
                 </div>
 
                 <div className='trade-offer-line'></div>
-               {product?.status === 'pending'? (<div className='trade-items-btn-container'>
+                {product?.status === 'pending' ? (<div className='trade-items-btn-container'>
                   <IonButton
                     style={{ backgroundColor: 'white' }}
                     size='small' className='trade-item-btn'
@@ -178,14 +180,15 @@ const productDetails = (productId:string) =>{
                     }} >DENY</IonButton>
 
                   <IonButton size='small'
-                  className='trade-item-btn'
-                   onClick={() => {
-                    acceptTrade(product._id)
-                  }} >ACCEPT</IonButton>
-                </div>):
-               <div className='trade-items-btn-container-2'>
-                Oops! It looks like this Product is no longer available.
-                </div>
+                    className='trade-item-btn'
+                    onClick={() => {
+                      acceptTrade(product._id)
+                    }} >ACCEPT
+                  </IonButton>
+                </div>) :
+                  <div className='trade-items-btn-container-2'>
+                    Oops! It looks like this Product is no longer available.
+                  </div>
                 }
               </IonCol>
             </IonRow>

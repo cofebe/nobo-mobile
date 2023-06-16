@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import { UserService } from '../services/UserService'
 import { formatPrice } from '../utils'
 import Input from '../components/Input'
+import { useHistory } from 'react-router'
 
 interface AccResponse {
   availableFunds: number
@@ -15,6 +16,7 @@ interface FundsResponse {
 }
 
 const Withdraw: React.FC = () => {
+  const history = useHistory()
   const userService = new UserService()
   const [pendingFunds, setPendingFunds] = useState<number>(0)
   const [availableFunds, setAvailableFunds] = useState<number>(0)
@@ -41,8 +43,7 @@ const Withdraw: React.FC = () => {
     .then((res: FundsResponse) => {
       console.log('res', res)
       if(res.success){
-        loadBalance()
-        console.log('transfer successfull')
+        history.push('/settings/withdraw/submitted')
       }else{
         console.log('transfer failed')
       }

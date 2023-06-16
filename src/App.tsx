@@ -97,6 +97,7 @@ import ForgetPassword from './pages/ForgetPassword';
 import ReturnPolicy from './pages/ReturnPolicy';
 import TermsAndCondition from './pages/TermsAndCondition';
 import Faq from './pages/Faq';
+import ShippingTerms from './pages/ShippingTerms';
 
 
 setupIonicReact({
@@ -314,10 +315,10 @@ const App: React.FC = () => {
             <Route path="/sales/shipping-label" exact={true}>
               <SalesShippingLabel />
             </Route>
-            <Route path="/purchases/return-request/:id" exact={true}>
+            <Route path="/settings/returns" exact={true}>
               <Returns />
             </Route>
-            <Route path="/purchases/return-product-details" exact={true}>
+            <Route path="/purchases/return-details" exact={true}>
               <ReturnRequest />
             </Route>
             <Route path="/settings/returns/:id/submitted" exact={true}>
@@ -346,6 +347,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/settings/faq" exact={true}>
               <Faq />
+            </Route>
+            <Route path="/settings/shipping-terms" exact={true}>
+              <ShippingTerms />
             </Route>
 
             <Route path="/signup1" exact={true}>

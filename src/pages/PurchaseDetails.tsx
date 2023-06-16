@@ -323,7 +323,7 @@ const PurchaseDetails: React.FC = () => {
             <IonCol style={{ fontWeight: '500px' }} size='12'
               onClick={() => {
                 console.log('returnDtata', returnData)
-                history.push({ pathname: `/purchases/return-product-details`, state: returnData })
+                history.push({ pathname: `/purchases/return-details`, state: returnData })
                 modal.current?.dismiss()
               }}
               className='purchase-details-return-text'
