@@ -17,10 +17,6 @@ import { FullOrder, OrdersResponse } from '../models'
 import { formatPrice, getCardImage, getImageUrl } from '../utils'
 
 
-const url = 'https://thenobo.sfo3.digitaloceanspaces.com/terms.pdf'
-
-
-
 
 const Purchases: React.FC = () => {
   const userService = new UserService()
@@ -112,10 +108,7 @@ console.log(filteredProduct)
 
                   }}
                   ></div>
-                  {/* {<img
-                    className='purchases-item-img'
-                    src={singleProduct.images[0]?.url.length < 60 ? `https://staging.thenobo.com/${singleProduct.images[0]?.url}` : `${singleProduct.images[0]?.url}`} alt={singleProduct.name}
-                  />} */}
+
                 </IonCol>
                 <IonCol size='4.5' className='purchse-item-props'>
                   <p className='purchases-item-brand'>{singleProduct.brand}</p>
