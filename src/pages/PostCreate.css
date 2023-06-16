@@ -67,10 +67,6 @@ ion-button.cancel-btn {
 	/* height: 100px; */
 }
 
-.nobo-post-container {
-	border-bottom: solid #ACACAC 1px;
-}
-
 .post-text::placeholder {
 	color: #9BC9C1;
 }
@@ -185,7 +181,6 @@ ion-button.cancel-btn {
     position: absolute;
     left: 20px;
     right: 20px;
-    border: 3px solid #cae3de38;
     border-radius: 5px;
     height: 500px;
     margin-top: 20px;
@@ -196,7 +191,6 @@ ion-button.cancel-btn {
 .nobo-post-image-gallery img {
     width: 200px;
     border-radius: 1px;
-    border: 5px dashed #D6980E;
     margin: 11px;
 }
 
