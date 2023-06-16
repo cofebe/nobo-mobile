@@ -46,6 +46,7 @@ const Home: React.FC = () => {
   let [userType, setUserType] = useState<string>();
   let [profileURL, setProfileURL] = useState<string>();
   const [experience, setExperience] = useState<string>('women');
+  const [unreadCount, setUnreadCount] = useState(0);
 
   if (!isPlatform('desktop') && !isPlatform('mobileweb')) {
     PushNotifications.requestPermissions().then(result => {
@@ -163,10 +164,19 @@ const Home: React.FC = () => {
       .catch(err => {
         console.log('Error getting user experience', err);
       });
+
+    userService.getUnreadNotificationCount().then(count => {
+      setUnreadCount(count);
+    });
+    setInterval(() => {
+      userService.getUnreadNotificationCount().then(count => {
+        setUnreadCount(count);
+      });
+    }, 60000);
   });
 
   return (
-    <IonContent  scrollY={false}>
+    <IonContent scrollY={false}>
       <IonTabs className="nav-bar-background">
         <IonRouterOutlet>
           <Redirect exact path="/home" to="/home/nobo-home" />
@@ -205,16 +215,16 @@ const Home: React.FC = () => {
           </Route>
 
           <Route path="/home/profile-overview">
-            <ProfileOverviewPage defaultToggled={false}/>
+            <ProfileOverviewPage defaultToggled={false} />
           </Route>
           <Route path="/home/my-profile" exact={true}>
-            <ProfileOverviewPage defaultToggled={false}/>
+            <ProfileOverviewPage defaultToggled={false} />
           </Route>
           <Route path="/home/profile/:id" exact={true}>
-            <ProfileOverviewPage defaultToggled={false} myProfile={false}/>
+            <ProfileOverviewPage defaultToggled={false} myProfile={false} />
           </Route>
           <Route path="/home/style-feed" exact={true}>
-            <ProfileOverviewPage defaultToggled={true}/>
+            <ProfileOverviewPage defaultToggled={true} />
           </Route>
           <Route path="/home/post-create" exact={true}>
             <PostCreate />
@@ -321,6 +331,7 @@ const Home: React.FC = () => {
               style={{ width: '1.5rem' }}
               alt="notifications"
             />
+            {unreadCount > 0 && <div className="dot"></div>}
             {appMode === 'notifications' && (
               <div
                 style={{

@@ -160,6 +160,9 @@
           height: 90px;
           width: 90px;
           border-radius: 10px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
         }
 
         .trade-item-name-left {
@@ -237,7 +240,10 @@
         .item-img-right {
           height: 90px;
           width: 90px;
-          border-radius: 5px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          border-radius: 10px;
         }
 
         .trade-item-name-right {

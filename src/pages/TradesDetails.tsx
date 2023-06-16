@@ -4,7 +4,7 @@ import Header from '../components/Header'
 import './TradeDetails.scss'
 import { useHistory, useParams } from 'react-router'
 import { Product, TradesResponse } from '../models'
-import { formatPrice } from '../utils'
+import { formatPrice, getImageUrl } from '../utils'
 import { UserService } from '../services/UserService'
 
 
@@ -44,11 +44,7 @@ const TradesDetails: React.FC = () => {
 
 
 
-  const offered: any = trade1
-  const requested: any = recieved
-  // console.log(trade1[0])
-  // console.log('test1', offered?.price)
-  // console.log('test',offered)
+
 
   const data: any = tradesData[0]?.received.filter((trade) => trade._id === params.id)
   console.log('a trade ', data)
@@ -63,14 +59,13 @@ const TradesDetails: React.FC = () => {
             <IonCol size='12' className='trade-details-items'>
               <div className="left">
                 <p className='your-item'>YOUR ITEM</p>
-                <div className="img-container">
-                  <img
-                    className='img'
-                    src={product?.products?.offered?.images[0].url.length < 60
-                      ? `https://staging.thenobo.com/${product?.products?.offered?.images[0].url}`
-                      : `${product?.products?.offered?.images[0].url}`} alt={product?.products?.offered?.name}
-                  />
-                </div>
+                <div className="img-container"
+                style={{
+                  backgroundImage: product?.products?.offered?.images?.length
+                    ? getImageUrl(product?.products?.offered?.images[0]?.url)
+                    : '',
+                }}
+                ></div>
                 <p className='product-name-left'>{product?.products?.offered?.name}</p>
                 <p className='product-price-left'>{formatPrice(product?.products?.offered?.price)}</p>
                 <p className='your-pay'>YOUR PAY <span className='your-pay-amount'>
@@ -93,16 +88,12 @@ const TradesDetails: React.FC = () => {
               <div className="right">
                 <p className='your-item'>THEIR ITEM</p>
                 <div className="img-container"
-                // style={{backgroundImage:`url${getCardImage(product?.products?.requested?.images[0].url)}`}}
-                >
-                  {<img
-                    className='img'
-                    src={product?.products?.requested?.images[0]?.url.length < 60
-                      ? `https://staging.thenobo.com/${requested?.images[0].url}`
-                      : `${product?.products?.requested?.images[0].url}`} alt={product?.products?.requested?.name}
-                  />}
-                  {/* <img className='img' src="assets/images/test/bvlgary.svg" alt="" /> */}
-                </div>
+                style={{
+                  backgroundImage: product?.products?.requested?.images?.length
+                    ? getImageUrl(product?.products?.requested?.images[0]?.url)
+                    : '',
+                }}
+                ></div>
                 <p className='product-name-right'>{product?.products?.requested?.name}</p>
                 <p className='product-price-right'>{formatPrice(product?.products?.requested?.price)}</p>
                 <p className='your-pay'>THEY PAY <span className='your-pay-amount'>

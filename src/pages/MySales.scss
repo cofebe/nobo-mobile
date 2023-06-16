@@ -155,6 +155,10 @@
         .img-container {
           height: 75px;
           width: 75px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          border-radius: 10px;
         }
 
         .price {

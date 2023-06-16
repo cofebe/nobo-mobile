@@ -1,8 +1,8 @@
-.return-policy-main-container {
+.shipping-terms-main-container {
 
   background-color: #fefcf7;
 
-  .return-policy-container {
+  .shipping-terms-container {
     height: 118px;
     width: 390px;
     position: absolute;
@@ -15,14 +15,14 @@
 
 
 
-  .return-policy-back-btn {
+  .shipping-terms-back-btn {
     position: absolute;
     left: 36px;
     bottom: 15px;
     z-index: 1000;
   }
 
-  .return-policy-title-text-container {
+  .shipping-terms-title-text-container {
     position: absolute;
     top: 63%;
     bottom: 10.71%;
@@ -36,9 +36,9 @@
     text-align: center;
   }
 
-  .return-policy-ion-content {
-    --padding-start: 27px;
-    --padding-end: 31px;
+  .shipping-terms-ion-content {
+    --padding-start: 40px;
+    --padding-end: 41px;
     --padding-bottom: 20px;
     --padding-top: 22px;
     --background: #fefcf7;

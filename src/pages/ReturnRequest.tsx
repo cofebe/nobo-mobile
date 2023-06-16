@@ -14,6 +14,7 @@ import './ReturnRequest.scss'
 import './ReturnRequest.css'
 import Input from '../components/Input'
 import { Product } from '../models'
+import { getImageUrl } from '../utils'
 
 
 const ReturnRequest: React.FC = () => {
@@ -60,19 +61,18 @@ const ReturnRequest: React.FC = () => {
       </IonRow>
 
       <IonContent className='return-r-item-content'>
-        <IonRow style={{ padding: '0px', marginTop:'17px' }}>
+        <IonRow style={{ padding: '0px', marginTop: '17px' }}>
           {productsData?.map((product: Product) => (
 
             <IonCol className='return-r-item-prop-container' size='12'>
 
-              <div className='img-container'>
-                {<img
-                  height={90}
-                  width={90}
-                  src={product.images[0]?.url.length < 60 ? `https://staging.thenobo.com/${product.images[0]?.url}` : `${product.images[0]?.url}`} alt={product.name}
-                />}
-                {/* <img height={90} src="assets/images/test/item.png" alt="" /> */}
-              </div>
+              <div className='img-container'
+                style={{
+                  backgroundImage: product.images?.length
+                    ? getImageUrl(product.images[0]?.url)
+                    : '',
+                }}
+              > </div>
 
               <div className="right-props">
                 <div className='return-r-brand-name-box' >
