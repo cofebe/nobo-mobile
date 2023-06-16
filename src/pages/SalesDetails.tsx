@@ -79,7 +79,7 @@ const SalesDetails: React.FC = () => {
                           ? getImageUrl(product.images[0]?.url)
                           : '',
                       }}
-                    > </div>
+                    ></div>
                     <p className='price'>{formatPrice(product.price)}</p>
                   </div>
                 </IonCol>
