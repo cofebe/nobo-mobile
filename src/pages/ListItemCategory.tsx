@@ -44,6 +44,7 @@ const ListItemCategory: React.FC = () => {
     setIsTrade(isTradeUrl);
 
     reset();
+    listingStore.reset();
 
     //listingStore.reset();
     subscription = listingStore.subscribe((state: ListingState) => {
