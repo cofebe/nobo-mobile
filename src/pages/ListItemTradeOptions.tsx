@@ -13,6 +13,7 @@ import { useHistory } from 'react-router';
 
 import './ListItem.scss';
 import BrandSelect from '../components/BrandSelect';
+import BrandSelectModal from '../components/BrandSelectModal';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Checkbox from '../components/Checkbox';
@@ -34,6 +35,7 @@ const ListItemTradeOptions: React.FC = () => {
   const [isTrade, setIsTrade] = useState(false);
   const [tradeSteps, setTradeSteps] = useState(3);
   const [allOptions, setAllOptions] = useState(false);
+  const [showBrandModal, setShowBrandModal] = useState(-1);
   const [tradeOptions, setTradeOptions] = useState<TradeOption[]>([
     {
       brand: '',
@@ -107,7 +109,7 @@ const ListItemTradeOptions: React.FC = () => {
       action: 'trade',
       name: state.productTitle,
       brand: state.brand,
-      description: '',
+      description: state.productDescription,
       receipt: state.receiptUrl,
       price: state.price,
       retailPrice: state.estimatedPrice,
@@ -166,7 +168,7 @@ const ListItemTradeOptions: React.FC = () => {
         </div>
         <span className="trade-steps">{tradeSteps}/3</span>
       </IonHeader>
-      <IonContent style={{ zIndex: 100 }}>
+      <IonContent>
         <IonGrid className="list-item-content">
           <div className="">
             {[...Array(3)].map((_, i) => (
@@ -209,12 +211,7 @@ const ListItemTradeOptions: React.FC = () => {
                       value={tradeOptions[i].brand}
                       placeholder="DESIGNER/BRAND"
                       disabled={allOptions}
-                      onChange={val => {
-                        setTradeOptions(prev => {
-                          prev[i].brand = val;
-                          return [...prev];
-                        });
-                      }}
+                      onShow={() => setShowBrandModal(i)}
                     />
                   </IonCol>
                 </IonRow>
@@ -283,6 +280,18 @@ const ListItemTradeOptions: React.FC = () => {
           </IonRow>
         </IonGrid>
       </IonContent>
+      <BrandSelectModal
+        value={showBrandModal === -1 ? '' : tradeOptions[showBrandModal].brand}
+        show={showBrandModal !== -1}
+        onChange={val => {
+          setTradeOptions(prev => {
+            prev[showBrandModal].brand = val;
+            return [...prev];
+          });
+          setShowBrandModal(-1);
+        }}
+        onCancel={() => setShowBrandModal(-1)}
+      />
     </IonPage>
   );
 };

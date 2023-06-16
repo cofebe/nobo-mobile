@@ -1,9 +1,4 @@
-import { useState } from 'react';
-import { IonButton, IonIcon } from '@ionic/react';
-import { checkmarkOutline } from 'ionicons/icons';
 import './BrandSelect.scss';
-import { brands } from '../data/brands';
-import Search from './Search';
 
 interface BrandSelectProps {
   className?: string;
@@ -11,7 +6,7 @@ interface BrandSelectProps {
   placeholder?: string;
   disabled?: boolean;
   border?: boolean;
-  onChange: (val: string) => void;
+  onShow: () => void;
 }
 
 const BrandSelect: React.FC<BrandSelectProps> = ({
@@ -20,21 +15,8 @@ const BrandSelect: React.FC<BrandSelectProps> = ({
   placeholder,
   disabled,
   border,
-  onChange,
+  onShow,
 }) => {
-  const [showBrandModal, setShowBrandModal] = useState(false);
-  const [search, setSearch] = useState('');
-  const [allBrands, setAllBrands] = useState(brands);
-
-  function searchOnChange(val: string) {
-    setSearch(val);
-    if (val) {
-      val = val.trim();
-      const filteredBrands = brands.filter(b => b.toLowerCase().includes(val.toLowerCase()));
-      setAllBrands(filteredBrands);
-    }
-  }
-
   return (
     <div className="brand-select-container">
       <div
@@ -47,7 +29,7 @@ const BrandSelect: React.FC<BrandSelectProps> = ({
         onClick={e => {
           e.preventDefault();
           e.stopPropagation();
-          setShowBrandModal(true);
+          onShow();
         }}
       >
         <div className="brand-select-container">
@@ -59,49 +41,6 @@ const BrandSelect: React.FC<BrandSelectProps> = ({
           </div>
         </div>
       </div>
-      {showBrandModal && (
-        <div className="brand-modal-container">
-          <div className="brand-modal">
-            <div className="search-container">
-              <Search
-                value={search}
-                onChange={val => {
-                  searchOnChange(val);
-                }}
-              />
-            </div>
-            <div className="options">
-              {allBrands.map((o, index) => (
-                <div
-                  key={index}
-                  className={'option' + (o === value ? ' selected' : '')}
-                  onClick={e => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    onChange(o);
-                    setShowBrandModal(false);
-                  }}
-                >
-                  <div>{o}</div>
-                  <IonIcon icon={checkmarkOutline}></IonIcon>
-                </div>
-              ))}
-            </div>
-            <div className="buttons">
-              <IonButton
-                className="button-cancel"
-                onClick={e => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setShowBrandModal(false);
-                }}
-              >
-                Cancel
-              </IonButton>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
