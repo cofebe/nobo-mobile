@@ -46,14 +46,13 @@
       gap: 14px;
 
       .img-container {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
         border-radius: 10px;
         height: 90px;
         width: 90px;
-        background-color: purple;
 
-        >img{
-          border-radius: 10px;
-        }
       }
 
       .right-props {

@@ -147,7 +147,10 @@
             height: 50px;
             width: 50px;
             left: 2px;
-            border-radius: 10px;
+            background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          border-radius: 10px;
 
           }
 
@@ -156,6 +159,9 @@
             height: 50px;
             width: 50px;
             right: 2px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
             border-radius: 10px;
 
           }

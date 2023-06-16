@@ -18,7 +18,7 @@ import './PurchaseDetails.css'
 import { useHistory, useParams } from 'react-router'
 import { UserService } from '../services/UserService'
 import { FullOrder, User } from '../models'
-import { formatPrice, getCardImage } from '../utils'
+import { formatPrice, getCardImage, getImageUrl } from '../utils'
 import SendMessageModal from '../components/SendMessageModal'
 
 
@@ -167,10 +167,10 @@ const PurchaseDetails: React.FC = () => {
                 <img className='order-details-card-brand' src={getCardImage(product.charge.source.brand)} alt='card brand' />
 
               </div>
-              {/* <div className='order-details-item-order-status'>
+              <div className='order-details-item-order-status'>
 								<p style={{ color: '#ACACAC', textAlign: 'center' }}>STATUS</p>
 								<p style={{ color: '#42D60E', textAlign: 'center' }}>{product.status}</p>
-							</div> */}
+							</div>
             </div>
 
 
@@ -180,29 +180,30 @@ const PurchaseDetails: React.FC = () => {
                   <p className='order-details-purchased-from'>Purchased From</p>
                   <p className='order-details-vendor-name'>{singleProduct.vendor.displayName}</p>
                   <p className='order-details-return-icon'
-                    onClick={() => { modal.current?.present()
+                    onClick={() => {
+                      modal.current?.present()
                       setReturnData(singleProduct)
-                    // console.log(singleProduct)
-                  }}
+                    }}
 
                   >
                     <img src='assets/images/menu-dots.svg' alt="menu" />
                   </p>
                 </IonCol>
                 <IonCol size='12' className='order-details-img-props'>
-                  <img
-                    className='order-details-item-img'
-                    height={68}
-                    width={68}
-                    src={singleProduct.images[0]?.url.length < 60 ? `https://thenobo.com/${singleProduct.images[0]?.url}`
-                      : `${singleProduct.images[0]?.url}`} alt={singleProduct.name}
-                  />
+                  <div className='order-details-img-box'
+                  style={{
+                    backgroundImage: singleProduct.images?.length
+                      ? getImageUrl(singleProduct.images[0]?.url)
+                      : '',}}
+                  ></div>
+
                   <div className='order-details-item-info'>
                     <p className='order-details-brand'>{singleProduct.brand}</p>
                     <p className='order-details-name'>{singleProduct.name}</p>
                     <p className='order-details-price'>{formatPrice(singleProduct.price)}</p>
                   </div>
-                  <div className='order-details-showmore' >
+
+                  <div className='order-details-showmore'>
                     <p className='order-details-text' style={{}}>
                       show more
                     </p>
@@ -321,8 +322,8 @@ const PurchaseDetails: React.FC = () => {
           <IonRow className="purchase-details-return-box">
             <IonCol style={{ fontWeight: '500px' }} size='12'
               onClick={() => {
-                console.log('returnDtata',returnData)
-                history.push({pathname:`/purchases/return-product-details`, state:returnData})
+                console.log('returnDtata', returnData)
+                history.push({ pathname: `/purchases/return-product-details`, state: returnData })
                 modal.current?.dismiss()
               }}
               className='purchase-details-return-text'

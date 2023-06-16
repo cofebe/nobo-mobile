@@ -12,7 +12,7 @@ import './MyTrade.scss'
 import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
 import { FullOrder, Trade, TradesResponse } from '../models'
-import { formatPrice } from '../utils'
+import { formatPrice, getImageUrl } from '../utils'
 
 
 
@@ -134,12 +134,14 @@ const productDetails = (productId:string) =>{
                 <div className='items-view-props'>
 
                   <div className='items-view-props-left'>
-                    {<img
-                      className='item-img-left'
-                      src={product.products.offered.images[0]?.url.length < 60
-                        ? `https://staging.thenobo.com/${product.products.offered.images[0].url}`
-                        : `${product.products.offered.images[0].url}`} alt={product.products.name}
-                    />}
+                  <div className='item-img-left'
+                      style={{
+                        backgroundImage: product.products.offered.images?.length
+                          ? getImageUrl(product.products.offered.images[0]?.url)
+                          : '',
+                      }}
+                    > </div>
+
                     <div className="trade-item-name-left">{product.products.offered.name.toUpperCase()}</div>
                     <div className="trade-item-price-left">{formatPrice(product.products.offered.price)}</div>
                   </div>
@@ -152,12 +154,14 @@ const productDetails = (productId:string) =>{
                   </div>
 
                   <div className='items-view-props-right'>
-                    {<img
-                      className='item-img-right'
-                      src={product.products.requested.images[0]?.url.length < 60 ?
-                        `https://staging.thenobo.com/${product.products.requested.images[0].url}` :
-                        `${product.products.requested.images[0].url}`} alt={product.products.name}
-                    />}
+                  <div className='item-img-right'
+                      style={{
+                        backgroundImage: product.products.requested.images?.length
+                          ? getImageUrl(product.products.requested.images[0]?.url)
+                          : '',
+                      }}
+                    > </div>
+
                     <div className="trade-item-name-right">{product.products.requested.name.toUpperCase()}</div>
                     <div className="trade-item-price-right">{formatPrice(product.products.requested.price)}</div>
                   </div>

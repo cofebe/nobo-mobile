@@ -21,14 +21,19 @@ const Withdraw: React.FC = () => {
   const [email, setEmail] = useState('')
   const [showInput, setShowInput] = useState(false)
 
-  useIonViewWillEnter(() => {
+
+  const loadBalance = () =>{
     userService.getAccount()
-      .then((res: AccResponse) => {
-        setPendingFunds(res.pendingFunds)
-        setAvailableFunds(res.availableFunds)
-        console.log('res', res)
-      })
-      .catch((error) => { console.log('err getting acc details', error) })
+    .then((res: AccResponse) => {
+      setPendingFunds(res.pendingFunds)
+      setAvailableFunds(res.availableFunds)
+      console.log('res', res)
+    })
+    .catch((error) => { console.log('err getting acc details', error) })
+  }
+
+  useIonViewWillEnter(() => {
+   loadBalance()
   })
 
   const transferFunds = (paypal:string, email:string) =>{
@@ -36,6 +41,7 @@ const Withdraw: React.FC = () => {
     .then((res: FundsResponse) => {
       console.log('res', res)
       if(res.success){
+        loadBalance()
         console.log('transfer successfull')
       }else{
         console.log('transfer failed')
