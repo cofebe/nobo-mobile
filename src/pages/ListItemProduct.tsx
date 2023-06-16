@@ -45,6 +45,7 @@ const ListItemProduct: React.FC = () => {
   const [itemType, setItemType] = useState<Category | null>(null);
   const [fileName, setFileName] = useState<string>('');
   const [productTitle, setProductTitle] = useState('');
+  const [productDescription, setProductDescription] = useState('');
   const [receiptUrl, setReceiptUrl] = useState<string>('');
   const [seletectedAttributes, setSelectedAttributes] = useState<ItemAttributesWithValues[]>(
     attributes.map((attribute: ItemAttributes) => {
@@ -259,7 +260,7 @@ const ListItemProduct: React.FC = () => {
       action: 'sell',
       name: productTitle,
       brand: state.brand,
-      description: '',
+      description: productDescription,
       receipt: receiptUrl,
       price: state.price,
       retailPrice: state.estimatedPrice,
@@ -325,6 +326,19 @@ const ListItemProduct: React.FC = () => {
                   onChange={val => {
                     setProductTitle(val);
                     listingStore.setProductTitle(val);
+                  }}
+                />
+              </IonCol>
+            </IonRow>
+            <IonRow className="margin-bottom-5">
+              <IonCol>
+                <Textarea
+                  value={productDescription}
+                  className="input-height"
+                  placeholder="Product Description"
+                  onChange={val => {
+                    setProductDescription(val);
+                    listingStore.setProductDescription(val);
                   }}
                 />
               </IonCol>

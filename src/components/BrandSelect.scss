@@ -1,76 +1,76 @@
-.brand-select-container {
-  .brand-modal-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 101;
+.brand-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 101;
 
-    .brand-modal {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      border-radius: 10px;
-      padding: 16px 30px;
-      height: 60vh;
-      width: 70vw;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
+  .brand-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px;
+    padding: 16px 30px;
+    height: 60vh;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 
-      .search-container {
-        padding-bottom: 10px;
+    .search-container {
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+
+    .options {
+      overflow: auto;
+      flex: 1;
+
+      .option {
         padding-top: 10px;
-      }
+        padding-bottom: 10px;
+        display: flex;
+        font-size: 17px;
 
-      .options {
-        overflow: auto;
-        flex: 1;
-
-        .option {
-          padding-top: 10px;
-          padding-bottom: 10px;
-          display: flex;
-          font-size: 17px;
-
-          div {
-            flex: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-
-          ion-icon {
-            visibility: hidden;
-            height: 24px;
-            width: 24px;
-          }
-
-          &.selected {
-            ion-icon {
-              visibility: visible;
-            }
-          }
+        div {
+          flex: 1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
-      }
 
-      .buttons {
-        ion-button {
-          --color: black;
-          --background: white;
-          --border-radius: 4px;
-          height: fit-content;
-          width: 100%;
-          margin-top: 24px;
+        ion-icon {
+          visibility: hidden;
+          height: 24px;
+          width: 24px;
+        }
+
+        &.selected {
+          ion-icon {
+            visibility: visible;
+          }
         }
       }
     }
-  }
 
+    .buttons {
+      ion-button {
+        --color: black;
+        --background: white;
+        --border-radius: 4px;
+        height: fit-content;
+        width: 100%;
+        margin-top: 24px;
+      }
+    }
+  }
+}
+
+.brand-select-container {
   .brand-select {
     position: relative;
     font-size: 15px;

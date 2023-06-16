@@ -14,6 +14,7 @@ import { useHistory } from 'react-router';
 import './ListItem.scss';
 import Select, { SelectOption } from '../components/Select';
 import BrandSelect from '../components/BrandSelect';
+import BrandSelectModal from '../components/BrandSelectModal';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import { CategoryService } from '../services/CategoryService';
@@ -255,9 +256,8 @@ const ListItemCategory: React.FC = () => {
                   placeholder="SELECT BRAND"
                   disabled={!itemType}
                   value={brand}
-                  onChange={val => {
-                    setBrand(val);
-                    listingStore.setBrand(val);
+                  onShow={() => {
+                    setShowBrandModal(true);
                   }}
                 ></BrandSelect>
               </IonCol>
@@ -309,6 +309,16 @@ const ListItemCategory: React.FC = () => {
           </>
         </IonGrid>
       </IonContent>
+      <BrandSelectModal
+        value={brand}
+        show={showBrandModal}
+        onChange={val => {
+          setBrand(val);
+          listingStore.setBrand(val);
+          setShowBrandModal(false);
+        }}
+        onCancel={() => setShowBrandModal(false)}
+      />
     </IonPage>
   );
 };
