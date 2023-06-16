@@ -5,7 +5,7 @@ import './MyOffers.scss'
 import { UserService } from '../services/UserService'
 import { CreateProductResponse } from '../models'
 import { useHistory } from 'react-router'
-import { formatPrice } from '../utils'
+import { formatPrice, getImageUrl } from '../utils'
 
 
 
@@ -83,9 +83,16 @@ const MyOffers: React.FC = () => {
           <div key={offer._id}>
             <IonRow style={{ padding: '0px' }}>
               <IonCol className='my-offers-item-container'>
-                <img src={`${offer?.product.images[0]?.url}`} alt=""
+              <div className='img'
+                      style={{
+                        backgroundImage: offer?.product.images?.length
+                          ? getImageUrl(offer?.product.images[0]?.url)
+                          : '',
+                      }}
+                    > </div>
+                {/* <img src={`${offer?.product.images[0]?.url}`} alt=""
                   className='img'
-                />
+                /> */}
                 <div>
                   <p className={
                     offer?.status === 'pending' ?

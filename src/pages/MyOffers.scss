@@ -18,6 +18,9 @@
         height: 90px;
         width: 90px;
         border-radius: 10px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
       }
 
       &>div {

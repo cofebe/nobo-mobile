@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import './MySales.scss'
 import { UserService } from '../services/UserService'
 import { OrdersResponse } from '../models'
-import { formatPrice } from '../utils'
+import { formatPrice, getImageUrl } from '../utils'
 
 
 const MySales: React.FC = () => {
@@ -80,9 +80,14 @@ const MySales: React.FC = () => {
                     <div className="year">{new Date(sProduct?.createdAt).toDateString().slice(0 - 11)}</div>
                   </div>
                   <div className="sales-items-props-right">
-                    <div className="img-container">
-                      <img src={`${sProduct?.images[0].url}`} alt="channel" />
-                    </div>
+                    <div className='img-container'
+                      style={{
+                        backgroundImage: sProduct.images?.length
+                          ? getImageUrl(sProduct.images[0]?.url)
+                          : '',
+                      }}
+                    > </div>
+
                     <p className='price'>{formatPrice(sProduct?.price)}</p>
                   </div>
                 </IonCol>

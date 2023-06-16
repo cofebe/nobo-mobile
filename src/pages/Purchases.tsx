@@ -14,7 +14,7 @@ import { useHistory, } from 'react-router'
 import Search from '../components/Search'
 import { UserService } from '../services/UserService'
 import { FullOrder, OrdersResponse } from '../models'
-import { formatPrice, getCardImage } from '../utils'
+import { formatPrice, getCardImage, getImageUrl } from '../utils'
 
 
 const url = 'https://thenobo.sfo3.digitaloceanspaces.com/terms.pdf'
@@ -104,10 +104,18 @@ console.log(filteredProduct)
             {product.products.map((singleProduct: any) => (
               <IonRow className='purchase-item' >
                 <IonCol size='3' className='purchases-item-img-container'>
-                  {<img
+                <div className='purchases-item-img'
+                  style={{
+                    backgroundImage: singleProduct.images?.length
+                      ? getImageUrl(singleProduct.images[0]?.url)
+                      : '',
+
+                  }}
+                  ></div>
+                  {/* {<img
                     className='purchases-item-img'
                     src={singleProduct.images[0]?.url.length < 60 ? `https://staging.thenobo.com/${singleProduct.images[0]?.url}` : `${singleProduct.images[0]?.url}`} alt={singleProduct.name}
-                  />}
+                  />} */}
                 </IonCol>
                 <IonCol size='4.5' className='purchse-item-props'>
                   <p className='purchases-item-brand'>{singleProduct.brand}</p>

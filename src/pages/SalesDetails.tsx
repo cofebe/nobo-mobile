@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router'
 import './SalesDetails.scss'
 import { UserService } from '../services/UserService'
 import { FullOrder } from '../models'
-import { formatPrice } from '../utils'
+import { formatPrice, getImageUrl } from '../utils'
 
 const SalesDetails: React.FC = () => {
   const history = useHistory()
@@ -73,9 +73,13 @@ const SalesDetails: React.FC = () => {
                     <div className="year">{new Date(product.createdAt).toDateString().slice(0 - 11)}</div>
                   </div>
                   <div className="single-sales-items-props-right">
-                    <div className="img-container">
-                      <img src={`${product.images[0].url}`} alt="channel" />
-                    </div>
+                  <div className='img-container'
+                      style={{
+                        backgroundImage: product.images?.length
+                          ? getImageUrl(product.images[0]?.url)
+                          : '',
+                      }}
+                    > </div>
                     <p className='price'>{formatPrice(product.price)}</p>
                   </div>
                 </IonCol>

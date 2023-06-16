@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import { UserService } from '../services/UserService'
 import { formatPrice } from '../utils'
 import Input from '../components/Input'
+import { useHistory } from 'react-router'
 
 interface AccResponse {
   availableFunds: number
@@ -15,20 +16,26 @@ interface FundsResponse {
 }
 
 const Withdraw: React.FC = () => {
+  const history = useHistory()
   const userService = new UserService()
   const [pendingFunds, setPendingFunds] = useState<number>(0)
   const [availableFunds, setAvailableFunds] = useState<number>(0)
   const [email, setEmail] = useState('')
   const [showInput, setShowInput] = useState(false)
 
-  useIonViewWillEnter(() => {
+
+  const loadBalance = () =>{
     userService.getAccount()
-      .then((res: AccResponse) => {
-        setPendingFunds(res.pendingFunds)
-        setAvailableFunds(res.availableFunds)
-        console.log('res', res)
-      })
-      .catch((error) => { console.log('err getting acc details', error) })
+    .then((res: AccResponse) => {
+      setPendingFunds(res.pendingFunds)
+      setAvailableFunds(res.availableFunds)
+      console.log('res', res)
+    })
+    .catch((error) => { console.log('err getting acc details', error) })
+  }
+
+  useIonViewWillEnter(() => {
+   loadBalance()
   })
 
   const transferFunds = (paypal:string, email:string) =>{
@@ -36,7 +43,7 @@ const Withdraw: React.FC = () => {
     .then((res: FundsResponse) => {
       console.log('res', res)
       if(res.success){
-        console.log('transfer successfull')
+        history.push('/settings/withdraw/submitted')
       }else{
         console.log('transfer failed')
       }
