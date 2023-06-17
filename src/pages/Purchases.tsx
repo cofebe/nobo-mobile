@@ -47,29 +47,24 @@ const Purchases: React.FC = () => {
 console.log(filteredProduct)
   return (
     <IonPage className='purchase-item-main-container'>
-      <IonHeader className='purchase-item-header'>
-        <IonToolbar className='purchase-item-header-toolbar'>
-          <IonGrid>
-            <IonRow>
-              <IonCol size='12'>
-                <div className='purchase-item-title'>
-                  <div
-                    className='purchase-item-back-button'
-                    onClick={e => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      history.goBack();
-                    }}
-                  >
-                    <img src='assets/images/arrow-left.svg' alt='back' />
-                  </div>
-                  MY PURCHASES
-                </div>
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-        </IonToolbar>
-      </IonHeader>
+      <IonRow >
+        <IonCol style={{ height: '118px'  }} size='12'>
+          <div
+            className='purchases-back-btn'
+            onClick={() => {
+              history.goBack()
+            }}
+          >
+            <img
+              height={23}
+              src='assets/images/arrow-left.svg'
+              alt='logo'
+            />
+          </div>
+
+          <IonCol className='purchases-title-text-container'>MY PURCHASES</IonCol>
+        </IonCol>
+      </IonRow>
       <div className='purchase-item-search-container'>
         <Search
           value={inputValue}
@@ -117,7 +112,12 @@ console.log(filteredProduct)
                 </IonCol>
                 <IonCol size='3.7' className='purchases-item-status-container'>
                   <p className='purchases-item-status'>STATUS</p>
+                  {
+                  singleProduct.shipmentInfo?.status === 'delivered'?
                   <p className='purchases-item-status-info'>{singleProduct.shipmentInfo?.status}</p>
+                  :
+                  <p className='purchases-item-status-info-await'>Awaiting Shipment</p>
+                  }
 
                     <a className='purchases-item-track' href={`${singleProduct.tracker?.public_url}`}
                      rel='noreferrer'

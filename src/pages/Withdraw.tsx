@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import './Withdraw.scss'
-import { IonButton, IonCol, IonContent, IonPage, IonRow, useIonViewWillEnter } from '@ionic/react'
+import './Withdraw.css'
+import { IonButton, IonCol, IonContent, IonModal, IonPage, IonRow, useIonViewWillEnter } from '@ionic/react'
 import Header from '../components/Header'
 import { UserService } from '../services/UserService'
 import { formatPrice } from '../utils'
@@ -23,32 +24,40 @@ const Withdraw: React.FC = () => {
   const [email, setEmail] = useState('')
   const [showInput, setShowInput] = useState(false)
 
+  const modal = useRef<HTMLIonModalElement>(null)
+const present = () =>{
+  modal.current?.present()
+}
+const dismiss = () =>{
+  modal.current?.dismiss()
+}
 
-  const loadBalance = () =>{
+  const loadBalance = () => {
     userService.getAccount()
-    .then((res: AccResponse) => {
-      setPendingFunds(res.pendingFunds)
-      setAvailableFunds(res.availableFunds)
-      console.log('res', res)
-    })
-    .catch((error) => { console.log('err getting acc details', error) })
+      .then((res: AccResponse) => {
+        setPendingFunds(res.pendingFunds)
+        setAvailableFunds(res.availableFunds)
+        console.log('res', res)
+      })
+      .catch((error) => { console.log('err getting acc details', error) })
   }
 
   useIonViewWillEnter(() => {
-   loadBalance()
+    loadBalance()
   })
 
-  const transferFunds = (paypal:string, email:string) =>{
+  const transferFunds = (paypal: string, email: string) => {
     userService.transferFunds(paypal, email)
-    .then((res: FundsResponse) => {
-      console.log('res', res)
-      if(res.success){
-        history.push('/settings/withdraw/submitted')
-      }else{
-        console.log('transfer failed')
-      }
-    })
-    .catch((error) => { console.log('err getting acc details', error) })
+      .then((res: FundsResponse) => {
+        console.log('res', res)
+        if (res.success) {
+          dismiss()
+          history.push('/settings/withdraw/submitted')
+        } else {
+          console.log('transfer failed')
+        }
+      })
+      .catch((error) => { console.log('err getting acc details', error) })
   }
 
 
@@ -93,9 +102,9 @@ const Withdraw: React.FC = () => {
         <IonRow className='withdraw-payment-method-box'>
 
           <IonCol size='5.5' className='payment-box'
-          onClick={()=>{
-            setShowInput(!showInput)
-          }}
+            onClick={() => {
+              present()
+            }}
           >
             <div className='img-container'>
               <img className='' height={78} src='assets/images/test/your-bank-eclips.svg' alt="" />
@@ -115,11 +124,11 @@ const Withdraw: React.FC = () => {
           {/* </IonCol> */}
         </IonRow>
 
-       { showInput  &&(<IonRow className='withdraw-payment-input-container'>
+        {/* {showInput && (<IonRow className='withdraw-payment-input-container'>
           <IonCol size='12'>
             <Input
-            className='withdraw-input'
-            placeholder='EMAIL ADDRESS'
+              className='withdraw-input'
+              placeholder='EMAIL ADDRESS'
               value={email}
               onChange={(val) => {
                 setEmail(val)
@@ -128,13 +137,44 @@ const Withdraw: React.FC = () => {
           </IonCol>
           <div className="withrawal-r-btn-below">
             <IonButton style={{ backgroundColor: 'white' }} className='btn'
-             onClick={() => {
-              transferFunds('paypal', email)
-            }} >TRANSFER FUNDS</IonButton>
+              onClick={() => {
+                transferFunds('paypal', email)
+              }} >TRANSFER FUNDS</IonButton>
           </div>
-        </IonRow>)}
+        </IonRow>)} */}
 
       </IonContent>
+
+      <IonModal
+        ref={modal} trigger='open-return-modal' initialBreakpoint={1} breakpoints={[0, 5]}
+        className='withdraw-details-ion'
+      >
+        <IonContent  >
+          <IonRow className='withdraw-payment-input-container'>
+            <IonCol size='12' className='withdraw-payment-input-box'>
+              <Input
+                className='withdraw-input'
+                placeholder='EMAIL ADDRESS'
+                value={email}
+                onChange={(val) => {
+                  setEmail(val)
+                }}
+              ></Input>
+
+            </IonCol>
+              <IonCol size='12' className='btn-container'>
+              {/* <div className="withrawal-r-btn-below"> */}
+              <IonButton style={{ backgroundColor: 'white' }} className='btn'
+                onClick={() => {
+                  transferFunds('paypal', email)
+                }} >TRANSFER FUNDS</IonButton>
+            {/* </div> */}
+              </IonCol>
+
+          </IonRow>
+        </IonContent>
+      </IonModal>
+
     </IonPage>
   )
 }
