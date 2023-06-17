@@ -6,6 +6,7 @@ import { UserService } from '../services/UserService'
 import { CreateProductResponse } from '../models'
 import { useHistory } from 'react-router'
 import { formatPrice, getImageUrl } from '../utils'
+import Button from '../components/Button'
 
 
 
@@ -83,13 +84,13 @@ const MyOffers: React.FC = () => {
           <div key={offer._id}>
             <IonRow style={{ padding: '0px' }}>
               <IonCol className='my-offers-item-container'>
-              <div className='img'
-                      style={{
-                        backgroundImage: offer?.product.images?.length
-                          ? getImageUrl(offer?.product.images[0]?.url)
-                          : '',
-                      }}
-                    > </div>
+                <div className='img'
+                  style={{
+                    backgroundImage: offer?.product.images?.length
+                      ? getImageUrl(offer?.product.images[0]?.url)
+                      : '',
+                  }}
+                > </div>
                 {/* <img src={`${offer?.product.images[0]?.url}`} alt=""
                   className='img'
                 /> */}
@@ -113,21 +114,45 @@ const MyOffers: React.FC = () => {
               <IonCol className='view-my-purchases_btn' >
 
                 <div className='btn-container'>
-                  {offer.status === 'pending' ? <>
-                    <IonButton className='btn-deny' fill='outline'
-                      onClick={() => { denyOffer(offer._id, offer.product.price) }}
-                    >DENY</IonButton>
+                  {
+                    offer.status === 'pending' ?
+                      <p
+                        className='browse-shop'
+                        onClick={() => {
+                          history.push(`/home/style-feed`)
+                        }}>
+                        Browse Shop
+                      </p>
 
-                    <IonButton className='btn-accept'
-                      onClick={() => { acceptOffer(offer._id, offer.product.name) }}
-                    >ACCEPT</IonButton>
-                  </> :
-                    <p className='browse-shop'
-                      onClick={() => {
-                        history.push('/settings/sales')
-                      }}
+                      : offer.status === 'accepted' ?
+                        <p
+                          className='browse-shop'
+                          onClick={() => {
+                            history.push('/settings/sales')
+                          }}>
+                          View in my sales
+                        </p>
+                        : offer.status === 'rejected' ?
+                          <IonButton
+                          fill='outline'
+                            className='rejected-btn'
+                            onClick={() => {
+                              // history.push('/settings/sales')
+                            }}
+                            >BUY AT A LISTED PRICE
+                            </IonButton>
 
-                    >View in my sales</p>}
+                          :
+                          <>
+                            <IonButton className='btn-deny' fill='outline'
+                              onClick={() => { denyOffer(offer._id, offer.product.price) }}
+                            >DENY</IonButton>
+
+                            <IonButton className='btn-accept'
+                              onClick={() => { acceptOffer(offer._id, offer.product.name) }}
+                            >ACCEPT</IonButton>
+                          </>
+                  }
                 </div>
 
                 <p className='date'>{new Date(offer?.product?.updatedAt).toDateString().slice(0 - 11)}</p>

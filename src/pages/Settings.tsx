@@ -175,7 +175,7 @@ const Settings: React.FC = () => {
             history.push('/settings/terms-conditions');
           }}
         >
-          TERMS &amp; CONDITION
+          TERMS &amp; CONDITIONS
         </div>
         <div
           onClick={e => {
