@@ -6,7 +6,6 @@ import { UserService } from '../services/UserService'
 import { CreateProductResponse } from '../models'
 import { useHistory } from 'react-router'
 import { formatPrice, getImageUrl } from '../utils'
-import Button from '../components/Button'
 
 
 
@@ -16,7 +15,9 @@ interface OfferResponse {
   product: CreateProductResponse
   status: string
   _id: string
+  updatedAt: string
   offeredPrice: number
+
 
 
 }
@@ -71,8 +72,7 @@ const MyOffers: React.FC = () => {
   }
 
 
-
-  console.log(offerData)
+// console.log(offerData)
   return (
     <IonPage className='my-offers-main-container'>
       <Header
@@ -91,9 +91,6 @@ const MyOffers: React.FC = () => {
                       : '',
                   }}
                 > </div>
-                {/* <img src={`${offer?.product.images[0]?.url}`} alt=""
-                  className='img'
-                /> */}
                 <div>
                   <p className={
                     offer?.status === 'pending' ?
@@ -104,7 +101,7 @@ const MyOffers: React.FC = () => {
                     OFFER  {` ${offer?.status}`}
                   </p>
                   <p className='product-name'>{`${offer?.product.brand} ${offer.product.name}`}</p>
-                  <p className='price'>{formatPrice(offer?.product.price)}</p>
+                  <p className='price'>{formatPrice(offer?.offeredPrice)}</p>
                   <p className='offered-price'>Price you offered</p>
                 </div>
               </IonCol>
@@ -137,7 +134,7 @@ const MyOffers: React.FC = () => {
                           fill='outline'
                             className='rejected-btn'
                             onClick={() => {
-                              // history.push('/settings/sales')
+                              history.push(`/home/product/${offer._id}`)
                             }}
                             >BUY AT A LISTED PRICE
                             </IonButton>
@@ -155,7 +152,7 @@ const MyOffers: React.FC = () => {
                   }
                 </div>
 
-                <p className='date'>{new Date(offer?.product?.updatedAt).toDateString().slice(0 - 11)}</p>
+                <p className='date'>{new Date(offer?.updatedAt).toDateString().slice(0 - 11)}</p>
 
               </IonCol>
             </IonRow>

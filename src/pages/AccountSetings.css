@@ -1,6 +1,7 @@
-.ion-modal {
+.acc-settings-main-modal{
   --height: 320px;
-  --border-radius: 28px 28px 0px 0px;
+  /* --border-radius: 30px 30px 30px 30px; */
+  /* --border-radius: 30px 30px; */
 }
 
 

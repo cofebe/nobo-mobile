@@ -11,7 +11,7 @@ import {
 import './MyTrade.scss'
 import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
-import { FullOrder, Trade, TradesResponse } from '../models'
+import { TradesResponse } from '../models'
 import { formatPrice, getImageUrl } from '../utils'
 
 
@@ -72,11 +72,6 @@ const MyTrade: React.FC = () => {
   }
 
 
-  const productDetails = (productId: string) => {
-    const singleProduct: any = tradesData[0]?.received.filter((data: any) => data._id === productId)
-    history.push({ pathname: `trades/details/${productId}`, state: singleProduct })
-
-  }
 
 
   return (
@@ -119,7 +114,10 @@ const MyTrade: React.FC = () => {
             <IonRow key={product._id} style={{ marginBottom: '14px' }}
               onClick={() => {
                 if (product.status === 'accepted') {
-                  productDetails(product._id)
+                  // productDetails(product._id)
+                  // console.log('first push', product)
+                  history.push({ pathname: `trades/details/${product._id}`, state: product })
+
                 }
               }}
             >

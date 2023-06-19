@@ -43,8 +43,6 @@ const Purchases: React.FC = () => {
     product.products[0]?.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)
   );
 
-
-console.log(filteredProduct)
   return (
     <IonPage className='purchase-item-main-container'>
       <IonRow >
@@ -93,7 +91,7 @@ console.log(filteredProduct)
             </div>
 
             {product.products.map((singleProduct: any) => (
-              <IonRow className='purchase-item' >
+              <IonRow key={singleProduct._id} className='purchase-item' >
                 <IonCol size='3' className='purchases-item-img-container'>
                 <div className='purchases-item-img'
                   style={{
@@ -132,7 +130,7 @@ console.log(filteredProduct)
             <div className='purchase-product-view-container'>
               <p className='purchase-product-view-text'
                 onClick={() => {
-                  history.push({ pathname: `/settings/purchases/details/${product._id}`, state: product.fromVendors[0] })
+                  history.push({ pathname: `/settings/purchases/details/${product._id}`, state: product.fromVendors})
                 }}
               >
                 VIEW DETAILS</p>

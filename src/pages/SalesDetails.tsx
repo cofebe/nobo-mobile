@@ -1,30 +1,24 @@
 import { IonCol, IonContent, IonPage, IonRow, useIonViewWillEnter } from '@ionic/react'
 import React, { useState } from 'react'
-import { useHistory, useParams } from 'react-router'
+import { useHistory } from 'react-router'
 import './SalesDetails.scss'
-import { UserService } from '../services/UserService'
 import { FullOrder } from '../models'
 import { formatPrice, getImageUrl } from '../utils'
 
 const SalesDetails: React.FC = () => {
   const history = useHistory()
-  const params: any = useParams()
-  const userService = new UserService()
-  const [salesItem, setSalesItem] = useState<FullOrder[]>()
+  const [salesItem, setSalesItem] = useState<any[]>()
 
 
 
 
   useIonViewWillEnter(() => {
-    userService.getSale(params.id)
-      .then((sales) => {
-        if (sales) {
-          setSalesItem([sales])
-          console.log(sales)
+    if(history.location.state){
+      setSalesItem([history.location.state])
+    }else{
+      console.log('no data found')
+    }
 
-        } else { console.log('something went wrong') }
-      })
-      .catch((err) => { console.log('err info while fetching products ', err) })
   })
 
 
@@ -53,10 +47,10 @@ const SalesDetails: React.FC = () => {
           <IonCol className='single-sales-shipping-label' size='12' >SHIPPING LABELS</IonCol>
         </IonRow> */}
         { }
-        {salesItem?.map((sale) => (
-          <div>
+        {salesItem?.map((sale:FullOrder) => (
+          <div key={sale._id}>
             {sale.products.map((product) => (
-              <IonRow >
+              <IonRow key={product._id}>
                 <IonCol className='single-sales-items-container' size='12' >
                   <div className="single-sales-items-props-left">
                     <div className="order-no">
