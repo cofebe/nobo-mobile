@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import './Withdraw.scss'
 import './Withdraw.css'
-import { IonButton, IonCol, IonContent, IonModal, IonPage, IonRow, useIonViewWillEnter } from '@ionic/react'
+import { IonButton, IonCol, IonContent, IonModal, IonPage, IonRow, useIonViewWillEnter, useIonViewWillLeave } from '@ionic/react'
 import Header from '../components/Header'
 import { UserService } from '../services/UserService'
 import { formatPrice } from '../utils'
@@ -22,15 +22,21 @@ const Withdraw: React.FC = () => {
   const [pendingFunds, setPendingFunds] = useState<number>(0)
   const [availableFunds, setAvailableFunds] = useState<number>(0)
   const [email, setEmail] = useState('')
-  const [showInput, setShowInput] = useState(false)
+  const [error, setError] = useState<boolean>(false);
+
+
+  // email check...
+  const emailCheck = (email: string) => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
 
   const modal = useRef<HTMLIonModalElement>(null)
-const present = () =>{
-  modal.current?.present()
-}
-const dismiss = () =>{
-  modal.current?.dismiss()
-}
+  const present = () => {
+    modal.current?.present()
+  }
+  const dismiss = () => {
+    modal.current?.dismiss()
+  }
 
   const loadBalance = () => {
     userService.getAccount()
@@ -44,6 +50,11 @@ const dismiss = () =>{
 
   useIonViewWillEnter(() => {
     loadBalance()
+   setError(false)
+
+  })
+  useIonViewWillLeave(() => {
+   setError(false)
   })
 
   const transferFunds = (paypal: string, email: string) => {
@@ -60,6 +71,13 @@ const dismiss = () =>{
       .catch((error) => { console.log('err getting acc details', error) })
   }
 
+  const validateInput = () => {
+    if (email.length < 6) {
+      return false;
+    } else {
+      return true
+    }
+  }
 
   return (
     <IonPage className='withdraw-main-container'>
@@ -153,24 +171,32 @@ const dismiss = () =>{
           <IonRow className='withdraw-payment-input-container'>
             <IonCol size='12' className='withdraw-payment-input-box'>
               <Input
-                className='withdraw-input'
+                className={`withdraw-input ${error ? 'invalid-text-color' : ''}`}
+                errorMessage={error ? 'Enter a valid email address' : ''}
                 placeholder='EMAIL ADDRESS'
                 value={email}
                 onChange={(val) => {
                   setEmail(val)
+                  if (!emailCheck(val)) {
+                    setError(true);
+                  } else {
+                    setError(false);
+                  }
                 }}
               ></Input>
 
             </IonCol>
-              <IonCol size='12' className='btn-container'>
-              {/* <div className="withrawal-r-btn-below"> */}
-              <IonButton style={{ backgroundColor: 'white' }} className='btn'
+            <IonCol size='12' className='btn-container'>
+              <IonButton
+                style={{ backgroundColor: 'white' }} className='btn'
                 onClick={() => {
                   transferFunds('paypal', email)
-                }} >TRANSFER FUNDS</IonButton>
-            {/* </div> */}
-              </IonCol>
-
+                }}
+                disabled={!validateInput() || error}
+              >
+                TRANSFER FUNDS
+              </IonButton>
+            </IonCol>
           </IonRow>
         </IonContent>
       </IonModal>

@@ -38,7 +38,6 @@ const ReturnRequest: React.FC = () => {
   })
 
 
-  console.log('data recieved ', productsData)
 
   return (
     <IonPage className='return-r-main-container'>
@@ -64,7 +63,7 @@ const ReturnRequest: React.FC = () => {
         <IonRow style={{ padding: '0px', marginTop: '17px' }}>
           {productsData?.map((product: Product) => (
 
-            <IonCol className='return-r-item-prop-container' size='12'>
+            <IonCol key={product._id} className='return-r-item-prop-container' size='12'>
 
               <div className='img-container'
                 style={{

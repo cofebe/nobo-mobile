@@ -270,7 +270,7 @@ const AccountSettings: React.FC = () => {
           />
         </div>
       </IonContent>
-      <IonModal className='ion-modal' ref={modal}  initialBreakpoint={1} breakpoints={[0, 5]}>
+      <IonModal style={{borderRadius:'28px'}} className='acc-settings-main-modal' ref={modal}  initialBreakpoint={1} breakpoints={[1, 5]}>
         {/* <IonContent className='acc-password-change-box' > */}
           <IonRow style={{ paddingLeft: '20px', paddingRight: '20px', height: '500px' }}>
 

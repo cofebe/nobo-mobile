@@ -10,7 +10,6 @@ import { formatPrice, getImageUrl } from '../utils'
 const MySales: React.FC = () => {
   const [allSales, setAllSales] = useState<OrdersResponse[]>([])
   const history = useHistory()
-
   const userService = new UserService()
 
 
@@ -19,8 +18,6 @@ const MySales: React.FC = () => {
       .then((sales: OrdersResponse) => {
         if (sales) {
           setAllSales([sales])
-          console.log(sales)
-
         } else { console.log('something went wrong') }
       })
       .catch((err) => { console.log('err info while fetching products ', err) })
@@ -62,7 +59,7 @@ const MySales: React.FC = () => {
               <IonRow key={sProduct?._id}>
                 <IonCol
                   onClick={() => {
-                    history.push(`/sales/single-sales-item/${product?._id}`)
+                    history.push({pathname:`/sales/single-sales-item/${product?._id}`, state:product})
                   }}
                   className='sales-items-container' size='12' >
 

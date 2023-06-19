@@ -34,9 +34,10 @@ const PurchaseDetails: React.FC = () => {
   const history = useHistory()
   const [productsData, setProductData] = useState<FullOrder[]>([])
   const [returnData, setReturnData] = useState<FullOrder[]>([])
-  const [following, setFollowing] = useState(false)
   const sendMessageModal = useRef<HTMLIonModalElement>(null);
   const [data, setData] = useState('')
+  const [vendors, setVendors] = useState<string[]>([])
+  const [followingList, setFollowingList] = useState<string[]>([])
 
   const modal = useRef<HTMLIonModalElement>(null)
 
@@ -48,7 +49,8 @@ const PurchaseDetails: React.FC = () => {
     sendMessageModal.current?.present();
   }
 
-  useIonViewWillEnter(() => {
+
+  const getOrder = () => {
     userService.getOrder(params.id)
       .then((products: FullOrder) => {
         if (products) {
@@ -56,70 +58,63 @@ const PurchaseDetails: React.FC = () => {
         } else { console.log('something went wrong') }
       })
       .catch((err) => { console.log('err info while fetching products ', err) })
-  })
+  }
 
-  useIonViewDidEnter(() => {
-    const vendorId: any = history.location.state
+  const getMe = () => {
     userService
       .getMe()
       .then((user: User) => {
-        console.log('from location ', user.following.includes(vendorId, 0))
-        if (user.following.includes(vendorId, 0)) {
-          setFollowing(true)
-        } else {
-          setFollowing(false)
-        }
+        setFollowingList(user.following)
       })
-      .catch((error) => {
-        console.log('error msg fetching user: ', error)
-      })
+  }
+
+
+
+
+  useIonViewWillEnter(() => {
+    const data:any = history.location.state
+    setVendors(data)
+    getOrder()
+    getMe()
+
   })
 
 
 
 
-  const followVendor = (vendorId: any) => {
-    userService
-      .getMe()
-      .then((user: User) => {
-        const result = user.following.includes(vendorId, 0)
-        if (result) {
-          userService.removeFollowUser(vendorId)
-            .then(() => {
-              setFollowing(false)
-            })
-            .catch((error) => { console.log(error) })
-
-        } else {
-
+  const followVendor = (sellerId: any) => {
+    console.log('seller Id ', sellerId)
+    if (!followingList.includes(sellerId, 0)) {
+      userService.followUser(sellerId)
+        .then((res) => {
+          console.log(
+            'response after following seller', res)
           userService
-            .followUsers(vendorId)
-            .then(user => {
-              if (user.following.includes(vendorId)) {
-                setFollowing(true)
-                console.log(' you have successfully followed ', vendorId);
-              } else {
-                console.log(' something went wrong, unable to follow ');
-              }
+            .getMe()
+            .then((user: User) => {
+              setFollowingList(user.following)
             })
-            .catch((err: any) => {
-              console.log(' FollowUser', err);
-            });
-        }
-      })
-      .catch(error => {
-        console.log('error msg while fetching user profile', error);
-      });
+        })
+
+    } else {
+
+      userService.removeFollowUser(sellerId)
+        .then((res) => {
+          userService
+            .getMe()
+            .then((user: User) => {
+              setFollowingList(user.following)
+            })
+          console.log('response after un-following seller', res)
+        })
+    }
+
 
   };
 
 
+  const sellers = vendors.filter((ar: any) => followingList.includes(ar, 0))
 
-
-
-
-
-  console.log(productsData.map((p) => p))
   return (
     <IonPage className='order-details-item-main-container'>
       <IonHeader className='order-details-item-header'>
@@ -168,9 +163,9 @@ const PurchaseDetails: React.FC = () => {
 
               </div>
               <div className='order-details-item-order-status'>
-								<p style={{ color: '#ACACAC', textAlign: 'center' }}>STATUS</p>
-								<p style={{ color: '#42D60E', textAlign: 'center' }}>{product.status}</p>
-							</div>
+                <p style={{ color: '#ACACAC', textAlign: 'center' }}>STATUS</p>
+                <p style={{ color: '#42D60E', textAlign: 'center' }}>{product.status}</p>
+              </div>
             </div>
 
 
@@ -191,10 +186,11 @@ const PurchaseDetails: React.FC = () => {
                 </IonCol>
                 <IonCol size='12' className='order-details-img-props'>
                   <div className='order-details-img-box'
-                  style={{
-                    backgroundImage: singleProduct.images?.length
-                      ? getImageUrl(singleProduct.images[0]?.url)
-                      : '',}}
+                    style={{
+                      backgroundImage: singleProduct.images?.length
+                        ? getImageUrl(singleProduct.images[0]?.url)
+                        : '',
+                    }}
                   ></div>
 
                   <div className='order-details-item-info'>
@@ -220,15 +216,22 @@ const PurchaseDetails: React.FC = () => {
                       }
                     }
                     style={{ marginLeft: '-2px' }}
-                  >MESSAGE SELLER</IonButton>
-                  <IonButton size='small'
+                  >MESSAGE SELLER
+                  </IonButton>
+
+                  <IonButton
+                    size='small'
                     className='single-order-btn'
                     onClick={(e) => {
                       e.preventDefault()
                       e.stopPropagation()
-                      followVendor(singleProduct.fromVendors)
+                      followVendor(singleProduct.vendor._id)
                     }}
-                  >{following ? 'FOLLOWING' : 'FOLLOW SELLER'}</IonButton>
+                  >{
+
+                      sellers.includes(singleProduct.vendor._id, 0) ? 'FOLLOWING' : 'FOLLOW SELLER'
+
+                    }</IonButton>
 
                 </IonCol>
               </IonRow>
