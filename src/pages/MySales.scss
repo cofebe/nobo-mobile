@@ -80,7 +80,7 @@
 
         .seller-name {
           margin-top: 8px;
-          width: 126px;
+          width: 100%;
           height: 23px;
           font-family: 'Nunito Sans';
           font-style: normal;
@@ -155,6 +155,10 @@
         .img-container {
           height: 75px;
           width: 75px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          border-radius: 10px;
         }
 
         .price {

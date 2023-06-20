@@ -31,7 +31,7 @@
 
         .order-details-item-back-text {
           position: absolute;
-          left: 55px;
+          left: 70px;
           top: 36%;
           font-size: 12px;
 
@@ -59,6 +59,7 @@
       // border-bottom: 1px solid #707070;
       display: flex;
       flex-direction: column;
+      padding: 0px;
 
     }
 
@@ -68,6 +69,8 @@
       display: flex;
       align-items: center;
       justify-content: space-evenly;
+      padding-left: 10px;
+      padding-right: 10px;
 
       .order-details-item-order-date {
         text-transform: uppercase;
@@ -173,21 +176,53 @@
       }
 
       .order-details-img-props {
+      padding: 0px;
+
+        position: relative;
         height: 68px;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: space-evenly;
+
+
+        .order-details-img-box{
+          left: 0px;
+          position: absolute;
+          height: 68px;
+          width: 68px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          border-radius: 10px;
+
+        }
+
+        .order-details-item-info{
+          position: absolute;
+          left: 72px;
+          height: 68px;
+          // width: 136px;
+          // background-color: palevioletred;
+        }
+
+        .order-details-showmore{
+          position: absolute;
+          right: 0px;
+          height: 68px;
+          width: 70px;
+          // background-color: greenyellow;
+        }
+
       }
+
+
 
       .order-details-item-info {
         position: relative;
         margin-left: 14px;
         height: 68px;
         width: 130px;
-        // display: flex;
-        // align-items: flex-start;
-        // justify-content: center;
-        // flex-direction: column;
+
 
         .order-details-name {
           position: absolute;
@@ -249,8 +284,6 @@
         position: relative;
         width: 110px;
         height: 68px;
-
-
         .order-details-text {
           position: absolute;
           right: 0px;
@@ -280,7 +313,19 @@
         border-radius: 10px;
 
         .order-details-item-img {
+          background-color: #D6980E;
           border-radius: 10px;
+          height: 90px;
+          width: 90px;
+          // margin-bottom: 10px;
+          // background-color: #FFFFFF;
+          // box-shadow: 0px 0px 10px #EDEAE3;
+          // background-position: center;
+          // background-repeat: no-repeat;
+          // background-size: contain;
+          // border-radius: 5px;
+          // margin-left: auto;
+          // margin-right: auto;
 
         }
 
@@ -370,13 +415,14 @@
 
 
     .order-details-item-msg-flw {
+      padding: 0px;
       margin-top: 10px;
       margin-bottom: 2px;
       display: flex;
       align-items: center;
       justify-content: flex-start;
       gap: 1rem;
-      margin-left: 3px;
+      // margin-left: 3px;
 
       // .order-item-arrow-box {
       //   display: flex;

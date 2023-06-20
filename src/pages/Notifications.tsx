@@ -90,7 +90,13 @@ const Notifications: React.FC = () => {
                         className="text"
                         dangerouslySetInnerHTML={{ __html: getText(note) }}
                       ></div>
-                      <div className="date">{getDate(note)}</div>
+                      <div className="date">
+                        {note.nid === 1 ? (
+                          <img src="/assets/images/caret-right.svg" className="action" />
+                        ) : (
+                          <>{getDate(note)}</>
+                        )}
+                      </div>
                     </div>
                   </IonItem>
                   <IonItemOptions>

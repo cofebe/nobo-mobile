@@ -1,85 +1,55 @@
-import { IonCol, IonContent, IonPage, IonRow, useIonViewDidEnter, useIonViewWillEnter } from '@ionic/react'
+import { IonCol, IonContent, IonPage, IonRow, useIonViewWillEnter } from '@ionic/react'
 import React, { useState } from 'react'
 import Header from '../components/Header'
-import './TradeDetails.scss'
-import { useHistory, useParams } from 'react-router'
-import { Product, TradesResponse } from '../models'
-import { formatPrice } from '../utils'
-import { UserService } from '../services/UserService'
+import './TradesDetails.scss'
+import { useHistory, } from 'react-router'
+import { Trade } from '../models'
+import { formatPrice, getImageUrl } from '../utils'
 
 
 
 const TradesDetails: React.FC = () => {
-  const params: any = useParams()
-  const userService = new UserService()
-
   const history = useHistory()
-  const [trade1, settrade] = useState<TradesResponse[]>([])
-  const [recieved, setRecieved] = useState<TradesResponse[]>([])
-  const [tradesData, setTradesData] = useState<TradesResponse[]>([])
+  const [tradesData, setTradesData] = useState<any[]>([])
 
 
 
-
-
-  const trade: any = history.location.state
   useIonViewWillEnter(() => {
-
-    settrade(trade[0].products.offered)
-    setRecieved(trade[0].products.requested)
+    history.location.state as Trade
+    // console.log('tradeDetails page ', history.location.state)
+    setTradesData([history.location.state])
   })
 
-  useIonViewDidEnter(() => {
-    userService.getMyTrades()
-      .then((products) => {
-        if (products) {
-          setTradesData([products])
-        } else { console.log('something went wrong') }
-      })
-      .catch((err) => { console.log('err info while fetching products ', err) })
-  })
-
-  // console.log('full trades ',tradesData)
 
 
 
-
-  const offered: any = trade1
-  const requested: any = recieved
-  // console.log(trade1[0])
-  // console.log('test1', offered?.price)
-  // console.log('test',offered)
-
-  const data: any = tradesData[0]?.received.filter((trade) => trade._id === params.id)
-  console.log('a trade ', data)
 
   return (
     <IonPage className='trade-details-main-container'>
       <Header title='TRADE DETAILS' />
       <IonContent className='trade-details-content'>
-        {data?.map((product: any) => (
+        {tradesData?.map((product: any) => (
 
-          <IonRow style={{ padding: '0px', marginTop: '60px' }}>
+          <IonRow key={product._id} style={{ padding: '0px', marginTop: '60px' }}>
             <IonCol size='12' className='trade-details-items'>
               <div className="left">
                 <p className='your-item'>YOUR ITEM</p>
-                <div className="img-container">
-                  <img
-                    className='img'
-                    src={product?.products?.offered?.images[0].url.length < 60
-                      ? `https://staging.thenobo.com/${product?.products?.offered?.images[0].url}`
-                      : `${product?.products?.offered?.images[0].url}`} alt={product?.products?.offered?.name}
-                  />
-                </div>
+                <div className="img-container"
+                  style={{
+                    backgroundImage: product?.products?.offered?.images?.length
+                      ? getImageUrl(product?.products?.offered?.images[0]?.url)
+                      : '',
+                  }}
+                ></div>
                 <p className='product-name-left'>{product?.products?.offered?.name}</p>
                 <p className='product-price-left'>{formatPrice(product?.products?.offered?.price)}</p>
                 <p className='your-pay'>YOUR PAY <span className='your-pay-amount'>
-                {formatPrice(
+                  {formatPrice(
                     product?.salesTax.recipient.shipping
-                    +product.fee
+                    + product.fee
                     + product?.salesTax.recipient.taxable_amount
                   ) || 0}
-                  </span> </p>
+                </span> </p>
 
               </div>
 
@@ -93,25 +63,21 @@ const TradesDetails: React.FC = () => {
               <div className="right">
                 <p className='your-item'>THEIR ITEM</p>
                 <div className="img-container"
-                // style={{backgroundImage:`url${getCardImage(product?.products?.requested?.images[0].url)}`}}
-                >
-                  {<img
-                    className='img'
-                    src={product?.products?.requested?.images[0]?.url.length < 60
-                      ? `https://staging.thenobo.com/${requested?.images[0].url}`
-                      : `${product?.products?.requested?.images[0].url}`} alt={product?.products?.requested?.name}
-                  />}
-                  {/* <img className='img' src="assets/images/test/bvlgary.svg" alt="" /> */}
-                </div>
+                  style={{
+                    backgroundImage: product?.products?.requested?.images?.length
+                      ? getImageUrl(product?.products?.requested?.images[0]?.url)
+                      : '',
+                  }}
+                ></div>
                 <p className='product-name-right'>{product?.products?.requested?.name}</p>
                 <p className='product-price-right'>{formatPrice(product?.products?.requested?.price)}</p>
                 <p className='your-pay'>THEY PAY <span className='your-pay-amount'>
                   {formatPrice(
                     product?.salesTax.initiator.shipping
-                    +product.fee
+                    + product.fee
                     + product?.salesTax.initiator.taxable_amount
                   )}
-                  </span> </p>
+                </span> </p>
               </div>
 
               <div className="line-sep-1"></div>
@@ -149,7 +115,7 @@ const TradesDetails: React.FC = () => {
               </div>
               <div className='trade-details t-value'>
                 <p className='sales-title'>Sales Tax</p>
-                <p className='sales price'>{formatPrice(product?.salesTax.initiator.taxable_amount)}</p>
+                <p className='sales price'>{formatPrice(product?.salesTax.initiator.amount_to_collect)}</p>
               </div>
               <div className='trade-details t-value'>
                 <p className='nobo-title'>TheNOBO Trade Fee (12%)</p>
@@ -157,13 +123,19 @@ const TradesDetails: React.FC = () => {
               </div>
               <div className='trade-details t-value'>
                 <p className='savings-title' style={{ color: '#D6980E' }}>Your Savings</p>
-                <p className='savings-price' style={{ color: '#D6980E' }}>$N/A</p>
+                <p className='savings-price' style={{ color: '#D6980E' }}>
+                  {formatPrice(
+                    product?.products?.offered?.price
+                    - product?.salesTax.initiator.taxable_amount
+                    - product?.salesTax.initiator.shipping
+                  )}
+                </p>
               </div>
               <div className="line-sep-1"></div>
               <div className='trade-details t-value'>
                 <p className='total-title' >YOUR TOTAL</p>
                 <p className='total-price' >{formatPrice(
-                   product?.products?.offered?.price
+                  product?.products?.offered?.price
                   + product?.products?.requested?.price
                   + product?.salesTax.initiator.shipping
                   + product?.salesTax.initiator.taxable_amount

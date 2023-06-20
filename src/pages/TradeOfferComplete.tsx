@@ -136,7 +136,7 @@ const TradeOfferComplete: React.FC = () => {
               onClick={e => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('go to my trades');
+                history.push('/settings/trades');
               }}
             />
             <Button

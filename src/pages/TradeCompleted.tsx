@@ -11,7 +11,7 @@ import './TradeCompleted.scss'
 import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
 import { TradesResponse } from '../models'
-import { formatPrice } from '../utils'
+import { formatPrice, getImageUrl } from '../utils'
 
 
 
@@ -83,18 +83,22 @@ const TradeCompleted: React.FC = () => {
                     <div className="trade-completed-line-l"></div>
                     <div className='trade-completed-circle-l'></div>
                     <img className='trade-completed-connect-l' src='assets/images/12420.svg' alt="" />
-                    {<img
-                      className='trade-completed-img-l'
-                      src={product.products.requested.images[0]?.url.length < 60 ?
-                        `https://staging.thenobo.com/${product.products.requested.images[0].url}` :
-                        `${product.products.requested.images[0].url}`} alt=''
-                    />}
-                    {<img
-                      className='trade-completed-img-r'
-                      src={product.products.offered.images[0]?.url.length < 60 ?
-                        `https://staging.thenobo.com/${product.products.offered.images[0].url}` :
-                        `${product.products.offered.images[0].url}`} alt=''
-                    />}
+                    <div className='trade-completed-img-l'
+                      style={{
+                        backgroundImage: product.products.requested.images?.length
+                          ? getImageUrl(product.products.requested.images[0]?.url)
+                          : '',
+                      }}
+                    > </div>
+
+                    <div className='trade-completed-img-r'
+                      style={{
+                        backgroundImage: product.products.offered.images?.length
+                          ? getImageUrl(product.products.offered.images[0]?.url)
+                          : '',
+                      }}
+                    > </div>
+
                   </div>
                   <div className="trade-completed-props-right">
                     <div className="trade-with-container-l">

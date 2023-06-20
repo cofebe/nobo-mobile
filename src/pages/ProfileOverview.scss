@@ -1,4 +1,5 @@
 .profile-header-container {
+  margin-top: var(--ion-safe-area-top, 0);
   position: absolute;
   top: 65px;
   height: 45px;
@@ -12,10 +13,10 @@
 .toggle-switch {
   z-index: 10000;
   position: absolute;
-  top: 75px;
+  top: calc(75px + var(--ion-safe-area-top, 0));
   margin-left: auto;
   margin-right: auto;
-  min-width: 200px;
+  width: 220px;
   min-height: 30px;
   background: white;
   border-radius: 25px;
@@ -29,7 +30,7 @@
 
 .toggle-switch-slider {
   position: absolute;
-  width: 100px;
+  width: 110px;
   height: 30px;
   background: #d7980d;
   border-radius: 20px;
@@ -37,7 +38,7 @@
 }
 
 .toggle-switch.checked .toggle-switch-slider {
-  transform: translateX(100px);
+  transform: translateX(110px);
 }
 
 .toggle-switch-text {

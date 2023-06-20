@@ -7,7 +7,7 @@
     border-bottom: 1.5px solid black;
     .single-sales-item-back-btn {
       position: absolute;
-      left: 15px;
+      left: 36px;
       bottom: 15px;
       z-index: 1000;
     }
@@ -80,7 +80,6 @@
 
         .seller-name {
           margin-top: 8px;
-          width: 126px;
           height: 23px;
           font-family: 'Nunito Sans';
           font-style: normal;
@@ -96,7 +95,6 @@
 
         .product {
           margin-top: 8px;
-          width: 52px;
           height: 15px;
           font-family: 'Nunito Sans';
           font-style: normal;
@@ -155,6 +153,10 @@
         .img-container {
           height: 75px;
           width: 75px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+          border-radius: 10px;
         }
 
         .price {

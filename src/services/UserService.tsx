@@ -21,6 +21,7 @@ import {
   SignUpType,
   SuccessResponse,
   TradesResponse,
+  UnreadNotificationCountResponse,
   User,
   UserAccData,
 } from '../models';
@@ -38,23 +39,28 @@ export interface ProductSearchOptions {
 }
 
 function parseJwt(token: string) {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split('')
+      .map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
+      })
+      .join('')
+  );
 
-    return JSON.parse(jsonPayload);
-};
+  return JSON.parse(jsonPayload);
+}
 
 function isTokenExpired(token: string) {
-    const decodedToken = parseJwt(token);
-    const currentTime = Date.now().valueOf() / 1000;
+  const decodedToken = parseJwt(token);
+  const currentTime = Date.now().valueOf() / 1000;
 
-    if (decodedToken.exp < currentTime) {
-        return true;
-    }
-    return false;
+  if (decodedToken.exp < currentTime) {
+    return true;
+  }
+  return false;
 }
 
 export class UserService extends BaseService {
@@ -84,12 +90,11 @@ export class UserService extends BaseService {
   async getProfile(userId: any) {
     return await super.fetch('GET', `/api/users/${userId}/profile`);
   }
+
   async getBuyer(userId: any) {
     const res = await super.fetch('GET', `/api/users/${userId}/profile`);
-    return res.json()
+    return res.json();
   }
-
-
 
   async getMyProducts(
     productType: string,
@@ -119,6 +124,18 @@ export class UserService extends BaseService {
     const res = await super.fetch('GET', '/api/messages/my-convos');
     const json: Conversation[] = await res.json();
     return json;
+  }
+
+  async getUnreadNotificationCount() {
+    const res = await super.fetch('GET', '/api/notifications/unread-count');
+    const json: UnreadNotificationCountResponse = await res.json();
+
+    if (json.token) {
+      const authService = new AuthService();
+      authService.setUserToken(json.token);
+    }
+
+    return json.unread;
   }
 
   async getConversation(conversationId: string): Promise<Conversation | undefined> {
@@ -250,8 +267,8 @@ export class UserService extends BaseService {
   }
 
   async forgotPassword(email: string) {
-    const res = await super.fetch('POST', '/api/users/lostPassword', { email })
-    return res.json()
+    const res = await super.fetch('POST', '/api/users/lostPassword', { email });
+    return res.json();
   }
 
   async addShippingAddress(data: AddressRequest): Promise<User> {
@@ -325,21 +342,27 @@ export class UserService extends BaseService {
     return json.success;
   }
 
-  async getAccount(){
-    const res = await super.fetch('GET', '/api/users/accountBalance')
+  async getAccount() {
+    const res = await super.fetch('GET', '/api/users/accountBalance');
+    return res.json();
+  }
+  async transferFunds(paypal: string, email: string) {
+    const res = await super.fetch('POST', '/api/users/transfer-funds', {
+      payoutMethod: paypal,
+      paypal: email,
+    });
     return res.json();
   }
 
-
   async getSales(): Promise<OrdersResponse> {
     const res = await super.fetch('GET', '/api/orders/my-sales');
-    const json:OrdersResponse= await res.json();
+    const json: OrdersResponse = await res.json();
     return json;
   }
 
-  async getSale(id:string): Promise<FullOrder> {
+  async getSale(id: string): Promise<FullOrder> {
     const res = await super.fetch('GET', `/api/orders/my-sales/${id}`);
-    const json:OrderResponse= await res.json();
+    const json: OrderResponse = await res.json();
     return json.order;
   }
 
@@ -361,30 +384,30 @@ export class UserService extends BaseService {
     return json;
   }
 
-  async getOffers():Promise<OfferedStatus> {
+  async getOffers(): Promise<OfferedStatus> {
     const res = await super.fetch('GET', '/api/offers/my-offers/all');
     const json: OfferedStatus = await res.json();
 
     return json;
   }
 
-  async acceptOffer(offerid:string): Promise<OfferedStatus> {
-    const res = await super.fetch('POST', '/api/offers/accept',{offerid});
+  async acceptOffer(offerid: string): Promise<OfferedStatus> {
+    const res = await super.fetch('POST', '/api/offers/accept', { offerid });
     const json: OfferedStatus = await res.json();
     return json;
   }
-  async denyOffer(offerid:string): Promise<OfferedStatus> {
-    const res = await super.fetch('POST', '/api/offers/reject',{offerid});
+  async denyOffer(offerid: string): Promise<OfferedStatus> {
+    const res = await super.fetch('POST', '/api/offers/reject', { offerid });
     const json: OfferedStatus = await res.json();
     return json;
   }
-  async acceptTradeOffer(tradeid:string): Promise<TradesResponse> {
-    const res = await super.fetch('POST', '/api/trades/accept',{tradeid});
+  async acceptTradeOffer(tradeid: string): Promise<TradesResponse> {
+    const res = await super.fetch('POST', '/api/trades/accept', { tradeid });
     const json: TradesResponse = await res.json();
     return json;
   }
-  async denyTradeOffer(tradeid:string): Promise<TradesResponse> {
-    const res = await super.fetch('POST', '/api/trades/reject',{tradeid});
+  async denyTradeOffer(tradeid: string): Promise<TradesResponse> {
+    const res = await super.fetch('POST', '/api/trades/reject', { tradeid });
     const json: TradesResponse = await res.json();
     return json;
   }
@@ -548,7 +571,6 @@ export class UserService extends BaseService {
     return json.brands;
   }
 
-
   // ADD FAVOURITE BRAND
   async addBrand(brandId: string) {
     const response = await super.fetch('POST', '/api/brands/add-favorite', { brandId });
@@ -567,7 +589,7 @@ export class UserService extends BaseService {
   }
   //UPDATE USER ACCOUNT INFO
   async updateUserAccount(data: UserAccData) {
-    console.log("userservice", data)
+    console.log('userservice', data);
     const response = await super.fetch('POST', '/api/users/me', {
       firstName: data.firstName,
       lastName: data.lastName,
@@ -576,7 +598,7 @@ export class UserService extends BaseService {
       saleSchedule: [],
       experiencePreferences: data.experiencePreferences,
       currentPassword: data.currentPassword,
-      newPassword: data.newPassword
+      newPassword: data.newPassword,
     });
     return response.json();
   }

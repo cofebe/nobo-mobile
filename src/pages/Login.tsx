@@ -61,7 +61,7 @@ const Login: React.FC = () => {
 
   return (
     <IonPage className="nobo-login-page">
-      <IonContent>
+      <IonContent scrollY={false}>
       <div className="background-image">
         <IonRow>
           <IonCol size="12" style={{ height: '160px' }}>

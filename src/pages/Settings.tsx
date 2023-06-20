@@ -116,7 +116,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            // history.push('/settings/returns');
+            history.push('/settings/returns');
           }}
         >
           My Returns
@@ -134,7 +134,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            //history.push('/settings/savings');
+            // history.push('/settings/savings');
           }}
         >
           Savings &amp; Sustainability
@@ -154,7 +154,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            history.push('/settings/shipping');
+            history.push('/settings/shipping-terms');
           }}
         >
           Shipping
@@ -175,7 +175,7 @@ const Settings: React.FC = () => {
             history.push('/settings/terms-conditions');
           }}
         >
-          TERMS &amp; CONDITION
+          TERMS &amp; CONDITIONS
         </div>
         <div
           onClick={e => {

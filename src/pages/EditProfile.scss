@@ -26,9 +26,10 @@
 }
 
 .edit-profile-back {
+	z-index: 100;
 	position: absolute;
-	left: 40px;
-	background: black;
+	left: 45px;
+	top: 20px;
 }
 
 .profile-banner-container-edit {

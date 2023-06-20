@@ -57,7 +57,7 @@ const Returns: React.FC = () => {
         {productsData[0]?.products.map((product: Product) => (
           <IonRow key={product._id} className='return-item-container'
             onClick={() => {
-              history.push({pathname:`/purchases/return-product-details`, state:product})
+              history.push({pathname:`/purchases/return-details`, state:product})
               console.log(product)
             }}
           >

@@ -53,7 +53,8 @@ const ProductList: React.FC<ProductListProps> = ({ type, userId }) => {
         .getProfileFeed(userId)
         .then(res => res.json())
         .then(data => {
-          setFeed(data.feed.feed);
+          if (data.feed !== undefined)
+            setFeed(data.feed.feed);
         });
     }
   }

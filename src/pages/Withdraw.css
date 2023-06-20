@@ -1,0 +1,28 @@
+.withdraw-details-ion{
+  --height: 200px;
+  /* --border-radius: 28px 28px 0px 0px; */
+
+
+}
+
+
+.withdraw-payment-input-container{
+height: 100%;
+padding: 20px 20px 0px 20px;
+}
+
+.withdraw-payment-input-box{
+
+}
+
+.withdraw-input{
+  box-sizing: border-box;
+  height: 37px;
+  border: 0.5px solid #000000;
+  border-radius: 2px;
+}
+
+.btn-container{
+  display: flex;
+  justify-content: center;
+}

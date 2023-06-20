@@ -16,7 +16,7 @@
       width: 160px;
       position: absolute;
       top: 65%;
-      left: 50px;
+      left: 75px;
       bottom: 10.71%;
       font-family: 'Nunito Sans';
       font-style: normal;
@@ -46,14 +46,13 @@
       gap: 14px;
 
       .img-container {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
         border-radius: 10px;
         height: 90px;
         width: 90px;
-        background-color: purple;
 
-        >img{
-          border-radius: 10px;
-        }
       }
 
       .right-props {
