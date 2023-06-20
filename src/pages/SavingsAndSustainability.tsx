@@ -47,7 +47,7 @@ const SavingsAndSustainabilityPage: React.FC = () => {
       .getRewards()
       .then( reward => {
         if(reward) {
-          setPoints(reward.point)
+          setPoints(reward.points)
         }
       })
 

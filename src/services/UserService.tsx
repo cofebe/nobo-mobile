@@ -623,9 +623,4 @@ export class UserService extends BaseService {
     const response = await super.fetch('POST', 'api/users/update-blurb', data);
     return response.json();
   }
-
-  async getRewards() {
-    const response = await super.fetch('GET', 'api/users/rewards');
-    return response.json();
-  }
 }
