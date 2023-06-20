@@ -93,3 +93,25 @@
   color: #707070;
 
 }
+
+.reward-copy-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 32px;
+  gap: 8px;
+
+}
+/* .reward-copy-img{
+
+} */
+.reward-copy-text{
+  height: 20px;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+  color: #D6980E;
+}

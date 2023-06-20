@@ -1,18 +1,29 @@
-import { IonButton, IonCol, IonContent, IonModal, IonPage, IonRow, IonTextarea, useIonViewWillEnter } from '@ionic/react'
+import { IonCol, IonContent, IonModal, IonPage, IonRow, useIonViewWillEnter } from '@ionic/react'
 import './Reward.scss'
 import './Reward.css'
 import { useHistory } from 'react-router'
 import { useRef, useState } from 'react'
 import { UserService } from '../services/UserService'
+import { Clipboard } from '@capacitor/clipboard';
+
 
 const Reward = () => {
   const userService = new UserService()
   const history = useHistory()
   const modal = useRef<HTMLIonModalElement>(null)
-const [fivePercentCoupon, setfivePercent] = useState<string>('')
-const [tenPercentCoupon, setTenPercent] = useState<string>('')
-const [fifteenPercentCoupon, setfifteenPercent] = useState<string>('')
-const [couponCode, setCouponCode] = useState<string>('')
+  const [fivePercentCoupon, setfivePercent] = useState<string>('')
+  const [tenPercentCoupon, setTenPercent] = useState<string>('')
+  const [fifteenPercentCoupon, setfifteenPercent] = useState<string>('')
+  const [couponCode, setCouponCode] = useState<string>('')
+
+
+  const writeToClipboard = async (code: string) => {
+    await Clipboard.write({
+      string: `${code}`
+    });
+  };
+
+
 
 
   const getRewards = () => {
@@ -25,9 +36,11 @@ const [couponCode, setCouponCode] = useState<string>('')
       .catch((error) => { console.log('unable to fetch rewards :', error) })
   }
 
-  useIonViewWillEnter(()=>{
+  useIonViewWillEnter(() => {
     getRewards()
   })
+
+
 
   return (
     <IonPage className='reward-main-container'>
@@ -117,7 +130,9 @@ const [couponCode, setCouponCode] = useState<string>('')
             </IonCol>
           </IonRow>
 
-          <IonRow className='reward-earn-container'>
+          <IonRow className='reward-earn-container'
+
+          >
             <IonCol className='reward-earn-text'>
               <p className='text' style={{ fontWeight: 700 }}>HOW TO EARN</p>
             </IonCol>
@@ -150,6 +165,7 @@ const [couponCode, setCouponCode] = useState<string>('')
         ref={modal}
         initialBreakpoint={1}
         breakpoints={[1, 5]}>
+
         <IonRow className='reward-body'>
           <IonCol size='12' className='reward-header-box'>
             <p className='reward-header-text'>$5 OFF REWARD</p>
@@ -157,6 +173,18 @@ const [couponCode, setCouponCode] = useState<string>('')
           <IonCol size='12' className='reward-promo-box'>
             <p className='reward-promo-code'>PROMO CODE</p>
             <p className='reward-promo-text'>{couponCode}</p>
+            <div
+              className='reward-copy-box'
+              onClick={() => {
+                writeToClipboard(couponCode)
+                console.log('copy', couponCode)
+              }}
+            >
+              <img className='reward-copy-img' width={18} height={21}
+                src='assets/images/reward-copy.svg' alt=""
+              />
+              <p className='reward-copy-text'>Copy</p>
+            </div>
           </IonCol>
           <div className='reward-line'></div>
 
