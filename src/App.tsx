@@ -44,6 +44,7 @@ import CreateFirstPost from './pages/CreateFirstPost';
 import Purchases from './pages/Purchases';
 import PurchaseDetails from './pages/PurchaseDetails';
 import AccountSettings from './pages/AccountSettings';
+import SavingsAndSustainabilityPage from './pages/SavingsAndSustainability';
 import UploadProfilePic from './pages/UploadProfilePic';
 import OfferComplete from './pages/OfferComplete';
 import MyTrade from './pages/MyTrade';
@@ -297,6 +298,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/settings/trades" exact={true}>
               <MyTrade />
+            </Route>
+            <Route path="/settings/savings" exact={true}>
+              <SavingsAndSustainabilityPage />
             </Route>
             <Route path="/settings/trades/trades-completed" exact={true}>
               <TradeCompleted />
