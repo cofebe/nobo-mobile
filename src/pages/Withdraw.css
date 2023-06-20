@@ -11,9 +11,12 @@ height: 100%;
 padding: 20px 20px 0px 20px;
 }
 
-.withdraw-payment-input-box{
-
+ .btn {
+  width: 200px;
+  height: 51px;
 }
+
+
 
 .withdraw-input{
   box-sizing: border-box;

@@ -1,0 +1,274 @@
+.reward-main-container {
+
+  background-color: #fefcf7;
+
+  .reward-container {
+    height: 118px;
+    width: 390px;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+
+  }
+
+
+
+  .reward-back-btn {
+    position: absolute;
+    left: 36px;
+    bottom: 15px;
+    z-index: 1000;
+  }
+
+  .reward-title-text-container {
+    position: absolute;
+    top: 63%;
+    bottom: 10.71%;
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 150%;
+    letter-spacing: 0.05em;
+    color: #000000;
+    text-align: center;
+  }
+
+  .reward-ion-content {
+    --padding-start: 24px;
+    --padding-end: 24px;
+    --padding-bottom: 20px;
+    --padding-top: 22px;
+    --background: #fefcf7;
+
+    .rreward-header-container {
+      padding: 0px;
+
+    }
+
+    .reward-header-text {
+      padding: 0px;
+      width: 82px;
+      height: 23px;
+      display: flex;
+      align-items: center;
+
+      .text {
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 800px;
+        font-size: 15px;
+        line-height: 150%;
+        letter-spacing: 0.05em;
+        color: #000000;
+      }
+
+    }
+
+    .reward-trophy-container {
+      padding: 0px;
+      margin-bottom: 20px;
+    }
+
+    .reward-trophy-box {
+      box-sizing: border-box;
+      width: 341px;
+      height: 62px;
+      background: #FEFCF7;
+      border: 1.2px solid #ACACAC;
+      border-radius: 100px;
+      padding: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .info {
+        position: relative;
+        width: 200px;
+        height: 40px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 16px;
+        text-transform: uppercase;
+        color: #ACACAC;
+        // display: flex;
+        // flex-direction: column;
+      }
+
+      .info-text-1 {
+        position: absolute;
+        top: -8px;
+      }
+
+      .info-text-2 {
+        font-size: 10px;
+        text-transform: lowercase;
+        position: absolute;
+        bottom: -10px;
+      }
+
+      .circle {
+        box-sizing: border-box;
+        width: 43px;
+        height: 42px;
+        background: #FFFFFF;
+        border: 1.5px solid #707070;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+
+    }
+
+
+
+    .reward-earn-container {
+      margin-top: 30px;
+      padding: 0px;
+      margin-bottom: 20px;
+
+    }
+
+    .reward-earn-text {
+      padding: 0px;
+      height: 23px;
+      display: flex;
+      align-items: center;
+
+      .text {
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 800px;
+        font-size: 15px;
+        line-height: 150%;
+        letter-spacing: 0.05em;
+        color: #000000;
+      }
+
+    }
+
+    .earn-box-container {
+      padding: 0px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .earn-box1 {
+        position: relative;
+        height: 50px;
+
+        .cart-img {
+          position: absolute;
+          left: 10px;
+        }
+
+        .buy {
+          top: -5px;
+          position: absolute;
+          right: 12px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 16px;
+          color: #000000;
+        }
+
+        .plus {
+          // top: -10px;
+          position: absolute;
+          right: 20px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 27px;
+          text-align: center;
+          color: #D6980E;
+        }
+
+
+      }
+
+      .earn-box2 {
+        position: relative;
+        height: 50px;
+
+        .doller {
+          position: absolute;
+          left: 10px;
+        }
+
+        .sell {
+          top: -5px;
+          position: absolute;
+          right: 5px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 16px;
+          color: #000000;
+        }
+
+        .plus2 {
+          // top: -10px;
+          position: absolute;
+          right: 20px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 27px;
+          text-align: center;
+          color: #D6980E;
+        }
+
+      }
+
+      .earn-box3 {
+        position: relative;
+        height: 50px;
+
+        .refresh {
+          position: absolute;
+          // left: 10px;
+        }
+
+        .trade {
+          top: -5px;
+          position: absolute;
+          right: 0px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 16px;
+          color: #000000;
+        }
+
+        .plus3 {
+          // top: -10px;
+          position: absolute;
+          right: 20px;
+          font-family: 'Nunito Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: 27px;
+          text-align: center;
+          color: #D6980E;
+        }
+
+      }
+
+    }
+
+  }
+}

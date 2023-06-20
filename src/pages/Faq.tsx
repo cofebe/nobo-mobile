@@ -28,6 +28,12 @@ const Faq = () => {
         </IonCol>
       </IonRow>
       <IonContent className='faq-ion-content'>
+        <IonRow className='faq-text-container'>
+          <IonCol className='faq-text-box'>How do you list an item with NOBO?</IonCol>
+        </IonRow>
+        <IonRow className='faq-text-container'>
+          <IonCol className='faq-text-box'>What happens when your consignment item is purchased?</IonCol>
+        </IonRow>
 
 
 
