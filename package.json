@@ -38,6 +38,7 @@
     "3d-react-carousal": "^5.0.0",
     "aws-amplify": "^4.3.33",
     "aws-appsync": "^4.1.8",
+    "chart.js": "^4.3.0",
     "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-plugin-purchase": "^11.0.0",
