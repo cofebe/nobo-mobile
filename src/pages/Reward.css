@@ -1,0 +1,95 @@
+.reward-main-modal {
+  --height: 297px;
+
+
+
+}
+
+.reward-body {
+  position: relative;
+  height: 100%;
+  padding: 18px 24px 0px 24px;
+}
+
+.reward-header-box {
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.reward-header-text {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 25px;
+  color: #ACACAC;
+}
+
+
+.reward-promo-box {
+  display: flex;
+  align-items: center;
+  height: 34px;
+  margin-top: 50px;
+
+
+}
+
+.reward-promo-code {
+  height: 25px;
+  margin-left: 10px;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 25px;
+  color: #ACACAC;
+}
+
+.reward-promo-text {
+  height: 34px;
+  margin-left: 30px;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 34px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #000000;
+
+}
+
+.reward-line {
+  position: absolute;
+  width: 100%;
+  height: 0px;
+  border: 0.3px solid #707070;
+  left: 0px;
+  top: 75%;
+}
+
+.reward-info-box {
+  height: 61px;
+  margin-top: 90px;
+  padding: 0px;
+}
+
+.reward-info-text {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 13px;
+  /* or 162% */
+
+  text-align: center;
+
+  color: #707070;
+
+}

@@ -98,6 +98,7 @@ import ReturnPolicy from './pages/ReturnPolicy';
 import TermsAndCondition from './pages/TermsAndCondition';
 import Faq from './pages/Faq';
 import ShippingTerms from './pages/ShippingTerms';
+import Reward from './pages/Reward';
 
 
 setupIonicReact({
@@ -330,9 +331,9 @@ const App: React.FC = () => {
             <Route path="/settings/withdraw/submitted" exact={true}>
               <WithdrawalSubmit/>
             </Route>
-            {/* <Route path="/settings/help" exact={true}>
-              <Help />
-            </Route> */}
+            <Route path="/reward" exact={true}>
+              <Reward />
+            </Route>
             <Route path="/settings/help" exact={true}>
               <HelpSupport />
             </Route>

@@ -17,6 +17,7 @@ import {
   PaymentMethodsResponse,
   ProductsResponse,
   ProfilPicResponse,
+  RewardsResponse,
   SignUpResponse,
   SignUpType,
   SuccessResponse,
@@ -409,6 +410,11 @@ export class UserService extends BaseService {
   async denyTradeOffer(tradeid: string): Promise<TradesResponse> {
     const res = await super.fetch('POST', '/api/trades/reject', { tradeid });
     const json: TradesResponse = await res.json();
+    return json;
+  }
+  async getRewards(): Promise<RewardsResponse> {
+    const res = await super.fetch('GET', '/api/users/rewards');
+    const json: RewardsResponse = await res.json();
     return json;
   }
 

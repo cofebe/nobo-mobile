@@ -545,6 +545,44 @@ export interface TradesResponse {
   sent: Trade[];
   received: Trade[];
 }
+export interface RewardsResponse {
+  points: number;
+  coupons: {
+    USD_5_OFF:{
+      type:string;
+      active:boolean;
+      multi:boolean;
+      _id:string;
+      code:string;
+      user:string;
+      discount:string;
+      createdAt:string;
+      updatedAt:string;
+    }
+    USD_10_OFF:{
+      type:string;
+      active:boolean;
+      multi:boolean;
+      _id:string;
+      code:string;
+      user:string;
+      discount:string;
+      createdAt:string;
+      updatedAt:string;
+    }
+    USD_15_OFF:{
+      type:string;
+      active:boolean;
+      multi:boolean;
+      _id:string;
+      code:string;
+      user:string;
+      discount:string;
+      createdAt:string;
+      updatedAt:string;
+    }
+  };
+}
 
 export interface CategoriesResponse {
   docs: Category[];

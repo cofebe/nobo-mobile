@@ -60,7 +60,6 @@ const Withdraw: React.FC = () => {
   const transferFunds = (paypal: string, email: string) => {
     userService.transferFunds(paypal, email)
       .then((res: FundsResponse) => {
-        console.log('res', res)
         if (res.success) {
           dismiss()
           history.push('/settings/withdraw/submitted')
@@ -188,7 +187,7 @@ const Withdraw: React.FC = () => {
             </IonCol>
             <IonCol size='12' className='btn-container'>
               <IonButton
-                style={{ backgroundColor: 'white' }} className='btn'
+                style={{  width:350, height:51 }} className='btn'
                 onClick={() => {
                   transferFunds('paypal', email)
                 }}

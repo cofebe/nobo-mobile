@@ -67,9 +67,9 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
     const newUser = localStorage.getItem('newUser');
     if (newUser) {
       setModalVisible(true);
-      console.log('we found new newUser');
+      // console.log('we found new newUser');
     } else {
-      console.log('no newUser');
+      // console.log('no newUser');
     }
   };
 

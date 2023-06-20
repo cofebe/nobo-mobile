@@ -5,6 +5,7 @@ import './TradesDetails.scss'
 import { useHistory, } from 'react-router'
 import { Trade } from '../models'
 import { formatPrice, getImageUrl } from '../utils'
+import { calculateFee } from '../helpers/tradeFees'
 
 
 
@@ -23,7 +24,7 @@ const TradesDetails: React.FC = () => {
 
 
 
-
+  console.log('trade details', tradesData)
   return (
     <IonPage className='trade-details-main-container'>
       <Header title='TRADE DETAILS' />
@@ -119,7 +120,7 @@ const TradesDetails: React.FC = () => {
               </div>
               <div className='trade-details t-value'>
                 <p className='nobo-title'>TheNOBO Trade Fee (12%)</p>
-                <p className='nobo price'>{formatPrice(product?.salesTax.initiator.taxable_amount)}</p>
+                <p className='nobo price'>{formatPrice(calculateFee(product?.total))} </p>
               </div>
               <div className='trade-details t-value'>
                 <p className='savings-title' style={{ color: '#D6980E' }}>Your Savings</p>
