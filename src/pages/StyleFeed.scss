@@ -38,7 +38,7 @@
 
   .profile-create-post {
     position: absolute;
-    top: 95px;
+    top: calc(45px + var(--ion-safe-area-top, 0));
     right: 0;
   }
 
