@@ -16,13 +16,12 @@ const DonutGraph: React.FC<DonutGraphProps> = ({ data, labels }) => {
         new Chart(ctx, {
           type: 'doughnut',
           data: {
-            labels,
             datasets: [
               {
                 data,
                 backgroundColor: [
-                  '#FF6384',
-                  '#36A2EB',
+                  '#d6980e',
+                  '#C4C4C4',
                   '#FFCE56',
                   '#4BC0C0',
                   '#9966FF',
@@ -38,9 +37,9 @@ const DonutGraph: React.FC<DonutGraphProps> = ({ data, labels }) => {
         });
       }
     }
-  }, [data, labels]);
+  }, [data]);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas id={"chart"} ref={canvasRef} />;
 };
 
 export default DonutGraph;
