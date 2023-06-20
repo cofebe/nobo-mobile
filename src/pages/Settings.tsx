@@ -134,7 +134,7 @@ const Settings: React.FC = () => {
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();
-            // history.push('/settings/savings');
+            history.push('/settings/savings');
           }}
         >
           Savings &amp; Sustainability

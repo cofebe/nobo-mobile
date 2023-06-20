@@ -1,0 +1,103 @@
+.savings-page {
+  background-color: #FEFCF7;
+
+  .rewards-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+  }
+
+  .rewards-card {
+    --background: #fefcf6;
+    width: 80%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .rewards-graph {
+    height: 103px;
+    /* Style your donut graph here */
+  }
+
+  .rewards-points {
+    text-align: right;
+  }
+
+  .savings-header {
+    // background-color: #FEFCF7;
+    height: 118px;
+
+    .savings-text {
+      padding-top: 20%;
+      font-size: 8px;
+      font-weight: 400;
+      line-height: 12px;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    .savings-details {
+      color: #D6980E;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 18px;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    .savings-back-btn {
+      position: absolute;
+      left: 36px;
+      bottom: 15px;
+      z-index: 1000;
+    }
+
+    .savings-title-text-container {
+      width: 100%;
+      position: absolute;
+      top: 70%;
+      bottom: 10.71%;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 150%;
+      letter-spacing: 0.05em;
+      color: #000000;
+      text-align: center;
+    }
+
+    .savings-sub-title {
+      left: 24px;
+    }
+
+  }
+}
+
+.rewards-content {
+  --background: #fefcf6;
+}
+
+.savings-amount {
+  font-family: 'Nunito Sans';
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 60px;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.toggle-switch-savings {
+  z-index: 10000;
+  margin-left: auto;
+  margin-right: auto;
+  width: 220px;
+  min-height: 30px;
+  background: white;
+  border-radius: 25px;
+  border: .5px solid black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
