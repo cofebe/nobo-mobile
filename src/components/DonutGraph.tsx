@@ -8,12 +8,13 @@ interface DonutGraphProps {
 
 const DonutGraph: React.FC<DonutGraphProps> = ({ data, labels }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  let myChart: Chart<"doughnut">;
 
   useEffect(() => {
     if (canvasRef.current) {
       const ctx = canvasRef.current.getContext('2d');
       if (ctx) {
-        new Chart(ctx, {
+        myChart = new Chart(ctx, {
           type: 'doughnut',
           data: {
             datasets: [
@@ -37,9 +38,13 @@ const DonutGraph: React.FC<DonutGraphProps> = ({ data, labels }) => {
         });
       }
     }
+
+    return () => {
+      myChart.destroy()
+    }
   }, [data]);
 
-  return <canvas id={"chart"} ref={canvasRef} />;
+  return <canvas id="donut-graph" ref={canvasRef} />;
 };
 
 export default DonutGraph;
