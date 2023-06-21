@@ -335,7 +335,7 @@ const App: React.FC = () => {
             <Route path="/settings/withdraw/submitted" exact={true}>
               <WithdrawalSubmit/>
             </Route>
-            <Route path="/reward" exact={true}>
+            <Route path="/settings/saving/rewards" exact={true}>
               <Reward />
             </Route>
             <Route path="/settings/help" exact={true}>

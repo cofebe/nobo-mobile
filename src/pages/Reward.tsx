@@ -1,33 +1,64 @@
-import { IonButton, IonCol, IonContent, IonModal, IonPage, IonRow, IonTextarea, useIonViewWillEnter } from '@ionic/react'
+import { IonCol, IonContent, IonModal, IonPage, IonRow, useIonToast, useIonViewWillEnter } from '@ionic/react'
 import './Reward.scss'
 import './Reward.css'
 import { useHistory } from 'react-router'
 import { useRef, useState } from 'react'
 import { UserService } from '../services/UserService'
+import { Clipboard } from '@capacitor/clipboard';
+import DonutGraph from '../components/DonutGraph'
+
 
 const Reward = () => {
   const userService = new UserService()
   const history = useHistory()
   const modal = useRef<HTMLIonModalElement>(null)
-const [fivePercentCoupon, setfivePercent] = useState<string>('')
-const [tenPercentCoupon, setTenPercent] = useState<string>('')
-const [fifteenPercentCoupon, setfifteenPercent] = useState<string>('')
-const [couponCode, setCouponCode] = useState<string>('')
+  const [fivePercentCoupon, setfivePercent] = useState<string>('')
+  const [tenPercentCoupon, setTenPercent] = useState<string>('')
+  const [fifteenPercentCoupon, setfifteenPercent] = useState<string>('')
+  const [rewardPoint, setRewardPoint]= useState<number>()
+  const [couponCode, setCouponCode] = useState<string>('')
+  const [rewardType, setRewardType] = useState<string>('')
+  const [present] = useIonToast();
+  const rewardNumber = Array.from(String(rewardPoint), Number)
+
+  const pointsData = [1,5];
+  const pointsLabels = ["Current Points", "Points to Next Reward"];
+
+  const presentToast = (position: 'top' | 'middle' | 'bottom') => {
+    present({
+      message: `${couponCode} Copied to clipboard`,
+      duration: 1000,
+      position: position,
+    });
+  };
+
+  const writeToClipboard = async (code: string) => {
+    await Clipboard.write({
+      string: `${code}`
+    });
+    presentToast('top')
+    modal.current?.dismiss()
+  };
 
 
-  const getRewards = () => {
-    userService.getRewards()
-      .then((rewards) => {
-        setfivePercent(rewards.coupons.USD_5_OFF.code)
-        setTenPercent(rewards.coupons.USD_10_OFF.code)
-        setfifteenPercent(rewards.coupons.USD_15_OFF.code)
-      })
-      .catch((error) => { console.log('unable to fetch rewards :', error) })
-  }
 
-  useIonViewWillEnter(()=>{
-    getRewards()
+
+
+
+
+
+  useIonViewWillEnter(() => {
+      userService.getRewards()
+        .then((rewards) => {
+          setRewardPoint(rewards.points)
+          setfivePercent(rewards.coupons.USD_5_OFF.code)
+          setTenPercent(rewards.coupons.USD_10_OFF.code)
+          setfifteenPercent(rewards.coupons.USD_15_OFF.code)
+
+        })
+        .catch((error) => { console.log('unable to fetch rewards :', error) })
   })
+
 
   return (
     <IonPage className='reward-main-container'>
@@ -57,65 +88,85 @@ const [couponCode, setCouponCode] = useState<string>('')
             </IonCol>
           </IonRow>
 
-          <IonRow className='reward-trophy-container'
-            onClick={() => {
-              setCouponCode(fivePercentCoupon)
-              modal.current?.present()
-            }}
-          >
-            <IonCol className='reward-trophy-box'>
-              <div className="circle">
-                <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
-              </div>
-              <div className="info">
-                <p className='info-text-1'>$5 off your Purchase</p>
-                <p className='info-text-2'>5 Points | Expires in 1 Year</p>
-              </div>
-              <div className="arrow">
-                <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
-              </div>
+          <IonRow className='rewards-graph-container'>
+            <IonCol className='rewards-graph-box' style={{ height: 100 }}>
+              <DonutGraph data={rewardNumber} labels={pointsLabels} > </DonutGraph>
+              <p className='reward-g-text'>+{rewardPoint}</p>
+            </IonCol>
+          </IonRow>
+          <IonRow className='rewards-point-r-container'>
+            <IonCol className='rewards-point-r-box'>
+              <p className='rewards-point-r-text'>17 POINTS FROM YOUR NEXT REWARD</p>
+
             </IonCol>
           </IonRow>
 
-          <IonRow className='reward-trophy-container'
-            onClick={() => {
-              setCouponCode(tenPercentCoupon)
-              modal.current?.present()
-            }}
-          >
-            <IonCol className='reward-trophy-box'>
-              <div className="circle">
-                <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
-              </div>
-              <div className="info">
-                <p className='info-text-1'>$10 off your Purchase</p>
-                <p className='info-text-2'>10 Points | Expires in 1 Year</p>
-              </div>
-              <div className="arrow">
-                <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
-              </div>
-            </IonCol>
-          </IonRow>
+          <div style={{ marginTop: '39px' }}>
+            <IonRow className='reward-trophy-container'
+              onClick={() => {
+                setCouponCode(fivePercentCoupon)
+                setRewardType('$5 OFF YOUR PURCHASES')
 
-          <IonRow className='reward-trophy-container'
-            onClick={() => {
-              setCouponCode(fifteenPercentCoupon)
-              modal.current?.present()
-            }}
-          >
-            <IonCol className='reward-trophy-box'>
-              <div className="circle">
-                <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
-              </div>
-              <div className="info">
-                <p className='info-text-1'>$15 off your Purchase</p>
-                <p className='info-text-2'>15 Points | Expires in 1 Year</p>
-              </div>
-              <div className="arrow">
-                <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
-              </div>
-            </IonCol>
-          </IonRow>
+                modal.current?.present()
+              }}
+            >
+              <IonCol className='reward-trophy-box'>
+                <div className="circle">
+                  <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
+                </div>
+                <div className="info">
+                  <p className='info-text-1'>$5 off your Purchase</p>
+                  <p className='info-text-2'>5 Points | Expires in 1 Year</p>
+                </div>
+                <div className="arrow">
+                  <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                </div>
+              </IonCol>
+            </IonRow>
+
+            <IonRow className='reward-trophy-container'
+              onClick={() => {
+                setCouponCode(tenPercentCoupon)
+                setRewardType('$10 OFF YOUR PURCHASES')
+                modal.current?.present()
+              }}
+            >
+              <IonCol className='reward-trophy-box'>
+                <div className="circle">
+                  <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
+                </div>
+                <div className="info">
+                  <p className='info-text-1'>$10 off your Purchase</p>
+                  <p className='info-text-2'>10 Points | Expires in 1 Year</p>
+                </div>
+                <div className="arrow">
+                  <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                </div>
+              </IonCol>
+            </IonRow>
+
+            <IonRow className='reward-trophy-container'
+              onClick={() => {
+                setCouponCode(fifteenPercentCoupon)
+                setRewardType('$15 OFF YOUR PURCHASES')
+
+                modal.current?.present()
+              }}
+            >
+              <IonCol className='reward-trophy-box'>
+                <div className="circle">
+                  <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
+                </div>
+                <div className="info">
+                  <p className='info-text-1'>$15 off your Purchase</p>
+                  <p className='info-text-2'>15 Points | Expires in 1 Year</p>
+                </div>
+                <div className="arrow">
+                  <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                </div>
+              </IonCol>
+            </IonRow>
+          </div>
 
           <IonRow className='reward-earn-container'>
             <IonCol className='reward-earn-text'>
@@ -150,13 +201,25 @@ const [couponCode, setCouponCode] = useState<string>('')
         ref={modal}
         initialBreakpoint={1}
         breakpoints={[1, 5]}>
+
         <IonRow className='reward-body'>
           <IonCol size='12' className='reward-header-box'>
-            <p className='reward-header-text'>$5 OFF REWARD</p>
+            <p className='reward-header-text'>{rewardType}</p>
           </IonCol>
           <IonCol size='12' className='reward-promo-box'>
             <p className='reward-promo-code'>PROMO CODE</p>
             <p className='reward-promo-text'>{couponCode}</p>
+            <div
+              className='reward-copy-box'
+              onClick={() => {
+                writeToClipboard(couponCode)
+              }}
+            >
+              <img className='reward-copy-img' width={18} height={21}
+                src='assets/images/reward-copy.svg' alt=""
+              />
+              <p className='reward-copy-text'>Copy</p>
+            </div>
           </IonCol>
           <div className='reward-line'></div>
 
