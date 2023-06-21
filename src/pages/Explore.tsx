@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
-import { IonCol, IonRow, IonPage, IonContent, useIonViewWillEnter } from '@ionic/react';
+import { useEffect, useRef, useState } from 'react';
+import { IonCol, IonRow, IonPage, IonContent, useIonViewWillEnter, IonModal } from '@ionic/react';
 import './Explore.scss';
+import './Explore.css';
 import ExploreHeader from '../components/ExploreHeader';
 import NoboHomeItem from '../components/NoboHomeItem';
 import { ProductService } from '../services/ProductService';
@@ -10,6 +11,9 @@ const Explore: React.FC = () => {
   const productService = new ProductService();
   const params: any = useParams();
   const [products, setProducts] = useState<any>([]);
+  const [sort, setSort] = useState('');
+
+  const modal = useRef<HTMLIonModalElement>(null)
 
   useIonViewWillEnter(() => {
     const ionRouterOutlet = document.querySelector('ion-router-outlet') as HTMLElement;
@@ -42,9 +46,39 @@ const Explore: React.FC = () => {
       });
   }
 
+
+
+  if (sort === 'low') {
+    console.log('low')
+    products?.sort((a: any, b: any) => a.price - b.price)
+  } else if (sort === 'high') {
+    console.log('high')
+    products?.sort((a: any, b: any) => b.price - a.price)
+  } else if (sort === 'date') {
+    products?.sort((a: any, b: any) => new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf());
+  }
+
+
+
   return (
     <IonPage className="nobo-explore-page">
       <ExploreHeader />
+      <div className='explore-sort-container'>
+
+        <div>FILTER</div>
+        <div className="explore-sort-box"
+          onClick={() => {
+            modal.current?.present()
+          }}
+        >
+          <img height={24} src='assets/images/sort-icon.svg' alt="" />
+          <p className="explore-sort-text"
+            style={{ fontWeight: 800, fontSize: 12 }}
+          >SORT BY</p>
+        </div>
+
+      </div>
+
       {params.sectionName === 'explore' ? (
         <IonContent>
           <IonRow>
@@ -76,6 +110,43 @@ const Explore: React.FC = () => {
           </IonRow>
         </IonContent>
       )}
+      <IonModal className='explore-main-modal' ref={modal} initialBreakpoint={1} breakpoints={[1, 5]}>
+        <IonRow className='explore-modal-container'>
+
+          <IonCol size='12' className='explore-modal-title-box'>
+            <p className='explore-modal-title-text'>SORT BY</p>
+          </IonCol>
+          <IonCol size='12' className='explore-modal-listed-box'
+            onClick={() => {
+              setSort('date')
+              modal.current?.dismiss()
+            }}
+          >
+            <p className='explore-modal-listed-text'>JUST LISTED</p>
+          </IonCol>
+
+          <IonCol size='12' className='explore-modal-listed-box'
+            onClick={() => {
+              setSort('high')
+              modal.current?.dismiss()
+            }}
+          >
+            <p className='explore-modal-listed-text'>HIGH TO LOW</p>
+          </IonCol>
+
+          <IonCol size='12' className='explore-modal-listed-box'
+            onClick={() => {
+              setSort('low')
+              modal.current?.dismiss()
+            }}
+          >
+            <p className='explore-modal-listed-text'>LOW TO HIGH</p>
+          </IonCol>
+
+
+        </IonRow>
+      </IonModal>
+
     </IonPage>
   );
 };

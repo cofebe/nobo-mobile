@@ -1,0 +1,65 @@
+.explore-main-modal{
+  --height: 320px;
+  /* --border-radius: 30px 30px 0px 0px !important; */
+  /* --border-radius: 30px 30px; */
+}
+
+.explore-main-modal{
+  --height: 187px;
+  /* --border-radius: 30px 30px 0px 0px !important; */
+  /* --border-radius: 30px 30px; */
+}
+
+
+.explore-modal-container{
+  /* background-color: pink; */
+  height: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 20px;
+}
+.explore-modal-title-box{
+ /* background-color: teal; */
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ height: 30px;
+}
+.explore-modal-title-text{
+  /* height: 50px; */
+
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  /* line-height: 150%; */
+  /* identical to box height, or 18px */
+
+  text-align: center;
+  letter-spacing: 0.05em;
+
+  color: #000000;
+}
+
+.explore-modal-listed-box{
+  /* background-color: teal; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+}
+.explore-modal-listed-text{
+
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 150%;
+  /* identical to box height, or 22px */
+
+  text-align: center;
+  letter-spacing: 0.05em;
+
+  color: #000000;
+}
+
