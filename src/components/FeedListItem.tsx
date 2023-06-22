@@ -104,10 +104,6 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
     // }
   }, [message, trackImpressions]);
 
-  function showPostComment() {
-    commentModal.current?.present();
-  }
-
   function viewUser_(history: any, userId: number, userType: string) {
     if (!disableProfileLink) {
       // viewUser(history, userId, userType, message.post_id);
@@ -489,7 +485,10 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
                             </div>
                             <div className="feed-list-nobo-likes-count">{message.likes.length}</div>
                           </div>
-                          <div onClick={() => showPostComment()}>
+                          <div onClick={e => {
+                                  e.preventDefault();
+                                  history.push(`/post-detail/${message._id}`);
+                                }}>
                             <div>
                               <svg
                                 width="10"
@@ -566,7 +565,10 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
                       </div>
                       <div className="feed-list-nobo-likes-count">{message.likes.length}</div>
                     </div>
-                    <div onClick={() => showPostComment()}>
+                    <div onClick={e => {
+                          e.preventDefault();
+                          history.push(`/post-detail/${message._id}`);
+                          }}>
                       <div>
                         <svg
                           width="10"
