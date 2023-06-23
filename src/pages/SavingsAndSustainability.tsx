@@ -90,7 +90,11 @@ const SavingsAndSustainabilityPage: React.FC = () => {
                 <IonCol className="savings-header" size="6">
                   <div className="rewards-points">
                     <p className="savings-text">{pointsData[1]} POINTS FROM YOUR NEXT REWARD!</p>
-                    <p className="savings-details">DETAILS</p>
+                    <p className="savings-details"
+                    onClick={()=>{
+                      history.push('/settings/saving/rewards')
+                    }}
+                    >DETAILS</p>
                   </div>
                 </IonCol>
               </IonRow>
