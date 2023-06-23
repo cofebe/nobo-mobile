@@ -24,6 +24,8 @@ import CreateCommentModal from '../components/CreateCommentModal';
 import { chevronBackOutline } from 'ionicons/icons';
 import { AuthService } from '../services/AuthService';
 import { FeedService } from '../services/FeedService';
+import { UserService } from '../services/UserService';
+import { User } from '../models';
 //import ImageZoom from '../components/ImageZoom';
 
 interface FeedItem {
@@ -64,10 +66,12 @@ const PostDetail: React.FC = () => {
   console.log('PostDetail');
   const authService = new AuthService();
   const feedService = new FeedService();
+  const userService = new UserService();
   const history = useHistory();
   const [postId, setPostId] = useState<string>(getPostId());
   const [message, setMessage] = useState<FeedItem>();
   const [comments, setComments] = useState<Comment[]>([]);
+  let [noboProfile, setNoboProfile] = useState<User>();
   //const [imageZoom, setImageZoom] = useState('');
   const [currentUserAvatar, setCurrentUserAvatar] = useState<string>('');
   const [commentMessage, setCommentMessage] = useState<string>('');
@@ -86,6 +90,9 @@ const PostDetail: React.FC = () => {
 
     let userID = authService.getUserId();
 
+    userService.getMe().then( (data) => {
+      setNoboProfile(data);
+    })
     // postId = getPostId();
     // setPostId(postId);
     //setImageZoom('');
@@ -277,7 +284,7 @@ const PostDetail: React.FC = () => {
                 currentTarget.onerror = null; // prevents looping
                 // currentTarget.src = '../../assets/images/nobo_logo_round.svg';
               }}
-              src="https://thenobo.sfo3.digitaloceanspaces.com/production/84amuJRJRKEBhaMVIYbmY.png"
+              src={noboProfile !== undefined ? noboProfile.avatar : "https://thenobo.sfo3.digitaloceanspaces.com/production/84amuJRJRKEBhaMVIYbmY.png"}
               alt="avatar"
             />
           </IonAvatar>
