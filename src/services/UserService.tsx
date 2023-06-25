@@ -572,7 +572,7 @@ export class UserService extends BaseService {
 
   // GET BRANDS
   async getBrands() {
-    const response = await fetch('https://staging.thenobo.com/api/brands/all');
+    const response = await super.fetch('GET','api/brands/all');
     const json: BrandsResponse = await response.json();
     return json.brands;
   }

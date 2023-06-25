@@ -75,14 +75,17 @@ const NoboExploreHeader: React.FC = () => {
           console.log(detail);
         }
         if (detail.data.action === 'women') {
+          localStorage.removeItem('mainProduct')
           setActiveCategoryTitle('WOMEN');
           setActiveCategory('women');
           history.replace(`/home/explore/women/${activeButton}`);
         } else if (detail.data.action === 'men') {
+          localStorage.removeItem('mainProduct')
           setActiveCategoryTitle('MEN');
           setActiveCategory('men');
           history.replace(`/home/explore/men/${activeButton}`);
         } else if (detail.data.action === 'sneakers') {
+          localStorage.removeItem('mainProduct')
           setActiveCategoryTitle('SNEAKERS');
           setActiveCategory('sneakers');
           history.replace(`/home/explore/sneakers/${activeButton}`);
@@ -102,6 +105,7 @@ const NoboExploreHeader: React.FC = () => {
                   e.preventDefault();
                   e.stopPropagation();
                   history.push('/settings');
+                  localStorage.removeItem('mainProduct')
                 }}
               >
                 <img

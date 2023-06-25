@@ -1,4 +1,4 @@
-.explore-main-modal{
+.explore-sort-main-modal{
   --height: 320px;
   /* --border-radius: 30px 30px 0px 0px !important; */
   /* --border-radius: 30px 30px; */
@@ -49,17 +49,231 @@
   height: 30px;
 }
 .explore-modal-listed-text{
-
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 150%;
-  /* identical to box height, or 22px */
-
   text-align: center;
   letter-spacing: 0.05em;
-
   color: #000000;
+}
+.explore-modal-listed-text-high{
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #D6980E;
+}
+.explore-modal-listed-text-low{
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: 0.05em;
+    color: #D6980E;
+
+}
+.explore-modal-listed-text-date{
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: 0.05em;
+   color: #D6980E;
+
+}
+
+.explore-main-filter-modal{
+  --height: 420px;
+  /* --border-radius: 30px 30px 0px 0px !important; */
+  /* --border-radius: 30px 30px; */
+}
+.explore-main-filter-modal2{
+  --height: 320px;
+  /* --border-radius: 30px 30px 0px 0px !important; */
+  /* --border-radius: 30px 30px; */
+}
+
+.explore-modal-filter-container{
+  /* height: 100%; */
+  padding: 20px;
+}
+
+.filter-option-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 24px;
+  margin-bottom: 14px;
+}
+.filter-option-title-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  margin-bottom: 30px;
+}
+
+.filter-option-title{
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #000000;
+}
+.filter-option-text{
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #000000;
+}
+
+.filter-line-sep{
+  width: 100%;
+  border: .1px solid #707070;
+  margin-bottom: 14px;
+}
+
+
+
+/* -----------------------------BY CATEGORY ----------------------------*/
+
+
+.filter-title-category-title-box{
+  position: relative;
+  /* background-color: aquamarine; */
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-title-category-img{
+  position: absolute;
+  left: 0px;
+  top: 10px;
+}
+
+.filter-title-category-title{
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #000000;
+}
+
+.filter-title-category-box{
+  /* background-color: plum; */
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 11px;
+}
+
+.filter-title-category-option{
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22.5px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #000000;
+}
+.filter-title-category-option-active{
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 22.5px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #D6980E;
+}
+
+
+
+/* ---------------------BY DESIGN ---------------------------*/
+
+
+.filter-title-designer-title-box{
+  position: relative;
+  /* background-color: aquamarine; */
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.filter-title-designer-img{
+  position: absolute;
+  left: 20px;
+  top: 10px;
+}
+
+.filter-title-designer-title{
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #000000;
+}
+
+.filter-input-box{
+ padding: 0px 20px 0px 20px;
+ margin-bottom: 30px;
+}
+.filter-input{
+  height: 37px;
+}
+
+.test{
+  width: 100%;
+  overflow-y: scroll;
+  height: 270px;
+  /* padding-bottom: 30px; */
+
+}
+
+.filter-option-design-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 24px;
+  margin-bottom: 14px;
+}
+
+.filter-option-design-text{
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: 0.05em;
+  color: #000000;
+  text-transform: uppercase;
+
 }
 
