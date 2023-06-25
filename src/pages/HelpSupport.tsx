@@ -28,14 +28,20 @@ const HelpSupport = () => {
         </IonCol>
       </IonRow>
       <IonContent className='help-support-ion-content'>
-        <IonRow className='help-support-container-1'>
+        <IonRow className='help-support-container-1' >
           <IonCol className='contact' size='12'>CONTACT <span className='support'>SUPPORT</span></IonCol>
-          <IonCol className='email' size='12'>Customerservice@thenobo.com</IonCol>
+
+          <IonCol size='12' className='email'>
+            <a href="mailto:customerservice@thenobo.com">
+              customerservice@thenobo.com
+            </a>
+          </IonCol>
+
           <IonCol className='info' size='12'>
             Make sure to include your TheNOBO account email and
             specific details of the problems you're experiencing
           </IonCol>
-          <IonCol className='faq' size='12'>Check out our <span className='support' onClick={()=>{
+          <IonCol className='faq' size='12'>Check out our <span className='support' onClick={() => {
             history.push('/settings/faq')
           }}>FAQ</span> for quick solutions </IonCol>
 

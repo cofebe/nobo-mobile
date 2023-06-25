@@ -5,6 +5,7 @@ import './SalesShippingLabel.scss'
 import { UserService } from '../services/UserService'
 import Search from '../components/Search'
 import { FullOrder, OrderResponse, OrdersResponse } from '../models'
+import { getImageUrl } from '../utils'
 
 
 const SalesShippingLabel: React.FC = () => {
@@ -114,14 +115,22 @@ const SalesShippingLabel: React.FC = () => {
                   <div >
                     {products.products.map((product: any) => (
                       <div className=' shipping-l-product-box_show'>
-                        <div className="img-box">
+                        <div className='purchases-item-img'
+                          style={{
+                            backgroundImage: product.images?.length
+                              ? getImageUrl(product.images[0]?.url)
+                              : '',
+
+                          }}
+                        ></div>
+                        {/* <div className="img-box">
                           {<img
                             className='img'
                             src={product?.images[1]?.url.length < 60 ?
                               `https://staging.thenobo.com/${product?.images[1].url}`
                             : `${product?.images[0].url}`} alt=''
                           />}
-                        </div>
+                        </div> */}
 
 
                         {/* ------TOP--------- */}
