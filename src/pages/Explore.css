@@ -116,7 +116,7 @@
 }
 .filter-option-title-box{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 20px;
   margin-bottom: 30px;

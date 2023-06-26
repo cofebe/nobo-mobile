@@ -120,21 +120,18 @@ const Explore: React.FC = () => {
         const data2 = JSON.parse(data)
 
         if (option === 'low') {
-          setSort('low')
           const result = data2?.sort((a: any, b: any) => a.price - b.price)
           setProducts(result)
           localStorage.setItem('mainProduct', JSON.stringify(result))
         }
 
         else if (option === 'high') {
-          setSort('high')
           const result = data2?.sort((a: any, b: any) => b.price - a.price)
           setProducts(result)
           localStorage.setItem('mainProduct', JSON.stringify(result))
         }
 
         else if (option === 'date') {
-          setSort('date')
           const result = data2?.sort((a: any, b: any) =>
             new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf());
           setProducts(result)
@@ -149,8 +146,8 @@ const Explore: React.FC = () => {
 
 
   const filterColor = (productColor: string) => {
-    localStorage.removeItem('mainProduct')
-    getProducts(params.sectionCategory, 'explore', false);
+    // localStorage.removeItem('mainProduct')
+    // getProducts(params.sectionCategory, 'explore', false);
 
     setTimeout(() => {
       const data = localStorage.getItem('mainProduct')
@@ -303,7 +300,6 @@ const Explore: React.FC = () => {
   );
 
 
-
   return (
     <IonPage className="nobo-explore-page">
       <ExploreHeader />
@@ -365,6 +361,7 @@ const Explore: React.FC = () => {
           </IonCol>
           <IonCol size='12' className='explore-modal-listed-box'
             onClick={() => {
+              setSort('date')
               sortProduct('date')
               setTimeout(() => {
                 modal.current?.dismiss()
@@ -382,6 +379,7 @@ const Explore: React.FC = () => {
 
           <IonCol size='12' className='explore-modal-listed-box'
             onClick={() => {
+              setSort('high')
               sortProduct('high')
               setTimeout(() => {
                 modal.current?.dismiss()
@@ -398,6 +396,7 @@ const Explore: React.FC = () => {
 
           <IonCol size='12' className='explore-modal-listed-box'
             onClick={() => {
+              setSort('low')
               sortProduct('low')
               setTimeout(() => {
                 modal.current?.dismiss()
@@ -427,7 +426,23 @@ const Explore: React.FC = () => {
         <IonRow className='explore-modal-filter-container'>
           {sortPage === 'default' && (<>
             <IonCol size='12' className="filter-option-title-box">
-              <div className="filter-option-title">FILTER</div>
+              <div className="filter-option-title"></div>
+              <div className="filter-option-title"
+                style={{ marginLeft: '50px' }}
+              >FILTER</div>
+              <div
+                style={{ color: '#D6980E' }}
+                className="filter-option-title"
+                onClick={() => {
+                  setSort('date')
+                  sortProduct('date')
+                  handleBrandOption('')
+                  setTimeout(() => {
+                    filterModal.current?.dismiss()
+                  }, 3000);
+
+                }}
+              >RESET</div>
             </IonCol>
             <IonCol size='12' className='filter-option-box'
               onClick={() => setSortPage('category')}
@@ -519,8 +534,8 @@ const Explore: React.FC = () => {
               <div className="filter-title-category-img"
                 onClick={() => {
                   setSortPage('default')
-                  localStorage.removeItem('mainProduct')
-                  getProducts(params.sectionCategory, 'explore', false);
+                  // localStorage.removeItem('mainProduct')
+                  // getProducts(params.sectionCategory, 'explore', false);
                 }}
               >
                 <img
@@ -529,41 +544,6 @@ const Explore: React.FC = () => {
               </div>
 
               <div className="filter-title-category-title">BY CATEGORY</div>
-            </IonCol>
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('bags')
-                filterCategory('bag')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'bags' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>BAGS</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('shoes')
-                filterCategory('shoes')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'shoes' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>SHOES</p>
             </IonCol>
 
             <IonCol size='12' className="filter-title-category-box"
@@ -586,8 +566,8 @@ const Explore: React.FC = () => {
 
             <IonCol size='12' className="filter-title-category-box"
               onClick={() => {
-                setSort('clothing')
-                filterCategory('clothing')
+                setSort('bags')
+                filterCategory('bag')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
                 }, 3000);
@@ -596,82 +576,10 @@ const Explore: React.FC = () => {
             >
               <p
                 className={
-                  sort === 'clothing' ?
+                  sort === 'bags' ?
                     'filter-title-category-option-active'
                     : 'filter-title-category-option'
-                }>CLOTHING</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('tops')
-                filterCategory('tops')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'tops' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>TOPS</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('dresses')
-                filterCategory('dresses')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'dresses' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>DRESSES</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('outwear')
-                filterCategory('outerwear')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'outwear' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>OUTWEAR</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('swims')
-                filterCategory('swims')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'swims' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>SWIMS</p>
+                }>BAGS</p>
             </IonCol>
 
             <IonCol size='12' className="filter-title-category-box"
@@ -694,6 +602,42 @@ const Explore: React.FC = () => {
 
             <IonCol size='12' className="filter-title-category-box"
               onClick={() => {
+                setSort('clothing')
+                filterCategory('clothing')
+                setTimeout(() => {
+                  filterModal.current?.dismiss()
+                }, 3000);
+
+              }}
+            >
+              <p
+                className={
+                  sort === 'clothing' ?
+                    'filter-title-category-option-active'
+                    : 'filter-title-category-option'
+                }>CLOTHING</p>
+            </IonCol>
+
+            <IonCol size='12' className="filter-title-category-box"
+              onClick={() => {
+                setSort('dresses')
+                filterCategory('dresses')
+                setTimeout(() => {
+                  filterModal.current?.dismiss()
+                }, 3000);
+
+              }}
+            >
+              <p
+                className={
+                  sort === 'dresses' ?
+                    'filter-title-category-option-active'
+                    : 'filter-title-category-option'
+                }>DRESSES</p>
+            </IonCol>
+
+            <IonCol size='12' className="filter-title-category-box"
+              onClick={() => {
                 setSort('jeans')
                 filterCategory('jeans')
                 setTimeout(() => {
@@ -708,6 +652,42 @@ const Explore: React.FC = () => {
                     'filter-title-category-option-active'
                     : 'filter-title-category-option'
                 }>JEANS</p>
+            </IonCol>
+
+            <IonCol size='12' className="filter-title-category-box"
+              onClick={() => {
+                setSort('outwear')
+                filterCategory('outerwear')
+                setTimeout(() => {
+                  filterModal.current?.dismiss()
+                }, 3000);
+
+              }}
+            >
+              <p
+                className={
+                  sort === 'outwear' ?
+                    'filter-title-category-option-active'
+                    : 'filter-title-category-option'
+                }>OUTWEAR</p>
+            </IonCol>
+
+            <IonCol size='12' className="filter-title-category-box"
+              onClick={() => {
+                setSort('shoes')
+                filterCategory('shoes')
+                setTimeout(() => {
+                  filterModal.current?.dismiss()
+                }, 3000);
+
+              }}
+            >
+              <p
+                className={
+                  sort === 'shoes' ?
+                    'filter-title-category-option-active'
+                    : 'filter-title-category-option'
+                }>SHOES</p>
             </IonCol>
 
             <IonCol size='12'
@@ -729,6 +709,42 @@ const Explore: React.FC = () => {
                 }
               >SUITING</p>
             </IonCol>
+
+            <IonCol size='12' className="filter-title-category-box"
+              onClick={() => {
+                setSort('swims')
+                filterCategory('swims')
+                setTimeout(() => {
+                  filterModal.current?.dismiss()
+                }, 3000);
+
+              }}
+            >
+              <p
+                className={
+                  sort === 'swims' ?
+                    'filter-title-category-option-active'
+                    : 'filter-title-category-option'
+                }>SWIMS</p>
+            </IonCol>
+
+            <IonCol size='12' className="filter-title-category-box"
+              onClick={() => {
+                setSort('tops')
+                filterCategory('tops')
+                setTimeout(() => {
+                  filterModal.current?.dismiss()
+                }, 3000);
+
+              }}
+            >
+              <p
+                className={
+                  sort === 'tops' ?
+                    'filter-title-category-option-active'
+                    : 'filter-title-category-option'
+                }>TOPS</p>
+            </IonCol>
           </>)}
 
           {/* ---------------------DESIGNER-------------------- */}
@@ -738,8 +754,8 @@ const Explore: React.FC = () => {
               <div className="filter-title-category-img"
                 onClick={() => {
                   setSortPage('default')
-                  localStorage.removeItem('mainProduct')
-                  getProducts(params.sectionCategory, 'explore', false);
+                  // localStorage.removeItem('mainProduct')
+                  // getProducts(params.sectionCategory, 'explore', false);
                 }}
               >
                 <img
@@ -787,8 +803,7 @@ const Explore: React.FC = () => {
             <IonCol size='12' className='filter-title-designer-title-box'>
               <div className="filter-title-category-img"
                 onClick={() => {
-                  localStorage.removeItem('mainProduct')
-                  getProducts(params.sectionCategory, 'explore', false);
+                  // localStorage.removeItem('mainProduct')
                   setSortPage('default')
                 }}
               >
@@ -922,11 +937,7 @@ const Explore: React.FC = () => {
           {sortPage === 'color' && (<>
             <IonCol size='12' className='filter-title-designer-title-box'>
               <div className="filter-title-category-img"
-                onClick={() => {
-                  localStorage.removeItem('mainProduct')
-                  getProducts(params.sectionCategory, 'explore', false);
-                  setSortPage('default')
-                }}
+                onClick={() =>setSortPage('default')}
               >
                 <img
                   height={24}
