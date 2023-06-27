@@ -9,7 +9,6 @@ import { useParams } from 'react-router';
 import Input from '../components/Input';
 import { UserService } from '../services/UserService';
 import { Brand, Product } from '../models';
-import { loadingStore } from '../loading-store';
 
 
 
@@ -21,9 +20,7 @@ const Explore: React.FC = () => {
   const [sort, setSort] = useState('date');
   const [sortPage, setSortPage] = useState('default');
   const [brandsItems, setBrandItems] = useState<Brand[]>([]);
-  const [brandOption, setBrandOption] = useState<string[]>([])
   const [brandInput, setbrandInput] = useState('')
-  const [searchStatus, setSearchStatus] = useState(false)
 
 
   const modal = useRef<HTMLIonModalElement>(null)
@@ -40,10 +37,7 @@ const Explore: React.FC = () => {
       });
   }
 
-  const handleBrandOption = (brandId: any) => {
-    setBrandOption(brandId)
 
-  }
 
   useIonViewWillEnter(() => {
     getBrands()
@@ -54,54 +48,68 @@ const Explore: React.FC = () => {
     // console.log('params', params);
   });
 
+
+
   useEffect(() => {
-    const product = localStorage.getItem('mainProduct')
-    if (params.sectionName === 'explore' && product) {
-      setProducts(JSON.parse(product))
-    } else if (!product && params.sectionName === 'explore') {
-      sortProduct('date')
-      // getProducts(params.sectionCategory, 'explore', false);
+    if (params.sectionName === 'explore') {
+      const exploreProducts = localStorage.getItem(`${params.sectionName}Products`)
+      if (exploreProducts) {
+        setProducts(JSON.parse(exploreProducts))
+      }
+      else if (params.sectionName === 'explore' && !exploreProducts) {
+        getProducts(params.sectionCategory, 'explore', false);
+
+      }
     }
 
-    if (params.sectionName === 'trade' && product) {
-      setProducts(JSON.parse(product))
-    } else if (!product && params.sectionName === 'explore') {
-      sortProduct('date')
+    if (params.sectionName === 'trade') {
+      const tradeProducts = localStorage.getItem(`${params.sectionName}Products`)
+      if (tradeProducts) {
+        setProducts(JSON.parse(tradeProducts))
+      }
+      else if (params.sectionName === 'trade' && !tradeProducts) {
+        getProducts(params.sectionCategory, 'trade', false);
 
-      // getProducts(params.sectionCategory, 'explore', false);
+      }
     }
 
-    if (params.sectionName === 'sale' && product) {
-      setProducts(JSON.parse(product))
-    } else if (!product && params.sectionName === 'explore') {
-      sortProduct('date')
+    if (params.sectionName === 'shop') {
+      const shopProducts = localStorage.getItem(`${params.sectionName}Products`)
+      if (shopProducts) {
+        setProducts(JSON.parse(shopProducts))
+      }
+      else if (params.sectionName === 'shop' && !shopProducts) {
+        getProducts(params.sectionCategory, 'sell', false);
 
-      // getProducts(params.sectionCategory, 'explore', false);
-    }
-
-    if (params.sectionName === 'shop' && product) {
-      setProducts(JSON.parse(product))
-    } else if (!product && params.sectionName === 'explore') {
-      sortProduct('date')
-
-      // getProducts(params.sectionCategory, 'explore', false);
+      }
     }
 
 
+    if (params.sectionName === 'sale') {
+      const salesProduct = localStorage.getItem(`${params.sectionName}Products`)
+      if (salesProduct) {
+        setProducts(JSON.parse(salesProduct))
+      }
+      else if (params.sectionName === 'sale' && !salesProduct) {
+        getProducts(params.sectionCategory, 'sell', true);
 
+      }
+    }
 
   }, [params]);
 
 
-  function getProducts(group: string, action: string, onSale: boolean) {
+  function getProducts(group: string, action: string, onSale: boolean, data?: any) {
+    // localStorage.removeItem('mainProduct')
+    // console.log('removing item')
     productService
       .getProducts(group, action, onSale)
 
       .then(products => {
         const result = products.docs.sort((a: any, b: any) =>
           new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf());
-        setProducts(result)
-        localStorage.setItem('mainProduct', JSON.stringify(result))
+        setProducts(products.docs)
+        // localStorage.setItem('mainProduct', JSON.stringify(result))
 
       })
       .catch(error => {
@@ -110,32 +118,42 @@ const Explore: React.FC = () => {
   }
 
 
+  // --------------------------SORT PRODUCT -------------------------------
+
   const sortProduct = (option: string) => {
-    localStorage.removeItem('mainProduct')
-    getProducts(params.sectionCategory, 'explore', false);
+    localStorage.removeItem(`${params.sectionName}Products`)
+    if (params.sectionName === 'sale') {
+      getProducts(params.sectionCategory, 'sell', true);
+    }
+    else {
+      getProducts(params.sectionCategory, `${params.sectionName}`, false);
+
+    }
 
     setTimeout(() => {
-      const data = localStorage.getItem('mainProduct')
+      localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
+
+      const data = localStorage.getItem(`${params.sectionName}Products`)
       if (data) {
         const data2 = JSON.parse(data)
 
         if (option === 'low') {
           const result = data2?.sort((a: any, b: any) => a.price - b.price)
           setProducts(result)
-          localStorage.setItem('mainProduct', JSON.stringify(result))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(result))
         }
 
         else if (option === 'high') {
           const result = data2?.sort((a: any, b: any) => b.price - a.price)
           setProducts(result)
-          localStorage.setItem('mainProduct', JSON.stringify(result))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(result))
         }
 
         else if (option === 'date') {
           const result = data2?.sort((a: any, b: any) =>
             new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf());
           setProducts(result)
-          localStorage.setItem('mainProduct', JSON.stringify(result))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(result))
         }
 
       }
@@ -144,52 +162,78 @@ const Explore: React.FC = () => {
   }
 
 
+  //---------------FILTER BY COLOR --------------------------
 
   const filterColor = (productColor: string) => {
-    // localStorage.removeItem('mainProduct')
-    // getProducts(params.sectionCategory, 'explore', false);
+    localStorage.removeItem(`${params.sectionName}Products`)
+    if (params.sectionName === 'sale') {
+      getProducts(params.sectionCategory, 'sell', true);
+    }
+    else {
+      getProducts(params.sectionCategory, `${params.sectionName}`, false);
+
+    }
 
     setTimeout(() => {
-      const data = localStorage.getItem('mainProduct')
+      localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
+
+      const data = localStorage.getItem(`${params.sectionName}Products`)
       if (data) {
         const data2 = JSON.parse(data)
         const colorFilter = data2?.filter((product: Product) =>
           product.attributes.find((p) =>
             p.value.toString().toLowerCase().includes(productColor.toLowerCase())))
         setProducts(colorFilter)
-        localStorage.setItem('mainProduct', JSON.stringify(colorFilter))
+        localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(colorFilter))
 
-
+      }
+      else {
+        setProducts([])
       }
 
     }, 3000);
 
   }
 
+  //-----------------------FILTER BY CATEGORY---------------------------
 
   const filterCategory = (categoryType: string) => {
-    localStorage.removeItem('mainProduct')
-    getProducts(params.sectionCategory, 'explore', false);
+    localStorage.removeItem(`${params.sectionName}Products`)
+    if (params.sectionName === 'sale') {
+      getProducts(params.sectionCategory, 'sell', true);
+    }
+    else {
+      getProducts(params.sectionCategory, `${params.sectionName}`, false);
+
+    }
+
 
     setTimeout(() => {
-      const data = localStorage.getItem('mainProduct')
+      localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
+
+      const data = localStorage.getItem(`${params.sectionName}Products`)
       if (data) {
         const data2 = JSON.parse(data)
         const categoryFilter = data2?.find((product: Product) =>
           product?.parentCategory?.name?.toLowerCase().includes(categoryType.toLowerCase()))
         if (typeof (categoryFilter) === 'object') {
           const categoryData: any = []
+          const newArr = categoryData.push(categoryFilter)
           categoryData.push(categoryFilter)
           setProducts(categoryData)
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(newArr))
 
         }
         else if (typeof (categoryFilter) === 'undefined') {
           const categoryData: any = []
           setProducts(categoryData)
+          const newArr = categoryData.push(categoryFilter)
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(newArr))
+
         }
         else {
           setProducts(categoryFilter)
-          localStorage.setItem('mainProduct', JSON.stringify(categoryFilter))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(categoryFilter))
         }
 
       }
@@ -200,12 +244,17 @@ const Explore: React.FC = () => {
 
 
   const productFilter = (option: string) => {
-    // loadingStore.increment('');
-    localStorage.removeItem('mainProduct')
-    getProducts(params.sectionCategory, 'explore', false);
+    localStorage.removeItem(`${params.sectionName}Products`)
+    if (params.sectionName === 'sale') {
+      getProducts(params.sectionCategory, 'sell', true);
+    }
+    else {
+      getProducts(params.sectionCategory, `${params.sectionName}`, false);
+    }
 
     setTimeout(() => {
-      const data = localStorage.getItem('mainProduct')
+      localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
+      const data = localStorage.getItem(`${params.sectionName}Products`)
       if (data) {
         const data2 = JSON.parse(data)
 
@@ -216,7 +265,7 @@ const Explore: React.FC = () => {
           );
 
           setProducts(tagFilter)
-          localStorage.setItem('mainProduct', JSON.stringify(tagFilter))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(tagFilter))
 
         }
 
@@ -224,9 +273,8 @@ const Explore: React.FC = () => {
           const tagFilter = data2?.filter((product: Product) =>
             product.tags.length > 0
           );
-
           setProducts(tagFilter)
-          localStorage.setItem('mainProduct', JSON.stringify(tagFilter))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(tagFilter))
         }
 
         else if (option === 'immaculate') {
@@ -234,7 +282,8 @@ const Explore: React.FC = () => {
             product.attributes.find((p) =>
               p.value.toString().toLowerCase().includes(option.toLowerCase())))
           setProducts(immaculateProduct)
-          localStorage.setItem('mainProduct', JSON.stringify(immaculateProduct))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(immaculateProduct))
+
         }
 
         else if (option === 'good condition') {
@@ -242,15 +291,18 @@ const Explore: React.FC = () => {
             product.attributes.find((p) =>
               p.value.toString().toLowerCase().includes(option.toLowerCase())))
           setProducts(goodCondition)
-          localStorage.setItem('mainProduct', JSON.stringify(goodCondition))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(goodCondition))
+
         }
+
 
         else if (option === 'gently used') {
           const gentlyUsed = data2?.filter((product: Product) =>
             product.attributes.find((p) =>
               p.value.toString().toLowerCase().includes(option.toLowerCase())))
           setProducts(gentlyUsed)
-          localStorage.setItem('mainProduct', JSON.stringify(gentlyUsed))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(gentlyUsed))
+
         }
 
         else if (option === 'vintage') {
@@ -258,7 +310,7 @@ const Explore: React.FC = () => {
             product.attributes.find((p) =>
               p.value.toString().toLowerCase().includes(option.toLowerCase())))
           setProducts(vintageproduct)
-          localStorage.setItem('mainProduct', JSON.stringify(vintageproduct))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(vintageproduct))
         }
 
         else if (option === 'no box') {
@@ -266,7 +318,7 @@ const Explore: React.FC = () => {
             product.attributes.find((p) =>
               p.value.toString().toLowerCase().includes(option.toLowerCase())))
           setProducts(noBoxProduct)
-          localStorage.setItem('mainProduct', JSON.stringify(noBoxProduct))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(noBoxProduct))
         }
 
         else if (option === 'box included') {
@@ -274,7 +326,7 @@ const Explore: React.FC = () => {
             product.attributes.find((p) =>
               p.value.toString().toLowerCase().includes(option.toLowerCase())))
           setProducts(boxIncluded)
-          localStorage.setItem('mainProduct', JSON.stringify(boxIncluded))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(boxIncluded))
         }
 
         else {
@@ -283,7 +335,7 @@ const Explore: React.FC = () => {
             product.brand.toLowerCase() === option.toLowerCase()
           );
           setProducts(brandFilter)
-          localStorage.setItem('mainProduct', JSON.stringify(brandFilter))
+          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(brandFilter))
         }
 
 
@@ -293,6 +345,21 @@ const Explore: React.FC = () => {
 
   }
 
+
+
+  const reset = () => {
+    console.log(params.sectionName)
+    localStorage.removeItem(`${params.sectionName}Products`)
+    if (params.sectionName === 'sale') {
+      getProducts(params.sectionCategory, 'sell', true);
+    }
+    else {
+      getProducts(params.sectionCategory, `${params.sectionName}`, false);
+    }
+    setSort('date')
+    // sortProduct('date')
+    console.log('clearing ', `${params.sectionName}Products`)
+  }
 
 
   const brandFilter = brandsItems?.filter(brand =>
@@ -417,9 +484,11 @@ const Explore: React.FC = () => {
       {/* ---------------------FILTER OPTION-------------------- */}
 
       <IonModal className={
-        sortPage == 'condition' ?
+        sortPage === 'color' ?
           'explore-main-filter-modal2'
-          : 'explore-main-filter-modal'
+          : sortPage === 'condition' ?
+            'explore-main-filter-modal2'
+            : 'explore-main-filter-modal'
       }
         ref={filterModal} initialBreakpoint={1} breakpoints={[1, 5]}
       >
@@ -434,15 +503,16 @@ const Explore: React.FC = () => {
                 style={{ color: '#D6980E' }}
                 className="filter-option-title"
                 onClick={() => {
+                  reset()
                   setSort('date')
                   sortProduct('date')
-                  handleBrandOption('')
+                  // setSort('')
                   setTimeout(() => {
                     filterModal.current?.dismiss()
                   }, 3000);
 
                 }}
-              >RESET</div>
+              >Reset</div>
             </IonCol>
             <IonCol size='12' className='filter-option-box'
               onClick={() => setSortPage('category')}
@@ -486,7 +556,9 @@ const Explore: React.FC = () => {
 
             <IonCol size='12' className='filter-option-box'
               onClick={() => {
-                handleBrandOption('box included')
+                // setSort('box included')
+                setSort('box included')
+
                 productFilter('box included')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
@@ -498,7 +570,7 @@ const Explore: React.FC = () => {
               <input
                 type="radio"
                 name=""
-                checked={brandOption.includes('box included')} id=""
+                checked={sort.includes('box included')} id=""
                 readOnly
               />
             </IonCol>
@@ -506,7 +578,7 @@ const Explore: React.FC = () => {
             <IonCol
               size='12' className='filter-option-box'
               onClick={() => {
-                handleBrandOption('no box')
+                setSort('no box')
                 productFilter('no box')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
@@ -518,7 +590,7 @@ const Explore: React.FC = () => {
               <input
                 type="radio"
                 name=""
-                checked={brandOption.includes('no box')} id=""
+                checked={sort.includes('no box')} id=""
                 readOnly
               />
 
@@ -754,8 +826,6 @@ const Explore: React.FC = () => {
               <div className="filter-title-category-img"
                 onClick={() => {
                   setSortPage('default')
-                  // localStorage.removeItem('mainProduct')
-                  // getProducts(params.sectionCategory, 'explore', false);
                 }}
               >
                 <img
@@ -780,7 +850,7 @@ const Explore: React.FC = () => {
                   key={brand._id}
                   className='filter-option-design-box'
                   onClick={() => {
-                    handleBrandOption(brand._id)
+                    setSort(brand._id)
                     productFilter(brand.name)
                     setTimeout(() => {
                       filterModal.current?.dismiss()
@@ -790,7 +860,7 @@ const Explore: React.FC = () => {
                 >
                   <div className="filter-option-design-text">{brand.name}</div>
                   <input onChange={() => {
-                  }} type="radio" name="" checked={brandOption.includes(brand._id, 0)} id="" />
+                  }} type="radio" name="" checked={sort.includes(brand._id, 0)} id="" />
                 </IonCol>
               ))}
             </div>
@@ -803,7 +873,6 @@ const Explore: React.FC = () => {
             <IonCol size='12' className='filter-title-designer-title-box'>
               <div className="filter-title-category-img"
                 onClick={() => {
-                  // localStorage.removeItem('mainProduct')
                   setSortPage('default')
                 }}
               >
@@ -819,7 +888,7 @@ const Explore: React.FC = () => {
               className='filter-option-design-box'
               onClick={() => {
                 productFilter('yes')
-                handleBrandOption('withTags')
+                setSort('withTags')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
                 }, 3000);
@@ -829,7 +898,7 @@ const Explore: React.FC = () => {
               <input
                 type="radio"
                 name=""
-                checked={brandOption.includes('withTags')} id=""
+                checked={sort.includes('withTags')} id=""
                 readOnly
               />
             </IonCol>
@@ -838,7 +907,7 @@ const Explore: React.FC = () => {
               className='filter-option-design-box'
               onClick={() => {
                 productFilter('no')
-                handleBrandOption('noTags')
+                setSort('noTags')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
                 }, 3000);
@@ -848,7 +917,7 @@ const Explore: React.FC = () => {
               <input
                 type="radio"
                 name=""
-                checked={brandOption.includes('noTags')} id=""
+                checked={sort.includes('noTags')} id=""
                 readOnly
               />
 
@@ -857,7 +926,7 @@ const Explore: React.FC = () => {
               className='filter-option-design-box'
               onClick={() => {
                 productFilter('immaculate')
-                handleBrandOption('immaculate')
+                setSort('immaculate')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
                 }, 3000);
@@ -867,7 +936,7 @@ const Explore: React.FC = () => {
               <input
                 type="radio"
                 name=""
-                checked={brandOption.includes('immaculate')} id=""
+                checked={sort.includes('immaculate')} id=""
                 readOnly
               />
             </IonCol>
@@ -876,7 +945,7 @@ const Explore: React.FC = () => {
               className='filter-option-design-box'
               onClick={() => {
                 productFilter('good condition')
-                handleBrandOption('good condition')
+                setSort('good condition')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
                 }, 3000);
@@ -886,7 +955,7 @@ const Explore: React.FC = () => {
               <input
                 type="radio"
                 name=""
-                checked={brandOption.includes('good condition')} id=""
+                checked={sort.includes('good condition')} id=""
                 readOnly
               />
             </IonCol>
@@ -895,7 +964,7 @@ const Explore: React.FC = () => {
               className='filter-option-design-box'
               onClick={() => {
                 productFilter('gently used')
-                handleBrandOption('gently used')
+                setSort('gently used')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
                 }, 3000);
@@ -905,7 +974,7 @@ const Explore: React.FC = () => {
               <input
                 type="radio"
                 name=""
-                checked={brandOption.includes('gently used')} id=""
+                checked={sort.includes('gently used')} id=""
                 readOnly
               />
             </IonCol>
@@ -914,7 +983,7 @@ const Explore: React.FC = () => {
               className='filter-option-design-box'
               onClick={() => {
                 productFilter('vintage')
-                handleBrandOption('vintage')
+                setSort('vintage')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
                 }, 3000);
@@ -924,7 +993,7 @@ const Explore: React.FC = () => {
               <input
                 type="radio"
                 name=""
-                checked={brandOption.includes('vintage')} id=""
+                checked={sort.includes('vintage')} id=""
                 readOnly
               />
             </IonCol>
@@ -937,7 +1006,7 @@ const Explore: React.FC = () => {
           {sortPage === 'color' && (<>
             <IonCol size='12' className='filter-title-designer-title-box'>
               <div className="filter-title-category-img"
-                onClick={() =>setSortPage('default')}
+                onClick={() => setSortPage('default')}
               >
                 <img
                   height={24}
@@ -950,7 +1019,7 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleBrandOption('blue')
+                setSort('blue')
                 filterColor('blue')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
@@ -960,7 +1029,7 @@ const Explore: React.FC = () => {
               <div className="filter-option-design-text">BLUE</div>
               <input
                 type="radio" name=""
-                checked={brandOption.includes('blue')}
+                checked={sort.includes('blue')}
                 id=""
                 readOnly
               />
@@ -969,7 +1038,7 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleBrandOption('beige')
+                setSort('beige')
                 filterColor('beige')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
@@ -979,7 +1048,7 @@ const Explore: React.FC = () => {
               <div className="filter-option-design-text">BEIGE</div>
               <input
                 type="radio" name=""
-                checked={brandOption.includes('beige')}
+                checked={sort.includes('beige')}
                 id=""
                 readOnly
               />
@@ -987,7 +1056,7 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleBrandOption('brown')
+                setSort('brown')
                 filterColor('brown')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
@@ -997,7 +1066,7 @@ const Explore: React.FC = () => {
               <div className="filter-option-design-text">BROWN</div>
               <input
                 type="radio" name=""
-                checked={brandOption.includes('brown')}
+                checked={sort.includes('brown')}
                 id=""
                 readOnly
               />
@@ -1006,7 +1075,7 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleBrandOption('black')
+                setSort('black')
                 filterColor('black')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
@@ -1017,7 +1086,7 @@ const Explore: React.FC = () => {
               <div className="filter-option-design-text">BLACK</div>
               <input
                 type="radio" name=""
-                checked={brandOption.includes('black')}
+                checked={sort.includes('black')}
                 id=""
                 readOnly
               />
@@ -1026,7 +1095,7 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleBrandOption('yellow')
+                setSort('yellow')
                 filterColor('yellow')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
@@ -1036,7 +1105,7 @@ const Explore: React.FC = () => {
               <div className="filter-option-design-text">YELLOW</div>
               <input
                 type="radio" name=""
-                checked={brandOption.includes('yellow')}
+                checked={sort.includes('yellow')}
                 id=""
                 readOnly
               />
@@ -1045,7 +1114,7 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleBrandOption('gold')
+                setSort('gold')
                 filterColor('gold')
                 setTimeout(() => {
                   filterModal.current?.dismiss()
@@ -1056,7 +1125,7 @@ const Explore: React.FC = () => {
               <input
                 style={{ color: 'black' }}
                 type="radio" name=""
-                checked={brandOption.includes('gold')}
+                checked={sort.includes('gold')}
                 id=""
                 readOnly
               />
