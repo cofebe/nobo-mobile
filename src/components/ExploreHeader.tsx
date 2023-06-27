@@ -22,6 +22,15 @@ const NoboExploreHeader: React.FC = () => {
   const [activeCategoryTitle, setActiveCategoryTitle] = useState<string>('WOMAN');
   const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
 
+
+  const reset = () =>{
+    localStorage.removeItem('exploreProducts')
+    localStorage.removeItem('saleProducts')
+    localStorage.removeItem('tradeProducts')
+    localStorage.removeItem('shopProducts')
+
+  }
+
   useEffect(() => {
     const subscription = shoppingCartStore.subscribe((cart: ShoppingCartState) => {
       setCart(cart);
@@ -75,17 +84,17 @@ const NoboExploreHeader: React.FC = () => {
           console.log(detail);
         }
         if (detail.data.action === 'women') {
-          localStorage.removeItem('mainProduct')
+          reset()
           setActiveCategoryTitle('WOMEN');
           setActiveCategory('women');
           history.replace(`/home/explore/women/${activeButton}`);
         } else if (detail.data.action === 'men') {
-          localStorage.removeItem('mainProduct')
+          reset()
           setActiveCategoryTitle('MEN');
           setActiveCategory('men');
           history.replace(`/home/explore/men/${activeButton}`);
         } else if (detail.data.action === 'sneakers') {
-          localStorage.removeItem('mainProduct')
+          reset()
           setActiveCategoryTitle('SNEAKERS');
           setActiveCategory('sneakers');
           history.replace(`/home/explore/sneakers/${activeButton}`);
@@ -105,7 +114,7 @@ const NoboExploreHeader: React.FC = () => {
                   e.preventDefault();
                   e.stopPropagation();
                   history.push('/settings');
-                  localStorage.removeItem('mainProduct')
+                  reset()
                 }}
               >
                 <img
