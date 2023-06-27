@@ -17,7 +17,7 @@ const Explore: React.FC = () => {
   const userService = new UserService()
   const params: any = useParams();
   const [products, setProducts] = useState<any>([]);
-  const [sort, setSort] = useState('date');
+  const [sort, setSort] = useState('');
   const [sortPage, setSortPage] = useState('default');
   const [brandsItems, setBrandItems] = useState<Brand[]>([]);
   const [brandInput, setbrandInput] = useState('')
@@ -100,15 +100,13 @@ const Explore: React.FC = () => {
 
 
   function getProducts(group: string, action: string, onSale: boolean, data?: any) {
-    // localStorage.removeItem('mainProduct')
-    // console.log('removing item')
     productService
       .getProducts(group, action, onSale)
 
       .then(products => {
         const result = products.docs.sort((a: any, b: any) =>
           new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf());
-        setProducts(products.docs)
+        setProducts(result)
         // localStorage.setItem('mainProduct', JSON.stringify(result))
 
       })
@@ -348,7 +346,6 @@ const Explore: React.FC = () => {
 
 
   const reset = () => {
-    console.log(params.sectionName)
     localStorage.removeItem(`${params.sectionName}Products`)
     if (params.sectionName === 'sale') {
       getProducts(params.sectionCategory, 'sell', true);
@@ -356,9 +353,12 @@ const Explore: React.FC = () => {
     else {
       getProducts(params.sectionCategory, `${params.sectionName}`, false);
     }
-    setSort('date')
-    // sortProduct('date')
-    console.log('clearing ', `${params.sectionName}Products`)
+    setTimeout(() => {
+
+      filterModal.current?.dismiss()
+    }, 3000);
+
+setSort('')
   }
 
 
@@ -504,12 +504,12 @@ const Explore: React.FC = () => {
                 className="filter-option-title"
                 onClick={() => {
                   reset()
-                  setSort('date')
-                  sortProduct('date')
-                  // setSort('')
-                  setTimeout(() => {
-                    filterModal.current?.dismiss()
-                  }, 3000);
+                  // setSort('date')
+                  // sortProduct('date')
+                  // // setSort('')
+                  // setTimeout(() => {
+                  //   filterModal.current?.dismiss()
+                  // }, 3000);
 
                 }}
               >Reset</div>
