@@ -110,6 +110,7 @@ background-color: transparent;
     margin-top: 60px;
     margin-left: 20px;
     margin-right: 20px;
+
   }
 
   .signup-btn-container2 {
@@ -117,7 +118,31 @@ background-color: transparent;
     margin-top: 5px;
     margin-left: 20px;
     margin-right: 20px;
+
   }
+
+
+  .signup2-btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .signup2-btn{
+      width: 310px;
+      height: 51px;
+      font-weight: 500;
+      font-family: 'Nunito Sans';
+      font-size: 15px;
+      margin-top: 10px;
+      line-height: 22.5px;
+      letter-spacing:2px;
+      color: #ffffff;
+    }
+
+  }
+
+
+
 }
 
 

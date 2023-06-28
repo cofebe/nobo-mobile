@@ -42,20 +42,20 @@ const CreateFirstPost: React.FC = () => {
       .createPost(textValue)
       .then((success: PostResponse) => {
         if (success) {
-          localStorage.setItem('newUser', 'newUser');
-
-          history.push(`/home/my-profile`);
-
+          setTimeout(() => {
+            localStorage.setItem('newUser', 'newUser');
+            history.push(`/home/my-profile`);
+          }, 2000);
         }
       })
       .catch(err => console.log('getting a user', err));
   };
   // skip post
   const skipPost = () => {
-
-    localStorage.setItem('newUser', 'newUser');
-    history.push(`/home/my-profile`);
-
+    setTimeout(() => {
+      localStorage.setItem('newUser', 'newUser');
+      history.push(`/home/my-profile`);
+    }, 2000);
   };
 
   return (
@@ -63,7 +63,7 @@ const CreateFirstPost: React.FC = () => {
       <IonContent className='create-post-ion-content'>
         <HeaderComponent />
 
-        <IonRow style={{marginTop:'-10px' }}>
+        <IonRow style={{ marginTop: '-10px' }}>
           <IonCol className='create-post-title'>YOUR FIRST POST</IonCol>
         </IonRow>
         <IonRow className='create-post-desc-container'>
@@ -108,7 +108,10 @@ const CreateFirstPost: React.FC = () => {
         }
 
         <div className='create-post-btn-container'>
-          <Button label='NEXT' large onClick={createPost} disabled={textValue === ''} />
+          <Button label='NEXT'
+            className='create-post-btn'
+            large onClick={createPost}
+            disabled={textValue === ''} />
         </div>
       </IonContent>
     </IonPage>

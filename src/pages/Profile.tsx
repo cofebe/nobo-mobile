@@ -1,6 +1,6 @@
 import ProfileSummary from '../components/ProfileSections/ProfileSummary';
 import { useState, useRef } from 'react';
-import { IonTitle, isPlatform } from '@ionic/react';
+import { IonCol, IonTitle, isPlatform } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { NoboProfile, emptyProfile } from '../data/nobo-profile';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing';
@@ -23,11 +23,13 @@ import { UserService } from '../services/UserService';
 import { InAppPurchase2 } from '@awesome-cordova-plugins/in-app-purchase-2/ngx';
 
 import './Profile.scss';
+import './Profile.css';
 import ProductList from '../components/ProductList';
 import ReviewList from '../components/ReviewList';
 import { chevronBackOutline } from 'ionicons/icons';
 import { loadingOptions } from '../util';
 import Button from '../components/Button';
+import { getImageUrl } from '../utils';
 
 interface ProfileProps {
   myProfile: boolean;
@@ -48,6 +50,10 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
+
+  const welcomeModal = useRef<HTMLIonModalElement>(null)
+
+
   useIonViewDidEnter(() => {
     reset();
     modalSwitch();
@@ -66,12 +72,16 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
   const modalSwitch = () => {
     const newUser = localStorage.getItem('newUser');
     if (newUser) {
-      setModalVisible(true);
+      welcomeModal.current?.present()
       // console.log('we found new newUser');
     } else {
       // console.log('no newUser');
     }
   };
+
+  // const welcomeModal = () =>{
+
+  // }
 
   useIonViewDidLeave(() => {
     reset();
@@ -166,7 +176,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           text: 'Cancel',
           role: 'cancel',
           data: {
-            action: () => {}, // noop
+            action: () => { }, // noop
           },
         },
       ],
@@ -266,7 +276,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           setNoboProfile(data['user']);
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }
 
   function checkIfFollowing() {
@@ -391,8 +401,8 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
 
                 className='nobo-profile-menu-selected2'
                 src={targetSection === 'Feed' ?
-                "assets/images/navigation/feeds-dark.svg"
-                :"assets/images/navigation/feeds-gray.svg"}
+                  "assets/images/navigation/feeds-dark.svg"
+                  : "assets/images/navigation/feeds-gray.svg"}
                 alt="feed"
               />
             </div>
@@ -406,8 +416,8 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
                 //     : 'nobo-profile-menu-not-selected'
                 // }
                 src={targetSection === 'Trades' ?
-                "assets/images/navigation/trades-dark.svg"
-                :"assets/images/navigation/trades-gray.svg"}
+                  "assets/images/navigation/trades-dark.svg"
+                  : "assets/images/navigation/trades-gray.svg"}
                 alt="trades"
               />
             </div>
@@ -445,44 +455,50 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
         {targetSection === 'Reviews' && <ReviewList reviewData={noboProfile.reviews}></ReviewList>}
         <div style={{ height: '5vh' }}></div>
       </IonContent>
-      {modalVisible && <div className="nobo-modal-container" id="relative"></div>}
 
-      {modalVisible && (
-        <div className="nobo-modal">
-          <h3 className="profile-modal-title">Check Out your style feed post!</h3>
-          <div className="profile-modal-image">
-            <img
-              style={{ height: '98%', width: '98%', borderRadius: '50%' }}
-              className=""
-              src={noboProfile.avatar}
-              alt="avatar"
-            />
-          </div>
-          <h5 className="profile-modal-text">
-            GO TO YOUR STYLE FEED TO CONNECT WITH THE COMMUNITY!
-          </h5>
-          <div className="profile-modal-btn">
-            <IonButton
-            className='modal-btn_'
-              onClick={e => {
-                e.preventDefault();
-                history.push(`/home/style-feed`);
+
+      <IonModal id="example-modal" ref={welcomeModal} trigger="open-modal">
+        <IonRow className='welcome-main-container'>
+          <IonCol size='12' className='welcome-title-container'>
+            <p className='welcome-title-text'>
+              Check Out your style feed post!
+            </p>
+          </IonCol>
+
+          <IonCol size='12' className='welcome-img-container'>
+            <div className='welcome-img-box'>
+              <img height={114} className='welcome-profile-img' src={noboProfile.avatar} alt="" />
+            </div>
+          </IonCol>
+
+          <IonCol size='12' className='welcome-body-info'>
+            <p className='welcome-body-text'>Go to your style feed to connect with the community!</p>
+          </IonCol>
+
+          <IonCol size='12' className='welcome-btn-container'>
+            <Button
+              className='welcome-btn'
+              label='VIEW MY POST'
+              onClick={() => {
                 localStorage.removeItem('newUser');
+                history.push(`/home/style-feed`);
+                welcomeModal.current?.dismiss()
               }}
+            />
+          </IonCol>
 
-            >VIEW MY POST</IonButton>
-          </div>
-          <h3
-            className="profile-modal-later"
+          <IonCol size='12' className='welcome-btn-container2'
             onClick={() => {
-              setModalVisible(false);
               localStorage.removeItem('newUser');
+              welcomeModal.current?.dismiss()
             }}
           >
-            MAYBE LATER
-          </h3>
-        </div>
-      )}
+            <p className='welcome-btn2'>Maybe later</p>
+          </IonCol>
+
+
+        </IonRow>
+      </IonModal>
     </div>
   );
 };

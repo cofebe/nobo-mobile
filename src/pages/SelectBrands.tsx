@@ -17,7 +17,6 @@ const SelectBrands: React.FC = () => {
   const [brandsItems, setBrandItems] = useState<Brand[]>([]);
   const [brandsSelectArr, setBrandSelectArray] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [brand, setbrand] = useState('')
 
   // fetching all brands
   useIonViewWillEnter(() => {
@@ -34,21 +33,22 @@ const SelectBrands: React.FC = () => {
 
   // Handling the ticker
   const handleTicker = (brandId: string) => {
-    // console.log('in the ticker container ', brandId)
     if (!brandsSelectArr.includes(brandId, 0)) {
       setBrandSelectArray([...brandsSelectArr, brandId])
-      // console.log(brandsSelectArr)
     }
 
-    // else {
-    //   return
-    // }
     else if (brandsSelectArr.includes(brandId, 0)) {
       const updatedRemove = brandsSelectArr.filter((brand) => brand !== brandId)
       setBrandSelectArray(updatedRemove)
-      // console.log('after removed brand ', brandsSelectArr)
     }
   };
+
+
+  function getMyBrands() {
+    userService.getMe()
+      .then((user) => { console.log('my updated brand list', user.favoriteBrands) })
+      .catch(error => { console.log('unable to get user', error) })
+  }
 
 
   const handleSubmit = async (brandId: any) => {
@@ -61,13 +61,7 @@ const SelectBrands: React.FC = () => {
             .then(res => {
               if (res) {
                 console.log('the res ', res);
-                // userService.getMe()
-                //   .then((user: User) => {
-                //     console.log('updated brands after delete', user.favoriteBrands)
-                //     setBrandSelectArray([...brandsSelectArr, brandId])
-
-                //   })
-                //   .catch(err => console.log(err))
+                getMyBrands();
               }
               else {
                 console.log('something went wrong ', res);
@@ -76,17 +70,16 @@ const SelectBrands: React.FC = () => {
             .catch((err: any) => {
               console.log('SelectBrand error', err);
             });
-        } else {
+        }
+
+        else {
           console.log('adding :', brandId)
           userService
             .addBrand(brandId)
             .then(res => {
               if (res) {
                 console.log('the res ', res);
-                // userService.getMe()
-                //   .then((user: User) => console.log('updated brands after add', user.favoriteBrands))
-                //   .catch(err => console.log(err))
-
+                getMyBrands();
               } else {
                 console.log('something went wrong ', res);
               }
@@ -127,7 +120,7 @@ const SelectBrands: React.FC = () => {
         </IonRow>
         <IonRow className='select-brands-desc-container'>
           <IonCol className='select-brands-desc'>
-          Let other NOBO insiders know your top 4 brands to Trade, Buy, or Sell.
+          Let other people know your top 4 favorite brands to trade, buy, or sell.
           </IonCol>
         </IonRow>
         <div className='select-brands-search-container'>
@@ -148,7 +141,7 @@ const SelectBrands: React.FC = () => {
                 }}
                 className='select-brand-img-col' key={brand._id} size='5'
               >
-                <img src={brand.url} alt='' />
+                <img className='brand-img' src={brand.url} alt={brand.name} />
                 <div className='select-brand-checkbox'>
                   {/* <Checkbox value={tickedBrand === brand._id} onChange={e => { }} /> */}
                   <Checkbox value={brandsSelectArr.includes(brand._id)} onChange={e => { }} />
@@ -176,10 +169,11 @@ const SelectBrands: React.FC = () => {
           className={brandsSelectArr.length < 1 ? 'select-brands-btn-container' : 'select-brands-btn-container2'}
         >
           <Button
+          className='select-brands-btn'
             label='NEXT' large onClick={() => {
               history.push('/onboarding-post');
             }}
-            disabled={brandsSelectArr.length < 1} />
+            disabled={brandsSelectArr.length < 4} />
         </div>
       </IonContent>
     </IonPage>

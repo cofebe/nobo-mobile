@@ -1,0 +1,116 @@
+ion-modal#example-modal {
+  --height: 400px;
+  --width: 330px;
+  --border-radius: 5px;
+  --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.welcome-main-container {
+  /* height: 100%; */
+  padding: 20px 30px 20px 30px;
+}
+
+.welcome-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  margin-bottom: 21px;
+}
+
+.welcome-title-text {
+  color: #000;
+  text-align: center;
+  font-size: 23px;
+  font-family: 'Nunito Sans';
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 1px;
+}
+
+
+.welcome-img-container {
+  /* margin-top: 0px; */
+  height: 114px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-img-box {
+  height: 114px;
+  width: 114px;
+  border-radius: 50%;
+}
+
+.welcome-profile-img {
+  height: 114px;
+  width: 114px;
+  border-radius: 50%;
+}
+
+.welcome-body-info {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.welcome-body-text {
+  color: #707070;
+  text-align: center;
+  font-size: 12px;
+  font-family: 'Nunito Sans';
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.welcome-btn-container {
+  margin-top: 14px;
+}
+
+.welcome-btn {
+  width: 252px;
+  height: 51px;
+  color: #FFF;
+  font-size: 17px;
+  font-family: 'Nunito Sans';
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: 1px;
+}
+
+
+.welcome-btn-container2 {
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.welcome-btn2 {
+  width: 252px;
+  height: 18px;
+  color: #707070;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Nunito Sans';
+  font-weight: 600;
+  line-height: 150%;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ion-modal#example-modal::part(backdrop) {
+  background: rgba(209, 213, 219);
+  opacity: 1;
+}
+
+ion-modal#example-modal ion-toolbar {
+  --background: rgb(14 116 144);
+  --color: white;
+} */

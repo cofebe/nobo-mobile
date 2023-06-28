@@ -82,6 +82,17 @@
     align-items: center;
     width: 30%;
     height: 3rem;
+
+    .profile-picture-btn{
+      width: 104px;
+      height: 37px;
+      font-family: 'Nunito Sans';
+      font-size: 10px;
+      margin-top: 10px;
+      line-height: 22.5px;
+      letter-spacing:5%;
+      color: #ffffff;
+    }
   }
 
   .follow-people-skip-container {
@@ -106,9 +117,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 11%;
-    margin-bottom: -10px;
-    // background-col: aqua;
+    margin-top: 30px;
+    height: 30px;
+    // margin-bottom: -10px;
   }
 
   .follow-people-skip-text {
@@ -116,22 +127,36 @@
     color: black;
     font-size: 12px;
   }
-
+// before follow 5 user
   .follow-people-submit-btn-container {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;
-    margin-top: 85px;
+    margin-top: 80px;
   }
 
   .follow-people-submit-btn-container2 {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;
     margin-top: 10px;
+
+    .btn{
+      width: 310px;
+      height: 51px;
+      font-weight: 500;
+      font-family: 'Nunito Sans';
+      font-size: 15px;
+      margin-top: 10px;
+      line-height: 22.5px;
+      letter-spacing:2px;
+      color: #ffffff;
+    }
   }
 }

@@ -162,14 +162,19 @@
       margin-top: 29px;
       height: 51px;
       padding: 0;
+      margin-bottom: 8px;
     }
 
     .signup-btn {
-      // width: 302px;
+      width: 310px;
       height: 51px;
-      background: #D6980E;
-      backdrop-filter: blur(7.5px);
-      border-radius: 5px;
+      font-weight: 500;
+      font-family: 'Nunito Sans';
+      font-size: 15px;
+      margin-top: 10px;
+      line-height: 22.5px;
+      letter-spacing:2px;
+      color: #ffffff;
     }
 
     .signup-user-check {
@@ -185,12 +190,12 @@
     .already-user {
       font-family: 'Nunito Sans';
       font-style: normal;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 15px;
       line-height: 150%;
       display: flex;
       align-items: center;
-      letter-spacing: 0.05em;
+      letter-spacing: 2px;
       color: #FFFFFF;
     }
 
