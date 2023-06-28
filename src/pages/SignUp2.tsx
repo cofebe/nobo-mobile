@@ -146,8 +146,9 @@ const SignUp2 = () => {
           </IonGrid>
         </div>
         <IonRow className={!error ? 'signup-btn-container' : 'signup-btn-container2'}>
-          <IonCol >
+          <IonCol size='12' className='signup2-btn-container'>
             <Button
+            className='signup2-btn'
               onClick={() => {
                 signup();
               }}

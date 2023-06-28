@@ -100,7 +100,7 @@ const UploadProfilePic: React.FC = () => {
         </IonRow>
         <IonRow className='profile-picture-desc-container'>
           <IonCol className='profile-picture-desc'>
-            To move foward, choose a profile photo for your style feed!
+          To move forward, choose a profile photo for your style feed!
           </IonCol>
         </IonRow>
 
@@ -150,6 +150,7 @@ const UploadProfilePic: React.FC = () => {
 
         <div className={imageData !== '' ? 'profile-picture-btn-container' : 'profile-picture-btn-container2'}>
           <Button
+          className='profile-picture-btn'
             label='NEXT'
             large
             onClick={e => {

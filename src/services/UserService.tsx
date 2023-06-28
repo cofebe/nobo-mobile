@@ -554,13 +554,23 @@ export class UserService extends BaseService {
   }
 
   // GET EXISTING USERS
-  async getUsers() {
-    try {
-      const response = await fetch('https://staging.thenobo.com/api/users/q/term/a');
-      return response.json();
-    } catch (error) {
-      console.log('err from userService response', error);
+  async getUsers(query:string) {
+    if(query !== ''){
+      try {
+        const response = await super.fetch('GET',`/api/users/q/term/${query}`);
+        return response.json();
+      } catch (error) {
+        console.log('err from userService response', error);
+      }
+    }else{
+      try {
+        const response = await super.fetch('GET',`/api/users/q/term/a`);
+        return response.json();
+      } catch (error) {
+        console.log('err from userService response', error);
+      }
     }
+
   }
 
   // FOLLOW A USER

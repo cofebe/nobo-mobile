@@ -22,14 +22,13 @@ const FollowPeople: React.FC = () => {
   const userService = new UserService();
   const history = useHistory();
   const [users, setUsers] = useState<User[]>([]);
-  const [follow, setFollow] = useState<string[]>([]);
   const [peopleIfollow, setPeopleIfollow] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('')
 
   //  fetching exiting users to follow
-  useIonViewWillEnter(() => {
+  const getUsers = (query: string) => {
     userService
-      .getUsers()
+      .getUsers(query)
       .then(res => res)
       .then(users => {
         setUsers(users?.users);
@@ -37,46 +36,60 @@ const FollowPeople: React.FC = () => {
       .catch(error => {
         console.log('follow users error', error);
       });
+  }
+
+
+  useIonViewWillEnter(() => {
+    getUsers('a')
   });
 
-  const myFollowList = () => {
+
+  // Following  a user
+  const followUser = async (userId: string) => {
     userService
       .getMe()
       .then((user: User) => {
-        setPeopleIfollow(user.following);
+        if (!user.following.includes(userId, 0)) {
+          console.log(userId, 'not in your list you can follow')
+          userService
+            .followUsers(userId)
+            .then((user: User) => {
+              if (user) {
+                peopleIfollow.push(userId)
+                // myFollowList()
+              }
+            })
+            .catch((err: any) => {
+              console.log(' FollowUser', err);
+            });
+
+        } else {
+          console.log(`You already followed this user ${userId}`);
+          userService
+            .removeFollowUser(userId)
+            .then((user) => {
+              if (user) {
+                const result = peopleIfollow.filter((id: string) => id !== userId)
+                setPeopleIfollow(result)
+                // myFollowList()
+              }
+            })
+            .catch((err: any) => {
+              console.log(' FollowUser', err);
+            });
+        }
       })
       .catch(error => {
         console.log('error msg while fetching user profile', error);
       });
-  };
 
-  // Load My Following List
-  useIonViewWillEnter(() => {
-    myFollowList();
-  });
 
-  // Following  a user
-  const followUser = async (userId: string) => {
-    myFollowList();
-    setFollow([...follow, userId]);
-    const result = peopleIfollow.includes(userId, 0);
-    if (!result) {
-      userService
-        .followUsers(userId)
-        .then(user => {
-          console.log(user)
-        })
-        .catch((err: any) => {
-          console.log(' FollowUser', err);
-        });
-    } else {
-      console.log(`You already followed this user ${userId}`);
-    }
   };
 
   const mapFilter = users?.filter(user =>
     user.displayName.toLowerCase().includes(inputValue.toLowerCase(), 0)
   );
+
   return (
     <IonPage className='follow-people-main-container'>
       <IonContent className='follow-people-ion-content'>
@@ -86,7 +99,7 @@ const FollowPeople: React.FC = () => {
         </IonRow>
         <IonRow className='follow-people-desc-container'>
           <IonCol className='follow-people-desc'>
-            Follow 5 other users to begin connecting with other insiders!
+            follow 5 other users to begin connecting with other Insiders!
           </IonCol>
         </IonRow>
         <IonRow style={{ marginLeft: '20px', marginRight: '20px' }}>
@@ -94,8 +107,10 @@ const FollowPeople: React.FC = () => {
             <Search
               value={inputValue}
               onChange={
-                (e) => { setInputValue(e) }
-              } />
+                (e) => {
+                  getUsers(e)
+                  setInputValue(e)
+                }} />
           </IonCol>
         </IonRow>
         <div className='follow-people-body-container' style={{}}>
@@ -110,9 +125,9 @@ const FollowPeople: React.FC = () => {
 
               <div className='follow-people-button-container'>
                 <Button
-                  disabled={follow.includes(user._id, 0)}
+                  disabled={peopleIfollow.includes(user._id, 0)}
                   className='profile-picture-btn'
-                  label={!follow.includes(user._id, 0) ? 'FOLLOW' : 'FOLLOWING'}
+                  label={!peopleIfollow.includes(user._id, 0) ? 'FOLLOW' : 'FOLLOWING'}
                   large={false}
                   onClick={e => {
                     e.preventDefault();
@@ -124,14 +139,11 @@ const FollowPeople: React.FC = () => {
           ))}
         </div>
 
-        {follow.length > 0 ? (
-          ''
-        ) : (
+        {peopleIfollow.length < 5 && (
           <IonRow className={'follow-people-skip-container'}>
             <IonButton
               fill='clear'
               className='follow-people-skip-text'
-              disabled={follow.length > 0}
               onClick={() => {
                 history.push('/select-brands');
               }}
@@ -143,19 +155,20 @@ const FollowPeople: React.FC = () => {
 
         <div
           className={
-            follow.length < 1
+            peopleIfollow.length < 5
               ? 'follow-people-submit-btn-container2'
               : 'follow-people-submit-btn-container'
           }
         >
           <Button
+            className='btn'
             label='NEXT'
             large={true}
             onClick={e => {
               e.preventDefault();
               history.push('/select-brands');
             }}
-            disabled={follow.length < 5}
+            disabled={peopleIfollow.length < 5}
           />
         </div>
       </IonContent>

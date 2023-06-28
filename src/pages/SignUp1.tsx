@@ -46,7 +46,7 @@ const SignUp1: React.FC = () => {
       .then(user => {
         loadingStore.decrement('Signup:timeout');
         if (user.exists) {
-          console.log(email, ' already exist ');
+          // console.log(email, ' already exist ');
           setError(true);
           loadingStore.decrement('SignUp:timeout');
         } else {
@@ -157,7 +157,6 @@ const SignUp1: React.FC = () => {
                     checked={checked}
                     onChange={() => {
                       setchecked(!checked)
-                      console.log(checked)
                     }}
                   />
                   <p className='signup-terms-text'>

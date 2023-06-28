@@ -56,7 +56,7 @@
   }
 
   .select-brands-desc {
-    line-height: 18px;
+    line-height: 19px;
     font-weight: 400;
     font-size: 12px;
     color: gray;
@@ -107,13 +107,22 @@
 
   .select-brands-skip-text {
     text-align: center;
-    color: black;
+    color: #707070;
+    text-align: center;
     font-size: 12px;
+    font-family: 'Nunito Sans';
+    line-height: 150%;
+    letter-spacing: 1px;
+    font-size: 12px;
+    height: 20px;
+    margin-bottom: 5px;
+    margin-top: 10px;
   }
 
   .select-brands-btn-container {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;
@@ -122,11 +131,24 @@
 
   .select-brands-btn-container2 {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;
     margin-top: 56px;
+  }
+
+  .select-brands-btn{
+    width: 310px;
+      height: 51px;
+      font-weight: 500;
+      font-family: 'Nunito Sans';
+      font-size: 15px;
+      margin-top: 10px;
+      line-height: 22.5px;
+      letter-spacing:2px;
+      color: #ffffff;
   }
 
   .select-brand-checkbox {
@@ -170,5 +192,17 @@
     overflow: hidden;
     padding: 10px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+
+    .brand-img{
+
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 150%;
+      letter-spacing: 0.05em;
+      color: #000000;
+      text-align: center;
+    }
   }
 }

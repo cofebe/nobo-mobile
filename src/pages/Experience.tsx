@@ -48,8 +48,7 @@ const Experience: React.FC = () => {
         </IonRow>
         <IonRow className='experience-desc-container'>
           <IonCol className='experience-desc'>
-            Select the category of clothing you prefer to shop. Don't worry, you can still view other
-            experiences later.
+          Select the category of clothing you prefer to shop. Don’t worry, you can still view other experiences  later.
           </IonCol>
         </IonRow>
 

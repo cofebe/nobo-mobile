@@ -38,7 +38,7 @@
   }
 
   .create-post-desc {
-    line-height: 18px;
+    line-height: 19px;
     font-weight: 400;
     font-size: 12px;
     color: gray;
@@ -80,23 +80,16 @@
     letter-spacing: 4;
   }
 
-  .create-post-container1 {
-    height: 30%;
-    width: 90%;
-    background-color: gray;
-    margin: auto;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
-  }
 
   .create-post-testarea {
     // margin-top: -10px;
-    height: 140;
+    height: 137;
     width: 90%;
     margin-bottom: -20px;
-    border-radius: 15px;
+    border-radius: 8px;
     margin-top: 35px;
     box-shadow: 5px 5px 10px 0px rgba(203, 194, 194, 0.5);
-    font-size: 20px;
+    font-size: 14px;
     color: grey;
     padding-left: 15px;
     padding-right: 15px;
@@ -139,17 +132,34 @@
   }
 
   .create-post-skip-text {
+    color: #707070;
     text-align: center;
-    color: black;
     font-size: 12px;
+    font-family: 'Nunito Sans';
+    line-height: 150%;
+    letter-spacing: 1px;
   }
 
   .create-post-btn-container {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;
     margin-top: 0px;
+
+.create-post-btn{
+  width: 310px;
+  height: 51px;
+  font-weight: 500;
+  font-family: 'Nunito Sans';
+  font-size: 15px;
+  margin-top: 10px;
+  line-height: 22.5px;
+  letter-spacing:2px;
+  color: #ffffff;
+}
+
   }
 }

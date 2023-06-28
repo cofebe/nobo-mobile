@@ -55,7 +55,7 @@
     width: 330px;
     line-height: 18px;
     font-weight: 400;
-    font-size: 12px;
+    font-size: 13px;
     color: gray;
     text-align: center;
     margin: auto;
@@ -136,12 +136,25 @@
   }
 
   .experience-btn-container {
-    margin-top: 10px;
     display: flex;
+    align-items: center;
+    justify-content: center;
     align-items: flex-end;
     margin: auto;
     width: 340px;
     margin-bottom: -25px;
+
+    .experience-btn{
+      width: 310px;
+      height: 51px;
+      font-weight: 500;
+      font-family: 'Nunito Sans';
+      font-size: 15px;
+      // margin-top: 10px;
+      line-height: 22.5px;
+      letter-spacing:2px;
+      color: #ffffff;
+    }
 
     @media only screen and (device-height: 667px) {
       margin-bottom: 10px;
