@@ -136,14 +136,14 @@ const MyTrade: React.FC = () => {
                   <div className='items-view-props-left'>
                     <div className='item-img-left'
                       style={{
-                        backgroundImage: product.products.offered.images?.length
-                          ? getImageUrl(product.products.offered.images[0]?.url)
+                        backgroundImage: product.products.requested.images?.length
+                          ? getImageUrl(product.products.requested.images[0]?.url)
                           : '',
                       }}
                     > </div>
 
-                    <div className="trade-item-name-left">{product.products.offered.name.toUpperCase()}</div>
-                    <div className="trade-item-price-left">{formatPrice(product.products.offered.price)}</div>
+                    <div className="trade-item-name-left">{product.products.requested.name.toUpperCase()}</div>
+                    <div className="trade-item-price-left">{formatPrice(product.products.requested.price)}</div>
                   </div>
 
                   <div className='items-view-props-center'>
@@ -156,14 +156,14 @@ const MyTrade: React.FC = () => {
                   <div className='items-view-props-right'>
                     <div className='item-img-right'
                       style={{
-                        backgroundImage: product.products.requested.images?.length
-                          ? getImageUrl(product.products.requested.images[0]?.url)
+                        backgroundImage: product.products.offered.images?.length
+                          ? getImageUrl(product.products.offered.images[0]?.url)
                           : '',
                       }}
                     > </div>
 
-                    <div className="trade-item-name-right">{product.products.requested.name.toUpperCase()}</div>
-                    <div className="trade-item-price-right">{formatPrice(product.products.requested.price)}</div>
+                    <div className="trade-item-name-right">{product.products.offered.name.toUpperCase()}</div>
+                    <div className="trade-item-price-right">{formatPrice(product.products.offered.price)}</div>
                   </div>
                 </div>
 

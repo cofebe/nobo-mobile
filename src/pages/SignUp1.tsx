@@ -184,7 +184,7 @@ const SignUp1: React.FC = () => {
 
                 <IonCol size='12' className='signup-user-check' style={{ marginTop: '8px' }}>
                   <p className='already-user'>
-                    Already have an account?
+                    Already an insider?
                   </p>
                   <p className='login'
                     onClick={() => history.push('/login')}

@@ -64,11 +64,11 @@ const CreateFirstPost: React.FC = () => {
         <HeaderComponent />
 
         <IonRow style={{ marginTop: '-10px' }}>
-          <IonCol className='create-post-title'>YOUR FIRST POST</IonCol>
+          <IonCol className='create-post-title'>YOUR FIRST POST!</IonCol>
         </IonRow>
         <IonRow className='create-post-desc-container'>
           <IonCol className='create-post-desc'>
-            Write your first post here. Or, we can do it for you
+            Write your first post here. Or, we can do it for you.
           </IonCol>
         </IonRow>
 

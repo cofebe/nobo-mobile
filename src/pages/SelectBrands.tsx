@@ -55,13 +55,19 @@ const SelectBrands: React.FC = () => {
     userService.getMe()
       .then((user: User) => {
         if (user.favoriteBrands.includes(brandId, 0)) {
-          console.log('removing : ', brandId)
+          // console.log('removing : ', brandId)
           userService
             .deleteBrand(brandId)
             .then(res => {
               if (res) {
-                console.log('the res ', res);
-                getMyBrands();
+                // console.log('the res ', res);
+                const brands = brandsSelectArr.filter((b: string) => b !== brandId)
+                setBrandSelectArray(brands)
+                // setTimeout(() => {
+                //   console.log('updated brands arr', brandsSelectArr)
+
+                // }, 2000);
+                // getMyBrands();
               }
               else {
                 console.log('something went wrong ', res);
@@ -73,13 +79,17 @@ const SelectBrands: React.FC = () => {
         }
 
         else {
-          console.log('adding :', brandId)
+          // console.log('adding :', brandId)
           userService
             .addBrand(brandId)
             .then(res => {
               if (res) {
-                console.log('the res ', res);
-                getMyBrands();
+                // console.log('the res ', res);
+                brandsSelectArr.push(brandId)
+                // setTimeout(() => {
+                //   // console.log('updated brands arr', brandsSelectArr)
+
+                // }, 2000);
               } else {
                 console.log('something went wrong ', res);
               }
@@ -110,6 +120,9 @@ const SelectBrands: React.FC = () => {
     return 1;
   });
 
+
+  console.log('selected brands arr', brandsSelectArr)
+
   return (
     <IonPage className='select-brands-main-container'>
       <IonContent className='select-brands-ion-content'>
@@ -120,7 +133,7 @@ const SelectBrands: React.FC = () => {
         </IonRow>
         <IonRow className='select-brands-desc-container'>
           <IonCol className='select-brands-desc'>
-          Let other people know your top 4 favorite brands to trade, buy, or sell.
+            Let other people know your top 4 favorite brands to trade, buy, or sell.
           </IonCol>
         </IonRow>
         <div className='select-brands-search-container'>
@@ -151,7 +164,7 @@ const SelectBrands: React.FC = () => {
           </IonRow>
         </div>
 
-        {brandsSelectArr.length < 1 && (
+        {/* {brandsSelectArr.length < 1 && (
           <IonRow className={'select-brands-skip-container'}>
             <IonButton
               fill='clear'
@@ -163,13 +176,13 @@ const SelectBrands: React.FC = () => {
               SKIP FOR NOW
             </IonButton>
           </IonRow>
-        )}
+        )} */}
 
         <div
-          className={brandsSelectArr.length < 1 ? 'select-brands-btn-container' : 'select-brands-btn-container2'}
+          className={'select-brands-btn-container'}
         >
           <Button
-          className='select-brands-btn'
+            className='select-brands-btn'
             label='NEXT' large onClick={() => {
               history.push('/onboarding-post');
             }}

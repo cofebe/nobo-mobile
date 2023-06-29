@@ -37,13 +37,13 @@ const TradesDetails: React.FC = () => {
                 <p className='your-item'>YOUR ITEM</p>
                 <div className="img-container"
                   style={{
-                    backgroundImage: product?.products?.offered?.images?.length
-                      ? getImageUrl(product?.products?.offered?.images[0]?.url)
+                    backgroundImage: product?.products?.requested?.images?.length
+                      ? getImageUrl(product?.products?.requested?.images[0]?.url)
                       : '',
                   }}
                 ></div>
-                <p className='product-name-left'>{product?.products?.offered?.name}</p>
-                <p className='product-price-left'>{formatPrice(product?.products?.offered?.price)}</p>
+                <p className='product-name-left'>{product?.products?.requested?.name}</p>
+                <p className='product-price-left'>{formatPrice(product?.products?.requested?.price)}</p>
                 <p className='your-pay'>YOUR PAY <span className='your-pay-amount'>
                   {formatPrice(
                     product?.salesTax.recipient.shipping
@@ -65,13 +65,13 @@ const TradesDetails: React.FC = () => {
                 <p className='your-item'>THEIR ITEM</p>
                 <div className="img-container"
                   style={{
-                    backgroundImage: product?.products?.requested?.images?.length
-                      ? getImageUrl(product?.products?.requested?.images[0]?.url)
+                    backgroundImage: product?.products?.offered?.images?.length
+                      ? getImageUrl(product?.products?.offered?.images[0]?.url)
                       : '',
                   }}
                 ></div>
-                <p className='product-name-right'>{product?.products?.requested?.name}</p>
-                <p className='product-price-right'>{formatPrice(product?.products?.requested?.price)}</p>
+                <p className='product-name-right'>{product?.products?.offered?.name}</p>
+                <p className='product-price-right'>{formatPrice(product?.products?.offered?.price)}</p>
                 <p className='your-pay'>THEY PAY <span className='your-pay-amount'>
                   {formatPrice(
                     product?.salesTax.initiator.shipping

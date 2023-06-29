@@ -25,8 +25,20 @@ const FollowPeople: React.FC = () => {
   const [peopleIfollow, setPeopleIfollow] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('')
 
+
+
+  function getMe() {
+    userService.getMe()
+      .then((user: User) => {
+        setPeopleIfollow(user.following)
+
+      })
+
+  }
+
   //  fetching exiting users to follow
   const getUsers = (query: string) => {
+    getMe()
     userService
       .getUsers(query)
       .then(res => res)
@@ -40,48 +52,38 @@ const FollowPeople: React.FC = () => {
 
 
   useIonViewWillEnter(() => {
+    getMe()
     getUsers('a')
   });
 
 
   // Following  a user
   const followUser = async (userId: string) => {
-    userService
-      .getMe()
-      .then((user: User) => {
-        if (!user.following.includes(userId, 0)) {
-          console.log(userId, 'not in your list you can follow')
-          userService
-            .followUsers(userId)
-            .then((user: User) => {
-              if (user) {
-                peopleIfollow.push(userId)
-                // myFollowList()
-              }
-            })
-            .catch((err: any) => {
-              console.log(' FollowUser', err);
-            });
+    if (peopleIfollow.includes(userId, 0)) {
+      console.log(`You already followed this user ${userId}`);
+      userService
+        .removeFollowUser(userId)
+        .then((user) => {
+          getMe()
+        })
+        .catch((err: any) => {
+          // console.log(' FollowUser', err);
+        });
 
-        } else {
-          console.log(`You already followed this user ${userId}`);
-          userService
-            .removeFollowUser(userId)
-            .then((user) => {
-              if (user) {
-                const result = peopleIfollow.filter((id: string) => id !== userId)
-                setPeopleIfollow(result)
-                // myFollowList()
-              }
-            })
-            .catch((err: any) => {
-              console.log(' FollowUser', err);
-            });
-        }
-      })
-      .catch(error => {
-        console.log('error msg while fetching user profile', error);
-      });
+
+    } else {
+      console.log(userId, 'not in your')
+      userService
+        .followUsers(userId)
+        .then((user: User) => {
+         getMe()
+        })
+        .catch((err: any) => {
+          // console.log(' FollowUser', err);
+        });
+
+    }
+
 
 
   };
@@ -89,6 +91,7 @@ const FollowPeople: React.FC = () => {
   const mapFilter = users?.filter(user =>
     user.displayName.toLowerCase().includes(inputValue.toLowerCase(), 0)
   );
+
 
   return (
     <IonPage className='follow-people-main-container'>
@@ -127,7 +130,7 @@ const FollowPeople: React.FC = () => {
                 <Button
                   disabled={peopleIfollow.includes(user._id, 0)}
                   className='profile-picture-btn'
-                  label={!peopleIfollow.includes(user._id, 0) ? 'FOLLOW' : 'FOLLOWING'}
+                  label={peopleIfollow.includes(user._id, 0) ? 'FOLLOWING' : 'FOLLOW'}
                   large={false}
                   onClick={e => {
                     e.preventDefault();
