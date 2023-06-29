@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { IonPage, useIonViewWillEnter } from '@ionic/react';
+import { IonCol, IonPage, IonRow, useIonViewWillEnter } from '@ionic/react';
 import '../styles.scss';
 import './Splash.css';
 import { UserService } from '../services/UserService';
@@ -41,9 +41,21 @@ const Splash: React.FC = () => {
       }}
       id="nobo-splash-page"
     >
-      <div>
-        <img className="splash-logo" src="assets/images/nobo_logo.png" alt="logo" />
-      </div>
+      <IonRow>
+        <IonCol className='splash-logo-container' size='12'>
+          <div className='splash-logo-box'>
+            <img
+              className="splash-logo"
+              src="assets/images/nobo_logo.png" alt="logo" />
+          </div>
+        </IonCol>
+      </IonRow>
+
+      {/* <div>
+        <img
+        className="splash-logo"
+        src="assets/images/nobo_logo.png" alt="logo" />
+      </div> */}
     </IonPage>
   );
 };

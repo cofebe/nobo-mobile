@@ -42,7 +42,7 @@ const Purchases: React.FC = () => {
     product.products[0]?.name.toLowerCase().includes(inputValue.toLowerCase(), 0) ||
     product.products[0]?.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)
   );
-
+console.log(filteredProduct)
   return (
     <IonPage className='purchase-item-main-container'>
       <IonRow >
@@ -117,7 +117,7 @@ const Purchases: React.FC = () => {
                   <p className='purchases-item-status-info-await'>Awaiting Shipment</p>
                   }
 
-                    <a className='purchases-item-track' href={`${singleProduct.tracker?.public_url}`}
+                    <a className='purchases-item-track' href={singleProduct.shipmentInfo?.tracker?.public_url}
                      rel='noreferrer'
                      target='_blank'
                     >TRACK</a>

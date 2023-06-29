@@ -107,7 +107,7 @@ const Explore: React.FC = () => {
         const result = products.docs.sort((a: any, b: any) =>
           new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf());
         setProducts(result)
-        // localStorage.setItem('mainProduct', JSON.stringify(result))
+        localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(result))
 
       })
       .catch(error => {
@@ -123,13 +123,16 @@ const Explore: React.FC = () => {
     if (params.sectionName === 'sale') {
       getProducts(params.sectionCategory, 'sell', true);
     }
+    else if (params.sectionName === 'shop') {
+      getProducts(params.sectionCategory, 'sell', false);
+    }
     else {
       getProducts(params.sectionCategory, `${params.sectionName}`, false);
 
     }
 
     setTimeout(() => {
-      localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
+      // localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
 
       const data = localStorage.getItem(`${params.sectionName}Products`)
       if (data) {
@@ -167,13 +170,16 @@ const Explore: React.FC = () => {
     if (params.sectionName === 'sale') {
       getProducts(params.sectionCategory, 'sell', true);
     }
+    else if (params.sectionName === 'shop') {
+      getProducts(params.sectionCategory, 'sell', false);
+    }
     else {
       getProducts(params.sectionCategory, `${params.sectionName}`, false);
 
     }
 
     setTimeout(() => {
-      localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
+      // localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
 
       const data = localStorage.getItem(`${params.sectionName}Products`)
       if (data) {
@@ -200,6 +206,9 @@ const Explore: React.FC = () => {
     if (params.sectionName === 'sale') {
       getProducts(params.sectionCategory, 'sell', true);
     }
+    else if (params.sectionName === 'shop') {
+      getProducts(params.sectionCategory, 'sell', false);
+    }
     else {
       getProducts(params.sectionCategory, `${params.sectionName}`, false);
 
@@ -207,7 +216,7 @@ const Explore: React.FC = () => {
 
 
     setTimeout(() => {
-      localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
+      // localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
 
       const data = localStorage.getItem(`${params.sectionName}Products`)
       if (data) {
@@ -246,12 +255,15 @@ const Explore: React.FC = () => {
     if (params.sectionName === 'sale') {
       getProducts(params.sectionCategory, 'sell', true);
     }
+    else if (params.sectionName === 'shop') {
+      getProducts(params.sectionCategory, 'sell', false);
+    }
     else {
       getProducts(params.sectionCategory, `${params.sectionName}`, false);
     }
 
     setTimeout(() => {
-      localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
+      // localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
       const data = localStorage.getItem(`${params.sectionName}Products`)
       if (data) {
         const data2 = JSON.parse(data)
@@ -349,6 +361,9 @@ const Explore: React.FC = () => {
     localStorage.removeItem(`${params.sectionName}Products`)
     if (params.sectionName === 'sale') {
       getProducts(params.sectionCategory, 'sell', true);
+    }
+    else if (params.sectionName === 'shop') {
+      getProducts(params.sectionCategory, 'sell', false);
     }
     else {
       getProducts(params.sectionCategory, `${params.sectionName}`, false);

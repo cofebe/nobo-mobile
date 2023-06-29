@@ -32,7 +32,7 @@ const TradeCompleted: React.FC = () => {
       .catch((err) => { console.log('err info while fetching products ', err) })
   })
 
-
+console.log(tradesData)
 
   return (
     <IonPage className='trade-completed-main-container'>

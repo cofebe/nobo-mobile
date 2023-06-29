@@ -165,7 +165,9 @@ const PostDetail: React.FC = () => {
         >
           <IonButtons
             slot="start"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
               history.goBack();
             }}
           >
