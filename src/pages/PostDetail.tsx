@@ -168,7 +168,8 @@ const PostDetail: React.FC = () => {
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              history.goBack();
+              history.push('/home/style-feed');
+              // history.goBack();
             }}
           >
             {/*            <IonIcon
