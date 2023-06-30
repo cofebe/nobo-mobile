@@ -67,6 +67,12 @@ ion-button.cancel-btn {
 	/* height: 100px; */
 }
 
+.create-post-sep{
+  height: 1px;
+  width: 100%;
+  border: 1px solid #ACACAC;;
+}
+
 .post-text::placeholder {
 	color: #9BC9C1;
 }

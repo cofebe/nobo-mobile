@@ -355,6 +355,7 @@ const PostCreate: React.FC = () => {
                     autoGrow={true}
                     rows={5}
                   ></IonTextarea>
+                <div className='create-post-sep'></div>
                   {validUrlRegex.test(highlightLink) && showVideoLink && (
                     <span>
                       <div style={{ width: '100%' }}>
