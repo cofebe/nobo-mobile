@@ -748,3 +748,18 @@ export interface UnreadNotificationCountResponse {
   unread: number;
   token: string;
 }
+
+export interface deleteCommentResponse {
+  comment:[];
+  createdAt:string;
+  feedText:string;
+  images:[];
+  likes:string[];
+  template:string;
+  updatedAt:string;
+  __v3:string;
+  _id:string;
+
+}
+
+

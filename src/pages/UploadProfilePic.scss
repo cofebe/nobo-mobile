@@ -51,6 +51,17 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 165px;
+
+    .profile-picture-clear-photo {
+      width: 35px;
+      height: 35px;
+      position: absolute;
+      right: 80px;
+      top: 160px;
+      z-index: 500;
+    }
+
+
   }
 
   .photo-button-container {
@@ -153,14 +164,7 @@
     border-radius: 50%;
   }
 
-  .profile-picture-clear-photo {
-    width: 35px;
-    height: 35px;
-    position: absolute;
-    right: 24%;
-    top: 40%;
-    z-index: 500;
-  }
+
 
   .profile-picture-container {
     height: 210px;

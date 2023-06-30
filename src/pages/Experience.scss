@@ -49,18 +49,24 @@
     padding-left: 30px;
     padding-right: 30px;
     margin: auto;
+
+
+
+    .experience-desc {
+      width: 330px;
+      line-height: 18px;
+      font-weight: 400;
+      font-size: 13px;
+      color: gray;
+      text-align: center;
+      margin: auto;
+      margin-bottom: -28px;
+
+    }
+
   }
 
-  .experience-desc {
-    width: 330px;
-    line-height: 18px;
-    font-weight: 400;
-    font-size: 13px;
-    color: gray;
-    text-align: center;
-    margin: auto;
-    margin-bottom: -28px;
-  }
+
 
   .experience-img-container {
     height: 17vh;
@@ -70,6 +76,17 @@
     justify-content: center;
     border-radius: 10px;
     margin-bottom: 20px;
+
+  }
+  .experience-img-container-men {
+    height: 17vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+
   }
 
   .experience-form-container {
@@ -99,40 +116,64 @@
         margin-top: -20px;
       }
 
-      .exp-img-selected {
-        border: 2px solid black;
-        border-radius: 10px;
-      }
 
-      .exp-img-title {
-        position: absolute;
-        letter-spacing: 2px;
-        font-weight: 600;
-        font-size: 20px;
-        text-align: center;
-        font-family: 'Georgia';
-        line-height: 18px;
-        color: #fff;
-      }
 
-      .exp-checkbox-ticker {
-        position: absolute;
-        left: 88%;
-        top: 8%;
 
-        @media only screen and (device-height: 1180px) {
-          position: absolute;
-          left: 68%;
-          top: 18%;
+
+
+
+        .exp-img-selected {
+          border: 2px solid black;
+          border-radius: 10px;
         }
 
-        @media only screen and (device-height: 1024px) {
+        .exp-img-title {
           position: absolute;
-          left: 69.5%;
-          top: 14%;
+          letter-spacing: 2px;
+          font-weight: 600;
+          font-size: 20px;
+          text-align: center;
+          font-family: 'Georgia';
+          line-height: 18px;
+          color: #fff;
         }
-      }
+
+        .exp-checkbox-ticker {
+          position: absolute;
+          left: 88%;
+          top: 8%;
+
+          @media only screen and (device-height: 1180px) {
+            position: absolute;
+            left: 68%;
+            top: 18%;
+          }
+          @media only screen and (device-height: 896px) {
+            position: absolute;
+            left: 85%;
+            top: 18%;
+          }
+
+          @media only screen and (device-height: 1024px) {
+            position: absolute;
+            left: 69.5%;
+            top: 14%;
+          }
+        }
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
   }
 
   .experience-btn-container {

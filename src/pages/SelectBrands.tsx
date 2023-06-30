@@ -15,7 +15,7 @@ const SelectBrands: React.FC = () => {
   const userService = new UserService();
   const history = useHistory();
   const [brandsItems, setBrandItems] = useState<Brand[]>([]);
-  const [brandsSelectArr, setBrandSelectArray] = useState<string[]>([]);
+  const [userBrandList, setUserBrandList] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
 
   // fetching all brands
@@ -31,43 +31,28 @@ const SelectBrands: React.FC = () => {
   });
 
 
-  // Handling the ticker
-  const handleTicker = (brandId: string) => {
-    if (!brandsSelectArr.includes(brandId, 0)) {
-      setBrandSelectArray([...brandsSelectArr, brandId])
-    }
-
-    else if (brandsSelectArr.includes(brandId, 0)) {
-      const updatedRemove = brandsSelectArr.filter((brand) => brand !== brandId)
-      setBrandSelectArray(updatedRemove)
-    }
-  };
-
-
   function getMyBrands() {
     userService.getMe()
-      .then((user) => { console.log('my updated brand list', user.favoriteBrands) })
+      .then((user) => {
+        setUserBrandList(user.favoriteBrands)
+       })
       .catch(error => { console.log('unable to get user', error) })
   }
 
+  useIonViewWillEnter(()=>{
+    getMyBrands()
+
+  })
+
+
 
   const handleSubmit = async (brandId: any) => {
-    userService.getMe()
-      .then((user: User) => {
-        if (user.favoriteBrands.includes(brandId, 0)) {
-          // console.log('removing : ', brandId)
+        if (userBrandList.includes(brandId, 0)) {
           userService
             .deleteBrand(brandId)
             .then(res => {
               if (res) {
-                // console.log('the res ', res);
-                const brands = brandsSelectArr.filter((b: string) => b !== brandId)
-                setBrandSelectArray(brands)
-                // setTimeout(() => {
-                //   console.log('updated brands arr', brandsSelectArr)
-
-                // }, 2000);
-                // getMyBrands();
+                getMyBrands()
               }
               else {
                 console.log('something went wrong ', res);
@@ -79,17 +64,11 @@ const SelectBrands: React.FC = () => {
         }
 
         else {
-          // console.log('adding :', brandId)
           userService
             .addBrand(brandId)
             .then(res => {
               if (res) {
-                // console.log('the res ', res);
-                brandsSelectArr.push(brandId)
-                // setTimeout(() => {
-                //   // console.log('updated brands arr', brandsSelectArr)
-
-                // }, 2000);
+                getMyBrands()
               } else {
                 console.log('something went wrong ', res);
               }
@@ -98,10 +77,7 @@ const SelectBrands: React.FC = () => {
               console.log('SelectBrand error', err);
             });
         }
-      })
-      .catch((err) => {
-        console.log('error fetching user', err)
-      })
+
 
   };
 
@@ -120,8 +96,6 @@ const SelectBrands: React.FC = () => {
     return 1;
   });
 
-
-  console.log('selected brands arr', brandsSelectArr)
 
   return (
     <IonPage className='select-brands-main-container'>
@@ -149,34 +123,18 @@ const SelectBrands: React.FC = () => {
             {mapFilter.sort().map(brand => (
               <IonCol
                 onClick={() => {
-                  handleTicker(brand._id)
                   handleSubmit(brand._id)
                 }}
                 className='select-brand-img-col' key={brand._id} size='5'
               >
                 <img className='brand-img' src={brand.url} alt={brand.name} />
                 <div className='select-brand-checkbox'>
-                  {/* <Checkbox value={tickedBrand === brand._id} onChange={e => { }} /> */}
-                  <Checkbox value={brandsSelectArr.includes(brand._id)} onChange={e => { }} />
+                  <Checkbox value={ userBrandList.includes(brand._id) } onChange={e => { }} />
                 </div>
               </IonCol>
             ))}
           </IonRow>
         </div>
-
-        {/* {brandsSelectArr.length < 1 && (
-          <IonRow className={'select-brands-skip-container'}>
-            <IonButton
-              fill='clear'
-              className='select-brands-skip-text'
-              onClick={() => {
-                history.push('/onboarding-post');
-              }}
-            >
-              SKIP FOR NOW
-            </IonButton>
-          </IonRow>
-        )} */}
 
         <div
           className={'select-brands-btn-container'}
@@ -186,7 +144,7 @@ const SelectBrands: React.FC = () => {
             label='NEXT' large onClick={() => {
               history.push('/onboarding-post');
             }}
-            disabled={brandsSelectArr.length < 4} />
+            disabled={userBrandList.length < 4} />
         </div>
       </IonContent>
     </IonPage>

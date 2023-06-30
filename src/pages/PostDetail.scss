@@ -35,6 +35,7 @@
       font-size: 10px;
       font-weight: 400;
     }
+
     --padding-start: 6px;
   }
 
@@ -73,6 +74,62 @@
     --background: #1a3a35;
   }
 
+  .post-slide {
+    --background: #FEFCF7;
+    ;
+  }
+
+  .delete-post-main {
+    // background-color: gray;
+
+    // justify-content: center;
+  }
+
+
+  .post-slide-img-box {
+    background-color: #FEFCF7;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .report-c-box-delete {
+    background-color: #E8DABB;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1.2px solid #FEFCF7;
+  }
+
+  .report-c-box-report {
+    background-color: #E8DABB;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1.2px solid #FEFCF7;
+
+  }
+
+  // .report-c-box-report{
+  //   background-color: #E8DABB;
+  //   border-left: 2px ;
+  //   height: 50px ;
+  //   width: 50px ;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  // }
+  // .delete-post-img {
+  //   // height:100px;
+  //   // width: 120px;
+  // }
+
   .home-toolbar {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -84,12 +141,13 @@
     margin-right: 20px;
     float: right;
   }
+
   .nobo-comments-count {
     top: 8px;
     position: absolute;
     right: 61px;
     font-size: .8em;
-    color:#00D6B6;
+    color: #00D6B6;
   }
 
   .nobo-likes-count {
@@ -97,7 +155,7 @@
     position: absolute;
     right: 5px;
     font-size: .8em;
-    color:#00D6B6;
+    color: #00D6B6;
   }
 
 
@@ -106,7 +164,7 @@
   }
 
   .item-inner {
-    border-bottom:none;
+    border-bottom: none;
   }
 
   .post-detail-page .nobo-list-background {
@@ -129,17 +187,15 @@
     right: 0;
     text-align: center;
     padding-left: 68px;
-    background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 79%, rgba(0,0,0,0) 106%);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 79%, rgba(0, 0, 0, 0) 106%);
   }
 
   .post-detail-page .feed-name {
     font-size: 1.4em;
   }
 
-  .post-detail-page .nobo-header-stars {
-
-  }
+  .post-detail-page .nobo-header-stars {}
 
   .post-detail-page .nobo-location-pin {
     margin-left: -35px;
@@ -185,7 +241,7 @@
   }
 
   .feed-item-item-content {
-    & > ion-col:first-child {
+    &>ion-col:first-child {
       padding-left: 0;
 
       .feed-list-feed-image {
