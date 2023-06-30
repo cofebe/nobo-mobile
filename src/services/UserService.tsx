@@ -25,6 +25,7 @@ import {
   UnreadNotificationCountResponse,
   User,
   UserAccData,
+  deleteCommentResponse,
 } from '../models';
 
 const API_URL = environment.serverUrl + '/api';
@@ -347,6 +348,9 @@ export class UserService extends BaseService {
     const res = await super.fetch('GET', '/api/users/accountBalance');
     return res.json();
   }
+
+
+
   async transferFunds(paypal: string, email: string) {
     const res = await super.fetch('POST', '/api/users/transfer-funds', {
       payoutMethod: paypal,
@@ -554,17 +558,17 @@ export class UserService extends BaseService {
   }
 
   // GET EXISTING USERS
-  async getUsers(query:string) {
-    if(query !== ''){
+  async getUsers(query: string) {
+    if (query !== '') {
       try {
-        const response = await super.fetch('GET',`/api/users/q/term/${query}`);
+        const response = await super.fetch('GET', `/api/users/q/term/${query}`);
         return response.json();
       } catch (error) {
         console.log('err from userService response', error);
       }
-    }else{
+    } else {
       try {
-        const response = await super.fetch('GET',`/api/users/q/term/a`);
+        const response = await super.fetch('GET', `/api/users/q/term/a`);
         return response.json();
       } catch (error) {
         console.log('err from userService response', error);
@@ -582,7 +586,7 @@ export class UserService extends BaseService {
 
   // GET BRANDS
   async getBrands() {
-    const response = await super.fetch('GET','api/brands/all');
+    const response = await super.fetch('GET', 'api/brands/all');
     const json: BrandsResponse = await response.json();
     return json.brands;
   }

@@ -16,7 +16,13 @@ import {
   IonCol,
   IonAvatar,
   IonInput,
+  IonItemSliding,
+  IonItemOptions,
+  IonItemOption,
+  IonItem,
+  IonLabel,
 } from '@ionic/react';
+import { archive, heart, trash } from 'ionicons/icons';
 import './PostDetail.scss';
 import FeedListItem from '../components/FeedListItem';
 import PostComment from '../components/PostComment';
@@ -63,7 +69,7 @@ interface Comment {
 }
 
 const PostDetail: React.FC = () => {
-  console.log('PostDetail');
+  // console.log('PostDetail');
   const authService = new AuthService();
   const feedService = new FeedService();
   const userService = new UserService();
@@ -90,7 +96,7 @@ const PostDetail: React.FC = () => {
 
     let userID = authService.getUserId();
 
-    userService.getMe().then( (data) => {
+    userService.getMe().then((data) => {
       setNoboProfile(data);
     })
     // postId = getPostId();
@@ -148,6 +154,20 @@ const PostDetail: React.FC = () => {
     //https://thenobo.codepilot.com/api/feed/create-item
     // {"userMessage":"jjlkjgfkdljg j a;lkjfdl jfsdklajf kjds fadj ;kjdsfa kjf asdkljf akdjf akjd fjdsfl kdjsfljlsjfdlkj kdsjf k jklds kdjf lksdfj lkjsflkjsdf kdsjf  lksdfj ldja","userImage":null}
   }
+
+
+  function deleteComment(commentId:string){
+    feedService.deleteComment(commentId, postId)
+    .then((res=>{
+      console.log('msg delete response',res)
+      load()
+    }))
+    .catch((error)=>{
+      console.log('error , unable to delete comment',error)
+    })
+  }
+
+
 
   return (
     <IonPage className="post-detail-page">
@@ -264,13 +284,47 @@ const PostDetail: React.FC = () => {
                     // let zoomImageUrl = (message.images[0] || "").replace('[', '').replace(']', '').split("'").join('').split(',')[targetIndex];
                     // setImageZoom(zoomImageUrl);
                   }
-                } catch (exZoomPicNoExist) {}
+                } catch (exZoomPicNoExist) { }
               }}
             />
           </IonList>
           {message.comments.map(c => (
-            <PostComment message={message} comment={c} key={c.comment_id} />
+            <div style={{ backgroundColor: '' }}>
+
+              <IonItemSliding>
+                <IonItem className='post-slide' >
+                  <PostComment message={message} comment={c} key={c.comment_id} />
+                </IonItem>
+                <IonItemOptions className='delete-post-main'  side="end">
+
+                  <div className='post-slide-img-box'
+                   onClick={()=>{
+                    deleteComment(c._id)
+                    console.log('message id ',c._id)
+                  }}
+                  >
+                    <div className="report-c-box-delete">
+                      <img className='delete-post-img'
+                        src='assets/images/delete-comment2.svg' alt='delete'
+                      />
+                    </div>
+                  </div>
+
+                  <div className='post-slide-img-box'>
+                    <div className="report-c-box-report">
+                      <img className='delete-post-img'
+                        src='assets/images/report-comment.svg' alt='delete'
+                      />
+                    </div>
+                  </div>
+
+                </IonItemOptions>
+              </IonItemSliding>
+            </div>
+
+
           ))}
+
         </IonContent>
       ) : (
         ''

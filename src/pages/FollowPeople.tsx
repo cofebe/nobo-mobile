@@ -27,7 +27,7 @@ const FollowPeople: React.FC = () => {
 
 
 
-  function getMe() {
+  function getMyFollowingList() {
     userService.getMe()
       .then((user: User) => {
         setPeopleIfollow(user.following)
@@ -38,7 +38,7 @@ const FollowPeople: React.FC = () => {
 
   //  fetching exiting users to follow
   const getUsers = (query: string) => {
-    getMe()
+    getMyFollowingList()
     userService
       .getUsers(query)
       .then(res => res)
@@ -52,7 +52,7 @@ const FollowPeople: React.FC = () => {
 
 
   useIonViewWillEnter(() => {
-    getMe()
+    getMyFollowingList()
     getUsers('a')
   });
 
@@ -64,7 +64,7 @@ const FollowPeople: React.FC = () => {
       userService
         .removeFollowUser(userId)
         .then((user) => {
-          getMe()
+          getMyFollowingList()
         })
         .catch((err: any) => {
           // console.log(' FollowUser', err);
@@ -76,7 +76,7 @@ const FollowPeople: React.FC = () => {
       userService
         .followUsers(userId)
         .then((user: User) => {
-         getMe()
+         getMyFollowingList()
         })
         .catch((err: any) => {
           // console.log(' FollowUser', err);
@@ -92,6 +92,7 @@ const FollowPeople: React.FC = () => {
     user.displayName.toLowerCase().includes(inputValue.toLowerCase(), 0)
   );
 
+  console.log(peopleIfollow)
 
   return (
     <IonPage className='follow-people-main-container'>

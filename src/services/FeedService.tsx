@@ -1,5 +1,6 @@
 import { BaseService } from './BaseService';
 import { environment } from '../environments/environment';
+import { deleteCommentResponse } from '../models';
 const API_URL = environment.serverUrl;
 
 export class FeedService extends BaseService {
@@ -123,4 +124,17 @@ export class FeedService extends BaseService {
   async getPostStats(postID: number, age: number) {
     return await super.fetch('GET', `/feed/${postID}/stats?age=${age}`);
   }
+
+  async deleteComment(commentId: string, itemId: string): Promise<deleteCommentResponse> {
+    const res = await super.fetch('POST', `/api/feed/delete/comment`,
+      {
+        commentId,
+        itemId
+      }
+    )
+    const json: deleteCommentResponse = await res.json()
+    return json
+  }
+
+
 }
