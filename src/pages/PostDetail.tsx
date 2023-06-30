@@ -18,7 +18,7 @@ import {
   IonInput,
 } from '@ionic/react';
 import './PostDetail.scss';
-import FeedListItem from '../components/FeedListItem';
+import PostDetailItem from '../components/PostDetailItem';
 import PostComment from '../components/PostComment';
 import CreateCommentModal from '../components/CreateCommentModal';
 import { chevronBackOutline } from 'ionicons/icons';
@@ -156,11 +156,11 @@ const PostDetail: React.FC = () => {
         imageUrl={imageZoom}
         onClose={() => setImageZoom('')}
       ></ImageZoom>*/}
-      <IonHeader>
+      <IonHeader className="ion-no-border">
         <IonToolbar
           style={{
             '--background': 'rgb(254, 252, 247)',
-            padding: '40px 10px 10px 10px',
+            padding: '40px 10px 10px 30px',
           }}
         >
           <IonButtons
@@ -254,8 +254,7 @@ const PostDetail: React.FC = () => {
           <IonRefresher slot="fixed" onIonRefresh={refresh}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
-          <IonList className="nobo-post-detail-background">
-            <FeedListItem
+            <PostDetailItem
               message={message}
               zoomAction={(i: number) => {
                 try {
@@ -267,7 +266,6 @@ const PostDetail: React.FC = () => {
                 } catch (exZoomPicNoExist) {}
               }}
             />
-          </IonList>
           {message.comments.map(c => (
             <PostComment message={message} comment={c} key={c.comment_id} />
           ))}
