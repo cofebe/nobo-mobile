@@ -120,14 +120,21 @@
   }
 
   .select-brands-btn-container {
-
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
     width: 350px;
     margin-bottom: 25px;
-    margin-top: 35px;
+    margin-top: 40px;
+
+    @media only screen and (device-height: 926px) {
+      margin-top: 120px;
+    }
+
+    @media only screen and (device-height: 896px) {
+      margin-top: 90px;
+    }
   }
 
   // .select-brands-btn-container2 {
@@ -141,16 +148,16 @@
   //   margin-top: 35px;
   // }
 
-  .select-brands-btn{
+  .select-brands-btn {
     width: 310px;
-      height: 51px;
-      font-weight: 500;
-      font-family: 'Nunito Sans';
-      font-size: 15px;
-      margin-top: 10px;
-      line-height: 22.5px;
-      letter-spacing:2px;
-      color: #ffffff;
+    height: 51px;
+    font-weight: 500;
+    font-family: 'Nunito Sans';
+    font-size: 15px;
+    margin-top: 10px;
+    line-height: 22.5px;
+    letter-spacing: 2px;
+    color: #ffffff;
   }
 
   .select-brand-checkbox {
@@ -195,7 +202,7 @@
     padding: 10px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
 
-    .brand-img{
+    .brand-img {
 
       font-family: 'Nunito Sans';
       font-style: normal;

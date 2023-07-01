@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import {
   IonButtons,
   IonContent,
@@ -81,7 +81,7 @@ const PostDetail: React.FC = () => {
   //const [imageZoom, setImageZoom] = useState('');
   const [currentUserAvatar, setCurrentUserAvatar] = useState<string>('');
   const [commentMessage, setCommentMessage] = useState<string>('');
-
+const params = useParams()
   const modal = useRef<HTMLIonModalElement>(null);
 
   console.log('PostDetail: ', postId, message);
@@ -157,9 +157,11 @@ const PostDetail: React.FC = () => {
 
 
   function deleteComment(commentId:string){
-    feedService.deleteComment(commentId, postId)
+    const postId:any = params
+    console.log(postId.id, 'test')
+    feedService.deleteComment(commentId, postId.id)
     .then((res=>{
-      console.log('msg delete response',res)
+      // console.log('msg delete response',res)
       load()
     }))
     .catch((error)=>{
@@ -308,13 +310,13 @@ const PostDetail: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className='post-slide-img-box'>
+                  {/* <div className='post-slide-img-box'>
                     <div className="report-c-box-report">
                       <img className='delete-post-img'
                         src='assets/images/report-comment.svg' alt='delete'
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                 </IonItemOptions>
               </IonItemSliding>

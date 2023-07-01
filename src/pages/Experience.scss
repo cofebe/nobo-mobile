@@ -78,6 +78,7 @@
     margin-bottom: 20px;
 
   }
+
   .experience-img-container-men {
     height: 17vh;
     position: relative;
@@ -122,61 +123,60 @@
 
 
 
-        .exp-img-selected {
-          border: 2px solid black;
-          border-radius: 10px;
-        }
+      .exp-img-selected {
+        border: 2px solid black;
+        border-radius: 10px;
+      }
 
-        .exp-img-title {
+      .exp-img-title {
+        position: absolute;
+        letter-spacing: 2px;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: center;
+        font-family: 'Georgia';
+        line-height: 18px;
+        color: #fff;
+      }
+
+      .exp-checkbox-ticker {
+        position: absolute;
+        left: 88%;
+        top: 8%;
+
+        @media only screen and (device-height: 1180px) {
           position: absolute;
-          letter-spacing: 2px;
-          font-weight: 600;
-          font-size: 20px;
-          text-align: center;
-          font-family: 'Georgia';
-          line-height: 18px;
-          color: #fff;
+          left: 68%;
+          top: 18%;
         }
 
-        .exp-checkbox-ticker {
+        @media only screen and (device-height: 896px) {
           position: absolute;
-          left: 88%;
-          top: 8%;
-
-          @media only screen and (device-height: 1180px) {
-            position: absolute;
-            left: 68%;
-            top: 18%;
-          }
-          @media only screen and (device-height: 896px) {
-            position: absolute;
-            left: 85%;
-            top: 18%;
-          }
-
-          @media only screen and (device-height: 1024px) {
-            position: absolute;
-            left: 69.5%;
-            top: 14%;
-          }
+          left: 85%;
+          top: 18%;
         }
 
+        @media only screen and (device-height: 1024px) {
+          position: absolute;
+          left: 69.5%;
+          top: 14%;
+        }
 
-
-
-
-
+        @media only screen and (device-height: 926px) {
+          position: absolute;
+          left: 85%;
+          top: 12%;
+          // left: 69.5%;
+          // top: 14%;
+        }
+      }
 
     }
-
-
-
-
-
 
   }
 
   .experience-btn-container {
+    margin-top: '';
     display: flex;
     align-items: center;
     justify-content: center;
@@ -185,7 +185,7 @@
     width: 340px;
     margin-bottom: -25px;
 
-    .experience-btn{
+    .experience-btn {
       width: 310px;
       height: 51px;
       font-weight: 500;
@@ -193,13 +193,21 @@
       font-size: 15px;
       // margin-top: 10px;
       line-height: 22.5px;
-      letter-spacing:2px;
+      letter-spacing: 2px;
       color: #ffffff;
     }
 
     @media only screen and (device-height: 667px) {
       margin-bottom: 10px;
       margin-top: -10px;
+    }
+
+    @media only screen and (device-height: 926px) {
+      margin-top: 40px;
+    }
+
+    @media only screen and (device-height: 896px) {
+      margin-top: 20px;
     }
   }
 }

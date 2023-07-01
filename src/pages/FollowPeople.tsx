@@ -76,7 +76,7 @@ const FollowPeople: React.FC = () => {
       userService
         .followUsers(userId)
         .then((user: User) => {
-         getMyFollowingList()
+          getMyFollowingList()
         })
         .catch((err: any) => {
           // console.log(' FollowUser', err);

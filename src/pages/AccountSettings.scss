@@ -152,6 +152,41 @@
       border-radius: 10px;
     }
 
+    .acc-settings-btn-container {
+
+      margin-top: 0px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .acc-settings-btn_ {
+        height: 52px;
+        letter-spacing: 1px;
+        font-family: 'Nunito Sans';
+        border-radius: 5px;
+        border: 0.5px solid #FFF;
+        background: var(--accent-c-olor, #D6980E);
+        backdrop-filter: blur(7.5px);
+        width: 310px;
+
+        color: #FFF;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
+
+      }
+
+      @media only screen and (device-height: 926px) {
+        margin-top: 65px;
+      }
+
+      @media only screen and (device-height: 896px) {
+        margin-top: 35px;
+      }
+
+    }
+
 
 
 

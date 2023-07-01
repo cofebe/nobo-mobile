@@ -83,34 +83,29 @@
     width: 30%;
     height: 3rem;
 
-    .profile-picture-btn{
+    .profile-picture-btn {
       width: 104px;
       height: 37px;
       font-family: 'Nunito Sans';
       font-size: 10px;
       margin-top: 10px;
       line-height: 22.5px;
-      letter-spacing:5%;
+      letter-spacing: 5%;
       color: #ffffff;
     }
   }
 
-  .follow-people-skip-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  // .follow-people-skip-container {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  // }
 
-  .follow-people-skip-container2 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
   .follow-people-skip-text {
     text-align: center;
-    color: black;
-    font-size: 12px;
+    color: #707070;
+    font-size: 14px;
   }
 
   .follow-people-skip-container {
@@ -120,6 +115,15 @@
     margin-top: 30px;
     height: 30px;
     // margin-bottom: -10px;
+
+    @media only screen and (device-height: 926px) {
+      margin-top: 65px;
+    }
+
+    @media only screen and (device-height: 896px) {
+      margin-top: 55px;
+    }
+
   }
 
   .follow-people-skip-text {
@@ -127,7 +131,8 @@
     color: black;
     font-size: 12px;
   }
-// before follow 5 user
+
+  // before follow 5 user
   .follow-people-submit-btn-container {
     display: flex;
     align-items: center;
@@ -136,6 +141,15 @@
     width: 350px;
     margin-bottom: 25px;
     margin-top: 80px;
+
+    @media only screen and (device-height: 926px) {
+      margin-top: 110px;
+    }
+
+    @media only screen and (device-height: 896px) {
+      margin-top: 100px;
+    }
+
   }
 
   .follow-people-submit-btn-container2 {
@@ -147,7 +161,7 @@
     margin-bottom: 25px;
     margin-top: 10px;
 
-    .btn{
+    .btn {
       width: 310px;
       height: 51px;
       font-weight: 500;
@@ -155,8 +169,11 @@
       font-size: 15px;
       margin-top: 10px;
       line-height: 22.5px;
-      letter-spacing:2px;
+      letter-spacing: 2px;
       color: #ffffff;
     }
+
+
+
   }
 }

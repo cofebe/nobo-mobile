@@ -250,11 +250,11 @@ export class UserService extends BaseService {
     // console.log('json', json);
 
     if (res.status === 404) {
-      console.log('404', json.error);
+      // console.log('404', json.error);
       throw json.error;
     }
     if (res.status === 401) {
-      console.log('401', json.error);
+      // console.log('401', json.error);
       throw json.error;
     }
 

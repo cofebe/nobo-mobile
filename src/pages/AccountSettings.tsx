@@ -21,7 +21,7 @@ const AccountSettings: React.FC = () => {
   const [displayName, setdisplayName] = useState('')
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNum] = useState('')
-  const [currentPassword, setPassword] = useState('')
+  const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [comfirmPassword, setComfirmPassword] = useState('')
   const [wrongPassword, seTwrongPassword] = useState(false)
@@ -90,9 +90,13 @@ const AccountSettings: React.FC = () => {
       .then((user: ExperienceResponse) => {
         if (user.passwordError) {
           seTwrongPassword(true)
-          console.log('password incorrect');
+          // console.log('password incorrect');
         } else {
-          console.log(user.currentUser)
+          // console.log('success',user.currentUser)
+          dismiss()
+          setComfirmPassword('')
+          setNewPassword('')
+          setCurrentPassword('')
         }
       })
       .catch((err: any) => {
@@ -257,9 +261,10 @@ const AccountSettings: React.FC = () => {
             </div>
           </div>
         </div>
-        <div style={{ width: '300px', margin: 'auto' }}>
+        <IonRow>
+          <IonCol size='12' className='acc-settings-btn-container'>
           <Button
-            className='acc-settings-btn'
+            className='acc-settings-btn_'
             label='SAVE'
             large
             onClick={e => {
@@ -268,7 +273,9 @@ const AccountSettings: React.FC = () => {
             }}
             disabled={validate()}
           />
-        </div>
+          </IonCol>
+        </IonRow>
+
       </IonContent>
       <IonModal style={{borderRadius:'28px'}} className='acc-settings-main-modal' ref={modal}  initialBreakpoint={1} breakpoints={[1, 5]}>
         {/* <IonContent className='acc-password-change-box' > */}
@@ -287,7 +294,7 @@ const AccountSettings: React.FC = () => {
                 value={currentPassword}
                 className={`nobo-input `}
                 placeholder='CURRENT PASSWORD'
-                onChange={e => { setPassword(e) }}
+                onChange={e => { setCurrentPassword(e) }}
               />
             </IonCol>
 
