@@ -339,7 +339,9 @@ const PostCreate: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="post-content" fullscreen>
+
         <IonGrid className="post-grid">
+      <div className='create-post-sep'></div>
           <IonRow>
             <IonCol size="12">
               <IonItem className="nobo-post-input-area" lines="none">
@@ -355,7 +357,6 @@ const PostCreate: React.FC = () => {
                     autoGrow={true}
                     rows={5}
                   ></IonTextarea>
-                <div className='create-post-sep'></div>
                   {validUrlRegex.test(highlightLink) && showVideoLink && (
                     <span>
                       <div style={{ width: '100%' }}>

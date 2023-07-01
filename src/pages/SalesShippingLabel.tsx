@@ -42,23 +42,9 @@ const SalesShippingLabel: React.FC = () => {
       })
       .catch((err) => { console.log('err info while fetching products ', err) })
   })
-  // useIonViewWillEnter(() => {
-  //   userService.getSales()
-  //     .then((sales: OrdersResponse) => {
-  //       if (sales) {
-  //         setAllSales([sales])
-  //         console.log(sales)
-
-  //       } else { console.log('something went wrong') }
-  //     })
-  //     .catch((err) => { console.log('err info while fetching products ', err) })
-  // })
 
 
 
-  // console.log('sec log ', allSales[0]?.docs.map((s: any) => s.products))
-  // console.log('state checking...', salesData)
-  console.log(allSales)
   return (
     <IonPage className='sales-shipping-main-container'>
       <IonRow>
@@ -66,7 +52,7 @@ const SalesShippingLabel: React.FC = () => {
           <div
             className='sales-shipping-back-btn'
             onClick={() => {
-              history.replace('/settings/sales')
+              history.goBack()
             }}
           >
             <img
@@ -98,7 +84,7 @@ const SalesShippingLabel: React.FC = () => {
 
 
                 {products.products.map((p) => (
-                  <div className="shipping-l-product-box_" style={{}}>
+                  <div className="shipping-l-product-box_" key={p._id} style={{}}>
                     <div className='shipping-box1'>
                       <p className="shipping-l-product-name_">{p.name.toUpperCase()}</p>
                     </div>
@@ -113,25 +99,18 @@ const SalesShippingLabel: React.FC = () => {
                 ))}
                 {dropDown[0] === products._id && (
                   <div >
-                    {products.products.map((product: any) => (
-                      <div className=' shipping-l-product-box_show'>
-                        <div className='purchases-item-img'
+                    {products.products.map((product: any, index: any) => (
+                      <div
+                        key={index}
+                        className=' shipping-l-product-box_show'>
+                        <div
+                          className="img-box"
                           style={{
-                            backgroundImage: product.images?.length
-                              ? getImageUrl(product.images[0]?.url)
+                            backgroundImage: product?.images?.length
+                              ? getImageUrl(product?.images[1]?.url)
                               : '',
-
                           }}
                         ></div>
-                        {/* <div className="img-box">
-                          {<img
-                            className='img'
-                            src={product?.images[1]?.url.length < 60 ?
-                              `https://staging.thenobo.com/${product?.images[1].url}`
-                            : `${product?.images[0].url}`} alt=''
-                          />}
-                        </div> */}
-
 
                         {/* ------TOP--------- */}
                         <p className="top-earnings-title">EARNINGS</p>

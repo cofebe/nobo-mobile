@@ -103,8 +103,12 @@
       }
 
       @media only screen and (device-height: 896px) {
-              margin-top: 235px;
-            }
+        margin-top: 235px;
+      }
+
+      @media only screen and (device-height: 926px) {
+        margin-top: 255px;
+      }
 
 
     }
@@ -173,7 +177,7 @@
       font-size: 15px;
       margin-top: 10px;
       line-height: 22.5px;
-      letter-spacing:2px;
+      letter-spacing: 2px;
       color: #ffffff;
     }
 

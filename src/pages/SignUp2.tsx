@@ -102,6 +102,7 @@ const SignUp2 = () => {
                   placeholder='USERNAME'
                   onChange={val => {
                     setPerson({ ...person, userName: val });
+                    setError(false)
                   }}
                 />
               </IonCol>

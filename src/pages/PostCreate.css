@@ -3,6 +3,10 @@
 	--background: #fefcf6;
 }
 
+.post-grid{
+  position: relative;
+}
+
 .post-btn {
 	font-family: 'Nunito Sans';
 	font-size: .8rem;
@@ -68,9 +72,12 @@ ion-button.cancel-btn {
 }
 
 .create-post-sep{
+  position: absolute;
+  top: 76%;
   height: 1px;
   width: 100%;
-  border: 1px solid #ACACAC;;
+  /* border: 1px solid red; */
+  border: 1px solid #ACACAC;
 }
 
 .post-text::placeholder {

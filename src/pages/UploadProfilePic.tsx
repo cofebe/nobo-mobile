@@ -112,7 +112,7 @@ const UploadProfilePic: React.FC = () => {
             position: 'relative',
           }}
         >
-          <IonRow  className='profile-picture-image-container'>
+          <IonRow className='profile-picture-image-container'>
           {imageData === '' &&(
           <IonCol size='12'  className='profile-picture-circle'>
             <div  style={{ position:'relative'}}>
