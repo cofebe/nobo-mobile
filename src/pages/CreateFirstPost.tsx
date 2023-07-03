@@ -52,10 +52,18 @@ const CreateFirstPost: React.FC = () => {
   };
   // skip post
   const skipPost = () => {
-    setTimeout(() => {
-      localStorage.setItem('newUser', 'newUser');
-      history.push(`/home/my-profile`);
-    }, 2000);
+    const defaultPost = "Excited to be on TheNOBO! Let me know what products you're looking to Trade, or Buy from me, and I'll check my closet!"
+    userService
+      .createPost(defaultPost)
+      .then((success: PostResponse) => {
+        if (success) {
+          setTimeout(() => {
+            localStorage.setItem('newUser', 'newUser');
+            history.push(`/home/my-profile`);
+          }, 2000);
+        }
+      })
+      .catch(err => console.log('getting a user', err));
   };
 
   return (

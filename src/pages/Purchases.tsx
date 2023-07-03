@@ -42,7 +42,7 @@ const Purchases: React.FC = () => {
     product.products[0]?.name.toLowerCase().includes(inputValue.toLowerCase(), 0) ||
     product.products[0]?.brand.toLowerCase().includes(inputValue.toLowerCase(), 0)
   );
-console.log(filteredProduct)
+// console.log(filteredProduct)
   return (
     <IonPage className='purchase-item-main-container'>
       <IonRow >

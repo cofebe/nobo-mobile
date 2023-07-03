@@ -60,26 +60,24 @@ const FollowPeople: React.FC = () => {
   // Following  a user
   const followUser = async (userId: string) => {
     if (peopleIfollow.includes(userId, 0)) {
-      console.log(`You already followed this user ${userId}`);
       userService
         .removeFollowUser(userId)
-        .then((user) => {
+        .then(() => {
           getMyFollowingList()
         })
         .catch((err: any) => {
-          // console.log(' FollowUser', err);
+          console.log(' remove User', err);
         });
 
 
     } else {
-      console.log(userId, 'not in your')
       userService
         .followUsers(userId)
-        .then((user: User) => {
+        .then(() => {
           getMyFollowingList()
         })
         .catch((err: any) => {
-          // console.log(' FollowUser', err);
+          console.log(' FollowUser', err);
         });
 
     }
@@ -91,8 +89,6 @@ const FollowPeople: React.FC = () => {
   const mapFilter = users?.filter(user =>
     user.displayName.toLowerCase().includes(inputValue.toLowerCase(), 0)
   );
-
-  console.log(peopleIfollow)
 
   return (
     <IonPage className='follow-people-main-container'>
