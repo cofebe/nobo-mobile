@@ -6,7 +6,6 @@ import { AuthService } from '../services/AuthService';
 import { FeedService } from '../services/FeedService';
 import { ReportService } from '../services/ReportService';
 import CreateCommentModal from '../components/CreateCommentModal';
-import { SocialSharing } from '@awesome-cordova-plugins/social-sharing';
 import './PostDetailItem.scss';
 import './carousel.min.css';
 import { getMessagePhotos, viewUser } from '../util';
@@ -110,20 +109,6 @@ const PostDetailItem: React.FC<FeedListItemProps> = ({
     }
   }
 
-  const [postURL, setPostURL] = useState(
-    `https://www.noboplus.com/home/post-detail/${message._id}`
-  );
-
-  var options = {
-    message: `Share Post`,
-    subject: 'Share Post',
-    files: ['', ''],
-    url: postURL,
-    chooserTitle: 'Pick an app',
-    appPackageName: 'com.apple.social.facebook',
-    iPadCoordinates: '0,0,0,0',
-  };
-
   const actionSheetButtons = [
     {
       text: 'Report Post',
@@ -133,16 +118,6 @@ const PostDetailItem: React.FC<FeedListItemProps> = ({
         action: () => {
           console.log('reportPost');
           showReportingActionSheet();
-        },
-      },
-    },
-    {
-      text: 'Share Post',
-      who: 'all',
-      data: {
-        action: () => {
-          console.log('sharePost');
-          SocialSharing.shareWithOptions(options);
         },
       },
     },
