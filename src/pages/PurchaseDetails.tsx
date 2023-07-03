@@ -69,10 +69,8 @@ const PurchaseDetails: React.FC = () => {
   }
 
 
-
-
   useIonViewWillEnter(() => {
-    const data:any = history.location.state
+    const data: any = history.location.state
     setVendors(data)
     getOrder()
     getMe()
@@ -80,32 +78,17 @@ const PurchaseDetails: React.FC = () => {
   })
 
 
-
-
   const followVendor = (sellerId: any) => {
-    console.log('seller Id ', sellerId)
     if (!followingList.includes(sellerId, 0)) {
       userService.followUser(sellerId)
-        .then((res) => {
-          console.log(
-            'response after following seller', res)
-          userService
-            .getMe()
-            .then((user: User) => {
-              setFollowingList(user.following)
-            })
+        .then(() => {
+          getMe()
         })
 
     } else {
-
       userService.removeFollowUser(sellerId)
-        .then((res) => {
-          userService
-            .getMe()
-            .then((user: User) => {
-              setFollowingList(user.following)
-            })
-          console.log('response after un-following seller', res)
+        .then(() => {
+          getMe()
         })
     }
 
@@ -113,7 +96,7 @@ const PurchaseDetails: React.FC = () => {
   };
 
 
-  const sellers = vendors.filter((ar: any) => followingList.includes(ar, 0))
+  // const sellers = vendors.filter((ar: any) => followingList.includes(ar, 0))
 
   return (
     <IonPage className='order-details-item-main-container'>
@@ -169,8 +152,8 @@ const PurchaseDetails: React.FC = () => {
             </div>
 
 
-            {product.products.map((singleProduct: any) => (
-              <IonRow className='order-details-item'>
+            {product.products.map((singleProduct: any, index:any) => (
+              <IonRow className='order-details-item' key={index}>
                 <IonCol className='order-details-vendor-container' size='12'>
                   <p className='order-details-purchased-from'>Purchased From</p>
                   <p className='order-details-vendor-name'>{singleProduct.vendor.displayName}</p>
@@ -229,7 +212,7 @@ const PurchaseDetails: React.FC = () => {
                     }}
                   >{
 
-                      sellers.includes(singleProduct.vendor._id, 0) ? 'FOLLOWING' : 'FOLLOW SELLER'
+                      followingList.includes(singleProduct.vendor._id, 0) ? 'FOLLOWING' : 'FOLLOW SELLER'
 
                     }</IonButton>
 

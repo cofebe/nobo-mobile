@@ -496,7 +496,6 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
             <p className='welcome-btn2'>Maybe later</p>
           </IonCol>
 
-
         </IonRow>
       </IonModal>
     </div>
