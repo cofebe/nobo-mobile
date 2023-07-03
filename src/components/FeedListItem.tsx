@@ -110,20 +110,6 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
     }
   }
 
-  const [postURL, setPostURL] = useState(
-    `https://www.noboplus.com/home/post-detail/${message._id}`
-  );
-
-  var options = {
-    message: `Share Post`,
-    subject: 'Share Post',
-    files: ['', ''],
-    url: postURL,
-    chooserTitle: 'Pick an app',
-    appPackageName: 'com.apple.social.facebook',
-    iPadCoordinates: '0,0,0,0',
-  };
-
   const actionSheetButtons = [
     {
       text: 'Report Post',
@@ -133,16 +119,6 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
         action: () => {
           console.log('reportPost');
           showReportingActionSheet();
-        },
-      },
-    },
-    {
-      text: 'Share Post',
-      who: 'all',
-      data: {
-        action: () => {
-          console.log('sharePost');
-          SocialSharing.shareWithOptions(options);
         },
       },
     },
