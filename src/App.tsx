@@ -26,9 +26,6 @@ import CheckoutShipping from './pages/CheckoutShipping';
 import CheckoutPayment from './pages/CheckoutPayment';
 import CheckoutSummary from './pages/CheckoutSummary';
 import CheckoutComplete from './pages/CheckoutComplete';
-import ContactUs from './pages/ContactUs';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsAndConditions from './pages/TermsAndConditions';
 import Settings from './pages/Settings';
 import SettingsShipping from './pages/SettingsShipping';
 import SettingsPayment from './pages/SettingsPayment';
@@ -386,15 +383,6 @@ const App: React.FC = () => {
             </Route>
             <Route path="/forgot-reset" exact={true}>
               <ForgotReset />
-            </Route>
-            <Route path="/contact-us" exact={true}>
-              <ContactUs />
-            </Route>
-            <Route path="/privacy-policy" exact={true}>
-              <PrivacyPolicy />
-            </Route>
-            <Route path="/terms-and-conditions" exact={true}>
-              <TermsAndConditions />
             </Route>
 
           </IonRouterOutlet>
