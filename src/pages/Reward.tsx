@@ -174,7 +174,8 @@ const Reward = () => {
             </IonCol>
           </IonRow>
 
-          <IonRow className='earn-box-container'>
+          <IonRow className='earn-box-container' >
+
             <IonCol className='earn-box1' size='2.5'>
               <img className='cart-img' width={22} height={21} src='assets/images/reward-cart.svg' alt="" />
               <p className='buy'>BUY</p>

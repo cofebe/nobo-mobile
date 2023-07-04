@@ -15,6 +15,7 @@ const SelectBrands: React.FC = () => {
   const userService = new UserService();
   const history = useHistory();
   const [brandsItems, setBrandItems] = useState<Brand[]>([]);
+  const [error, setError] = useState<any[]>([]);
   const [userBrandList, setUserBrandList] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -35,11 +36,11 @@ const SelectBrands: React.FC = () => {
     userService.getMe()
       .then((user) => {
         setUserBrandList(user.favoriteBrands)
-       })
+      })
       .catch(error => { console.log('unable to get user', error) })
   }
 
-  useIonViewWillEnter(()=>{
+  useIonViewWillEnter(() => {
     getMyBrands()
 
   })
@@ -47,36 +48,36 @@ const SelectBrands: React.FC = () => {
 
 
   const handleSubmit = async (brandId: any) => {
-        if (userBrandList.includes(brandId, 0)) {
-          userService
-            .deleteBrand(brandId)
-            .then(res => {
-              if (res) {
-                getMyBrands()
-              }
-              else {
-                console.log('something went wrong ', res);
-              }
-            })
-            .catch((err: any) => {
-              console.log('SelectBrand error', err);
-            });
-        }
+    if (userBrandList.includes(brandId, 0)) {
+      userService
+        .deleteBrand(brandId)
+        .then(res => {
+          if (res) {
+            getMyBrands()
+          }
+          else {
+            console.log('something went wrong ', res);
+          }
+        })
+        .catch((err: any) => {
+          console.log('SelectBrand error', err);
+        });
+    }
 
-        else {
-          userService
-            .addBrand(brandId)
-            .then(res => {
-              if (res) {
-                getMyBrands()
-              } else {
-                console.log('something went wrong ', res);
-              }
-            })
-            .catch((err: any) => {
-              console.log('SelectBrand error', err);
-            });
-        }
+    else {
+      userService
+        .addBrand(brandId)
+        .then(res => {
+          if (res) {
+            getMyBrands()
+          } else {
+            console.log('something went wrong ', res);
+          }
+        })
+        .catch((err: any) => {
+          console.log('SelectBrand error', err);
+        });
+    }
 
 
   };
@@ -95,7 +96,6 @@ const SelectBrands: React.FC = () => {
     }
     return 1;
   });
-
 
   return (
     <IonPage className='select-brands-main-container'>
@@ -127,9 +127,18 @@ const SelectBrands: React.FC = () => {
                 }}
                 className='select-brand-img-col' key={brand._id} size='5'
               >
-                <img className='brand-img' src={brand.url} alt={brand.name} />
+                {error.includes(brand._id) ?
+                  <p className='brand-img'>{brand.name}</p>
+                  :
+                  <img className='brand-img'
+                    src={brand.url}
+                    onError={() => {
+                      setError([...error, brand._id])
+                    }}
+
+                  />}
                 <div className='select-brand-checkbox'>
-                  <Checkbox value={ userBrandList.includes(brand._id) } onChange={e => { }} />
+                  <Checkbox value={userBrandList.includes(brand._id)} onChange={e => { }} />
                 </div>
               </IonCol>
             ))}

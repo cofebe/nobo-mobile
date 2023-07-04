@@ -63,7 +63,7 @@ const AccountSettings: React.FC = () => {
   });
 
 
-  const handleTicker = (expId: string) => {
+  const handleTicker:any = (expId: string) => {
     if (!selectedExperienceArray.includes(expId, 0)) {
       setSelectedExpArray([expId])
     } else if (selectedExperienceArray.includes(expId, 0)) {
