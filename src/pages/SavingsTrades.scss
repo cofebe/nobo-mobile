@@ -1,0 +1,160 @@
+.trades-s-main-header-container1 {
+  padding: 0px 24px 0px 24px;
+
+
+
+  .trades-s-header-item-box {
+    height: 30px;
+
+    .trades-s-header-item-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 9px;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+
+  .trades-s-header-retail-box {
+    height: 30px;
+
+    .trades-s-header-retail-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+  .trades-s-header-price-box {
+    height: 30px;
+
+    .trades-s-header-price-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+  .trades-s-header-savings-box {
+    height: 30px;
+
+    .trades-s-header-savings-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+
+
+}
+
+
+
+
+.trades-s-main-container {
+  padding: 0px 24px 0px 24px;
+
+  .trades-s-box {
+    height: 90px;
+  }
+
+  .trades-retail-s-box {
+    height: 90px;
+    // background-color: skyblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .trades-retail-s-text {
+      color: #000;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+  }
+
+  .trades-saving-s-box {
+    height: 90px;
+    // background-color: rgb(121, 196, 121);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .trades-saving-s-text {
+      color: #D6980E;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+  }
+
+  .trades-fee-s-box {
+    height: 90px;
+    // background-color: skyblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .trades-fee-s-text {
+      color: #000;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+  }
+
+
+
+  .trades-img-s-box {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background-color: #D6980E;
+
+    .trades-s-img {
+      height: 68px;
+      width: 68px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+
+
+
+
+}

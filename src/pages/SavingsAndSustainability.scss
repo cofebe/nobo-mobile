@@ -16,7 +16,32 @@
 
   .rewards-graph {
     height: 103px;
+    position: relative;
+
     /* Style your donut graph here */
+    .sustain-reward-g-text {
+      position: absolute;
+      top: 37%;
+      left: 30%;
+      height: 45px;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 150%;
+      text-align: center;
+      letter-spacing: 0.05em;
+      color: #D6980E;
+    }
+
+  }
+
+  .rewards-graph2 {
+    height: 103px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-bottom: 40px;
   }
 
   .rewards-points {
@@ -76,6 +101,11 @@
 .rewards-content {
   --background: #fefcf6;
 }
+
+
+
+
+
 
 .savings-amount {
   font-family: 'Nunito Sans';

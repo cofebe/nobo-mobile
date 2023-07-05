@@ -1,0 +1,160 @@
+.purchase-s-main-header-container1 {
+  padding: 0px 24px 0px 24px;
+
+
+
+  .purchase-s-header-item-box {
+    height: 30px;
+
+    .purchase-s-header-item-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 9px;
+      font-family: 'Nunito Sans';
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+
+  .purchase-s-header-retail-box {
+    height: 30px;
+
+    .purchase-s-header-retail-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+  .purchase-s-header-price-box {
+    height: 30px;
+
+    .purchase-s-header-price-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+  .purchase-s-header-savings-box {
+    height: 30px;
+
+    .purchase-s-header-savings-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+
+
+
+}
+
+
+
+
+.purchase-s-main-container {
+  padding: 0px 24px 0px 24px;
+
+  .purchase-s-box {
+    height: 90px;
+  }
+
+  .purchase-retail-s-box {
+    height: 90px;
+    // background-color: skyblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .purchase-retail-s-text {
+      color: #000;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+  }
+
+  .purchase-saving-s-box {
+    height: 90px;
+    // background-color: rgb(121, 196, 121);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .purchase-saving-s-text {
+      color: #D6980E;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+  }
+
+  .purchase-fee-s-box {
+    height: 90px;
+    // background-color: skyblue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .purchase-fee-s-text {
+      color: #000;
+      font-size: 9px;
+      font-family: Nunito Sans;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+
+  }
+
+
+
+  .purchase-img-s-box {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background-color: #D6980E;
+
+    .purchase-s-img {
+      height: 68px;
+      width: 68px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+
+
+
+
+}
