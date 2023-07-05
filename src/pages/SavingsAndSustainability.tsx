@@ -22,7 +22,8 @@ const SavingsAndSustainabilityPage: React.FC = () => {
   const userService = new UserService();
   const [myOrders, setMyOrders] = useState<OrdersResponse[]>([]);
   const [myTrades, setMyTrades] = useState<TradesResponse[]>([]);
-  const [points, setPoints] = useState<number>();
+  const [points, setPoints] = useState<number>(0);
+  const [currentPoints, setCurrentPoints] = useState<number>();
   const [savingsAmount, setSavingsAmount] = useState<string>("");
   const [tradesSavings, setTradeSavings] = useState<number>(0)
   const [purchasesSavings, setpurchasesSavings] = useState<number>(0)
@@ -70,6 +71,11 @@ const SavingsAndSustainabilityPage: React.FC = () => {
       .then(reward => {
         if (reward) {
           setPoints(reward.points)
+          if(reward.points < 5){
+            setCurrentPoints(5 - reward.points)
+          }else{
+            setCurrentPoints(0)
+          }
         }
       })
 
@@ -145,11 +151,15 @@ const SavingsAndSustainabilityPage: React.FC = () => {
           </div>
           <div className="savings-title-text-container">SAVINGS & SUSTAINABILITY</div>
         </IonCol>
-        <IonCol className="savings-header" size="12">
-          <div className="savings-title-text-container savings-sub-title" style={{ textAlign: "left" }}>REWARDS</div>
-        </IonCol>
+
       </IonRow>
       <IonContent className="rewards-content">
+        <IonRow>
+
+      <IonCol className="savings-header" size="12">
+          <div className="savings-title-text-container savings-sub-title" style={{ textAlign: "left" }}>REWARDS</div>
+        </IonCol>
+        </IonRow>
         <div className="rewards-container">
           <IonCard className="rewards-card">
             <IonCardContent>
@@ -163,10 +173,13 @@ const SavingsAndSustainabilityPage: React.FC = () => {
                 </IonCol>
                 <IonCol className="savings-header" size="6">
                   <div className="rewards-points">
-                    <p className="savings-text">{pointsData[1]} POINTS FROM YOUR NEXT REWARD!</p>
+                    <p className="savings-text">{currentPoints} POINTS FROM YOUR NEXT REWARD!</p>
+                    {/* <p className="savings-text">{pointsData[1]} POINTS FROM YOUR NEXT REWARD!</p> */}
                     <p className="savings-details"
                       onClick={() => {
-                        history.push('/settings/saving/rewards')
+                        if(points > 4){
+                          history.push('/settings/saving/rewards')
+                        }
                       }}
                     >DETAILS</p>
                   </div>

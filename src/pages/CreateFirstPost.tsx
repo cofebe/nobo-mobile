@@ -54,7 +54,7 @@ const CreateFirstPost: React.FC = () => {
   const skipPost = () => {
     const defaultPost = "Excited to be on TheNOBO! Let me know what products you're looking to Trade, or Buy from me, and I'll check my closet!"
     userService
-      .createPost('test post')
+      .createPost(defaultPost)
       .then((success: PostResponse) => {
         if (success) {
           setTimeout(() => {

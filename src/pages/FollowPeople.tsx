@@ -139,7 +139,7 @@ const FollowPeople: React.FC = () => {
           ))}
         </div>
 
-        {peopleIfollow.length < 5 && (
+        {/* {peopleIfollow.length < 5 && (
           <IonRow className={'follow-people-skip-container'}>
             <IonButton
               fill='clear'
@@ -151,14 +151,15 @@ const FollowPeople: React.FC = () => {
               SKIP FOR NOW
             </IonButton>
           </IonRow>
-        )}
+        )} */}
 
         <div
-          className={
-            peopleIfollow.length < 5
-              ? 'follow-people-submit-btn-container2'
-              : 'follow-people-submit-btn-container'
-          }
+          className='follow-people-submit-btn-container'
+          // className={
+          //   peopleIfollow.length < 5
+          //     ? 'follow-people-submit-btn-container2'
+          //     : 'follow-people-submit-btn-container'
+          // }
         >
           <Button
             className='btn'
