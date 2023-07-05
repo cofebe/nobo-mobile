@@ -32,7 +32,6 @@ import { AuthService } from '../services/AuthService';
 import { FeedService } from '../services/FeedService';
 import { UserService } from '../services/UserService';
 import { User } from '../models';
-//import ImageZoom from '../components/ImageZoom';
 
 interface FeedItem {
   likes: Comment[];
@@ -68,23 +67,27 @@ interface Comment {
   updatedAt: string;
 }
 
+interface RouteParams {
+  postID: string;
+  userID?: string;
+}
+
 const PostDetail: React.FC = () => {
-  // console.log('PostDetail');
   const authService = new AuthService();
   const feedService = new FeedService();
   const userService = new UserService();
   const history = useHistory();
-  const [postId, setPostId] = useState<string>(getPostId());
+  let { postID, userID } = useParams<RouteParams>();
+  const modal = useRef<HTMLIonModalElement>(null);
+
+  const { userId } = useParams<{ userId: string }>();
   const [message, setMessage] = useState<FeedItem>();
   const [comments, setComments] = useState<Comment[]>([]);
   let [noboProfile, setNoboProfile] = useState<User>();
-  //const [imageZoom, setImageZoom] = useState('');
   const [currentUserAvatar, setCurrentUserAvatar] = useState<string>('');
   const [commentMessage, setCommentMessage] = useState<string>('');
-const params = useParams()
-  const modal = useRef<HTMLIonModalElement>(null);
 
-  console.log('PostDetail: ', postId, message);
+  console.log('PostDetail: ', postID, message);
 
   useIonViewDidEnter(() => {
     const onPageLoad = () => {
@@ -103,22 +106,21 @@ const params = useParams()
     let storage: any = window.localStorage.getItem('persistedState');
     const user = storage ? JSON.parse(storage) : undefined;
 
-    let userID = authService.getUserId();
+    if (userID === undefined) {
+      userID = authService.getUserId() || "";
+    }
 
     userService.getMe().then((data) => {
       setNoboProfile(data);
     })
-    // postId = getPostId();
-    // setPostId(postId);
-    //setImageZoom('');
 
-    console.log('feedService.getPost(): ', userID, getPostId());
+    console.log('feedService.getPost(): ', userID, postID);
     feedService
       .getProfileFeed(userID || '')
       .then(res => res.json())
       .then(data => {
         const filteredFeed = data.feed.feed.filter(
-          (item: FeedItem, index: number) => item._id === getPostId()
+          (item: FeedItem, index: number) => item._id === postID
         );
         if (filteredFeed && filteredFeed.length !== 0) {
           setMessage(filteredFeed[0]);
@@ -136,22 +138,11 @@ const params = useParams()
     modal.current?.present();
   }
 
-  function getPostId() {
-    console.log(
-      'getPostId: ',
-      history.location.pathname.substring(history.location.pathname.lastIndexOf('/') + 1)
-    );
-    let postid = history.location.pathname.substring(
-      history.location.pathname.lastIndexOf('/') + 1
-    );
-    return postid;
-  }
-
   function createComment() {
     console.log('CreateComment: ', commentMessage);
     let req = {
       userMessage: commentMessage,
-      itemId: getPostId(),
+      itemId: postID,
     };
     feedService
       .postComment(req)
@@ -160,17 +151,13 @@ const params = useParams()
         console.log('Post Comment success: ', data);
         load();
       });
-    //https://thenobo.codepilot.com/api/feed/create-item
-    // {"userMessage":"jjlkjgfkdljg j a;lkjfdl jfsdklajf kjds fadj ;kjdsfa kjf asdkljf akdjf akjd fjdsfl kdjsfljlsjfdlkj kdsjf k jklds kdjf lksdfj lkjsflkjsdf kdsjf  lksdfj ldja","userImage":null}
   }
 
 
   function deleteComment(commentId:string){
-    const postId:any = params
-    console.log(postId.id, 'test')
-    feedService.deleteComment(commentId, postId.id)
+    console.log(postID, 'test')
+    feedService.deleteComment(commentId, postID)
     .then((res=>{
-      // console.log('msg delete response',res)
       load()
     }))
     .catch((error)=>{
@@ -182,11 +169,6 @@ const params = useParams()
 
   return (
     <IonPage className="post-detail-page">
-      {/*<ImageZoom
-        show={!!imageZoom}
-        imageUrl={imageZoom}
-        onClose={() => setImageZoom('')}
-      ></ImageZoom>*/}
       <IonHeader className="ion-no-border">
         <IonToolbar
           style={{
@@ -199,8 +181,7 @@ const params = useParams()
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              history.push('/home/style-feed');
-              // history.goBack();
+              history.goBack();
             }}
           >
             {/*            <IonIcon
