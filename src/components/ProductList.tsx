@@ -212,7 +212,7 @@ const ProductList: React.FC<ProductListProps> = ({ type, userId }) => {
               className="image-grid-container"
               onClick={e => {
                 e.preventDefault();
-                history.push(`/post-detail/${feedItem._id}`);
+                history.push(`/post-detail/${feedItem._id}/${feedItem.user._id}`);
               }}
               key={index}
               style={{ boxShadow: 'none' }}

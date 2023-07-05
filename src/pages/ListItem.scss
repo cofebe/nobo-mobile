@@ -2,6 +2,7 @@
   ion-content {
     --background: #fefcf7;
   }
+
   .list-item-header {
     background-color: #fefcf7;
     position: relative;
@@ -485,6 +486,42 @@
           width: 100%;
           margin-top: 24px;
         }
+      }
+    }
+  }
+
+  .no-shipping-address {
+    margin-top: 100px;
+
+    .text {
+      text-align: center;
+      font-size: 12px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 250px;
+      color: #707070;
+      text-transform: uppercase;
+    }
+
+    .link {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      text-transform: uppercase;
+      color: #d6980e;
+      text-decoration: underline;
+      font-size: 12px;
+      line-height: 1;
+
+      & > div:first-child {
+        margin-right: 10px;
+      }
+
+      svg {
+        height: 17px;
       }
     }
   }

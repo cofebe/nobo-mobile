@@ -3,6 +3,7 @@ import './ProfileSummary.scss';
 import { useEffect, useState } from 'react';
 import { NoboProfile } from '../../data/nobo-profile';
 import ProfileActionMenu, { ActionListItem } from '../ProfileActionMenu';
+import { AuthService } from '../../services/AuthService';
 
 interface ProfileSummaryProps {
   profile: NoboProfile;
@@ -10,8 +11,10 @@ interface ProfileSummaryProps {
 }
 const previewCharLen = 160;
 const FeedListItem: React.FC<ProfileSummaryProps> = ({ profile, openSocialShare }) => {
+  const authService = new AuthService();
   const [previewMode, setPreviewMode] = useState(true);
   const [myProfile, setMyProfile] = useState<NoboProfile>(profile);
+  const myUserId = authService.getUserId();
 
   useEffect(() => {
     setMyProfile(profile);
@@ -36,9 +39,11 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({ profile, openSocialShare 
                 </div>
               </div>
             </IonCol>
-            <IonCol offset="3" size="2">
-              <ProfileActionMenu openSocialShare={openSocialShare} />
-            </IonCol>
+            { (myUserId !== profile._id) && (
+              <IonCol offset="3" size="2">
+                <ProfileActionMenu openSocialShare={openSocialShare} />
+              </IonCol>
+            )}
           </IonRow>
           {myProfile.blurbText ? (
             <IonRow>
