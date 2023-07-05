@@ -110,12 +110,12 @@ const Reward = () => {
                 modal.current?.present()
               }}
             >
-              <IonCol className='reward-trophy-box'>
+              <IonCol className='reward-trophy-box' >
                 <div className="circle">
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1'>$5 off your Purchase</p>
+                  <p className='info-text-1' style={{fontSize:12}}>$5 off your Purchase</p>
                   <p className='info-text-2'>5 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">
@@ -136,7 +136,7 @@ const Reward = () => {
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1'>$10 off your Purchase</p>
+                  <p className='info-text-1' style={{fontSize:12}}>$10 off your Purchase</p>
                   <p className='info-text-2'>10 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">
@@ -158,7 +158,7 @@ const Reward = () => {
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1'>$15 off your Purchase</p>
+                  <p className='info-text-1' style={{fontSize:12}}>$15 off your Purchase</p>
                   <p className='info-text-2'>15 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">
