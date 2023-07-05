@@ -19,6 +19,7 @@ export interface NoboProfile {
   orders: string;
   tradeCloset: number;
   sellCloset: number;
+  _id?: string;
 }
 
 export const emptyProfile = {

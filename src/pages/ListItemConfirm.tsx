@@ -48,6 +48,7 @@ const ListItemConfirm: React.FC = () => {
 
   return (
     <IonPage className="list-item-page">
+      <div className="list-item-header"></div>
       <IonContent>
         <IonGrid className="list-item-content">
           <div className="padding-bottom-container">

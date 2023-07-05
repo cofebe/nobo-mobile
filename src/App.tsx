@@ -209,7 +209,10 @@ const App: React.FC = () => {
             <Route path="/checkout/order/:id" exact={true}>
               <CheckoutComplete />
             </Route>
-            <Route exact path="/post-detail/:id">
+            <Route exact path="/post-detail/:postID">
+              <PostDetail />
+            </Route>
+            <Route exact path="/post-detail/:postID/:userID">
               <PostDetail />
             </Route>
             <Route path="/settings/offers" exact={true}>
