@@ -15,7 +15,8 @@ const Reward = () => {
   const [fivePercentCoupon, setfivePercent] = useState<string>('')
   const [tenPercentCoupon, setTenPercent] = useState<string>('')
   const [fifteenPercentCoupon, setfifteenPercent] = useState<string>('')
-  const [rewardPoint, setRewardPoint]= useState<number>()
+  const [rewardPoint, setRewardPoint]= useState<number>(0)
+  const [currentPoint, setCurrentPoints]= useState<number>(0)
   const [couponCode, setCouponCode] = useState<string>('')
   const [rewardType, setRewardType] = useState<string>('')
   const [present] = useIonToast();
@@ -50,10 +51,17 @@ const Reward = () => {
   useIonViewWillEnter(() => {
       userService.getRewards()
         .then((rewards) => {
-          setRewardPoint(rewards.points)
-          setfivePercent(rewards.coupons.USD_5_OFF.code)
-          setTenPercent(rewards.coupons.USD_10_OFF.code)
-          setfifteenPercent(rewards.coupons.USD_15_OFF.code)
+          if(rewards){
+            setRewardPoint(rewards.points)
+            setfivePercent(rewards.coupons.USD_5_OFF.code)
+            setTenPercent(rewards.coupons.USD_10_OFF.code)
+            setfifteenPercent(rewards.coupons.USD_15_OFF.code)
+            if(rewards.points < 5){
+              setCurrentPoints(5 - rewards.points)
+            }else{
+              setCurrentPoints(0)
+            }
+          }
 
         })
         .catch((error) => { console.log('unable to fetch rewards :', error) })
@@ -96,7 +104,7 @@ const Reward = () => {
           </IonRow>
           <IonRow className='rewards-point-r-container'>
             <IonCol className='rewards-point-r-box'>
-              <p className='rewards-point-r-text'>17 POINTS FROM YOUR NEXT REWARD</p>
+              <p className='rewards-point-r-text'>{currentPoint} POINTS FROM YOUR NEXT REWARD</p>
 
             </IonCol>
           </IonRow>
