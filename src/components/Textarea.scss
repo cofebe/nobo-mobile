@@ -1,35 +1,34 @@
 .app-textarea-container {
+  ion-textarea {
+    font-size: 15px;
+    --padding-start: 14px;
+    --padding-end: 14px;
+    --padding-top: 4px;
+    --padding-bottom: 4px;
+    --placeholder-color: #acacac;
+    border: 1px solid black;
+    width: 100%;
+    height: auto !important;
 
+    ::placeholder {
+      padding-left: 0;
+      padding-right: 0;
+      text-transform: uppercase;
+    }
+  }
+
+  .error-message {
+    margin-top: 8px;
+    margin-left: 6px;
+    margin-right: 6px;
+    color: red;
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  &.invalid {
     ion-textarea {
-        font-size: 15px;
-        --padding-start: 14px;
-        --padding-end: 14px;
-        --padding-top: 4px;
-        --padding-bottom: 4px;
-        --placeholder-color: #ACACAC;
-        border: 1px solid black;
-        width: 100%;
-
-        ::placeholder {
-            padding-left: 0;
-            padding-right: 0;
-            text-transform: uppercase;
-        }
+      border-color: red;
     }
-
-    .error-message {
-        margin-top: 8px;
-        margin-left: 6px;
-        margin-right: 6px;
-        color: red;
-        font-size: 10px;
-        text-transform: uppercase;
-    }
-
-    &.invalid {
-
-        ion-textarea {
-            border-color: red;
-        }
-    }
+  }
 }
