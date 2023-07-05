@@ -10,7 +10,7 @@ import {
   IonRefresher,
   IonRefresherContent,
   IonToolbar,
-  useIonViewWillEnter,
+  useIonViewDidEnter,
   IonText,
   IonRow,
   IonCol,
@@ -86,8 +86,17 @@ const params = useParams()
 
   console.log('PostDetail: ', postId, message);
 
-  useIonViewWillEnter(() => {
-    load();
+  useIonViewDidEnter(() => {
+    const onPageLoad = () => {
+      load();
+    };
+
+    if (document.readyState === 'complete') {
+      onPageLoad();
+    } else {
+      window.addEventListener('load', onPageLoad);
+      return () => window.removeEventListener('load', onPageLoad);
+    }
   });
 
   function load() {
