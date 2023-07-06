@@ -98,7 +98,7 @@ const ListItemProduct: React.FC = () => {
 
   useEffect(() => {
     console.log('useEffect', itemCategory, itemSubcategory, itemType);
-    if (!itemCategory || !itemSubcategory || !itemType) {
+    if (!itemCategory) {
       return;
     }
 
@@ -115,8 +115,9 @@ const ListItemProduct: React.FC = () => {
         showFieldForClothing ||
         showFieldForMensClothing ||
         showFieldForWomensClothing ||
-        attr.visible.includes(itemSubcategory!.name) ||
-        attr.visible.includes(itemType!.name);
+        attr.visible.includes(itemCategory!) ||
+        (itemSubcategory && attr.visible.includes(itemSubcategory!.name)) ||
+        (itemType && attr.visible.includes(itemType!.name));
       return ret;
     });
     const attribs = newAttributes.map((attr: ItemAttributes) => {
@@ -264,8 +265,8 @@ const ListItemProduct: React.FC = () => {
       receipt: receiptUrl,
       price: state.price,
       retailPrice: state.estimatedPrice,
-      category: itemType!._id,
-      parentCategory: itemSubcategory!._id,
+      category: itemType ? itemType!._id : null,
+      parentCategory: itemSubcategory ? itemSubcategory!._id : null,
       group: itemCategory,
     };
     if (showAdditionalConditionDetails) {

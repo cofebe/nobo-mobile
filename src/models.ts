@@ -136,9 +136,9 @@ export interface CreateProductRequest {
   receipt: string;
   price: string;
   retailPrice: string;
-  category: string;
+  category: string | null;
   group: string;
-  parentCategory: string;
+  parentCategory: string | null;
   potentialTradeItems?: {
     designer?: string;
     productName?: string;
@@ -548,39 +548,39 @@ export interface TradesResponse {
 export interface RewardsResponse {
   points: number;
   coupons: {
-    USD_5_OFF:{
-      type:string;
-      active:boolean;
-      multi:boolean;
-      _id:string;
-      code:string;
-      user:string;
-      discount:string;
-      createdAt:string;
-      updatedAt:string;
-    }
-    USD_10_OFF:{
-      type:string;
-      active:boolean;
-      multi:boolean;
-      _id:string;
-      code:string;
-      user:string;
-      discount:string;
-      createdAt:string;
-      updatedAt:string;
-    }
-    USD_15_OFF:{
-      type:string;
-      active:boolean;
-      multi:boolean;
-      _id:string;
-      code:string;
-      user:string;
-      discount:string;
-      createdAt:string;
-      updatedAt:string;
-    }
+    USD_5_OFF: {
+      type: string;
+      active: boolean;
+      multi: boolean;
+      _id: string;
+      code: string;
+      user: string;
+      discount: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+    USD_10_OFF: {
+      type: string;
+      active: boolean;
+      multi: boolean;
+      _id: string;
+      code: string;
+      user: string;
+      discount: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+    USD_15_OFF: {
+      type: string;
+      active: boolean;
+      multi: boolean;
+      _id: string;
+      code: string;
+      user: string;
+      discount: string;
+      createdAt: string;
+      updatedAt: string;
+    };
   };
 }
 
@@ -750,16 +750,13 @@ export interface UnreadNotificationCountResponse {
 }
 
 export interface deleteCommentResponse {
-  comment:[];
-  createdAt:string;
-  feedText:string;
-  images:[];
-  likes:string[];
-  template:string;
-  updatedAt:string;
-  __v3:string;
-  _id:string;
-
+  comment: [];
+  createdAt: string;
+  feedText: string;
+  images: [];
+  likes: string[];
+  template: string;
+  updatedAt: string;
+  __v3: string;
+  _id: string;
 }
-
-
