@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { ItemAttributesWithValues, CreateProductResponse, Category } from './models';
 
-export type TopLevelCategory = 'men' | 'women' | 'sneakers' | '';
+export type TopLevelCategory = 'men' | 'women' | 'Sneakers' | '';
 
 export interface ListingState {
   //id: string;
