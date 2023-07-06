@@ -107,21 +107,37 @@ const AccountSettings: React.FC = () => {
 
   const validate = () => {
     if (
-      firstName === ''
-      && lastName === ''
-      && displayName === ''
-      && email === ''
-      && phoneNumber === ''
-      && selectedExperienceArray[0] === ''
-      && currentPassword === ''
-      && newPassword === ''
+      firstName === firstName
+      || lastName === lastName
+      || displayName === displayName
+      || email === email
+      || phoneNumber === phoneNumber
+      // && selectedExperienceArray[0] === ''
+      // && currentPassword === ''
+      // && newPassword === ''
     ) {
       return true
     } else {
       return false
     }
   }
-
+  // const validate = () => {
+  //   if (
+  //     firstName === ''
+  //     && lastName === ''
+  //     && displayName === ''
+  //     && email === ''
+  //     && phoneNumber === ''
+  //     && selectedExperienceArray[0] === ''
+  //     && currentPassword === ''
+  //     && newPassword === ''
+  //   ) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
+console.log(firstName)
   return (
     <IonPage className='account-settings-container'>
       <IonContent className='account-settings-content'>
@@ -155,7 +171,10 @@ const AccountSettings: React.FC = () => {
                 value={firstName}
                 className={`custom-input-name nobo-input`}
                 placeholder='FIRST NAME'
-                onChange={(e) => setFirstName(e)}
+                onChange={(e) => {
+                  setFirstName(e)
+                  validate()
+                }}
               />
             </IonCol>
 
