@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import './SalesShippingLabel.scss'
 import { UserService } from '../services/UserService'
 import Search from '../components/Search'
-import { FullOrder, OrderResponse, OrdersResponse } from '../models'
+import { FullOrder, OrdersResponse } from '../models'
 import { getImageUrl } from '../utils'
 
 
@@ -12,11 +12,9 @@ const SalesShippingLabel: React.FC = () => {
   const history = useHistory()
 
   const userService = new UserService()
-  // const salesData: any = history.location.state
   const [allSales, setAllSales] = useState<OrdersResponse[]>([])
-  const [showDetails, setShowDetails] = useState(false)
   const [dropDown, setDropDownArray] = useState<string[]>([]);
-
+  const [searchInput, setSearchInput] = useState('')
 
   const selectedDropDown = (pId: string) => {
     if (!dropDown.includes(pId, 0)) {
@@ -43,6 +41,11 @@ const SalesShippingLabel: React.FC = () => {
       .catch((err) => { console.log('err info while fetching products ', err) })
   })
 
+  const filteredProduct = allSales[0]?.docs?.filter(product =>
+    product.products[0]?.name.toLowerCase().includes(searchInput.toLowerCase(), 0) ||
+    product.products[0]?.brand.toLowerCase().includes(searchInput.toLowerCase(), 0)
+  );
+
 
 
   return (
@@ -67,12 +70,14 @@ const SalesShippingLabel: React.FC = () => {
       <IonRow>
         <IonCol size='12' style={{ paddingLeft: '20px', paddingRight: '20px' }}>
           <Search
-            onChange={() => { }} />
+            value={searchInput}
+            onChange={(val) => { setSearchInput(val) }}
+          />
         </IonCol>
       </IonRow>
       <IonContent className='shipping-item-content'>
-        {allSales[0]?.docs?.map((products: FullOrder) => (
-          <div>
+        {filteredProduct?.map((products: FullOrder) => (
+          <div key={products._id}>
             {/* {product?.products.map((sProduct) => ( */}
             <IonRow>
               <IonCol className='shipping-l-header-container' size='12' >
