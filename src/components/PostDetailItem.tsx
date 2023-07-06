@@ -506,7 +506,7 @@ const PostDetailItem: React.FC<FeedListItemProps> = ({
                 <div
                   className="image-grid-container image-grid-container-text"
                   style={{
-                    minWidth: '168px',
+                    minWidth: '100%',
                     minHeight: '168px',
                     height: '300px',
                     display: 'flex',
