@@ -1,11 +1,17 @@
 .savings-page {
   background-color: #FEFCF7;
 
+  .savings-row {
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid #ACACAC;
+  }
+
   .rewards-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 20vh;
+    margin-top: -1rem;
   }
 
   .rewards-card {
@@ -49,11 +55,23 @@
   }
 
   .savings-header {
-    // background-color: #FEFCF7;
     height: 118px;
+    padding-left: 25px;
 
+    .savings-title-text-container {
+      width: 100%;
+      position: absolute;
+      bottom: 20px;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 150%;
+      letter-spacing: 0.05em;
+      color: #000000;
+      text-align: center;
+    }
     .savings-text {
-      padding-top: 20%;
+      padding-top: 40%;
       font-size: 8px;
       font-weight: 400;
       line-height: 12px;
@@ -67,7 +85,7 @@
       font-weight: 400;
       line-height: 18px;
       letter-spacing: 0.05em;
-      text-align: center;
+      text-align: right;
     }
 
     .savings-back-btn {
@@ -75,6 +93,15 @@
       left: 36px;
       bottom: 15px;
       z-index: 1000;
+    }
+  }
+
+  .savings-sub-header {
+    height: 40px;
+
+    .savings-sub-title {
+      height: 30px;
+      left: 24px;
     }
 
     .savings-title-text-container {
@@ -90,11 +117,6 @@
       color: #000000;
       text-align: center;
     }
-
-    .savings-sub-title {
-      left: 24px;
-    }
-
   }
 }
 
@@ -103,7 +125,27 @@
 }
 
 
+.modal-content {
+  color: black;
+  padding: 1rem;
 
+  .modal-text {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+
+  .modal-source {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+
+    a {
+      padding-left: .5rem;
+      color: black;
+    }
+  }
+}
 
 
 
@@ -118,9 +160,10 @@
 
 .toggle-switch-savings {
   z-index: 10000;
+  margin-top: 4rem;
   margin-left: auto;
   margin-right: auto;
-  width: 220px;
+  width: 320px;
   min-height: 30px;
   background: white;
   border-radius: 25px;
@@ -130,4 +173,37 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+
+  .toggle-switch-slider {
+    width: 160px;
+  }
+}
+
+.toggle-switch-savings.checked .toggle-switch-slider {
+  transform: translateX(160px);
+}
+
+.rewards-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.rewards-circle-container {
+  width: 95px;
+  height: 95px;
+  border-radius: 50%;
+  background-color: #fefcf6;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rewards-circle-image {
+  opacity: .38;
+  width: 40%;
+  height: auto;
+  border-radius: 50%;
 }

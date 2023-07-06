@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router";
-import { IonContent, IonPage, IonCard, IonCardContent, IonRow, IonCol, useIonViewWillEnter } from "@ionic/react";
+import { IonContent, IonPage, IonCard, IonCardContent, IonRow, IonCol, useIonViewWillEnter, useIonViewDidEnter, IonModal } from "@ionic/react";
 import DonutGraph from "../components/DonutGraph";
 import { OrdersResponse, TradesResponse } from "../models"
 import "./SavingsAndSustainability.scss";
@@ -17,28 +17,40 @@ const SavingsAndSustainabilityPage: React.FC = () => {
 
 
   const history = useHistory()
-  const pointsData = [3, 5];
-  // const pointsLabels = ["Current Points", "Points to Next Reward"];
   const userService = new UserService();
   const [myOrders, setMyOrders] = useState<OrdersResponse[]>([]);
   const [myTrades, setMyTrades] = useState<TradesResponse[]>([]);
   const [points, setPoints] = useState<number>(0);
-  const [currentPoints, setCurrentPoints] = useState<number>();
+  const [untilNextReward, setUntilNextReward] = useState<number>(0);
   const [savingsAmount, setSavingsAmount] = useState<string>("");
   const [tradesSavings, setTradeSavings] = useState<number>(0)
   const [purchasesSavings, setpurchasesSavings] = useState<number>(0)
 
-
   const rewardNumber = Array.from(String(points), Number)
+  const pointsData = [rewardNumber, untilNextReward];
 
-  // const pointsData = [1,5];
   const pointsLabels = ["Current Points", "Points to Next Reward"];
-
-
+  const [inputValue, setInputValue] = useState('');
 
   const [isToggled, setIsToggled] = useState(false);
   const myPurchasesText = "PURCHASE SAVINGS";
   const mySavingsText = "TRADE SAVINGS";
+
+  const modal = useRef<HTMLIonModalElement>(null);
+
+  function sustainability() {
+    modal.current?.present();
+  }
+
+  const calculateSavings = (product: any) => {
+    console.log(product)
+    const retailPrice = product.retailPrice || 0;
+    const price = product.price || 0;
+
+    const savings = retailPrice - price;
+    setSavingsAmount(savingsAmount + savings);
+    return savings;
+  };
 
   const handleClick = () => {
     setIsToggled(!isToggled);
@@ -71,16 +83,20 @@ const SavingsAndSustainabilityPage: React.FC = () => {
       .then(reward => {
         if (reward) {
           setPoints(reward.points)
-          if(reward.points < 5){
-            setCurrentPoints(5 - reward.points)
-          }else{
-            setCurrentPoints(0)
+          let untilNextReward = 0;
+
+          if (reward.points < 5) {
+            untilNextReward = 5 - reward.points;
           }
+          if (reward.points >= 5 && reward.points < 10) {
+            untilNextReward = 10 - reward.points;
+          }
+          if (reward.points >= 10 && reward.points < 20) {
+            untilNextReward = 20 - reward.points;
+          }
+          setUntilNextReward(untilNextReward)
         }
       })
-
-    console.log(points)
-    setPoints(5)
   }
 
   useIonViewWillEnter(() => {
@@ -151,49 +167,45 @@ const SavingsAndSustainabilityPage: React.FC = () => {
           </div>
           <div className="savings-title-text-container">SAVINGS & SUSTAINABILITY</div>
         </IonCol>
-
       </IonRow>
       <IonContent className="rewards-content">
         <IonRow>
+            <IonCol className="savings-header" size="12">
+              <div className="savings-title-text-container savings-sub-title" style={{ textAlign: "left" }}>REWARDS</div>
+            </IonCol>
+            <IonCol size="12">
+                <div className="rewards-container">
+                  <IonCard className="rewards-card">
+                    <IonCardContent>
+                      <IonRow>
+                        <IonCol className="savings-header" size="6">
+                          <div className="rewards-graph">
+                            <DonutGraph data={rewardNumber} labels={pointsLabels} />
+                      <p className='sustain-reward-g-text'>+{points}</p>
 
-      <IonCol className="savings-header" size="12">
-          <div className="savings-title-text-container savings-sub-title" style={{ textAlign: "left" }}>REWARDS</div>
-        </IonCol>
+                          </div>
+                        </IonCol>
+                        <IonCol className="savings-header" size="6">
+                          <div className="rewards-points">
+                            <p className="savings-text">{pointsData[1]} POINTS FROM YOUR NEXT REWARD!</p>
+                            <p className="savings-details"
+                              onClick={() => {
+                                history.push('/settings/saving/rewards')
+                              }}
+                            >DETAILS</p>
+                          </div>
+                        </IonCol>
+                      </IonRow>
+                    </IonCardContent>
+                  </IonCard>
+                </div>
+            </IonCol>
         </IonRow>
-        <div className="rewards-container">
-          <IonCard className="rewards-card">
-            <IonCardContent>
-              <IonRow>
-                <IonCol className="savings-header" size="6">
-                  <div className="rewards-graph">
-                    <DonutGraph data={rewardNumber} labels={pointsLabels} />
-              <p className='sustain-reward-g-text'>+{points}</p>
-
-                  </div>
-                </IonCol>
-                <IonCol className="savings-header" size="6">
-                  <div className="rewards-points">
-                    <p className="savings-text">{currentPoints} POINTS FROM YOUR NEXT REWARD!</p>
-                    {/* <p className="savings-text">{pointsData[1]} POINTS FROM YOUR NEXT REWARD!</p> */}
-                    <p className="savings-details"
-                      onClick={() => {
-                        if(points > 4){
-                          history.push('/settings/saving/rewards')
-                        }
-                      }}
-                    >DETAILS</p>
-                  </div>
-                </IonCol>
-              </IonRow>
-            </IonCardContent>
-          </IonCard>
-        </div>
         <IonRow>
           <IonCol className="savings-header" size="12">
             <div className="savings-title-text-container savings-sub-title" style={{ textAlign: "left" }}>SAVINGS</div>
           </IonCol>
           <IonCol className="savings-header" size="12">
-            {/* <p className="savings-amount">${savingsAmount || "0.00"}</p> */}
             <p className="savings-amount">{formatPrice(tradesSavings + purchasesSavings) || 0}</p>
           </IonCol>
         </IonRow>
@@ -204,15 +216,12 @@ const SavingsAndSustainabilityPage: React.FC = () => {
           <IonCol className="savings-header" size="12"
           style={{marginBottom:20, marginTop:20}}
           >
-
-              {/* <img src="assets/images/reward-tree.png" alt="reward tree" /> */}
-            <div className="rewards-graph2">
+            <div className="rewards-graph2" onClick={() => sustainability()}>
             <img
               height={130}
               src="assets/images/reward-tree-01.png"
               alt="logo"
             />
-              {/* <DonutGraph data={pointsData} labels={pointsLabels} /> */}
             </div>
           </IonCol>
         </IonRow>
@@ -225,13 +234,13 @@ const SavingsAndSustainabilityPage: React.FC = () => {
             onClick={handleClick}>
           </Toggle>
         </IonRow>
-        {isToggled && (
+        {!isToggled && (
           <>
             <IonRow className="purchase-s-main-header-container1">
               <IonCol size="3" className="purchase-s-header-item-box">
                 <p className="purchase-s-header-item-text">Item</p>
               </IonCol>
-              <IonCol size="1.5"></IonCol>
+              <IonCol size="1"></IonCol>
               <IonCol size="2.5" className="purchase-s-header-retail-box">
                 <p className="purchase-s-header-retail-text">Est. Retail Price</p>
               </IonCol>
@@ -239,7 +248,7 @@ const SavingsAndSustainabilityPage: React.FC = () => {
                 <p className="purchase-s-header-price-text">TheNOBO Price</p>
               </IonCol>
               <IonCol size="2.5" className="purchase-s-header-savings-box">
-                <p className="purchase-s-header-savings-text">Total Savins</p>
+                <p className="purchase-s-header-savings-text">Total Savings</p>
               </IonCol>
             </IonRow>
 
@@ -275,13 +284,13 @@ const SavingsAndSustainabilityPage: React.FC = () => {
             ))}
           </>
         )}
-        {!isToggled && (
+        {isToggled && (
           <>
             <IonRow className="trades-s-main-header-container1">
               <IonCol size="3" className="trades-s-header-item-box">
                 <p className="trades-s-header-item-text">Item</p>
               </IonCol>
-              <IonCol size="1.5"></IonCol>
+              <IonCol size="1"></IonCol>
               <IonCol size="2.5" className="trades-s-header-retail-box">
                 <p className="trades-s-header-retail-text">Est. Retail Price</p>
               </IonCol>
@@ -289,13 +298,12 @@ const SavingsAndSustainabilityPage: React.FC = () => {
                 <p className="trades-s-header-price-text">TheNOBO Price</p>
               </IonCol>
               <IonCol size="2.5" className="trades-s-header-savings-box">
-                <p className="trades-s-header-savings-text">Total Savins</p>
+                <p className="trades-s-header-savings-text">Total Savings</p>
               </IonCol>
             </IonRow>
 
-            {myTrades[0]?.received.map((product: any) => product.status === 'accepted' && (
+            {myTrades[0]?.sent.map((product: any) => (product.status === 'accepted') && (
               <div>
-
 
                 <IonRow className='trades-s-main-container'>
                   <IonCol className='trades-img-s-box' size='3'>
@@ -330,6 +338,24 @@ const SavingsAndSustainabilityPage: React.FC = () => {
             ))}
           </>
         )}
+
+
+        <IonModal
+          className=""
+          ref={modal}
+          backdropDismiss={true}
+          swipeToClose={true}
+        >
+          <div className="modal-content">
+            <p className="modal-text">
+              Roughly 80% of the world’s garment workers are women, where low wages and unsafe working conditions are alarmingly prevalent.
+            </p>
+            <p className="modal-source">
+                SOURCE:
+                <a href="https://www.theguardian.com/sustainable-business/2016/mar/08/fashion-industry-protect-women-unsafe-low-wages-harassment" target="_blank">The Guardian</a>
+            </p>
+          </div>
+        </IonModal>
       </IonContent>
     </IonPage>
   );
