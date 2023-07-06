@@ -637,4 +637,9 @@ export class UserService extends BaseService {
     const response = await super.fetch('POST', 'api/users/update-blurb', data);
     return response.json();
   }
+
+  async addFavorite(data: any) {
+    const response = await super.fetch('POST', 'api/users/favorites', data);
+    return response.json();
+  }
 }
