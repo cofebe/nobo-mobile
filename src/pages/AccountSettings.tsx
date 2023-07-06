@@ -25,7 +25,8 @@ const AccountSettings: React.FC = () => {
   const [newPassword, setNewPassword] = useState('')
   const [comfirmPassword, setComfirmPassword] = useState('')
   const [wrongPassword, seTwrongPassword] = useState(false)
-
+const [btnToggle, setBtnToggle] = useState(true)
+// const [pBtnToggle, setpBtnToggle] = useState(true)
 
 
   const modal = useRef<HTMLIonModalElement>(null)
@@ -48,6 +49,8 @@ const AccountSettings: React.FC = () => {
 
 
 
+
+
   useIonViewWillEnter(() => {
     userService.getMe()
       .then((user: User) => {
@@ -56,6 +59,11 @@ const AccountSettings: React.FC = () => {
         setEmail(user.email)
         setdisplayName(user.displayName)
         setPhoneNum(user.phoneNumber)
+    setBtnToggle(false);
+    setBtnToggle(false);
+    setTimeout(() => {
+      setBtnToggle(true);
+    }, 10);
       })
       .catch((error) => {
         console.log(error)
@@ -155,7 +163,10 @@ const AccountSettings: React.FC = () => {
                 value={firstName}
                 className={`custom-input-name nobo-input`}
                 placeholder='FIRST NAME'
-                onChange={(e) => setFirstName(e)}
+                onChange={(e) =>{
+                  setFirstName(e)
+                setBtnToggle(false)
+                }}
               />
             </IonCol>
 
@@ -166,7 +177,10 @@ const AccountSettings: React.FC = () => {
                 value={lastName}
                 className={`custom-input-name nobo-input`}
                 placeholder='LAST NAME'
-                onChange={(e) => setLastName(e)}
+                onChange={(e) => {
+                  setLastName(e)
+                setBtnToggle(false);
+                }}
               />
             </IonCol>
 
@@ -177,7 +191,9 @@ const AccountSettings: React.FC = () => {
                 value={displayName}
                 className={`custom-input-name nobo-input`}
                 placeholder='USERNAME'
-                onChange={e => setdisplayName(e)}
+                onChange={(e) => {
+                  setdisplayName(e)
+                setBtnToggle(false);}}
               />
             </IonCol>
             <IonCol sizeLg='6' sizeXs='12' className='acc-text-input-box'>
@@ -187,7 +203,10 @@ const AccountSettings: React.FC = () => {
                 value={email}
                 className={`custom-input-name nobo-input`}
                 placeholder='EMAIL'
-                onChange={e => setEmail(e)}
+                onChange={(e) => {
+                  setEmail(e)
+                setBtnToggle(false);
+                }}
               />
             </IonCol>
             <IonCol sizeLg='6' sizeXs='12' className='acc-text-input-box'>
@@ -197,7 +216,9 @@ const AccountSettings: React.FC = () => {
                 value={phoneNumber}
                 className={`custom-input-name nobo-input`}
                 placeholder='PHONE NUMBER'
-                onChange={e => setPhoneNum(e)}
+                onChange={(e) => {
+                  setPhoneNum(e)
+                setBtnToggle(false)}}
               />
             </IonCol>
             <IonCol size='12' className='acc-change-password-box'>
@@ -271,7 +292,7 @@ const AccountSettings: React.FC = () => {
               e.preventDefault();
               handleSubmit(data);
             }}
-            disabled={validate()}
+            disabled={btnToggle}
           />
           </IonCol>
         </IonRow>
