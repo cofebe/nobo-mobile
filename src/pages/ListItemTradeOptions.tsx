@@ -113,8 +113,8 @@ const ListItemTradeOptions: React.FC = () => {
       receipt: state.receiptUrl,
       price: state.price,
       retailPrice: state.estimatedPrice,
-      category: state.itemType!._id,
-      parentCategory: state.itemSubcategory!._id,
+      category: state.itemType ? state.itemType!._id : null,
+      parentCategory: state.itemSubcategory ? state.itemSubcategory!._id : null,
       group: state.itemCategory,
     };
     if (state.conditionDetails?.length) {
