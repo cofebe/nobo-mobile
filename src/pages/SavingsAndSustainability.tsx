@@ -244,10 +244,10 @@ const SavingsAndSustainabilityPage: React.FC = () => {
             </IonRow>
 
             {myOrders[0]?.docs.map((order) => (
-              <div>
+              <div key={order._id}>
                 {
-                  order.products.map((singleProduct, index: any) => (
-                    <IonRow className='purchase-s-main-container'>
+                  order.products.map((singleProduct) => (
+                    <IonRow className='purchase-s-main-container' key={singleProduct._id}>
                       <IonCol className='purchase-img-s-box' size='3'>
                         <div className="purchase-s-img"
                           style={{
