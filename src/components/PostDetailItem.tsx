@@ -71,43 +71,8 @@ const PostDetailItem: React.FC<FeedListItemProps> = ({
 
   const commentModal = useRef<HTMLIonModalElement>(null);
 
-  // const elementId =
-  //   'feedItem' + message.post_id + (message.is_promoted ? 'p' : '');
-
   useEffect(() => {
-    // if (message.sport) {
-    //   if (message.sport[0] === 'w' || message.sport[0] === 'm') {
-    //     message.sport = message.sport.slice(1);
-    //   }
-    // }
-    // setMsgPhotos(getMessagePhotos(message));
-    // if (trackImpressions) {
-    //   const container = document.querySelector('.home-content');
-    //   const elem = document.querySelector('#' + elementId);
-    //   if (container && elem) {
-    //     const options = {
-    //       root: container,
-    //       rootMargin: '0px',
-    //       threshold: 1.0,
-    //     };
-    //     const observer = new IntersectionObserver((entries) => {
-    //       //console.log('*1', entries, entries[0]);
-    //       if (entries.length && entries[0].isIntersecting) {
-    //         console.log(`Tracking impression for post ID ${message.post_id}`);
-    //         feedService.trackImpression(message.post_id);
-    //         observer.unobserve(elem);
-    //       }
-    //     }, options);
-    //     observer.observe(elem);
-    //   }
-    // }
   }, [message, trackImpressions]);
-
-  function viewUser_(history: any, userId: number, userType: string) {
-    if (!disableProfileLink) {
-      // viewUser(history, userId, userType, message.post_id);
-    }
-  }
 
   const actionSheetButtons = [
     {
