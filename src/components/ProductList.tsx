@@ -7,6 +7,7 @@ import { FeedService } from '../services/FeedService';
 import { UserService } from '../services/UserService';
 import ProductCard from './ProductCard';
 import { ProductsResponse } from '../models';
+import { environment } from '../environments/environment';
 
 interface ProductListProps {
   type: string;
@@ -64,9 +65,11 @@ const ProductList: React.FC<ProductListProps> = ({ type, userId }) => {
     getFavorites();
   }
 
-  function shareItem(itemUrl: string) {
+  function shareItem(product: any) {
+    let itemUrl = `${environment.serverUrl}/${product.group}/${product._id}`;
+
     const options = {
-      subject: 'Share Item',
+      subject: 'Share Product',
       files: ['', ''],
       url: itemUrl,
       chooserTitle: 'Pick an app',
@@ -153,7 +156,7 @@ const ProductList: React.FC<ProductListProps> = ({ type, userId }) => {
                 </svg>
               )}
               <svg
-                onClick={() => shareItem(`assets/${index}`)}
+                onClick={() => shareItem(product)}
                 style={{
                   position: 'absolute',
                   top: '10px',
@@ -239,6 +242,7 @@ const ProductList: React.FC<ProductListProps> = ({ type, userId }) => {
                 </svg>
               )}
               <svg
+                onClick={() => shareItem(product)}
                 style={{
                   position: 'absolute',
                   top: '10px',

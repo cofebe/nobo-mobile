@@ -20,16 +20,15 @@ const SavingsAndSustainabilityPage: React.FC = () => {
   const userService = new UserService();
   const [myOrders, setMyOrders] = useState<OrdersResponse[]>([]);
   const [myTrades, setMyTrades] = useState<TradesResponse[]>([]);
-  const [points, setPoints] = useState<number>(0);
+  const [rewardPoints, setRewardPoints] = useState<number>(0);
   const [untilNextReward, setUntilNextReward] = useState<number>(0);
   const [savingsAmount, setSavingsAmount] = useState<string>("");
   const [tradesSavings, setTradeSavings] = useState<number>(0)
   const [purchasesSavings, setpurchasesSavings] = useState<number>(0)
 
-  const rewardNumber = Array.from(String(points), Number)
-  const pointsData = [rewardNumber, untilNextReward];
-
+  const pointsData = [rewardPoints, untilNextReward];
   const pointsLabels = ["Current Points", "Points to Next Reward"];
+
   const [inputValue, setInputValue] = useState('');
 
   const [isToggled, setIsToggled] = useState(false);
@@ -72,17 +71,13 @@ const SavingsAndSustainabilityPage: React.FC = () => {
           setMyTrades([trades]);
 
         }
-      })
-      .then(() => {
-
-      })
-      ;
+      });
 
     userService
       .getRewards()
       .then(reward => {
         if (reward) {
-          setPoints(reward.points)
+          setRewardPoints(reward.points)
           let untilNextReward = 0;
 
           if (reward.points < 5) {
@@ -95,6 +90,7 @@ const SavingsAndSustainabilityPage: React.FC = () => {
             untilNextReward = 20 - reward.points;
           }
           setUntilNextReward(untilNextReward)
+          console.log("untilNextReward", untilNextReward)
         }
       })
   }
@@ -180,14 +176,14 @@ const SavingsAndSustainabilityPage: React.FC = () => {
                       <IonRow>
                         <IonCol className="savings-header" size="6">
                           <div className="rewards-graph">
-                            <DonutGraph data={rewardNumber} labels={pointsLabels} />
-                      <p className='sustain-reward-g-text'>+{points}</p>
+                            <DonutGraph data={pointsData} labels={pointsLabels} />
+                      <p className='sustain-reward-g-text'>+{rewardPoints}</p>
 
                           </div>
                         </IonCol>
                         <IonCol className="savings-header" size="6">
                           <div className="rewards-points">
-                            <p className="savings-text">{pointsData[1]} POINTS FROM YOUR NEXT REWARD!</p>
+                            <p className="savings-text">{untilNextReward} POINTS FROM YOUR NEXT REWARD!</p>
                             <p className="savings-details"
                               onClick={() => {
                                 history.push('/settings/saving/rewards')

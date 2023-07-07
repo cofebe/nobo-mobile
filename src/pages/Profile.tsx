@@ -4,6 +4,7 @@ import { IonCol, IonTitle, isPlatform } from '@ionic/react';
 import { useHistory } from 'react-router-dom';
 import { NoboProfile, emptyProfile } from '../data/nobo-profile';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing';
+import { environment } from '../environments/environment';
 
 import {
   IonButton,
@@ -102,9 +103,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
   }
 
   function shareProfile(result: any) {
-    if (result === 'qrCode') {
-      profileModal.current?.present();
-    } else if (result === 'share') {
+    if (result === 'share') {
       SocialSharing.shareWithOptions(options);
     } else if (result === 'report') {
       showReportingActionSheet();
@@ -204,6 +203,13 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           },
         },
         {
+          text: 'Share',
+          who: 'all',
+          data: {
+            action: 'share',
+          },
+        },
+        {
           text: 'Cancel',
           role: 'cancel',
           data: {
@@ -274,6 +280,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
             data['user'].profileBg = 'https://thenobo.com/NOBO_defaultcoverimage.jpeg';
           }
           setNoboProfile(data['user']);
+          setProfileURL(`${environment.serverUrl}/profile/${data['user']._id}/feed`)
         }
       })
       .catch(() => { });
