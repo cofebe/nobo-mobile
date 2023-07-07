@@ -109,6 +109,104 @@ const MyTrade: React.FC = () => {
 
       >
         <IonGrid>
+
+
+
+
+          {/* OFFER I SENT */}
+
+          {tradesData[0]?.sent.map((product: any) => (
+            <IonRow key={product._id} style={{ marginBottom: '14px' }}
+              onClick={() => {
+                if (product.status === 'accepted') {
+                  // productDetails(product._id)
+                  // console.log('first push', product)
+                  history.push({ pathname: `trades/details/${product._id}`, state: product })
+
+                }
+              }}
+            >
+              <IonCol className='trade-item-container'>
+                <div className='trade-item-status-container'>
+                  <div className="item-status">
+                    <p className='status_'>STATUS</p>
+                    {product.status !== 'accepted' ? (<p className='status_text'>{product.status.toUpperCase()} TRADE OFFER</p>) :
+                      (<p className='status_text-accepted'>TRADE {product.status.toUpperCase()}</p>)
+                    }
+                  </div>
+                  <div className="items-view-details"></div>
+                </div>
+                <div className='items-view-props'>
+
+                  <div className='items-view-props-left'>
+                    <div className='item-img-left'
+                      style={{
+                        backgroundImage: product.products.offered.images?.length
+                          ? getImageUrl(product.products.offered.images[0]?.url)
+                          : '',
+                      }}
+                    > </div>
+
+                    <div className="trade-item-name-left">{product.products.offered.name.toUpperCase()}</div>
+                    <div className="trade-item-price-left">{formatPrice(product.products.offered.price)}</div>
+                  </div>
+
+                  <div className='items-view-props-center'>
+                    <div className='line'></div>
+                    <div className='circle'></div>
+                    <img className='img' src='assets/images/trade-hands.svg' alt="" />
+
+                  </div>
+
+                  <div className='items-view-props-right'>
+                    <div className='item-img-right'
+                      style={{
+                        backgroundImage: product.products.requested.images?.length
+                          ? getImageUrl(product.products.requested.images[0]?.url)
+                          : '',
+                      }}
+                    > </div>
+
+                    <div className="trade-item-name-right">{product.products.requested.name.toUpperCase()}</div>
+                    <div className="trade-item-price-right">{formatPrice(product.products.requested.price)}</div>
+                  </div>
+                </div>
+
+                <div className='trade-offer-line'></div>
+                {product?.status === 'pending' ?
+                  (<div className='trade-items-pending-sent'>
+                    You Have a Pending Trade Offer waiting for confirmation.
+                    {/* <IonButton
+                    style={{ backgroundColor: 'white' }}
+                    size='small' className='trade-item-btn'
+                    fill='outline'
+                    onClick={() => {
+                      denyTrade(product._id)
+                    }} >DENY</IonButton>
+
+                  <IonButton size='small'
+                    className='trade-item-btn'
+                    onClick={() => {
+                      acceptTrade(product._id)
+                    }} >ACCEPT
+                  </IonButton> */}
+                  </div>) :
+                  <div className='trade-items-btn-container-2'>
+                    Oops! It looks like this Product is no longer available.
+                  </div>
+                }
+              </IonCol>
+            </IonRow>
+          ))}
+
+
+
+
+
+
+
+
+
           {/* product.status === 'pending' && */}
           {tradesData[0]?.received.map((product: any) => (
             <IonRow key={product._id} style={{ marginBottom: '14px' }}
@@ -149,7 +247,7 @@ const MyTrade: React.FC = () => {
                   <div className='items-view-props-center'>
                     <div className='line'></div>
                     <div className='circle'></div>
-                    <img className='img' src='assets/images/12420.svg' alt="" />
+                    <img className='img' src='assets/images/trade-hands.svg' alt="" />
 
                   </div>
 

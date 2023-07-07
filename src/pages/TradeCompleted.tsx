@@ -82,7 +82,7 @@ console.log(tradesData)
                   <div className="trade-completed-props-left">
                     <div className="trade-completed-line-l"></div>
                     <div className='trade-completed-circle-l'></div>
-                    <img className='trade-completed-connect-l' src='assets/images/12420.svg' alt="" />
+                    <img className='trade-completed-connect-l' src='assets/images/trade-hands.svg' alt="" />
                     <div className='trade-completed-img-l'
                       style={{
                         backgroundImage: product.products.requested.images?.length

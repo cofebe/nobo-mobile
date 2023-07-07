@@ -57,7 +57,7 @@ const TradesDetails: React.FC = () => {
               <div className="center">
                 <div className='line'></div>
                 <div className='circle'>
-                  <img className='img' src={'assets/images/12420.svg'} alt="" />
+                  <img className='img' src={'assets/images/trade-hands.svg'} alt="" />
                 </div>
               </div>
 

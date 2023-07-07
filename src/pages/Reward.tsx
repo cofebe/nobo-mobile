@@ -15,14 +15,14 @@ const Reward = () => {
   const [fivePercentCoupon, setfivePercent] = useState<string>('')
   const [tenPercentCoupon, setTenPercent] = useState<string>('')
   const [fifteenPercentCoupon, setfifteenPercent] = useState<string>('')
-  const [rewardPoint, setRewardPoint]= useState<number>(0)
-  const [currentPoint, setCurrentPoints]= useState<number>(0)
+  const [rewardPoint, setRewardPoint] = useState<number>(0)
+  const [currentPoint, setCurrentPoints] = useState<number>(0)
   const [couponCode, setCouponCode] = useState<string>('')
   const [rewardType, setRewardType] = useState<string>('')
   const [present] = useIonToast();
   const rewardNumber = Array.from(String(rewardPoint), Number)
 
-  const pointsData = [1,5];
+  const pointsData = [1, 5];
   const pointsLabels = ["Current Points", "Points to Next Reward"];
 
   const presentToast = (position: 'top' | 'middle' | 'bottom') => {
@@ -49,22 +49,22 @@ const Reward = () => {
 
 
   useIonViewWillEnter(() => {
-      userService.getRewards()
-        .then((rewards) => {
-          if(rewards){
-            setRewardPoint(rewards.points)
-            setfivePercent(rewards.coupons.USD_5_OFF.code)
-            setTenPercent(rewards.coupons.USD_10_OFF.code)
-            setfifteenPercent(rewards.coupons.USD_15_OFF.code)
-            if(rewards.points < 5){
-              setCurrentPoints(5 - rewards.points)
-            }else{
-              setCurrentPoints(0)
-            }
+    userService.getRewards()
+      .then((rewards) => {
+        if (rewards) {
+          setRewardPoint(rewards.points)
+          setfivePercent(rewards.coupons.USD_5_OFF.code)
+          setTenPercent(rewards.coupons.USD_10_OFF.code)
+          setfifteenPercent(rewards.coupons.USD_15_OFF.code)
+          if (rewards.points < 5) {
+            setCurrentPoints(5 - rewards.points)
+          } else {
+            setCurrentPoints(0)
           }
+        }
 
-        })
-        .catch((error) => { console.log('unable to fetch rewards :', error) })
+      })
+      .catch((error) => { console.log('unable to fetch rewards :', error) })
   })
 
 
@@ -112,18 +112,22 @@ const Reward = () => {
           <div style={{ marginTop: '39px' }}>
             <IonRow className='reward-trophy-container'
               onClick={() => {
-                setCouponCode(fivePercentCoupon)
-                setRewardType('$5 OFF YOUR PURCHASES')
+                if (rewardPoint > 4) {
+                  setCouponCode(fivePercentCoupon)
+                  setRewardType('$5 OFF YOUR PURCHASES')
+                  modal.current?.present()
+                }
 
-                modal.current?.present()
               }}
             >
               <IonCol className='reward-trophy-box' >
-                <div className="circle">
+                <div className={
+                  rewardPoint > 4 && rewardPoint < 10 ? 'circle2' : 'circle'
+                }>
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1' style={{fontSize:12}}>$5 off your Purchase</p>
+                  <p className='info-text-1' style={{ fontSize: 12 }}>$5 off your Purchase</p>
                   <p className='info-text-2'>5 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">
@@ -134,17 +138,21 @@ const Reward = () => {
 
             <IonRow className='reward-trophy-container'
               onClick={() => {
-                setCouponCode(tenPercentCoupon)
-                setRewardType('$10 OFF YOUR PURCHASES')
-                modal.current?.present()
+                if (rewardPoint > 9) {
+                  setCouponCode(tenPercentCoupon)
+                  setRewardType('$10 OFF YOUR PURCHASES')
+                  modal.current?.present()
+                }
               }}
             >
               <IonCol className='reward-trophy-box'>
-                <div className="circle">
+                <div className={
+                  rewardPoint > 9 && rewardPoint < 15 ? 'circle2' : 'circle'
+                }>
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1' style={{fontSize:12}}>$10 off your Purchase</p>
+                  <p className='info-text-1' style={{ fontSize: 12 }}>$10 off your Purchase</p>
                   <p className='info-text-2'>10 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">
@@ -155,18 +163,21 @@ const Reward = () => {
 
             <IonRow className='reward-trophy-container'
               onClick={() => {
-                setCouponCode(fifteenPercentCoupon)
-                setRewardType('$15 OFF YOUR PURCHASES')
-
-                modal.current?.present()
+                if (rewardPoint > 14) {
+                  setCouponCode(fifteenPercentCoupon)
+                  setRewardType('$15 OFF YOUR PURCHASES')
+                  modal.current?.present()
+                }
               }}
             >
               <IonCol className='reward-trophy-box'>
-                <div className="circle">
+                <div className={
+                  rewardPoint > 14 ? 'circle2' : 'circle'
+                }>
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1' style={{fontSize:12}}>$15 off your Purchase</p>
+                  <p className='info-text-1' style={{ fontSize: 12 }}>$15 off your Purchase</p>
                   <p className='info-text-2'>15 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">

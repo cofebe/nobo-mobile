@@ -26,6 +26,7 @@ import { formatPrice, getImageUrl, getMinTradeFee, getMaxTradeFee } from '../uti
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import CreateOfferModal from '../components/CreateOfferModal';
 import { calculateEstPrice } from '../helpers/tradeFees';
+import { UserService } from '../services/UserService';
 
 const ProductDetail: React.FC = () => {
   const params: any = useParams();
@@ -53,11 +54,14 @@ const ProductDetail: React.FC = () => {
   const [selectedSneakers, setSelectedSneakers] = useState<Product[]>();
   const [selectedSneakerDetails, setSelectedSneakerDetails] = useState<Product>();
   const [presentDeleteActionSheet] = useIonActionSheet();
+  // const userService = new UserService()
 
   const tooltipModal = useRef<HTMLIonModalElement>(null);
   const offerTradeModal = useRef<HTMLIonModalElement>(null);
   const offerModal = useRef<HTMLIonModalElement>(null);
   const sendMessageModal = useRef<HTMLIonModalElement>(null);
+
+  const gwtMe = () =>{}
 
   interface sneaekerSizeChart {
     size: string;
@@ -133,6 +137,7 @@ const ProductDetail: React.FC = () => {
 
     productService.getProduct(productId, isSneakerUrl).then((data: ProductResponse) => {
       console.log('getProduct:', data.product);
+
       setProduct(data.product);
       activeTradeSneakerSizes(data.product);
       setIsTrade(data.product.action === 'trade' || isTradeUrl);
@@ -312,6 +317,8 @@ const ProductDetail: React.FC = () => {
   function showCart() {
     history.push('/cart');
   }
+
+  console.log('product data',product)
 
   return (
     <IonPage className="product-detail-page">
@@ -1303,9 +1310,9 @@ const ProductDetail: React.FC = () => {
             )}
           </IonGrid>
         </IonContent>
-      ) : (
-        ''
-      )}
+      ) :product === undefined?
+        'Product not available'
+      :<div>fg</div>}
 
       <TradeHelpModal ref={tooltipModal} />
 

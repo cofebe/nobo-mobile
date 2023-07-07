@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Header from '../components/Header'
 import './MyOffers.scss'
 import { UserService } from '../services/UserService'
-import { CreateProductResponse } from '../models'
+import { CreateProductResponse, User } from '../models'
 import { useHistory } from 'react-router'
 import { formatPrice, getImageUrl } from '../utils'
 
@@ -26,9 +26,22 @@ const MyOffers: React.FC = () => {
   const history = useHistory()
   const userService = new UserService()
   const [offerData, setTradesData] = useState<OfferResponse[]>([])
+const [experienceOption, setExperienceOption] = useState('')
+
+
+  const getMe = () => {
+    userService.getMe()
+      .then((user: User) => {
+        setExperienceOption(user.experiencePreferences)
+      })
+      .catch((error: Error) => {
+        console.log(error)
+      })
+  }
 
 
   useIonViewWillEnter(() => {
+    getMe()
     userService.getOffers()
       .then((res: any) => {
         setTradesData(res)
@@ -57,7 +70,6 @@ const MyOffers: React.FC = () => {
   const denyOffer = (offerId: string, productPrice: number) => {
     userService.denyOffer(offerId)
       .then((res: any) => {
-        console.log('before the condition', res)
         if (res.error === 'you are too late') {
           console.log(res.error)
         } else {
@@ -72,7 +84,7 @@ const MyOffers: React.FC = () => {
   }
 
 
-// console.log(offerData)
+  // console.log(offerData)
   return (
     <IonPage className='my-offers-main-container'>
       <Header
@@ -116,7 +128,7 @@ const MyOffers: React.FC = () => {
                       <p
                         className='browse-shop'
                         onClick={() => {
-                          history.push(`/home/style-feed`)
+                          history.push(`/home/explore/${experienceOption}/explore`)
                         }}>
                         Browse Shop
                       </p>
@@ -131,13 +143,13 @@ const MyOffers: React.FC = () => {
                         </p>
                         : offer.status === 'rejected' ?
                           <IonButton
-                          fill='outline'
+                            fill='outline'
                             className='rejected-btn'
                             onClick={() => {
-                              history.push(`/home/product/${offer._id}`)
+                              history.push(`/home/product/${offer.product._id}`)
                             }}
-                            >BUY AT A LISTED PRICE
-                            </IonButton>
+                          >BUY AT A LISTED PRICE
+                          </IonButton>
 
                           :
                           <>

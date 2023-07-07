@@ -18,7 +18,7 @@ const Returns: React.FC = () => {
 
 
   useIonViewWillEnter(() => {
-    console.log('params1', params.id)
+    // console.log('params1', params.id)
     userService.getOrder(params.id)
       .then((products: FullOrder) => {
         if (products) {

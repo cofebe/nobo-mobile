@@ -180,6 +180,18 @@
         justify-content: center;
       }
 
+      .circle2 {
+        box-sizing: border-box;
+        width: 43px;
+        height: 42px;
+        background: #FFFFFF;
+        border: 2px solid #000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
 
     }
 

@@ -609,7 +609,6 @@ export class UserService extends BaseService {
   }
   //UPDATE USER ACCOUNT INFO
   async updateUserAccount(data: UserAccData) {
-    console.log('userservice', data);
     const response = await super.fetch('POST', '/api/users/me', {
       firstName: data.firstName,
       lastName: data.lastName,
