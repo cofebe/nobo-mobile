@@ -112,14 +112,15 @@ const Reward = () => {
           <div style={{ marginTop: '39px' }}>
             <IonRow className='reward-trophy-container'
               onClick={() => {
-                setCouponCode(fivePercentCoupon)
-                setRewardType('$5 OFF YOUR PURCHASES')
-
-                modal.current?.present()
+                if(rewardPoints > 4){
+                  setCouponCode(fivePercentCoupon)
+                  setRewardType('$5 OFF YOUR PURCHASES')
+                  modal.current?.present()
+                }
               }}
             >
               <IonCol className='reward-trophy-box' >
-                <div className="circle">
+                <div className={rewardPoints > 4 && rewardPoints < 9 ? 'circle2' :'circle'}>
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
@@ -134,13 +135,15 @@ const Reward = () => {
 
             <IonRow className='reward-trophy-container'
               onClick={() => {
-                setCouponCode(tenPercentCoupon)
-                setRewardType('$10 OFF YOUR PURCHASES')
-                modal.current?.present()
+                if(rewardPoints > 9){
+                  setCouponCode(tenPercentCoupon)
+                  setRewardType('$10 OFF YOUR PURCHASES')
+                  modal.current?.present()
+                }
               }}
             >
               <IonCol className='reward-trophy-box'>
-                <div className="circle">
+                <div className={rewardPoints > 9 && rewardPoints < 14 ? 'circle2' :'circle'}>
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
@@ -155,14 +158,15 @@ const Reward = () => {
 
             <IonRow className='reward-trophy-container'
               onClick={() => {
-                setCouponCode(fifteenPercentCoupon)
-                setRewardType('$15 OFF YOUR PURCHASES')
-
-                modal.current?.present()
+                if(rewardPoints > 14){
+                  setCouponCode(fifteenPercentCoupon)
+                  setRewardType('$15 OFF YOUR PURCHASES')
+                  modal.current?.present()
+                }
               }}
             >
               <IonCol className='reward-trophy-box'>
-                <div className="circle">
+                <div className={rewardPoints > 14 ? 'circle2' :'circle'}>
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">

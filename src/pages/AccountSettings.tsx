@@ -25,8 +25,8 @@ const AccountSettings: React.FC = () => {
   const [newPassword, setNewPassword] = useState('')
   const [comfirmPassword, setComfirmPassword] = useState('')
   const [wrongPassword, seTwrongPassword] = useState(false)
-const [btnToggle, setBtnToggle] = useState(true)
-// const [pBtnToggle, setpBtnToggle] = useState(true)
+  const [btnToggle, setBtnToggle] = useState(true)
+  const [pBtnToggle, setpBtnToggle] = useState(true)
 
 
   const modal = useRef<HTMLIonModalElement>(null)
@@ -59,11 +59,12 @@ const [btnToggle, setBtnToggle] = useState(true)
         setEmail(user.email)
         setdisplayName(user.displayName)
         setPhoneNum(user.phoneNumber)
-    setBtnToggle(false);
-    setBtnToggle(false);
-    setTimeout(() => {
-      setBtnToggle(true);
-    }, 10);
+        setBtnToggle(false);
+        setBtnToggle(false);
+        setTimeout(() => {
+          setBtnToggle(true);
+          setpBtnToggle(true);
+        }, 10);
       })
       .catch((error) => {
         console.log(error)
@@ -71,7 +72,7 @@ const [btnToggle, setBtnToggle] = useState(true)
   });
 
 
-  const handleTicker:any = (expId: string) => {
+  const handleTicker: any = (expId: string) => {
     if (!selectedExperienceArray.includes(expId, 0)) {
       setSelectedExpArray([expId])
     } else if (selectedExperienceArray.includes(expId, 0)) {
@@ -101,6 +102,10 @@ const [btnToggle, setBtnToggle] = useState(true)
           // console.log('password incorrect');
         } else {
           // console.log('success',user.currentUser)
+          setTimeout(() => {
+            setBtnToggle(true);
+            setpBtnToggle(true);
+          }, 10);
           dismiss()
           setComfirmPassword('')
           setNewPassword('')
@@ -163,9 +168,9 @@ const [btnToggle, setBtnToggle] = useState(true)
                 value={firstName}
                 className={`custom-input-name nobo-input`}
                 placeholder='FIRST NAME'
-                onChange={(e) =>{
+                onChange={(e) => {
                   setFirstName(e)
-                setBtnToggle(false)
+                  setBtnToggle(false)
                 }}
               />
             </IonCol>
@@ -179,7 +184,7 @@ const [btnToggle, setBtnToggle] = useState(true)
                 placeholder='LAST NAME'
                 onChange={(e) => {
                   setLastName(e)
-                setBtnToggle(false);
+                  setBtnToggle(false);
                 }}
               />
             </IonCol>
@@ -193,7 +198,8 @@ const [btnToggle, setBtnToggle] = useState(true)
                 placeholder='USERNAME'
                 onChange={(e) => {
                   setdisplayName(e)
-                setBtnToggle(false);}}
+                  setBtnToggle(false);
+                }}
               />
             </IonCol>
             <IonCol sizeLg='6' sizeXs='12' className='acc-text-input-box'>
@@ -205,7 +211,7 @@ const [btnToggle, setBtnToggle] = useState(true)
                 placeholder='EMAIL'
                 onChange={(e) => {
                   setEmail(e)
-                setBtnToggle(false);
+                  setBtnToggle(false);
                 }}
               />
             </IonCol>
@@ -218,14 +224,15 @@ const [btnToggle, setBtnToggle] = useState(true)
                 placeholder='PHONE NUMBER'
                 onChange={(e) => {
                   setPhoneNum(e)
-                setBtnToggle(false)}}
+                  setBtnToggle(false)
+                }}
               />
             </IonCol>
             <IonCol size='12' className='acc-change-password-box'>
               <p className='acc-change-password-text'
-               onClick={()=>{
-                modal.current?.present()
-              }}
+                onClick={() => {
+                  modal.current?.present()
+                }}
               >CHANGE PASSWORD</p>
               <img height={15} src='assets/images/account-change-password.png' alt='' />
             </IonCol>
@@ -284,77 +291,86 @@ const [btnToggle, setBtnToggle] = useState(true)
         </div>
         <IonRow>
           <IonCol size='12' className='acc-settings-btn-container'>
-          <Button
-            className='acc-settings-btn_'
-            label='SAVE'
-            large
-            onClick={e => {
-              e.preventDefault();
-              handleSubmit(data);
-            }}
-            disabled={btnToggle}
-          />
+            <Button
+              className='acc-settings-btn_'
+              label='SAVE'
+              large
+              onClick={e => {
+                e.preventDefault();
+                handleSubmit(data);
+              }}
+              disabled={btnToggle}
+            />
           </IonCol>
         </IonRow>
 
       </IonContent>
-      <IonModal style={{borderRadius:'28px'}} className='acc-settings-main-modal' ref={modal}  initialBreakpoint={1} breakpoints={[1, 5]}>
+      <IonModal style={{ borderRadius: '28px' }} className='acc-settings-main-modal' ref={modal} initialBreakpoint={1} breakpoints={[1, 5]}>
         {/* <IonContent className='acc-password-change-box' > */}
-          <IonRow style={{ paddingLeft: '20px', paddingRight: '20px', height: '500px' }}>
+        <IonRow style={{ paddingLeft: '20px', paddingRight: '20px', height: '500px' }}>
 
-            <IonCol size='12'
-              style={{ fontWeight: 700, fontSize: '22px', backgroundCollor: 'yellow' }}
-              className='acc-password-change-title' >
-              NEW PASSWORD
-            </IonCol>
+          <IonCol size='12'
+            style={{ fontWeight: 700, fontSize: '22px', backgroundCollor: 'yellow' }}
+            className='acc-password-change-title' >
+            NEW PASSWORD
+          </IonCol>
 
-            <IonCol class='input-container' size='12'>
-              <Input
-                errorMessage={wrongPassword == true ? 'Incorrect password' : ''}
-                type='password'
-                value={currentPassword}
-                className={`nobo-input `}
-                placeholder='CURRENT PASSWORD'
-                onChange={e => { setCurrentPassword(e) }}
-              />
-            </IonCol>
+          <IonCol class='input-container' size='12'>
+            <Input
+              errorMessage={wrongPassword == true ? 'Incorrect password' : ''}
+              type='password'
+              value={currentPassword}
+              className={`nobo-input `}
+              placeholder='CURRENT PASSWORD'
+              onChange={e => {
+                setCurrentPassword(e)
+                setpBtnToggle(false)
+              }}
+            />
+          </IonCol>
 
-            <IonCol class='input-container' size='12'>
-              <Input
-                type='password'
-                value={newPassword}
-                className={`nobo-input `}
-                placeholder='NEW PASSWORD'
-                onChange={e => { setNewPassword(e) }}
-              />
-            </IonCol>
+          <IonCol class='input-container' size='12'>
+            <Input
+              type='password'
+              value={newPassword}
+              className={`nobo-input `}
+              placeholder='NEW PASSWORD'
+              onChange={e => {
+                setNewPassword(e)
+                setBtnToggle(false)
+              }}
+            />
+          </IonCol>
 
-            <IonCol class='input-container' size='12'>
-              <Input
-                errorMessage={newPassword !== comfirmPassword ? 'password mismatch' : ''}
-                type='password'
-                value={comfirmPassword}
-                className={`nobo-input `}
-                placeholder='COMFIRM PASSWORD'
-                onChange={e => { setComfirmPassword(e) }}
-              />
-            </IonCol>
+          <IonCol class='input-container' size='12'>
+            <Input
+              errorMessage={newPassword !== comfirmPassword ? 'password mismatch' : ''}
+              type='password'
+              value={comfirmPassword}
+              className={`nobo-input `}
+              placeholder='COMFIRM PASSWORD'
+              onChange={e => {
+                setComfirmPassword(e)
+                setpBtnToggle(false)
+              }}
+            />
+          </IonCol>
 
-            <IonCol class='input-container' size='12'>
-              <Button
-                className='acc-settings-btn'
-                label='SAVE'
-                large={true}
-                onClick={e => {
-                  e.preventDefault();
-                  handleSubmit(data);
-                  // dismiss()
-                }}
-                disabled={validate() || newPassword !== comfirmPassword}
-              />
-            </IonCol>
+          <IonCol class='input-container' size='12'>
+            <Button
+              className='acc-settings-btn'
+              label='SAVE'
+              large={true}
+              onClick={e => {
+                e.preventDefault();
+                handleSubmit(data);
+                // dismiss()
+              }}
+              disabled={validate() || newPassword !== comfirmPassword || pBtnToggle}
+            />
+          </IonCol>
 
-          </IonRow>
+        </IonRow>
         {/* </IonContent> */}
       </IonModal>
     </IonPage>
