@@ -268,6 +268,7 @@ const PostDetail: React.FC = () => {
           </IonRefresher>
             <PostDetailItem
               message={message}
+              refreshFeed={load}
               zoomAction={(i: number) => {
                 try {
                   if (message && message.images && message.images.length > 0) {
