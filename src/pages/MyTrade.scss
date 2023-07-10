@@ -6,7 +6,7 @@
     background-color: #FEFCF7;
     height: 118px;
 
-    .trade-item-back-btn{
+    .trade-item-back-btn {
       position: absolute;
       left: 35px;
       bottom: 15px;
@@ -62,27 +62,95 @@
 
     }
 
+    .trade-item-container-sm {
+      position: relative;
+      width: 350px;
+      height: 230px;
+      background: #FEFCF7;
+      border: 0.5px solid #707070;
+      border-radius: 10px;
+
+    }
+
+    .trade-item-container-xsm {
+      position: relative;
+      width: 350px;
+      height: 200px;
+      background: #FEFCF7;
+      border: 0.5px solid #707070;
+      border-radius: 10px;
+
+    }
+
+    .trade-accepeted-email {
+      margin-left: 10px;
+      margin-top: 10px;
+      color: #000;
+      font-family: 'Nunito Sans';
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 14.5px;
+    }
+
     .trade-item-status-container {
-      // background-color: teal;
+      // background-color: plum;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 15px;
       margin: 5px 16px 0px 10px;
 
-      .item-status {
-        // background-color: red;
+      .item-status-pending {
         flex: 1.1;
         display: flex;
         align-items: center;
-        // justify-content: center;
         height: 15px;
         padding-top: 5px;
 
       }
 
+      .item-status-accepted {
+        flex: 1.1;
+        display: flex;
+        align-items: center;
+        height: 15px;
+        padding-top: 5px;
+
+      }
+
+      .item-status-rejected {
+        flex: 1.1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 15px;
+        padding-top: 5px;
+
+      }
+
+      .item-status-invalid {
+        flex: 1.1;
+        display: flex;
+        align-items: center;
+        height: 15px;
+        padding-top: 5px;
+
+      }
+
+      .view-details {
+        color: #000;
+        font-family: 'Nunito Sans';
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
+        letter-spacing: 0.5px;
+        text-decoration-line: underline;
+      }
+
       .status_ {
-        padding-top: 1px;
+        padding-top: 2px;
         width: 40px;
         height: 15px;
         font-family: 'Nunito Sans';
@@ -94,7 +162,9 @@
         color: #707070;
       }
 
-      .status_text {
+      .status_text-pending {
+        margin-left: 8px;
+        padding-top: 1px;
         width: 126px;
         height: 15px;
         font-family: 'Nunito Sans';
@@ -105,7 +175,10 @@
         letter-spacing: 0.05em;
         color: #D6980E;
       }
-      .status_text-accepted{
+
+      .status_text-accepted {
+        margin-left: 8px;
+        padding-top: 1px;
         width: 126px;
         height: 15px;
         font-family: 'Nunito Sans';
@@ -114,26 +187,45 @@
         font-size: 9px;
         line-height: 150%;
         letter-spacing: 0.05em;
-        color:#42D60E;
+        color: #42D60E;
+      }
+
+      .status_text-rejected {
+        margin-right: 45px;
+        height: 15px;
+        color: #FA0707;
+        font-family: 'Nunito Sans';
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
+        letter-spacing: 0.5px;
+      }
+
+      .status_text-invalid {
+        margin-left: 7px;
+        height: 15px;
+        color: #FA0707;
+        font-family: 'Nunito Sans';
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
+        letter-spacing: 0.5px;
       }
 
       .items-view-details {
-        // background-color: aqua;
         flex: .9;
         width: 77px;
         height: 15px;
         text-align: right;
-
         font-family: 'Nunito Sans';
         font-style: normal;
         font-weight: 700;
         font-size: 10px;
         line-height: 150%;
-        /* identical to box height, or 15px */
-
         letter-spacing: 0.05em;
         text-decoration-line: underline;
-
         color: #000000;
 
       }
@@ -142,7 +234,6 @@
     }
 
     .items-view-props {
-      // background-color: greenyellow;
       margin: 17px 40px 0px 40px;
       display: flex;
       align-items: center;
@@ -220,8 +311,6 @@
 
         .img {
           position: absolute;
-          // height: 30px;
-          // width: 30px;
 
         }
 
@@ -229,7 +318,6 @@
 
       .items-view-props-right {
         width: 100px;
-        // background-color: palevioletred;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -279,13 +367,12 @@
 
     }
 
-    .trade-items-btn-container {
+    .trade-items-btn-container-pending {
       position: absolute;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      // background-color: teal;
       height: 40px;
       bottom: 3%;
       right: 5%;
@@ -305,14 +392,43 @@
     }
 
 
-    .trade-items-btn-container-2{
+    .trade-items-btn-container-rejected {
       width: 90%;
       position: absolute;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      // background-color: teal;
+      height: 40px;
+      bottom: 10px;
+      right: 5%;
+      color: rgb(32, 31, 31);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .trade-items-btn-container-invalid {
+      width: 90%;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 40px;
+      bottom: 10px;
+      right: 5%;
+      color: rgb(32, 31, 31);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .trade-items-btn-container2 {
+      width: 90%;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       height: 40px;
       bottom: 3%;
       right: 5%;
@@ -320,20 +436,21 @@
       text-align: center;
       font-weight: 600;
     }
-    .trade-items-pending-sent{
+
+    .trade-items-pending-sent {
       width: 90%;
       position: absolute;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      // background-color: teal;
       height: 40px;
       bottom: 3%;
       right: 5%;
-      color: #8DAD31;
+      color: #000000;
+
       text-align: center;
-      font-weight: 600;
+      font-weight: 400;
     }
 
 

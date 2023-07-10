@@ -11,6 +11,7 @@ import {
 import './TradeDenied.scss'
 import { useHistory, } from 'react-router'
 import { FullOrder } from '../models'
+import { getImageUrl } from '../utils'
 
 
 const TradeDenied: React.FC = () => {
@@ -65,13 +66,20 @@ const TradeDenied: React.FC = () => {
 
               <div className='items-view-props'>
                 <div className='items-view-props-left'>
-                  <img
+                <div className='item-img-left'
+                      style={{
+                        backgroundImage: product.products?.requested[0]?.images?.length
+                          ? getImageUrl(product.products.requested?.images[0]?.url)
+                          : '',
+                      }}
+                    > </div>
+                  {/* <img
                     className='item-img-left'
                     src={product?.products?.requested[0]?.url.length < 60 ?
                       `https://staging.thenobo.com/${product?.products?.requested[0]?.url}`
                       : `${product?.products?.requested.images[0]?.url}`}
                     alt={product?.products?.requested.name}
-                  />
+                  /> */}
 
                 </div>
 
@@ -81,13 +89,20 @@ const TradeDenied: React.FC = () => {
                 </div>
 
                 <div className='items-view-props-right'>
-                  <img
+                <div className='item-img-right'
+                      style={{
+                        backgroundImage: product.products?.offered?.images[0]?.length
+                          ? getImageUrl(product.products.offered.images[0]?.url)
+                          : '',
+                      }}
+                    > </div>
+                  {/* <img
                     className='item-img-right'
                     src={product?.products?.offered[0]?.url.length < 60 ?
                       `https://staging.thenobo.com/${product.products?.offered[0]?.url}`
                       : `${product?.products?.offered.images[0]?.url}`}
                     alt={product?.products?.offered.name}
-                  />
+                  /> */}
 
                 </div>
               </div>
