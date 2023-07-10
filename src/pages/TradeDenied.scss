@@ -101,7 +101,10 @@
         .item-img-left {
           height: 90px;
           width: 90px;
-          border-radius: 10px;
+          border-radius: 5px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
         }
 
         .denied-item-name-left {
@@ -167,6 +170,9 @@
           height: 90px;
           width: 90px;
           border-radius: 5px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
         }
 
         .denied-item-name-right {

@@ -55,7 +55,7 @@
       .item-accepted-desc {
         width: 273px;
         height: 40px;
-
+text-transform: uppercase;
         font-family: 'Nunito Sans';
         font-style: normal;
         font-weight: 600;
@@ -141,6 +141,16 @@
           text-transform: uppercase;
           color: #000000;
         }
+
+
+        .my-item-img{
+          height: 90px;
+          width: 90px;
+          border-radius: 10px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
       }
 
       .items-view-props-center {
@@ -167,8 +177,12 @@
 
         .img {
           position: absolute;
-          // height: 30px;
-          // width: 30px;
+          // height: 60px;
+          // width: 60px;
+          // border-radius: 10px;
+          // background-position: center;
+          // background-repeat: no-repeat;
+          // background-size: contain;
         }
       }
 
@@ -215,6 +229,16 @@
           text-transform: uppercase;
           color: #000000;
         }
+
+        .your-item-img{
+          height: 90px;
+          width: 90px;
+          border-radius: 10px;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
+
       }
     }
 

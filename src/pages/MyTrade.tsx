@@ -72,6 +72,9 @@ const MyTrade: React.FC = () => {
   }
 
 
+  const check = tradesData[0]?.received?.length === 0 && tradesData[0]?.sent?.length === 0
+  console.log('check',check)
+  // console.log('sent',tradesData[0].sent.length)
 
 
   return (
@@ -105,39 +108,69 @@ const MyTrade: React.FC = () => {
           </div>
         </IonCol>
       </IonRow>
-      <IonContent className='trade-item-content'
-
-      >
+      {!check ? <IonContent className='trade-item-content'>
         <IonGrid>
 
-
-
-
           {/* OFFER I SENT */}
-
           {tradesData[0]?.sent.map((product: any) => (
             <IonRow key={product._id} style={{ marginBottom: '14px' }}
               onClick={() => {
-                if (product.status === 'accepted') {
-                  // productDetails(product._id)
-                  // console.log('first push', product)
+                if (product.status === 'pending') {
                   history.push({ pathname: `trades/details/${product._id}`, state: product })
-
                 }
               }}
             >
-              <IonCol className='trade-item-container'>
-                <div className='trade-item-status-container'>
-                  <div className="item-status">
-                    <p className='status_'>STATUS</p>
-                    {product.status !== 'accepted' ? (<p className='status_text'>{product.status.toUpperCase()} TRADE OFFER</p>) :
-                      (<p className='status_text-accepted'>TRADE {product.status.toUpperCase()}</p>)
-                    }
-                  </div>
-                  <div className="items-view-details"></div>
-                </div>
-                <div className='items-view-props'>
+              <IonCol
+                className={
+                  product.status === 'rejected' ?
+                    'trade-item-container-xsm'
+                    : product.status === 'accepted' ?
+                      'trade-item-container-sm'
+                      : product.status === 'invalid' ?
+                        'trade-item-container-xsm'
+                        :
+                        'trade-item-container'
+                }>
 
+                <div className='trade-item-status-container' >
+                  {product.status === 'pending' && (
+                    <div className="item-status-pending" >
+                      <p className='status_'>STATUS</p>
+                      <p className='status_text-pending'>{product.status.toUpperCase()} TRADE OFFER</p>
+                    </div>
+                  )}
+                  {product.status === 'accepted' && (
+                    <div className="item-status-accepted" >
+                      <p className='status_'>STATUS</p>
+                      <p className='status_text-accepted'>TRADE {product.status.toUpperCase()}</p>
+                    </div>
+                  )}
+                  {product.status === 'rejected' && (
+                    <div className="item-status-rejected" >
+                      <p className='status_'>STATUS</p>
+                      <p className='status_text-rejected'>TRADE REQUEST DENIED</p>
+                      <p className='view-details'
+                        onClick={() => {
+                          history.push({ pathname: `trades/details/${product._id}`, state: product })
+                        }}
+                      >
+                        VIEW DETAILS</p>
+                    </div>
+                  )}
+                  {product.status === 'invalid' && (
+                    <div className="item-status-invalid" >
+                      <p className='status_'>STATUS</p>
+                      <p className='status_text-invalid'>INVALID TRADE</p>
+                      {/* <p className='view-details'></p> */}
+                    </div>
+                  )}
+                </div>
+                {product.status === 'accepted' && (
+                  <div className='trade-accepeted-email'>You will receive an email when you order has been shipped.</div>
+                )}
+
+
+                <div className='items-view-props'>
                   <div className='items-view-props-left'>
                     <div className='item-img-left'
                       style={{
@@ -172,63 +205,91 @@ const MyTrade: React.FC = () => {
                   </div>
                 </div>
 
-                <div className='trade-offer-line'></div>
+
                 {product?.status === 'pending' ?
                   (<div className='trade-items-pending-sent'>
                     You Have a Pending Trade Offer waiting for confirmation.
-                    {/* <IonButton
-                    style={{ backgroundColor: 'white' }}
-                    size='small' className='trade-item-btn'
-                    fill='outline'
-                    onClick={() => {
-                      denyTrade(product._id)
-                    }} >DENY</IonButton>
+                  </div>)
 
-                  <IonButton size='small'
-                    className='trade-item-btn'
-                    onClick={() => {
-                      acceptTrade(product._id)
-                    }} >ACCEPT
-                  </IonButton> */}
-                  </div>) :
-                  <div className='trade-items-btn-container-2'>
-                    Oops! It looks like this Product is no longer available.
-                  </div>
+                  // product?.status === 'invalid' ?
+
+                  //   <div className='trade-items-btn-container-invalid'>
+                  //     Your trade offer was not accepted
+                  //   </div>
+                  //   : product?.status === 'accepted' ?
+                  //     ''
+                  :
+                  ''
+                  // <div className='trade-items-btn-container-2'>
+                  //   Oops! It looks like this Product is no longer available.
+                  // </div>
                 }
               </IonCol>
             </IonRow>
           ))}
 
 
-
-
-
-
-
-
-
           {/* product.status === 'pending' && */}
           {tradesData[0]?.received.map((product: any) => (
             <IonRow key={product._id} style={{ marginBottom: '14px' }}
               onClick={() => {
-                if (product.status === 'accepted') {
-                  // productDetails(product._id)
-                  // console.log('first push', product)
+                if (product.status === 'pending') {
                   history.push({ pathname: `trades/details/${product._id}`, state: product })
-
                 }
               }}
             >
-              <IonCol className='trade-item-container'>
+              <IonCol
+                className={
+                  product.status === 'rejected' ?
+                    'trade-item-container-xsm'
+                    : product.status === 'accepted' ?
+                      'trade-item-container-sm'
+                      : product.status === 'invalid' ?
+                        'trade-item-container-xsm'
+                        :
+                        'trade-item-container'
+                }>
                 <div className='trade-item-status-container'>
-                  <div className="item-status">
-                    <p className='status_'>STATUS</p>
-                    {product.status !== 'accepted' ? (<p className='status_text'>{product.status.toUpperCase()} TRADE OFFER</p>) :
-                      (<p className='status_text-accepted'>TRADE {product.status.toUpperCase()}</p>)
-                    }
-                  </div>
-                  <div className="items-view-details"></div>
+                  {product.status === 'pending' && (
+                    <div className="item-status-pending" >
+                      <p className='status_'>STATUS</p>
+                      <p className='status_text-pending'>{product.status.toUpperCase()} TRADE OFFER</p>
+                    </div>
+                  )}
+                  {product.status === 'accepted' && (
+                    <div className="item-status-accepted" >
+                      <p className='status_'>STATUS</p>
+                      <p className='status_text-accepted'>TRADE {product.status.toUpperCase()}</p>
+                    </div>
+                  )}
+                  {product.status === 'rejected' && (
+                    <div className="item-status-rejected" >
+                      <p className='status_'>STATUS</p>
+                      <p className='status_text-rejected'>TRADE REQUEST DENIED</p>
+                      <p
+                        className='view-details'
+                        onClick={() => {
+                          history.push({ pathname: `trades/details/${product._id}`, state: product })
+                        }}
+                      >VIEW DETAILS</p>
+
+                    </div>
+                  )}
+                  {product.status === 'invalid' && (
+                    <div className="item-status-invalid" >
+                      <p className='status_'>STATUS</p>
+                      <p className='status_text-invalid'>INVALID TRADE</p>
+                      {/* <p className='view-details'></p> */}
+                    </div>
+                  )}
                 </div>
+
+                {product.status === 'accepted' && (
+                  <div className='trade-accepeted-email'>You will receive an email when you order has been shipped.</div>
+                )}
+
+
+
                 <div className='items-view-props'>
 
                   <div className='items-view-props-left'>
@@ -265,26 +326,32 @@ const MyTrade: React.FC = () => {
                   </div>
                 </div>
 
-                <div className='trade-offer-line'></div>
-                {product?.status === 'pending' ? (<div className='trade-items-btn-container'>
-                  <IonButton
-                    style={{ backgroundColor: 'white' }}
-                    size='small' className='trade-item-btn'
-                    fill='outline'
-                    onClick={() => {
-                      denyTrade(product._id)
-                    }} >DENY</IonButton>
+                {product?.status === 'pending' && (<div className='trade-offer-line'></div>)}
+                {product?.status === 'pending' ? (
+                  <div className='trade-items-btn-container-pending'>
+                    <IonButton
+                      style={{ backgroundColor: 'white' }}
+                      size='small' className='trade-item-btn'
+                      fill='outline'
+                      onClick={() => {
+                        denyTrade(product._id)
+                      }} >DENY</IonButton>
 
-                  <IonButton size='small'
-                    className='trade-item-btn'
-                    onClick={() => {
-                      acceptTrade(product._id)
-                    }} >ACCEPT
-                  </IonButton>
-                </div>) :
-                  <div className='trade-items-btn-container-2'>
-                    Oops! It looks like this Product is no longer available.
-                  </div>
+                    <IonButton size='small'
+                      className='trade-item-btn'
+                      onClick={() => {
+                        acceptTrade(product._id)
+                      }} >ACCEPT
+                    </IonButton>
+                  </div>)
+                  :
+                  // product?.status === 'invalid' ?
+                  //   <div className='trade-items-btn-container-invalid'>
+                  //     It looks like someone else has completed a trade offer for this product
+                  //   </div>
+
+                  //   :
+                  ''
                 }
               </IonCol>
             </IonRow>
@@ -292,8 +359,16 @@ const MyTrade: React.FC = () => {
 
         </IonGrid>
       </IonContent>
+        :
+        <IonContent className='trade-item-content'>
+          <IonRow>You have no pending trades!</IonRow>
+        </IonContent>
+      }
     </IonPage>
   )
+
+
+
 }
 
 export default MyTrade

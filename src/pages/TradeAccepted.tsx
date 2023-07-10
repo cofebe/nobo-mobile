@@ -13,6 +13,7 @@ import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
 import { TradesResponse } from '../models'
 import { useParams, } from 'react-router'
+import { getImageUrl } from '../utils'
 
 
 
@@ -57,7 +58,7 @@ const TradeAccepted: React.FC = () => {
         <div className='item-accepted-desc-container2'>
           <div className='item-accepted-desc2'>
             An email confirmation has been sent to your inbox. You can find and
-            track this item under Completed Trades
+            track this item under Completed Trades.
           </div>
         </div>
 
@@ -68,34 +69,40 @@ const TradeAccepted: React.FC = () => {
               <div className='items-view-props'>
 
                 <div className='items-view-props-left'>
-                  <img
-                    className='img'
-                    src={tradeData?.products?.requested[0]?.url.length < 60 ?
-                      `https://staging.thenobo.com/${tradeData?.products?.requested[0]?.url}`
-                      : `${tradeData?.products?.requested.images[0]?.url}`}
-                    alt={tradeData?.products?.requested.name}
-                  />
-                  <div className="accepted-accepted-item-name-left">{tradeData?.products?.requested.name}</div>
-                  <div className="accepted-accepted-item-price-left">{currencyFormat.format(tradeData?.products?.requested.price)}</div>
+                  <div
+                    className='my-item-img'
+                    style={{
+                      backgroundImage: tradeData?.products?.offered.images?.length
+                        ? getImageUrl(tradeData?.products?.offered.images[0]?.url)
+                        : '',
+
+                    }}
+                  ></div>
+
+                  <div className="accepted-accepted-item-name-left">{tradeData?.products?.offered.name}</div>
+                  <div className="accepted-accepted-item-price-left">{currencyFormat.format(tradeData?.products?.offered.price)}</div>
                 </div>
 
                 <div className='items-view-props-center'>
                   <div className='line'></div>
                   <div className='circle'></div>
-                  <img className='img' src='assets/images/12420.svg' alt="" />
+                  <img className='img' src='assets/images/trade-hands.svg' alt="" />
 
                 </div>
 
                 <div className='items-view-props-right'>
                   {/* <img className='item-img-left' src='assets/images/test/bvlgary.svg' alt="" /> */}
-                  <img
-                    className='img'
-                    src={tradeData?.products?.offered[0]?.url.length < 60 ?
-                      `https://staging.thenobo.com/${tradeData?.products?.offered[0]?.url}`
-                      : `${tradeData?.products?.offered.images[0]?.url}`} alt={tradeData?.products?.offered.name}
-                  />
-                  <div className="accepted-accepted-item-name-right">{tradeData?.products?.offered.name}</div>
-                  <div className="accepted-accepted-item-price-right">{currencyFormat.format(tradeData?.products?.offered.price)}</div>
+                  <div
+                    className='your-item-img'
+                    style={{
+                      backgroundImage: tradeData?.products?.requested.images?.length
+                        ? getImageUrl(tradeData?.products?.requested.images[0]?.url)
+                        : '',
+
+                    }}
+                  ></div>
+                  <div className="accepted-accepted-item-name-right">{tradeData?.products?.requested.name}</div>
+                  <div className="accepted-accepted-item-price-right">{currencyFormat.format(tradeData?.products?.requested.price)}</div>
                 </div>
               </div>
 
