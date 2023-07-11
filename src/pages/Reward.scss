@@ -129,6 +129,8 @@
       margin-bottom: 20px;
     }
 
+
+
     .reward-trophy-box {
       box-sizing: border-box;
       width: 341px;
@@ -184,8 +186,76 @@
         box-sizing: border-box;
         width: 43px;
         height: 42px;
+        background: #D6980E;
+        border: 2px solid #D6980E;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+
+    }
+
+    .reward-trophy-box2 {
+      box-sizing: border-box;
+      width: 341px;
+      height: 62px;
+      background: #FEFCF7;
+      border: 1.2px solid #D6980E;
+      border-radius: 100px;
+      padding: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .info {
+        position: relative;
+        width: 200px;
+        height: 40px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 16px;
+        text-transform: uppercase;
+        color: #ACACAC;
+        // display: flex;
+        // flex-direction: column;
+      }
+
+      .info-text-1 {
+        position: absolute;
+        top: -8px;
+        color: #000000;
+        font-weight: 700;
+      }
+
+      .info-text-2 {
+        font-size: 10px;
+        text-transform: lowercase;
+        position: absolute;
+        bottom: -10px;
+      }
+
+      .circle {
+        box-sizing: border-box;
+        width: 43px;
+        height: 42px;
         background: #FFFFFF;
-        border: 2px solid #000;
+        border: 1.5px solid #707070;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .circle2 {
+        box-sizing: border-box;
+        width: 43px;
+        height: 42px;
+        background: #D6980E;
+        border: 2px solid #D6980E;
         border-radius: 50%;
         display: flex;
         align-items: center;
