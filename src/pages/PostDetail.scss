@@ -1,7 +1,12 @@
 .post-detail-page {
   --background: rgb(254, 252, 247);
 
+  .post-detail-create-comment-container {
+    margin-bottom: 80px;
+  }
+
   .post-detail-create-comment {
+    background-color: #fefcf6;
     color: #000000;
     border-top: solid #707070 1px;
     height: 80px;
