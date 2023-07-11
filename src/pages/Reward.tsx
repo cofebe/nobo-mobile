@@ -15,7 +15,7 @@ const Reward = () => {
   const [fivePercentCoupon, setfivePercent] = useState<string>('')
   const [tenPercentCoupon, setTenPercent] = useState<string>('')
   const [fifteenPercentCoupon, setfifteenPercent] = useState<string>('')
-  const [rewardPoints, setRewardPoints]= useState<number>(0)
+  const [rewardPoints, setRewardPoints] = useState<number>(0)
   const [untilNextReward, setUntilNextReward] = useState<number>(0);
   const [couponCode, setCouponCode] = useState<string>('')
   const [rewardType, setRewardType] = useState<string>('')
@@ -41,30 +41,30 @@ const Reward = () => {
   };
 
   useIonViewWillEnter(() => {
-      userService
-        .getRewards()
-        .then((rewards) => {
-          if(rewards){
-            setRewardPoints(rewards.points)
-            setfivePercent(rewards.coupons?.USD_5_OFF?.code)
-            setTenPercent(rewards.coupons?.USD_10_OFF?.code)
-            let untilNextReward = 0;
+    userService
+      .getRewards()
+      .then((rewards) => {
+        if (rewards) {
+          setRewardPoints(rewards.points)
+          setfivePercent(rewards.coupons?.USD_5_OFF?.code)
+          setTenPercent(rewards.coupons?.USD_10_OFF?.code)
+          let untilNextReward = 0;
 
-            if (rewards.points < 5) {
-              untilNextReward = 5 - rewards.points;
-            }
-            if (rewards.points >= 5 && rewards.points < 10) {
-              untilNextReward = 10 - rewards.points;
-            }
-            if (rewards.points >= 10 && rewards.points < 20) {
-              untilNextReward = 20 - rewards.points;
-            }
-            setUntilNextReward(untilNextReward)
+          if (rewards.points < 5) {
+            untilNextReward = 5 - rewards.points;
           }
-        })
-        .catch((error) => {
-          console.log('unable to fetch rewards :', error)
-        })
+          if (rewards.points >= 5 && rewards.points < 10) {
+            untilNextReward = 10 - rewards.points;
+          }
+          if (rewards.points >= 10 && rewards.points < 20) {
+            untilNextReward = 20 - rewards.points;
+          }
+          setUntilNextReward(untilNextReward)
+        }
+      })
+      .catch((error) => {
+        console.log('unable to fetch rewards :', error)
+      })
   })
 
 
@@ -112,69 +112,88 @@ const Reward = () => {
           <div style={{ marginTop: '39px' }}>
             <IonRow className='reward-trophy-container'
               onClick={() => {
-                if(rewardPoints > 4){
+                if (rewardPoints > 4) {
                   setCouponCode(fivePercentCoupon)
                   setRewardType('$5 OFF YOUR PURCHASES')
                   modal.current?.present()
                 }
               }}
             >
-              <IonCol className='reward-trophy-box' >
-                <div className={rewardPoints > 4 && rewardPoints < 9 ? 'circle2' :'circle'}>
+              <IonCol className={rewardPoints > 5 ? 'reward-trophy-box2' : 'reward-trophy-box'} >
+                <div
+                  className={rewardPoints > 4 ? 'circle2' : 'circle'}>
+                  {/* className={rewardPoints > 4 && rewardPoints < 9 ? 'circle2' :'circle'}> */}
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1' style={{fontSize:12}}>$5 off your Purchase</p>
+                  <p className='info-text-1' style={{ fontSize: 12 }}>$5 off your Purchase</p>
                   <p className='info-text-2'>5 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">
-                  <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                  {rewardPoints > 4 ?
+                    <img width={20} height={16} src='assets/images/reward-arrow-color.svg' alt="" />
+                    :
+                    <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                  }
                 </div>
               </IonCol>
             </IonRow>
 
             <IonRow className='reward-trophy-container'
               onClick={() => {
-                if(rewardPoints > 9){
+                if (rewardPoints > 9) {
                   setCouponCode(tenPercentCoupon)
                   setRewardType('$10 OFF YOUR PURCHASES')
                   modal.current?.present()
                 }
               }}
             >
-              <IonCol className='reward-trophy-box'>
-                <div className={rewardPoints > 9 && rewardPoints < 14 ? 'circle2' :'circle'}>
+              <IonCol className={rewardPoints > 9 ? 'reward-trophy-box2' : 'reward-trophy-box'}>
+                <div
+                  // className={rewardPoints > 9 && rewardPoints < 14 ? 'circle2' :'circle'}
+                  className={rewardPoints > 9 ? 'circle2' : 'circle'}
+                >
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1' style={{fontSize:12}}>$10 off your Purchase</p>
+                  <p className='info-text-1' style={{ fontSize: 12 }}>$10 off your Purchase</p>
                   <p className='info-text-2'>10 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">
-                  <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                  {rewardPoints > 9 ?
+                    <img width={20} height={16} src='assets/images/reward-arrow-color.svg' alt="" />
+                    :
+                    <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                  }
                 </div>
               </IonCol>
             </IonRow>
 
             <IonRow className='reward-trophy-container'
               onClick={() => {
-                if(rewardPoints > 14){
+                if (rewardPoints > 14) {
                   setCouponCode(fifteenPercentCoupon)
                   setRewardType('$15 OFF YOUR PURCHASES')
                   modal.current?.present()
                 }
               }}
             >
-              <IonCol className='reward-trophy-box'>
-                <div className={rewardPoints > 14 ? 'circle2' :'circle'}>
+              <IonCol className={rewardPoints > 14 ? 'reward-trophy-box2' : 'reward-trophy-box'}>
+                <div
+                  className={rewardPoints > 14 ? 'circle2' : 'circle'}
+                >
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1' style={{fontSize:12}}>$15 off your Purchase</p>
+                  <p className='info-text-1' style={{ fontSize: 12 }}>$15 off your Purchase</p>
                   <p className='info-text-2'>15 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">
-                  <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                  {rewardPoints > 14 ?
+                    <img width={20} height={16} src='assets/images/reward-arrow-color.svg' alt="" />
+                    :
+                    <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                  }
                 </div>
               </IonCol>
             </IonRow>
