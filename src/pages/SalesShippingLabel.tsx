@@ -149,9 +149,6 @@ const SalesShippingLabel: React.FC = () => {
                             size='small'
                             fill='outline'
                             className='status-bottom-btn1_'
-                            onClick={() => {
-                              console.log('shipping label', singleProduct.shipmentInfo?.postage_label?.label_url)
-                            }}
                           >
                             SHIPPING LABEL
                             <img style={{ marginLeft: 10 }} height={12} src='assets/images/download-icon.svg' alt='logo' />
@@ -167,7 +164,7 @@ const SalesShippingLabel: React.FC = () => {
                         <p className="status-bottom-rating-text">N/A</p>
                         <a
                           target='_blank'
-                          rel='noreferrer' href={`https://staging.thenobo.com/api/orders/packing-slip/${singleProduct._id}-${userId}.html`}
+                          rel='noreferrer' href={`https://staging.thenobo.com/api/orders/packing-slip/${products._id}-${userId}.html`}
                         >
                           <IonButton
                             size='small'
