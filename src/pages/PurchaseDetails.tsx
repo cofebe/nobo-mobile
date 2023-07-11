@@ -133,7 +133,7 @@ const PurchaseDetails: React.FC = () => {
               <div className='order-details-item-order-date'>
                 <p style={{ color: '#ACACAC', textAlign: 'center' }}>ORDER DATE</p>
                 <p style={{ textAlign: 'center' }}>
-                  {new Date(product.updatedAt).toDateString().slice(0 - 11)}
+                  {new Date(product.createdAt).toDateString().slice(0 - 11)}
                 </p>
               </div>
               <div className='order-details-item-order-num'>
@@ -309,7 +309,7 @@ const PurchaseDetails: React.FC = () => {
             <IonCol style={{ fontWeight: '500px' }} size='12'
               onClick={() => {
                 console.log('returnDtata', returnData)
-                history.push({ pathname: `/purchases/return-details`, state: returnData })
+                history.push({ pathname: `/purchases/return-details/${params.id}`, state: returnData })
                 modal.current?.dismiss()
               }}
               className='purchase-details-return-text'

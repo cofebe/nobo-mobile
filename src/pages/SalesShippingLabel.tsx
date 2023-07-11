@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import './SalesShippingLabel.scss'
 import { UserService } from '../services/UserService'
 import Search from '../components/Search'
-import { FullOrder, OrdersResponse } from '../models'
+import { FullOrder, OrdersResponse, User } from '../models'
 import { getImageUrl } from '../utils'
 
 
@@ -15,6 +15,7 @@ const SalesShippingLabel: React.FC = () => {
   const [allSales, setAllSales] = useState<OrdersResponse[]>([])
   const [dropDown, setDropDownArray] = useState<string[]>([]);
   const [searchInput, setSearchInput] = useState('')
+  const [userId, setUser] = useState('')
 
   const selectedDropDown = (pId: string) => {
     if (!dropDown.includes(pId, 0)) {
@@ -25,11 +26,14 @@ const SalesShippingLabel: React.FC = () => {
     }
   };
 
+  function getMe() {
+    userService.getMe().then((user: User) => {
+      setUser(user._id)
+    })
+      .catch((error) => { console.log(error) });
+  }
 
-
-  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
-
-  useIonViewWillEnter(() => {
+  function getMySales() {
     userService.getSales()
       .then((sales: OrdersResponse) => {
         if (sales) {
@@ -39,12 +43,27 @@ const SalesShippingLabel: React.FC = () => {
         } else { console.log('something went wrong') }
       })
       .catch((err) => { console.log('err info while fetching products ', err) })
+  }
+
+
+
+  const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+
+  useIonViewWillEnter(() => {
+    getMe()
+    getMySales()
+
   })
 
   const filteredProduct = allSales[0]?.docs?.filter(product =>
     product.products[0]?.name.toLowerCase().includes(searchInput.toLowerCase(), 0) ||
     product.products[0]?.brand.toLowerCase().includes(searchInput.toLowerCase(), 0)
   );
+
+
+
+
+
 
 
 
@@ -104,36 +123,61 @@ const SalesShippingLabel: React.FC = () => {
                 ))}
                 {dropDown[0] === products._id && (
                   <div >
-                    {products.products.map((product: any, index: any) => (
+                    {products.products.map((singleProduct: any, index: any) => (
                       <div
                         key={index}
                         className=' shipping-l-product-box_show'>
                         <div
                           className="img-box"
                           style={{
-                            backgroundImage: product?.images?.length
-                              ? getImageUrl(product?.images[1]?.url)
+                            backgroundImage: singleProduct?.images?.length
+                              ? getImageUrl(singleProduct?.images[1]?.url)
                               : '',
                           }}
                         ></div>
 
                         {/* ------TOP--------- */}
                         <p className="top-earnings-title">EARNINGS</p>
-                        <p className="top-earnings-text">{currencyFormat.format(product?.summary.earnings)}</p>
+                        <p className="top-earnings-text">{currencyFormat.format(singleProduct?.summary.earnings)}</p>
                         <p className="top-order-status">ORDER STATUS</p>
                         <p className="top-order-status-text">{products.status}</p>
-                        <IonButton fill='outline'
-                          className='status-bottom-btn1_'>SHIPPING LABEL</IonButton>
+                        <a
+                          target='_blank'
+                          rel='noreferrer' href={`${singleProduct.shipmentInfo?.postage_label?.label_url}`}
+                        >
+                          <IonButton
+                            size='small'
+                            fill='outline'
+                            className='status-bottom-btn1_'
+                            onClick={() => {
+                              console.log('shipping label', singleProduct.shipmentInfo?.postage_label?.label_url)
+                            }}
+                          >
+                            SHIPPING LABEL
+                            <img style={{ marginLeft: 10 }} height={12} src='assets/images/download-icon.svg' alt='logo' />
+                          </IonButton>
+                        </a>
+
 
 
                         {/* -----BOTTOM------ */}
                         <p className="earnings-bottom-title">SOLD DATE</p>
-                        <p className="earnings-bottom-text">{new Date(product.updatedAt).toDateString().slice(0 - 11)}</p>
+                        <p className="earnings-bottom-text">{new Date(singleProduct.createdAt).toDateString().slice(0 - 11)}</p>
                         <p className="status-bottom-rating">RATING</p>
                         <p className="status-bottom-rating-text">N/A</p>
-                        <IonButton fill='outline'
-                          className='status-bottom-btn2_'>PACKING</IonButton>
-
+                        <a
+                          target='_blank'
+                          rel='noreferrer' href={`https://staging.thenobo.com/api/orders/packing-slip/${singleProduct._id}-${userId}.html`}
+                        >
+                          <IonButton
+                            size='small'
+                            fill='outline'
+                            className='status-bottom-btn2_'
+                          >
+                            PACKING SLIP
+                            <img style={{ marginLeft: 20 }} height={12} src='assets/images/download-icon.svg' alt='logo' />
+                          </IonButton>
+                        </a>
                       </div>
                     ))}
                   </div>)}

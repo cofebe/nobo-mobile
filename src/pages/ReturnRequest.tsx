@@ -9,18 +9,37 @@ import {
   useIonViewWillEnter
 } from '@ionic/react'
 import React, { useRef, useState } from 'react'
-import { useHistory } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import './ReturnRequest.scss'
 import './ReturnRequest.css'
 import Input from '../components/Input'
 import { Product } from '../models'
 import { formatPrice, getImageUrl } from '../utils'
+import { UserService } from '../services/UserService'
 
 
 const ReturnRequest: React.FC = () => {
+  const userService = new UserService()
+  const params: any = useParams()
+
   const history = useHistory()
   const [productsData, setProductData] = useState<any[]>([])
 
+
+  function requestReturn(reason: string, comments: string, prodId: string) {
+    console.log('reason', reason)
+    console.log('comments', comments)
+    console.log('prodId', prodId)
+    userService.requestReturns(reason, comments, prodId)
+      .then((res: any) => {
+        if (res) {
+          console.log('response from return', res);
+        } else { console.log('something went wrong') }
+      })
+      .catch((err) => { console.log('err sending return request ', err) })
+
+
+  }
 
 
 
@@ -121,6 +140,7 @@ const ReturnRequest: React.FC = () => {
         </IonRow>
         <div className="return-s-btn-below">
           <IonButton className='btn' onClick={() => {
+            requestReturn(reasonForReturn, textValue, params.id)
           }} >
             SUBMIT
           </IonButton>

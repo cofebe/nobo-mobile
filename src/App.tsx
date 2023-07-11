@@ -323,7 +323,7 @@ const App: React.FC = () => {
             <Route path="/settings/returns" exact={true}>
               <Returns />
             </Route>
-            <Route path="/purchases/return-details" exact={true}>
+            <Route path="/purchases/return-details/:id" exact={true}>
               <ReturnRequest />
             </Route>
             <Route path="/settings/returns/:id/submitted" exact={true}>

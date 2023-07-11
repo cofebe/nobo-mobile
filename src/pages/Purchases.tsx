@@ -1,12 +1,9 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import {
   IonCol,
   IonContent,
-  IonGrid,
-  IonHeader,
   IonPage,
   IonRow,
-  IonToolbar,
   useIonViewWillEnter
 } from '@ionic/react'
 import './Purchases.scss'
@@ -78,7 +75,7 @@ const Purchases: React.FC = () => {
             <div className='purchase-item-info'>
               <div className='purchase-item-order-date'>
                 <p style={{ color: '#ACACAC', textAlign: 'center' }}>ORDER DATE</p>
-                <p style={{ textAlign: 'center' }}>{new Date(product.updatedAt).toDateString().slice(0 - 11)}</p>
+                <p style={{ textAlign: 'center' }}>{new Date(product.createdAt).toDateString().slice(0 - 11)}</p>
               </div>
               <div className='purchase-item-order-num'>
                 <p style={{ color: '#ACACAC', textAlign: 'center' }}>ORDER NO.</p>

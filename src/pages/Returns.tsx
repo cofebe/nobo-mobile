@@ -12,26 +12,29 @@ const Returns: React.FC = () => {
   const params: any = useParams()
   const userService = new UserService()
   const [productsData, setProductData] = useState<FullOrder[]>([])
+  const [returns, setReturns] = useState<any[]>([])
 
-
-
+  function getReturns() {
+    userService.getReturns()
+    .then((res) => {
+      console.log(res, 'res')
+      setReturns(res);
+    })
+    .catch((err) => {
+      console.log(err, 'Error getting returns');
+    })
+  }
 
 
   useIonViewWillEnter(() => {
-    // console.log('params1', params.id)
-    userService.getOrder(params.id)
-      .then((products: FullOrder) => {
-        if (products) {
-          setProductData([products])
-        } else { console.log('something went wrong') }
-      })
-      .catch((err) => { console.log('err info while fetching products ', err) })
+  getReturns()
+
   })
 
 
 
 
-
+  console.log('returns...', returns)
 
   return (
     <IonPage className='return-main-container'>
@@ -57,7 +60,7 @@ const Returns: React.FC = () => {
         {productsData[0]?.products.map((product: Product) => (
           <IonRow key={product._id} className='return-item-container'
             onClick={() => {
-              history.push({pathname:`/purchases/return-details`, state:product})
+              history.push({ pathname: `/purchases/return-details`, state: product })
               console.log(product)
             }}
           >
