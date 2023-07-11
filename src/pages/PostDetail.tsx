@@ -150,6 +150,7 @@ const PostDetail: React.FC = () => {
       .then(data => {
         console.log('Post Comment success: ', data);
         load();
+        setCommentMessage("");
       });
   }
 
@@ -279,42 +280,42 @@ const PostDetail: React.FC = () => {
                 } catch (exZoomPicNoExist) { }
               }}
             />
-          {message.comments.map(c => (
-            <div style={{ backgroundColor: '' }}>
+          <div className="post-detail-create-comment-container">
+            {message.comments.map(c => (
+              <div style={{ backgroundColor: '' }}>
 
-              <IonItemSliding>
-                <IonItem className='post-slide' >
-                  <PostComment message={message} comment={c} key={c.comment_id} />
-                </IonItem>
-                <IonItemOptions className='delete-post-main'  side="end">
+                <IonItemSliding>
+                  <IonItem className='post-slide' >
+                    <PostComment message={message} comment={c} key={c.comment_id} />
+                  </IonItem>
+                  <IonItemOptions className='delete-post-main'  side="end">
 
-                  <div className='post-slide-img-box'
-                   onClick={()=>{
-                    deleteComment(c._id)
-                    console.log('message id ',c._id)
-                  }}
-                  >
-                    <div className="report-c-box-delete">
-                      <img className='delete-post-img'
-                        src='assets/images/delete-comment2.svg' alt='delete'
-                      />
+                    <div className='post-slide-img-box'
+                     onClick={()=>{
+                      deleteComment(c._id)
+                      console.log('message id ',c._id)
+                    }}
+                    >
+                      <div className="report-c-box-delete">
+                        <img className='delete-post-img'
+                          src='assets/images/delete-comment2.svg' alt='delete'
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* <div className='post-slide-img-box'>
-                    <div className="report-c-box-report">
-                      <img className='delete-post-img'
-                        src='assets/images/report-comment.svg' alt='delete'
-                      />
-                    </div>
-                  </div> */}
+                    {/* <div className='post-slide-img-box'>
+                      <div className="report-c-box-report">
+                        <img className='delete-post-img'
+                          src='assets/images/report-comment.svg' alt='delete'
+                        />
+                      </div>
+                    </div> */}
 
-                </IonItemOptions>
-              </IonItemSliding>
-            </div>
-
-
-          ))}
+                  </IonItemOptions>
+                </IonItemSliding>
+              </div>
+            ))}
+          </div>
 
         </IonContent>
       ) : (
