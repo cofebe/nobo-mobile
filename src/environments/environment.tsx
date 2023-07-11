@@ -6,11 +6,7 @@
 export const environment = {
   development: true,
 
-<<<<<<< HEAD
-    //  serverUrl: 'https://thenobo.com',
-=======
   // serverUrl: 'https://thenobo.com',
->>>>>>> c3f2b90b7040b41b1a0e08a38b8f69273daf4e61
   serverUrl: 'https://staging.thenobo.com',
   // serverUrl: 'http://localhost:8080',
 
