@@ -94,7 +94,7 @@
         }
 
         // -------TOP----------------
-        .top-earnings-title{
+        .top-earnings-title {
           position: absolute;
           top: 11.5px;
           left: 85px;
@@ -109,7 +109,7 @@
           color: #ACACAC;
         }
 
-        .top-earnings-text{
+        .top-earnings-text {
           position: absolute;
           top: 27px;
           left: 85px;
@@ -124,7 +124,7 @@
           color: #000000;
         }
 
-        .top-order-status{
+        .top-order-status {
           position: absolute;
           top: 11.5px;
           left: 155px;
@@ -139,7 +139,7 @@
           color: #ACACAC;
         }
 
-        .top-order-status-text{
+        .top-order-status-text {
           position: absolute;
           top: 27px;
           left: 155px;
@@ -156,26 +156,23 @@
         }
 
         .status-bottom-btn1_ {
-          box-sizing: border-box;
           position: absolute;
-          width: 100px;
-          height: 32px;
           right: 4px;
           top: 14px;
+          border-radius: 5px;
           background: #FFFFFF;
-          border: 0.2px solid #D6980E;
-          backdrop-filter: blur(7.5px);
-          border-radius: 10px;
+          width: 100px;
+          height: 32px;
           font-family: 'Nunito Sans';
           font-style: normal;
-          font-weight: 700;
-          font-size: 8px;
+          font-weight: 500;
+          font-size: 7px;
           line-height: 150%;
+
           letter-spacing: 0.05em;
-          color: #D6980E;
         }
 
-// ---------BOTTOM-----------
+        // ---------BOTTOM-----------
         .earnings-bottom-title {
           position: absolute;
           top: 50px;
@@ -240,23 +237,21 @@
 
 
         .status-bottom-btn2_ {
-          box-sizing: border-box;
           position: absolute;
-          width: 100px;
-          height: 32px;
           right: 4px;
           bottom: 13px;
+          border-radius: 5px;
           background: #FFFFFF;
-          border: 0.2px solid #D6980E;
-          backdrop-filter: blur(7.5px);
-          border-radius: 10px;
+          width: 100px;
+          height: 32px;
           font-family: 'Nunito Sans';
           font-style: normal;
-          font-weight: 700;
-          font-size: 8px;
+          font-weight: 500;
+          font-size: 7px;
           line-height: 150%;
+          display: flex;
+          align-items: center;
           letter-spacing: 0.05em;
-          color: #D6980E;
         }
 
 

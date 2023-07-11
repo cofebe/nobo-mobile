@@ -12,11 +12,14 @@ import { formatPrice, getImageUrl } from '../utils'
 
 
 interface OfferResponse {
+  buyer: string;
+  seller: string;
   product: CreateProductResponse
-  status: string
-  _id: string
-  updatedAt: string
-  offeredPrice: number
+  status: string;
+  _id: string;
+  updatedAt: string;
+  createdAt: string;
+  offeredPrice: number;
 
 
 
@@ -26,13 +29,15 @@ const MyOffers: React.FC = () => {
   const history = useHistory()
   const userService = new UserService()
   const [offerData, setTradesData] = useState<OfferResponse[]>([])
-const [experienceOption, setExperienceOption] = useState('')
+  const [experienceOption, setExperienceOption] = useState('')
+  const [userId, setUser] = useState<string>('')
 
 
   const getMe = () => {
     userService.getMe()
       .then((user: User) => {
         setExperienceOption(user.experiencePreferences)
+        setUser(user._id)
       })
       .catch((error: Error) => {
         console.log(error)
@@ -84,96 +89,107 @@ const [experienceOption, setExperienceOption] = useState('')
   }
 
 
-  // console.log(offerData)
   return (
     <IonPage className='my-offers-main-container'>
       <Header
         title='MY OFFERS'
       />
-      <IonContent className='my-offers-ion-content'>
-        {/* offer.status === 'pending' && */}
-        {offerData?.map((offer) => (
-          <div key={offer._id}>
-            <IonRow style={{ padding: '0px' }}>
-              <IonCol className='my-offers-item-container'>
-                <div className='img'
-                  style={{
-                    backgroundImage: offer?.product.images?.length
-                      ? getImageUrl(offer?.product.images[0]?.url)
-                      : '',
-                  }}
-                > </div>
-                <div>
-                  <p className={
-                    offer?.status === 'pending' ?
-                      'offer-pending' :
-                      offer?.status === 'rejected' ?
-                        'offer-rejected'
-                        : 'offer-accepted'}>
-                    OFFER  {` ${offer?.status}`}
-                  </p>
-                  <p className='product-name'>{`${offer?.product.brand} ${offer.product.name}`}</p>
-                  <p className='price'>{formatPrice(offer?.offeredPrice)}</p>
-                  <p className='offered-price'>Price you offered</p>
-                </div>
-              </IonCol>
-            </IonRow>
+      {offerData?.length < 1 ?
+        <IonContent className='my-offers-ion-content'>
+          <IonRow>You have no completed offers!</IonRow>
+        </IonContent>
+        :
+        <IonContent className='my-offers-ion-content'>
+          {/* offer.status === 'pending' && */}
+          {offerData?.map((offer) => (
+            <div key={offer._id}>
+              <IonRow style={{ padding: '0px' }}>
+                <IonCol className='my-offers-item-container'>
+                  <div className='img'
+                    style={{
+                      backgroundImage: offer?.product.images?.length
+                        ? getImageUrl(offer?.product.images[0]?.url)
+                        : '',
+                    }}
+                  > </div>
+                  <div>
+                    {offer.status === 'pending' && offer.seller !== userId && (<p className='offer-pending'>REQUEST {offer?.status}</p>)}
+                    {offer.status === 'accepted' && (<p className='offer-accepted'>REQUEST {offer?.status}</p>)}
+                    {offer.status === 'rejected' && (<p className='offer-rejected'>REQUEST NOT ACCEPTED</p>)}
+                    {offer.status === 'pending' && offer.seller === userId && (<p className='offer-request'>OFFER REQUEST</p>)}
+                    <p className='product-name'>{`${offer?.product.brand} ${offer.product.name}`}</p>
+                    <p className='price'>{formatPrice(offer?.offeredPrice)}</p>
+                    { }
+                    <p className='offered-price'>
+                      {offer.status === 'pending' && offer.seller === userId ? 'Price offered' : 'Price you offered'}
+                    </p>
+                  </div>
+                </IonCol>
+              </IonRow>
 
-            <IonRow style={{ marginTop: '10px' }}>
-              <IonCol className='view-my-purchases_btn' >
+              <IonRow style={{ marginTop: '10px' }}>
+                <IonCol className='view-my-purchases_btn' >
 
-                <div className='btn-container'>
-                  {
-                    offer.status === 'pending' ?
-                      <p
-                        className='browse-shop'
-                        onClick={() => {
-                          history.push(`/home/explore/${experienceOption}/explore`)
-                        }}>
-                        Browse Shop
-                      </p>
-
-                      : offer.status === 'accepted' ?
+                  <div className='btn-container'>
+                    {
+                      offer.status === 'pending' && offer.seller !== userId ?
                         <p
                           className='browse-shop'
                           onClick={() => {
-                            history.push('/settings/sales')
+                            history.push(`/home/explore/${experienceOption}/explore`)
                           }}>
-                          View in my sales
+                          Browse Shop
                         </p>
-                        : offer.status === 'rejected' ?
-                          <IonButton
-                            fill='outline'
-                            className='rejected-btn'
+
+                        : offer.status === 'accepted' ?
+                          <p
+                            className='browse-shop'
                             onClick={() => {
-                              history.push(`/home/product/${offer.product._id}`)
-                            }}
-                          >BUY AT A LISTED PRICE
-                          </IonButton>
+                              history.push('/settings/sales')
+                            }}>
+                            View in my sales
+                          </p>
+                          : offer.status === 'rejected' ?
+                            <IonButton
+                              size='small'
+                              fill='outline'
+                              className='rejected-btn'
+                              onClick={() => {
+                                history.push(`/home/product/${offer.product._id}`)
+                              }}
+                            >BUY AT A LISTED PRICE
+                            </IonButton>
 
-                          :
-                          <>
-                            <IonButton className='btn-deny' fill='outline'
-                              onClick={() => { denyOffer(offer._id, offer.product.price) }}
-                            >DENY</IonButton>
+                            :
+                            offer.status === 'pending' && offer.seller === userId ?
 
-                            <IonButton className='btn-accept'
-                              onClick={() => { acceptOffer(offer._id, offer.product.name) }}
-                            >ACCEPT</IonButton>
-                          </>
-                  }
-                </div>
+                              <>
+                                <IonButton
+                                  size='small'
+                                  className='btn-deny'
+                                  fill='outline'
+                                  onClick={() => { denyOffer(offer._id, offer.product.price) }}
+                                >DENY</IonButton>
 
-                <p className='date'>{new Date(offer?.updatedAt).toDateString().slice(0 - 11)}</p>
+                                <IonButton
+                                  size='small'
+                                  className='btn-accept'
+                                  onClick={() => { acceptOffer(offer._id, offer.product.name) }}
+                                >ACCEPT</IonButton>
+                              </>
+                              : ''}
+                  </div>
 
-              </IonCol>
-            </IonRow>
+                  <p className='date'>{new Date(offer?.updatedAt).toDateString().slice(0 - 11)}</p>
+
+                </IonCol>
+              </IonRow>
 
 
-            <div className='my-0ffers-seperator'></div>
-          </div>
-        ))}
-      </IonContent>
+              <div className='my-0ffers-seperator'></div>
+            </div>
+          ))}
+        </IonContent>}
     </IonPage>
   )
 }

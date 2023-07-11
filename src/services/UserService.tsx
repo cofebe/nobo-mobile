@@ -392,8 +392,16 @@ export class UserService extends BaseService {
   async getOffers(): Promise<OfferedStatus> {
     const res = await super.fetch('GET', '/api/offers/my-offers/all');
     const json: OfferedStatus = await res.json();
-
     return json;
+  }
+
+  async getReturns() {
+    const res = await super.fetch('GET', '/api/returns/my');
+    return res.json();
+  }
+  async requestReturns(reason:string, comments:string, prodId:string) {
+    const res = await super.fetch('POST', '/api/returns/request-return', {reason, comments, prodId })
+    return res.json();
   }
 
   async acceptOffer(offerid: string): Promise<OfferedStatus> {
