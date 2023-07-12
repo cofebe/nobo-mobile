@@ -388,6 +388,7 @@
         letter-spacing: 0.05em;
         height: 32px;
         width: 80px;
+        z-index: 10000;
       }
     }
 
@@ -442,26 +443,15 @@
       position: absolute;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 10px;
       height: 40px;
       bottom: 3%;
       right: 5%;
       color: #000000;
-      // font-size: 10px;
+
       text-align: center;
       font-weight: 400;
-
-      .btn-reminder {
-        width: 120px;
-        font-size: 9px;
-        font-weight: 400;
-        font-family: 'Nunito Sans';
-        font-style: normal;
-        letter-spacing: 0.5;
-
-
-      }
     }
 
 
