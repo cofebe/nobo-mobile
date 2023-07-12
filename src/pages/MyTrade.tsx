@@ -6,6 +6,7 @@ import {
   IonGrid,
   IonPage,
   IonRow,
+  useIonToast,
   useIonViewWillEnter
 } from '@ionic/react'
 import './MyTrade.scss'
@@ -15,12 +16,26 @@ import { TradesResponse } from '../models'
 import { formatPrice, getImageUrl } from '../utils'
 
 
+interface ReminderResponse {
+  success: boolean;
+}
+
 
 const MyTrade: React.FC = () => {
   const userService = new UserService()
   const history = useHistory()
   const [tradesData, setTradesData] = useState<TradesResponse[]>([])
 
+
+  const [present] = useIonToast();
+
+  const presentToast = (position: 'top' | 'middle' | 'bottom') => {
+    present({
+      message: `Reminder Sent`,
+      duration: 1800,
+      position: position,
+    });
+  };
 
   useIonViewWillEnter(() => {
     userService.getMyTrades()
@@ -69,6 +84,20 @@ const MyTrade: React.FC = () => {
       .catch((error) => {
         console.log('error denying trade : ', error)
       })
+  }
+
+
+  function sendReminder(tradeId: string) {
+    userService.sendReminder(tradeId)
+      .then((response: ReminderResponse) => {
+        if (response.success) {
+          // console.log('reminder sent successfully')
+          presentToast('top')
+        } else {
+          console.log('something went wrong')
+        }
+      })
+      .catch((error) => { console.log('error sending reminder', error) })
   }
 
 
@@ -185,6 +214,8 @@ const MyTrade: React.FC = () => {
                       <div className="trade-item-price-left">{formatPrice(product.products.offered.price)}</div>
                     </div>
 
+                    {product?.status === 'pending' && (<div className='trade-offer-line'></div>)}
+
                     <div className='items-view-props-center'>
                       <div className='line'></div>
                       <div className='circle'></div>
@@ -209,7 +240,15 @@ const MyTrade: React.FC = () => {
 
                   {product?.status === 'pending' ?
                     (<div className='trade-items-pending-sent'>
-                      You Have a Pending Trade Offer waiting for confirmation.
+                      <div></div>
+                      <IonButton
+                        className='btn-reminder'
+                        onClick={() => {
+                          sendReminder(product._id)
+                        }}
+                      >
+                        SEND REMINDER
+                      </IonButton>
                     </div>)
 
                     // product?.status === 'invalid' ?
