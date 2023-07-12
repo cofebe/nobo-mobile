@@ -315,8 +315,20 @@ export interface FileUploadResponse {
 }
 
 export interface ShoppingCartResponse {
-  coupon: boolean;
+  coupon:  Coupon | boolean;
   products: Product[];
+}
+
+export interface Coupon {
+  active: boolean;
+  code: string;
+  createdAt: string;
+  discount: number;
+  multi: boolean;
+  type: string;
+  updatedAt: string;
+  user: string;
+  _id: string;
 }
 
 export interface TaxShippingResponse {

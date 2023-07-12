@@ -15,7 +15,7 @@ import {
 import { caretUpOutline, caretDownOutline } from 'ionicons/icons';
 import './ShoppingCart.scss';
 import Button from '../components/Button';
-import { Address, Product, User, TaxShippingResponse } from '../models';
+import { Address, Product, User, TaxShippingResponse, ShoppingCartResponse } from '../models';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import { ProductService } from '../services/ProductService';
 import { UserService } from '../services/UserService';
@@ -28,6 +28,9 @@ const ShoppingCartPage: React.FC = () => {
   const userService = new UserService();
   const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
   const [promoCode, setPromoCode] = useState<string>('');
+  const [isPromoCodeValid, setIsPromoCodeValid] = useState(false);
+  const [promoDiscount, setPromoDiscount] = useState(0);
+  const [discountAmount, setDiscountAmount] = useState(0);
   const [shippingAddress, setShippingAddress] = useState<Address>();
   const [showDetails, setShowDetails] = useState<boolean>(true);
   let subscription: any;
@@ -37,9 +40,8 @@ const ShoppingCartPage: React.FC = () => {
       setCart(cart);
     });
 
-    productService.getCart().then((products: Product[]) => {
-      //console.log('getCart', products);
-      shoppingCartStore.setProducts(products);
+    productService.getCart().then((shoppingCart: ShoppingCartResponse) => {
+      shoppingCartStore.setProducts(shoppingCart.products);
     });
 
     userService.getMe().then((user: User) => {
@@ -78,6 +80,20 @@ const ShoppingCartPage: React.FC = () => {
         window.alert('Unable to remove item from cart!');
       }
     });
+  }
+
+  function checkPromoCode(promoCode: string) {
+    setPromoCode(promoCode)
+
+    productService
+      .checkPromoCode(promoCode)
+      .then((res) => {
+        setIsPromoCodeValid(res.valid);
+        if (res.valid === true) {
+          setPromoDiscount(res.coupon.discount);
+          setDiscountAmount(cart.subtotal * (promoDiscount/100));
+        }
+      })
   }
 
   function checkout() {
@@ -156,6 +172,12 @@ const ShoppingCartPage: React.FC = () => {
                     <div className="label">Subtotal</div>
                     <div className="value">{formatPrice(cart.subtotal)}</div>
                   </div>
+                  { isPromoCodeValid && (
+                    <div className="summary-info">
+                      <div className="label">Coupon ({promoDiscount}% OFF)</div>
+                      <div className="value">-{formatPrice(discountAmount)}</div>
+                    </div>
+                  )}
                   <div className="summary-info">
                     <div className="label">Shipping</div>
                     <div className="value">{formatPrice(cart.shipping)}</div>
@@ -168,18 +190,26 @@ const ShoppingCartPage: React.FC = () => {
               ) : (
                 ''
               )}
-              <div className="summary-info total">
-                <div className="label">Your Total</div>
-                <div className="value">{formatPrice(cart.total)}</div>
-              </div>
+              { isPromoCodeValid ? (
+                <div className="summary-info total">
+                  <div className="label">Your Total</div>
+                  <div className="value">{formatPrice(cart.total - discountAmount )}</div>
+                </div>
+              ) : (
+                <div className="summary-info total">
+                  <div className="label">Your Total</div>
+                  <div className="value">{formatPrice(cart.total)}</div>
+                </div>
+              )}
             </div>
             <div className="footer">
               <div className="promo-code-container">
                 <Input
                   value={promoCode}
                   small={true}
-                  onChange={val => setPromoCode(val)}
+                  onChange={val => checkPromoCode(val)}
                   placeholder="Enter promo code"
+                  className={isPromoCodeValid ? 'promo-valid' : 'promo-invalid'}
                 />
               </div>
               <div className="button-container">
