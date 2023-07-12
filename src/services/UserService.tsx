@@ -93,6 +93,11 @@ export class UserService extends BaseService {
     return await super.fetch('GET', `/api/users/${userId}/profile`);
   }
 
+  async autoCompleteUser(arg: string) {
+    const res = await super.fetch('GET', `/api/users/autocomplete/${arg}`);
+    return res.json()
+  }
+
   async getBuyer(userId: any) {
     const res = await super.fetch('GET', `/api/users/${userId}/profile`);
     return res.json();
@@ -393,6 +398,10 @@ export class UserService extends BaseService {
     const res = await super.fetch('GET', '/api/offers/my-offers/all');
     const json: OfferedStatus = await res.json();
     return json;
+  }
+  async sendReminder(tradeId:string) {
+    const res = await super.fetch('POST', '/api/trades/reminder',{tradeId})
+    return res.json();
   }
 
   async getReturns() {

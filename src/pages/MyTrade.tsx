@@ -6,6 +6,7 @@ import {
   IonGrid,
   IonPage,
   IonRow,
+  useIonToast,
   useIonViewWillEnter
 } from '@ionic/react'
 import './MyTrade.scss'
@@ -13,13 +14,27 @@ import { useHistory, } from 'react-router'
 import { UserService } from '../services/UserService'
 import { TradesResponse } from '../models'
 import { formatPrice, getImageUrl } from '../utils'
+import Button from '../components/Button'
 
+interface ReminderResponse {
+  success: boolean;
+}
 
 
 const MyTrade: React.FC = () => {
   const userService = new UserService()
   const history = useHistory()
   const [tradesData, setTradesData] = useState<TradesResponse[]>([])
+
+  const [present] = useIonToast();
+
+  const presentToast = (position: 'top' | 'middle' | 'bottom') => {
+    present({
+      message: `Reminder Sent`,
+      duration: 1800,
+      position: position,
+    });
+  };
 
 
   useIonViewWillEnter(() => {
@@ -71,6 +86,19 @@ const MyTrade: React.FC = () => {
       })
   }
 
+  function sendReminder(tradeId: string) {
+    userService.sendReminder(tradeId)
+      .then((response: ReminderResponse) => {
+        if (response.success) {
+          console.log('reminder sent successfully')
+          presentToast('top')
+        } else {
+          console.log('something went wrong')
+        }
+      })
+      .catch((error) => { console.log('error sending reminder', error) })
+  }
+
 
 
 
@@ -116,11 +144,11 @@ const MyTrade: React.FC = () => {
             {/* OFFER I SENT */}
             {tradesData[0]?.sent.map((product: any) => (
               <IonRow key={product._id} style={{ marginBottom: '14px' }}
-                onClick={() => {
-                  if (product.status === 'pending') {
-                    history.push({ pathname: `trades/details/${product._id}`, state: product })
-                  }
-                }}
+              // onClick={() => {
+              //   if (product.status === 'pending') {
+              //     history.push({ pathname: `trades/details/${product._id}`, state: product })
+              //   }
+              // }}
               >
                 <IonCol
                   className={
@@ -207,10 +235,19 @@ const MyTrade: React.FC = () => {
                     </div>
                   </div>
 
+                  {product?.status === 'pending' && (<div className='trade-offer-line'></div>)}
 
                   {product?.status === 'pending' ?
                     (<div className='trade-items-pending-sent'>
-                      You Have a Pending Trade Offer waiting for confirmation.
+                      <div></div>
+                      <IonButton
+                        className='btn-reminder'
+                        onClick={() => {
+                          sendReminder(product._id)
+                        }}
+                      >
+                        SEND REMINDER
+                      </IonButton>
                     </div>)
 
                     // product?.status === 'invalid' ?
