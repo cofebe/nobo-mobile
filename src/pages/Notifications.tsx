@@ -27,6 +27,12 @@ const Notifications: React.FC = () => {
       console.log('notifications', notifications);
       setUnreadNotifications(notifications.filter(n => !n.readStatus));
       setReadNotifications(notifications.filter(n => n.readStatus));
+
+      userService.markNotificationsAsRead(
+        notifications.filter(n => !n.readStatus).map(n => n._id))
+          .then(() => {
+            console.log('marked as read:', unreadNotifications);
+          });
     });
   });
 
