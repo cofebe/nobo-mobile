@@ -78,6 +78,8 @@ const PostCreate: React.FC = () => {
   const [videoUploadComplete, setVideoUploadComplete] = useState(false);
   const [tagUsers, setTagUsers] = useState<UsersRes[]>([]);
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const PlacesAutocomplete = ({ setSelected }: any) => {
     const {
       ready,
@@ -313,6 +315,8 @@ const PostCreate: React.FC = () => {
     setUploadVideoMode(true);
     // document?.querySelector('.video-upload-file-progress .progress')?.setAttribute('style', `display:block`);
   };
+
+
 
 
   const tagUser = () => {
