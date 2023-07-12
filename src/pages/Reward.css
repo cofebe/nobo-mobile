@@ -19,6 +19,14 @@
 
 }
 
+/* .reward-coupon-active{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  color: red;
+} */
+
 .reward-header-text {
   font-family: 'Nunito Sans';
   font-style: normal;
