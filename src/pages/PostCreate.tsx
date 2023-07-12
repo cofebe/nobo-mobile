@@ -32,6 +32,22 @@ interface InternalValues {
   file: any;
 }
 
+interface UsersRes{
+  users:[
+   {
+     _id:string;
+     avater:string;
+     displayName:string;
+     firstName:string;
+     lastName:number;
+     sellCloset:string;
+     tradeCloset:string;
+
+    }
+
+  ]
+}
+
 const PostCreate: React.FC = () => {
   const [userId, setUserId] = useState<number>();
   const [data, setData] = useState<string>();
@@ -60,6 +76,7 @@ const PostCreate: React.FC = () => {
   const [progressActive, setProgressActive] = useState(false);
   const [uploadVideoMode, setUploadVideoMode] = useState(false);
   const [videoUploadComplete, setVideoUploadComplete] = useState(false);
+  const [tagUsers, setTagUsers] = useState<UsersRes[]>([]);
 
   const PlacesAutocomplete = ({ setSelected }: any) => {
     const {
@@ -297,6 +314,23 @@ const PostCreate: React.FC = () => {
     // document?.querySelector('.video-upload-file-progress .progress')?.setAttribute('style', `display:block`);
   };
 
+
+  const tagUser = () => {
+    const result: any = data?.match(/@(.+?)\b/);
+    if (result !== null) {
+      console.log(result[1]);
+      userService.autoCompleteUser(result[1])
+        .then((res:UsersRes) => {
+          setTagUsers([res]);
+        })
+        .catch((err) => { console.log(err) });
+
+    }
+
+  }
+
+  console.log('tagusers',tagUsers[0]?.users)
+
   return (
     <IonPage className="post-create">
       <IonHeader className="post-header">
@@ -341,7 +375,7 @@ const PostCreate: React.FC = () => {
       <IonContent className="post-content" fullscreen>
 
         <IonGrid className="post-grid">
-      <div className='create-post-sep'></div>
+          <div className='create-post-sep'></div>
           <IonRow>
             <IonCol size="12">
               <IonItem className="nobo-post-input-area" lines="none">
@@ -351,7 +385,10 @@ const PostCreate: React.FC = () => {
                     value={data}
                     autocapitalize="on sentence"
                     spellcheck={true}
-                    onIonChange={e => setData(e.detail.value!)}
+                    onIonChange={e => {
+                      setData(e.detail.value!)
+                      tagUser()
+                    }}
                     placeholder="Share a post..."
                     maxlength={350}
                     autoGrow={true}
@@ -453,6 +490,12 @@ const PostCreate: React.FC = () => {
                   ></input>
                 </div>
               </div>
+            </IonCol>
+            <IonCol className='tag-user-container' size="12" >
+              {tagUsers[0]?.users.map((user=>(
+                <p className='tag-user' >@{user.displayName}</p>
+
+              )))}
             </IonCol>
           </IonRow>
           {showVideoLink && (

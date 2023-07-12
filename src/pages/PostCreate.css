@@ -151,6 +151,25 @@ ion-button.cancel-btn {
 	position: absolute;
 	right: -20px;
 }
+.tag-user-container{
+z-index: 500;
+  background-color: #fefcf6;
+  padding: 0px 50px 0px 50px;
+}
+
+.tag-user{
+/* background-color: plum; */
+text-align: center;
+font-family: 'Nunito Sans';
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 150%;
+letter-spacing: 0.05em;
+color: #000000;
+text-transform: uppercase;
+/* text-align: center; */
+}
 
 .nobo-post-tool-menu svg {
 	height: 36px;
