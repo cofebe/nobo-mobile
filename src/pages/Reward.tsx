@@ -19,6 +19,10 @@ const Reward = () => {
   const [untilNextReward, setUntilNextReward] = useState<number>(0);
   const [couponCode, setCouponCode] = useState<string>('')
   const [rewardType, setRewardType] = useState<string>('')
+  const [activeCoupon, setActiveCoupon] = useState(false)
+  const [valid5Percents, setValid5Percents] = useState(false)
+  const [valid10Percents, setValid10Percents] = useState(false)
+  const [valid15Percents, setValid15Percents] = useState(false)
   const [present] = useIonToast();
 
   const pointsData = [rewardPoints, untilNextReward];
@@ -45,6 +49,9 @@ const Reward = () => {
       .getRewards()
       .then((rewards) => {
         if (rewards) {
+          setValid5Percents(rewards.coupons.USD_5_OFF.active)
+          setValid10Percents(rewards.coupons.USD_10_OFF.active)
+          setValid15Percents(rewards.coupons.USD_15_OFF.active)
           setRewardPoints(rewards.points)
           setfivePercent(rewards.coupons?.USD_5_OFF?.code)
           setTenPercent(rewards.coupons?.USD_10_OFF?.code)
@@ -113,6 +120,7 @@ const Reward = () => {
             <IonRow className='reward-trophy-container'
               onClick={() => {
                 if (rewardPoints > 4) {
+                  setActiveCoupon(valid5Percents)
                   setCouponCode(fivePercentCoupon)
                   setRewardType('$5 OFF YOUR PURCHASES')
                   modal.current?.present()
@@ -142,6 +150,7 @@ const Reward = () => {
             <IonRow className='reward-trophy-container'
               onClick={() => {
                 if (rewardPoints > 9) {
+                  setActiveCoupon(valid10Percents)
                   setCouponCode(tenPercentCoupon)
                   setRewardType('$10 OFF YOUR PURCHASES')
                   modal.current?.present()
@@ -173,6 +182,7 @@ const Reward = () => {
               onClick={() => {
                 if (rewardPoints > 14) {
                   setCouponCode(fifteenPercentCoupon)
+                  setActiveCoupon(valid15Percents)
                   setRewardType('$15 OFF YOUR PURCHASES')
                   modal.current?.present()
                 }
@@ -241,6 +251,7 @@ const Reward = () => {
           <IonCol size='12' className='reward-promo-box'>
             <p className='reward-promo-code'>PROMO CODE</p>
             <p className='reward-promo-text'>{couponCode}</p>
+
             <div
               className='reward-copy-box'
               onClick={() => {
@@ -252,6 +263,8 @@ const Reward = () => {
               />
               <p className='reward-copy-text'>Copy</p>
             </div>
+            {activeCoupon ? <p style={{ color: 'red', marginLeft: 30 }}>USED</p> : ''}
+
           </IonCol>
           <div className='reward-line'></div>
 
