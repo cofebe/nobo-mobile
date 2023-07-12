@@ -39,7 +39,7 @@ const MyTrade: React.FC = () => {
 
           setTimeout(() => {
             localStorage.setItem('denyTradeData', JSON.stringify(res))
-            history.push(`trades/denied/${productId}`)
+            history.push(`/settings/trades/denied/${productId}`)
           }, 1000);
         } else {
           return
@@ -59,7 +59,7 @@ const MyTrade: React.FC = () => {
           console.log('response from acacepted trade ', res)
           setTimeout(() => {
             localStorage.setItem('acceptTradeData', JSON.stringify(res))
-            history.push(`trades/accepted/${productId}`)
+            history.push(`/settings/trades/accepted/${productId}`)
           }, 500);
         } else {
           console.log('trade accept fail')
@@ -115,13 +115,7 @@ const MyTrade: React.FC = () => {
 
             {/* OFFER I SENT */}
             {tradesData[0]?.sent.map((product: any) => (
-              <IonRow key={product._id} style={{ marginBottom: '14px' }}
-                onClick={() => {
-                  if (product.status === 'pending') {
-                    history.push({ pathname: `trades/details/${product._id}`, state: product })
-                  }
-                }}
-              >
+              <IonRow key={product._id} style={{ marginBottom: '14px' }}>
                 <IonCol
                   className={
                     product.status === 'rejected' ?
@@ -172,7 +166,12 @@ const MyTrade: React.FC = () => {
                   )}
 
 
-                  <div className='items-view-props'>
+                  <div className='items-view-props'
+                      onClick={() => {
+                        if (product.status === 'pending') {
+                          history.push({ pathname: `trades/details/${product._id}`, state: product })
+                        }
+                    }}>
                     <div className='items-view-props-left'>
                       <div className='item-img-left'
                         style={{
@@ -233,13 +232,7 @@ const MyTrade: React.FC = () => {
 
             {/* product.status === 'pending' && */}
             {tradesData[0]?.received.map((product: any) => (
-              <IonRow key={product._id} style={{ marginBottom: '14px' }}
-                onClick={() => {
-                  if (product.status === 'pending') {
-                    history.push({ pathname: `trades/details/${product._id}`, state: product })
-                  }
-                }}
-              >
+              <IonRow key={product._id} style={{ marginBottom: '14px' }}>
                 <IonCol
                   className={
                     product.status === 'rejected' ?
@@ -293,7 +286,6 @@ const MyTrade: React.FC = () => {
 
 
                   <div className='items-view-props'>
-
                     <div className='items-view-props-left'>
                       <div className='item-img-left'
                         style={{
