@@ -26,6 +26,7 @@ const Reward = () => {
   const [present] = useIonToast();
 
   const pointsData = [rewardPoints, untilNextReward];
+
   const pointsLabels = ["Current Points", "Points to Next Reward"];
 
   const presentToast = (position: 'top' | 'middle' | 'bottom') => {
@@ -49,9 +50,10 @@ const Reward = () => {
       .getRewards()
       .then((rewards) => {
         if (rewards) {
-          setValid5Percents(rewards.coupons.USD_5_OFF.active)
-          setValid10Percents(rewards.coupons.USD_10_OFF.active)
-          setValid15Percents(rewards.coupons.USD_15_OFF.active)
+          console.log("Got Rewards: ", rewards)
+          setValid5Percents(rewards.coupons?.USD_5_OFF?.active || false)
+          setValid10Percents(rewards.coupons?.USD_10_OFF?.active || false)
+          setValid15Percents(rewards.coupons?.USD_15_OFF?.active || false)
           setRewardPoints(rewards.points)
           setfivePercent(rewards.coupons?.USD_5_OFF?.code)
           setTenPercent(rewards.coupons?.USD_10_OFF?.code)
@@ -122,7 +124,7 @@ const Reward = () => {
                 if (rewardPoints > 4) {
                   setActiveCoupon(valid5Percents)
                   setCouponCode(fivePercentCoupon)
-                  setRewardType('$5 OFF YOUR PURCHASES')
+                  setRewardType('5% OFF YOUR PURCHASE')
                   modal.current?.present()
                 }
               }}
@@ -134,7 +136,7 @@ const Reward = () => {
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1' style={{ fontSize: 12 }}>$5 off your Purchase</p>
+                  <p className='info-text-1' style={{ fontSize: 12 }}>5% off your Purchase</p>
                   <p className='info-text-2'>5 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">
@@ -152,20 +154,19 @@ const Reward = () => {
                 if (rewardPoints > 9) {
                   setActiveCoupon(valid10Percents)
                   setCouponCode(tenPercentCoupon)
-                  setRewardType('$10 OFF YOUR PURCHASES')
+                  setRewardType('10% OFF YOUR PURCHASE')
                   modal.current?.present()
                 }
               }}
             >
               <IonCol className={rewardPoints > 9 ? 'reward-trophy-box2' : 'reward-trophy-box'}>
                 <div
-                  // className={rewardPoints > 9 && rewardPoints < 14 ? 'circle2' :'circle'}
                   className={rewardPoints > 9 ? 'circle2' : 'circle'}
                 >
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1' style={{ fontSize: 12 }}>$10 off your Purchase</p>
+                  <p className='info-text-1' style={{ fontSize: 12 }}>10% off your Purchase</p>
                   <p className='info-text-2'>10 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">
@@ -180,26 +181,26 @@ const Reward = () => {
 
             <IonRow className='reward-trophy-container'
               onClick={() => {
-                if (rewardPoints > 14) {
+                if (rewardPoints > 19) {
                   setCouponCode(fifteenPercentCoupon)
                   setActiveCoupon(valid15Percents)
-                  setRewardType('$15 OFF YOUR PURCHASES')
+                  setRewardType('15% OFF YOUR PURCHASE')
                   modal.current?.present()
                 }
               }}
             >
-              <IonCol className={rewardPoints > 14 ? 'reward-trophy-box2' : 'reward-trophy-box'}>
+              <IonCol className={rewardPoints > 19 ? 'reward-trophy-box2' : 'reward-trophy-box'}>
                 <div
-                  className={rewardPoints > 14 ? 'circle2' : 'circle'}
+                  className={rewardPoints > 19 ? 'circle2' : 'circle'}
                 >
                   <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
                 </div>
                 <div className="info">
-                  <p className='info-text-1' style={{ fontSize: 12 }}>$15 off your Purchase</p>
+                  <p className='info-text-1' style={{ fontSize: 12 }}>15% off your Purchase</p>
                   <p className='info-text-2'>15 Points | Expires in 1 Year</p>
                 </div>
                 <div className="arrow">
-                  {rewardPoints > 14 ?
+                  {rewardPoints > 19 ?
                     <img width={20} height={16} src='assets/images/reward-arrow-color.svg' alt="" />
                     :
                     <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
@@ -263,7 +264,7 @@ const Reward = () => {
               />
               <p className='reward-copy-text'>Copy</p>
             </div>
-            {activeCoupon ? <p style={{ color: 'red', marginLeft: 30 }}>USED</p> : ''}
+            {activeCoupon ? '' : <p style={{ color: 'red', marginLeft: 30 }}>USED</p>}
 
           </IonCol>
           <div className='reward-line'></div>
