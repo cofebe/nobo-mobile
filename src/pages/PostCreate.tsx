@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonCol,
@@ -27,21 +27,24 @@ import { UserService } from '../services/UserService';
 import { OverlayEventDetail } from '@ionic/core/components';
 import usePlacesAutocomplete from 'use-places-autocomplete';
 import { loadingOptions } from '../util';
+import { Mentions } from 'antd';
+import debounce from 'lodash/debounce';
+
 
 interface InternalValues {
   file: any;
 }
 
-interface UsersRes{
-  users:[
-   {
-     _id:string;
-     avater:string;
-     displayName:string;
-     firstName:string;
-     lastName:number;
-     sellCloset:string;
-     tradeCloset:string;
+interface UsersRes {
+  users: [
+    {
+      _id: string;
+      avater: string;
+      displayName: string;
+      firstName: string;
+      lastName: number;
+      sellCloset: string;
+      tradeCloset: string;
 
     }
 
@@ -76,9 +79,10 @@ const PostCreate: React.FC = () => {
   const [progressActive, setProgressActive] = useState(false);
   const [uploadVideoMode, setUploadVideoMode] = useState(false);
   const [videoUploadComplete, setVideoUploadComplete] = useState(false);
-  const [tagUsers, setTagUsers] = useState<UsersRes[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [users, setUsers] = useState<{ _id: string; displayName: string }[]>([]);
+  const ref = useRef<string>();
 
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const PlacesAutocomplete = ({ setSelected }: any) => {
     const {
@@ -318,22 +322,33 @@ const PostCreate: React.FC = () => {
 
 
 
-
-  const tagUser = () => {
-    const result: any = data?.match(/@(.+?)\b/);
-    if (result !== null) {
-      console.log(result[1]);
-      userService.autoCompleteUser(result[1])
-        .then((res:UsersRes) => {
-          setTagUsers([res]);
-        })
-        .catch((err) => { console.log(err) });
-
+  const getNoboUsers = (key: string) => {
+    if (!key) {
+      setUsers([]);
+      return;
     }
+    userService.autoCompleteUser(key)
+      .then((res: UsersRes) => {
+        if (ref.current !== key) return;
+        setLoading(false);
+        setUsers(res.users.map((user) => ({ _id: user.displayName, displayName: user.displayName })));
 
-  }
+      })
 
-  console.log('tagusers',tagUsers[0]?.users)
+  };
+
+  const debounceLoadGithubUsers = useCallback(debounce(getNoboUsers, 800), []);
+
+  const onSearch = (search: string) => {
+    console.log('Search:', search);
+    ref.current = search;
+    setLoading(!!search);
+    setUsers([]);
+
+    debounceLoadGithubUsers(search);
+  };
+
+
 
   return (
     <IonPage className="post-create">
@@ -384,20 +399,40 @@ const PostCreate: React.FC = () => {
             <IonCol size="12">
               <IonItem className="nobo-post-input-area" lines="none">
                 <div className="nobo-post-input-text">
-                  <IonTextarea
+                  <Mentions
+                    maxLength={350}
+                    spellCheck
+                    autoCapitalize='on sentence'
+                    rows={5}
+                    value={data}
+                    onChange={(val) => setData(val)}
+                    autoFocus={false}
+                    className='mention-users'
+                    autoSize
+                    placeholder="Share a post..."
+                    loading={loading}
+                    onSearch={onSearch}
+                    options={users.map(({ _id, displayName }) => ({
+                      key: _id,
+                      value: displayName,
+                      className: 'mention-users-text',
+                      label: displayName,
+                    }))}
+                  />
+
+                  {/* <IonTextarea
                     className="post-text"
                     value={data}
                     autocapitalize="on sentence"
                     spellcheck={true}
                     onIonChange={e => {
                       setData(e.detail.value!)
-                      tagUser()
                     }}
                     placeholder="Share a post..."
                     maxlength={350}
                     autoGrow={true}
                     rows={5}
-                  ></IonTextarea>
+                  ></IonTextarea> */}
                   {validUrlRegex.test(highlightLink) && showVideoLink && (
                     <span>
                       <div style={{ width: '100%' }}>
@@ -495,12 +530,12 @@ const PostCreate: React.FC = () => {
                 </div>
               </div>
             </IonCol>
-            <IonCol className='tag-user-container' size="12" >
-              {tagUsers[0]?.users.map((user=>(
+            {/* <IonCol className='tag-user-container' size="12" >
+              {tagUsers[0]?.users.map((user => (
                 <p className='tag-user' >@{user.displayName}</p>
 
               )))}
-            </IonCol>
+            </IonCol> */}
           </IonRow>
           {showVideoLink && (
             <IonRow>
