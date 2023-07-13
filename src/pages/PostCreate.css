@@ -107,6 +107,41 @@ ion-button.cancel-btn {
 
 .post-create .nobo-post-input-text {
 	width: 100%;
+  /* background-color: teal; */
+
+}
+
+.mention-users{
+  width: 100%;
+  height: 120px;
+  padding-left: 75px;
+	padding-right: 60px;
+  background-color: #fefcf6;
+  font-weight: 500px;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.05em;
+  color: #000000;
+  border-color: #fefcf6;
+  border: 0px  #fefcf6;
+  /* box-shadow: none;
+  outline: none; */
+
+}
+
+
+.mention-users-text{
+  /* height: 120px; */
+  font-weight: 700px;
+  font-size: 16px;
+  /* background-color: gray; */
+  color: #000000;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+
+
 }
 
 .post-create .post-text {
