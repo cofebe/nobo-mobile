@@ -59,7 +59,6 @@ const MyTrade: React.FC = () => {
         } else {
           return
         }
-
       })
       .catch((error) => {
         console.log('error denying trade : ', error)

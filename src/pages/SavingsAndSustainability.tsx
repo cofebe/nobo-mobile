@@ -262,7 +262,7 @@ const SavingsAndSustainabilityPage: React.FC = () => {
                           }}
                         ></div>
                       </IonCol>
-                      <IonCol size='1.5'></IonCol>
+                      <IonCol size='1'></IonCol>
                       <IonCol className='purchase-retail-s-box' size='2.5'>
                         <p className='purchase-retail-s-text'>{formatPrice(singleProduct.retailPrice)}</p>
                       </IonCol>

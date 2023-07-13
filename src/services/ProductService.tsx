@@ -95,10 +95,10 @@ export class ProductService extends BaseService {
     return json.success;
   }
 
-  async getCart(): Promise<Product[]> {
+  async getCart(): Promise<ShoppingCartResponse> {
     const res = await super.fetch('GET', '/api/products/cart');
     const json: ShoppingCartResponse = await res.json();
-    return json.products;
+    return json;
   }
 
   async getTaxAndShipping(
@@ -155,6 +155,12 @@ export class ProductService extends BaseService {
   async getBrands(): Promise<BrandsResponse> {
     const res = await super.fetch('GET', '/api/brands/all');
     const json: BrandsResponse = await res.json();
+    return json;
+  }
+
+  async checkPromoCode(promoCode: string) {
+    const res = await super.fetch('POST', `/api/coupons/activate/${promoCode}`);
+    const json = await res.json();
     return json;
   }
 }
