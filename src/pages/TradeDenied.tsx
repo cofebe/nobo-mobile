@@ -19,9 +19,9 @@ const TradeDenied: React.FC = () => {
   const [tradesData, setTradesData] = useState<FullOrder[]>([])
 
 
-
   useIonViewWillEnter(() => {
     const data1 = localStorage.getItem('denyTradeData')
+
     if (data1) {
       const resp = JSON.parse(data1)
       setTradesData(resp)
@@ -30,7 +30,6 @@ const TradeDenied: React.FC = () => {
 
 
   const product: any = tradesData
-
 
   return (
     <IonPage className='denied-item-main-container'>
@@ -49,7 +48,7 @@ const TradeDenied: React.FC = () => {
 
         <div className='item-denied-desc-container'>
           <div className='item-denied-desc'>
-            YOU DENIED <span style={{ color: '#D6980E', fontStyle: 'italic' }}>@{product?.initiator?.displayName} </span>
+            YOU DENIED <span style={{ color: '#D6980E', fontStyle: 'italic' }}>@{product?.initiator?.displayName}</span>
             TRADE OFFER
           </div>
         </div>
@@ -68,7 +67,7 @@ const TradeDenied: React.FC = () => {
                 <div className='items-view-props-left'>
                 <div className='item-img-left'
                       style={{
-                        backgroundImage: product.products?.requested[0]?.images?.length
+                        backgroundImage: product.products?.requested?.images?.length
                           ? getImageUrl(product.products.requested?.images[0]?.url)
                           : '',
                       }}
@@ -91,7 +90,7 @@ const TradeDenied: React.FC = () => {
                 <div className='items-view-props-right'>
                 <div className='item-img-right'
                       style={{
-                        backgroundImage: product.products?.offered?.images[0]?.length
+                        backgroundImage: product.products?.offered?.images?.length
                           ? getImageUrl(product.products.offered.images[0]?.url)
                           : '',
                       }}
