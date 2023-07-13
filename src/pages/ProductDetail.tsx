@@ -15,7 +15,7 @@ import './ProductDetail.scss';
 import { caretUpOutline, caretDownOutline } from 'ionicons/icons';
 import { ProductService } from '../services/ProductService';
 import { AuthService } from '../services/AuthService';
-import { ProductResponse, Product } from '../models';
+import { ProductResponse, Product, ShoppingCartResponse } from '../models';
 //import ImageZoom from '../components/ImageZoom';
 import Button from '../components/Button';
 import OfferTradeModal from '../components/OfferTradeModal';
@@ -163,8 +163,8 @@ const ProductDetail: React.FC = () => {
       setIsMine(authService.getUserId() === data.product.vendor._id);
     });
 
-    productService.getCart().then((products: Product[]) => {
-      shoppingCartStore.setProducts(products);
+    productService.getCart().then((shoppingCart: ShoppingCartResponse) => {
+      shoppingCartStore.setProducts(shoppingCart.products);
     });
     isSneakerUrl ? setIsSneaker(true) : setIsSneaker(false);
     if (isTradeUrl && isSneakerUrl) {

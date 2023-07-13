@@ -173,12 +173,18 @@
     margin-top: 30px;
 
     .promo-code-container {
-      ion-input {
-      }
     }
 
     .button-container {
       margin-top: 20px;
     }
   }
+}
+
+.promo-valid {
+  color: green;
+}
+
+.promo-invalid {
+  color: red;
 }

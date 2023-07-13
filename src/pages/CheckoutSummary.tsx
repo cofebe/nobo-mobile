@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   IonContent,
@@ -23,6 +23,8 @@ import {
   TaxShippingResponse,
   PaymentMethod,
   PaymentMethodsResponse,
+  ShoppingCartResponse,
+  Coupon,
 } from '../models';
 import { shoppingCartStore, ShoppingCartState } from '../cart-store';
 import { ProductService } from '../services/ProductService';
@@ -43,6 +45,9 @@ const CheckoutSummary: React.FC = () => {
   const [showCart, setShowCart] = useState<boolean>(false);
   const [cartImage, setCartImage] = useState<string>('');
   const [emailAddress, setEmailAddress] = useState<string>('');
+  const [isPromoCodeValid, setIsPromoCodeValid] = useState(false);
+  const [discountAmount, setDiscountAmount] = useState(0);
+  const [coupon, setCoupon] = useState<Coupon | boolean>(false);
   let [experience, setExperience] = useState<string>('women');
   let subscription: any;
 
@@ -97,9 +102,12 @@ const CheckoutSummary: React.FC = () => {
       }
     });
 
-    productService.getCart().then((products: Product[]) => {
-      //console.log('getCart', products);
-      shoppingCartStore.setProducts(products);
+    productService.getCart().then((shoppingCart: ShoppingCartResponse) => {
+      shoppingCartStore.setProducts(shoppingCart.products);
+      if (shoppingCart.coupon !== false && typeof shoppingCart.coupon !== "boolean") {
+        setCoupon(shoppingCart.coupon)
+        setDiscountAmount(cart.subtotal * (shoppingCart.coupon.discount));
+      }
     });
 
     userService.getMe().then((user: User) => {
@@ -117,6 +125,11 @@ const CheckoutSummary: React.FC = () => {
   useIonViewWillLeave(() => {
     subscription?.unsubscribe();
   });
+
+  useEffect( () => {
+    if (typeof coupon !== "boolean")
+      setDiscountAmount(cart.subtotal * (coupon.discount/100));
+  }, [cart])
 
   function remove(product: Product) {
     productService.addToCart(product._id).then((success: boolean) => {
@@ -348,14 +361,27 @@ const CheckoutSummary: React.FC = () => {
                 <div className="label">Sales Tax</div>
                 <div className="value">{formatPrice(cart.tax)}</div>
               </div>
+              { coupon && typeof coupon !== 'boolean' && (
+                <div className="summary-info">
+                  <div className="label">Coupon ({coupon.discount}% OFF)</div>
+                  <div className="value">-{formatPrice(discountAmount)}</div>
+                </div>
+              )}
             </div>
           ) : (
             ''
           )}
-          <div className="summary-info total">
-            <div className="label">Your Total</div>
-            <div className="value">{formatPrice(cart.total)}</div>
-          </div>
+          { coupon && typeof coupon !== 'boolean' ? (
+            <div className="summary-info total">
+              <div className="label">Your Total</div>
+              <div className="value">{formatPrice(cart.total - discountAmount )}</div>
+            </div>
+          ) : (
+            <div className="summary-info total">
+              <div className="label">Your Total</div>
+              <div className="value">{formatPrice(cart.total)}</div>
+            </div>
+          )}
         </div>
         <div className="footer">
           <div className="button-container">
