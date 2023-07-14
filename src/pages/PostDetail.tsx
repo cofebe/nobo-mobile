@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import {
   IonButtons,
@@ -24,6 +24,7 @@ import {
 } from '@ionic/react';
 import { archive, heart, trash } from 'ionicons/icons';
 import './PostDetail.scss';
+import './PostDetail.css';
 import PostDetailItem from '../components/PostDetailItem';
 import PostComment from '../components/PostComment';
 import CreateCommentModal from '../components/CreateCommentModal';
@@ -32,6 +33,8 @@ import { AuthService } from '../services/AuthService';
 import { FeedService } from '../services/FeedService';
 import { UserService } from '../services/UserService';
 import { User } from '../models';
+import { Mentions } from 'antd';
+import debounce from 'lodash/debounce';
 
 interface FeedItem {
   likes: Comment[];
@@ -86,8 +89,14 @@ const PostDetail: React.FC = () => {
   let [noboProfile, setNoboProfile] = useState<User>();
   const [currentUserAvatar, setCurrentUserAvatar] = useState<string>('');
   const [commentMessage, setCommentMessage] = useState<string>('');
+  const [data, setData] = useState<string>();
+  const [loading, setLoading] = useState(false);
+  const [users, setUsers] = useState<{ displayName: string; avatar: string }[]>([]);
 
-  console.log('PostDetail: ', postID, message);
+  const ref = useRef<string>();
+
+
+  // console.log('PostDetail: ', postID, message);
 
   useIonViewDidEnter(() => {
     const onPageLoad = () => {
@@ -114,7 +123,7 @@ const PostDetail: React.FC = () => {
       setNoboProfile(data);
     })
 
-    console.log('feedService.getPost(): ', userID, postID);
+    // console.log('feedService.getPost(): ', userID, postID);
     feedService
       .getProfileFeed(userID || '')
       .then(res => res.json())
@@ -139,7 +148,7 @@ const PostDetail: React.FC = () => {
   }
 
   function createComment() {
-    console.log('CreateComment: ', commentMessage);
+    // console.log('CreateComment: ', commentMessage);
     let req = {
       userMessage: commentMessage,
       itemId: postID,
@@ -148,26 +157,55 @@ const PostDetail: React.FC = () => {
       .postComment(req)
       .then(res => res.json())
       .then(data => {
-        console.log('Post Comment success: ', data);
+        // console.log('Post Comment success: ', data);
         load();
         setCommentMessage("");
       });
   }
 
 
-  function deleteComment(commentId:string){
+  function deleteComment(commentId: string) {
     console.log(postID, 'test')
     feedService.deleteComment(commentId, postID)
-    .then((res=>{
-      load()
-    }))
-    .catch((error)=>{
-      console.log('error , unable to delete comment',error)
-    })
+      .then((res => {
+        load()
+      }))
+      .catch((error) => {
+        console.log('error , unable to delete comment', error)
+      })
   }
 
 
 
+  const getNoboUsers = (key: string) => {
+    if (!key) {
+      setUsers([]);
+      return;
+    }
+
+    userService.autoCompleteUser(key)
+      .then((res: any) => {
+        if (ref.current !== key) return;
+        setLoading(false);
+        setUsers(res.users);
+
+      })
+
+  };
+
+  const debounceLoadNoboUsers = useCallback(debounce(getNoboUsers, 800), []);
+
+  const onSearch = (search: string) => {
+    // console.log('Search:', search);
+    ref.current = search;
+    setLoading(!!search);
+    setUsers([]);
+
+    debounceLoadNoboUsers(search);
+  };
+
+
+  console.log('post sec')
   return (
     <IonPage className="post-detail-page">
       <IonHeader className="ion-no-border">
@@ -267,19 +305,19 @@ const PostDetail: React.FC = () => {
           <IonRefresher slot="fixed" onIonRefresh={refresh}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
-            <PostDetailItem
-              message={message}
-              refreshFeed={load}
-              zoomAction={(i: number) => {
-                try {
-                  if (message && message.images && message.images.length > 0) {
-                    let targetIndex = i;
-                    // let zoomImageUrl = (message.images[0] || "").replace('[', '').replace(']', '').split("'").join('').split(',')[targetIndex];
-                    // setImageZoom(zoomImageUrl);
-                  }
-                } catch (exZoomPicNoExist) { }
-              }}
-            />
+          <PostDetailItem
+            message={message}
+            refreshFeed={load}
+            zoomAction={(i: number) => {
+              try {
+                if (message && message.images && message.images.length > 0) {
+                  let targetIndex = i;
+                  // let zoomImageUrl = (message.images[0] || "").replace('[', '').replace(']', '').split("'").join('').split(',')[targetIndex];
+                  // setImageZoom(zoomImageUrl);
+                }
+              } catch (exZoomPicNoExist) { }
+            }}
+          />
           <div className="post-detail-create-comment-container">
             {message.comments.map(c => (
               <div style={{ backgroundColor: '' }}>
@@ -288,13 +326,13 @@ const PostDetail: React.FC = () => {
                   <IonItem className='post-slide' >
                     <PostComment message={message} comment={c} key={c.comment_id} />
                   </IonItem>
-                  <IonItemOptions className='delete-post-main'  side="end">
+                  <IonItemOptions className='delete-post-main' side="end">
 
                     <div className='post-slide-img-box'
-                     onClick={()=>{
-                      deleteComment(c._id)
-                      console.log('message id ',c._id)
-                    }}
+                      onClick={() => {
+                        deleteComment(c._id)
+                        // console.log('message id ',c._id)
+                      }}
                     >
                       <div className="report-c-box-delete">
                         <img className='delete-post-img'
@@ -339,7 +377,32 @@ const PostDetail: React.FC = () => {
           </IonAvatar>
         </IonCol>
         <IonCol size="9">
-          <IonInput
+          <Mentions
+            onKeyDown={event => {
+              if (event.key === 'Enter') {
+                createComment();
+              }
+            }}
+            value={commentMessage}
+            onChange={(val) => setCommentMessage(val)}
+            className='create-comment'
+            placeholder="Add a comment..."
+            loading={loading}
+            onSearch={onSearch}
+            options={users.map(({ displayName, avatar: avatar }) => ({
+              key: displayName,
+              value: displayName,
+              className: 'mention-users-text',
+              label: (
+                <div className='mentions-img-container-pd'>
+                  <img className='mentions-img-pd' src={avatar} alt={displayName} />
+                  <span className='mentions-display-name-pd'>{displayName}</span>
+                </div>
+              ),
+            }))}
+
+          />
+          {/* <IonInput
             value={commentMessage}
             onIonChange={(e: any) => setCommentMessage(e.target.value)}
             onKeyDown={event => {
@@ -349,7 +412,7 @@ const PostDetail: React.FC = () => {
             }}
             className="create-comment"
             placeholder="Add a comment..."
-          ></IonInput>
+          ></IonInput> */}
         </IonCol>
       </IonRow>
     </IonPage>
