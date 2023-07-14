@@ -29,27 +29,28 @@ import usePlacesAutocomplete from 'use-places-autocomplete';
 import { loadingOptions } from '../util';
 import { Mentions } from 'antd';
 import debounce from 'lodash/debounce';
+import { getImageUrl } from '../utils';
 
 
 interface InternalValues {
   file: any;
 }
 
-interface UsersRes {
-  users: [
-    {
-      _id: string;
-      avater: string;
-      displayName: string;
-      firstName: string;
-      lastName: number;
-      sellCloset: string;
-      tradeCloset: string;
+// interface UsersRes {
+//   users: [
+//     {
+//       _id: string;
+//       avater: string;
+//       displayName: string;
+//       firstName: string;
+//       lastName: number;
+//       sellCloset: string;
+//       tradeCloset: string;
 
-    }
+//     }
 
-  ]
-}
+//   ]
+// }
 
 const PostCreate: React.FC = () => {
   const [userId, setUserId] = useState<number>();
@@ -80,7 +81,8 @@ const PostCreate: React.FC = () => {
   const [uploadVideoMode, setUploadVideoMode] = useState(false);
   const [videoUploadComplete, setVideoUploadComplete] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [users, setUsers] = useState<{ _id: string; displayName: string }[]>([]);
+  const [users, setUsers] = useState<{ displayName: string; avatar: string }[]>([]);
+  // const [users, setUsers] = useState<{ _id: string; displayName: string, avater: string }[]>([]);
   const ref = useRef<string>();
 
 
@@ -327,28 +329,27 @@ const PostCreate: React.FC = () => {
       setUsers([]);
       return;
     }
+
     userService.autoCompleteUser(key)
-      .then((res: UsersRes) => {
+      .then((res: any) => {
         if (ref.current !== key) return;
         setLoading(false);
-        setUsers(res.users.map((user) => ({ _id: user.displayName, displayName: user.displayName })));
+        setUsers(res.users);
 
       })
 
   };
 
-  const debounceLoadGithubUsers = useCallback(debounce(getNoboUsers, 800), []);
+  const debounceLoadNoboUsers = useCallback(debounce(getNoboUsers, 800), []);
 
   const onSearch = (search: string) => {
-    console.log('Search:', search);
+    // console.log('Search:', search);
     ref.current = search;
     setLoading(!!search);
     setUsers([]);
 
-    debounceLoadGithubUsers(search);
+    debounceLoadNoboUsers(search);
   };
-
-
 
   return (
     <IonPage className="post-create">
@@ -412,12 +413,30 @@ const PostCreate: React.FC = () => {
                     placeholder="Share a post..."
                     loading={loading}
                     onSearch={onSearch}
-                    options={users.map(({ _id, displayName }) => ({
-                      key: _id,
+                    options={users.map(({ displayName, avatar: avatar }) => ({
+                      key: displayName,
                       value: displayName,
                       className: 'mention-users-text',
-                      label: displayName,
+                      label: (
+                        <div className='mentions-img-container'>
+                          <img className='mentions-img' src={avatar} alt={displayName} />
+                          <span className='mentions-display-name'>{displayName}</span>
+                        </div>
+                      ),
                     }))}
+                    // options={users?.map(({ _id, displayName, avater }) => (
+                    //   {
+                    //     key: _id,
+                    //     value: displayName,
+                    //     label: (
+                    //       <div>
+                    //         <img src={`${avater}`} alt="" />
+                    //         <span>{displayName}</span>
+                    //       </div>
+                    //     )
+                    //   }
+                    // ))}
+
                   />
 
                   {/* <IonTextarea
