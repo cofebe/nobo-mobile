@@ -29,7 +29,6 @@ import usePlacesAutocomplete from 'use-places-autocomplete';
 import { loadingOptions } from '../util';
 import { Mentions } from 'antd';
 import debounce from 'lodash/debounce';
-import { getImageUrl } from '../utils';
 
 
 interface InternalValues {
@@ -424,18 +423,7 @@ const PostCreate: React.FC = () => {
                         </div>
                       ),
                     }))}
-                    // options={users?.map(({ _id, displayName, avater }) => (
-                    //   {
-                    //     key: _id,
-                    //     value: displayName,
-                    //     label: (
-                    //       <div>
-                    //         <img src={`${avater}`} alt="" />
-                    //         <span>{displayName}</span>
-                    //       </div>
-                    //     )
-                    //   }
-                    // ))}
+
 
                   />
 
