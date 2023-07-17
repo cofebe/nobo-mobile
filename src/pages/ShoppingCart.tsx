@@ -28,7 +28,7 @@ const ShoppingCartPage: React.FC = () => {
   const userService = new UserService();
   const [cart, setCart] = useState<ShoppingCartState>(shoppingCartStore.initialState);
   const [promoCode, setPromoCode] = useState<string>('');
-  const [isPromoCodeValid, setIsPromoCodeValid] = useState(false);
+  const [isPromoCodeValid, setIsPromoCodeValid] = useState<null | boolean>(null);
   const [promoDiscount, setPromoDiscount] = useState(0);
   const [discountAmount, setDiscountAmount] = useState(0);
   const [shippingAddress, setShippingAddress] = useState<Address>();
@@ -85,13 +85,18 @@ const ShoppingCartPage: React.FC = () => {
   function checkPromoCode(promoCode: string) {
     setPromoCode(promoCode)
 
+    if (promoCode.length === 0) {
+      setIsPromoCodeValid(null);
+      return;
+    }
+
     productService
       .checkPromoCode(promoCode)
       .then((res) => {
         setIsPromoCodeValid(res.valid);
         if (res.valid === true) {
           setPromoDiscount(res.coupon.discount);
-          setDiscountAmount(cart.subtotal * (promoDiscount/100));
+          setDiscountAmount(cart.subtotal * (res.coupon.discount/100));
         }
       })
   }
@@ -209,7 +214,7 @@ const ShoppingCartPage: React.FC = () => {
                   small={true}
                   onChange={val => checkPromoCode(val)}
                   placeholder="Enter promo code"
-                  className={isPromoCodeValid ? 'promo-valid' : 'promo-invalid'}
+                  className={isPromoCodeValid === null ? "" : isPromoCodeValid ? 'promo-valid' : 'promo-invalid'}
                 />
               </div>
               <div className="button-container">
