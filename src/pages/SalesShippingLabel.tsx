@@ -164,7 +164,7 @@ const SalesShippingLabel: React.FC = () => {
                         <p className="status-bottom-rating-text">N/A</p>
                         <a
                           target='_blank'
-                          rel='noreferrer' href={`https://staging.thenobo.com/api/orders/packing-slip/${products._id}-${userId}.html`}
+                          rel='noreferrer' href={`https://thenobo.com/api/orders/packing-slip/${products._id}-${userId}.html`}
                         >
                           <IonButton
                             size='small'
