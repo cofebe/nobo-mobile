@@ -24,7 +24,9 @@ interface ReminderResponse {
 const MyTrade: React.FC = () => {
   const userService = new UserService()
   const history = useHistory()
-  const [tradesData, setTradesData] = useState<TradesResponse[]>([])
+  const [receivedTradeOffer, setReceivedTradeOffer] = useState<any[]>([])
+  const [sentTradeOffer, setSentTradeOffer] = useState<any[]>([])
+  // const [tradesData, setTradesData] = useState<any[]>([])
 
 
   const [present] = useIonToast();
@@ -37,11 +39,33 @@ const MyTrade: React.FC = () => {
     });
   };
 
+
+
   useIonViewWillEnter(() => {
     userService.getMyTrades()
       .then((products) => {
         if (products) {
-          setTradesData([products])
+
+          const receivedTrade = products?.received?.sort((a: any, b: any) =>
+            new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+          const status: any = {
+            'pending': 1,
+            'accepted': 2,
+            'rejected': 3,
+            'invalid': 4,
+          }
+          const recievedData = receivedTrade.sort((a: any, b: any) => status[a.status] - status[b.status]);
+
+          const sentTrade = products?.sent?.sort((a: any, b: any) =>
+            new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+
+          const sentData = sentTrade.sort((a: any, b: any) => status[a.status] - status[b.status]);
+
+
+          setReceivedTradeOffer(recievedData)
+          setSentTradeOffer(sentData)
+
+
         } else { console.log('something went wrong') }
       })
       .catch((err) => { console.log('err info while fetching products ', err) })
@@ -100,6 +124,15 @@ const MyTrade: React.FC = () => {
   }
 
 
+  // const receivedTrade = tradesData[0]?.received.sort((a: any, b: any) =>
+  //   new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+
+  // console.log('Rtrade down', receivedTrade)
+
+
+  // const sentTrade = tradesData[0]?.sent.sort((a: any, b: any) =>
+  //   new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf());
+
 
 
   return (
@@ -133,7 +166,7 @@ const MyTrade: React.FC = () => {
           </div>
         </IonCol>
       </IonRow>
-      {tradesData[0]?.received?.length === 0 && tradesData[0]?.sent?.length === 0 ?
+      {sentTradeOffer?.length === 0 && receivedTradeOffer?.length === 0 ?
         <IonContent className='trade-item-content'>
           <IonRow>You have no pending trades!</IonRow>
         </IonContent>
@@ -142,7 +175,7 @@ const MyTrade: React.FC = () => {
           <IonGrid>
 
             {/* OFFER I SENT */}
-            {tradesData[0]?.sent.map((product: any) => (
+            {sentTradeOffer?.map((product: any) => (
               <IonRow key={product._id} style={{ marginBottom: '14px' }}>
                 <IonCol
                   className={
@@ -195,10 +228,10 @@ const MyTrade: React.FC = () => {
 
 
                   <div className='items-view-props'
-                      onClick={() => {
-                        if (product.status === 'pending') {
-                          history.push({ pathname: `trades/details/${product._id}`, state: product })
-                        }
+                    onClick={() => {
+                      if (product.status === 'pending') {
+                        history.push({ pathname: `trades/details/${product._id}`, state: product })
+                      }
                     }}>
                     <div className='items-view-props-left'>
                       <div className='item-img-left'
@@ -268,8 +301,9 @@ const MyTrade: React.FC = () => {
             ))}
 
 
-            {/* product.status === 'pending' && */}
-            {tradesData[0]?.received.map((product: any) => (
+
+            {/* TRADE OFFER RECIEVED */}
+            {receivedTradeOffer?.map((product: any) => (
               <IonRow key={product._id} style={{ marginBottom: '14px' }}>
                 <IonCol
                   className={
@@ -388,6 +422,9 @@ const MyTrade: React.FC = () => {
                 </IonCol>
               </IonRow>
             ))}
+
+
+
 
           </IonGrid>
         </IonContent>
