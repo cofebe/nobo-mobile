@@ -540,13 +540,13 @@ export class UserService extends BaseService {
   }
 
   // SIGNUP
-  async signup(person: SignUpType): Promise<User> {
+  async signup(user: any): Promise<User> {
     const response = await super.fetch('POST', '/api/users/register', {
-      firstName: person.firstName,
-      lastName: person.lastName,
-      email: person.email,
-      displayName: person.userName,
-      password: person.password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      displayName: user.username,
+      password: user.password,
     });
 
     const json: SignUpResponse = await response.json();
