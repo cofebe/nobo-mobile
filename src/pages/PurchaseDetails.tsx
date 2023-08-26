@@ -95,6 +95,7 @@ const PurchaseDetails: React.FC = () => {
 
   };
 
+  console.log('prodData', productsData)
 
   // const sellers = vendors.filter((ar: any) => followingList.includes(ar, 0))
 

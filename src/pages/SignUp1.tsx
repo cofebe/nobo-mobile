@@ -46,7 +46,6 @@ const SignUp1: React.FC = () => {
       .then(user => {
         loadingStore.decrement('Signup:timeout');
         if (user.exists) {
-          // console.log(email, ' already exist ');
           setError(true);
           loadingStore.decrement('SignUp:timeout');
         } else {
@@ -170,7 +169,7 @@ const SignUp1: React.FC = () => {
                 </IonCol>
 
 
-                <IonCol size='12' className='signup-btn-container' >
+                <IonCol size='12' className='signup-btn-container'>
                   <Button
                     onClick={() => {
                       checkUserExist();

@@ -76,7 +76,7 @@ const OfferAccepted: React.FC = () => {
 
         <div className='offer-accepted-desc-container'>
           <div className='offer-accepted-desc'>
-            YOU ACCEPTED <span style={{ color: '#D6980E' }}>@{buyerName} </span>
+            YOU ACCEPTED <span style={{ color: '#D6980E' }}>@{buyerName.toUpperCase()} </span>
             SALE OFFER OF <span style={{ color: '#D6980E' }}>{currencyFormat.format(parseInt(tradeData?.offeredPrice))} </span>
             FOR <span style={{ color: '#D6980E' }}>{prodName.toUpperCase()}</span>
           </div>

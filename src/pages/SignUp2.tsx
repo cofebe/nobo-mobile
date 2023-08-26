@@ -10,35 +10,53 @@ import {
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserService } from '../services/UserService';
-import { SignUpType, User } from '../models';
+import { User } from '../models';
 import Input from '../components/Input';
 import './SignUp2.scss';
 import Button from '../components/Button';
 
+interface UserDetails {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
 const SignUp2 = () => {
   const history = useHistory();
   const userService = new UserService();
-  const [error, setError] = useState<boolean>(false);
+  const [user, setUser] = useState<UserDetails>();
+  const [error, setError] = useState(false);
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [comfirmPassword, setComfirmPassword] = useState('')
+
+
+
+
+  function getUserDetails() {
+    const user = history.location.state as UserDetails
+    setUser(user);
+  }
 
   useIonViewWillEnter(() => {
     setError(false);
+    getUserDetails()
   });
 
-  const state2: any = history.location.state;
-  console.log(state2);
-  const [person, setPerson] = useState<SignUpType>({
-    firstName: state2?.firstName,
-    lastName: state2?.lastName,
-    userName: '',
-    email: state2?.email,
-    password: '',
-    comfirmPassword: '',
-  });
+
+
 
   const signup = () => {
-    if (person.password !== person.comfirmPassword) return;
+    if (password !== comfirmPassword) return;
+    const userData = {
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      email: user?.email,
+      username,
+      password,
+    }
     userService
-      .signup(person)
+      .signup(userData)
       .then((user: User) => {
         if (user) {
           history.replace('/experience');
@@ -54,9 +72,9 @@ const SignUp2 = () => {
 
   const validate = () => {
     if (
-      person.userName.length < 3 ||
-      person.password.length < 6 ||
-      person.comfirmPassword.length < 6
+      username.length < 3 ||
+      password.length < 6 ||
+      comfirmPassword.length < 6
     ) {
       return true;
     } else {
@@ -64,10 +82,12 @@ const SignUp2 = () => {
     }
   };
 
+
+
   return (
     <IonPage className='signup-container'>
       <IonContent scrollY={false} className='signup-ion-content'>
-      <IonRow>
+        <IonRow>
           <IonCol className='signup-header_' size='12' >
             <div
               onClick={() => {
@@ -96,12 +116,13 @@ const SignUp2 = () => {
             <IonRow >
               <IonCol size='12' >
                 <Input
+                type='text'
                   errorMessage={error ? 'Username already in use' : ''}
-                  value={person.userName}
+                  value={username}
                   className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
                   placeholder='USERNAME'
                   onChange={val => {
-                    setPerson({ ...person, userName: val });
+                    setUsername(val);
                     setError(false)
                   }}
                 />
@@ -120,11 +141,11 @@ const SignUp2 = () => {
               <IonCol size='12'>
                 <Input
                   type='password'
-                  value={person.password}
+                  value={password}
                   className={`nobo-input ${error ? 'invalid-text-color' : ''}`}
                   placeholder='PASSWORD'
                   onChange={val => {
-                    setPerson({ ...person, password: val });
+                    setPassword(val);
                   }}
                 />
               </IonCol>
@@ -132,14 +153,14 @@ const SignUp2 = () => {
             <IonRow >
               <IonCol size='12'>
                 <Input
-                  errorMessage={person.password !== person.comfirmPassword ? 'password mismatch' : ''}
+                  errorMessage={password !== comfirmPassword ? 'password mismatch' : ''}
                   type='password'
-                  value={person.comfirmPassword}
-                  className={`nobo-input ${person.password !== person.comfirmPassword ? 'invalid-text-color' : ''
+                  value={comfirmPassword}
+                  className={`nobo-input ${password !== comfirmPassword ? 'invalid-text-color' : ''
                     }`}
                   placeholder='COMFIRM PASSWORD'
                   onChange={val => {
-                    setPerson({ ...person, comfirmPassword: val });
+                    setComfirmPassword(val);
                   }}
                 ></Input>
               </IonCol>
@@ -149,7 +170,7 @@ const SignUp2 = () => {
         <IonRow className={!error ? 'signup-btn-container' : 'signup-btn-container2'}>
           <IonCol size='12' className='signup2-btn-container'>
             <Button
-            className='signup2-btn'
+              className='signup2-btn'
               onClick={() => {
                 signup();
               }}
