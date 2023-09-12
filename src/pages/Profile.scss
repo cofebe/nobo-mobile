@@ -138,19 +138,19 @@
     font-size: 0.7em;
     line-height: 15px;
     text-align: left;
-    vertical-align: middle;
+    vertical-align: left; /*middlea*/
     letter-spacing: 1px;
     margin-top: 1rem;
     float: right;
-    background-color: #d6980e;
     color: #ffffff;
     border-radius: 5px;
-    height: 32px;
+    height: 42px;
     width: 80px;
     text-transform: capitalize;
-    border: 1px solid #d6980e;
     margin-right: 20px;
+    padding: 12px 24px;
   }
+/*border: 1px solid #d6980e;*/
 
   /* border: 1px solid rgba(100,100,100,.1);
   width: 28vw;

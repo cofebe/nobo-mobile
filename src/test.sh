@@ -1,7 +1,7 @@
 #!/bin/bash
 
-curl 'https://staging.thenobo.com/list-my-item/sell' \
-  -H 'authority: staging.thenobo.com' \
+curl 'https://thenobo.com/list-my-item/sell' \
+  -H 'authority: thenobo.com' \
   -H 'accept: */*' \
   -H 'accept-language: en-US,en;q=0.6' \
   -H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2ZkMTEzMTNiN2M3ZGJhMWY2ODVkMzYiLCJlbWFpbCI6ImpiYWlsZXkrbm9ib0Bjb2ZlYmUuY29tIiwicm9sZSI6ImFkbWluIiwiZXhwIjoxNjg2MTc0MDU0LCJyZWZyZXNoIjoxNjg1NTcwMTU0LCJpYXQiOjE2ODU1NjkyNTR9.9iH00AI9Y8Rth_WYrPVt0wudLyJlxqobnAlEHd2ffvE' \

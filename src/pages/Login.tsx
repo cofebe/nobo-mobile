@@ -185,7 +185,7 @@ const Login: React.FC = () => {
                     expand="block"
                     className="nobo-button"
                   >
-                    CONTINUE
+                    LOGIN
                   </IonButton>
                 </IonCol>
               </IonRow>
@@ -200,7 +200,7 @@ const Login: React.FC = () => {
                     color: '#FFFFFF',
                   }}
                 >
-                  Not a NOBO Insider?
+                  NOT A NOBO INSIDER?
                 </IonCol>
                 <IonCol
                   size="4"

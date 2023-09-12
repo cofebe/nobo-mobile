@@ -46,13 +46,7 @@ const Experience: React.FC = () => {
         <IonRow >
           <IonCol className='experience-title'>CHOOSE YOUR EXPERIENCE</IonCol>
         </IonRow>
-        <IonRow className='experience-desc-container'>
-          <IonCol className='experience-desc'>
-          Select the category of clothing you prefer to shop. Don’t worry, you can still view other experiences  later.
-          </IonCol>
-        </IonRow>
-
-        <IonGrid className='experience-form-container'>
+            <IonGrid className='experience-form-container'>
           {/* WOMEN */}
           <IonCol
             size='12'

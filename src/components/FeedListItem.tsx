@@ -509,7 +509,7 @@ const FeedListItem: React.FC<FeedListItemProps> = ({
                   style={{
                     minWidth: '100%',
                     minHeight: '168px',
-                    height: '300px',
+                    height: 'auto',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',

@@ -25,7 +25,7 @@ const SignUp2 = () => {
   });
 
   const state2: any = history.location.state;
-  console.log(state2);
+  console.log("signUp2.tsx");
   const [person, setPerson] = useState<SignUpType>({
     firstName: state2?.firstName,
     lastName: state2?.lastName,
@@ -55,8 +55,8 @@ const SignUp2 = () => {
   const validate = () => {
     if (
       person.userName.length < 3 ||
-      person.password.length < 6 ||
-      person.comfirmPassword.length < 6
+      person.password.length < 1 ||
+      person.comfirmPassword.length < 1
     ) {
       return true;
     } else {

@@ -541,22 +541,25 @@ export class UserService extends BaseService {
 
   // SIGNUP
   async signup(person: SignUpType): Promise<User> {
-    const response = await super.fetch('POST', '/api/users/register', {
+    
+   console.log("person:" + JSON.stringify(person));
+   const response = await super.fetch('POST', '/api/users/register', {
       firstName: person.firstName,
       lastName: person.lastName,
       email: person.email,
       displayName: person.userName,
       password: person.password,
     });
-
+    console.log("Payload:" + JSON.stringify(response));
     const json: SignUpResponse = await response.json();
     if (json.token) {
+      console.log("json:" + JSON.stringify(json));
       const authService = new AuthService();
       authService.setUserToken(json.token);
       authService.setUserId(json.user._id);
       authService.setUserDisplayName(json.user.displayName);
     }
-
+    console.log("json.user:" + JSON.stringify(json.user));
     return json.user;
   }
 

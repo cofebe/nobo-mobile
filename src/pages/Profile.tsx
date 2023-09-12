@@ -245,6 +245,8 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
   }
 
   function loadProfile() {
+   console.log("Profile.tsx:loadProfile");
+
     const addressBarPathName = history.location.pathname;
     let userIdStr: any = addressBarPathName.substring(addressBarPathName.lastIndexOf('/') + 1);
 
@@ -266,6 +268,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
   }
 
   function getProfile(id: any = '') {
+      console.log("Profile.tsx:getProfile");
     userService
       .getProfile(id)
       .then(res => res.json())
@@ -287,6 +290,8 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
   }
 
   function checkIfFollowing() {
+    console.log("Profile.tsx:checkIfFollowing");
+
     userService
       .getFollowers(userId)
       .then(res => res.json())

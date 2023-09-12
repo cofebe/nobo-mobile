@@ -29,6 +29,7 @@ export class BaseService {
     skipAuth?: boolean
   ) {
     const url = `${environment.serverUrl}${path.startsWith('/') ? '' : '/'}${path}`;
+    console.log("super fetch url:" + url);
     headers = headers || {};
     let body: any = undefined;
     if (data !== undefined && data !== null) {

@@ -38,8 +38,8 @@ const SignUp1: React.FC = () => {
 
 
 
-
   const checkUserExist = () => {
+    console.log("SignUp1.txs:checkUserExist");
     loadingStore.increment('Signup:timeout');
     userService
       .checkExistingEmail(email)
@@ -164,7 +164,7 @@ const SignUp1: React.FC = () => {
                      <a className='terms-and-agree' href='https://thenobo.sfo3.digitaloceanspaces.com/terms.pdf'
                      target='_blank'
                      rel='noreferrer'
-                      style={{ textDecoration: 'underLine' }}> Terms and Conditions
+                      style={{ textDecoration: 'underLine' }}> Terms & Conditions.
                     </a>
                   </p>
                 </IonCol>

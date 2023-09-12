@@ -321,7 +321,7 @@ const ProductList: React.FC<ProductListProps> = ({ type, userId }) => {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    boxShadow: 'none',
+                    boxShadow: 'none'
                   }}
                   dangerouslySetInnerHTML={{ __html: feedItem.feedText }}
                 ></div>

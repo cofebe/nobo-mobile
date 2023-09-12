@@ -95,11 +95,11 @@ const FollowPeople: React.FC = () => {
       <IonContent className='follow-people-ion-content'>
         <HeaderComponent />
         <IonRow>
-          <IonCol className='follow-people-title'>FOLLOW PEOPLE</IonCol>
+          <IonCol className='follow-people-title'>FOLLOW NOBOINSIDERS</IonCol>
         </IonRow>
         <IonRow className='follow-people-desc-container'>
           <IonCol className='follow-people-desc'>
-            follow 5 other users to begin connecting with other Insiders!
+             Follow 5 people to begin connecting with other NOBO Insiders
           </IonCol>
         </IonRow>
         <IonRow style={{ marginLeft: '20px', marginRight: '20px' }}>
@@ -125,9 +125,8 @@ const FollowPeople: React.FC = () => {
 
               <div className='follow-people-button-container'>
                 <Button
-                  disabled={peopleIfollow.includes(user._id, 0)}
                   className='profile-picture-btn'
-                  label={peopleIfollow.includes(user._id, 0) ? 'FOLLOWING' : 'FOLLOW'}
+                  label={peopleIfollow.includes(user._id, 0) ? 'UNFOLLOW' : 'FOLLOW'}
                   large={false}
                   onClick={e => {
                     e.preventDefault();
