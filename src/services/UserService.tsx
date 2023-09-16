@@ -619,7 +619,7 @@ export class UserService extends BaseService {
     return response.json();
   }
 
-  //CREATE FIRST POST
+  //CREATE FIRST POST.
   async createPost(userMessage: string) {
     const response = await super.fetch('POST', '/api/feed/create-item', { userMessage });
     return response.json();
