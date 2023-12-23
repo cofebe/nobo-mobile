@@ -8,6 +8,7 @@ interface InputProps {
   placeholder?: string;
   value?: string;
   onChange: (val: string) => void;
+  maxlength?: number,
   disabled?: boolean;
   readonly?: boolean;
   invalid?: boolean;
@@ -24,6 +25,7 @@ const Textarea: React.FC<InputProps> = ({
   placeholder = '',
   value = '',
   onChange,
+  maxlength,
   disabled = false,
   readonly = false,
   required = false,
@@ -62,6 +64,7 @@ const Textarea: React.FC<InputProps> = ({
         autocapitalize={autocapitalize}
         spellcheck={spellcheck}
         autoGrow={autoGrow}
+        maxlength={maxlength}
       />
       {errorMessage ? <div className="error-message">{errorMessage}</div> : ''}
     </div>

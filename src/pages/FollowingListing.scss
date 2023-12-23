@@ -1,0 +1,61 @@
+.following-people-main-container {
+  .following-people-ion-content {
+    --background: #fefcf7;
+  }
+
+  .follow-people-back-btn {
+    position: absolute;
+    left: 6%;
+    top: 40%;
+  }
+
+  .following-people-title {
+    margin-top: 24px;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Georgia';
+    line-height: 18px;
+  }
+
+  .following-people-body-container {
+    grid-template-rows: 8.5rem 8.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    overflow: auto;
+    max-height: 60%;
+    margin: 8px;
+  }
+
+  .following-people-users-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    height: 120px;
+    margin: 8px;
+  }
+
+  .following-people-users-img-container {
+    height: 80px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .following-people-users-img {
+    height: 90%;
+    width: 90%;
+    border-radius: 50%;
+  }
+
+  .following-people-user-names-container {
+    font-size: 15px;
+    color: #d69a0e;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+  }
+}

@@ -63,7 +63,6 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({ children, product, isBig }) => 
               ) : (
                 <>
                   <div>{'$' + product?.price}</div>
-                  <div>COST</div>
                 </>
               )
             ) : isSneaker ? (

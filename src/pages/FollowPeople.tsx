@@ -99,7 +99,7 @@ const FollowPeople: React.FC = () => {
         </IonRow>
         <IonRow className='follow-people-desc-container'>
           <IonCol className='follow-people-desc'>
-             Follow 5 people to begin connecting with other NOBO Insiders
+             Follow {5 - peopleIfollow.length} people to begin connecting with other NOBO Insiders
           </IonCol>
         </IonRow>
         <IonRow style={{ marginLeft: '20px', marginRight: '20px' }}>

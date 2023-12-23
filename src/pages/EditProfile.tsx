@@ -348,6 +348,7 @@ const EditProfilePage: React.FC = profile => {
         />
         <Textarea
           value={blurbText}
+          maxlength={160}
           className={`nobo-input nobo-input-padding edit-profile-nobo-input ${error ? 'invalid-text-color' : 'nobo-input2'}`}
           placeholder="Bio"
           onChange={val => {
@@ -480,13 +481,13 @@ const EditProfilePage: React.FC = profile => {
             },
           ]}
         />*/}
-        <IonButton className='btn edit-profile-btn' 
+        <IonButton className='btn edit-profile-btn'
           disabled={!isToggled}
           onClick={() => {
             history.push('/home/my-profile')
             save();
         }}>SAVE</IonButton>
-      </div>    
+      </div>
   </IonPage>
   );
 };

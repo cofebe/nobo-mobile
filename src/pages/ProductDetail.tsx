@@ -160,7 +160,7 @@ const ProductDetail: React.FC = () => {
         setRating(0);
       }
 
-      setIsMine(authService.getUserId() === data.product.vendor._id);
+      setIsMine(authService.getUserId() === data.product?.vendor?._id);
     });
 
     productService.getCart().then((shoppingCart: ShoppingCartResponse) => {

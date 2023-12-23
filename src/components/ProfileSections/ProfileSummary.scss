@@ -9,11 +9,17 @@
   }
 
   ion-grid {
-    .profile-name {
-      padding-left: 0;
-      padding-bottom: 0;
-      font-size: 20px;
-      font-weight: 700;
+    .profile-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      .profile-name {
+        padding-left: 0;
+        padding-bottom: 0;
+        font-size: 20px;
+        font-weight: 700;
+      }
     }
 
     .nobo-action-menu {
@@ -296,7 +302,7 @@
       color: #000000;
       font-size: 12px;
       font-weight: 600;
-      margin-top: 24px;
+      margin-top: 12px;
       line-height: 18px;
       margin-right: 2.5rem; /* matches mr-10 */
       border-radius: 1rem; /* matches rounded-xl */

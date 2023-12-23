@@ -57,6 +57,21 @@ const Returns: React.FC = () => {
       </IonRow>
 
       <IonContent className='return-item-content'>
+      {!productsData[0]?.products &&
+          <IonRow className='return-item-container'>
+            <IonCol className='return-item-box' size='12'>
+              <p className="return-brand">Brand</p>
+              <p className="return-date"> Date  </p>
+            </IonCol>
+            <IonCol className='return-item-name' size='12'>
+              Product
+            </IonCol>
+            <IonCol className='return-cost-info' size='2.5'>
+              <p className="return-cost-title">Cost</p>
+              <p className="return-cost"></p>
+            </IonCol>
+          </IonRow>
+        }
         {productsData[0]?.products.map((product: Product) => (
           <IonRow key={product._id} className='return-item-container'
             onClick={() => {

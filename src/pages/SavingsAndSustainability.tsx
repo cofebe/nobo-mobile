@@ -166,8 +166,8 @@ const SavingsAndSustainabilityPage: React.FC = () => {
       </IonRow>
       <IonContent className="rewards-content">
         <IonRow>
-            <IonCol className="savings-header" size="12">
-              <div className="savings-title-text-container savings-sub-title" style={{ textAlign: "left" }}>REWARDS</div>
+            <IonCol className="savings-header savings-sub-title" size="12">
+              <div className="savings-title-text-container" style={{ textAlign: "left" }}>REWARDS</div>
             </IonCol>
             <IonCol size="12">
                 <div className="rewards-container">
@@ -198,16 +198,16 @@ const SavingsAndSustainabilityPage: React.FC = () => {
             </IonCol>
         </IonRow>
         <IonRow>
-          <IonCol className="savings-header" size="12">
-            <div className="savings-title-text-container savings-sub-title" style={{ textAlign: "left" }}>SAVINGS</div>
+          <IonCol className="savings-header savings-sub-title" size="12">
+            <div className="savings-title-text-container" style={{ textAlign: "left" }}>SAVINGS</div>
           </IonCol>
           <IonCol className="savings-header" size="12">
             <p className="savings-amount">{formatPrice(tradesSavings + purchasesSavings) || 0}</p>
           </IonCol>
         </IonRow>
         <IonRow>
-          <IonCol className="savings-header" size="12">
-            <div className="savings-title-text-container savings-sub-title" style={{ textAlign: "left" }}>SUSTAINABILITY</div>
+          <IonCol className="savings-header savings-sub-title" size="12">
+            <div className="savings-title-text-container" style={{ textAlign: "left" }}>SUSTAINABILITY</div>
           </IonCol>
           <IonCol className="savings-header" size="12"
           style={{marginBottom:20, marginTop:20}}

@@ -35,6 +35,8 @@ import { User } from './models';
 import ListItemModal from './components/ListItemModal';
 
 import { viewUser } from './util';
+import FollowingListing from './pages/FollowingListing';
+import FollowerListing from './pages/FollowersListing';
 
 const Home: React.FC = () => {
   const history = useHistory();
@@ -221,7 +223,13 @@ const Home: React.FC = () => {
             <ProfileOverviewPage defaultToggled={false} />
           </Route>
           <Route path="/home/profile/:id" exact={true}>
-            <ProfileOverviewPage defaultToggled={false} myProfile={false} />
+            <ProfileOverviewPage defaultToggled={false} myProfile={false} showToggle={false} />
+          </Route>
+          <Route path="/home/following/:id" exact={true}>
+            <FollowingListing />
+          </Route>
+          <Route path="/home/followers/:id" exact={true}>
+            <FollowerListing />
           </Route>
           <Route path="/home/style-feed" exact={true}>
             <ProfileOverviewPage defaultToggled={true} />

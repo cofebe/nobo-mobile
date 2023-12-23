@@ -61,7 +61,7 @@ const Experience: React.FC = () => {
                   ? 'exp-img-selected'
                   : ''
               }
-              src='assets/images/experience-women.png'
+              src='assets/images/experience-women2.png'
               alt='women'
             />
             <h3 className='exp-img-title'> WOMEN </h3>
@@ -84,7 +84,7 @@ const Experience: React.FC = () => {
                   ? 'exp-img-selected'
                   : ''
               }
-              src='assets/images/experience-men.png'
+              src='assets/images/experience-men2.png'
               alt='men'
             />
             <h3 className='exp-img-title'> MEN </h3>
@@ -107,7 +107,7 @@ const Experience: React.FC = () => {
                   ? 'exp-img-selected'
                   : ''
               }
-              src='assets/images/experience-sneaker.png'
+              src='assets/images/experience-sneakers2.png'
               alt='sneakers'
             />
             <h3 className='exp-img-title'> SNEAKERS </h3>

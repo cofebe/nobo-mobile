@@ -114,7 +114,7 @@ const Withdraw: React.FC = () => {
           </IonCol>
         </IonRow>
         <IonRow className='withdraw-payment-method'>
-          <IonCol className='title'>PAYMENT METHOD</IonCol>
+          <IonCol className='title'>Select Payout Method</IonCol>
         </IonRow>
         <IonRow className='withdraw-payment-method-box'>
 
@@ -128,7 +128,7 @@ const Withdraw: React.FC = () => {
               <img className='img' height={74} src='assets/images/test/paypal-tab.svg' alt="" />
             </div>
             <div className="info1">PayPal</div>
-            <div className="info2">Instantly in account</div>
+            <div className="info2">5 business days</div>
           </IonCol>
 
           {/* <IonCol size='5.5' className='payment-box'> */}

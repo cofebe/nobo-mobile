@@ -218,22 +218,34 @@ const Reward = () => {
 
           <IonRow className='earn-box-container' >
 
-            <IonCol className='earn-box1' size='2.5'>
-              <img className='cart-img' width={22} height={21} src='assets/images/reward-cart.svg' alt="" />
-              <p className='buy'>BUY</p>
+            <IonCol className='earn-box1' size='4'>
+            <div className='container-flex'>
+              <p className='buy'>LIST AN ITEM</p>
+              <div>
+                <img className='cart-img' width={22} height={21} src='assets/images/reward-dollar-sign.svg' alt="" />
+              </div>
               <p className='plus'>+1</p>
+            </div>
             </IonCol>
 
-            <IonCol className='earn-box2' size='2.5'>
-              <img className='doller' width={22} height={21} src='assets/images/reward-dollar-sign.svg' alt="" />
-              <p className='sell'>SELL</p>
+            <IonCol className='earn-box2' size='4'>
+            <div className='container-flex'>
+              <p className='sell'>BUY / SELL</p>
+              <div>
+               <img className='doller' width={22} height={21} src='assets/images/reward-cart.svg' alt="" />
+              </div>
               <p className='plus2'>+2</p>
+            </div>
             </IonCol>
 
-            <IonCol className='earn-box3' size='2.5'>
-              <img className='refresh' width={22} height={21} src='assets/images/reward-refresh.svg' alt="" />
-              <p className='trade'>TRADE</p>
-              <p className='plus3'>+3</p>
+            <IonCol className='earn-box3' size='4'>
+              <div className='container-flex'>
+                <p className='trade'>TRADE</p>
+                <div>
+                  <img className='refresh' width={22} height={21} src='assets/images/reward-refresh.svg' alt="" />
+                </div>
+                <p className='plus3'>+3</p>
+              </div>
             </IonCol>
 
           </IonRow>

@@ -325,21 +325,19 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           <IonButtons
             style={{
               position: 'absolute',
-              left: '1.5rem',
-              top: '3rem',
-              color: 'white',
+              left: '20px',
+              top: '90px',
               zIndex: 101,
             }}
+            onClick={() => {
+              history.goBack();
+            }}
           >
-            <IonIcon
-              onClick={() => {
-                history.goBack();
-              }}
-              size="large"
-              slot="icon-only"
-              icon={chevronBackOutline}
-            />
-            hi
+             <img
+            height={38}
+            src="assets/images/arrow-left.svg"
+            alt="logo"
+          />
           </IonButtons>
         )}
 
@@ -359,11 +357,75 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
           </IonContent>
           <IonHeader></IonHeader>
         </IonModal>
-
+        <div
+            className="profile-create-post"
+            onClick={e => {
+              e.preventDefault();
+              history.push('/home/post-create');
+            }}
+          >
+          <svg
+            width="90"
+            height="90"
+            viewBox="0 0 90 90"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g filter="url(#filter0_d_1150_5872)">
+              <path
+                d="M30.5 36C30.5 32.9624 32.9624 30.5 36 30.5H42.157H45H47.843H54C57.0376 30.5 59.5 32.9624 59.5 36V54C59.5 57.0376 57.0376 59.5 54 59.5H45H36C32.9624 59.5 30.5 57.0376 30.5 54V36Z"
+                stroke="black"
+                shape-rendering="crispEdges"
+              />
+            </g>
+            <path
+              d="M52.0625 45.0312C52.0625 45.5835 51.6148 46.0357 51.0625 46.0357H46.0357V51.0625C46.0357 51.6148 45.5835 52.0625 45.0312 52.0625C44.479 52.0625 44.0268 51.6148 44.0268 51.0625V46.0357H39C38.4477 46.0357 38 45.5835 38 45.0312C38 44.479 38.4477 44.0268 39 44.0268H44.0268V39C44.0268 38.4477 44.479 38 45.0312 38C45.5835 38 46.0357 38.4477 46.0357 39V44.0268H51.0625C51.6148 44.0268 52.0625 44.479 52.0625 45.0312Z"
+              fill="black"
+            />
+            <defs>
+              <filter
+                id="filter0_d_1150_5872"
+                x="0"
+                y="0"
+                width="90"
+                height="90"
+                filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB"
+              >
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feColorMatrix
+                  in="SourceAlpha"
+                  type="matrix"
+                  values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                  result="hardAlpha"
+                />
+                <feOffset />
+                <feGaussianBlur stdDeviation="15" />
+                <feComposite in2="hardAlpha" operator="out" />
+                <feColorMatrix
+                  type="matrix"
+                  values="0 0 0 0 0.87451 0 0 0 0 0.87451 0 0 0 0 0.87451 0 0 0 1 0"
+                />
+                <feBlend
+                  mode="normal"
+                  in2="BackgroundImageFix"
+                  result="effect1_dropShadow_1150_5872"
+                />
+                <feBlend
+                  mode="normal"
+                  in="SourceGraphic"
+                  in2="effect1_dropShadow_1150_5872"
+                  result="shape"
+                />
+              </filter>
+            </defs>
+          </svg>
+        </div>
         <div
           className="profile-banner-container"
           style={{ backgroundImage: `url(${noboProfile.profileBg})` }}
-        ></div>
+        >
+        </div>
         {profile.myProfile && (
           <IonButton
             onClick={e => {
@@ -389,7 +451,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
         {!profile.myProfile && isFollowing && (
           <Button
             label="FOLLOWING"
-            className="nobo-follow-profile-button"
+            className="nobo-un-follow-profile-button"
             onClick={() => {
               unFollowUser();
             }}
@@ -461,10 +523,10 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
             </div>
           </div>
         </IonRow>
-        {targetSection === 'Feed' && <ProductList type="" userId={userId}></ProductList>}
-        {targetSection === 'Trades' && <ProductList type="trade" userId={userId}></ProductList>}
-        {targetSection === 'Purchase' && <ProductList type="sell" userId={userId}></ProductList>}
-        {targetSection === 'Reviews' && <ReviewList reviewData={noboProfile.reviews}></ReviewList>}
+        {targetSection === 'Feed' && <ProductList type="" userId={userId} isLoggedUser={profile.myProfile}></ProductList>}
+        {targetSection === 'Trades' && <ProductList type="trade" userId={userId} isLoggedUser={profile.myProfile}></ProductList>}
+        {targetSection === 'Purchase' && <ProductList type="sell" userId={userId} isLoggedUser={profile.myProfile}></ProductList>}
+        {targetSection === 'Reviews' && <ReviewList reviewData={noboProfile.reviews} isLoggedUser={profile.myProfile}></ReviewList>}
         <div style={{ height: '5vh' }}></div>
       </IonContent>
 
@@ -473,7 +535,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
         <IonRow className='welcome-main-container'>
           <IonCol size='12' className='welcome-title-container'>
             <p className='welcome-title-text'>
-              Check Out your style feed post!
+              Check out your style feed post!
             </p>
           </IonCol>
 
@@ -505,7 +567,7 @@ const ProfilePage: React.FC<ProfileProps> = profile => {
               welcomeModal.current?.dismiss()
             }}
           >
-            <p className='welcome-btn2'>Maybe later</p>
+            <p className='welcome-btn2'>MAYBE LATER</p>
           </IonCol>
 
         </IonRow>

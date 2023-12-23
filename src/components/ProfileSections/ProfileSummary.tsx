@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { NoboProfile } from '../../data/nobo-profile';
 import ProfileActionMenu, { ActionListItem } from '../ProfileActionMenu';
 import { AuthService } from '../../services/AuthService';
+import { useHistory } from 'react-router';
 
 interface ProfileSummaryProps {
   profile: NoboProfile;
@@ -11,6 +12,7 @@ interface ProfileSummaryProps {
 }
 const previewCharLen = 160;
 const FeedListItem: React.FC<ProfileSummaryProps> = ({ profile, openSocialShare }) => {
+  const history = useHistory();
   const authService = new AuthService();
   const [previewMode, setPreviewMode] = useState(true);
   const [myProfile, setMyProfile] = useState<NoboProfile>(profile);
@@ -24,7 +26,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({ profile, openSocialShare 
     <div className={'profile-summary-athlete ' + (isPlatform('desktop') ? 'desktop' : '')}>
       {!isPlatform('desktop') ? (
         <IonGrid className="mobile-only profile-summary-container">
-          <IonRow style={{ maxHeight: '48px' }}>
+          <IonRow className="profile-container">
             <IonCol size="7" className="profile-name">
               <div>@{myProfile.displayName}</div>
               <div style={{ paddingTop: '8px' }}>
@@ -101,11 +103,17 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({ profile, openSocialShare 
             ''
           )}
           <IonRow className="nobo-profile-stats-top">
-            <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} size="4">
+            <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} size="4"  onClick={(e) => {
+              e.preventDefault();
+              history.push(`/home/followers/${myProfile._id}`);
+            }}>
               <div className="nobo-profile-stats-header">FOLLOWERS</div>
               <div className="nobo-profile-stats-value">{myProfile.followers.length}</div>
             </IonCol>
-            <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} size="4">
+            <IonCol style={{ paddingLeft: 0, paddingRight: 0 }} size="4" onClick={(e) => {
+              e.preventDefault();
+              history.push(`/home/following/${myProfile._id}`);
+            }}>
               <div className="nobo-profile-stats-header">FOLLOWING</div>
               <div className="nobo-profile-stats-value">{myProfile.following.length}</div>
             </IonCol>

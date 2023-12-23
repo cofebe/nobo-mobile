@@ -1,9 +1,9 @@
 import { IonButton, IonPage } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import backgroundImage1 from '../assets/Splash1.jpg';
-import backgroundImage2 from '../assets/Splash2.jpg';
-import backgroundImage3 from '../assets/Splash3.jpg';
+import backgroundImage1 from '../assets/nobo-splash-1.jpeg';
+import backgroundImage3 from '../assets/nobo-splash-2.jpeg';
+import backgroundImage2 from '../assets/nobo-splash-3.jpeg';
 
 import './GetStarted.scss';
 
@@ -11,10 +11,9 @@ const GetStarted: React.FC = () => {
   const history = useHistory();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const sentences = [
-    'TRADE \n BUY, & SELL LUXURY',
-    'RECEIVE \n BETTER \n DEALS',
-    // 'DISCOVER NEW \n ELEGANCE',
-    'DISCOVER SUSTAINABLE \n LUXURY',
+    `DISCOVER \nSUSTAINABLE \nLUXURY`,
+    'TRADE,\nBUY & SELL \nLUXURY',
+    'A NEW LUXURY \nEXPERIENCE \nAWAITS',
   ];
 
   useEffect(() => {
@@ -43,10 +42,10 @@ const GetStarted: React.FC = () => {
             fontWeight: '400',
             lineHeight: '60px',
             marginTop: '474px',
-            maxWidth: '259px',
             color: '#FFFFFF',
             marginLeft: '40px',
             height:'200px',
+            whiteSpace: 'pre-wrap'
           }}
         >
           {sentences[currentImageIndex]}
@@ -59,10 +58,11 @@ const GetStarted: React.FC = () => {
         >
           <IonButton
             style={{
-              width: '341px',
+              width: '100%',
+              margin: '0 24px',
               height: '51px',
               fontFamily: 'Nunito Sans',
-              fontSize: '12px',
+              fontSize: '15px',
               fontWeight: '700',
               lineHeight: '15px',
               // border: '0.5px solid #ffffff',
@@ -84,7 +84,7 @@ const GetStarted: React.FC = () => {
           <div
             style={{
               fontFamily: 'Nunito Sans',
-              fontWeight: '600',
+              fontWeight: '700',
               fontSize: '15px',
               lineHeight: '22.5px',
               color: '#FFFFFF',

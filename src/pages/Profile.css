@@ -76,7 +76,7 @@ ion-modal#example-modal {
   width: 252px;
   height: 51px;
   color: #FFF;
-  font-size: 17px;
+  font-size: 12px !important;
   font-family: 'Nunito Sans';
   font-weight: 700;
   line-height: 150%;
@@ -94,15 +94,22 @@ ion-modal#example-modal {
 
 .welcome-btn2 {
   width: 252px;
-  height: 18px;
+  height: 17px;
   color: #707070;
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
   font-family: 'Nunito Sans';
   font-weight: 600;
   line-height: 150%;
   letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+.profile-create-post {
+  position: absolute;
+  top: calc(45px + var(--ion-safe-area-top, 0));
+  right: 0;
+  z-index: 9;
 }
 
 /* ion-modal#example-modal::part(backdrop) {

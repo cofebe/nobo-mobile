@@ -48,3 +48,11 @@
   font-weight: 400;
   margin-bottom: -10px;
 }
+
+.experience-text {
+  position: absolute;
+  top: 45%;
+  color: white;
+  font-weight: 600;
+  font-family: 'Nunito Sans';
+}

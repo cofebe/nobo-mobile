@@ -29,7 +29,7 @@ const HelpSupportShipping = () => {
       </IonRow>
       <IonContent className='help-support-shipping-ion-content'>
         <IonRow className='help-support-shipping-container-1'>
-          <IonCol className='contact' size='12'>CONTACT <span className='support'>SUPPORT</span></IonCol>
+          <IonCol className='contact' size='12'>CONTACT <span onClick={() => window.open('mailto:customerservice@thenobo.com')} className='support'>SUPPORT</span></IonCol>
           <IonCol className='email' size='12'>Customerservice@thenobo.com</IonCol>
           <IonCol className='info' size='12'>
             Make sure to include your TheNOBO account email and

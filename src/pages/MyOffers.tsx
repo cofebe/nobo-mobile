@@ -96,7 +96,7 @@ const MyOffers: React.FC = () => {
       />
       {offerData?.length < 1 ?
         <IonContent className='my-offers-ion-content'>
-          <IonRow>You have no completed offers!</IonRow>
+          <IonRow>You have no offers to view</IonRow>
         </IonContent>
         :
         <IonContent className='my-offers-ion-content'>

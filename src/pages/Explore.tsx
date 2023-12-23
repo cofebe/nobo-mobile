@@ -418,7 +418,7 @@ setSort('')
           )}
           <IonRow>
             {products?.slice(1).map((product: any, index: any) => (
-              <IonCol className="small" key={index} size="6">
+              <IonCol style={{ height: 185 }} key={index} size="6">
                 <NoboHomeItem product={product} />
               </IonCol>
             ))}

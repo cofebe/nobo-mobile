@@ -107,7 +107,7 @@ const SelectBrands: React.FC = () => {
         </IonRow>
         <IonRow className='select-brands-desc-container'>
           <IonCol className='select-brands-desc'>
-            Let other people know your top 4 favorite brands to trade, buy, or sell.
+            Let other NOBO Insiders know your top 4 brands to Trade, Buy, or Sell.
           </IonCol>
         </IonRow>
         <div className='select-brands-search-container'>

@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { useIonViewDidEnter } from '@ionic/react';
+import { IonRow, useIonViewDidEnter } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing';
 import './ProductList.css';
@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 interface ProductListProps {
   type: string;
   userId: string;
+  isLoggedUser: Boolean;
 }
 
 interface FeedItem {
@@ -33,7 +34,7 @@ interface FeedItem {
   __v: number;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ type, userId }) => {
+const ProductList: React.FC<ProductListProps> = ({ type, userId, isLoggedUser }) => {
   const history = useHistory();
   const feedService = new FeedService();
   const userService = new UserService();
@@ -189,11 +190,25 @@ const ProductList: React.FC<ProductListProps> = ({ type, userId }) => {
     } else {
       return (
         <div
-          style={{ backgroundColor: '#fefcf6', height: '10vh', width: '100%', textAlign: 'center' }}
+          style={{ backgroundColor: '#fefcf6', height: '10vh', width: '100%', textAlign: 'center', padding: '0 16px' }}
         >
-          <h5 style={{ backgroundColor: '#fefcf6', color: '#ACACAC' }}>
-            Profile has no trade feed
-          </h5>
+          {isLoggedUser ?
+            (<h5 style={{ backgroundColor: '#fefcf6', color: '#ACACAC' }}>
+              You haven’t added any items to your Trade Closet!
+              <img
+                onClick={() => {
+                  history.push('/list/trade-category');
+                }}
+                style={{ marginLeft: 8, marginTop: 8, marginBottom: -4 }}
+                height={22}
+                src="assets/images/trade-icon-gold.svg"
+                alt="logo"
+              />
+            </h5>) : (
+            <h5 style={{ backgroundColor: '#fefcf6', color: '#ACACAC' }}>
+              User hasn’t added any items to Trade Closet!
+            </h5>)
+          }
         </div>
       );
     }
@@ -275,9 +290,26 @@ const ProductList: React.FC<ProductListProps> = ({ type, userId }) => {
     } else {
       return (
         <div
-          style={{ backgroundColor: '#fefcf6', height: '10vh', width: '100%', textAlign: 'center' }}
+          style={{ backgroundColor: '#fefcf6', height: '10vh', width: '100%', textAlign: 'center', padding: '0 16px' }}
         >
-          <h5 style={{ backgroundColor: '#fefcf6', color: '#ACACAC' }}>Profile has no sell feed</h5>
+          {
+            isLoggedUser ? (
+              <h5 style={{ backgroundColor: '#fefcf6', color: '#ACACAC' }}>
+                You haven’t added any items to your Sell Closet!
+                <img
+                  height={22}
+                  style={{ marginLeft: 8, marginTop: 8, marginBottom: -4 }}
+                  src="assets/images/shop-icon-gold.svg"
+                  alt="logo"
+                />
+              </h5>
+            ) : (
+              <h5 style={{ backgroundColor: '#fefcf6', color: '#ACACAC' }}>
+                User hasn’t added any items to Sell Closet!
+              </h5>
+            )
+          }
+
         </div>
       );
     }

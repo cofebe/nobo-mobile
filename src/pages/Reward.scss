@@ -299,46 +299,29 @@
       align-items: center;
 
       .earn-box1 {
-        position: relative;
         height: 50px;
-
+        .container-flex {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          p {
+            margin-top: 6px;
+          }
+        }
         .cart-img {
-          position: absolute;
-          left: 10px;
 
-          @media only screen and (device-height: 1180px) {
-            left: 30px;
-          }
-
-          @media only screen and (device-height: 1024px) {
-            left: 20px;
-          }
         }
 
         .buy {
-          top: -5px;
-          position: absolute;
-          right: 12px;
           font-family: 'Nunito Sans';
           font-style: normal;
           font-weight: 600;
           font-size: 12px;
           line-height: 16px;
           color: #000000;
-
-          @media only screen and (device-height: 1180px) {
-            right: 75px;
-          }
-
-          @media only screen and (device-height: 1024px) {
-            right: 75px;
-          }
         }
 
         .plus {
-          // top: -10px;
-          position: absolute;
-          right: 20px;
           font-family: 'Nunito Sans';
           font-style: normal;
           font-weight: 600;
@@ -346,39 +329,22 @@
           line-height: 27px;
           text-align: center;
           color: #D6980E;
-
-          @media only screen and (device-height: 1180px) {
-            right: 80px;
-          }
-
-          @media only screen and (device-height: 1024px) {
-            right: 80px;
-          }
         }
 
 
       }
 
       .earn-box2 {
-        position: relative;
         height: 50px;
-
-        .doller {
-          position: absolute;
-          left: 10px;
-
-          @media only screen and (device-height: 1180px) {
-            left: 30px;
-          }
-
-          @media only screen and (device-height: 1024px) {
-            left: 20px;
+        .container-flex {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          p {
+            margin-top: 6px;
           }
         }
-
         .sell {
-          top: -5px;
-          position: absolute;
           right: 5px;
           font-family: 'Nunito Sans';
           font-style: normal;
@@ -386,20 +352,9 @@
           font-size: 12px;
           line-height: 16px;
           color: #000000;
-
-          @media only screen and (device-height: 1180px) {
-            right: 75px;
-          }
-
-          @media only screen and (device-height: 1024px) {
-            right: 75px;
-          }
         }
 
         .plus2 {
-          // top: -10px;
-          position: absolute;
-          right: 20px;
           font-family: 'Nunito Sans';
           font-style: normal;
           font-weight: 600;
@@ -407,59 +362,30 @@
           line-height: 27px;
           text-align: center;
           color: #D6980E;
-
-          @media only screen and (device-height: 1180px) {
-            right: 80px;
-          }
-
-          @media only screen and (device-height: 1024px) {
-            right: 80px;
-          }
         }
 
       }
 
       .earn-box3 {
-        position: relative;
         height: 50px;
-
-        .refresh {
-          position: absolute;
-
-          // left: 10px;
-          @media only screen and (device-height: 1180px) {
-            left: 30px;
-          }
-
-          @media only screen and (device-height: 1024px) {
-            left: 20px;
+        .container-flex {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          p {
+            margin-top: 6px;
           }
         }
-
         .trade {
-          top: -5px;
-          position: absolute;
-          right: 0px;
           font-family: 'Nunito Sans';
           font-style: normal;
           font-weight: 600;
           font-size: 12px;
           line-height: 16px;
           color: #000000;
-
-          @media only screen and (device-height: 1180px) {
-            right: 60px;
-          }
-
-          @media only screen and (device-height: 1024px) {
-            right: 60px;
-          }
         }
 
         .plus3 {
-          // top: -10px;
-          position: absolute;
-          right: 20px;
           font-family: 'Nunito Sans';
           font-style: normal;
           font-weight: 600;
@@ -467,14 +393,6 @@
           line-height: 27px;
           text-align: center;
           color: #D6980E;
-
-          @media only screen and (device-height: 1180px) {
-            right: 70px;
-          }
-
-          @media only screen and (device-height: 1024px) {
-            right: 70px;
-          }
         }
 
       }

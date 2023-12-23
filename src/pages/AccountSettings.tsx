@@ -239,7 +239,7 @@ const AccountSettings: React.FC = () => {
           </IonRow>
         </div>
         <IonRow style={{ width: '350px', margin: 'auto' }}>
-          <IonCol size='12' className='acc-experience-title'>EXPERIENCE</IonCol>
+          <IonCol size='12' className='acc-experience-title'>EXPERIENCE PREFERENCES</IonCol>
         </IonRow>
 
         <div className='acc-experience-option-box'>
@@ -249,8 +249,8 @@ const AccountSettings: React.FC = () => {
               handleTicker('women');
             }}
           >
-            <img className='acc-experience-optons-img' src='assets/images/women2.png' alt='women' />
-
+            <img className='acc-experience-optons-img' src='assets/images/women.png' alt='women' />
+            <span className='experience-text'>WOMEN</span>
             <div className='acc-experience-option-ticker'>
               <Checkbox value={selectedExperienceArray.includes('women')} onChange={() => { }} />
             </div>
@@ -263,13 +263,12 @@ const AccountSettings: React.FC = () => {
           >
             <img
               className='acc-experience-optons-img'
-              src='assets/images/men2.png'
+              src='assets/images/men.png'
               alt='sneakers'
             />
-
+            <span className='experience-text'>MEN</span>
             <div className='acc-experience-option-ticker'>
               <Checkbox value={selectedExperienceArray.includes('men')} onChange={e => { }} />
-
             </div>
           </div>
           <div
@@ -280,10 +279,10 @@ const AccountSettings: React.FC = () => {
           >
             <img
               className='acc-experience-optons-img'
-              src='assets/images/sneakers2.png'
+              src='assets/images/sneakers.png'
               alt='sneakers'
             />
-
+            <span className='experience-text'>SNEAKERS</span>
             <div className='acc-experience-option-ticker'>
               <Checkbox value={selectedExperienceArray.includes('sneakers')} onChange={e => { }} />
             </div>

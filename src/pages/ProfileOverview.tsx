@@ -12,9 +12,10 @@ import Toggle from '../components/Toggle';
 interface ProfileOverviewProps {
     defaultToggled: boolean;
     myProfile?: boolean;
+    showToggle?: Boolean;
 }
 
-const ProfileOverview: React.FC<ProfileOverviewProps> = ({defaultToggled, myProfile = true}) => {
+const ProfileOverview: React.FC<ProfileOverviewProps> = ({defaultToggled, myProfile = true, showToggle=true}) => {
     const [isToggled, setIsToggled] = useState(defaultToggled || false);
     const history = useHistory();
     const myProfileText = "MY PROFILE";
@@ -27,16 +28,16 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({defaultToggled, myProf
     return (
         <IonPage className="home-page-athlete-profile" style={{ backgroundColor: '#F9FBFB' }}>
 
-            <Toggle
+            {showToggle && <Toggle
                 className={`toggle-switch ${isToggled ? 'checked' : ''}`}
                 labelOne={myProfileText}
                 labelTwo={styleFeedText}
                 isToggled={isToggled}
                 onClick={handleClick}>
-            </Toggle>
+            </Toggle>}
 
             <div className="stylefeed-page" style={{display: `${isToggled ? 'none' : ''}`}}>
-                <Profile myProfile={myProfile}/>
+                <Profile myProfile={showToggle ? myProfile : false}/>
             </div>
 
             <div className="stylefeed-page" style={{display: `${isToggled ? '' : 'none'}`}}>

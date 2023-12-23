@@ -5,9 +5,10 @@ import { environment } from '../environments/environment';
 
 interface ReviewListProps {
   reviewData: any;
+  isLoggedUser: Boolean;
 }
 
-const ReviewList: React.FC<ReviewListProps> = ({ reviewData }) => {
+const ReviewList: React.FC<ReviewListProps> = ({ reviewData, isLoggedUser }) => {
   let rating = 5;
 
   function renderStars(rating: number) {
@@ -95,7 +96,7 @@ const ReviewList: React.FC<ReviewListProps> = ({ reviewData }) => {
       ))}
       {reviewData.length === 0 && (
         <div className="review-none-container">
-          <h5 className="review-none-text">Profile has not received any reviews.</h5>
+          <h5 className="review-none-text">{isLoggedUser ? 'You haven’t received any reviews yet!.' : 'User has not received any reviews yet!.'}</h5>
         </div>
       )}
     </div>

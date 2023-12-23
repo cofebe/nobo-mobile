@@ -29,7 +29,7 @@ const HelpSupport = () => {
       </IonRow>
       <IonContent className='help-support-ion-content'>
         <IonRow className='help-support-container-1' >
-          <IonCol className='contact' size='12'>CONTACT <span className='support'>SUPPORT</span></IonCol>
+          <IonCol className='contact' size='12'>CONTACT <span onClick={() => window.open('mailto:customerservice@thenobo.com')} className='support'>SUPPORT</span></IonCol>
 
           <IonCol size='12' className='email'>
             <a href="mailto:customerservice@thenobo.com">
