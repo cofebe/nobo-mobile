@@ -2,6 +2,7 @@ import { BaseService } from './BaseService';
 import {
   Address,
   BrandsResponse,
+  CategoriesResponse,
   CreateProductRequest,
   CreateProductResponse,
   Order,
@@ -14,7 +15,7 @@ import {
 } from '../models';
 
 export class ProductService extends BaseService {
-  async getProducts(group: string, action: string, onSale: boolean) {
+  async getProducts(group: string, action: string, onSale: boolean, sort: any, filters: any) {
     let params: URLSearchParams;
     if (action === 'explore') {
       params = new URLSearchParams({
@@ -24,8 +25,9 @@ export class ProductService extends BaseService {
           retailPrice: { $gt: 0 },
           group: group,
           onSale: onSale,
+          ...filters,
         }),
-        sort: JSON.stringify({ createdAt: -1 }),
+        sort: JSON.stringify(sort),
       });
     } else {
       params = new URLSearchParams({
@@ -36,13 +38,13 @@ export class ProductService extends BaseService {
           group: group,
           action: action,
           onSale: onSale,
+          ...filters,
         }),
-        sort: JSON.stringify({ createdAt: -1 }),
+        sort: JSON.stringify(sort),
       });
     }
 
     const response = await super.fetch('GET', `/api/products/all?${params}`);
-    //console.log('getProducts res: ', response);
     const json = await response.json();
     return json;
   }
@@ -155,6 +157,12 @@ export class ProductService extends BaseService {
   async getBrands(): Promise<BrandsResponse> {
     const res = await super.fetch('GET', '/api/brands/all');
     const json: BrandsResponse = await res.json();
+    return json;
+  }
+
+  async getCategories(): Promise<CategoriesResponse> {
+    const res = await super.fetch('GET', '/api/categories/all/?limit=500');
+    const json: CategoriesResponse = await res.json();
     return json;
   }
 

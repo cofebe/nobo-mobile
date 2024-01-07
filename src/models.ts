@@ -622,6 +622,10 @@ export interface BrandsResponse {
   brands: Brand[];
 }
 
+export interface CategoriesResponse {
+  Categories: Category[];
+}
+
 export interface Brand {
   _id: string;
   name: string;

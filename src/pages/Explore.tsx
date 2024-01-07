@@ -8,7 +8,7 @@ import { ProductService } from '../services/ProductService';
 import { useParams } from 'react-router';
 import Input from '../components/Input';
 import { UserService } from '../services/UserService';
-import { Brand, Product } from '../models';
+import { Brand, Category } from '../models';
 
 
 
@@ -17,10 +17,16 @@ const Explore: React.FC = () => {
   const userService = new UserService()
   const params: any = useParams();
   const [products, setProducts] = useState<any>([]);
-  const [sort, setSort] = useState('');
+  const [sort, setSort] = useState('date');
   const [sortPage, setSortPage] = useState('default');
   const [brandsItems, setBrandItems] = useState<Brand[]>([]);
-  const [brandInput, setbrandInput] = useState('')
+  const [categoryItems, setCategoryItems] = useState<Category[]>([]);
+  const [brandInput, setbrandInput] = useState('');
+  const [categoryFilters, setCategoryFilters] = useState<String>('');
+  const [designerFilters, setDesignerFilters] = useState<String[]>([]);
+  const [conditionFilters, setConditionFilters] = useState<String[]>([]);
+  const [colorFilters, setColorFilters] = useState<String[]>([]);
+  const [boxFilters, setBoxFilters] = useState<String[]>([]);
 
 
   const modal = useRef<HTMLIonModalElement>(null)
@@ -37,328 +43,57 @@ const Explore: React.FC = () => {
       });
   }
 
-
+  const getCategories = () => {
+    productService
+      .getCategories()
+      .then(categories => {
+        setCategoryItems(categories.docs.filter((el)=> el.parent === null))
+      })
+      .catch(error => {
+        console.log('err, ', error);
+      });
+  }
 
   useIonViewWillEnter(() => {
-    getBrands()
+    getBrands();
+    getCategories();
+    getProducts(params.sectionCategory, getAction(),  params.sectionName === 'sell', generateParams());
     const ionRouterOutlet = document.querySelector('ion-router-outlet') as HTMLElement;
     if (ionRouterOutlet) {
       ionRouterOutlet.style.setProperty('--animation-duration', '0s');
     }
-    // console.log('params', params);
   });
 
-
-
-  useEffect(() => {
-    if (params.sectionName === 'explore') {
-      const exploreProducts = localStorage.getItem(`${params.sectionName}Products`)
-      if (exploreProducts) {
-        setProducts(JSON.parse(exploreProducts))
-      }
-      else if (params.sectionName === 'explore' && !exploreProducts) {
-        getProducts(params.sectionCategory, 'explore', false);
-
+  const getSort = () => {
+    if (sort === 'date') {
+      return {
+        createdAt: -1
       }
     }
-
-    if (params.sectionName === 'trade') {
-      const tradeProducts = localStorage.getItem(`${params.sectionName}Products`)
-      if (tradeProducts) {
-        setProducts(JSON.parse(tradeProducts))
-      }
-      else if (params.sectionName === 'trade' && !tradeProducts) {
-        getProducts(params.sectionCategory, 'trade', false);
-
+    if (sort === 'high') {
+      return {
+        price: -1
       }
     }
-
-    if (params.sectionName === 'shop') {
-      const shopProducts = localStorage.getItem(`${params.sectionName}Products`)
-      if (shopProducts) {
-        setProducts(JSON.parse(shopProducts))
-      }
-      else if (params.sectionName === 'shop' && !shopProducts) {
-        getProducts(params.sectionCategory, 'sell', false);
-
+    if (sort === 'low') {
+      return {
+        price: 1
       }
     }
+  }
 
-
-    if (params.sectionName === 'sale') {
-      const salesProduct = localStorage.getItem(`${params.sectionName}Products`)
-      if (salesProduct) {
-        setProducts(JSON.parse(salesProduct))
-      }
-      else if (params.sectionName === 'sale' && !salesProduct) {
-        getProducts(params.sectionCategory, 'sell', true);
-
-      }
-    }
-
-  }, [params]);
-
-
-  function getProducts(group: string, action: string, onSale: boolean, data?: any) {
+  function getProducts(group: string, action: string, onSale: boolean, filters?: any) {
     productService
-      .getProducts(group, action, onSale)
-
+      .getProducts(group, action, onSale, getSort(), filters)
       .then(products => {
-        const result = products.docs.sort((a: any, b: any) =>
-          new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf());
-        setProducts(result)
-        localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(result))
-
+        setProducts(products.docs)
       })
       .catch(error => {
         console.log('error', error);
       });
   }
 
-
-  // --------------------------SORT PRODUCT -------------------------------
-
-  const sortProduct = (option: string) => {
-    localStorage.removeItem(`${params.sectionName}Products`)
-    if (params.sectionName === 'sale') {
-      getProducts(params.sectionCategory, 'sell', true);
-    }
-    else if (params.sectionName === 'shop') {
-      getProducts(params.sectionCategory, 'sell', false);
-    }
-    else {
-      getProducts(params.sectionCategory, `${params.sectionName}`, false);
-
-    }
-
-    setTimeout(() => {
-      // localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
-
-      const data = localStorage.getItem(`${params.sectionName}Products`)
-      if (data) {
-        const data2 = JSON.parse(data)
-
-        if (option === 'low') {
-          const result = data2?.sort((a: any, b: any) => a.price - b.price)
-          setProducts(result)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(result))
-        }
-
-        else if (option === 'high') {
-          const result = data2?.sort((a: any, b: any) => b.price - a.price)
-          setProducts(result)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(result))
-        }
-
-        else if (option === 'date') {
-          const result = data2?.sort((a: any, b: any) =>
-            new Date(a.createdAt).valueOf() - new Date(b.createdAt).valueOf());
-          setProducts(result)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(result))
-        }
-
-      }
-    }, 3000);
-
-  }
-
-
-  //---------------FILTER BY COLOR --------------------------
-
-  const filterColor = (productColor: string) => {
-    localStorage.removeItem(`${params.sectionName}Products`)
-    if (params.sectionName === 'sale') {
-      getProducts(params.sectionCategory, 'sell', true);
-    }
-    else if (params.sectionName === 'shop') {
-      getProducts(params.sectionCategory, 'sell', false);
-    }
-    else {
-      getProducts(params.sectionCategory, `${params.sectionName}`, false);
-
-    }
-
-    setTimeout(() => {
-      // localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
-
-      const data = localStorage.getItem(`${params.sectionName}Products`)
-      if (data) {
-        const data2 = JSON.parse(data)
-        const colorFilter = data2?.filter((product: Product) =>
-          product.attributes.find((p) =>
-            p.value.toString().toLowerCase().includes(productColor.toLowerCase())))
-        setProducts(colorFilter)
-        localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(colorFilter))
-
-      }
-      else {
-        setProducts([])
-      }
-
-    }, 3000);
-
-  }
-
-  //-----------------------FILTER BY CATEGORY---------------------------
-
-  const filterCategory = (categoryType: string) => {
-    localStorage.removeItem(`${params.sectionName}Products`)
-    if (params.sectionName === 'sale') {
-      getProducts(params.sectionCategory, 'sell', true);
-    }
-    else if (params.sectionName === 'shop') {
-      getProducts(params.sectionCategory, 'sell', false);
-    }
-    else {
-      getProducts(params.sectionCategory, `${params.sectionName}`, false);
-
-    }
-
-
-    setTimeout(() => {
-      // localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
-
-      const data = localStorage.getItem(`${params.sectionName}Products`)
-      if (data) {
-        const data2 = JSON.parse(data)
-        const categoryFilter = data2?.find((product: Product) =>
-          product?.parentCategory?.name?.toLowerCase().includes(categoryType.toLowerCase()))
-        if (typeof (categoryFilter) === 'object') {
-          const categoryData: any = []
-          const newArr = categoryData.push(categoryFilter)
-          categoryData.push(categoryFilter)
-          setProducts(categoryData)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(newArr))
-
-        }
-        else if (typeof (categoryFilter) === 'undefined') {
-          const categoryData: any = []
-          setProducts(categoryData)
-          const newArr = categoryData.push(categoryFilter)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(newArr))
-
-        }
-        else {
-          setProducts(categoryFilter)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(categoryFilter))
-        }
-
-      }
-
-    }, 3000);
-
-  }
-
-
-  const productFilter = (option: string) => {
-    localStorage.removeItem(`${params.sectionName}Products`)
-    if (params.sectionName === 'sale') {
-      getProducts(params.sectionCategory, 'sell', true);
-    }
-    else if (params.sectionName === 'shop') {
-      getProducts(params.sectionCategory, 'sell', false);
-    }
-    else {
-      getProducts(params.sectionCategory, `${params.sectionName}`, false);
-    }
-
-    setTimeout(() => {
-      // localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(products))
-      const data = localStorage.getItem(`${params.sectionName}Products`)
-      if (data) {
-        const data2 = JSON.parse(data)
-
-        // ------------FILTER LOGIC HERE----------------
-        if (option === 'no') {
-          const tagFilter = data2?.filter((product: Product) =>
-            product.tags.length === 0
-          );
-
-          setProducts(tagFilter)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(tagFilter))
-
-        }
-
-        else if (option === 'yes') {
-          const tagFilter = data2?.filter((product: Product) =>
-            product.tags.length > 0
-          );
-          setProducts(tagFilter)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(tagFilter))
-        }
-
-        else if (option === 'immaculate') {
-          const immaculateProduct = data2?.filter((product: Product) =>
-            product.attributes.find((p) =>
-              p.value.toString().toLowerCase().includes(option.toLowerCase())))
-          setProducts(immaculateProduct)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(immaculateProduct))
-
-        }
-
-        else if (option === 'good condition') {
-          const goodCondition = data2?.filter((product: Product) =>
-            product.attributes.find((p) =>
-              p.value.toString().toLowerCase().includes(option.toLowerCase())))
-          setProducts(goodCondition)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(goodCondition))
-
-        }
-
-
-        else if (option === 'gently used') {
-          const gentlyUsed = data2?.filter((product: Product) =>
-            product.attributes.find((p) =>
-              p.value.toString().toLowerCase().includes(option.toLowerCase())))
-          setProducts(gentlyUsed)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(gentlyUsed))
-
-        }
-
-        else if (option === 'vintage') {
-          const vintageproduct = data2?.filter((product: Product) =>
-            product.attributes.find((p) =>
-              p.value.toString().toLowerCase().includes(option.toLowerCase())))
-          setProducts(vintageproduct)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(vintageproduct))
-        }
-
-        else if (option === 'no box') {
-          const noBoxProduct = data2?.filter((product: Product) =>
-            product.attributes.find((p) =>
-              p.value.toString().toLowerCase().includes(option.toLowerCase())))
-          setProducts(noBoxProduct)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(noBoxProduct))
-        }
-
-        else if (option === 'box included') {
-          const boxIncluded = data2?.filter((product: Product) =>
-            product.attributes.find((p) =>
-              p.value.toString().toLowerCase().includes(option.toLowerCase())))
-          setProducts(boxIncluded)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(boxIncluded))
-        }
-
-        else {
-          // ------------FILTER BRANDS LOGIC HERE----------------
-          const brandFilter = data2?.filter((product: any) =>
-            product.brand.toLowerCase() === option.toLowerCase()
-          );
-          setProducts(brandFilter)
-          localStorage.setItem(`${params.sectionName}Products`, JSON.stringify(brandFilter))
-        }
-
-
-      }
-
-    }, 3000);
-
-  }
-
-
-
   const reset = () => {
-    localStorage.removeItem(`${params.sectionName}Products`)
     if (params.sectionName === 'sale') {
       getProducts(params.sectionCategory, 'sell', true);
     }
@@ -368,19 +103,95 @@ const Explore: React.FC = () => {
     else {
       getProducts(params.sectionCategory, `${params.sectionName}`, false);
     }
-    setTimeout(() => {
 
-      filterModal.current?.dismiss()
-    }, 3000);
-
-setSort('')
+    setSort('')
+    setCategoryFilters('');
+    setDesignerFilters([]);
+    setConditionFilters([]);
+    setColorFilters([]);
+    setBoxFilters([]);
+    closeFilterModal();
   }
 
+
+  const closeFilterModal = () => {
+    setTimeout(() => {
+      filterModal.current?.dismiss()
+    }, 1000);
+  }
 
   const brandFilter = brandsItems?.filter(brand =>
     brand.name.toLowerCase().includes(brandInput.toLowerCase(), 0)
   );
 
+  const handleConditionFilters = (checked: Boolean, value: String) => {
+    if (checked) {
+      setConditionFilters([...conditionFilters, value])
+    } else {
+      setConditionFilters([...conditionFilters.filter((el) => el !== value)])
+    }
+    closeFilterModal();
+  }
+
+  const handleColorFilters = (checked: Boolean, value: String) => {
+    if (checked) {
+      setColorFilters([...colorFilters, value])
+    } else {
+      setColorFilters([...colorFilters.filter((el) => el !== value)])
+    }
+    closeFilterModal();
+  }
+
+  const handleDesignerFilters = (checked: Boolean, value: String) => {
+    if (checked) {
+      setDesignerFilters([...designerFilters, value])
+    } else {
+      setDesignerFilters([...designerFilters.filter((el) => el !== value)])
+    }
+    closeFilterModal();
+  }
+
+  const handleCategoryFilters = (value: String) => {
+      setCategoryFilters(value)
+      closeFilterModal();
+  }
+
+  const handleBoxFilters = (checked: Boolean, value: String) => {
+    if (checked) {
+      setBoxFilters([...boxFilters, value])
+    } else {
+      setBoxFilters([...boxFilters.filter((el) => el !== value)])
+    }
+    closeFilterModal();
+  }
+
+  const generateParams = () => {
+    const category = categoryItems.find((el) => el.name.toUpperCase() === categoryFilters.toUpperCase() || el.name.toUpperCase() === `${categoryFilters} [${params.sectionCategory.toUpperCase()}]`)
+    return {
+      ...(category && { parentCategory: category?._id }),
+      ...((boxFilters.length > 0 || conditionFilters.length > 0 || colorFilters.length > 0 || designerFilters.length > 0) && { attributes: {
+          ...(boxFilters.length > 0 && { box: boxFilters }),
+          ...(conditionFilters.length > 0 && { condition: conditionFilters }),
+          ...(colorFilters.length > 0 && { color: colorFilters }),
+          ...(designerFilters.length > 0 && { brand: {
+              $in: designerFilters,
+            }
+          }),
+        }
+      }),
+    };
+  }
+
+  const getAction = () => {
+    if (params.sectionName === 'shop' || params.sectionName === 'sale' || params.sectionName === 'explore') {
+      return 'sell';
+    }
+    return params.sectionName;
+  }
+
+  useEffect(()=> {
+    getProducts(params.sectionCategory, getAction(),  params.sectionName === 'shop', generateParams());
+  }, [categoryFilters, designerFilters, conditionFilters, colorFilters, boxFilters, params.sectionName, sort]);
 
   return (
     <IonPage className="nobo-explore-page">
@@ -444,10 +255,9 @@ setSort('')
           <IonCol size='12' className='explore-modal-listed-box'
             onClick={() => {
               setSort('date')
-              sortProduct('date')
               setTimeout(() => {
                 modal.current?.dismiss()
-              }, 3000);
+              }, 1000);
             }}
           >
             <p
@@ -462,10 +272,9 @@ setSort('')
           <IonCol size='12' className='explore-modal-listed-box'
             onClick={() => {
               setSort('high')
-              sortProduct('high')
               setTimeout(() => {
                 modal.current?.dismiss()
-              }, 3000);
+              }, 1000);
             }}
           >
             <p
@@ -479,10 +288,9 @@ setSort('')
           <IonCol size='12' className='explore-modal-listed-box'
             onClick={() => {
               setSort('low')
-              sortProduct('low')
               setTimeout(() => {
                 modal.current?.dismiss()
-              }, 3000);
+              }, 1000);
             }}
           >
             <p
@@ -519,13 +327,6 @@ setSort('')
                 className="filter-option-title"
                 onClick={() => {
                   reset()
-                  // setSort('date')
-                  // sortProduct('date')
-                  // // setSort('')
-                  // setTimeout(() => {
-                  //   filterModal.current?.dismiss()
-                  // }, 3000);
-
                 }}
               >Reset</div>
             </IonCol>
@@ -571,21 +372,14 @@ setSort('')
 
             <IonCol size='12' className='filter-option-box'
               onClick={() => {
-                // setSort('box included')
-                setSort('box included')
-
-                productFilter('box included')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
+                handleBoxFilters(!boxFilters.includes('box included'), 'box included')
               }}
             >
               <div className="filter-option-text">BOX INCLUDED</div>
               <input
-                type="radio"
+                type="checkbox"
                 name=""
-                checked={sort.includes('box included')} id=""
+                checked={boxFilters.includes('box included')} id=""
                 readOnly
               />
             </IonCol>
@@ -593,19 +387,14 @@ setSort('')
             <IonCol
               size='12' className='filter-option-box'
               onClick={() => {
-                setSort('no box')
-                productFilter('no box')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
+                handleBoxFilters(!boxFilters.includes('no box'), 'no box')
               }}
             >
               <div className="filter-option-text">NOT INCLUDED</div>
               <input
-                type="radio"
+                type="checkbox"
                 name=""
-                checked={sort.includes('no box')} id=""
+                checked={boxFilters.includes('no box')} id=""
                 readOnly
               />
 
@@ -621,8 +410,6 @@ setSort('')
               <div className="filter-title-category-img"
                 onClick={() => {
                   setSortPage('default')
-                  // localStorage.removeItem('mainProduct')
-                  // getProducts(params.sectionCategory, 'explore', false);
                 }}
               >
                 <img
@@ -633,205 +420,23 @@ setSort('')
               <div className="filter-title-category-title">BY CATEGORY</div>
             </IonCol>
 
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('accessories')
-                filterCategory('accessories')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'accessories' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>ACCESSORIES</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('bags')
-                filterCategory('bag')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'bags' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>BAGS</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('bottoms')
-                filterCategory('bottoms')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'bottoms' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>BOTTOMS</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('clothing')
-                filterCategory('clothing')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'clothing' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>CLOTHING</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('dresses')
-                filterCategory('dresses')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'dresses' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>DRESSES</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('jeans')
-                filterCategory('jeans')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'jeans' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>JEANS</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('outwear')
-                filterCategory('outerwear')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'outwear' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>OUTWEAR</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('shoes')
-                filterCategory('shoes')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'shoes' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>SHOES</p>
-            </IonCol>
-
-            <IonCol size='12'
-              className='filter-title-category-box'
-              onClick={() => {
-                setSort('suiting')
-                filterCategory('suiting')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'suiting' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
+              {categoryItems?.map((category) => {
+                  return (
+                    <IonCol size='12' key={category._id} className="filter-title-category-box"
+                      onClick={() => {
+                        handleCategoryFilters(category.name.toLowerCase())
+                      }}
+                    >
+                      <p
+                        className={
+                          categoryFilters === category.name.toLowerCase() ?
+                            'filter-title-category-option-active'
+                            : 'filter-title-category-option'
+                        }>{category.name.toUpperCase().split(' ')[0]}</p>
+                    </IonCol>
+                  )
                 }
-              >SUITING</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('swims')
-                filterCategory('swims')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'swims' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>SWIMS</p>
-            </IonCol>
-
-            <IonCol size='12' className="filter-title-category-box"
-              onClick={() => {
-                setSort('tops')
-                filterCategory('tops')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
-
-              }}
-            >
-              <p
-                className={
-                  sort === 'tops' ?
-                    'filter-title-category-option-active'
-                    : 'filter-title-category-option'
-                }>TOPS</p>
-            </IonCol>
+              )}
           </>)}
 
           {/* ---------------------DESIGNER-------------------- */}
@@ -865,17 +470,12 @@ setSort('')
                   key={brand._id}
                   className='filter-option-design-box'
                   onClick={() => {
-                    setSort(brand._id)
-                    productFilter(brand.name)
-                    setTimeout(() => {
-                      filterModal.current?.dismiss()
-                    }, 3000);
-
+                    handleDesignerFilters(!designerFilters.includes(brand._id), brand._id)
                   }}
                 >
                   <div className="filter-option-design-text">{brand.name}</div>
                   <input onChange={() => {
-                  }} type="radio" name="" checked={sort.includes(brand._id, 0)} id="" />
+                  }} type="checkbox" name="" checked={designerFilters.includes(brand._id)} id="" />
                 </IonCol>
               ))}
             </div>
@@ -902,18 +502,14 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                productFilter('yes')
-                setSort('withTags')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleConditionFilters(!conditionFilters.includes('withTags'), 'withTags')
               }}
             >
               <div className="filter-option-design-text">NEW WITH TAGS</div>
               <input
-                type="radio"
+                type="checkbox"
                 name=""
-                checked={sort.includes('withTags')} id=""
+                checked={conditionFilters.includes('withTags')} id=""
                 readOnly
               />
             </IonCol>
@@ -921,18 +517,14 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                productFilter('no')
-                setSort('noTags')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleConditionFilters(!conditionFilters.includes('noTags'), 'noTags')
               }}
             >
               <div className="filter-option-design-text">NEW WITHOUT TAGS</div>
               <input
-                type="radio"
+                type="checkbox"
                 name=""
-                checked={sort.includes('noTags')} id=""
+                checked={conditionFilters.includes('noTags')} id=""
                 readOnly
               />
 
@@ -940,18 +532,14 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                productFilter('immaculate')
-                setSort('immaculate')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleConditionFilters(!conditionFilters.includes('immaculate'), 'immaculate')
               }}
             >
               <div className="filter-option-design-text">IMMACULATE</div>
               <input
-                type="radio"
+                type="checkbox"
                 name=""
-                checked={sort.includes('immaculate')} id=""
+                checked={conditionFilters.includes('immaculate')} id=""
                 readOnly
               />
             </IonCol>
@@ -959,18 +547,14 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                productFilter('good condition')
-                setSort('good condition')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleConditionFilters(!conditionFilters.includes('good condition'), 'good condition')
               }}
             >
               <div className="filter-option-design-text">GOOD CONDITION</div>
               <input
-                type="radio"
+                type="checkbox"
                 name=""
-                checked={sort.includes('good condition')} id=""
+                checked={conditionFilters.includes('good condition')} id=""
                 readOnly
               />
             </IonCol>
@@ -978,18 +562,14 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                productFilter('gently used')
-                setSort('gently used')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleConditionFilters(!conditionFilters.includes('gently used'), 'gently used')
               }}
             >
               <div className="filter-option-design-text">GENTLY USED</div>
               <input
-                type="radio"
+                type="checkbox"
                 name=""
-                checked={sort.includes('gently used')} id=""
+                checked={conditionFilters.includes('gently used')} id=""
                 readOnly
               />
             </IonCol>
@@ -997,18 +577,14 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                productFilter('vintage')
-                setSort('vintage')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleConditionFilters(!conditionFilters.includes('vintage'), 'vintage')
               }}
             >
               <div className="filter-option-design-text">VINTAGE</div>
               <input
-                type="radio"
+                type="checkbox"
                 name=""
-                checked={sort.includes('vintage')} id=""
+                checked={conditionFilters.includes('vintage')} id=""
                 readOnly
               />
             </IonCol>
@@ -1034,17 +610,13 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                setSort('blue')
-                filterColor('blue')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleColorFilters(!colorFilters.includes('blue'), 'blue')
               }}
             >
               <div className="filter-option-design-text">BLUE</div>
               <input
-                type="radio" name=""
-                checked={sort.includes('blue')}
+                type="checkbox" name=""
+                checked={colorFilters.includes('blue')}
                 id=""
                 readOnly
               />
@@ -1053,17 +625,13 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                setSort('beige')
-                filterColor('beige')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleColorFilters(!colorFilters.includes('beige'), 'beige')
               }}
             >
               <div className="filter-option-design-text">BEIGE</div>
               <input
-                type="radio" name=""
-                checked={sort.includes('beige')}
+                type="checkbox" name=""
+                checked={colorFilters.includes('beige')}
                 id=""
                 readOnly
               />
@@ -1071,17 +639,13 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                setSort('brown')
-                filterColor('brown')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleColorFilters(!colorFilters.includes('brown'), 'brown')
               }}
             >
               <div className="filter-option-design-text">BROWN</div>
               <input
-                type="radio" name=""
-                checked={sort.includes('brown')}
+                type="checkbox" name=""
+                checked={colorFilters.includes('brown')}
                 id=""
                 readOnly
               />
@@ -1090,18 +654,14 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                setSort('black')
-                filterColor('black')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleColorFilters(!colorFilters.includes('black'), 'black')
               }}
 
             >
               <div className="filter-option-design-text">BLACK</div>
               <input
-                type="radio" name=""
-                checked={sort.includes('black')}
+                type="checkbox" name=""
+                checked={colorFilters.includes('black')}
                 id=""
                 readOnly
               />
@@ -1110,17 +670,13 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                setSort('yellow')
-                filterColor('yellow')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleColorFilters(!colorFilters.includes('yellow'), 'yellow')
               }}
             >
               <div className="filter-option-design-text">YELLOW</div>
               <input
-                type="radio" name=""
-                checked={sort.includes('yellow')}
+                type="checkbox" name=""
+                checked={colorFilters.includes('yellow')}
                 id=""
                 readOnly
               />
@@ -1129,18 +685,14 @@ setSort('')
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                setSort('gold')
-                filterColor('gold')
-                setTimeout(() => {
-                  filterModal.current?.dismiss()
-                }, 3000);
+                handleColorFilters(!colorFilters.includes('gold'), 'gold')
               }}
             >
               <div className="filter-option-design-text">GOLD</div>
               <input
                 style={{ color: 'black' }}
-                type="radio" name=""
-                checked={sort.includes('gold')}
+                type="checkbox" name=""
+                checked={colorFilters.includes('gold')}
                 id=""
                 readOnly
               />
