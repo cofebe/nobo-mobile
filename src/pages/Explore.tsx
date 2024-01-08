@@ -104,7 +104,7 @@ const Explore: React.FC = () => {
       getProducts(params.sectionCategory, `${params.sectionName}`, false);
     }
 
-    setSort('')
+    setSort('date')
     setCategoryFilters('');
     setDesignerFilters([]);
     setConditionFilters([]);
