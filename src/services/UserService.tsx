@@ -540,9 +540,7 @@ export class UserService extends BaseService {
   }
 
   // SIGNUP
-  async signup(person: SignUpType): Promise<User> {
-    
-   console.log("person:" + JSON.stringify(person));
+  async signup(person: SignUpType): Promise<any> {
    const response = await super.fetch('POST', '/api/users/register', {
       firstName: person.firstName,
       lastName: person.lastName,
@@ -550,17 +548,14 @@ export class UserService extends BaseService {
       displayName: person.userName,
       password: person.password,
     });
-    console.log("Payload:" + JSON.stringify(response));
-    const json: SignUpResponse = await response.json();
+    const json = await response.json();
     if (json.token) {
-      console.log("json:" + JSON.stringify(json));
       const authService = new AuthService();
       authService.setUserToken(json.token);
       authService.setUserId(json.user._id);
       authService.setUserDisplayName(json.user.displayName);
     }
-    console.log("json.user:" + JSON.stringify(json.user));
-    return json.user;
+    return json;
   }
 
   // EXPERIENCE PREFERENCE

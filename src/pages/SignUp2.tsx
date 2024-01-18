@@ -39,11 +39,15 @@ const SignUp2 = () => {
     if (person.password !== person.comfirmPassword) return;
     userService
       .signup(person)
-      .then((user: User) => {
-        if (user) {
-          history.replace('/experience');
-        } else {
+      .then((response: any) => {
+        if(response.displayName === 'exits') {
           setError(true);
+        } else {
+          if (response.user?._id) {
+            history.replace('/experience');
+          } else {
+            setError(true);
+          }
         }
       })
       .catch((err: any) => {

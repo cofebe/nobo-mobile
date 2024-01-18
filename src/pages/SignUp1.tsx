@@ -45,7 +45,7 @@ const SignUp1: React.FC = () => {
       .checkExistingEmail(email)
       .then(user => {
         loadingStore.decrement('Signup:timeout');
-        if (user.exists) {
+        if (Boolean(user.exists)) {
           // console.log(email, ' already exist ');
           setError(true);
           loadingStore.decrement('SignUp:timeout');
