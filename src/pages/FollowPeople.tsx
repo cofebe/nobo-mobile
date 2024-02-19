@@ -125,7 +125,7 @@ const FollowPeople: React.FC = () => {
 
               <div className='follow-people-button-container'>
                 <Button
-                  className='profile-picture-btn'
+                  className={`profile-picture-btn ${peopleIfollow.includes(user._id, 0) ? 'followed' : ''}`}
                   label={peopleIfollow.includes(user._id, 0) ? 'UNFOLLOW' : 'FOLLOW'}
                   large={false}
                   onClick={e => {

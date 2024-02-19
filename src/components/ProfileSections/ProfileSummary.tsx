@@ -22,6 +22,23 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({ profile, openSocialShare 
     setMyProfile(profile);
   }, [profile]);
 
+const GetBioText = () => {
+  if (profile?._id != undefined && profile?._id == localStorage.getItem('appUserId')) {
+    return myProfile.blurbText.length > previewCharLen && previewMode
+    ? myProfile.blurbText.substring(0, previewCharLen) + '...'
+    : myProfile.blurbText
+  }
+
+  if (profile?._id != undefined && profile?._id != localStorage.getItem('appUserId')) {
+    if (myProfile.blurbText == 'Tell us who you are, what you do and a little about your style!' ) {
+      return 'This user has not given any information about themselves'
+    }
+  }
+  return myProfile.blurbText.length > previewCharLen && previewMode
+  ? myProfile.blurbText.substring(0, previewCharLen) + '...'
+  : myProfile.blurbText
+}
+
   return (
     <div className={'profile-summary-athlete ' + (isPlatform('desktop') ? 'desktop' : '')}>
       {!isPlatform('desktop') ? (
@@ -51,9 +68,7 @@ const FeedListItem: React.FC<ProfileSummaryProps> = ({ profile, openSocialShare 
             <IonRow>
               <IonCol style={{ paddingLeft: '0' }}>
                 <div className="nobo-profile-bio" style={{ textAlign: 'left' }}>
-                  {myProfile.blurbText.length > previewCharLen && previewMode
-                    ? myProfile.blurbText.substring(0, previewCharLen) + '...'
-                    : myProfile.blurbText}
+                  {GetBioText()}
                   <div
                     className="nobo-more-arrow"
                     style={{

@@ -91,6 +91,13 @@
       margin-top: 10px;
       line-height: 22.5px;
       letter-spacing: 5%;
+      --background: 'transparent';
+      color: black;
+      --border-color: black;
+    }
+    .followed {
+      --background: #D6980E;
+      --border-color: #D6980E;
       color: #ffffff;
     }
   }

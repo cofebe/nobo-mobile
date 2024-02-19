@@ -65,7 +65,7 @@ ion-modal#example-modal {
   font-weight: 600;
   line-height: 150%;
   letter-spacing: 0.5px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .welcome-btn-container {
