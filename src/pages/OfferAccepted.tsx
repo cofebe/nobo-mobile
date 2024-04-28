@@ -112,7 +112,7 @@ const OfferAccepted: React.FC = () => {
             </div>
             <div className='guide2'>
               Package the item neatly in a box of your choosing,
-              place the shipping label on the box
+              place the shipping label on the box.
             </div>
             <div className='guide3'>
               Drop it off at USPS in a timely manner

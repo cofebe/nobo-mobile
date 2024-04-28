@@ -12,9 +12,13 @@ const Reward = () => {
   const userService = new UserService()
   const history = useHistory()
   const modal = useRef<HTMLIonModalElement>(null)
-  const [fivePercentCoupon, setfivePercent] = useState<string>('')
+  const [fivePercentCoupon, setFivePercent] = useState<string>('')
   const [tenPercentCoupon, setTenPercent] = useState<string>('')
-  const [fifteenPercentCoupon, setfifteenPercent] = useState<string>('')
+  const [fifteenPercentCoupon, setFifteenPercent] = useState<string>('')
+  const [twentyPercentCoupon, setTwentyPercentCoupon] = useState<string>('')
+  const [twentyFivePercentCoupon, setTwentyFivePercentCoupon] = useState<string>('')
+  const [thirtyPercentCoupon, setThirtyPercentCoupon] = useState<string>('')
+  const [thirtyFivePercentCoupon, setThirtyFivePercentCoupon] = useState<string>('')
   const [rewardPoints, setRewardPoints] = useState<number>(0)
   const [untilNextReward, setUntilNextReward] = useState<number>(0);
   const [couponCode, setCouponCode] = useState<string>('')
@@ -23,6 +27,10 @@ const Reward = () => {
   const [valid5Percents, setValid5Percents] = useState(false)
   const [valid10Percents, setValid10Percents] = useState(false)
   const [valid15Percents, setValid15Percents] = useState(false)
+  const [valid20Percents, setValid20Percents] = useState(false)
+  const [valid25Percents, setValid25Percents] = useState(false)
+  const [valid30Percents, setValid30Percents] = useState(false)
+  const [valid35Percents, setValid35Percents] = useState(false)
   const [present] = useIonToast();
 
   const pointsData = [rewardPoints, untilNextReward];
@@ -54,21 +62,19 @@ const Reward = () => {
           setValid5Percents(rewards.coupons?.USD_5_OFF?.active || false)
           setValid10Percents(rewards.coupons?.USD_10_OFF?.active || false)
           setValid15Percents(rewards.coupons?.USD_15_OFF?.active || false)
+          setValid20Percents(rewards.coupons?.USD_20_OFF?.active || false)
+          setValid25Percents(rewards.coupons?.USD_25_OFF?.active || false)
+          setValid30Percents(rewards.coupons?.USD_30_OFF?.active || false)
+          setValid35Percents(rewards.coupons?.USD_35_OFF?.active || false)
           setRewardPoints(rewards.points)
-          setfivePercent(rewards.coupons?.USD_5_OFF?.code)
+          setFivePercent(rewards.coupons?.USD_5_OFF?.code)
           setTenPercent(rewards.coupons?.USD_10_OFF?.code)
-          let untilNextReward = 0;
-
-          if (rewards.points < 5) {
-            untilNextReward = 5 - rewards.points;
-          }
-          if (rewards.points >= 5 && rewards.points < 10) {
-            untilNextReward = 10 - rewards.points;
-          }
-          if (rewards.points >= 10 && rewards.points < 20) {
-            untilNextReward = 20 - rewards.points;
-          }
-          setUntilNextReward(untilNextReward)
+          setFifteenPercent(rewards.coupons?.USD_15_OFF?.code)
+          setTwentyPercentCoupon(rewards.coupons?.USD_20_OFF?.code)
+          setTwentyFivePercentCoupon(rewards.coupons?.USD_25_OFF?.code)
+          setThirtyPercentCoupon(rewards.coupons?.USD_30_OFF?.code)
+          setThirtyFivePercentCoupon(rewards.coupons?.USD_35_OFF?.code)
+          setUntilNextReward(rewards?.pointsTillNextReward)
         }
       })
       .catch((error) => {
@@ -208,6 +214,122 @@ const Reward = () => {
                 </div>
               </IonCol>
             </IonRow>
+            <IonRow className='reward-trophy-container'
+              onClick={() => {
+                if (rewardPoints > 49) {
+                  setCouponCode(twentyPercentCoupon)
+                  setActiveCoupon(valid20Percents)
+                  setRewardType('20% OFF YOUR PURCHASE')
+                  modal.current?.present()
+                }
+              }}
+            >
+              <IonCol className={rewardPoints > 49 ? 'reward-trophy-box2' : 'reward-trophy-box'}>
+                <div
+                  className={rewardPoints > 49 ? 'circle2' : 'circle'}
+                >
+                  <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
+                </div>
+                <div className="info">
+                  <p className='info-text-1' style={{ fontSize: 12 }}>20% off your Purchase</p>
+                  <p className='info-text-2'>50 Points | Expires in 1 Year</p>
+                </div>
+                <div className="arrow">
+                  {rewardPoints > 49 ?
+                    <img width={20} height={16} src='assets/images/reward-arrow-color.svg' alt="" />
+                    :
+                    <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                  }
+                </div>
+              </IonCol>
+            </IonRow>
+            <IonRow className='reward-trophy-container'
+              onClick={() => {
+                if (rewardPoints > 100) {
+                  setCouponCode(twentyFivePercentCoupon)
+                  setActiveCoupon(valid25Percents)
+                  setRewardType('25% OFF YOUR PURCHASE')
+                  modal.current?.present()
+                }
+              }}
+            >
+              <IonCol className={rewardPoints > 99 ? 'reward-trophy-box2' : 'reward-trophy-box'}>
+                <div
+                  className={rewardPoints > 99 ? 'circle2' : 'circle'}
+                >
+                  <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
+                </div>
+                <div className="info">
+                  <p className='info-text-1' style={{ fontSize: 12 }}>25% off your Purchase</p>
+                  <p className='info-text-2'>100 Points | Expires in 1 Year</p>
+                </div>
+                <div className="arrow">
+                  {rewardPoints > 99 ?
+                    <img width={20} height={16} src='assets/images/reward-arrow-color.svg' alt="" />
+                    :
+                    <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                  }
+                </div>
+              </IonCol>
+            </IonRow>
+            <IonRow className='reward-trophy-container'
+              onClick={() => {
+                if (rewardPoints > 149) {
+                  setCouponCode(thirtyPercentCoupon)
+                  setActiveCoupon(valid30Percents)
+                  setRewardType('30% OFF YOUR PURCHASE')
+                  modal.current?.present()
+                }
+              }}
+            >
+              <IonCol className={rewardPoints > 149 ? 'reward-trophy-box2' : 'reward-trophy-box'}>
+                <div
+                  className={rewardPoints > 149 ? 'circle2' : 'circle'}
+                >
+                  <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
+                </div>
+                <div className="info">
+                  <p className='info-text-1' style={{ fontSize: 12 }}>30% off your Purchase</p>
+                  <p className='info-text-2'>150 Points | Expires in 1 Year</p>
+                </div>
+                <div className="arrow">
+                  {rewardPoints > 149 ?
+                    <img width={20} height={16} src='assets/images/reward-arrow-color.svg' alt="" />
+                    :
+                    <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                  }
+                </div>
+              </IonCol>
+            </IonRow>
+            <IonRow className='reward-trophy-container'
+              onClick={() => {
+                if (rewardPoints > 199) {
+                  setCouponCode(thirtyFivePercentCoupon)
+                  setActiveCoupon(valid35Percents)
+                  setRewardType('35% OFF YOUR PURCHASE')
+                  modal.current?.present()
+                }
+              }}
+            >
+              <IonCol className={rewardPoints > 199 ? 'reward-trophy-box2' : 'reward-trophy-box'}>
+                <div
+                  className={rewardPoints > 199 ? 'circle2' : 'circle'}
+                >
+                  <img width={25} height={24} src='assets/images/reward-trophy.svg' alt="" />
+                </div>
+                <div className="info">
+                  <p className='info-text-1' style={{ fontSize: 12 }}>35% off your Purchase</p>
+                  <p className='info-text-2'>200 Points | Expires in 1 Year</p>
+                </div>
+                <div className="arrow">
+                  {rewardPoints > 199 ?
+                    <img width={20} height={16} src='assets/images/reward-arrow-color.svg' alt="" />
+                    :
+                    <img width={20} height={16} src='assets/images/reward-arrow.svg' alt="" />
+                  }
+                </div>
+              </IonCol>
+            </IonRow>
           </div>
 
           <IonRow className='reward-earn-container'>
@@ -283,8 +405,7 @@ const Reward = () => {
 
           <IonCol size='12' className='reward-info-box'>
             <p className='reward-info-text'>
-              your exclusive $5 reward is valid on your next purxhase totaling in $5.00 or more before taxed and shipping are applied. This offer code is unique to your email address. Offer excludes gift cards. One time use only. Cannot be applied toward previous transactions. Other exlclusions may apply
-            </p>
+              Your exclusive reward is valid on your next purchase totaling in X% off before taxed and shipping are applied. This offer code is unique to your email address. Offer excludes gift cards. One time use only. Cannot be applied toward previous transactions. Other exclusions may apply            </p>
           </IonCol>
         </IonRow>
       </IonModal>

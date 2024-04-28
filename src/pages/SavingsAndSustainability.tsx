@@ -11,6 +11,69 @@ import { UserService } from "../services/UserService";
 import Toggle from '../components/Toggle';
 import { formatPrice, getImageUrl } from "../utils";
 
+const sustainabilityOptions = [
+  {
+    text: 'The EPA estimates that around 85% of all textiles (roughly 13 million tons) thrown away in the United States either end up in landfills or are incinerated.',
+    source: 'EPA',
+    link: 'https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/textiles-material-specific-data'
+  },
+  {
+    text: 'We’ll need three times as many natural resources by 2050 if consumption continues at its current rate.',
+    source: 'ORGANISATION FOR ECONOMIC CO-OPERATION AND DEVELOPMENT',
+    link: 'https://www.oecd.org/env/indicators-modelling-outlooks/oecdenvironmentaloutlookto2050theconsequencesofinaction-keyfactsandfigures.htm'
+  },
+  {
+    text: 'Children under the age of age 18 account for 60% of those who labor in the global fashion industry, making child labor one of the biggest fast fashion problems.',
+    source: 'ECOFRIENDLYHABITS',
+    link: 'https://www.ecofriendlyhabits.com/fashion-industry-facts/'
+  },
+  {
+    text: 'Children under the age of age 18 account for 60% of those who labor in the global fashion industry, making child labor one of the biggest fast fashion problems.',
+    source: 'ECOFRIENDLYHABITS',
+    link: 'https://www.ecofriendlyhabits.com/fashion-industry-facts/'
+  },{
+    text: 'The textile industry is responsible for approximately 25% of global chemical output.',
+    source: 'SEWDYNAMIC',
+    link: 'https://www.sewdynamic.com/pages/polyester-industry'
+  },{
+    text: 'The fast fashion industry contributes to climate change, more than international aviation and shipping combined. Clothing production is the third biggest manufacturing industry following the automotive and technology industries.',
+    source: 'GOOD ON YOU',
+    link: 'https://goodonyou.eco/fast-fashion-facts/'
+  },{
+    text: 'Certain materials used to create shoes that end up in landfill will still be there in 1,000 years.',
+    source: 'THE GUARDIAN',
+    link: 'https://www.theguardian.com/environment/2009/aug/23/repair-trainers-ethical-living'
+  },{
+    text: 'According to Eco Watch, over 70% of the rivers and lakes in China are contaminated with over 2.5 billion gallons of wastewater from the dye and textile industries.',
+    source: 'ECOWATCH',
+    link: 'https://www.ecowatch.com/fast-fashion-riverblue-2318389169.html'
+  },{
+    text: 'As much as 35% of micro plastic flows into the ocean are because of fast fashion production.',
+    source: 'THE STATE OF FASHION, 2020',
+    link: 'https://www.mckinsey.com/~/media/mckinsey/industries/retail/our%20insights/the%20state%20of%20fashion%202020%20navigating%20uncertainty/the-state-of-fashion-2020-final.pdf'
+  },{
+    text: 'The EPA reports that landfills received 10.5 million tons of textiles in 2015, representing 7.6% of US landfills. An additional 2.45 million tons were recycled and 3.05 million were incinerated.',
+    source: 'EPA',
+    link: 'https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/textiles-material-specific-data'
+  },{
+    text: 'Due to clothing underutilization and the lack of recycling and donation, more than $500 Billion of value is lost annually.',
+    source: 'GOOD ON YOU',
+    link: 'https://goodonyou.eco/fast-fashion-facts/'
+  },{
+    text: 'Roughly 80% of the world’s garment workers are women, where low wages and unsafe working conditions are alarmingly prevalent.',
+    source: 'THE GUARDIAN',
+    link: 'https://www.theguardian.com/sustainable-business/2016/mar/08/fashion-industry-protect-women-unsafe-low-wages-harassment'
+  },{
+    text: 'An estimated 8000 types of chemicals, including carcinogens and hormone disruptors, are utilized in fashion manufacturing.',
+    source: 'COMPARE ETHICS',
+    link: 'https://compareethics.com/chemicals-in-clothing/'
+  },{
+    text: 'People wear their fast fashion garments less than 5 times and keep for 35 days. This produces over 400% more carbon emissions per item per year than those garments that are worn 50 times and kept for one full year.',
+    source: 'FORBES',
+    link: 'https://www.forbes.com/sites/jamesconca/2015/12/03/making-climate-change-fashionable-the-garment-industry-takes-on-global-warming/?sh=4f39c77979e4'
+  },
+]
+
 const SavingsAndSustainabilityPage: React.FC = () => {
 
   const unmounted = useRef(false);
@@ -29,7 +92,7 @@ const SavingsAndSustainabilityPage: React.FC = () => {
   const pointsData = [rewardPoints, untilNextReward];
   const pointsLabels = ["Current Points", "Points to Next Reward"];
 
-  const [inputValue, setInputValue] = useState('');
+  const [sustainabilityOption, setSustainabilityOption] = useState(sustainabilityOptions[0]);
 
   const [isToggled, setIsToggled] = useState(false);
   const myPurchasesText = "PURCHASE SAVINGS";
@@ -38,6 +101,14 @@ const SavingsAndSustainabilityPage: React.FC = () => {
   const modal = useRef<HTMLIonModalElement>(null);
 
   function sustainability() {
+    const previousIndex = Number(localStorage.getItem('sustainabilityIndex') ?? 0);
+    if(previousIndex === sustainabilityOptions.length - 1) {
+      setSustainabilityOption(sustainabilityOptions[0]);
+      localStorage.setItem('sustainabilityIndex', '0');
+    } else {
+      localStorage.setItem('sustainabilityIndex', (previousIndex + 1).toString());
+      setSustainabilityOption(sustainabilityOptions[previousIndex + 1]);
+    }
     modal.current?.present();
   }
 
@@ -78,18 +149,7 @@ const SavingsAndSustainabilityPage: React.FC = () => {
       .then(reward => {
         if (reward) {
           setRewardPoints(reward.points)
-          let untilNextReward = 0;
-
-          if (reward.points < 5) {
-            untilNextReward = 5 - reward.points;
-          }
-          if (reward.points >= 5 && reward.points < 10) {
-            untilNextReward = 10 - reward.points;
-          }
-          if (reward.points >= 10 && reward.points < 20) {
-            untilNextReward = 20 - reward.points;
-          }
-          setUntilNextReward(untilNextReward)
+          setUntilNextReward(reward?.pointsTillNextReward)
           console.log("untilNextReward", untilNextReward)
         }
       })
@@ -337,18 +397,18 @@ const SavingsAndSustainabilityPage: React.FC = () => {
 
 
         <IonModal
-          className=""
+          className="modal-wrapper"
           ref={modal}
           backdropDismiss={true}
           swipeToClose={true}
         >
           <div className="modal-content">
             <p className="modal-text">
-              Roughly 80% of the world’s garment workers are women, where low wages and unsafe working conditions are alarmingly prevalent.
+              {sustainabilityOption.text}
             </p>
             <p className="modal-source">
                 SOURCE:
-                <a href="https://www.theguardian.com/sustainable-business/2016/mar/08/fashion-industry-protect-women-unsafe-low-wages-harassment" target="_blank">The Guardian</a>
+                <a href={sustainabilityOption.link} target="_blank">{sustainabilityOption.source}</a>
             </p>
           </div>
         </IonModal>

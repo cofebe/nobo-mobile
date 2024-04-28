@@ -57,7 +57,7 @@ const Explore: React.FC = () => {
   useIonViewWillEnter(() => {
     getBrands();
     getCategories();
-    getProducts(params.sectionCategory, getAction(),  params.sectionName === 'sale', generateParams());
+    // getProducts(params.sectionCategory, getAction(),  params.sectionName === 'sale', generateParams());
     const ionRouterOutlet = document.querySelector('ion-router-outlet') as HTMLElement;
     if (ionRouterOutlet) {
       ionRouterOutlet.style.setProperty('--animation-duration', '0s');

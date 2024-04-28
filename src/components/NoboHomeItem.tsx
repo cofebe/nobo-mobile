@@ -62,7 +62,8 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({ children, product, isBig }) => 
                 </>
               ) : (
                 <>
-                  <div>{'$' + product?.price}</div>
+                  {product?.onSale && <div className='strike-though'>{'$' + product?.originalPrice}</div>}
+                  <div className={`${product?.onSale && 'price'}`}>{'$' + product?.price}</div>
                 </>
               )
             ) : isSneaker ? (

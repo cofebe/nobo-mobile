@@ -559,6 +559,7 @@ export interface TradesResponse {
 }
 export interface RewardsResponse {
   points: number;
+  pointsTillNextReward: number;
   coupons: {
     USD_5_OFF: {
       type: string;
@@ -583,6 +584,50 @@ export interface RewardsResponse {
       updatedAt: string;
     };
     USD_15_OFF: {
+      type: string;
+      active: boolean;
+      multi: boolean;
+      _id: string;
+      code: string;
+      user: string;
+      discount: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+    USD_20_OFF: {
+      type: string;
+      active: boolean;
+      multi: boolean;
+      _id: string;
+      code: string;
+      user: string;
+      discount: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+    USD_25_OFF: {
+      type: string;
+      active: boolean;
+      multi: boolean;
+      _id: string;
+      code: string;
+      user: string;
+      discount: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+    USD_30_OFF: {
+      type: string;
+      active: boolean;
+      multi: boolean;
+      _id: string;
+      code: string;
+      user: string;
+      discount: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+    USD_35_OFF: {
       type: string;
       active: boolean;
       multi: boolean;

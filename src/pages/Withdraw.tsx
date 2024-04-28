@@ -120,7 +120,9 @@ const Withdraw: React.FC = () => {
 
           <IonCol size='5.5' className='payment-box'
             onClick={() => {
-              present()
+              if(availableFunds > 0) {
+                present();
+              }
             }}
           >
             <div className='img-container'>

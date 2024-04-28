@@ -31,7 +31,7 @@ let shoppingCartStateUpdating = false;
 const shoppingCartSubject = new BehaviorSubject<ShoppingCartState>(shoppingCartInitialState);
 
 function recalculateState(state: ShoppingCartState): ShoppingCartState {
-  state.subtotal = state.products.reduce((total, curr) => total + curr.price, 0);
+  state.subtotal = state.products?.reduce((total, curr) => total + curr.price, 0);
   state.total = state.subtotal + state.tax + state.shipping;
   return state;
 }
