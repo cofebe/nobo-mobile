@@ -1,5 +1,5 @@
 {
-  "name": "The NOBO",
+  "name": "the_nobo",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -88,7 +88,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons)/)'",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "ionic:build": "npm run build",
+    "cap:copy": "npx cap copy ios",
+    "cap:sync": "npx cap sync ios",
+    "cap:open": "npx cap open ios",
+    "ios": "npm run ionic:build && npm run cap:copy && npm run cap:open"
   },
   "eslintConfig": {
     "extends": [
@@ -109,8 +114,12 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "^4.0.0",
+   "@capacitor/cli": "^4.0.0",
     "cordova-res": "0.15.4"
+  },
+  "resolutions": {
+    "@types/react": "17.0.14",
+    "@types/react-dom": "17.0.14"
   },
   "description": "An Ionic project"
 }

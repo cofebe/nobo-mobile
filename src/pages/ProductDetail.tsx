@@ -961,9 +961,9 @@ const ProductDetail: React.FC = () => {
             </IonRow>
             <IonRow className="blurb">
               {isSneaker && sneakersSteps === 3 && selectedSneakerDetails ? (
-                <IonCol>{selectedSneakerDetails.description}</IonCol>
+                <IonCol className="description">{selectedSneakerDetails.description}</IonCol>
               ) : (
-                <IonCol>{product.description}</IonCol>
+                <IonCol className="description">{product.description}</IonCol>
               )}
             </IonRow>
             {!isSneaker && (

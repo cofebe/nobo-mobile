@@ -1,3 +1,5 @@
+
+// @ts-nocheck
 import { useState } from 'react';
 import { Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
