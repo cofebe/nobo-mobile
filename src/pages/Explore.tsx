@@ -372,14 +372,14 @@ const Explore: React.FC = () => {
 
             <IonCol size='12' className='filter-option-box'
               onClick={() => {
-                handleBoxFilters(!boxFilters.includes('box included'), 'box included')
+                handleBoxFilters(!boxFilters.includes('Box Included'), 'Box Included')
               }}
             >
               <div className="filter-option-text">BOX INCLUDED</div>
               <input
                 type="checkbox"
                 name=""
-                checked={boxFilters.includes('box included')} id=""
+                checked={boxFilters.includes('Box Included')} id=""
                 readOnly
               />
             </IonCol>
@@ -387,14 +387,14 @@ const Explore: React.FC = () => {
             <IonCol
               size='12' className='filter-option-box'
               onClick={() => {
-                handleBoxFilters(!boxFilters.includes('no box'), 'no box')
+                handleBoxFilters(!boxFilters.includes('No Box'), 'No Box')
               }}
             >
               <div className="filter-option-text">NOT INCLUDED</div>
               <input
                 type="checkbox"
                 name=""
-                checked={boxFilters.includes('no box')} id=""
+                checked={boxFilters.includes('No Box')} id=""
                 readOnly
               />
 
@@ -470,12 +470,12 @@ const Explore: React.FC = () => {
                   key={brand._id}
                   className='filter-option-design-box'
                   onClick={() => {
-                    handleDesignerFilters(!designerFilters.includes(brand._id), brand._id)
+                    handleDesignerFilters(!designerFilters.includes(brand.name), brand.name)
                   }}
                 >
                   <div className="filter-option-design-text">{brand.name}</div>
                   <input onChange={() => {
-                  }} type="checkbox" name="" checked={designerFilters.includes(brand._id)} id="" />
+                  }} type="checkbox" name="" checked={designerFilters.includes(brand.name)} id="" />
                 </IonCol>
               ))}
             </div>
@@ -502,14 +502,14 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleConditionFilters(!conditionFilters.includes('withTags'), 'withTags')
+                handleConditionFilters(!conditionFilters.includes('New With Tags'), 'New With Tags')
               }}
             >
               <div className="filter-option-design-text">NEW WITH TAGS</div>
               <input
                 type="checkbox"
                 name=""
-                checked={conditionFilters.includes('withTags')} id=""
+                checked={conditionFilters.includes('New With Tags')} id=""
                 readOnly
               />
             </IonCol>
@@ -517,14 +517,14 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleConditionFilters(!conditionFilters.includes('noTags'), 'noTags')
+                handleConditionFilters(!conditionFilters.includes('New Without Tags'), 'New Without Tags')
               }}
             >
               <div className="filter-option-design-text">NEW WITHOUT TAGS</div>
               <input
                 type="checkbox"
                 name=""
-                checked={conditionFilters.includes('noTags')} id=""
+                checked={conditionFilters.includes('New Without Tags')} id=""
                 readOnly
               />
 
@@ -532,14 +532,14 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleConditionFilters(!conditionFilters.includes('immaculate'), 'immaculate')
+                handleConditionFilters(!conditionFilters.includes('Immaculate'), 'Immaculate')
               }}
             >
               <div className="filter-option-design-text">IMMACULATE</div>
               <input
                 type="checkbox"
                 name=""
-                checked={conditionFilters.includes('immaculate')} id=""
+                checked={conditionFilters.includes('Immaculate')} id=""
                 readOnly
               />
             </IonCol>
@@ -547,14 +547,14 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleConditionFilters(!conditionFilters.includes('good condition'), 'good condition')
+                handleConditionFilters(!conditionFilters.includes('Good Condition'), 'Good Condition')
               }}
             >
               <div className="filter-option-design-text">GOOD CONDITION</div>
               <input
                 type="checkbox"
                 name=""
-                checked={conditionFilters.includes('good condition')} id=""
+                checked={conditionFilters.includes('Good Condition')} id=""
                 readOnly
               />
             </IonCol>
@@ -562,14 +562,14 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleConditionFilters(!conditionFilters.includes('gently used'), 'gently used')
+                handleConditionFilters(!conditionFilters.includes('Gently Used'), 'Gently Used')
               }}
             >
               <div className="filter-option-design-text">GENTLY USED</div>
               <input
                 type="checkbox"
                 name=""
-                checked={conditionFilters.includes('gently used')} id=""
+                checked={conditionFilters.includes('Gently Used')} id=""
                 readOnly
               />
             </IonCol>
@@ -610,13 +610,13 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleColorFilters(!colorFilters.includes('blue'), 'blue')
+                handleColorFilters(!colorFilters.includes('Blue'), 'Blue')
               }}
             >
               <div className="filter-option-design-text">BLUE</div>
               <input
                 type="checkbox" name=""
-                checked={colorFilters.includes('blue')}
+                checked={colorFilters.includes('Blue')}
                 id=""
                 readOnly
               />
@@ -625,13 +625,13 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleColorFilters(!colorFilters.includes('beige'), 'beige')
+                handleColorFilters(!colorFilters.includes('Beige'), 'Beige')
               }}
             >
               <div className="filter-option-design-text">BEIGE</div>
               <input
                 type="checkbox" name=""
-                checked={colorFilters.includes('beige')}
+                checked={colorFilters.includes('Beige')}
                 id=""
                 readOnly
               />
@@ -639,13 +639,13 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleColorFilters(!colorFilters.includes('brown'), 'brown')
+                handleColorFilters(!colorFilters.includes('Brown'), 'Brown')
               }}
             >
               <div className="filter-option-design-text">BROWN</div>
               <input
                 type="checkbox" name=""
-                checked={colorFilters.includes('brown')}
+                checked={colorFilters.includes('Brown')}
                 id=""
                 readOnly
               />
@@ -654,14 +654,14 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleColorFilters(!colorFilters.includes('black'), 'black')
+                handleColorFilters(!colorFilters.includes('Black'), 'Black')
               }}
 
             >
               <div className="filter-option-design-text">BLACK</div>
               <input
                 type="checkbox" name=""
-                checked={colorFilters.includes('black')}
+                checked={colorFilters.includes('Black')}
                 id=""
                 readOnly
               />
@@ -670,13 +670,13 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleColorFilters(!colorFilters.includes('yellow'), 'yellow')
+                handleColorFilters(!colorFilters.includes('Yellow'), 'Yellow')
               }}
             >
               <div className="filter-option-design-text">YELLOW</div>
               <input
                 type="checkbox" name=""
-                checked={colorFilters.includes('yellow')}
+                checked={colorFilters.includes('Yellow')}
                 id=""
                 readOnly
               />
@@ -685,14 +685,14 @@ const Explore: React.FC = () => {
             <IonCol size='12'
               className='filter-option-design-box'
               onClick={() => {
-                handleColorFilters(!colorFilters.includes('gold'), 'gold')
+                handleColorFilters(!colorFilters.includes('Gold'), 'Gold')
               }}
             >
               <div className="filter-option-design-text">GOLD</div>
               <input
                 style={{ color: 'black' }}
                 type="checkbox" name=""
-                checked={colorFilters.includes('gold')}
+                checked={colorFilters.includes('Gold')}
                 id=""
                 readOnly
               />
