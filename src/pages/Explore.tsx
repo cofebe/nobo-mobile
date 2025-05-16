@@ -173,12 +173,12 @@ const Explore: React.FC = () => {
           ...(boxFilters.length > 0 && { box: boxFilters }),
           ...(conditionFilters.length > 0 && { condition: conditionFilters }),
           ...(colorFilters.length > 0 && { color: colorFilters }),
-          ...(designerFilters.length > 0 && { brand: {
+        }
+      }),
+      ...(designerFilters.length > 0 && { brand: {
               $in: designerFilters,
             }
           }),
-        }
-      }),
     };
   }
 
