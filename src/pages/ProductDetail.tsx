@@ -81,8 +81,8 @@ const ProductDetail: React.FC = () => {
     useState<sneaekerSizeChart[]>(mensSneakerSizesList);
 
   const activeTradeSneakerSizes = (product: Product) => {
-    mensSneakerSizesList.forEach(size => {
-      if (product.trade && Object.keys(product.trade).includes(size.size)) {
+    mensSneakerSizesList?.forEach(size => {
+      if (product?.trade && Object.keys(product?.trade).includes(size?.size)) {
         size.active = true;
         size.sneakerIds = product.trade[size.size];
       }
@@ -138,17 +138,17 @@ const ProductDetail: React.FC = () => {
     productService.getProduct(productId, isSneakerUrl).then((data: ProductResponse) => {
       console.log('getProduct:', data.product);
 
-      setProduct(data.product);
-      activeTradeSneakerSizes(data.product);
-      setIsTrade(data.product.action === 'trade' || isTradeUrl);
-      setImageSource(data.product.images[0].url);
+      setProduct(data?.product);
+      activeTradeSneakerSizes(data?.product);
+      setIsTrade(data?.product?.action === 'trade' || isTradeUrl);
+      setImageSource(data?.product?.images[0]?.url);
       !isSneakerUrl && setPrice(data.product.price);
 
       setShowPrevious(false);
-      setShowNext(data.product.images.length > 2);
+      setShowNext(data?.product?.images?.length > 2);
       setImageIndex(0);
-      setImage1(data.product.images[0].url);
-      setImage2(data.product.images.length > 1 ? data.product.images[1].url : '');
+      setImage1(data?.product?.images[0].url);
+      setImage2(data?.product?.images?.length > 1 ? data?.product?.images[1].url : '');
 
       if (data.product?.vendor?.reviews) {
         let vendorRating = 0;

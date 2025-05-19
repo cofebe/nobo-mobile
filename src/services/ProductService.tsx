@@ -52,7 +52,7 @@ export class ProductService extends BaseService {
   async getProduct(productId: string, isSneaker?: boolean): Promise<ProductResponse> {
     let res;
     if (isSneaker) {
-      res = await super.fetch('GET', `/api/products/sneakers/${productId}`);
+      res = await super.fetch('GET', `/api/products/sneakers/${productId}/sell`);
     } else {
       res = await super.fetch('GET', `/api/products/${productId}`);
     }

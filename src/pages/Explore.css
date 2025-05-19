@@ -257,6 +257,12 @@
 
 }
 
+.size-height{
+  width: 100%;
+  overflow-y: scroll;
+  height: 300px;
+}
+
 .filter-option-design-box{
   display: flex;
   justify-content: space-between;

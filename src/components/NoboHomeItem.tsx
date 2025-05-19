@@ -44,7 +44,7 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({ children, product, isBig }) => 
           history.push(`/home/product/sneakers/trade/${product._id}`);
         } else {
           isSneaker
-            ? history.push(`/home/product/sneakers/${product._id}`)
+            ? history.push(`/home/product/sneakers/${product.slug}`)
             : history.push(`/home/product/${product._id}`);
         }
       }}
@@ -62,7 +62,9 @@ const NoboHomeItem: React.FC<NoboItemProps> = ({ children, product, isBig }) => 
                 </>
               ) : (
                 <>
-                  {product?.onSale && <div className='strike-though'>{'$' + product?.originalPrice}</div>}
+                  {product?.onSale && (
+                    <div className="strike-though">{'$' + product?.originalPrice}</div>
+                  )}
                   <div className={`${product?.onSale && 'price'}`}>{'$' + product?.price}</div>
                 </>
               )
