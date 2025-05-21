@@ -21,7 +21,7 @@ const Explore: React.FC = () => {
   const [parentCategoryItems, setParentCategoryItems] = useState<Category[]>([]);
   const [categoryItems, setCategoryItems] = useState<Category>();
   const [brandInput, setbrandInput] = useState('');
-  const [categoryFilters, setCategoryFilters] = useState<String>('');
+  const [categoryFilters, setCategoryFilters] = useState<string>('');
   const [subCategoryFilters, setSubCategoryFilters] = useState<String[]>([]);
   const [designerFilters, setDesignerFilters] = useState<String[]>([]);
   const [conditionFilters, setConditionFilters] = useState<String[]>([]);
@@ -171,7 +171,7 @@ const Explore: React.FC = () => {
     closeFilterModal();
   };
 
-  const handleCategoryFilters = (value: String) => {
+  const handleCategoryFilters = (value: string) => {
     setCategoryFilters(value);
     // closeFilterModal();
   };
@@ -515,7 +515,20 @@ const Explore: React.FC = () => {
                   </IonCol>
                 </>
               )}
-              {params?.sectionCategory === 'sneakers' && (
+              {([
+                'shoes',
+                'tops [women]',
+                'tops [men]',
+                'dresses [women]',
+                'dresses [men]',
+                'bottoms [women]',
+                'bottoms [men]',
+                'outerwear [women]',
+                'outerwear [men]',
+                'suiting [men]',
+                'suiting [women]',
+              ].includes(categoryFilters) ||
+                params.sectionCategory === 'sneakers') && (
                 <>
                   <div className="filter-line-sep"></div>
 
@@ -533,6 +546,7 @@ const Explore: React.FC = () => {
                   </IonCol>
                 </>
               )}
+
               {params?.sectionCategory !== 'sneakers' && (
                 <>
                   <div className="filter-line-sep"></div>
@@ -595,34 +609,35 @@ const Explore: React.FC = () => {
 
                 <div className="filter-title-category-title">BY CATEGORY</div>
               </IonCol>
-
-              {parentCategoryItems
-                ?.filter(el => el.parent === null)
-                ?.map(category => {
-                  return (
-                    <IonCol
-                      size="12"
-                      key={category._id}
-                      className="filter-title-category-box"
-                      onClick={() => {
-                        setSubCategoryFilters([])
-                        handleCategoryFilters(category.name.toLowerCase());
-                        setCategoryItems(category);
-                        setSortPage('subCategory');
-                      }}
-                    >
-                      <p
-                        className={
-                          categoryFilters === category.name.toLowerCase()
-                            ? 'filter-title-category-option-active'
-                            : 'filter-title-category-option'
-                        }
+              <div className="size-height">
+                {parentCategoryItems
+                  ?.filter(el => el.parent === null)
+                  ?.map(category => {
+                    return (
+                      <IonCol
+                        size="12"
+                        key={category._id}
+                        className="filter-title-category-box"
+                        onClick={() => {
+                          setSubCategoryFilters([]);
+                          handleCategoryFilters(category.name.toLowerCase());
+                          setCategoryItems(category);
+                          setSortPage('subCategory');
+                        }}
                       >
-                        {category.name.toUpperCase().split(' ')[0]}
-                      </p>
-                    </IonCol>
-                  );
-                })}
+                        <p
+                          className={
+                            categoryFilters === category.name.toLowerCase()
+                              ? 'filter-title-category-option-active'
+                              : 'filter-title-category-option'
+                          }
+                        >
+                          {category.name.toUpperCase().split(' ')[0]}
+                        </p>
+                      </IonCol>
+                    );
+                  })}
+              </div>
             </>
           )}
 
@@ -1017,7 +1032,7 @@ const Explore: React.FC = () => {
                         }}
                       >
                         <div className="filter-option-design-text">
-                          {val.name.toUpperCase().split(' ')[0]}
+                          {val.name.toUpperCase()}
                         </div>
                         <input
                           type="checkbox"
