@@ -15,6 +15,7 @@ const Explore: React.FC = () => {
   const userService = new UserService();
   const params: any = useParams();
   const [products, setProducts] = useState<any>([]);
+  const [productsFilter, setProductsFilter] = useState<any>({});
   const [sort, setSort] = useState('date');
   const [sortPage, setSortPage] = useState('default');
   const [brandsItems, setBrandItems] = useState<Brand[]>([]);
@@ -87,7 +88,8 @@ const Explore: React.FC = () => {
     productService
       .getProducts(group, action, onSale, getSort(), filters)
       .then(products => {
-        setProducts(products.docs);
+        setProducts(products?.docs);
+        setProductsFilter(products._quantity);
       })
       .catch(error => {
         console.log('error', error);
@@ -200,9 +202,19 @@ const Explore: React.FC = () => {
         el.name.toUpperCase() === categoryFilters.toUpperCase() ||
         el.name.toUpperCase() === `${categoryFilters} [${params.sectionCategory.toUpperCase()}]`
     );
-    const Sizes = sizeFilters.map(val => ({
-      [`shop.${val}`]: { $exists: 1 },
-    }));
+
+    const WomenClothSizes =
+      params.sectionCategory === 'women' && categoryFilters !== 'shoes' ? sizeFilters : [];
+    const MenClothSizes =
+      params.sectionCategory === 'men' && categoryFilters !== 'shoes' ? sizeFilters : [];
+    const Sizes = categoryFilters === 'shoes' ? sizeFilters : [];
+    const SneakersSizes =
+      params?.sectionCategory === 'sneakers'
+        ? sizeFilters?.map(val => ({
+            [`shop.${val}`]: { $exists: 1 },
+          }))
+        : [];
+
     return {
       ...(category && { parentCategory: category?._id }),
       ...(subCategoryFilters.length > 0 && { category: { $in: subCategoryFilters } }),
@@ -210,12 +222,18 @@ const Explore: React.FC = () => {
         conditionFilters.length > 0 ||
         colorFilters.length > 0 ||
         materialFilters.length > 0 ||
+        WomenClothSizes.length > 0 ||
+        MenClothSizes.length > 0 ||
+        Sizes.length > 0 ||
         designerFilters.length > 0) && {
         attributes: {
           ...(boxFilters.length > 0 && { box: boxFilters }),
           ...(conditionFilters.length > 0 && { condition: conditionFilters }),
           ...(colorFilters.length > 0 && { color: colorFilters }),
           ...(materialFilters.length > 0 && { material: materialFilters }),
+          ...(WomenClothSizes?.length > 0 && { sizeClothingWomen: WomenClothSizes }),
+          ...(MenClothSizes?.length > 0 && { sizeClothingMen: MenClothSizes }),
+          ...(Sizes?.length > 0 && { size: Sizes }),
         },
       }),
       ...(designerFilters.length > 0 && {
@@ -223,8 +241,8 @@ const Explore: React.FC = () => {
           $in: designerFilters,
         },
       }),
-      ...(sizeFilters.length > 0 && {
-        $or: Sizes,
+      ...(SneakersSizes?.length > 0 && {
+        $or: SneakersSizes,
       }),
     };
   };
@@ -263,22 +281,154 @@ const Explore: React.FC = () => {
     reset();
   }, [params]);
 
+  const FilterParentItems = parentCategoryItems?.filter(
+    e =>
+      e?.parent === null &&
+      (params?.sectionCategory === 'men'
+        ? !e?.name?.includes('[WOMEN]')
+        : !e?.name?.includes('[MEN]'))
+  );
+
   const AllShoesSizes = [
-    { name: '10.5M', value: '10_5M' },
-    { name: '10M', value: '10M' },
-    { name: '11.5M', value: '11_5M' },
-    { name: '11M', value: '11M' },
-    { name: '12M', value: '12M' },
+    { name: '3.5M', value: '3_5M' },
+    { name: '4M', value: '4M' },
+    { name: '4.5M', value: '4_5M' },
+    { name: '5M', value: '5M' },
+    { name: '5W', value: '5W' },
+    { name: '5.5M', value: '5_5M' },
+    { name: '5.5W', value: '5_5W' },
+    { name: '6W', value: '6W' },
+    { name: '6M', value: '6M' },
+    { name: '6.5M', value: '6_5M' },
+    { name: '6.5W', value: '6_5W' },
     { name: '7W', value: '7W' },
+    { name: '7M', value: '7M' },
+    { name: '7.5M', value: '7_5M' },
+    { name: '7.5W', value: '7_5W' },
+    { name: '8W', value: '8W' },
+    { name: '8M', value: '8M' },
     { name: '8.5M', value: '8_5M' },
     { name: '8.5W', value: '8_5W' },
-    { name: '8W', value: '8W' },
+    { name: '9W', value: '9W' },
+    { name: '9M', value: '9M' },
     { name: '9.5M', value: '9_5M' },
     { name: '9.5W', value: '9_5W' },
-    { name: '9M', value: '9M' },
+    { name: '10W', value: '10W' },
+    { name: '10M', value: '10M' },
+    { name: '10.5M', value: '10_5M' },
+    { name: '10.5W', value: '10_5W' },
+    { name: '11W', value: '11W' },
+    { name: '11M', value: '11M' },
+    { name: '11.5M', value: '11_5M' },
+    { name: '11.5W', value: '11_5W' },
+    { name: '12W', value: '12W' },
+    { name: '12M', value: '12M' },
+    { name: '12.5M', value: '12_5M' },
+    { name: '12.5W', value: '12_5W' },
+    { name: '13W', value: '13W' },
+    { name: '13M', value: '13M' },
+    { name: '13.5M', value: '13_5M' },
+    { name: '13.5W', value: '13_5W' },
+    { name: '14W', value: '14W' },
+    { name: '14M', value: '14M' },
+    { name: '14.5M', value: '14_5M' },
+    { name: '14.5W', value: '14_5W' },
+    { name: '15W', value: '15W' },
+    { name: '15M', value: '15M' },
+    { name: '15.5M', value: '15_5M' },
+    { name: '15.5W', value: '15_5W' },
+    { name: '16W', value: '16W' },
+    { name: '16M', value: '16M' },
+    { name: '16.5M', value: '16_5M' },
+    { name: '16.5W', value: '16_5W' },
+    { name: '17M', value: '17M' },
+    { name: '17W', value: '17W' },
+    { name: '17.5W', value: '17_5W' },
+    { name: '17.5M', value: '17_5M' },
+    { name: '18M', value: '18M' },
+    { name: 'One Size', value: 'One Size' },
+    { name: 'XXS', value: 'XXS' },
+    { name: 'XS', value: 'XS' },
+    { name: 'S', value: 'S' },
+    { name: 'M', value: 'M' },
+    { name: 'L', value: 'L' },
+    { name: 'XL', value: 'XL' },
+    { name: 'XXL', value: 'XXL' },
+    { name: '3XL', value: '3XL' },
+    { name: '00', value: '00' },
+    { name: 0, value: 0 },
+    { name: 2, value: 2 },
+    { name: 4, value: 4 },
+    { name: 6, value: 6 },
+    { name: 8, value: 8 },
+    { name: 10, value: 10 },
+    { name: 12, value: 12 },
+    { name: 14, value: 14 },
+    { name: 16, value: 16 },
+    { name: 18, value: 18 },
+    { name: 20, value: 20 },
+    { name: 22, value: 22 },
+    { name: 24, value: 24 },
+    { name: 26, value: 26 },
+    { name: 27, value: 27 },
+    { name: 28, value: 28 },
+    { name: 29, value: 29 },
+    { name: 30, value: 30 },
+    { name: 31, value: 31 },
+    { name: 32, value: 32 },
+    { name: 33, value: 33 },
+    { name: 34, value: 34 },
+    { name: 35, value: 35 },
+    { name: 36, value: 36 },
+    { name: 37, value: 37 },
+    { name: 38, value: 38 },
+    { name: 39, value: 39 },
+    { name: 40, value: 40 },
+    { name: 41, value: 41 },
+    { name: 42, value: 42 },
+    { name: 43, value: 43 },
+    { name: 44, value: 44 },
   ];
 
   const AllMaterials = ['Canvas', 'Cloth', 'Foam', 'Knit', 'Leather', 'Patent Leather', 'Suede'];
+  const AllColors = [
+    'Beige',
+    'Black',
+    'Blue',
+    'Bronze',
+    'Brown',
+    'Camouflage',
+    'Cheetah',
+    'Cream',
+    'Dark Brown',
+    'Denim',
+    'Gold',
+    'Green',
+    'Grey',
+    'Magenta',
+    'Multicolor',
+    'Navy',
+    'Nude',
+    'Olive Green',
+    'Orange',
+    'Pink',
+    'Purple',
+    'Red',
+    'Sliver',
+    'Tan',
+    'Turquoise',
+    'White',
+    'Yellow',
+  ];
+
+  const AllConditions = [
+    'New With Tags',
+    'New Without Tags',
+    'Immaculate',
+    'Good Condition',
+    'Gently Used',
+    'Vintage',
+  ];
 
   return (
     <IonPage className="nobo-explore-page">
@@ -300,7 +450,7 @@ const Explore: React.FC = () => {
           <img height={18} src="assets/images/home-sort.svg" alt="" />
         </div>
       </div>
-      {products.length === 0 && <div className="home-search-status">NO RESULT FOUND!</div>}
+      {products?.length === 0 && <div className="home-search-status">NO RESULT FOUND!</div>}
       {params.sectionName === 'explore' ? (
         <IonContent>
           <IonRow>
@@ -308,7 +458,7 @@ const Explore: React.FC = () => {
               <NoboHomeItem product={products[0]} isBig />
             </IonCol>
           </IonRow>
-          {products.length > 1 && (
+          {products?.length > 1 && (
             <IonRow>
               <IonCol className="featured-items">FEATURED ITEMS</IonCol>
             </IonRow>
@@ -610,33 +760,32 @@ const Explore: React.FC = () => {
                 <div className="filter-title-category-title">BY CATEGORY</div>
               </IonCol>
               <div className="size-height">
-                {parentCategoryItems
-                  ?.filter(el => el.parent === null)
-                  ?.map(category => {
-                    return (
-                      <IonCol
-                        size="12"
-                        key={category._id}
-                        className="filter-title-category-box"
-                        onClick={() => {
-                          setSubCategoryFilters([]);
-                          handleCategoryFilters(category.name.toLowerCase());
-                          setCategoryItems(category);
-                          setSortPage('subCategory');
-                        }}
+                {FilterParentItems?.map(category => {
+                  return (
+                    <IonCol
+                      size="12"
+                      key={category._id}
+                      className="filter-title-category-box"
+                      onClick={() => {
+                        setSizeFilters([]);
+                        setSubCategoryFilters([]);
+                        handleCategoryFilters(category.name.toLowerCase());
+                        setCategoryItems(category);
+                        setSortPage('subCategory');
+                      }}
+                    >
+                      <p
+                        className={
+                          categoryFilters === category.name.toLowerCase()
+                            ? 'filter-title-category-option-active'
+                            : 'filter-title-category-option'
+                        }
                       >
-                        <p
-                          className={
-                            categoryFilters === category.name.toLowerCase()
-                              ? 'filter-title-category-option-active'
-                              : 'filter-title-category-option'
-                          }
-                        >
-                          {category.name.toUpperCase().split(' ')[0]}
-                        </p>
-                      </IonCol>
-                    );
-                  })}
+                        {category.name.toUpperCase().split(' ')[0]}
+                      </p>
+                    </IonCol>
+                  );
+                })}
               </div>
             </>
           )}
@@ -705,116 +854,27 @@ const Explore: React.FC = () => {
                 </div>
                 <div className="filter-title-designer-title">BY CONDITION</div>
               </IonCol>
-
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleConditionFilters(
-                    !conditionFilters.includes('New With Tags'),
-                    'New With Tags'
-                  );
-                }}
-              >
-                <div className="filter-option-design-text">NEW WITH TAGS</div>
-                <input
-                  type="checkbox"
-                  name=""
-                  checked={conditionFilters.includes('New With Tags')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
-
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleConditionFilters(
-                    !conditionFilters.includes('New Without Tags'),
-                    'New Without Tags'
-                  );
-                }}
-              >
-                <div className="filter-option-design-text">NEW WITHOUT TAGS</div>
-                <input
-                  type="checkbox"
-                  name=""
-                  checked={conditionFilters.includes('New Without Tags')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleConditionFilters(!conditionFilters.includes('Immaculate'), 'Immaculate');
-                }}
-              >
-                <div className="filter-option-design-text">IMMACULATE</div>
-                <input
-                  type="checkbox"
-                  name=""
-                  checked={conditionFilters.includes('Immaculate')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
-
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleConditionFilters(
-                    !conditionFilters.includes('Good Condition'),
-                    'Good Condition'
-                  );
-                }}
-              >
-                <div className="filter-option-design-text">GOOD CONDITION</div>
-                <input
-                  type="checkbox"
-                  name=""
-                  checked={conditionFilters.includes('Good Condition')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
-
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleConditionFilters(!conditionFilters.includes('Gently Used'), 'Gently Used');
-                }}
-              >
-                <div className="filter-option-design-text">GENTLY USED</div>
-                <input
-                  type="checkbox"
-                  name=""
-                  checked={conditionFilters.includes('Gently Used')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
-
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleConditionFilters(!conditionFilters.includes('vintage'), 'vintage');
-                }}
-              >
-                <div className="filter-option-design-text">VINTAGE</div>
-                <input
-                  type="checkbox"
-                  name=""
-                  checked={conditionFilters.includes('vintage')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
+              {AllConditions?.filter(e => e in productsFilter)?.map((item, index) => {
+                return (
+                  <IonCol
+                    key={index}
+                    size="12"
+                    className="filter-option-design-box"
+                    onClick={() => {
+                      handleConditionFilters(!conditionFilters.includes(item), item);
+                    }}
+                  >
+                    <div className="filter-option-design-text">{item.toUpperCase()}</div>
+                    <input
+                      type="checkbox"
+                      name=""
+                      checked={conditionFilters.includes(item)}
+                      id=""
+                      readOnly
+                    />
+                  </IonCol>
+                );
+              })}
             </>
           )}
 
@@ -828,108 +888,29 @@ const Explore: React.FC = () => {
                 </div>
                 <div className="filter-title-designer-title">COLOR</div>
               </IonCol>
-
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleColorFilters(!colorFilters.includes('Blue'), 'Blue');
-                }}
-              >
-                <div className="filter-option-design-text">BLUE</div>
-                <input
-                  type="checkbox"
-                  name=""
-                  checked={colorFilters.includes('Blue')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
-
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleColorFilters(!colorFilters.includes('Beige'), 'Beige');
-                }}
-              >
-                <div className="filter-option-design-text">BEIGE</div>
-                <input
-                  type="checkbox"
-                  name=""
-                  checked={colorFilters.includes('Beige')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleColorFilters(!colorFilters.includes('Brown'), 'Brown');
-                }}
-              >
-                <div className="filter-option-design-text">BROWN</div>
-                <input
-                  type="checkbox"
-                  name=""
-                  checked={colorFilters.includes('Brown')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
-
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleColorFilters(!colorFilters.includes('Black'), 'Black');
-                }}
-              >
-                <div className="filter-option-design-text">BLACK</div>
-                <input
-                  type="checkbox"
-                  name=""
-                  checked={colorFilters.includes('Black')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
-
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleColorFilters(!colorFilters.includes('Yellow'), 'Yellow');
-                }}
-              >
-                <div className="filter-option-design-text">YELLOW</div>
-                <input
-                  type="checkbox"
-                  name=""
-                  checked={colorFilters.includes('Yellow')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
-
-              <IonCol
-                size="12"
-                className="filter-option-design-box"
-                onClick={() => {
-                  handleColorFilters(!colorFilters.includes('Gold'), 'Gold');
-                }}
-              >
-                <div className="filter-option-design-text">GOLD</div>
-                <input
-                  style={{ color: 'black' }}
-                  type="checkbox"
-                  name=""
-                  checked={colorFilters.includes('Gold')}
-                  id=""
-                  readOnly
-                />
-              </IonCol>
+              <div className="size-height">
+                {AllColors?.filter(e => e in productsFilter)?.map((item, index) => {
+                  return (
+                    <IonCol
+                      key={index}
+                      size="12"
+                      className="filter-option-design-box"
+                      onClick={() => {
+                        handleColorFilters(!colorFilters.includes(item), item);
+                      }}
+                    >
+                      <div className="filter-option-design-text">{item.toUpperCase()}</div>
+                      <input
+                        type="checkbox"
+                        name=""
+                        checked={colorFilters.includes(item)}
+                        id=""
+                        readOnly
+                      />
+                    </IonCol>
+                  );
+                })}
+              </div>
             </>
           )}
 
@@ -944,21 +925,22 @@ const Explore: React.FC = () => {
                 <div className="filter-title-designer-title">SIZE</div>
               </IonCol>
               <div className="size-height">
-                {AllShoesSizes?.map((item, index) => {
+                {AllShoesSizes?.filter(e => e?.name in productsFilter)?.map((item: any, index) => {
+                  const SneakersSize = params.sectionCategory === "sneakers" ? item?.value : item?.name
                   return (
                     <IonCol
                       key={index}
                       size="12"
                       className="filter-option-design-box"
                       onClick={() => {
-                        handleSizeFilters(!sizeFilters.includes(item?.value), item?.value);
+                        handleSizeFilters(!sizeFilters.includes(SneakersSize), SneakersSize);
                       }}
                     >
                       <div className="filter-option-design-text">{item?.name}</div>
                       <input
                         type="checkbox"
                         name=""
-                        checked={sizeFilters.includes(item?.value)}
+                        checked={sizeFilters.includes(SneakersSize)}
                         id=""
                         readOnly
                       />
@@ -1031,9 +1013,7 @@ const Explore: React.FC = () => {
                           );
                         }}
                       >
-                        <div className="filter-option-design-text">
-                          {val.name.toUpperCase()}
-                        </div>
+                        <div className="filter-option-design-text">{val.name.toUpperCase()}</div>
                         <input
                           type="checkbox"
                           name=""
